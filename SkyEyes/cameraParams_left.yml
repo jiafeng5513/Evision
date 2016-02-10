@@ -1,0 +1,139 @@
+%YAML:1.0
+calibrationDate: "Mon Feb 08 13:56:21 2016\n"
+# flags: fix_k3 + use_intrinsic_guess + fix_principal_point + zero_tangent_dist
+flags: -842150451
+imageSize:
+   - 0
+   - 0
+cameraMatrix: !!opencv-matrix
+   rows: 3
+   cols: 3
+   dt: d
+   data: [ 1., 0., 0., 0., 1., 0., 0., 0., 1. ]
+distortionCoefficients: !!opencv-matrix
+   rows: 1
+   cols: 8
+   dt: d
+   data: [ -4.3518292532933373e-019, 0., 0., 0., 0., 0.,
+       5.7057917532453546e-014, -2.0481547360741429e-019 ]
+nImages: 10
+rotaionMatrix_0: !!opencv-matrix
+   rows: 3
+   cols: 1
+   dt: d
+   data: [ 2.1405292439520549e+000, 2.2993899989003181e+000,
+       1.9295301221150647e-005 ]
+rotaionMatrix_1: !!opencv-matrix
+   rows: 3
+   cols: 1
+   dt: d
+   data: [ 1.4730381559365129e+000, 2.7746309793154253e+000,
+       -7.9784061162955665e-006 ]
+rotaionMatrix_2: !!opencv-matrix
+   rows: 3
+   cols: 1
+   dt: d
+   data: [ 2.7886950549306655e+000, 1.4466555990128540e+000,
+       1.9039946266045580e-004 ]
+rotaionMatrix_3: !!opencv-matrix
+   rows: 3
+   cols: 1
+   dt: d
+   data: [ -2.8078386348435580e+000, -1.4090652970432425e+000,
+       -7.4438602469999624e-005 ]
+rotaionMatrix_4: !!opencv-matrix
+   rows: 3
+   cols: 1
+   dt: d
+   data: [ 2.1707115821874541e+000, 2.2709139569255763e+000,
+       6.6763172111726439e-005 ]
+rotaionMatrix_5: !!opencv-matrix
+   rows: 3
+   cols: 1
+   dt: d
+   data: [ -2.3160047783198334e+000, -2.1225407827904559e+000,
+       -8.6263191071120145e-005 ]
+rotaionMatrix_6: !!opencv-matrix
+   rows: 3
+   cols: 1
+   dt: d
+   data: [ -2.2352237591057622e+000, -2.2077062685079998e+000,
+       -1.9085701763370470e-004 ]
+rotaionMatrix_7: !!opencv-matrix
+   rows: 3
+   cols: 1
+   dt: d
+   data: [ 2.2536250362872372e+000, 2.1887579756905149e+000,
+       1.9623805947169230e-005 ]
+rotaionMatrix_8: !!opencv-matrix
+   rows: 3
+   cols: 1
+   dt: d
+   data: [ 2.8416748649925951e+000, 1.3395349411593012e+000,
+       5.5814012081941565e-005 ]
+rotaionMatrix_9: !!opencv-matrix
+   rows: 3
+   cols: 1
+   dt: d
+   data: [ 1.8870965533356601e+000, 2.5116247313532001e+000,
+       -8.4209153203902099e-005 ]
+translationMatrix_0: !!opencv-matrix
+   rows: 3
+   cols: 1
+   dt: d
+   data: [ 1.6666559086904294e+002, 9.6905039975968776e+001,
+       7.0361404808480743e-001 ]
+translationMatrix_1: !!opencv-matrix
+   rows: 3
+   cols: 1
+   dt: d
+   data: [ 2.2272862054439315e+002, 4.1916035470687319e+001,
+       7.0533832445836919e-001 ]
+translationMatrix_2: !!opencv-matrix
+   rows: 3
+   cols: 1
+   dt: d
+   data: [ 1.3562029736813085e+002, 1.5252649003096238e+002,
+       6.5265946268540820e-001 ]
+translationMatrix_3: !!opencv-matrix
+   rows: 3
+   cols: 1
+   dt: d
+   data: [ 1.2403544401010713e+002, 1.5123317553680414e+002,
+       5.9065509293362883e-001 ]
+translationMatrix_4: !!opencv-matrix
+   rows: 3
+   cols: 1
+   dt: d
+   data: [ 1.6582569878672169e+002, 4.6508166776125691e+001,
+       5.5550643341061201e-001 ]
+translationMatrix_5: !!opencv-matrix
+   rows: 3
+   cols: 1
+   dt: d
+   data: [ 1.5031194413056085e+002, 7.5813901233175983e+001,
+       5.4916643286215339e-001 ]
+translationMatrix_6: !!opencv-matrix
+   rows: 3
+   cols: 1
+   dt: d
+   data: [ 2.0343120125870254e+002, 7.7818235528867163e+001,
+       7.6505637179619490e-001 ]
+translationMatrix_7: !!opencv-matrix
+   rows: 3
+   cols: 1
+   dt: d
+   data: [ 1.8095543668360105e+002, 9.6644817835144011e+001,
+       7.9097533117244689e-001 ]
+translationMatrix_8: !!opencv-matrix
+   rows: 3
+   cols: 1
+   dt: d
+   data: [ 1.8502034108235426e+002, 1.7371776155943982e+002,
+       7.7952462609967499e-001 ]
+translationMatrix_9: !!opencv-matrix
+   rows: 3
+   cols: 1
+   dt: d
+   data: [ 1.8490716699998816e+002, 9.8411690423189725e+001,
+       8.3862194292465808e-001 ]
