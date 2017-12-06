@@ -49,6 +49,7 @@
 #define IDD_PARA3                       312
 #define IDD_NewProject                  313
 #define IDD_PARA4                       314
+#define IDB_BITMAP1                     322
 #define IDC_TAB                         1000
 #define IDC_EDIT_minDisp                1001
 #define IDC_e7ObjDist                   1002
@@ -111,6 +112,23 @@
 #define IDC_CP1CamList_L                1052
 #define IDC_CP1CamList_R                1053
 #define IDC_CP1Resolution               1054
+#define IDC_EDIT_Levels                 1055
+#define IDC_SLIDER_Levels               1056
+#define IDC_EDIT_PolySigma              1057
+#define IDC_EDIT_ImageX                 1057
+#define IDC_SLIDER_PolySigma            1058
+#define IDC_EDIT_ImageY                 1058
+#define IDC_EDIT_PyrScale               1059
+#define IDC_EDIT_WorldX                 1059
+#define IDC_SLIDER_PyrScale             1060
+#define IDC_EDIT_WorldY                 1060
+#define IDC_EDIT_Fi                     1061
+#define IDC_EDIT_WorldZ                 1061
+#define IDC_SLIDER_Fi                   1062
+#define IDC_EDIT_PolyN                  1063
+#define IDC_SLIDER_PolyN                1064
+#define IDC_EDIT_Lambda                 1065
+#define IDC_SLIDER_Lambda               1066
 #define ID_WRITE_PASTEASHYPERLINK       32770
 #define ID_BUTTON7                      32779
 #define ID_RefreshCam                   32779
@@ -152,14 +170,18 @@
 #define ID_CHK_Calculate                32820
 #define ID_CHK_YML                      32821
 #define ID_CalibFromYML                 32822
+#define ID_CHECK2                       32827
+#define ID_DoRefreshDisparityMap        32831
+#define ID_CHK_GetDepth                 32832
+#define ID_CHK_GetLength                32833
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        317
-#define _APS_NEXT_COMMAND_VALUE         32827
-#define _APS_NEXT_CONTROL_VALUE         1055
+#define _APS_NEXT_RESOURCE_VALUE        323
+#define _APS_NEXT_COMMAND_VALUE         32834
+#define _APS_NEXT_CONTROL_VALUE         1062
 #define _APS_NEXT_SYMED_VALUE           310
 #endif
 #endif

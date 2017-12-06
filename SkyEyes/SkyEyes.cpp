@@ -64,7 +64,10 @@ CSkyEyesApp theApp;
 
 
 // CSkyEyesApp 初始化
-
+// 在这里会发出一个用户消息到全局,这个消息的发出会导致用户区界面的初始化开始
+// 因为DocBase的程序里面,用户区是最后初始化的,为了界面好看,我修改了用户区的基类,导致了初始化的时间冲突,所以
+// 采用了全局消息来通知初始化的适当时机
+// 天使微积分注
 BOOL CSkyEyesApp::InitInstance()
 {
 	// 如果一个运行在 Windows XP 上的应用程序清单指定要
@@ -149,7 +152,7 @@ BOOL CSkyEyesApp::InitInstance()
 	//  在 SDI 应用程序中，这应在 ProcessShellCommand 之后发生
 	// 启用拖/放
 	m_pMainWnd->DragAcceptFiles();
-	PostMessage(*m_pMainWnd, WM_USER_Initializable, 0, 0);
+	PostMessage(*m_pMainWnd, WM_USER_Initializable, 0, 0);//系统初始化已经完成,发出消息提醒主类进行用户初始化
 	return TRUE;
 }
 

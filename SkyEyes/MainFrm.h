@@ -14,30 +14,11 @@
 //
 
 #pragma once
-//#pragma comment( lib, "IlmImf.lib" ) 
-//#pragma comment( lib, "libjasper.lib" )  
-//#pragma comment( lib, "libjpeg.lib" )  
-//#pragma comment( lib, "libpng.lib" )  
-//#pragma comment( lib, "libtiff.lib" )  
-//#pragma comment( lib, "zlib.lib" )
-
-//#pragma comment( lib, "opencv_core2411.lib" )
-//#pragma comment( lib, "opencv_highgui2411.lib" )
-//#pragma comment( lib, "opencv_imgproc2411.lib" )
-//#pragma comment( lib, "opencv_legacy2411.lib" )
-//#pragma comment( lib, "opencv_objdetect2411.lib" )
-//#pragma comment( lib, "opencv_calib3d2411.lib" )
-
-//#pragma comment( lib, "opencv_features2d2411.lib" )
-//#pragma comment( lib, "opencv_flann2411.lib" )
-
-
-  
 #pragma comment( lib, "vfw32.lib" )  
 #pragma comment( lib, "comctl32.lib" )  
 
 #include "OutputWnd.h"
-#include "I:\General_Files\opencv\build\include\opencv2\core\core.hpp"
+#include "opencv2\core\core.hpp"
 #include "afxwin.h"
 #include "afxcmn.h"
 #include "stdlib.h"
@@ -62,13 +43,15 @@
 #include "opencv2/highgui/highgui.hpp"
 #include "CvvImage.h"
 #include "calib.h"
+#include <math.h>
 #define CalibWnd 541301
 #define MatchWnd 541302
 #define RangeWnd 541303
 
 //using namespace std;
 using namespace cv;
-static Point moupoint=0;
+static Point moupoint = 0;
+static Point moupoint2 = 0;//这个用来给两点距离的测量做缓存
 class CMainFrame : public CFrameWndEx
 {
 	
@@ -116,9 +99,11 @@ protected:
 public:
 	/*===============================用户自定义数据类型============================*/
 	   // 匹配算法枚举
-	typedef enum { STEREO_BM, STEREO_SGBM } STEREO_METHOD;
+	typedef enum { STEREO_BM, STEREO_SGBM, STEREO_VAR} STEREO_METHOD;
 	   // 帧处理算法枚举
 	typedef enum { SHOW_ORIGINAL_FRAME, SHOW_EDGE_IMAGE, SHOW_EQUAL_HISTOGRAM, SHOW_CONVERT_COLOR } FRAME_PROCESS_METHOD;
+	   // 测距模式枚举
+	typedef enum { GetDepth, GetLength } RANGING_MODEL;
 	   // 相机标定设置结构体
 	struct OptionCameraCalib
 	{
@@ -138,7 +123,10 @@ private:
     cv::Mat OriginalDisparity;                  // 原始差数据        (使用:本类:OnBngivedisp();OnBnCompdisp())
 	cv::Mat ProcessedImageL, ProcessedImageR;   // 处理过后的左右视图(使用:本类:OnBngivedisp() OnBnCompdisp())
 	cv::Mat DisparityMap;                       // 视差图            (使用;本类:OnBngivedisp();OnBnCompdisp();OnBnMouseon())
+	cv::Mat DisparityMap2;                      // 视差图副本,用于在测量两点距离的时候进行叠绘            (使用;本类:)
 	cv::Mat pointCloud;                         // 三维点云          (使用:本类:OnBnMouseon();OnBnCompdisp())
+	cv::Mat TargetImageL, TargetImageR;         // 全局变量: 待测目标图像      (使用:本类:OnBngivedisp(); RefreshDispMap())
+	cv::Mat depth;                              // 全局变量: 以图像世界二维坐标为索引的深度信息 (使用:本类:
 	// 简单数据成员
 	CString WorkPath;                           // 工作路径
 	UINT m_nID_RAD;                             // 色彩空间变换方法
@@ -152,6 +140,7 @@ private:
 	double m_ObjectDistance;                    // 目标距离
 	bool BOUGUET=true;                          // 是否使用BOUGUET标定算法?  true=BOUGUET; false=Hartley
 	bool BM=true;                               // 是否使用BM匹配算法?       true=BM;      false=SGBM    
+	bool VAR;                                   // 是否使用VAR求解器?        true=使用;    false=不使用
 	bool CalibDefaultParamEnable = false;       // 是否启用 标定->默认参数
 	bool CalibDeleteParamEnable = false;        // 是否启用 标定->清除参数        
 	bool CalibFromImage = false;                // 是否启用 标定->从图片标定
@@ -162,7 +151,12 @@ private:
 	bool MatchDeleteParamEnable = false;        // 是否启用 匹配->清除参数
 	bool MatchBngivedispEnable = false;         // 是否启用 匹配->生成视差图
 	bool MatchDeepRebuildEnable = false;        // 是否启用 匹配->深度重建
+	bool DoRefreshDisparityMapEnable = false;   // 是否启用 匹配->刷新视差图
 	bool RangeEnable = false;                   // 是否启用 测距相关功能
+	bool FileSelected = false;                  // 是否选择了匹配所需的文件
+	bool IsSecondPoint = true;                 // 是不是第二个点
+	STEREO_METHOD stereoMethod;		        // 选择的立体匹配算法
+	RANGING_MODEL rangingModel;
 	// 对象成员
 	VideoCapture lfCam;                         //左镜头对象
 	VideoCapture riCam;                         //右镜头对象
@@ -197,6 +191,10 @@ private:
 	void F_EdgeDetectCanny(Mat& src, Mat& des);
 	// 确认摄像机定标的相关选项
 	bool DoParseOptionsOfCameraCalib(OptionCameraCalib& opt);
+	// 视差图刷新的执行函数
+	void RefreshDisparityMap();
+	// 给匹配求解器设置启动参数
+	void SetSolver(int imgChannels);
 public:
 	/*================================自定义消息的回调函数===============================*/
 	afx_msg LRESULT OnUserInitializable(WPARAM wParam, LPARAM lParam);
@@ -205,6 +203,8 @@ public:
 	afx_msg LRESULT OnUserCPara4ChangeCameraL(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnUserCPara4ChangeCameraR(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnUserChangedpi(WPARAM wParam, LPARAM lParam);
+	afx_msg LRESULT OnRefreshDisparityMap(WPARAM wParam, LPARAM lParam);
+	afx_msg LRESULT OnXYZAnalyse(WPARAM wParam, LPARAM lParam);
 	/*===============================以下是界面事件处理程序==============================*/
 	afx_msg void OnBnDefaultcamcalibparam();
 	afx_msg void OnBndetectag();
@@ -250,6 +250,18 @@ public:
 	afx_msg void OnUpdateTestcalib(CCmdUI *pCmdUI);
 	afx_msg void OnUpdateCalibfromyml(CCmdUI *pCmdUI);
 	afx_msg void OnUpdateStopcalib(CCmdUI *pCmdUI);
+	afx_msg void OnBnDeletecamcalibparam();
+	afx_msg void OnBnStereodeleteparam();
+	afx_msg void OnCheck2();
+	afx_msg void OnUpdateCheck2(CCmdUI *pCmdUI);
+	afx_msg void OnChkGc();
+	afx_msg void OnUpdateChkGc(CCmdUI *pCmdUI);
+	afx_msg void OnDorefreshdisparitymap();
+	afx_msg void OnUpdateDorefreshdisparitymap(CCmdUI *pCmdUI);
+	afx_msg void OnChkGetdepth();
+	afx_msg void OnUpdateChkGetdepth(CCmdUI *pCmdUI);
+	afx_msg void OnChkGetlength();
+	afx_msg void OnUpdateChkGetlength(CCmdUI *pCmdUI);
 };
 
 

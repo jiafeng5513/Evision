@@ -266,58 +266,62 @@ void calib::showText(cv::Mat& img, string text)
 int calib::loadCornerData(const char* filename, CornerDatas& cornerDatas)
 {
 	cv::FileStorage fs(filename, cv::FileStorage::READ);
-	if (fs.isOpened())
-	{
-		fs["nPoints"] >> cornerDatas.nPoints;
-		fs["nImages"] >> cornerDatas.nImages;
-		fs["nPointsPerImage"] >> cornerDatas.nPointsPerImage;
 
-		cv::FileNodeIterator it = fs["imageSize"].begin();
-		it >> cornerDatas.imageSize.width >> cornerDatas.imageSize.height;
-
-		cv::FileNodeIterator bt = fs["boardSize"].begin();
-		bt >> cornerDatas.boardSize.width >> cornerDatas.boardSize.height;
-
-		for (int i = 0; i<cornerDatas.nImages; i++)
-		{
-			std::stringstream imagename;
-			imagename << "image" << i;
-
-			cv::FileNode img = fs[imagename.str()];
-			vector<cv::Point3f> ov;
-			vector<cv::Point2f> iv1, iv2;
-			for (int j = 0; j<cornerDatas.nPointsPerImage; j++)
-			{
-				std::stringstream nodename;
-				nodename << "node" << j;
-
-				cv::FileNode pnt = img[nodename.str()];
-				cv::Point3f op;
-				cv::Point2f ip1, ip2;
-				cv::FileNodeIterator ot = pnt["objectPoints"].begin();
-				ot >> op.x >> op.y >> op.z;
-				cv::FileNodeIterator it1 = pnt["imagePoints1"].begin();
-				it1 >> ip1.x >> ip1.y;
-				cv::FileNodeIterator it2 = pnt["imagePoints2"].begin();
-				it2 >> ip2.x >> ip2.y;
-
-				iv1.push_back(ip1);
-				iv2.push_back(ip2);
-				ov.push_back(op);
-			}
-			cornerDatas.imagePoints1.push_back(iv1);
-			cornerDatas.imagePoints2.push_back(iv2);
-			cornerDatas.objectPoints.push_back(ov);
-		}
-
-		fs.release();
-		return 1;
-	}
-	else
-	{
+	//1 如果文件打开失败,返回0
+	if (fs.isOpened() == false){
 		return 0;
 	}
+	
+	fs["nPoints"] >> cornerDatas.nPoints;
+	fs["nImages"] >> cornerDatas.nImages;
+	fs["nPointsPerImage"] >> cornerDatas.nPointsPerImage;
 
+	//2 如果文件不是正确的角点坐标文件,返回0 
+	if (cornerDatas.nPoints <= 0 || cornerDatas.nImages <= 0 || cornerDatas.nPointsPerImage <= 0){
+		fs.release();
+		return 0;
+	}
+	//3 验证完毕,开始读取
+	cv::FileNodeIterator it = fs["imageSize"].begin();
+	it >> cornerDatas.imageSize.width >> cornerDatas.imageSize.height;
+
+	cv::FileNodeIterator bt = fs["boardSize"].begin();
+	bt >> cornerDatas.boardSize.width >> cornerDatas.boardSize.height;
+
+	for (int i = 0; i<cornerDatas.nImages; i++)
+	{
+		std::stringstream imagename;
+		imagename << "image" << i;
+
+		cv::FileNode img = fs[imagename.str()];
+		vector<cv::Point3f> ov;
+		vector<cv::Point2f> iv1, iv2;
+		for (int j = 0; j<cornerDatas.nPointsPerImage; j++)
+		{
+			std::stringstream nodename;
+			nodename << "node" << j;
+
+			cv::FileNode pnt = img[nodename.str()];
+			cv::Point3f op;
+			cv::Point2f ip1, ip2;
+			cv::FileNodeIterator ot = pnt["objectPoints"].begin();
+			ot >> op.x >> op.y >> op.z;
+			cv::FileNodeIterator it1 = pnt["imagePoints1"].begin();
+			it1 >> ip1.x >> ip1.y;
+			cv::FileNodeIterator it2 = pnt["imagePoints2"].begin();
+			it2 >> ip2.x >> ip2.y;
+
+			iv1.push_back(ip1);
+			iv2.push_back(ip2);
+			ov.push_back(op);
+		}
+		cornerDatas.imagePoints1.push_back(iv1);
+		cornerDatas.imagePoints2.push_back(iv2);
+		cornerDatas.objectPoints.push_back(ov);
+	}
+
+	fs.release();
+	return 1;
 }
 /*----------------------------
 * 功能 : 载入已标定好的摄像机内部参数

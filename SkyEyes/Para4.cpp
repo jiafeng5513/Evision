@@ -7,7 +7,7 @@
 #include "afxdialogex.h"
 #include "MainFrm.h"
 
-// CPara4 对话框
+// CPara4 对话框 采样控件面板
 
 IMPLEMENT_DYNAMIC(CPara4, CDialogEx)
 

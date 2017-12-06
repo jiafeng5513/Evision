@@ -154,10 +154,10 @@ void CSkyEyesView::OnTcnSelchangeTab(NMHDR *pNMHDR, LRESULT *pResult)
 	switch (CurSel)
 	{
 		case 0:
-		         m_para1->ShowWindow(true);
-		         m_para2->ShowWindow(false);
-				 m_para3->ShowWindow(false);
-				 m_para4->ShowWindow(false);
+		    m_para1->ShowWindow(true);
+		    m_para2->ShowWindow(false);
+		    m_para3->ShowWindow(false);
+	    	m_para4->ShowWindow(false);
 			break;
 		case 1:
 		         m_para1->ShowWindow(false);

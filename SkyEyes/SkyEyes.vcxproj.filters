@@ -69,7 +69,7 @@
     <ClInclude Include="Para4.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="CameraDS.h">
+    <ClInclude Include="DirectShowHelper.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -119,7 +119,7 @@
     <ClCompile Include="Para4.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="CameraDS.cpp">
+    <ClCompile Include="DirectShowHelper.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -172,6 +172,12 @@
       <Filter>资源文件</Filter>
     </Image>
     <Image Include="res\Toolbar256.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\bitmap1.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="I:\下载\main.bmp">
       <Filter>资源文件</Filter>
     </Image>
   </ItemGroup>

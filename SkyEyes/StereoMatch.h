@@ -7,10 +7,15 @@
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/calib3d/calib3d.hpp"
+#include "opencv2/imgproc/types_c.h"
+#include "opencv2/contrib/contrib.hpp"
 #include "cvaux.h"
 #include "cxcore.h"
 #include "highgui.h"
 #include "cv.h"
+
+
+
 using namespace std;
 
 class StereoMatch
@@ -49,7 +54,7 @@ public:
 	* 参数 : imageLeft		[out]	处理后的左视图，用于显示
 	* 参数 : imageRight		[out]	处理后的右视图，用于显示
 	*/
-	int bmMatch(cv::Mat& frameLeft, cv::Mat& frameRight, cv::Mat& disparity, cv::Mat& imageLeft, cv::Mat& imageRight, const char* cornerFile);
+	int bmMatch(cv::Mat& frameLeft, cv::Mat& frameRight, cv::Mat& disparity, cv::Mat& imageLeft, cv::Mat& imageRight);
 
 	/*----------------------------
 	* 功能 : 基于 SGBM 算法计算视差
@@ -63,9 +68,25 @@ public:
 	* 参数 : disparity		[out]	视差图
 	* 参数 : imageLeft		[out]	处理后的左视图，用于显示
 	* 参数 : imageRight		[out]	处理后的右视图，用于显示
+	* 参数 :                [in]    calib_paras.xml文件路径
 	*/
-	int sgbmMatch(cv::Mat& frameLeft, cv::Mat& frameRight, cv::Mat& disparity, cv::Mat& imageLeft, cv::Mat& imageRight, const char* cornerFile);
-	void GcMatch(IplImage * Left, IplImage * Right, CvMat * Left_disp, CvMat * Right_disp, const char* cornerFile);
+	int sgbmMatch(cv::Mat& frameLeft, cv::Mat& frameRight, cv::Mat& disparity, cv::Mat& imageLeft, cv::Mat& imageRight);
+	
+	/*----------------------------
+	* 功能 : 基于 VAR 算法计算视差
+	*----------------------------
+	* 函数 : StereoMatch::sgbmMatch
+	* 访问 : public
+	* 返回 : 0 - 失败，1 - 成功
+	*
+	* 参数 : frameLeft		[in]	左摄像机帧图
+	* 参数 : frameRight		[in]	右摄像机帧图
+	* 参数 : disparity		[out]	视差图
+	* 参数 : imageLeft		[out]	处理后的左视图，用于显示
+	* 参数 : imageRight		[out]	处理后的右视图，用于显示
+	* 参数 : CalibParasFile [in]    calib_paras.xml文件路径
+	*/
+	int varMatch(cv::Mat& frameLeft, cv::Mat& frameRight, cv::Mat& disparity, cv::Mat& imageLeft, cv::Mat& imageRight);
 	/*----------------------------
 	* 功能 : 计算三维点云
 	*----------------------------
@@ -103,11 +124,28 @@ public:
 	*/
 	void savePointClouds(cv::Mat& pointClouds, const char* filename);
 
+	/*----------------------------
+	* 功能 : 基于 GC 算法计算视差..............这个函数并没有实现
+	*----------------------------
+	* 函数 : StereoMatch::GcMatch
+	* 访问 : public
+	* 返回 : 0 - 失败，1 - 成功
+	*
+	* 参数 : Left		    [in]	左摄像机帧图
+	* 参数 : Right		    [in]	右摄像机帧图
+	* 参数 : Left_disp	    [out]	处理后的左视图，用于显示
+	* 参数 : Right_disp		[out]	处理后的右视图，用于显示
+	*/
+
+	void GcMatch(IplImage * Left, IplImage * Right, CvMat * Left_disp, CvMat * Right_disp);
+	int GcMatch(cv::Mat& frameLeft, cv::Mat& frameRight, cv::Mat& disparity, cv::Mat& imageLeft, cv::Mat& imageRight);
+
 	/***
 	*	公开变量
 	*/
 	cv::StereoBM	m_BM;				// 立体匹配 BM 方法
 	cv::StereoSGBM	m_SGBM;				// 立体匹配 SGBM 方法
+	cv::StereoVar   m_VAR;              // 立体匹配 VAR 方法
 	double			m_FL;				// 左摄像机校正后的焦距值
 
 private:

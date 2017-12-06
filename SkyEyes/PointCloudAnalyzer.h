@@ -54,13 +54,13 @@ public:
 	*----------------------------
 	* 函数 : PointCloudAnalyzer::detectNearObject
 	* 访问 : public
-	* 返回 : void
+	* 返回 : 是否成功
 	*
 	* 参数 : image			[io]	左摄像机视图，会进行原位操作，绘制目标尺寸位置
 	* 参数 : pointCloud		[in]	三维点云
 	* 参数 : objectInfos	[out]	目标信息序列
 	*/
-	void detectNearObject(cv::Mat& image, cv::Mat& pointCloud, vector<ObjectInfo>& objectInfos);
+	int detectNearObject(cv::Mat& image, cv::Mat& pointCloud, vector<ObjectInfo>& objectInfos);
 	/*----------------------------
 	* 功能 : 绘制近距物体尺寸和位置
 	*----------------------------

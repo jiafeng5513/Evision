@@ -7,7 +7,7 @@
 #include "afxdialogex.h"
 
 
-// CPara1 对话框
+// CPara1 对话框 标定控件面板
 
 IMPLEMENT_DYNAMIC(CPara1, CDialog)
 CPara1* CPara1::getInstance(){//取得实例

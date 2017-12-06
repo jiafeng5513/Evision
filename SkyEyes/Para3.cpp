@@ -7,7 +7,7 @@
 #include "afxdialogex.h"
 
 
-// CPara3 对话框
+// CPara3 对话框 测距控件面板
 
 IMPLEMENT_DYNAMIC(CPara3, CDialog)
 CPara3* CPara3::getInstance(){//取得实例

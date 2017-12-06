@@ -52,7 +52,10 @@
 #define WM_USER_CPara4ChangeCameraL  WM_USER+1003
 //自定义消息:CPara4右摄像头更新
 #define WM_USER_CPara4ChangeCameraR  WM_USER+1004
-
+// 自定义消息 :刷新视差图
+#define WM_USER_RefreshDisparityMap  WM_USER+1005
+// 自定义消息: 鼠标点击测距过程中发出这个消息,就意味着要进行坐标分析
+#define WM_USER_XYZAnalyse WM_USER+1006
 
 
 #ifdef _UNICODE

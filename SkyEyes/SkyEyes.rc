@@ -73,9 +73,13 @@ END
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDR_MAINFRAME           ICON                    "res\\SkyEyes.ico"
+
 IDR_SkyEyesTYPE         ICON                    "res\\SkyEyesDoc.ico"
+
 IDI_OUTPUT_WND          ICON                    "res\\output_wnd.ico"
+
 IDI_OUTPUT_WND_HC       ICON                    "res\\output_wnd_hc.ico"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -83,13 +87,23 @@ IDI_OUTPUT_WND_HC       ICON                    "res\\output_wnd_hc.ico"
 //
 
 IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
+
 IDR_MAINFRAME_256       BITMAP                  "res\\Toolbar256.bmp"
+
 IDB_MAIN                BITMAP                  "res\\main.bmp"
+
 IDB_FILELARGE           BITMAP                  "res\\filelarge.bmp"
+
 IDB_FILESMALL           BITMAP                  "res\\filesmall.bmp"
+
 IDB_WRITELARGE          BITMAP                  "res\\writelarge.bmp"
+
 IDB_WRITESMALL          BITMAP                  "res\\writesmall.bmp"
+
 IDB_BUTTONS             BITMAP                  "res\\buttons.bmp"
+
+IDB_BITMAP1             BITMAP                  "res\\main.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -269,15 +283,14 @@ BEGIN
     LTEXT           "角点数量:",IDC_STATIC,18,22,36,8
     LTEXT           "行",IDC_STATIC,87,21,9,8
     LTEXT           "列",IDC_STATIC,126,20,9,8
-    LTEXT           "边长:",IDC_STATIC,140,20,20,8
-    EDITTEXT        IDC_SquareSize,161,17,21,14,ES_AUTOHSCROLL | ES_NUMBER
-    LTEXT           "毫米",IDC_STATIC,185,20,17,8
+    LTEXT           "边长:",IDC_STATIC,142,20,20,8
+    EDITTEXT        IDC_SquareSize,162,17,29,14,ES_AUTOHSCROLL | ES_NUMBER
     EDITTEXT        IDC_nBoards,60,38,21,14,ES_AUTOHSCROLL | ES_NUMBER
     LTEXT           "迭代次数:",IDC_STATIC,18,41,36,8
     GROUPBOX        "摄像头",IDC_STATIC,10,74,194,55
     LTEXT           "α:",IDC_STATIC,89,40,8,8
     EDITTEXT        IDC_Alpha,100,37,22,14,ES_AUTOHSCROLL
-    LTEXT           "(0.0~1.0,或-1)",IDC_STATIC,144,39,50,8
+    LTEXT           "(0.0~1.0,或-1)",IDC_STATIC,141,39,50,8
     LTEXT           "标志位:",IDC_STATIC,19,57,28,8
     CONTROL         "FPP",IDC_CHK_FPP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,60,56,28,10
     CONTROL         "UIG",IDC_CHK_UIG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,89,56,28,10
@@ -296,48 +309,74 @@ IDD_PARA2 DIALOGEX 0, 0, 222, 137
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    CONTROL         "",IDC_SLIDER_minDisp,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,2,37,63,11
-    EDITTEXT        IDC_EDIT_minDisp,39,15,22,14,ES_AUTOHSCROLL | ES_WANTRETURN | ES_NUMBER
-    LTEXT           "MinDisp",IDC_STATIC,5,16,25,8
-    CONTROL         "",IDC_SLIDER_maxDisp,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,2,73,63,11
-    EDITTEXT        IDC_EDIT_maxDisp,40,54,22,14,ES_AUTOHSCROLL | ES_WANTRETURN | ES_NUMBER
-    LTEXT           "MaxDisp",IDC_STATIC,2,57,28,8
-    CONTROL         "",IDC_SLIDER_SADWinSiz,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,2,111,63,11
-    EDITTEXT        IDC_EDIT_SADWinSiz,40,95,22,14,ES_AUTOHSCROLL | ES_WANTRETURN | ES_NUMBER
-    LTEXT           "SadWinSiz",IDC_STATIC,2,98,34,8
-    CONTROL         "",IDC_SLIDER_textThres,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,74,111,63,11
-    EDITTEXT        IDC_EDIT_textThres,113,95,22,14,ES_AUTOHSCROLL | ES_WANTRETURN | ES_NUMBER
-    LTEXT           "textThread",IDC_STATIC,75,98,37,8
-    CONTROL         "",IDC_SLIDER_preFiltCap,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,144,74,63,11
-    EDITTEXT        IDC_EDIT_preFiltCap,186,54,22,14,ES_AUTOHSCROLL | ES_WANTRETURN | ES_NUMBER
-    LTEXT           "prefilcap",IDC_STATIC,146,56,28,8
-    CONTROL         "",IDC_SLIDER_uniqRatio,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,76,36,63,11
-    EDITTEXT        IDC_EDIT_uniqRatio,114,14,22,14,ES_AUTOHSCROLL | ES_WANTRETURN | ES_NUMBER
-    LTEXT           "uniradio",IDC_STATIC,76,17,26,8
-    CONTROL         "",IDC_SLIDER_speckRange,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,75,73,63,11
-    EDITTEXT        IDC_EDIT_speckRange,113,53,22,14,ES_AUTOHSCROLL | ES_WANTRETURN | ES_NUMBER
-    LTEXT           "specrange",IDC_STATIC,76,56,34,8
-    CONTROL         "",IDC_SLIDER_speckWinSiz,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,145,35,63,11
-    EDITTEXT        IDC_EDIT_speckWinSiz,186,14,22,14,ES_AUTOHSCROLL | ES_WANTRETURN | ES_NUMBER
-    LTEXT           "specwinsz",IDC_STATIC,147,16,33,8
-    LTEXT           "maxdifdisp12",IDC_STATIC,142,96,43,8
-    CONTROL         "",IDC_SLIDER_disp12MaxDiff,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,144,110,63,11
-    EDITTEXT        IDC_EDIT_disp12MaxDiff,187,95,22,13,ES_AUTOHSCROLL | ES_WANTRETURN | ES_NUMBER
+    CONTROL         "",IDC_SLIDER_minDisp,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,2,20,63,11
+    EDITTEXT        IDC_EDIT_minDisp,39,6,22,14,ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN | ES_NUMBER
+    LTEXT           "MinDisp",IDC_STATIC,4,7,25,8
+    CONTROL         "",IDC_SLIDER_maxDisp,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,2,46,63,11
+    EDITTEXT        IDC_EDIT_maxDisp,40,32,22,14,ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN | ES_NUMBER
+    LTEXT           "MaxDisp",IDC_STATIC,3,34,28,8
+    CONTROL         "",IDC_SLIDER_SADWinSiz,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,2,73,63,11
+    EDITTEXT        IDC_EDIT_SADWinSiz,40,57,22,14,ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN | ES_NUMBER
+    LTEXT           "SadWinSiz",IDC_STATIC,3,60,34,8
+    CONTROL         "",IDC_SLIDER_textThres,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,76,72,63,11
+    EDITTEXT        IDC_EDIT_textThres,113,58,22,14,ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN | ES_NUMBER
+    LTEXT           "textThread",IDC_STATIC,75,61,37,8
+    CONTROL         "",IDC_SLIDER_preFiltCap,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,145,47,63,11
+    EDITTEXT        IDC_EDIT_preFiltCap,186,31,22,14,ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN | ES_NUMBER
+    LTEXT           "prefilcap",IDC_STATIC,146,33,28,8
+    CONTROL         "",IDC_SLIDER_uniqRatio,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,75,19,63,11
+    EDITTEXT        IDC_EDIT_uniqRatio,114,5,22,14,ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN | ES_NUMBER
+    LTEXT           "uniradio",IDC_STATIC,76,8,26,8
+    CONTROL         "",IDC_SLIDER_speckRange,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,76,47,63,11
+    EDITTEXT        IDC_EDIT_speckRange,113,30,22,14,ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN | ES_NUMBER
+    LTEXT           "specrange",IDC_STATIC,76,33,34,8
+    CONTROL         "",IDC_SLIDER_speckWinSiz,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,145,19,63,11
+    EDITTEXT        IDC_EDIT_speckWinSiz,186,5,22,14,ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN | ES_NUMBER
+    LTEXT           "specwinsz",IDC_STATIC,147,7,33,8
+    LTEXT           "maxdifdisp12",IDC_STATIC,142,60,43,8
+    EDITTEXT        IDC_EDIT_disp12MaxDiff,186,59,22,13,ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN | ES_NUMBER
+    CONTROL         "",IDC_SLIDER_disp12MaxDiff,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,145,72,63,11
+    LTEXT           "Levels",IDC_STATIC,4,85,21,8
+    EDITTEXT        IDC_EDIT_Levels,40,82,22,14,ES_AUTOHSCROLL | ES_READONLY
+    CONTROL         "",IDC_SLIDER_Levels,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,2,96,63,11
+    LTEXT           "PolySigma",IDC_STATIC,5,111,33,8
+    EDITTEXT        IDC_EDIT_PolySigma,40,108,22,14,ES_AUTOHSCROLL | ES_READONLY
+    CONTROL         "",IDC_SLIDER_PolySigma,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,2,123,63,11
+    LTEXT           "pyrScale",IDC_STATIC,79,85,28,8
+    EDITTEXT        IDC_EDIT_PyrScale,113,82,22,14,ES_AUTOHSCROLL | ES_READONLY
+    CONTROL         "",IDC_SLIDER_PyrScale,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,76,96,63,11
+    LTEXT           "Fi",IDC_STATIC,79,110,8,8
+    EDITTEXT        IDC_EDIT_Fi,113,107,22,14,ES_AUTOHSCROLL | ES_READONLY
+    CONTROL         "",IDC_SLIDER_Fi,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,75,122,63,11
+    LTEXT           "PolyN",IDC_STATIC,149,86,19,8
+    EDITTEXT        IDC_EDIT_PolyN,186,82,22,14,ES_AUTOHSCROLL | ES_READONLY
+    CONTROL         "",IDC_SLIDER_PolyN,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,145,96,63,11
+    LTEXT           "Lambda",IDC_STATIC,148,110,26,8
+    EDITTEXT        IDC_EDIT_Lambda,186,107,22,14,ES_AUTOHSCROLL | ES_READONLY
+    CONTROL         "",IDC_SLIDER_Lambda,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,145,122,63,11
 END
 
 IDD_PARA3 DIALOGEX 0, 0, 222, 136
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    GROUPBOX        "距离输出",IDC_STATIC,12,11,193,62
-    LTEXT           "目标距离 :",IDC_STATIC,22,24,38,8
-    EDITTEXT        IDC_e7ObjDist,22,38,172,15,ES_AUTOHSCROLL | ES_READONLY
-    LTEXT           "单位: CM(厘米)",IDC_STATIC,22,59,53,8
-    GROUPBOX        "视差模式",IDC_STATIC,12,76,194,52
-    CONTROL         "彩色视差",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON,38,88,48,10
-    CONTROL         "灰度视差",IDC_RAD_GrayDisp,"Button",BS_AUTORADIOBUTTON,133,88,48,10
-    CONTROL         "环境俯视",IDC_RAD_TopDownView,"Button",BS_AUTORADIOBUTTON,37,105,48,10
-    CONTROL         "环境侧视",IDC_RAD_SideView,"Button",BS_AUTORADIOBUTTON,133,106,48,10
+    GROUPBOX        "距离信息",IDC_STATIC,12,11,193,40
+    LTEXT           "目标距离 :",IDC_STATIC,35,28,38,8
+    EDITTEXT        IDC_e7ObjDist,94,26,89,15,ES_AUTOHSCROLL | ES_READONLY
+    GROUPBOX        "坐标信息",IDC_STATIC,12,56,194,71
+    LTEXT           "图像坐标系:",IDC_STATIC,21,72,44,8
+    LTEXT           "世界坐标系:",IDC_STATIC,20,89,44,8
+    LTEXT           "X:",IDC_STATIC,68,73,8,8
+    LTEXT           "Y:",IDC_STATIC,116,74,8,8
+    LTEXT           "X:",IDC_STATIC,68,90,8,8
+    LTEXT           "Y:",IDC_STATIC,115,91,8,8
+    LTEXT           "Z:",IDC_STATIC,160,90,8,8
+    EDITTEXT        IDC_EDIT_ImageX,79,71,30,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT_ImageY,124,71,30,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT_WorldX,79,89,30,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT_WorldY,124,88,30,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT_WorldZ,170,88,29,14,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "世界坐标系的量纲取决于标定板参数中""边长""的量纲",IDC_STATIC,18,108,182,8
 END
 
 IDD_NewProject DIALOGEX 0, 0, 255, 68
@@ -506,6 +545,17 @@ BEGIN
 0xb1d6, 0xbdb7, 0xbccd, 0xf9be, 0xe2ba, "\000" 
     IDC_CP4MethodList, 0x403, 13, 0
 0xabc9, 0xcab2, 0xd5bf, 0xe4bc, 0xe4b1, 0xbbbb, "\000" 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_PARA1 AFX_DIALOG_LAYOUT
+BEGIN
     0
 END
 

@@ -19,17 +19,18 @@ PointCloudAnalyzer::~PointCloudAnalyzer(void)
 *----------------------------
 * 函数 : PointCloudAnalyzer::detectNearObject
 * 访问 : public
-* 返回 : void
+* 返回 : 是否成功
 *
 * 参数 : image			[io]	左摄像机视图，会进行原位操作，绘制目标尺寸位置
 * 参数 : pointCloud		[in]	三维点云
 * 参数 : objectInfos	[out]	目标信息序列
+
 */
-void PointCloudAnalyzer::detectNearObject(cv::Mat& image, cv::Mat& pointCloud, vector<ObjectInfo>& objectInfos)
+int PointCloudAnalyzer::detectNearObject(cv::Mat& image, cv::Mat& pointCloud, vector<ObjectInfo>& objectInfos)
 {
 	if (image.empty() || pointCloud.empty())
 	{
-		return;
+		return 0;
 	}
 
 	// 提取深度图像
@@ -45,30 +46,18 @@ void PointCloudAnalyzer::detectNearObject(cv::Mat& image, cv::Mat& pointCloud, v
 	//	threshold(depth, depthThresh,80, 255, CV_THRESH_BINARY_INV);
 	depthThresh.convertTo(depthThresh, CV_8UC1);
 	imageDenoising(depthThresh, 3);
-
-	//	Mat img_gray,img_gray_out;
-	//	cvtColor( image, img_gray, CV_BGR2GRAY );
-	//	threshold(img_gray, img_gray_out, 100, 255, CV_THRESH_BINARY);
-	//	imageDenoising(img_gray, 3);
-	//	blur( img_gray, img_gray, Size(3,3) );
-	//	cv::namedWindow("lslsls",1);
-	//	imshow("lslsls",img_gray);
-	//	blur( img_gray, img_gray, Size(3,3) );
 	parseCandidates(depthThresh, depth, objectInfos);
-	//	parseCandidates(img_gray, depth, objectInfos);
-
-	if (depthThresh.empty())
-		AfxMessageBox(_T("object为空@@@@"));
-	// 获取离摄像头较近的物体信息
-	/*	cvNamedWindow("lslsls",CV_WINDOW_AUTOSIZE);
-	imshow("lslsls",depth);
-	cvWaitKey(0);
-	cvDestroyWindow("lslsls");*/
-	if (objectInfos.empty())
-		AfxMessageBox(_T("objectInfos为空"));
-
+	if (depthThresh.empty()){
+		AfxMessageBox(_T("object为空!"));
+		return 0;
+	}
+	if (objectInfos.empty()){
+		AfxMessageBox(_T("objectInfos为空!"));
+		return 0;
+	}
 	// 绘制物体分布
 	showObjectInfo(objectInfos, image);
+	return 1;
 }
 
 
@@ -106,7 +95,7 @@ void PointCloudAnalyzer::imageDenoising(cv::Mat& img, int iters)
 }
 
 
-/*----------------------------////?????
+/*----------------------------
 * 功能 : 生成近距物体信息序列
 *----------------------------
 * 函数 : PointCloudAnalyzer::parseCandidates
@@ -202,7 +191,7 @@ void PointCloudAnalyzer::showObjectInfo(vector<ObjectInfo>& objectInfos, cv::Mat
 		//物体中心
 		circle(outImage, objectInfos[i].center, 3, CV_RGB(0, 0, 255), 2);
 
-		//物体最小矩形
+		//物体最小外接矩形
 		cv::Point2f rect_points[4];
 		//		objectInfos[i].minRect.points( rect_points );
 		objectInfos[i].minRect.points(rect_points);

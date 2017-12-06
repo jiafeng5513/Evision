@@ -87,7 +87,7 @@ public:
 	/*----------------------------
 	* 功能 : 初始化棋盘角点数据信息
 	*----------------------------
-	* 函数 : StereoCalib::initCornerData
+	* 函数 : calib::initCornerData
 	* 访问 : public
 	* 返回 : 0 - 操作失败，1 - 操作成功
 	*
@@ -102,7 +102,7 @@ public:
 	/*----------------------------
 	* 功能 : 根据成功检测的棋盘数目修改棋盘角点数据
 	*----------------------------
-	* 函数 : StereoCalib::resizeCornerData
+	* 函数 : calib::resizeCornerData
 	* 访问 : public
 	* 返回 : 0 - 操作失败，1 - 操作成功
 	*
@@ -114,7 +114,7 @@ public:
 	/*----------------------------
 	* 功能 : 载入棋盘角点数据信息
 	*----------------------------
-	* 函数 : StereoCalib::loadCornerData
+	* 函数 : calib::loadCornerData
 	* 访问 : public
 	* 返回 : 0 - 操作失败，1 - 操作成功
 	*
@@ -126,7 +126,7 @@ public:
 	/*----------------------------
 	* 功能 : 保存棋盘角点数据信息
 	*----------------------------
-	* 函数 : StereoCalib::saveCornerData
+	* 函数 : calib::saveCornerData
 	* 访问 : public
 	* 返回 : 0 - 操作失败，1 - 操作成功
 	*
@@ -138,7 +138,7 @@ public:
 	/*----------------------------
 	* 功能 : 检测棋盘角点
 	*----------------------------
-	* 函数 : StereoCalib::detectCorners
+	* 函数 : calib::detectCorners
 	* 访问 : public
 	* 返回 : 0 - 操作失败，1 - 操作成功
 	*
@@ -152,7 +152,7 @@ public:
 	/*----------------------------
 	* 功能 : 载入已标定好的摄像机内部参数
 	*----------------------------
-	* 函数 : StereoCalib::loadCameraParams
+	* 函数 : calib::loadCameraParams
 	* 访问 : public
 	* 返回 : 0 - 操作失败，1 - 操作成功
 	*
@@ -164,7 +164,7 @@ public:
 	/*----------------------------
 	* 功能 : 保存已标定好的摄像机内部参数
 	*----------------------------
-	* 函数 : StereoCalib::saveCameraParams
+	* 函数 : calib::saveCameraParams
 	* 访问 : public
 	* 返回 : 0 - 操作失败，1 - 操作成功
 	*
@@ -176,7 +176,7 @@ public:
 	/*----------------------------
 	* 功能 : 执行单目摄像机标定
 	*----------------------------
-	* 函数 : StereoCalib::calibrateSingleCamera
+	* 函数 : calib::calibrateSingleCamera
 	* 访问 : public
 	* 返回 : 0 - 操作失败，1 - 操作成功
 	*
@@ -189,7 +189,7 @@ public:
 	* 功能 : 执行双目摄像机标定
 	*		 若每个摄像机尚未标定，则首先进行单目标定，再进行双目标定
 	*----------------------------
-	* 函数 : StereoCalib::calibrateStereoCamera
+	* 函数 : calib::calibrateStereoCamera
 	* 访问 : public
 	* 返回 : 0 - 操作失败，1 - 操作成功
 	*
@@ -202,7 +202,7 @@ public:
 	/*----------------------------
 	* 功能 : 计算单目标定误差
 	*----------------------------
-	* 函数 : StereoCalib::getCameraCalibrateError
+	* 函数 : calib::getCameraCalibrateError
 	* 访问 : public
 	* 返回 : 0 - 操作失败，1 - 操作成功
 	*
@@ -216,7 +216,7 @@ public:
 	/*----------------------------
 	* 功能 : 计算双目标定误差
 	*----------------------------
-	* 函数 : StereoCalib::getStereoCalibrateError
+	* 函数 : calib::getStereoCalibrateError
 	* 访问 : public
 	* 返回 : 0 - 操作失败，1 - 操作成功
 	*
@@ -229,7 +229,7 @@ public:
 	/*----------------------------------
 	* 功能 : 生成单个摄像头的校正矩阵
 	*----------------------------------
-	* 函数 : StereoCalib::rectifySingleCamera
+	* 函数 : calib::rectifySingleCamera
 	* 访问 : public
 	* 返回 : 0 - 操作失败，1 - 操作成功
 	*
@@ -241,7 +241,7 @@ public:
 	/*----------------------------
 	* 功能 : 执行双目摄像机校正
 	*----------------------------
-	* 函数 : StereoCalib::rectifyStereoCamera
+	* 函数 : calib::rectifyStereoCamera
 	* 访问 : public
 	* 返回 : 0 - 操作失败，1 - 操作成功
 	*
@@ -255,7 +255,7 @@ public:
 	/*----------------------------
 	* 功能 : 保存双目校正参数
 	*----------------------------
-	* 函数 : StereoCalib::saveCalibrationDatas
+	* 函数 : calib::saveCalibrationDatas
 	* 访问 : public
 	* 返回 : 0 - 操作失败，1 - 操作成功
 	*
@@ -270,7 +270,7 @@ public:
 	/*----------------------------------
 	* 功能 : 对图像进行校正
 	*----------------------------------
-	* 函数 : StereoCalib::remapImage
+	* 函数 : calib::remapImage
 	* 访问 : public
 	* 返回 : 0 - 操作失败，1 - 操作成功
 	*
@@ -287,7 +287,7 @@ private:
 	/*----------------------------
 	* 功能 : 在图像右下角显示指定文字信息
 	*----------------------------
-	* 函数 : StereoCalib::showText
+	* 函数 : calib::showText
 	* 访问 : private
 	* 返回 : void
 	*

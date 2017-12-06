@@ -8,6 +8,9 @@
 
 
 // CNewProject 对话框
+/*
+用来获取新建工程的工程名用的对话框
+*/
 
 IMPLEMENT_DYNAMIC(CNewProject, CDialogEx)
 

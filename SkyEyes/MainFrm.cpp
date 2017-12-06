@@ -17,7 +17,8 @@
 #include "SkyEyesView.h"
 #include "MainFrm.h"
 #include "NewProject.h"
-#include "CameraDS.h"
+//#include "CameraDS.h"
+#include "DirectShowHelper.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -79,9 +80,21 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWndEx)
 	ON_UPDATE_COMMAND_UI(ID_TESTCALIB, &CMainFrame::OnUpdateTestcalib)
 	ON_UPDATE_COMMAND_UI(ID_CalibFromYML, &CMainFrame::OnUpdateCalibfromyml)
 	ON_UPDATE_COMMAND_UI(ID_STOPCALIB, &CMainFrame::OnUpdateStopcalib)
+	ON_COMMAND(IDC_BN_DeleteCamCalibParam, &CMainFrame::OnBnDeletecamcalibparam)
+	ON_COMMAND(IDC_BN_StereoDeleteParam, &CMainFrame::OnBnStereodeleteparam)
+	ON_COMMAND(ID_CHECK2, &CMainFrame::OnCheck2)
+	ON_UPDATE_COMMAND_UI(ID_CHECK2, &CMainFrame::OnUpdateCheck2)
+	ON_MESSAGE(WM_USER_RefreshDisparityMap, &CMainFrame::OnRefreshDisparityMap)
+	ON_COMMAND(ID_DoRefreshDisparityMap, &CMainFrame::OnDorefreshdisparitymap)
+	ON_UPDATE_COMMAND_UI(ID_DoRefreshDisparityMap, &CMainFrame::OnUpdateDorefreshdisparitymap)
+	ON_COMMAND(ID_CHK_GetDepth, &CMainFrame::OnChkGetdepth)
+	ON_UPDATE_COMMAND_UI(ID_CHK_GetDepth, &CMainFrame::OnUpdateChkGetdepth)
+	ON_COMMAND(ID_CHK_GetLength, &CMainFrame::OnChkGetlength)
+	ON_UPDATE_COMMAND_UI(ID_CHK_GetLength, &CMainFrame::OnUpdateChkGetlength)
+	ON_MESSAGE(WM_USER_XYZAnalyse, &CMainFrame::OnXYZAnalyse)
 END_MESSAGE_MAP()
 
-// CMainFrame 构造/析构
+// CMainFrame 构造/析构WM_USER_XYZAnalyse
 
 CMainFrame::CMainFrame()
 : m_ProcMethod(0)
@@ -92,6 +105,7 @@ CMainFrame::CMainFrame()
 , m_nCamCount(0)
 , m_lfCamID(0)
 , m_riCamID(0)
+, VAR(false)
 {
 	// TODO:  在此添加成员初始化代码
 	theApp.m_nAppLook = theApp.GetInt(_T("ApplicationLook"), ID_VIEW_APPLOOK_OFF_2007_BLACK);
@@ -415,6 +429,21 @@ afx_msg LRESULT CMainFrame::OnUserCPara4ChangeCameraR(WPARAM wParam, LPARAM lPar
 	return 0;
 }
 
+//接收到刷新视差图的消息,本消息由CPara2发出,由本类捕获,分类并处理
+afx_msg LRESULT CMainFrame::OnRefreshDisparityMap(WPARAM wParam, LPARAM lParam)
+{
+	if (FileSelected == true){
+		DoRefreshDisparityMapEnable = true;//只有选择完文件才能启用刷新功能
+		if (stereoMethod == STEREO_VAR){   //如果使用的是VAR算法,可以进行实时刷新而不需要手动点击
+			RefreshDisparityMap();
+		}
+		
+	}
+	return 0;
+}
+
+
+
 /*======================================================================================*/
 /*                                以下是本类的工具方法定义                              */
 /*======================================================================================*/
@@ -422,7 +451,11 @@ afx_msg LRESULT CMainFrame::OnUserCPara4ChangeCameraR(WPARAM wParam, LPARAM lPar
 // 刷新摄像头
 void CMainFrame::RefalshCamera()
 {
-	m_nCamCount = CCameraDS::CameraCount();
+	DirectShowHelper dsHelper;
+	std::vector<std::wstring> devices;
+	dsHelper.enumerateDevices(CLSID_VideoInputDeviceCategory, devices);
+
+	m_nCamCount = devices.size();
 	if (m_nCamCount < 1)
 	{
 		AfxMessageBox(_T("未检测到摄像头!相关功能将无法使用!"));
@@ -430,9 +463,9 @@ void CMainFrame::RefalshCamera()
 	}
 
 	// 在组合框CamList中添加摄像头名称的字符串
-	char camera_name[1024];
-	char istr[1024];
-	CString camstr;
+	//char camera_name[1024];
+	//char istr[1024];
+	//CString camstr;
 	CPara1::getInstance()->m_CP1CamList_R.EnableWindow(TRUE);
 	CPara1::getInstance()->m_CP1CamList_L.ResetContent();
 	CPara1::getInstance()->m_CP1CamList_R.ResetContent();
@@ -441,22 +474,22 @@ void CMainFrame::RefalshCamera()
 	CPara4::getInstance()->m_CP4CamList_R.ResetContent();
 	for (int i = 0; i < m_nCamCount; i++)
 	{
-		int retval = CCameraDS::CameraName(i, camera_name, sizeof(camera_name));
+		//int retval = CCameraDS::CameraName(i, camera_name, sizeof(camera_name));
 
-		sprintf_s(istr, "#%d ", i);
-		strcat_s(istr, camera_name);
-		camstr = istr;
-		if (retval >0)
+		//sprintf_s(istr, "#%d ", i);
+		//strcat_s(istr, camera_name);
+		//camstr = istr;
+		if (devices[i].empty()==false)
 		{
-			CPara1::getInstance()->m_CP1CamList_L.AddString(camstr);
-			CPara1::getInstance()->m_CP1CamList_R.AddString(camstr);
-			CPara4::getInstance()->m_CP4CamList_L.AddString(camstr);
-			CPara4::getInstance()->m_CP4CamList_R.AddString(camstr);
+			CPara1::getInstance()->m_CP1CamList_L.AddString(CString(devices[i].c_str()));
+			CPara1::getInstance()->m_CP1CamList_R.AddString(CString(devices[i].c_str()));
+			CPara4::getInstance()->m_CP4CamList_L.AddString(CString(devices[i].c_str()));
+			CPara4::getInstance()->m_CP4CamList_R.AddString(CString(devices[i].c_str()));
 		}
 		else
 			AfxMessageBox(_T("不能获取摄像头的名称"));
 	}
-	camstr.ReleaseBuffer();
+	//camstr.ReleaseBuffer();
 	if (m_nCamCount <= 1)
 	{
 		CPara1::getInstance()->m_CP1CamList_R.EnableWindow(FALSE);
@@ -465,28 +498,12 @@ void CMainFrame::RefalshCamera()
 		
 }
 
-// 鼠标定点函数 
-void CMainFrame::On_Mouse(int event, int x, int y, int flags, void *)
-{
-	switch (event)
-	{
-	case CV_EVENT_LBUTTONDOWN:
-	{
-		moupoint.x = x;
-		moupoint.y = y;
-	}
-		break;
-	case CV_EVENT_LBUTTONUP:
-	{
 
-	}
-		break;
-	}
-}
 
-//
+// 这个函数现在已经不用了....已经没有调用点了
 void CMainFrame::FixDisp(Mat_<float> & disp, int numofdisp)
 {
+	/*
 	Mat_<float> disp1;
 	float lastPixel = 10;
 	int minDisparity = 23;
@@ -505,6 +522,7 @@ void CMainFrame::FixDisp(Mat_<float> & disp, int numofdisp)
 	morphologyEx(disp1, disp1, CV_MOP_OPEN, element);
 	morphologyEx(disp1, disp1, CV_MOP_CLOSE, element);
 	disp = disp1(Range(an, disp.rows - an), Range(an, disp.cols - an)).clone();
+	*/
 }
 
 // 显示摄像头实时画面
@@ -693,6 +711,118 @@ bool CMainFrame::DoParseOptionsOfCameraCalib(OptionCameraCalib& opt)
 	return true;
 }
 
+// 给匹配求解器设置启动参数
+void CMainFrame::SetSolver(int imgChannels)
+{
+	//给相应的求解器设置启动参数,同时检查参数的正确性
+	CString temp;
+	switch (stereoMethod)
+	{
+	case STEREO_BM:
+		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_preFiltCap))->GetWindowText(temp);
+		m_stereoMatcher.m_BM.state->preFilterCap = atoi(temp);
+		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_SADWinSiz))->GetWindowText(temp);
+		m_stereoMatcher.m_BM.state->SADWindowSize = atoi(temp);
+		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_minDisp))->GetWindowText(temp);
+		m_stereoMatcher.m_BM.state->minDisparity = atoi(temp);
+		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_maxDisp))->GetWindowText(temp);
+		m_stereoMatcher.m_BM.state->numberOfDisparities = atoi(temp);
+		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_textThres))->GetWindowText(temp);
+		m_stereoMatcher.m_BM.state->textureThreshold = atoi(temp);
+		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_uniqRatio))->GetWindowText(temp);
+		m_stereoMatcher.m_BM.state->uniquenessRatio = atoi(temp);
+		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_speckWinSiz))->GetWindowText(temp);
+		m_stereoMatcher.m_BM.state->speckleWindowSize = atoi(temp);
+		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_speckRange))->GetWindowText(temp);
+		m_stereoMatcher.m_BM.state->speckleRange = atoi(temp);
+		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_disp12MaxDiff))->GetWindowText(temp);
+		m_stereoMatcher.m_BM.state->disp12MaxDiff = atoi(temp);
+
+		//	m_stereoMatcher.m_BM.state->preFilterSize=41;
+		break;
+	case STEREO_SGBM:
+		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_preFiltCap))->GetWindowText(temp);
+		m_stereoMatcher.m_SGBM.preFilterCap = atoi(temp);
+		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_SADWinSiz))->GetWindowText(temp);
+		m_stereoMatcher.m_SGBM.SADWindowSize = atoi(temp);
+		m_stereoMatcher.m_SGBM.P1 = 48 * imgChannels * atoi(temp) * atoi(temp);//48??????!!!!!!?!?!?!?!!?!??
+		m_stereoMatcher.m_SGBM.P2 = 48 * imgChannels * atoi(temp) * atoi(temp);
+		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_minDisp))->GetWindowText(temp);
+		m_stereoMatcher.m_SGBM.minDisparity = atoi(temp);
+		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_maxDisp))->GetWindowText(temp);
+		m_stereoMatcher.m_SGBM.numberOfDisparities = atoi(temp);
+		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_uniqRatio))->GetWindowText(temp);
+		m_stereoMatcher.m_SGBM.uniquenessRatio = atoi(temp);
+		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_speckWinSiz))->GetWindowText(temp);
+		m_stereoMatcher.m_SGBM.speckleWindowSize = atoi(temp);
+		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_speckRange))->GetWindowText(temp);
+		m_stereoMatcher.m_SGBM.speckleRange = atoi(temp);
+		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_disp12MaxDiff))->GetWindowText(temp);
+		m_stereoMatcher.m_SGBM.disp12MaxDiff = atoi(temp);
+		m_stereoMatcher.m_SGBM.fullDP = true;
+		break;
+	case STEREO_VAR:
+		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_minDisp))->GetWindowText(temp);
+		m_stereoMatcher.m_VAR.minDisp = atoi(temp);
+		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_maxDisp))->GetWindowText(temp);
+		m_stereoMatcher.m_VAR.maxDisp = atoi(temp);
+		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_Levels))->GetWindowText(temp);
+		m_stereoMatcher.m_VAR.levels = atoi(temp);// 如果设置USE_AUTO_PARAMS,算法将会自动设置该值
+		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_PyrScale))->GetWindowText(temp);
+		m_stereoMatcher.m_VAR.pyrScale = atof(temp);// 如果设置USE_AUTO_PARAMS,算法将会自动设置该值
+		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_PolyN))->GetWindowText(temp);
+		m_stereoMatcher.m_VAR.poly_n = atoi(temp);
+		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_PolySigma))->GetWindowText(temp);
+		m_stereoMatcher.m_VAR.poly_sigma = atof(temp);
+		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_Fi))->GetWindowText(temp);
+		m_stereoMatcher.m_VAR.fi = atof(temp);
+		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_Lambda))->GetWindowText(temp);
+		m_stereoMatcher.m_VAR.lambda = atof(temp);//如果设置PENALIZATION_CHARBONNIER or PENALIZATION_PERONA_MALIK,将会忽略该参数
+		break;
+	default:
+		break;
+	}
+}
+
+// 视差图刷新的执行函数
+void CMainFrame::RefreshDisparityMap()
+{
+	int imgChannels = TargetImageL.channels();
+	SetSolver(imgChannels);//识别所采用的匹配算法并对求解器进行初始化
+	bool MatchSucceed = false;
+	switch (stereoMethod)//求解视差
+	{
+	case STEREO_BM://使用BM求解器
+		MatchSucceed = m_stereoMatcher.bmMatch(TargetImageL, TargetImageR, OriginalDisparity, ProcessedImageL, ProcessedImageR);
+		break;
+	case STEREO_SGBM://使用SGBM求解器
+		MatchSucceed = m_stereoMatcher.sgbmMatch(TargetImageL, TargetImageR, OriginalDisparity, ProcessedImageL, ProcessedImageR);
+		break;
+	case STEREO_VAR://使用VAR求解器
+		MatchSucceed = m_stereoMatcher.varMatch(TargetImageL, TargetImageR, OriginalDisparity, ProcessedImageL, ProcessedImageR);
+		break;
+	default:
+		return;
+	}
+	if (MatchSucceed == false)//求解失败
+	{
+		return;
+	}
+	for (int j = 0; j < ProcessedImageL.rows; j += 32)//画平行线
+	{
+		line(ProcessedImageL, cvPoint(0, j), cvPoint(ProcessedImageL.cols, j), CV_RGB(0, 255, 0));
+		line(ProcessedImageR, cvPoint(0, j), cvPoint(ProcessedImageR.cols, j), CV_RGB(0, 255, 0));
+	}
+	m_stereoMatcher.getDisparityImage(OriginalDisparity, DisparityMap, true);//得到伪彩
+	//图像显示
+	F_ShowImage(ProcessedImageL, m_lfImage, IDC_PicLfCam);
+	F_ShowImage(ProcessedImageR, m_riImage, IDC_PicRiCam);
+	F_ShowImage(DisparityMap, m_disparity, IDC_PicSynImg);
+	MatchDeepRebuildEnable = true;      // 启用匹配->深度重建
+	DoRefreshDisparityMapEnable = false;//刷新完,禁用刷新按钮
+}
+
+
 /*----------------------------------------------
 * 功能 : 向输出窗口的指定标签页输出指定文本信息,
 *-----------------------------------------------
@@ -829,18 +959,20 @@ void CMainFrame::F_ShowImage(Mat& src, Mat& des, UINT ID)
 }
 
 /*=====================以下的一组监听器负责更新Ribbon界面上的控件状态====================*/
-/*                                     标志位说明:                                       */
-/*  bool CalibDefaultParamEnable     = false;      // 是否启用标定->默认参数             */
-/*  bool CalibDeleteParamEnable      = false;      // 是否启用标定->清除参数             */
-/*	bool CalibFromImage              = false;      // 是否启用 标定->从图片标定          */
-/*	bool CalibFromCamera             = false;      // 是否启用 标定->从相机标定          */
-/*	bool CalibFromFile               = false;      // 是否启用 标定->从文件标定          */
-/*	bool StopCalibFromCamera         = false;      // 是否启用 标定->停止从镜头标定      */
-/*  bool MatchDefaultParamEnable     = false;      // 是否启用匹配->默认参数             */
-/*  bool MatchDeleteParamEnable      = false;      // 是否启用匹配->清除参数             */
-/*  bool MatchBngivedispEnable       = false;      // 是否启用匹配->生成视差图           */
-/*  bool MatchDeepRebuildEnable      = false;      // 是否启用匹配->深度重建             */
-/*  bool RangeEnable                 = false;      // 是否启用测距相关功能               */
+/*                                     标志位说明:                                       
+  bool CalibDefaultParamEnable     = false;      // 是否启用标定->默认参数             
+  bool CalibDeleteParamEnable      = false;      // 是否启用标定->清除参数             
+  bool CalibFromImage              = false;      // 是否启用 标定->从图片标定          
+  bool CalibFromCamera             = false;      // 是否启用 标定->从相机标定          
+  bool CalibFromFile               = false;      // 是否启用 标定->从文件标定          
+  bool StopCalibFromCamera         = false;      // 是否启用 标定->停止从镜头标定      
+  bool MatchDefaultParamEnable     = false;      // 是否启用匹配->默认参数             
+  bool MatchDeleteParamEnable      = false;      // 是否启用匹配->清除参数             
+  bool MatchBngivedispEnable       = false;      // 是否启用匹配->生成视差图           
+  bool MatchDeepRebuildEnable      = false;      // 是否启用匹配->深度重建             
+  bool RangeEnable                 = false;      // 是否启用测距相关功能               
+  bool DoRefreshDisparityMapEnable = false;      // 是否启用 匹配->刷新视差图          
+  */
 /*=======================================================================================*/
 //ribbon->标定->默认参数
 void CMainFrame::OnUpdateBnDefaultcamcalibparam(CCmdUI *pCmdUI)
@@ -903,6 +1035,13 @@ void CMainFrame::OnUpdateBngivedisp(CCmdUI *pCmdUI)
 {
 	// TODO:  在此添加命令更新用户界面处理程序代码
 	pCmdUI->Enable(MatchBngivedispEnable);
+}
+
+//ribbon->匹配->刷新
+void CMainFrame::OnUpdateDorefreshdisparitymap(CCmdUI *pCmdUI)
+{
+	// TODO:  在此添加命令更新用户界面处理程序代码
+	pCmdUI->Enable(DoRefreshDisparityMapEnable);
 }
 
 //ribbon->匹配->深度重建
@@ -1070,7 +1209,9 @@ void CMainFrame::OnCloseproject()
 	MatchDeleteParamEnable = false;       // 禁用匹配->清除参数
 	MatchBngivedispEnable = false;        // 禁用匹配->生成视差图
 	MatchDeepRebuildEnable = false;       // 禁用匹配->深度重建
-	RangeEnable = false;      // 禁用测距相关功能
+	RangeEnable = false;                  // 禁用测距相关功能        
+	StopCalibFromCamera = false;          // 禁用 标定->停止从镜头标定                     
+	DoRefreshDisparityMapEnable = false;  // 禁用 匹配->刷新视差图
 }
 
 //Home键->帮助文档
@@ -1084,6 +1225,29 @@ void CMainFrame::OnHelpdoc()
 /*======================================================================================*/
 /*                         以下是Ribbon按键的事件处理程序                               */
 /*======================================================================================*/
+//Ribbon->标定->BOUGUET(复选框)
+void CMainFrame::OnRadBouguet()
+{
+	// TODO:  在此添加命令处理程序代码
+	BOUGUET = !BOUGUET;
+}
+void CMainFrame::OnUpdateRadBouguet(CCmdUI *pCmdUI)
+{
+	// TODO:  在此添加命令更新用户界面处理程序代码
+	pCmdUI->SetCheck(BOUGUET);
+}
+
+//Ribbon->标定->HEARTLY(复选框)
+void CMainFrame::OnRadHartley()
+{
+	// TODO:  在此添加命令处理程序代码
+	BOUGUET = !BOUGUET;
+}
+void CMainFrame::OnUpdateRadHartley(CCmdUI *pCmdUI)
+{
+	// TODO:  在此添加命令更新用户界面处理程序代码
+	pCmdUI->SetCheck(!BOUGUET);
+}
 
 //Ribbon->标定->默认参数(按键)
 void CMainFrame::OnBnDefaultcamcalibparam()
@@ -1098,7 +1262,7 @@ void CMainFrame::OnBnDefaultcamcalibparam()
 	CPara1::getInstance()->GetDlgItem(IDC_BoardWidth)->SetWindowText("9");
 	CPara1::getInstance()->GetDlgItem(IDC_BoardHeight)->SetWindowText("6");
 	CPara1::getInstance()->GetDlgItem(IDC_nBoards)->SetWindowText("20");
-	CPara1::getInstance()->GetDlgItem(IDC_SquareSize)->SetWindowText("20");
+	CPara1::getInstance()->GetDlgItem(IDC_SquareSize)->SetWindowText("25");
 	CPara1::getInstance()->GetDlgItem(IDC_Alpha)->SetWindowText("-1");
 	((CButton *)(CPara1::getInstance()->GetDlgItem(IDC_CHK_FPP)))->SetCheck(true);
 	((CButton *)(CPara1::getInstance()->GetDlgItem(IDC_CHK_UIG)))->SetCheck(true);
@@ -1108,7 +1272,117 @@ void CMainFrame::OnBnDefaultcamcalibparam()
 	return;
 }
 
-//Ribbon->标定->从本地标定(按键)============================================================================①文件访问
+//Ribbon->标定->清除参数(按键)
+void CMainFrame::OnBnDeletecamcalibparam()
+{
+	// TODO:  在此添加命令处理程序代码
+	CPara1::getInstance()->GetDlgItem(IDC_BoardWidth)->SetWindowText("");
+	CPara1::getInstance()->GetDlgItem(IDC_BoardHeight)->SetWindowText("");
+	CPara1::getInstance()->GetDlgItem(IDC_nBoards)->SetWindowText("");
+	CPara1::getInstance()->GetDlgItem(IDC_SquareSize)->SetWindowText("");
+	CPara1::getInstance()->GetDlgItem(IDC_Alpha)->SetWindowText("");
+	((CButton *)(CPara1::getInstance()->GetDlgItem(IDC_CHK_FPP)))->SetCheck(false);
+	((CButton *)(CPara1::getInstance()->GetDlgItem(IDC_CHK_UIG)))->SetCheck(false);
+	((CButton *)(CPara1::getInstance()->GetDlgItem(IDC_CHK_FAR)))->SetCheck(false);
+	((CButton *)(CPara1::getInstance()->GetDlgItem(IDC_CHK_SFL)))->SetCheck(false);
+	((CButton *)(CPara1::getInstance()->GetDlgItem(IDC_CHK_FI)))->SetCheck(false);
+}
+
+//Ribbon->标定/采样->启动摄像头(按键)
+void CMainFrame::OnBn1runcam()
+{
+	// TODO:  在此添加命令处理程序代码
+	if (m_nImageWidth * m_nImageHeight * m_nImageChannels == 0)
+	{
+		AfxMessageBox(_T("请选择摄像头画面的分辨率！"));
+		return;
+	}
+	if (m_nCamCount > 0)
+	{
+		//打开第一个摄像头
+		//if( ! lfCam.OpenCamera(m_riCamID, false, m_nImageWidth, m_nImageHeight) ) //不弹出属性选择窗口，用代码制定图像宽和高
+		if (!lfCam.open(m_lfCamID))
+		{
+			AfxMessageBox(_T("打开左摄像头失败."));
+			return;
+		}
+		lfCam.set(CV_CAP_PROP_FRAME_WIDTH, m_nImageWidth);
+		lfCam.set(CV_CAP_PROP_FRAME_HEIGHT, m_nImageHeight);
+	}
+	if (m_nCamCount > 1)
+	{
+		if (m_lfCamID == m_riCamID)
+		{
+			AfxMessageBox(_T("左右摄像头的设备序号不能相同！"));
+			return;
+		}
+		//打开第二个摄像头
+		//if( ! riCam.OpenCamera(m_lfCamID, false, m_nImageWidth, m_nImageHeight) ) 
+		if (!riCam.open(m_riCamID))
+		{
+			AfxMessageBox(_T("打开右摄像头失败."));
+			return;
+		}
+		riCam.set(CV_CAP_PROP_FRAME_WIDTH, m_nImageWidth);
+		riCam.set(CV_CAP_PROP_FRAME_HEIGHT, m_nImageHeight);
+	}
+	/*
+	// 使部分按钮生效
+	GetDlgItem(IDC_BN2StopCam)->EnableWindow(TRUE);
+	
+	GetDlgItem(IDC_BN_CompDisp)->EnableWindow(TRUE);
+	// 使部分按钮失效
+	GetDlgItem(IDC_BN1RunCam)->EnableWindow(FALSE);
+	GetDlgItem(IDC_CBN1CamList_L)->EnableWindow(FALSE);
+	GetDlgItem(IDC_CBN1CamList_R)->EnableWindow(FALSE);
+	GetDlgItem(IDC_CBN_Resolution)->EnableWindow(FALSE);
+	*/
+
+
+	// 启动摄像头后显示实时画面
+	DoShowOrigFrame();
+}
+
+//Ribbon->标定/采样->关闭相机(按键)
+void CMainFrame::OnBn2stopcam()
+{
+	// TODO:  在此添加命令处理程序代码
+	if (lfCam.isOpened())
+	{
+		//GetDlgItem(IDC_BN2StopCam)->EnableWindow(FALSE);
+		KillTimer(1);
+
+		// 对图像数据清零
+		m_lfImage = Scalar(0);
+		F_ShowImage(m_lfImage, m_lfImage, IDC_PicLfCam);
+		lfCam.release();
+		if (riCam.isOpened())
+		{
+			m_riImage = Scalar(0);
+			F_ShowImage(m_riImage, m_riImage, IDC_PicRiCam);
+			riCam.release();
+		}
+
+		// 使启动摄像头按钮和摄像头选择列表生效
+		/*
+		GetDlgItem(IDC_BN1RunCam)->EnableWindow(TRUE);
+		GetDlgItem(IDC_CBN1CamList_L)->EnableWindow(TRUE);
+		GetDlgItem(IDC_CBN1CamList_R)->EnableWindow(TRUE);
+		GetDlgItem(IDC_CBN_Resolution)->EnableWindow(TRUE);
+		GetDlgItem(IDC_BN_CompDisp)->EnableWindow(FALSE);
+		*/
+	}
+	return;
+}
+
+//Ribbon->标定/采样->刷新相机(按键)
+void CMainFrame::OnRefreshcam()
+{
+	// TODO:  在此添加命令处理程序代码
+	RefalshCamera();
+}
+
+//Ribbon->标定->从图片标定(按键)
 void CMainFrame::OnBndetectag()
 {
 	// TODO:  在此添加命令处理程序代码
@@ -1123,7 +1397,7 @@ void CMainFrame::OnBndetectag()
 	try
 	{
 		if (DoParseOptionsOfCameraCalib(optCalib) == false){//对界面上的参数进行检查,并传递到镜头标定参数结构体中	
-			AfxMessageBox(_T("参数有误!无法启动!"));
+			AfxMessageBox(_T("您没有设置合理的标定参数!"));
 			return;
 		};
 		optCalib.numberFrameSkip = 5;//跳帧数改成5
@@ -1230,6 +1504,7 @@ void CMainFrame::OnBndetectag()
 	catch (LPCTSTR errMsg)
 	{
 		AfxMessageBox(errMsg);
+		return;
 	}
 	catch (cv::Exception& e)
 	{
@@ -1239,11 +1514,13 @@ void CMainFrame::OnBndetectag()
 		errInfo = err;
 		//AfxMessageBox(_T(errInfo));
 		PutMessage(CalibWnd, _T(errInfo));
+		return;
 	}
 	catch (...)
 	{
 		//AfxMessageBox(_T("发生未知错误！"));
 		PutMessage(CalibWnd, _T("发生未知错误！"));
+		return;
 	}
 	
 	//stereoParams.flags = optCalib.flagStereoCalib;
@@ -1272,6 +1549,9 @@ void CMainFrame::OnBndetectag()
 	const char* calibparasfile = CalibParasFile.GetBuffer(CalibParasFile.GetLength());
 	m_stereoCalibrator.saveCalibrationDatas(calibparasfile, optCalib.rectifyMethod, cornerDatas, stereoParams, remapMatrixs);
 	PutMessage(CalibWnd, _T("已保存定标参数文件:\n"));
+	if (avgErr > 5.0){
+		AfxMessageBox(_T("标定误差过大!强烈建议您检查标定来源的合理性并进行调整和重试,如果您继续执行操作,将会降低结果的置信度!"));
+	}
 	MatchDefaultParamEnable = true;      // 启用匹配->默认参数
 	MatchDeleteParamEnable = true;      // 启用匹配->清除参数
 	MatchBngivedispEnable = true;      // 启用匹配->生成视差图
@@ -1285,7 +1565,7 @@ void CMainFrame::OnTestcalib()
 	StopCalibFromCamera = true;      // 启用 停止标定的按键
 	KillTimer(1);
 	if (DoParseOptionsOfCameraCalib(optCalib) == false){//对界面上的参数进行检查,并传递到镜头标定参数结构体中	
-		AfxMessageBox(_T("参数有误!无法启动!"));
+		AfxMessageBox(_T("您没有设置合理的标定参数!"));
 		return;
 	};
 	// 本函数使用的临时变量
@@ -1483,18 +1763,25 @@ void CMainFrame::OnTestcalib()
 void CMainFrame::OnCalibfromyml()
 {
 	// TODO:  在此添加命令处理程序代码
-	if (!DoParseOptionsOfCameraCalib(optCalib))// 导入相机标定的相关参数
+	if (!DoParseOptionsOfCameraCalib(optCalib)){// 导入相机标定的相关参数
+		AfxMessageBox(_T("您没有设置合理的标定参数!"));
 		return;
+	}
+		
 	try
 	{
 		vector<CStringA> YmlFilePath;
 		YmlFilePath = DoSelectFiles(
 			_T("*.yml"),
 			OFN_FILEMUSTEXIST | OFN_PATHMUSTEXIST | OFN_HIDEREADONLY,
-			_T("YAML file (*.yml) |*.yml | All Files (*.*) |*.*||"),
+			_T("yml files (*.yml) |*.yml| All Files (*.*) |*.*||"),
 			_T("选择标定盘坐标文件"),
 			WorkPath
 			);
+		/*_T("*.bmp"),
+				OFN_ENABLESIZING | OFN_EXPLORER | OFN_ALLOWMULTISELECT | OFN_HIDEREADONLY,
+				_T("image files (*.bmp; *.png; *.jpg) |*.bmp; *.png; *.jpg; *.jpeg| All Files (*.*) |*.*||"),
+				_T("选择左视图文件"),*/
 		if (YmlFilePath.empty())
 		{
 			AfxMessageBox(_T("没有选中有效的坐标文件!"));
@@ -1521,7 +1808,7 @@ void CMainFrame::OnCalibfromyml()
 	catch (cv::Exception& e)
 	{
 		char err[2048];
-		sprintf_s(err, "发生错误: %s", e.what());
+		sprintf_s(err, "文件错误!以下是系统提供的错误信息: %s", e.what());
 		CString errInfo(err);
 		AfxMessageBox(errInfo);
 		return;
@@ -1577,73 +1864,102 @@ void CMainFrame::OnStopcalib()
 	StopCalibFromCamera = false;      // 禁用这个按键
 }
 
-//Ribbon->立体匹配->BOUGUET(复选框)
-void CMainFrame::OnRadBouguet()
-{
-	// TODO:  在此添加命令处理程序代码
-	BOUGUET = !BOUGUET;
-}
-void CMainFrame::OnUpdateRadBouguet(CCmdUI *pCmdUI)
-{
-	// TODO:  在此添加命令更新用户界面处理程序代码
-	pCmdUI->SetCheck(BOUGUET);
-}
-
-//Ribbon->立体匹配->HEARTLY(复选框)
-void CMainFrame::OnRadHartley()
-{
-	// TODO:  在此添加命令处理程序代码
-	BOUGUET = !BOUGUET;
-}
-void CMainFrame::OnUpdateRadHartley(CCmdUI *pCmdUI)
-{
-	// TODO:  在此添加命令更新用户界面处理程序代码
-	pCmdUI->SetCheck(!BOUGUET);
-}
-
-//Ribbon->立体匹配->BM(复选框)
+//Ribbon->匹配->BM(复选框)
 void CMainFrame::OnRadBm()
 {
 	// TODO:  在此添加命令处理程序代码
-	BM = !BM;
+	stereoMethod = STEREO_BM;
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_minDisp)->ShowWindow(SW_NORMAL);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_uniqRatio)->ShowWindow(SW_NORMAL);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_speckWinSiz)->ShowWindow(SW_NORMAL);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_maxDisp)->ShowWindow(SW_NORMAL);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_speckRange)->ShowWindow(SW_NORMAL);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_preFiltCap)->ShowWindow(SW_NORMAL);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_SADWinSiz)->ShowWindow(SW_NORMAL);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_textThres)->ShowWindow(SW_NORMAL);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_disp12MaxDiff)->ShowWindow(SW_NORMAL);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_Levels)->ShowWindow(SW_HIDE);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_PyrScale)->ShowWindow(SW_HIDE);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_PolyN)->ShowWindow(SW_HIDE);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_PolySigma)->ShowWindow(SW_HIDE);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_Fi)->ShowWindow(SW_HIDE);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_Lambda)->ShowWindow(SW_HIDE);
 }
 void CMainFrame::OnUpdateRadBm(CCmdUI *pCmdUI)
 {
 	// TODO:  在此添加命令更新用户界面处理程序代码
-	pCmdUI->SetCheck(BM);
+	pCmdUI->SetCheck(stereoMethod==STEREO_BM);
 }
 
-//Ribbon->立体匹配->SGBM(复选框)
+//Ribbon->匹配->SGBM(复选框)
 void CMainFrame::OnRadSgbm()
 {
 	// TODO:  在此添加命令处理程序代码
-	BM = !BM;
-	
+	stereoMethod = STEREO_SGBM;
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_minDisp)->ShowWindow(SW_NORMAL);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_uniqRatio)->ShowWindow(SW_NORMAL);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_speckWinSiz)->ShowWindow(SW_NORMAL);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_maxDisp)->ShowWindow(SW_NORMAL);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_speckRange)->ShowWindow(SW_NORMAL);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_preFiltCap)->ShowWindow(SW_NORMAL);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_SADWinSiz)->ShowWindow(SW_NORMAL);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_textThres)->ShowWindow(SW_HIDE);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_disp12MaxDiff)->ShowWindow(SW_NORMAL);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_Levels)->ShowWindow(SW_HIDE);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_PyrScale)->ShowWindow(SW_HIDE);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_PolyN)->ShowWindow(SW_HIDE);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_PolySigma)->ShowWindow(SW_HIDE);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_Fi)->ShowWindow(SW_HIDE);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_Lambda)->ShowWindow(SW_HIDE);
 }
 void CMainFrame::OnUpdateRadSgbm(CCmdUI *pCmdUI)
 {
-	// TODO:  在此添加命令更新用户界面处理程序代码
-	pCmdUI->SetCheck(!BM);
+	pCmdUI->SetCheck(stereoMethod == STEREO_SGBM);
 }
 
-//Ribbon->立体匹配->默认参数(按键)
+//Ribbon->匹配->VAR(复选框)
+void CMainFrame::OnCheck2()
+{
+	stereoMethod = STEREO_VAR;
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_minDisp)->ShowWindow(SW_NORMAL);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_uniqRatio)->ShowWindow(SW_HIDE);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_speckWinSiz)->ShowWindow(SW_HIDE);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_maxDisp)->ShowWindow(SW_NORMAL);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_speckRange)->ShowWindow(SW_HIDE);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_preFiltCap)->ShowWindow(SW_HIDE);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_SADWinSiz)->ShowWindow(SW_HIDE);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_textThres)->ShowWindow(SW_HIDE);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_disp12MaxDiff)->ShowWindow(SW_HIDE);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_Levels)->ShowWindow(SW_NORMAL);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_PyrScale)->ShowWindow(SW_NORMAL);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_PolyN)->ShowWindow(SW_NORMAL);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_PolySigma)->ShowWindow(SW_NORMAL);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_Fi)->ShowWindow(SW_NORMAL);
+	CPara2::getInstance()->GetDlgItem(IDC_SLIDER_Lambda)->ShowWindow(SW_NORMAL);
+}
+void CMainFrame::OnUpdateCheck2(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck(stereoMethod == STEREO_VAR);
+}
+
+//Ribbon->匹配->默认参数(按键)
 void CMainFrame::OnBnStereodefparam()
 {
 	// TODO:  在此添加命令处理程序代码
-	if (BM == true)
+	switch (stereoMethod)//求解视差
 	{
+	case STEREO_BM://使用BM求解器
 		CPara2::getInstance()->GetDlgItem(IDC_EDIT_minDisp)->SetWindowText("0");
 		CPara2::getInstance()->GetDlgItem(IDC_EDIT_maxDisp)->SetWindowText("144");
-		CPara2::getInstance()->GetDlgItem(IDC_EDIT_SADWinSiz)->SetWindowText("53");
+		CPara2::getInstance()->GetDlgItem(IDC_EDIT_SADWinSiz)->SetWindowText("51");
 		CPara2::getInstance()->GetDlgItem(IDC_EDIT_textThres)->SetWindowText("10");
 		CPara2::getInstance()->GetDlgItem(IDC_EDIT_disp12MaxDiff)->SetWindowText("1");
 		CPara2::getInstance()->GetDlgItem(IDC_EDIT_preFiltCap)->SetWindowText("31");
 		CPara2::getInstance()->GetDlgItem(IDC_EDIT_uniqRatio)->SetWindowText("25");
 		CPara2::getInstance()->GetDlgItem(IDC_EDIT_speckRange)->SetWindowText("32");
 		CPara2::getInstance()->GetDlgItem(IDC_EDIT_speckWinSiz)->SetWindowText("100");
-	} 
-	else if(BM==false)//SGBM
-	{
+		break;
+	case STEREO_SGBM://使用SGBM求解器
 		CPara2::getInstance()->GetDlgItem(IDC_EDIT_minDisp)->SetWindowText("0");
 		CPara2::getInstance()->GetDlgItem(IDC_EDIT_maxDisp)->SetWindowText("144");
 		CPara2::getInstance()->GetDlgItem(IDC_EDIT_SADWinSiz)->SetWindowText("25");
@@ -1653,19 +1969,51 @@ void CMainFrame::OnBnStereodefparam()
 		CPara2::getInstance()->GetDlgItem(IDC_EDIT_uniqRatio)->SetWindowText("20");
 		CPara2::getInstance()->GetDlgItem(IDC_EDIT_speckRange)->SetWindowText("32");
 		CPara2::getInstance()->GetDlgItem(IDC_EDIT_speckWinSiz)->SetWindowText("100");
+		break;
+	case STEREO_VAR://使用VAR求解器
+		CPara2::getInstance()->GetDlgItem(IDC_EDIT_minDisp)->SetWindowText("-64");
+		CPara2::getInstance()->GetDlgItem(IDC_EDIT_maxDisp)->SetWindowText("64");
+		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_Levels))->SetWindowText("1");
+		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_PyrScale))->SetWindowText("01");
+		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_PolyN))->SetWindowText("5");
+		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_PolySigma))->SetWindowText("52.6");
+		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_Fi))->SetWindowText("90");
+		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_Lambda))->SetWindowText("0.82");
+		break;
+	default:
+		break;
 	}
 }
 
-//Ribbon->立体匹配->生成视差图(按键)======================================================================③文件访问
+//Ribbon->匹配->清除参数(按键)
+void CMainFrame::OnBnStereodeleteparam()
+{
+	// TODO:  在此添加命令处理程序代码
+	CPara2::getInstance()->GetDlgItem(IDC_EDIT_minDisp)->SetWindowText("-64");
+	CPara2::getInstance()->GetDlgItem(IDC_EDIT_maxDisp)->SetWindowText("16");
+	CPara2::getInstance()->GetDlgItem(IDC_EDIT_SADWinSiz)->SetWindowText("5");
+	CPara2::getInstance()->GetDlgItem(IDC_EDIT_textThres)->SetWindowText("0");//这个以前不是这个值
+	CPara2::getInstance()->GetDlgItem(IDC_EDIT_disp12MaxDiff)->SetWindowText("0");
+	CPara2::getInstance()->GetDlgItem(IDC_EDIT_preFiltCap)->SetWindowText("0");
+	CPara2::getInstance()->GetDlgItem(IDC_EDIT_uniqRatio)->SetWindowText("0");
+	CPara2::getInstance()->GetDlgItem(IDC_EDIT_speckRange)->SetWindowText("0");
+	CPara2::getInstance()->GetDlgItem(IDC_EDIT_speckWinSiz)->SetWindowText("0");
+	(CPara2::getInstance()->GetDlgItem(IDC_EDIT_Levels))->SetWindowText("1");
+	(CPara2::getInstance()->GetDlgItem(IDC_EDIT_PyrScale))->SetWindowText("0.1");
+	(CPara2::getInstance()->GetDlgItem(IDC_EDIT_PolyN))->SetWindowText("1");
+	(CPara2::getInstance()->GetDlgItem(IDC_EDIT_PolySigma))->SetWindowText("0");
+	(CPara2::getInstance()->GetDlgItem(IDC_EDIT_Fi))->SetWindowText("0");
+	(CPara2::getInstance()->GetDlgItem(IDC_EDIT_Lambda))->SetWindowText("0");
+}
+
+//Ribbon->匹配->选择文件(按键)
 void CMainFrame::OnBngivedisp()
 {
 	// TODO:  在此添加命令处理程序代码
-	CMainFrame::OptionCameraCalib opt;
 	CStringA xmlPath;			// 定标结果数据文件
+	vector<CStringA> xmlFiles;
 	vector<CStringA> imgFiles1; //左右视图文件路径序列
 	vector<CStringA> imgFiles2;
-	cv::Mat TargetImageL, TargetImageR;      //全局变量: 待测目标图像      (使用:本类:OnBngivedisp())
-	int i = 0, j = 0;
 	const char* img1_filename = NULL;
 	const char* img2_filename = NULL;
 	const char* xml_filename = NULL;
@@ -1689,59 +2037,42 @@ void CMainFrame::OnBngivedisp()
 				_T("选择右视图图像"),
 				WorkPath
 				);
-
 		if (imgFiles1.empty() || imgFiles2.empty())
 		{
 			errMsg = _T("没有选中有效的图像文件!");
 			throw errMsg;
 		}
-
+		// 选择镜头参数文件
+		xmlFiles = DoSelectFiles(
+				_T("*.xml"),
+				OFN_FILEMUSTEXIST | OFN_PATHMUSTEXIST | OFN_HIDEREADONLY,
+				_T("XML/YML file (*.xml; *.yml) |*.xml; *.yml | All Files (*.*) |*.*||"),
+				_T("选择摄像头定标参数文件"),
+				WorkPath
+				);
+		if (xmlFiles.empty())
+		{
+			errMsg = _T("没有选中有效的摄像头定标参数文件!");
+			throw errMsg;
+		}// 读取图片
 		img1_filename = imgFiles1[0];
 		img2_filename = imgFiles2[0];
 		TargetImageL = imread(img1_filename);
 		TargetImageR = imread(img2_filename);
+
+		if (TargetImageL.empty() || TargetImageR.empty()){
+			AfxMessageBox(_T("图片文件错误!请重试."));
+			return;
+		}
+
+			
 		if (TargetImageL.rows>1000)
 		{
 			cv::resize(TargetImageL, TargetImageL, Size(TargetImageL.cols / 6, TargetImageL.rows / 6));
 			cv::resize(TargetImageR, TargetImageR, Size(TargetImageL.cols / 6, TargetImageL.rows / 6));
 		}
-		
-	}
-	catch (LPCTSTR ErrMsg)
-	{
-		PutMessage(MatchWnd, ErrMsg);
-		return;
-	}
-	catch (cv::Exception& e)
-	{
-		char err[2048];
-		sprintf_s(err, "发生错误: %s", e.what());
-		CString errInfo;
-		errInfo = err;
-		PutMessage(MatchWnd, errInfo);
-		return;
-	}
-	catch (...)
-	{
-		PutMessage(MatchWnd, _T("发生未知错误！"));
-		return;
-	}
-	try
-	{
-		vector<CStringA> xmlFiles;
-		xmlFiles = DoSelectFiles(
-			_T("*.xml"),
-			OFN_FILEMUSTEXIST | OFN_PATHMUSTEXIST | OFN_HIDEREADONLY,
-			_T("XML/YML file (*.xml; *.yml) |*.xml; *.yml | All Files (*.*) |*.*||"),
-			_T("选择摄像头定标参数文件"),
-			WorkPath
-			);
-		if (xmlFiles.empty())
-		{
-			errMsg = _T("没有选中有效的摄像头定标参数文件!");
-			throw errMsg;
-		}
-		xmlPath = xmlFiles[0];			// 获取xml文件路径
+		// 获取xml文件路径
+		xmlPath = xmlFiles[0];			
 		xml_filename = xmlPath;
 		// 读入摄像头定标参数
 		switch (m_stereoMatcher.init(TargetImageL.cols, TargetImageL.rows, xml_filename))
@@ -1751,15 +2082,14 @@ void CMainFrame::OnBngivedisp()
 			errMsg = _T("读取摄像头定标参数文件失败，请重新选择!");
 			throw errMsg;
 		case -1:
-			errMsg = _T("定标参数的图像尺寸与当前配置的图像尺寸不一致，请重新选择!");
+			errMsg = _T("您选择的不是正确的标定参数文件或与所选择的图片来自不同的相机!");
 			throw errMsg;
 			break;
 		}
 	}
 	catch (LPCTSTR ErrMsg)
 	{
-		//AfxMessageBox(ErrMsg);
-		PutMessage(MatchWnd, ErrMsg);
+		AfxMessageBox(ErrMsg);
 		return;
 	}
 	catch (cv::Exception& e)
@@ -1768,103 +2098,27 @@ void CMainFrame::OnBngivedisp()
 		sprintf_s(err, "发生错误: %s", e.what());
 		CString errInfo;
 		errInfo = err;
-		PutMessage(MatchWnd, errInfo);
+		AfxMessageBox(errInfo);
 		return;
 	}
 	catch (...)
 	{
-		PutMessage(MatchWnd, _T("发生未知错误！"));
+		AfxMessageBox(_T("发生未知错误！"));
 		return;
 	}
-	CString temp;
-	int frameCount = 0;	//图像计数
-	STEREO_METHOD	stereoMethod;		   //选择的立体匹配算法
-	stereoMethod = (BM==true ? STEREO_BM : STEREO_SGBM);//识别所采用的匹配算法
-	while (true)
-	{
-		if (frameCount >= MIN(imgFiles1.size(), imgFiles2.size()))
-			break;
-		img1_filename = imgFiles1[frameCount];
-		img2_filename = imgFiles2[frameCount];
-		TargetImageL = imread(img1_filename, 1);
-		TargetImageR = imread(img2_filename, 1);
-		if (TargetImageL.rows>1000)
-		{
-			cv::resize(TargetImageL, TargetImageL, Size(TargetImageL.cols / 6, TargetImageL.rows / 6));
-			cv::resize(TargetImageR, TargetImageR, Size(TargetImageR.cols / 6, TargetImageR.rows / 6));
-		}
-		if (TargetImageL.empty() || TargetImageR.empty()) break;
-		frameCount++;
-		//进行update_state_BM
-		CString FileTemp;
-		FileTemp.Format(_T("%s\\%s"), WorkPath, _T("\\DATA\\calib_paras.xml"));
-		const char* cornerFile = FileTemp.GetBuffer(FileTemp.GetLength());
-		if (stereoMethod == STEREO_BM)
-		{
-			(CPara2::getInstance()->GetDlgItem(IDC_EDIT_preFiltCap))->GetWindowText(temp);
-			m_stereoMatcher.m_BM.state->preFilterCap = atoi(temp);
-			(CPara2::getInstance()->GetDlgItem(IDC_EDIT_SADWinSiz))->GetWindowText(temp);
-			m_stereoMatcher.m_BM.state->SADWindowSize = atoi(temp);
-			(CPara2::getInstance()->GetDlgItem(IDC_EDIT_minDisp))->GetWindowText(temp);
-			m_stereoMatcher.m_BM.state->minDisparity = atoi(temp);
-			(CPara2::getInstance()->GetDlgItem(IDC_EDIT_maxDisp))->GetWindowText(temp);
-			m_stereoMatcher.m_BM.state->numberOfDisparities = atoi(temp);
-			(CPara2::getInstance()->GetDlgItem(IDC_EDIT_textThres))->GetWindowText(temp);
-			m_stereoMatcher.m_BM.state->textureThreshold = atoi(temp);
-			(CPara2::getInstance()->GetDlgItem(IDC_EDIT_uniqRatio))->GetWindowText(temp);
-			m_stereoMatcher.m_BM.state->uniquenessRatio = atoi(temp);
-			(CPara2::getInstance()->GetDlgItem(IDC_EDIT_speckWinSiz))->GetWindowText(temp);
-			m_stereoMatcher.m_BM.state->speckleWindowSize = atoi(temp);
-			(CPara2::getInstance()->GetDlgItem(IDC_EDIT_speckRange))->GetWindowText(temp);
-			m_stereoMatcher.m_BM.state->speckleRange = atoi(temp);
-			(CPara2::getInstance()->GetDlgItem(IDC_EDIT_disp12MaxDiff))->GetWindowText(temp);
-			m_stereoMatcher.m_BM.state->disp12MaxDiff = atoi(temp);
-
-			//	m_stereoMatcher.m_BM.state->preFilterSize=41;
-			m_stereoMatcher.bmMatch(TargetImageL, TargetImageR, OriginalDisparity, ProcessedImageL, ProcessedImageR, cornerFile);//BM算法OriginalDisparity
-
-		}
-		else if (stereoMethod == STEREO_SGBM)
-		{
-			int imgChannels = TargetImageL.channels();
-			//UpdateData(TRUE);
-			(CPara2::getInstance()->GetDlgItem(IDC_EDIT_preFiltCap))->GetWindowText(temp);
-			m_stereoMatcher.m_SGBM.preFilterCap = atoi(temp);
-			(CPara2::getInstance()->GetDlgItem(IDC_EDIT_SADWinSiz))->GetWindowText(temp);
-			m_stereoMatcher.m_SGBM.SADWindowSize = atoi(temp);
-			m_stereoMatcher.m_SGBM.P1 = 48 * imgChannels * atoi(temp) * atoi(temp);//48??????!!!!!!?!?!?!?!!?!??
-			m_stereoMatcher.m_SGBM.P2 = 48 * imgChannels * atoi(temp) * atoi(temp);
-			(CPara2::getInstance()->GetDlgItem(IDC_EDIT_minDisp))->GetWindowText(temp);
-			m_stereoMatcher.m_SGBM.minDisparity = atoi(temp);
-			(CPara2::getInstance()->GetDlgItem(IDC_EDIT_maxDisp))->GetWindowText(temp);
-			m_stereoMatcher.m_SGBM.numberOfDisparities = atoi(temp);
-			(CPara2::getInstance()->GetDlgItem(IDC_EDIT_uniqRatio))->GetWindowText(temp);
-			m_stereoMatcher.m_SGBM.uniquenessRatio = atoi(temp);
-			(CPara2::getInstance()->GetDlgItem(IDC_EDIT_speckWinSiz))->GetWindowText(temp);
-			m_stereoMatcher.m_SGBM.speckleWindowSize = atoi(temp);
-			(CPara2::getInstance()->GetDlgItem(IDC_EDIT_speckRange))->GetWindowText(temp);
-			m_stereoMatcher.m_SGBM.speckleRange = atoi(temp);
-			(CPara2::getInstance()->GetDlgItem(IDC_EDIT_disp12MaxDiff))->GetWindowText(temp);
-			m_stereoMatcher.m_SGBM.disp12MaxDiff = atoi(temp);
-			m_stereoMatcher.m_SGBM.fullDP = true;
-			m_stereoMatcher.sgbmMatch(TargetImageL, TargetImageR, OriginalDisparity, ProcessedImageL, ProcessedImageR, cornerFile);
-
-		}
-		for (j = 0; j < ProcessedImageL.rows; j += 32)
-		{
-			line(ProcessedImageL, cvPoint(0, j), cvPoint(ProcessedImageL.cols, j), CV_RGB(0, 255, 0));
-			line(ProcessedImageR, cvPoint(0, j), cvPoint(ProcessedImageR.cols, j), CV_RGB(0, 255, 0));
-		}
-		m_stereoMatcher.getDisparityImage(OriginalDisparity, DisparityMap, true);//得到伪彩
-		//图像显示
-		F_ShowImage(ProcessedImageL, m_lfImage, IDC_PicLfCam);
-		F_ShowImage(ProcessedImageR, m_riImage, IDC_PicRiCam);
-		F_ShowImage(DisparityMap, m_disparity, IDC_PicSynImg);
-		MatchDeepRebuildEnable      = true;      // 启用匹配->深度重建
-	}
+	FileSelected = true;//已经选择完文件
+	//直接执行一次刷新
+	RefreshDisparityMap();
 }
 
-//Ribbon->立体匹配->深度重建(按键)
+//Ribbon->匹配->刷新(按键)
+void CMainFrame::OnDorefreshdisparitymap()
+{
+	// TODO:  在此添加命令处理程序代码
+	RefreshDisparityMap();
+}
+
+//Ribbon->匹配->深度重建(按键)
 void CMainFrame::OnBnCompdisp()
 {
 	CString FileTemp;
@@ -1874,10 +2128,14 @@ void CMainFrame::OnBnCompdisp()
 	m_stereoMatcher.getPointClouds(OriginalDisparity, pointCloud, CloudsFile);//生成三维点云并进行Y轴反转
 	vector<PointCloudAnalyzer::ObjectInfo> objectInfos;
 	PointCloudAnalyzer pointCloudAnalyzer;
-	pointCloudAnalyzer.detectNearObject(DisparityMap, pointCloud, objectInfos);
-	pointCloudAnalyzer.showObjectInfo(objectInfos, ProcessedImageL);
-	m_ObjectDistance = objectInfos[0].distance; m_ObjectDistance = (int)(m_ObjectDistance * 10000) / 10000.;
-	m_ObjectDistance = -1 * m_ObjectDistance;
+	if (pointCloudAnalyzer.detectNearObject(DisparityMap, pointCloud, objectInfos)==0)
+	{
+		return;//上述函数失败,自行抛出异常信息,本函直接退出
+	}
+	pointCloudAnalyzer.showObjectInfo(objectInfos, ProcessedImageL);//在左视图上面叠加轮廓识别的框
+	m_ObjectDistance = objectInfos[0].distance; 
+	m_ObjectDistance = (int)(m_ObjectDistance * 10000) / 10000.;
+	m_ObjectDistance = -16 * m_ObjectDistance;//这个16倍是精度的核心问题
 	//向界面上写下距离数值
 	CString DIS;
 	DIS.Format("%f", m_ObjectDistance);
@@ -1888,138 +2146,28 @@ void CMainFrame::OnBnCompdisp()
 	RangeEnable = true;      // 启用测距相关功能
 }
 
-//Ribbon->测距->鼠标定点(按键)
-void CMainFrame::OnBnMouseon()
+//Ribbon->测距->主点距离(复选框)
+void CMainFrame::OnChkGetdepth()
 {
 	// TODO:  在此添加命令处理程序代码
-	int flag;                              
-	CString DIS;
-	moupoint.x = 5;
-	moupoint.y = 5;
-	vector<cv::Mat> xyzSet;
-	split(pointCloud, xyzSet);
-	cv::Mat depth;
-	xyzSet[2].copyTo(depth);
-	cv::namedWindow("鼠标点击测距", 1);
-	flag = 1;
-	while (flag)
-	{
-		imshow("鼠标点击测距", DisparityMap);
-		cv::setMouseCallback("鼠标点击测距", On_Mouse, 0);
-
-		if (moupoint.x>20)
-		{
-			flag = 1;
-			m_ObjectDistance = depth.at<float>(moupoint);
-			//	m_ObjectDistance=depth.ptr<float>(moupoint.x)[moupoint.y];
-			m_ObjectDistance = -1 * m_ObjectDistance;
-			if (m_ObjectDistance>0)
-			{
-				DIS.Format("%f", m_ObjectDistance);
-				CPara3::getInstance()->GetDlgItem(IDC_e7ObjDist)->SetWindowText(DIS);
-			}
-		}
-
-		//	cv::waitKey(15);
-		if (waitKey(100) == 27)
-			break;
-	}
-	destroyWindow("鼠标点击测距");
+	rangingModel = GetDepth;
 }
-
-//Ribbon->标定/采样->启动摄像头(按键)
-void CMainFrame::OnBn1runcam()
+void CMainFrame::OnUpdateChkGetdepth(CCmdUI *pCmdUI)
 {
-	// TODO:  在此添加命令处理程序代码
-	if (m_nImageWidth * m_nImageHeight * m_nImageChannels == 0)
-	{
-		AfxMessageBox(_T("请选择摄像头画面的分辨率！"));
-		return;
-	}
-	if (m_nCamCount > 0)
-	{
-		//打开第一个摄像头
-		//if( ! lfCam.OpenCamera(m_riCamID, false, m_nImageWidth, m_nImageHeight) ) //不弹出属性选择窗口，用代码制定图像宽和高
-		if (!lfCam.open(m_lfCamID))
-		{
-			AfxMessageBox(_T("打开左摄像头失败."));
-			return;
-		}
-		lfCam.set(CV_CAP_PROP_FRAME_WIDTH, m_nImageWidth);
-		lfCam.set(CV_CAP_PROP_FRAME_HEIGHT, m_nImageHeight);
-	}
-	if (m_nCamCount > 1)
-	{
-		if (m_lfCamID == m_riCamID)
-		{
-			AfxMessageBox(_T("左右摄像头的设备序号不能相同！"));
-			return;
-		}
-		//打开第二个摄像头
-		//if( ! riCam.OpenCamera(m_lfCamID, false, m_nImageWidth, m_nImageHeight) ) 
-		if (!riCam.open(m_riCamID))
-		{
-			AfxMessageBox(_T("打开右摄像头失败."));
-			return;
-		}
-		riCam.set(CV_CAP_PROP_FRAME_WIDTH, m_nImageWidth);
-		riCam.set(CV_CAP_PROP_FRAME_HEIGHT, m_nImageHeight);
-	}
-	/*
-	// 使部分按钮生效
-	GetDlgItem(IDC_BN2StopCam)->EnableWindow(TRUE);
-	
-	GetDlgItem(IDC_BN_CompDisp)->EnableWindow(TRUE);
-	// 使部分按钮失效
-	GetDlgItem(IDC_BN1RunCam)->EnableWindow(FALSE);
-	GetDlgItem(IDC_CBN1CamList_L)->EnableWindow(FALSE);
-	GetDlgItem(IDC_CBN1CamList_R)->EnableWindow(FALSE);
-	GetDlgItem(IDC_CBN_Resolution)->EnableWindow(FALSE);
-	*/
-
-
-	// 启动摄像头后显示实时画面
-	DoShowOrigFrame();
+	pCmdUI->SetCheck(rangingModel == GetDepth);
 }
 
-//Ribbon->标定/采样->关闭相机(按键)
-void CMainFrame::OnBn2stopcam()
+//Ribbon->测距->两点距离(复选框)
+void CMainFrame::OnChkGetlength()
 {
-	// TODO:  在此添加命令处理程序代码
-	if (lfCam.isOpened())
-	{
-		//GetDlgItem(IDC_BN2StopCam)->EnableWindow(FALSE);
-		KillTimer(1);
-
-		// 对图像数据清零
-		m_lfImage = Scalar(0);
-		F_ShowImage(m_lfImage, m_lfImage, IDC_PicLfCam);
-		lfCam.release();
-		if (riCam.isOpened())
-		{
-			m_riImage = Scalar(0);
-			F_ShowImage(m_riImage, m_riImage, IDC_PicRiCam);
-			riCam.release();
-		}
-
-		// 使启动摄像头按钮和摄像头选择列表生效
-		/*
-		GetDlgItem(IDC_BN1RunCam)->EnableWindow(TRUE);
-		GetDlgItem(IDC_CBN1CamList_L)->EnableWindow(TRUE);
-		GetDlgItem(IDC_CBN1CamList_R)->EnableWindow(TRUE);
-		GetDlgItem(IDC_CBN_Resolution)->EnableWindow(TRUE);
-		GetDlgItem(IDC_BN_CompDisp)->EnableWindow(FALSE);
-		*/
-	}
-	return;
+	rangingModel = GetLength;
 }
-
-//Ribbon->标定/采样->刷新相机(按键)
-void CMainFrame::OnRefreshcam()
+void CMainFrame::OnUpdateChkGetlength(CCmdUI *pCmdUI)
 {
-	// TODO:  在此添加命令处理程序代码
-	RefalshCamera();
+	pCmdUI->SetCheck(rangingModel == GetLength);
 }
+
+
 
 //Ribbon->采样->拍照(按键)
 void CMainFrame::OnPhotograph()
@@ -2071,5 +2219,172 @@ void CMainFrame::OnPhotograph()
 	//}
 	return;
 }
+
+
+
+//Ribbon->测距->鼠标定点(按键)
+void CMainFrame::OnBnMouseon()
+{
+	// 准备工作
+	int flag;                              
+	
+	moupoint.x = 5;
+	moupoint.y = 5;
+
+	vector<cv::Mat> xyzSet;
+	split(pointCloud, xyzSet);
+	xyzSet[2].copyTo(depth);
+
+	switch (rangingModel)//两种测距方法分开
+	{
+	case GetDepth:
+		cv::namedWindow("鼠标点击测距-按ESC退出", 1);
+		flag = 1;
+		while (flag)
+		{
+			imshow("鼠标点击测距-按ESC退出", DisparityMap);
+			cv::setMouseCallback("鼠标点击测距-按ESC退出", On_Mouse, 0);
+			if (waitKey(100) == 27){//27是ESC按键的ASCNII码
+				break;//break-while
+			}	
+		}
+		destroyWindow("鼠标点击测距-按ESC退出");
+		break;//break-case
+	case GetLength:
+		DisparityMap2 = DisparityMap.clone();//制作视差图副本
+		cv::namedWindow("鼠标点击测距-按ESC退出", 1);
+		while (true)
+		{
+			imshow("鼠标点击测距-按ESC退出", DisparityMap2);
+			cv::setMouseCallback("鼠标点击测距-按ESC退出", On_Mouse, 0);
+			if (waitKey(100) == 27){
+				break;//break-while
+			}
+		}
+		destroyWindow("鼠标点击测距-按ESC退出");
+		break;//break-case
+
+		//由于两点模式需要有一些绘制工作要做,所以为了提高效率,不能使用上面的循环方法
+		//1 做一个视差图的副本,这个变量应该是全局变量
+		//2 显示那个副本
+		//3 这里只需要循环就行了
+		//4 相应坐标分析的函数中,要这样做:
+			//4-1 取第一个点,用视差图原件覆盖已经叠绘过的副本,在全局副本上面划线,每次点击,五个坐标都要输出
+			//4-2 去第二个点,在全局副本上划线,并计算两点的距离,把这个距离输出到距离窗口
+		break;
+	default:
+		break;
+	}
+	
+	
+}
+
+// 鼠标定点函数 
+void CMainFrame::On_Mouse(int event, int x, int y, int flags, void *)
+{
+	switch (event)
+	{
+	case CV_EVENT_LBUTTONDOWN:
+	{
+		moupoint.x = x;
+		moupoint.y = y;
+		AfxGetApp()->GetMainWnd()->SendMessage(WM_USER_XYZAnalyse, 0, 0);
+	}
+		break;
+	case CV_EVENT_LBUTTONUP:
+	{
+							   
+	}
+		break;
+	}
+}
+
+//接收到坐标分析消息,本消息由On_Mouse函数发出,发出此函数的时候,mousepoint已经获取
+afx_msg LRESULT CMainFrame::OnXYZAnalyse(WPARAM wParam, LPARAM lParam)
+{
+	//准备临时变量
+	CString DIS;
+	Point3f WorldPoint;
+	Point3f WorldPoint2;
+	float distance;//用于存储两点之间的距离
+	
+	if (moupoint.x > 20)//大前提
+	{
+		m_ObjectDistance = depth.at<float>(moupoint);
+		//	m_ObjectDistance=depth.ptr<float>(moupoint.x)[moupoint.y];
+		m_ObjectDistance = -16 * m_ObjectDistance;
+		if (m_ObjectDistance > 0)
+		{
+			//无论哪种模式,这五个点的坐标都要输出
+			DIS.Format("%d", moupoint.x);
+			CPara3::getInstance()->GetDlgItem(IDC_EDIT_ImageX)->SetWindowText(DIS);//图片坐标X
+			DIS.Format("%d", moupoint.y);
+			CPara3::getInstance()->GetDlgItem(IDC_EDIT_ImageY)->SetWindowText(DIS);//图片坐标Y
+			WorldPoint = (pointCloud.at<Vec3f>(moupoint));//用像点坐标做索引,从点云中取得它对应的点的世界坐标
+			DIS.Format("%.2f", 16 * WorldPoint.x);
+			CPara3::getInstance()->GetDlgItem(IDC_EDIT_WorldX)->SetWindowText(DIS);//世界坐标X
+			DIS.Format("%.2f", 16 * WorldPoint.y);
+			CPara3::getInstance()->GetDlgItem(IDC_EDIT_WorldY)->SetWindowText(DIS);//世界坐标Y
+			DIS.Format("%.2f", -16 * WorldPoint.z);
+			CPara3::getInstance()->GetDlgItem(IDC_EDIT_WorldZ)->SetWindowText(DIS);//世界坐标Z
+			//下面是两种方法的分别处理
+			switch (rangingModel)
+			{
+			case GetDepth:
+				DIS.Format("%.3f", m_ObjectDistance);
+				CPara3::getInstance()->GetDlgItem(IDC_e7ObjDist)->SetWindowText(DIS);//目标距离(主点模式下,该值为Z坐标)
+				break;
+			case GetLength:
+				//翻牌子
+				//是不是第一个点-初值必须设置为true
+				IsSecondPoint = !IsSecondPoint;
+
+				if (IsSecondPoint == false){//如果是第一个点
+					// 清空视差图缓存
+					DisparityMap2 = DisparityMap.clone();//清掉视差图的缓存
+					// 清空界面上的距离值
+					CPara3::getInstance()->GetDlgItem(IDC_e7ObjDist)->SetWindowText(_T(""));//清空目标距离
+					// 划线
+					line(DisparityMap2, cvPoint(moupoint.x, 0), cvPoint(moupoint.x, DisparityMap2.rows), CV_RGB(255, 255, 255));//纵线
+					line(DisparityMap2, cvPoint(0, moupoint.y), cvPoint(DisparityMap2.cols, moupoint.y), CV_RGB(255, 255, 255));//横线
+					// 缓存这个点的图像空间坐标
+					moupoint2.x = moupoint.x;
+					moupoint2.y = moupoint.y;
+				}
+				else//如果是第二个点
+				{
+					//划线
+					line(DisparityMap2, cvPoint(moupoint.x, 0), cvPoint(moupoint.x, DisparityMap2.rows), CV_RGB(255, 255, 255));//纵线
+					line(DisparityMap2, cvPoint(0, moupoint.y), cvPoint(DisparityMap2.cols, moupoint.y), CV_RGB(255, 255, 255));//横线
+					//交点连线
+					line(DisparityMap2, cvPoint(moupoint2.x, moupoint2.y), cvPoint(moupoint.x, moupoint.y), CV_RGB(255, 255, 255));//两点连线
+					//算出两个点的世界坐标
+					WorldPoint = (pointCloud.at<Vec3f>(moupoint));
+					WorldPoint2 = (pointCloud.at<Vec3f>(moupoint2));
+					//计算距离
+					distance = sqrt((256 * (WorldPoint.x - WorldPoint2.x)*(WorldPoint.x - WorldPoint2.x)) +
+						(256 * (WorldPoint.y - WorldPoint2.y)*(WorldPoint.y - WorldPoint2.y)) +
+						(256 * (WorldPoint.z - WorldPoint2.z)*(WorldPoint.z - WorldPoint2.z)));
+
+					DIS.Format("%.3f", distance);
+					CPara3::getInstance()->GetDlgItem(IDC_e7ObjDist)->SetWindowText(DIS);
+					//end of if (IsSecondPoint == false)
+
+					break;
+			default:
+				break;
+				}//end of switch
+			}//end of if (m_ObjectDistance>0)
+		}//end of if (moupoint.x>20)//大前提
+	}
+	return 0;
+}
+
+
+
+
+
+
+
 
 
