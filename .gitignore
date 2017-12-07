@@ -9,13 +9,14 @@
 # Build results
 
 !opencv/*
+!opencv/build/x86/vc14/bin/*
 [Dd]ebug/
 [Rr]elease/
 x64/
 build/
 [Bb]in/
 [Oo]bj/
-.vs/
+.vs/*
 
 
 # Enable "build/" folder in the NuGet Packages folder since NuGet packages use it for MSBuild targets
