@@ -17,7 +17,9 @@ build/
 [Bb]in/
 [Oo]bj/
 .vs/*
-
+.vs/SkyEyes/v15/
+.vs/SkyEyes/v15/.suo
+.vs/SkyEyes/v15/Browse.VC.db
 
 # Enable "build/" folder in the NuGet Packages folder since NuGet packages use it for MSBuild targets
 !packages/*/build/
