@@ -13,8 +13,8 @@
 [Dd]ebug/
 [Rr]elease/
 x64/
-build/
-[Bb]in/
+# build/
+# [Bb]in/
 [Oo]bj/
 .vs/*
 .vs/SkyEyes/v15/
