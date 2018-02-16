@@ -1,0 +1,754 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Calibration</class>
+ <widget class="QWidget" name="Calibration">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>759</width>
+    <height>423</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>759</width>
+    <height>423</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>标定</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0" colspan="2">
+    <widget class="QSplitter" name="splitter">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <widget class="QGraphicsView" name="Viewer_CalibrateL">
+      <property name="minimumSize">
+       <size>
+        <width>368</width>
+        <height>207</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QGraphicsView" name="Viewer_CalibrateR">
+      <property name="minimumSize">
+       <size>
+        <width>368</width>
+        <height>207</height>
+       </size>
+      </property>
+     </widget>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>标定板参数</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_4">
+      <item row="7" column="1">
+       <widget class="QLineEdit" name="lineEdit__nBoards">
+        <property name="minimumSize">
+         <size>
+          <width>50</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>50</width>
+          <height>20</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_8">
+        <property name="text">
+         <string>方格边长:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="11">
+       <widget class="QCheckBox" name="checkBox_UIG">
+        <property name="text">
+         <string>UIG</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0">
+       <widget class="QLabel" name="label_9">
+        <property name="text">
+         <string>迭代次数:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="0" colspan="2">
+       <widget class="QPushButton" name="pushButton_CalibDefault">
+        <property name="text">
+         <string>默认参数</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="2">
+       <widget class="QLabel" name="label_10">
+        <property name="text">
+         <string>α:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="5">
+       <widget class="QCheckBox" name="checkBox_FAR">
+        <property name="text">
+         <string>FAR</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLineEdit" name="lineEdit_SquareSize">
+        <property name="minimumSize">
+         <size>
+          <width>50</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>50</width>
+          <height>20</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="3">
+       <widget class="QLineEdit" name="lineEdit_Alpha">
+        <property name="minimumSize">
+         <size>
+          <width>50</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>50</width>
+          <height>20</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="5">
+       <widget class="QCheckBox" name="checkBox_SFL">
+        <property name="text">
+         <string>SFL</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineEdit_BoardWidth">
+        <property name="minimumSize">
+         <size>
+          <width>50</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>50</width>
+          <height>20</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="4">
+       <widget class="QLabel" name="label_7">
+        <property name="text">
+         <string>列</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QLineEdit" name="lineEdit_BoardHeight">
+        <property name="minimumSize">
+         <size>
+          <width>50</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>50</width>
+          <height>20</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>角点数量:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLabel" name="label_6">
+        <property name="text">
+         <string>行</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="11">
+       <widget class="QCheckBox" name="checkBox_FPP">
+        <property name="text">
+         <string>FPP</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="5">
+       <widget class="QCheckBox" name="checkBox_FI">
+        <property name="text">
+         <string>FI</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="5">
+       <widget class="QCheckBox" name="checkBox_Bouguet">
+        <property name="text">
+         <string>Bouguet</string>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="5">
+       <widget class="QCheckBox" name="checkBox_Hartley">
+        <property name="text">
+         <string>Hartley</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QTabWidget" name="tabWidget_2">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>192</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>192</height>
+      </size>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab_1">
+      <attribute name="title">
+       <string>使用照片标定</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="1" column="1">
+        <widget class="QPushButton" name="pushButton_CalibChooseImages">
+         <property name="text">
+          <string>选择文件</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QPushButton" name="pushButton_CalibStart">
+         <property name="text">
+          <string>开始标定</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="4">
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="2" column="1">
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="3">
+        <widget class="QPushButton" name="pushButton_ShowImg">
+         <property name="text">
+          <string>显示图片</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>开启摄像头标定</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_6">
+       <item row="1" column="0">
+        <widget class="QPushButton" name="pushButton_CameraRefresh">
+         <property name="text">
+          <string>刷新</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QPushButton" name="pushButton_CameraCalibStart">
+         <property name="text">
+          <string>开始标定</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QPushButton" name="pushButton_CameraOnOff">
+         <property name="text">
+          <string>开启摄像头</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0" colspan="3">
+        <widget class="QGroupBox" name="groupBox_4">
+         <property name="title">
+          <string>摄像头</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_5">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_11">
+            <property name="text">
+             <string>左摄像头:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="label_13">
+            <property name="text">
+             <string>分辨率:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_12">
+            <property name="text">
+             <string>右摄像头:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1" colspan="2">
+           <widget class="QComboBox" name="comboBox_CameraR"/>
+          </item>
+          <item row="0" column="1" colspan="2">
+           <widget class="QComboBox" name="comboBox_CameraL"/>
+          </item>
+          <item row="4" column="1" colspan="2">
+           <widget class="QComboBox" name="comboBox_Resolution"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_3">
+      <attribute name="title">
+       <string>读取标定文件</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_9">
+       <item row="0" column="0">
+        <widget class="QPushButton" name="pushButton_CalibChooseXml">
+         <property name="text">
+          <string>选择文件</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QPushButton" name="pushButton_FileCalib">
+         <property name="text">
+          <string>标定</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <spacer name="horizontalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="0">
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>pushButton_CalibDefault</sender>
+   <signal>clicked()</signal>
+   <receiver>Calibration</receiver>
+   <slot>OnDefaultBoardParams()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>442</x>
+     <y>382</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>436</x>
+     <y>418</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_Bouguet</sender>
+   <signal>clicked()</signal>
+   <receiver>Calibration</receiver>
+   <slot>OnChecked_Bouguet()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>692</x>
+     <y>361</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>755</x>
+     <y>354</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_Hartley</sender>
+   <signal>clicked()</signal>
+   <receiver>Calibration</receiver>
+   <slot>OnChecked_Hartley()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>692</x>
+     <y>392</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>756</x>
+     <y>392</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_FI</sender>
+   <signal>clicked()</signal>
+   <receiver>Calibration</receiver>
+   <slot>OnChecked_Fi()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>692</x>
+     <y>267</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>646</x>
+     <y>217</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_UIG</sender>
+   <signal>clicked()</signal>
+   <receiver>Calibration</receiver>
+   <slot>OnChecked_Uig()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>739</x>
+     <y>267</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>726</x>
+     <y>219</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_SFL</sender>
+   <signal>clicked()</signal>
+   <receiver>Calibration</receiver>
+   <slot>OnChecked_Sfl()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>692</x>
+     <y>299</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>518</x>
+     <y>221</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_FPP</sender>
+   <signal>clicked()</signal>
+   <receiver>Calibration</receiver>
+   <slot>OnChecked_FPP()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>739</x>
+     <y>299</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>830</x>
+     <y>220</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_FAR</sender>
+   <signal>clicked()</signal>
+   <receiver>Calibration</receiver>
+   <slot>OnChecked_Far()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>692</x>
+     <y>331</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>850</x>
+     <y>324</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_CalibChooseImages</sender>
+   <signal>clicked()</signal>
+   <receiver>Calibration</receiver>
+   <slot>OnChooseImages()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>51</x>
+     <y>263</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>59</x>
+     <y>218</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_CalibStart</sender>
+   <signal>clicked()</signal>
+   <receiver>Calibration</receiver>
+   <slot>OnCalibrateFromImage()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>121</x>
+     <y>259</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>208</x>
+     <y>220</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboBox_CameraL</sender>
+   <signal>currentIndexChanged(QString)</signal>
+   <receiver>Calibration</receiver>
+   <slot>OnChanged_LCameraComboBox()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>293</x>
+     <y>283</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>364</x>
+     <y>221</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboBox_CameraR</sender>
+   <signal>currentIndexChanged(QString)</signal>
+   <receiver>Calibration</receiver>
+   <slot>OnChanged_RChangeComboBox()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>353</x>
+     <y>327</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>5</x>
+     <y>188</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboBox_Resolution</sender>
+   <signal>currentIndexChanged(QString)</signal>
+   <receiver>Calibration</receiver>
+   <slot>OnChanged_ResolutionComboBox()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>191</x>
+     <y>351</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>4</x>
+     <y>335</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_CameraRefresh</sender>
+   <signal>clicked()</signal>
+   <receiver>Calibration</receiver>
+   <slot>OnRefreshCameras()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>117</x>
+     <y>391</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>2</x>
+     <y>369</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_CameraOnOff</sender>
+   <signal>clicked()</signal>
+   <receiver>Calibration</receiver>
+   <slot>OnCamerasPowerOn()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>229</x>
+     <y>387</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>159</x>
+     <y>419</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_CameraCalibStart</sender>
+   <signal>clicked()</signal>
+   <receiver>Calibration</receiver>
+   <slot>OnCalibrateFromCameras()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>342</x>
+     <y>392</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>260</x>
+     <y>418</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_CalibChooseXml</sender>
+   <signal>clicked()</signal>
+   <receiver>Calibration</receiver>
+   <slot>OnChooseCalibrateFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>77</x>
+     <y>259</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>5</x>
+     <y>259</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_FileCalib</sender>
+   <signal>clicked()</signal>
+   <receiver>Calibration</receiver>
+   <slot>OnCalibrateFromFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>157</x>
+     <y>259</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>3</x>
+     <y>310</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_ShowImg</sender>
+   <signal>clicked()</signal>
+   <receiver>Calibration</receiver>
+   <slot>OnShowImg()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>237</x>
+     <y>263</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>76</x>
+     <y>3</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>OnDefaultBoardParams()</slot>
+  <slot>OnChecked_Bouguet()</slot>
+  <slot>OnChecked_Hartley()</slot>
+  <slot>OnChecked_Fi()</slot>
+  <slot>OnChecked_Uig()</slot>
+  <slot>OnChecked_Sfl()</slot>
+  <slot>OnChecked_FPP()</slot>
+  <slot>OnChecked_Far()</slot>
+  <slot>OnChooseImages()</slot>
+  <slot>OnCalibrateFromImage()</slot>
+  <slot>OnChanged_LCameraComboBox()</slot>
+  <slot>OnChanged_RChangeComboBox()</slot>
+  <slot>OnChanged_ResolutionComboBox()</slot>
+  <slot>OnRefreshCameras()</slot>
+  <slot>OnCamerasPowerOn()</slot>
+  <slot>OnCalibrateFromCameras()</slot>
+  <slot>OnChooseCalibrateFile()</slot>
+  <slot>OnCalibrateFromFile()</slot>
+  <slot>OnShowImg()</slot>
+ </slots>
+</ui>

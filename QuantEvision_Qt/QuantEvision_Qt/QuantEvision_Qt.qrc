@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/QuantEvision_Qt">
+        <file>Resources/main.bmp</file>
+        <file>Resources/QuantiEvision.ico</file>
+    </qresource>
+    <qresource prefix="/Rangefinder">
+        <file>Resources/标定-白.png</file>
+        <file>Resources/标定-黑.png</file>
+        <file>Resources/测距-白.png</file>
+        <file>Resources/测距-黑.png</file>
+        <file>Resources/匹配-白.png</file>
+        <file>Resources/匹配-黑.png</file>
+        <file>Resources/深度重建-白.png</file>
+        <file>Resources/深度重建-黑.png</file>
+        <file>Resources/尺子.png</file>
+    </qresource>
+</RCC>
