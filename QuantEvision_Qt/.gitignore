@@ -9,9 +9,8 @@
 *.ipch
 
 # Libraries
-dcmtk_3.6.2/
-vtk_8.0.0/
-itk_4.12/
+!opencv/*
+!opencv/build/x64/vc14/bin/*
 
 # Build results
 [Dd]ebug/
