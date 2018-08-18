@@ -4,6 +4,8 @@
 #include "ui_Calibration.h"
 #include <core/affine.hpp>
 #include "Calibrater.h"
+#include <QMetaType>
+#include <core/core.hpp>
 
 class Calibration : public QWidget
 {
@@ -20,7 +22,11 @@ private:
 	QStringList ImageListL, ImageListR;//从图片标定时需要的两组图片
 	void ShowImage(cv::Mat imgL, cv::Mat imgR);//显示Mat到界面上
 	QString WorkPath=".\\";
+	cv::Mat imgLtoShow, imgRtoShow;
+signals:
+	void IsTimeToShowImages();
 public slots:
+	void OnShowImages();					//响应显示图片的信号
 	void OnDefaultBoardParams();            //标定板默认参数
 	void OnChecked_Bouguet();				//点击"Bouguet"选项
 	void OnChecked_Hartley();				//点击"Hartley"选项

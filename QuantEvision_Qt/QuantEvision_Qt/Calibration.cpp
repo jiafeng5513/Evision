@@ -13,12 +13,17 @@
 /*
  * 本类是"标定"功能的视图类,业务逻辑在...中
  */
+
 Calibration::Calibration(QWidget *parent)
 	: QWidget(parent)
 {
 	ui.setupUi(this);
 	//初始化Calibrater
 	Calibrater::getInstance()->initialize();
+	//连接信号,使用异步模式
+	imgLtoShow = *new cv::Mat();
+	imgRtoShow = *new cv::Mat();
+	connect(this, SIGNAL(IsTimeToShowImages()), this, SLOT(OnShowImages()));
 }
 
 Calibration::~Calibration()
@@ -37,15 +42,21 @@ void Calibration::ShowImage(cv::Mat imgL, cv::Mat imgR)
 	QGraphicsScene *sceneL = new QGraphicsScene;
 	sceneL->addPixmap(QPixmap::fromImage(LQImage));
 	ui.Viewer_CalibrateL->setScene(sceneL);
-	ui.Viewer_CalibrateL->resize(LQImage.width() + 10, LQImage.height() + 10);
+	//ui.Viewer_CalibrateL->resize(LQImage.width() + 10, LQImage.height() + 10);
 	ui.Viewer_CalibrateL->show();
 
 	QGraphicsScene *sceneR = new QGraphicsScene;
 	sceneR->addPixmap(QPixmap::fromImage(RQImage));
 	ui.Viewer_CalibrateR->setScene(sceneR);
-	ui.Viewer_CalibrateR->resize(RQImage.width() + 10, RQImage.height() + 10);
+	//ui.Viewer_CalibrateR->resize(RQImage.width() + 10, RQImage.height() + 10);
 	ui.Viewer_CalibrateR->show();
+
 	ui.Viewer_CalibrateR->update();
+}
+//响应显示图片的信号
+void Calibration::OnShowImages()
+{
+	ShowImage(imgLtoShow, imgRtoShow);
 }
 
 //标定板默认参数
@@ -194,7 +205,10 @@ void Calibration::OnCalibrateFromImage()
 		}
 		//F_ShowImage(img0, m_lfImage, IDC_PicLfCam);//向界面上刷新两张图 
 		//F_ShowImage(img1, m_riImage, IDC_PicRiCam);
-		ShowImage(img0, img1);
+		//ShowImage(img0, img1);
+		imgLtoShow = img0;
+		imgRtoShow = img1;
+		emit IsTimeToShowImages();
 	}
 	if (nSucceedBoard < 4)//成功的数量小于4,无法用于标定
 	{
@@ -300,8 +314,9 @@ void Calibration::OnShowImg()
 			//cvReleaseImage(&temp);
 			cv::destroyWindow("MyWindow");
 		}
-
-
-		ShowImage(img, img);
+		imgLtoShow = img;
+		imgRtoShow = img;
+		emit IsTimeToShowImages();
+		//ShowImage(img, img);
 	}
 }

@@ -520,8 +520,8 @@ IDR_RIBBON              RT_RIBBON_XML           "res\\ribbon.mfcribbon-ms"
 
 IDD_PARA1 DLGINIT
 BEGIN
-    IDC_CP1Resolution, 0x403, 9, 0
-0x3436, 0xa130, 0x34c1, 0x3038, "\000" 
+    IDC_CP1Resolution, 0x403, 11, 0
+0x3931, 0x3032, 0xc1a1, 0x3031, 0x3038, "\000" 
     IDC_CP1Resolution, 0x403, 9, 0
 0x3533, 0xa132, 0x32c1, 0x3838, "\000" 
     IDC_CP1Resolution, 0x403, 9, 0

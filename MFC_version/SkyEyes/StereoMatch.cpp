@@ -2,16 +2,18 @@
 #include "StereoMatch.h"
 #include "MainFrm.h"
 using namespace cv;
+
 StereoMatch::StereoMatch(void)
 : m_frameWidth(0), m_frameHeight(0), m_numberOfDisparies(0)
 {
+	
 }
 
 StereoMatch::~StereoMatch(void)
 {
 }
 
-
+ 
 /*----------------------------
 * 功能 : 初始化内部变量，载入双目定标结果数据
 *----------------------------

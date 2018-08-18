@@ -2,6 +2,7 @@
 
 #include <QObject>
 #include <core/affine.hpp>
+#include <QThread>
 /*
  *1.这个类应该是个单例类
  *2.存储标定和矫正所需的输入和输出参数
@@ -11,16 +12,16 @@
  *5.注释要注明输入还是输出
  */
 
-class Calibrater //: public QObject
+class Calibrater : public QThread
 {
-	//Q_OBJECT
+	Q_OBJECT
 
 public:
 	static Calibrater* getInstance();
 	~Calibrater();
 	void initialize();
 private:
-	Calibrater(/*QObject *parent = Q_NULLPTR*/);
+	Calibrater(QObject *parent = Q_NULLPTR);
 	//棋盘角点数据 结构体
 	struct CornerDatas
 	{
@@ -45,7 +46,7 @@ private:
 			imagePoints1=*new std::vector<std::vector<cv::Point2f> >;	
 			imagePoints2=*new std::vector<std::vector<cv::Point2f> >;	
 		}
-	}cornerDatas;
+	};
 	//单目标定的输出参数
 	struct CameraParams
 	{
@@ -81,7 +82,7 @@ private:
 		cv::Rect	roi2;	// 右视图有效区域的矩形
 	};
 public:
-	//CornerDatas ;
+	CornerDatas cornerDatas;
 	StereoParams stereoParams;
 	RemapMatrixs remapMatrixs;
 	//双目校正方法
@@ -269,7 +270,7 @@ public:
 	* 参数 : remapMatrixs	[in]	图像校正结果数据，需包含像素坐标映射矩阵
 	*/
 	int remapImage(cv::Mat& img1, cv::Mat& img2, cv::Mat& img1r, cv::Mat& img2r, RemapMatrixs& remapMatrixs);
-
+	
 private:
 
 	/*----------------------------

@@ -372,8 +372,8 @@ afx_msg LRESULT CMainFrame::OnUserChangeDPI(WPARAM wParam, LPARAM lParam)
 	switch (index)
 	{
 	case 0:
-		m_nImageWidth = 640;
-		m_nImageHeight = 480;
+		m_nImageWidth = 1920;
+		m_nImageHeight = 1080;
 		break;
 	case 1:
 		m_nImageWidth = 352;

@@ -4,10 +4,9 @@
 #include <imgproc/imgproc.hpp>
 #include <bemapiset.h>
 
-Calibrater::Calibrater(/*QObject *parent*/)
-	//: QObject(parent)
+Calibrater::Calibrater(QObject *parent)
 {
-	int i = 0;
+	
 }
 
 Calibrater::~Calibrater()
