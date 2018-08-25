@@ -52,7 +52,7 @@
 *.VC.DB
 *.VC.db
 *.ipch
-
+*.opendb
 # Visual C++ cache files
 ipch/
 *.aps

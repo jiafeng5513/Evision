@@ -36,9 +36,15 @@
     <ClCompile Include="Evision.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ParamEntity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Evision.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="ParamEntity.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

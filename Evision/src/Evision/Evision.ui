@@ -262,70 +262,7 @@
      <string>匹配参数</string>
     </property>
     <layout class="QGridLayout" name="gridLayout_2">
-     <item row="2" column="2">
-      <widget class="QLabel" name="label_26">
-       <property name="text">
-        <string>specrange</string>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="0" colspan="2">
-      <widget class="QSlider" name="horizontalSlider_pyrScale">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>15</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>15</height>
-        </size>
-       </property>
-       <property name="minimum">
-        <number>1</number>
-       </property>
-       <property name="maximum">
-        <number>10</number>
-       </property>
-       <property name="singleStep">
-        <number>1</number>
-       </property>
-       <property name="value">
-        <number>1</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="2" colspan="2">
-      <widget class="QSlider" name="horizontalSlider_Levels">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>15</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>15</height>
-        </size>
-       </property>
-       <property name="minimum">
-        <number>1</number>
-       </property>
-       <property name="maximum">
-        <number>10</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="4" colspan="2">
+     <item row="8" column="4" colspan="2">
       <widget class="QSlider" name="horizontalSlider_PolyN">
        <property name="minimumSize">
         <size>
@@ -360,11 +297,18 @@
        </property>
       </widget>
      </item>
+     <item row="2" column="2">
+      <widget class="QLabel" name="label_26">
+       <property name="text">
+        <string>specrange</string>
+       </property>
+      </widget>
+     </item>
      <item row="0" column="3">
       <widget class="QLineEdit" name="lineEdit_uniradio">
        <property name="minimumSize">
         <size>
-         <width>30</width>
+         <width>35</width>
          <height>20</height>
         </size>
        </property>
@@ -376,6 +320,9 @@
        </property>
        <property name="readOnly">
         <bool>true</bool>
+       </property>
+       <property name="placeholderText">
+        <string>0</string>
        </property>
       </widget>
      </item>
@@ -383,7 +330,7 @@
       <widget class="QLineEdit" name="lineEdit_specwinsz">
        <property name="minimumSize">
         <size>
-         <width>30</width>
+         <width>35</width>
          <height>20</height>
         </size>
        </property>
@@ -395,6 +342,9 @@
        </property>
        <property name="readOnly">
         <bool>true</bool>
+       </property>
+       <property name="placeholderText">
+        <string>0</string>
        </property>
       </widget>
      </item>
@@ -402,7 +352,7 @@
       <widget class="QLineEdit" name="lineEdit_MinDisp">
        <property name="minimumSize">
         <size>
-         <width>30</width>
+         <width>35</width>
          <height>20</height>
         </size>
        </property>
@@ -415,12 +365,194 @@
        <property name="readOnly">
         <bool>true</bool>
        </property>
+       <property name="placeholderText">
+        <string>0</string>
+       </property>
       </widget>
      </item>
-     <item row="0" column="2">
-      <widget class="QLabel" name="label_25">
+     <item row="11" column="1">
+      <widget class="QLineEdit" name="lineEdit_PolySigma">
+       <property name="minimumSize">
+        <size>
+         <width>35</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>30</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+       <property name="placeholderText">
+        <string>0</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2" colspan="2">
+      <widget class="QSlider" name="horizontalSlider_uniradio">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>15</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>15</height>
+        </size>
+       </property>
+       <property name="maximum">
+        <number>50</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="5">
+      <widget class="QLineEdit" name="lineEdit_PolyN">
+       <property name="minimumSize">
+        <size>
+         <width>35</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>30</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+       <property name="placeholderText">
+        <string>3</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="3">
+      <widget class="QLineEdit" name="lineEdit_textThread">
+       <property name="minimumSize">
+        <size>
+         <width>35</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>30</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+       <property name="placeholderText">
+        <string>0</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="lineEdit_MaxDisp">
+       <property name="minimumSize">
+        <size>
+         <width>35</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>30</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+       <property name="placeholderText">
+        <string>16</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="4" colspan="2">
+      <widget class="QSlider" name="horizontalSlider_prefilcap">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>15</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>15</height>
+        </size>
+       </property>
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>100</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="12" column="2" colspan="2">
+      <widget class="QSlider" name="horizontalSlider_Fi">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>15</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>15</height>
+        </size>
+       </property>
+       <property name="maximum">
+        <number>900</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="3">
+      <widget class="QLineEdit" name="lineEdit_specrange">
+       <property name="minimumSize">
+        <size>
+         <width>35</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>30</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+       <property name="placeholderText">
+        <string>0</string>
+       </property>
+      </widget>
+     </item>
+     <item row="11" column="0">
+      <widget class="QLabel" name="label_24">
        <property name="text">
-        <string>uniradio</string>
+        <string>PolySigma</string>
        </property>
       </widget>
      </item>
@@ -428,6 +560,28 @@
       <widget class="QLabel" name="label_30">
        <property name="text">
         <string>specwinsz</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QLineEdit" name="lineEdit_SadWinSiz">
+       <property name="minimumSize">
+        <size>
+         <width>35</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>30</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+       <property name="placeholderText">
+        <string>5</string>
        </property>
       </widget>
      </item>
@@ -453,61 +607,6 @@
        </property>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="4" colspan="2">
-      <widget class="QSlider" name="horizontalSlider_specwinsz">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>15</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>15</height>
-        </size>
-       </property>
-       <property name="maximum">
-        <number>200</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="label_21">
-       <property name="text">
-        <string>MaxDisp</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="3">
-      <widget class="QLineEdit" name="lineEdit_specrange">
-       <property name="minimumSize">
-        <size>
-         <width>30</width>
-         <height>20</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>30</width>
-         <height>20</height>
-        </size>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="4">
-      <widget class="QLabel" name="label_31">
-       <property name="text">
-        <string>prefilcap</string>
        </property>
       </widget>
      </item>
@@ -539,57 +638,6 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="5">
-      <widget class="QLineEdit" name="lineEdit_prefilcap">
-       <property name="minimumSize">
-        <size>
-         <width>30</width>
-         <height>20</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>30</width>
-         <height>20</height>
-        </size>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="4" colspan="2">
-      <widget class="QSlider" name="horizontalSlider_prefilcap">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>15</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>15</height>
-        </size>
-       </property>
-       <property name="minimum">
-        <number>1</number>
-       </property>
-       <property name="maximum">
-        <number>100</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0">
-      <widget class="QLabel" name="label_22">
-       <property name="text">
-        <string>SadWinSiz</string>
-       </property>
-      </widget>
-     </item>
      <item row="3" column="2" colspan="2">
       <widget class="QSlider" name="horizontalSlider_specrange">
        <property name="minimumSize">
@@ -612,66 +660,6 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="2" colspan="2">
-      <widget class="QSlider" name="horizontalSlider_uniradio">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>15</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>15</height>
-        </size>
-       </property>
-       <property name="maximum">
-        <number>50</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QLineEdit" name="lineEdit_MaxDisp">
-       <property name="minimumSize">
-        <size>
-         <width>30</width>
-         <height>20</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>30</width>
-         <height>20</height>
-        </size>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="3">
-      <widget class="QLineEdit" name="lineEdit_textThread">
-       <property name="minimumSize">
-        <size>
-         <width>30</width>
-         <height>20</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>30</width>
-         <height>20</height>
-        </size>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
      <item row="4" column="4">
       <widget class="QLabel" name="label_32">
        <property name="text">
@@ -679,37 +667,11 @@
        </property>
       </widget>
      </item>
-     <item row="4" column="1">
-      <widget class="QLineEdit" name="lineEdit_SadWinSiz">
-       <property name="minimumSize">
-        <size>
-         <width>30</width>
-         <height>20</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>30</width>
-         <height>20</height>
-        </size>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="2">
-      <widget class="QLabel" name="label_27">
-       <property name="text">
-        <string>textThread</string>
-       </property>
-      </widget>
-     </item>
      <item row="4" column="5">
       <widget class="QLineEdit" name="lineEdit_maxdifdisp12">
        <property name="minimumSize">
         <size>
-         <width>30</width>
+         <width>35</width>
          <height>20</height>
         </size>
        </property>
@@ -722,135 +684,16 @@
        <property name="readOnly">
         <bool>true</bool>
        </property>
-      </widget>
-     </item>
-     <item row="11" column="4" colspan="2">
-      <widget class="QSlider" name="horizontalSlider_Lambda">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>15</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>15</height>
-        </size>
-       </property>
-       <property name="maximum">
-        <number>100</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+       <property name="placeholderText">
+        <string>0</string>
        </property>
       </widget>
      </item>
-     <item row="6" column="1">
-      <widget class="QLineEdit" name="lineEdit_Levels">
-       <property name="minimumSize">
-        <size>
-         <width>30</width>
-         <height>20</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>30</width>
-         <height>20</height>
-        </size>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="11" column="2" colspan="2">
-      <widget class="QSlider" name="horizontalSlider_Fi">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>15</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>15</height>
-        </size>
-       </property>
-       <property name="maximum">
-        <number>900</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="10" column="2">
-      <widget class="QLabel" name="label_29">
-       <property name="text">
-        <string>Fi</string>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="0">
-      <widget class="QLabel" name="label_23">
-       <property name="text">
-        <string>Levels</string>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="5">
-      <widget class="QLineEdit" name="lineEdit_PolyN">
-       <property name="minimumSize">
-        <size>
-         <width>30</width>
-         <height>20</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>30</width>
-         <height>20</height>
-        </size>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="10" column="0">
-      <widget class="QLabel" name="label_24">
-       <property name="text">
-        <string>PolySigma</string>
-       </property>
-      </widget>
-     </item>
-     <item row="10" column="1">
-      <widget class="QLineEdit" name="lineEdit_PolySigma">
-       <property name="minimumSize">
-        <size>
-         <width>30</width>
-         <height>20</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>30</width>
-         <height>20</height>
-        </size>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="10" column="3">
+     <item row="11" column="3">
       <widget class="QLineEdit" name="lineEdit_Fi">
        <property name="minimumSize">
         <size>
-         <width>30</width>
+         <width>35</width>
          <height>20</height>
         </size>
        </property>
@@ -862,6 +705,16 @@
        </property>
        <property name="readOnly">
         <bool>true</bool>
+       </property>
+       <property name="placeholderText">
+        <string>0</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_22">
+       <property name="text">
+        <string>SadWinSiz</string>
        </property>
       </widget>
      </item>
@@ -887,10 +740,92 @@
        </property>
       </widget>
      </item>
-     <item row="10" column="4">
+     <item row="2" column="4">
+      <widget class="QLabel" name="label_31">
+       <property name="text">
+        <string>prefilcap</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="2">
+      <widget class="QLabel" name="label_27">
+       <property name="text">
+        <string>textThread</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="4" colspan="2">
+      <widget class="QSlider" name="horizontalSlider_specwinsz">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>15</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>15</height>
+        </size>
+       </property>
+       <property name="maximum">
+        <number>200</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="12" column="4" colspan="2">
+      <widget class="QSlider" name="horizontalSlider_Lambda">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>15</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>15</height>
+        </size>
+       </property>
+       <property name="maximum">
+        <number>100</number>
+       </property>
+       <property name="singleStep">
+        <number>1</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QLabel" name="label_25">
+       <property name="text">
+        <string>uniradio</string>
+       </property>
+      </widget>
+     </item>
+     <item row="11" column="2">
+      <widget class="QLabel" name="label_29">
+       <property name="text">
+        <string>Fi</string>
+       </property>
+      </widget>
+     </item>
+     <item row="11" column="4">
       <widget class="QLabel" name="label_34">
        <property name="text">
         <string>Lambda</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_21">
+       <property name="text">
+        <string>MaxDisp</string>
        </property>
       </widget>
      </item>
@@ -898,6 +833,28 @@
       <widget class="QLabel" name="label_33">
        <property name="text">
         <string>PolyN</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="5">
+      <widget class="QLineEdit" name="lineEdit_prefilcap">
+       <property name="minimumSize">
+        <size>
+         <width>35</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>30</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+       <property name="placeholderText">
+        <string>1</string>
        </property>
       </widget>
      </item>
@@ -929,18 +886,11 @@
        </property>
       </widget>
      </item>
-     <item row="6" column="2">
-      <widget class="QLabel" name="label_28">
-       <property name="text">
-        <string>pyrScale</string>
-       </property>
-      </widget>
-     </item>
-     <item row="10" column="5">
-      <widget class="QLineEdit" name="lineEdit_Lambda">
+     <item row="6" column="1">
+      <widget class="QLineEdit" name="lineEdit_Levels">
        <property name="minimumSize">
         <size>
-         <width>30</width>
+         <width>35</width>
          <height>20</height>
         </size>
        </property>
@@ -953,9 +903,73 @@
        <property name="readOnly">
         <bool>true</bool>
        </property>
+       <property name="placeholderText">
+        <string>1</string>
+       </property>
       </widget>
      </item>
-     <item row="11" column="0" colspan="2">
+     <item row="6" column="0">
+      <widget class="QLabel" name="label_23">
+       <property name="text">
+        <string>Levels</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="2">
+      <widget class="QLabel" name="label_28">
+       <property name="text">
+        <string>pyrScale</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="4" colspan="2">
+      <widget class="QSlider" name="horizontalSlider_maxdifdisp12">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>15</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>15</height>
+        </size>
+       </property>
+       <property name="minimum">
+        <number>-1</number>
+       </property>
+       <property name="maximum">
+        <number>5</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="11" column="5">
+      <widget class="QLineEdit" name="lineEdit_Lambda">
+       <property name="minimumSize">
+        <size>
+         <width>35</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>30</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+       <property name="placeholderText">
+        <string>0</string>
+       </property>
+      </widget>
+     </item>
+     <item row="12" column="0" colspan="2">
       <widget class="QSlider" name="horizontalSlider_PolySigma">
        <property name="minimumSize">
         <size>
@@ -981,7 +995,7 @@
       <widget class="QLineEdit" name="lineEdit_pyrScale">
        <property name="minimumSize">
         <size>
-         <width>30</width>
+         <width>35</width>
          <height>20</height>
         </size>
        </property>
@@ -994,10 +1008,13 @@
        <property name="readOnly">
         <bool>true</bool>
        </property>
+       <property name="placeholderText">
+        <string>1</string>
+       </property>
       </widget>
      </item>
-     <item row="5" column="4" colspan="2">
-      <widget class="QSlider" name="horizontalSlider_maxdifdisp12">
+     <item row="8" column="0" colspan="2">
+      <widget class="QSlider" name="horizontalSlider_Levels">
        <property name="minimumSize">
         <size>
          <width>0</width>
@@ -1011,10 +1028,41 @@
         </size>
        </property>
        <property name="minimum">
-        <number>-1</number>
+        <number>1</number>
        </property>
        <property name="maximum">
-        <number>5</number>
+        <number>10</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="2" colspan="2">
+      <widget class="QSlider" name="horizontalSlider_pyrScale">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>15</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>15</height>
+        </size>
+       </property>
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>10</number>
+       </property>
+       <property name="singleStep">
+        <number>1</number>
+       </property>
+       <property name="value">
+        <number>1</number>
        </property>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -1080,14 +1128,14 @@
     </property>
     <layout class="QGridLayout" name="gridLayout_4">
      <item row="0" column="0">
-      <widget class="QRadioButton" name="radioButton_BM_2">
+      <widget class="QRadioButton" name="radioButton_BM">
        <property name="text">
         <string>BM</string>
        </property>
       </widget>
      </item>
      <item row="4" column="0">
-      <widget class="QRadioButton" name="radioButton_VAR_2">
+      <widget class="QRadioButton" name="radioButton_VAR">
        <property name="text">
         <string>VAR</string>
        </property>
@@ -1120,7 +1168,7 @@
       </widget>
      </item>
      <item row="1" column="0">
-      <widget class="QRadioButton" name="radioButton_SGBM_2">
+      <widget class="QRadioButton" name="radioButton_SGBM">
        <property name="text">
         <string>SGBM</string>
        </property>
@@ -1141,20 +1189,6 @@
      <string>标定算法</string>
     </property>
     <layout class="QGridLayout" name="gridLayout_5">
-     <item row="3" column="0">
-      <widget class="QCheckBox" name="checkBox_Hartley">
-       <property name="text">
-        <string>Hartley</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
-      <widget class="QCheckBox" name="checkBox_Bouguet">
-       <property name="text">
-        <string>Bouguet</string>
-       </property>
-      </widget>
-     </item>
      <item row="0" column="1">
       <widget class="QPushButton" name="pushButton_CalibDefault">
        <property name="text">
@@ -1162,10 +1196,24 @@
        </property>
       </widget>
      </item>
-     <item row="3" column="1">
+     <item row="4" column="1">
       <widget class="QPushButton" name="pushButton">
        <property name="text">
         <string>标定</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QRadioButton" name="radioButton_Bouguet">
+       <property name="text">
+        <string>Bouguet</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QRadioButton" name="radioButton_Hartley">
+       <property name="text">
+        <string>Hartley</string>
        </property>
       </widget>
      </item>
@@ -1188,6 +1236,7 @@
     <addaction name="action"/>
     <addaction name="action_3"/>
     <addaction name="action_2"/>
+    <addaction name="actionDebug"/>
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">
@@ -1233,10 +1282,647 @@
     <string>关于</string>
    </property>
   </action>
+  <action name="actionDebug">
+   <property name="text">
+    <string>Debug</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
   <include location="Evision.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton_CalibDefault</sender>
+   <signal>clicked()</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>setDefaultCalibParam()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>283</x>
+     <y>505</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>283</x>
+     <y>457</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>doCalib()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>252</x>
+     <y>534</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>253</x>
+     <y>558</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_MatchDefault</sender>
+   <signal>clicked()</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>setDefaultMatchParam()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>925</x>
+     <y>330</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>990</x>
+     <y>333</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_MatchChooseFiles</sender>
+   <signal>clicked()</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>doMatch()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>936</x>
+     <y>370</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>989</x>
+     <y>374</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_RangeSinglePoint</sender>
+   <signal>clicked()</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>getDistance()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>947</x>
+     <y>466</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>993</x>
+     <y>467</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_RangeDualPoint</sender>
+   <signal>clicked()</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>getGap()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>947</x>
+     <y>499</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>991</x>
+     <y>508</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_BoardWidth</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>onValueChanged_BoardWidth(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>107</x>
+     <y>338</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>7</x>
+     <y>341</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_BoardHeight</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>onValueChanged_BoardHeight(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>206</x>
+     <y>333</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>3</x>
+     <y>326</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_SquareSize</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>onValueChanged_SquareSize(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>109</x>
+     <y>383</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>4</x>
+     <y>376</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_Alpha</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>onValueChanged_Alpha(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>169</x>
+     <y>387</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>2</x>
+     <y>406</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit__nBoards</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>onValueChanged_nBoards(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>108</x>
+     <y>424</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>3</x>
+     <y>447</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_FI</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>onClicked_FI(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>247</x>
+     <y>341</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>244</x>
+     <y>291</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_UIG</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>onClicked_UIG(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>300</x>
+     <y>344</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>298</x>
+     <y>292</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_SFL</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>onClicked_SFL(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>260</x>
+     <y>383</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>309</x>
+     <y>289</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_FPP</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>onClicked_FPP(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>293</x>
+     <y>379</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>334</x>
+     <y>373</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_FAR</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>onClicked_FAR(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>245</x>
+     <y>423</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>240</x>
+     <y>460</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_Bouguet</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>onClicked_Bouguet(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>37</x>
+     <y>503</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>3</x>
+     <y>497</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_Hartley</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>onClicked_Hartley(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>71</x>
+     <y>536</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>18</x>
+     <y>565</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_MinDisp</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>valueChanged_MinDisp(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>429</x>
+     <y>347</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>436</x>
+     <y>291</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_uniradio</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>valueChanged_uniradio(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>536</x>
+     <y>346</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>600</x>
+     <y>293</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_specwinsz</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>valueChanged_specwinsz(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>671</x>
+     <y>344</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>783</x>
+     <y>293</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_MaxDisp</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>valueChanged_MaxDisp(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>394</x>
+     <y>395</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>336</x>
+     <y>405</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_specrange</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>valueChanged_Specrange(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>496</x>
+     <y>394</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>335</x>
+     <y>460</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_prefilcap</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>valueChanged_Prefilcap(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>631</x>
+     <y>400</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>744</x>
+     <y>392</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_SadWinSiz</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>valueChanged_SadWinSize(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>378</x>
+     <y>445</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>334</x>
+     <y>447</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_textThread</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>valueChanged_TextThread(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>521</x>
+     <y>446</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>335</x>
+     <y>502</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_maxdifdisp12</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>valueChanged_MaxDifdisp2(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>646</x>
+     <y>445</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>746</x>
+     <y>452</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_pyrScale</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>valueChanged_PyrScale(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>390</x>
+     <y>494</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>337</x>
+     <y>556</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_Levels</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>valueChanged_Levels(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>508</x>
+     <y>486</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>567</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_PolyN</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>valueChanged_PolyN(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>664</x>
+     <y>489</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>554</x>
+     <y>564</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_PolySigma</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>valueChanged_PolySigma(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>409</x>
+     <y>540</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>677</x>
+     <y>561</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_Fi</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>valueChanged_Fi(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>548</x>
+     <y>539</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>747</x>
+     <y>319</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_Lambda</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>valueChanged_Lambda(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>645</x>
+     <y>536</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>747</x>
+     <y>515</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_BM</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>onClicked_BM(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>796</x>
+     <y>338</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>995</x>
+     <y>136</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_SGBM</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>onClicked_SGBM(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>776</x>
+     <y>364</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>996</x>
+     <y>178</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_VAR</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>onClicked_VAR(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>824</x>
+     <y>403</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>995</x>
+     <y>230</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionDebug</sender>
+   <signal>triggered()</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>onTestAlltheParam()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>499</x>
+     <y>294</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>setDefaultCalibParam()</slot>
+  <slot>doCalib()</slot>
+  <slot>setDefaultMatchParam()</slot>
+  <slot>doMatch()</slot>
+  <slot>getDistance()</slot>
+  <slot>getGap()</slot>
+  <slot>onValueChanged_BoardHeight(QString)</slot>
+  <slot>onValueChanged_BoardWidth(QString)</slot>
+  <slot>onValueChanged_SquareSize(QString)</slot>
+  <slot>onValueChanged_Alpha(QString)</slot>
+  <slot>onValueChanged_nBoards(QString)</slot>
+  <slot>onClicked_FI(bool)</slot>
+  <slot>onClicked_UIG(bool)</slot>
+  <slot>onClicked_SFL(bool)</slot>
+  <slot>onClicked_FPP(bool)</slot>
+  <slot>onClicked_FAR(bool)</slot>
+  <slot>onClicked_Bouguet(bool)</slot>
+  <slot>onClicked_Hartley(bool)</slot>
+  <slot>valueChanged_MinDisp(int)</slot>
+  <slot>valueChanged_uniradio(int)</slot>
+  <slot>valueChanged_specwinsz(int)</slot>
+  <slot>valueChanged_MaxDisp(int)</slot>
+  <slot>valueChanged_Specrange(int)</slot>
+  <slot>valueChanged_Prefilcap(int)</slot>
+  <slot>valueChanged_SadWinSize(int)</slot>
+  <slot>valueChanged_TextThread(int)</slot>
+  <slot>valueChanged_MaxDifdisp2(int)</slot>
+  <slot>valueChanged_Levels(int)</slot>
+  <slot>valueChanged_PyrScale(int)</slot>
+  <slot>valueChanged_PolyN(int)</slot>
+  <slot>valueChanged_PolySigma(int)</slot>
+  <slot>valueChanged_Fi(int)</slot>
+  <slot>valueChanged_Lambda(int)</slot>
+  <slot>onClicked_BM(bool)</slot>
+  <slot>onClicked_SGBM(bool)</slot>
+  <slot>onClicked_VAR(bool)</slot>
+  <slot>onTestAlltheParam()</slot>
+ </slots>
 </ui>

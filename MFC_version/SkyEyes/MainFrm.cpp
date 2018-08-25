@@ -2143,7 +2143,7 @@ void CMainFrame::OnBnCompdisp()
 	F_ShowImage(ProcessedImageL, m_lfImage, IDC_PicLfCam);
 	F_ShowImage(ProcessedImageR, m_riImage, IDC_PicRiCam);
 	F_ShowImage(DisparityMap, m_disparity, IDC_PicSynImg);
-	RangeEnable = true;      // 启用测距相关功能
+	RangeEnable = true;      // 启用测距相关功能 
 }
 
 //Ribbon->测距->主点距离(复选框)
