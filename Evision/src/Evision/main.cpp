@@ -1,10 +1,10 @@
-#include "Evision.h"
+#include "EvisionView.h"
 #include <QtWidgets/QApplication>
 
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
-	Evision w;
+	EvisionView w;
 	w.show();
 	return a.exec();
 }

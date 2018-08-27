@@ -32,7 +32,7 @@
    <string>Evision</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QGraphicsView" name="graphicsView">
+   <widget class="QGraphicsView" name="graphicsView_L">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -54,7 +54,7 @@
      </brush>
     </property>
    </widget>
-   <widget class="QGraphicsView" name="graphicsView_2">
+   <widget class="QGraphicsView" name="graphicsView_R">
     <property name="geometry">
      <rect>
       <x>340</x>

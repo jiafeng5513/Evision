@@ -33,18 +33,24 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Evision.cpp">
+    <ClCompile Include="EvisionController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ParamEntity.cpp">
+    <ClCompile Include="EvisionUtils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EvisionView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EvisionParamEntity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="Evision.h">
+    <QtMoc Include="EvisionView.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="ParamEntity.h">
+    <QtMoc Include="EvisionParamEntity.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -60,5 +66,13 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Evision.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="EvisionController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EvisionUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

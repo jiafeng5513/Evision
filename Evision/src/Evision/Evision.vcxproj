@@ -115,12 +115,17 @@
     </QtRcc>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Evision.cpp" />
+    <ClCompile Include="EvisionView.cpp" />
+    <ClCompile Include="EvisionController.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ParamEntity.cpp" />
+    <ClCompile Include="EvisionParamEntity.cpp" />
+    <ClCompile Include="EvisionUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="Evision.h" />
+    <QtMoc Include="EvisionView.h">
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;_CRT_SECURE_NO_WARNINGS</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;_CRT_SECURE_NO_WARNINGS</Define>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="Evision.ui" />
@@ -132,10 +137,14 @@
     <ResourceCompile Include="Evision.rc" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="ParamEntity.h">
+    <QtMoc Include="EvisionParamEntity.h">
       <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;_CRT_SECURE_NO_WARNINGS</Define>
       <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;_CRT_SECURE_NO_WARNINGS</Define>
     </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="EvisionController.h" />
+    <ClInclude Include="EvisionUtils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
