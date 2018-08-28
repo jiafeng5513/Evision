@@ -15,5 +15,11 @@ public:
 	void MatchCommand();
 private:
 	void CalibrateFromImage();
+	void StereoCalib(const std::vector<std::string>& imagelist, 
+					cv::Size boardSize, 
+					float squareSize, 
+					bool displayCorners, 
+					bool useCalibrated , 
+					bool showRectified );
 };
 
