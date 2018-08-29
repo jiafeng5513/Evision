@@ -99,6 +99,7 @@ public slots:
 	void onTestAlltheParam();
 	//状态栏
 	void onParamChanged_StatusBarText();
+	
 	/*
 	 * 被动更新的组件:
 	 *	图片显示区域

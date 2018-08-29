@@ -56,6 +56,12 @@
     <QtMoc Include="EvisionParamEntity.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="StereoCalibrate.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="EvisionController.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="Evision.ui">
@@ -71,13 +77,7 @@
     <ResourceCompile Include="Evision.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="EvisionController.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="EvisionUtils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StereoCalibrate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

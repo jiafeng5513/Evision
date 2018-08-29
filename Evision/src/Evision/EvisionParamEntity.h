@@ -13,7 +13,7 @@ public:
 	static EvisionParamEntity * getInstance();
 	~EvisionParamEntity();
 private:
-	EvisionParamEntity();
+	EvisionParamEntity(QObject *parent = 0);
 private:
 #pragma region params
 

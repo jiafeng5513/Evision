@@ -144,12 +144,15 @@
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="EvisionController.h" />
-    <ClInclude Include="EvisionUtils.h" />
-    <ClInclude Include="StereoCalibrate.h">
+    <QtMoc Include="EvisionController.h">
       <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;_CRT_SECURE_NO_WARNINGS</Define>
       <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;_CRT_SECURE_NO_WARNINGS</Define>
-    </ClInclude>
+    </QtMoc>
+    <ClInclude Include="EvisionUtils.h" />
+    <QtMoc Include="StereoCalibrate.h">
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;_CRT_SECURE_NO_WARNINGS</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;_CRT_SECURE_NO_WARNINGS</Define>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

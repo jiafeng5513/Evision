@@ -64,7 +64,7 @@ EvisionView::EvisionView(QWidget *parent)
 
 	connect(m_entity, SIGNAL(paramChanged_ImageLtoShow()), this, SLOT(onParamChanged_imgLtoShow())/*, Qt::QueuedConnection*/);
 	connect(m_entity, SIGNAL(paramChanged_ImageRtoShow()), this, SLOT(onParamChanged_imgRtoShow())/*, Qt::QueuedConnection*/);
-	connect(m_entity, SIGNAL(paramChanged_StatusBar()), this, SLOT(onParamChanged_StatusBarText())/*, Qt::QueuedConnection*/);
+	connect(m_entity, SIGNAL(paramChanged_StatusBar()), this, SLOT(onParamChanged_StatusBarText()), Qt::QueuedConnection);
 
 }
 /*==========°´Å¥============*/
@@ -624,3 +624,4 @@ void EvisionView::onParamChanged_StatusBarText()
 {
 	msgLabel->setText(m_entity->getStatusBarText());
 }
+

@@ -1,7 +1,7 @@
 #include "EvisionParamEntity.h"
 
 //构造函数是私有的
-EvisionParamEntity::EvisionParamEntity()
+EvisionParamEntity::EvisionParamEntity(QObject * parent) : QObject(parent)
 { 
 }
 

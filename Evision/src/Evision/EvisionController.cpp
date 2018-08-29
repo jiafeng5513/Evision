@@ -7,8 +7,9 @@
 #include <iostream>
 #include <calib3d/calib3d.hpp>
 #include "StereoCalibrate.h"
+#include "QMessageBox"
 
-EvisionController::EvisionController()
+EvisionController::EvisionController(QObject * parent):QObject(parent)
 {
 	m_entity = EvisionParamEntity::getInstance();
 }
@@ -68,15 +69,21 @@ void EvisionController::CalibrateCommand()
 				 *3.一切正常,可以进行从图片标定
 				 */
 				std::vector<std::string>* imagelist = new std::vector<std::string>();
+				std::vector<std::string>* imagelistL = new std::vector<std::string>();
+				std::vector<std::string>* imagelistR = new std::vector<std::string>();
 				for (int i = 0; i < std::min(ImageListL.size(),ImageListR.size()); ++i)
 				{
 					imagelist->push_back(ImageListL.at(i).toStdString());
 					imagelist->push_back(ImageListR.at(i).toStdString());
+					imagelistL->push_back(ImageListL.at(i).toStdString());
+					imagelistR->push_back(ImageListR.at(i).toStdString());
+
 				}
 				cv::Size * _size = new cv::Size();
 				_size->width = m_entity->getBoardWidth();
 				_size->height = m_entity->getBoardHeight();
-				StereoCalibrate * _stereoCalib = new StereoCalibrate(imagelist, *_size,m_entity->getSquareSize(),true,true,true);
+				StereoCalibrate * _stereoCalib = new StereoCalibrate(imagelistL, imagelistR, *_size,m_entity->getSquareSize(),true,true);
+				connect(_stereoCalib,SIGNAL(openMessageBox(QString, QString)),this,SLOT(onOpenMessageBox(QString,QString)));
 				_stereoCalib->start();
 			}
 		}
@@ -139,3 +146,8 @@ void EvisionController::setDefaultMatchParamCommand()
 	}
 }
 
+//弹出对话框
+void EvisionController::onOpenMessageBox(QString title, QString msg)
+{
+	QMessageBox::information(NULL, title, msg);
+}
