@@ -120,6 +120,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="EvisionParamEntity.cpp" />
     <ClCompile Include="EvisionUtils.cpp" />
+    <ClCompile Include="StereoCalibrate.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="EvisionView.h">
@@ -145,6 +146,13 @@
   <ItemGroup>
     <ClInclude Include="EvisionController.h" />
     <ClInclude Include="EvisionUtils.h" />
+    <ClInclude Include="StereoCalibrate.h">
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;_CRT_SECURE_NO_WARNINGS</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;_CRT_SECURE_NO_WARNINGS</Define>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

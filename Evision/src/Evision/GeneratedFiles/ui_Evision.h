@@ -162,7 +162,11 @@ public:
         graphicsView_L = new QGraphicsView(centralWidget);
         graphicsView_L->setObjectName(QStringLiteral("graphicsView_L"));
         graphicsView_L->setGeometry(QRect(10, 10, 320, 240));
+        graphicsView_L->setContextMenuPolicy(Qt::ActionsContextMenu);
         graphicsView_L->setAutoFillBackground(false);
+        graphicsView_L->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+        graphicsView_L->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+        graphicsView_L->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
         QBrush brush(QColor(0, 0, 0, 255));
         brush.setStyle(Qt::SolidPattern);
         graphicsView_L->setBackgroundBrush(brush);

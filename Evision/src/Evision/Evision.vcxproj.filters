@@ -45,6 +45,9 @@
     <ClCompile Include="EvisionParamEntity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="StereoCalibrate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="EvisionView.h">
@@ -74,5 +77,11 @@
     <ClInclude Include="EvisionUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="StereoCalibrate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

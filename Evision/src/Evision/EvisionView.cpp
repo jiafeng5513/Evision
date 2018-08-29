@@ -62,9 +62,9 @@ EvisionView::EvisionView(QWidget *parent)
 	connect(m_entity, SIGNAL(paramChanged_VAR()), this, SLOT(onParamChanged_VAR()));
 	connect(m_entity, SIGNAL(paramChanged_distance()), this, SLOT(onParamChanged_Distance()));
 
-	connect(m_entity, SIGNAL(paramChanged_ImageLtoShow()), this, SLOT(onParamChanged_imgLtoShow()));
-	connect(m_entity, SIGNAL(paramChanged_ImageRtoShow()), this, SLOT(onParamChanged_imgRtoShow()));
-	connect(m_entity, SIGNAL(paramChanged_StatusBar()), this, SLOT(onParamChanged_StatusBarText()));
+	connect(m_entity, SIGNAL(paramChanged_ImageLtoShow()), this, SLOT(onParamChanged_imgLtoShow())/*, Qt::QueuedConnection*/);
+	connect(m_entity, SIGNAL(paramChanged_ImageRtoShow()), this, SLOT(onParamChanged_imgRtoShow())/*, Qt::QueuedConnection*/);
+	connect(m_entity, SIGNAL(paramChanged_StatusBar()), this, SLOT(onParamChanged_StatusBarText())/*, Qt::QueuedConnection*/);
 
 }
 /*==========按钮============*/
@@ -76,6 +76,7 @@ void EvisionView::setDefaultCalibParam()
 //标定
 void EvisionView::doCalib()
 {
+	m_controller->CalibrateCommand();
 }
 //默认匹配参数
 void EvisionView::setDefaultMatchParam()
@@ -547,6 +548,17 @@ void EvisionView::onParamChanged_imgLtoShow()
 	QImage LQImage = EvisionUtils::cvMat2QImage(m_entity->getImageLtoShow());
 	QGraphicsScene *sceneL = new QGraphicsScene;
 	sceneL->addPixmap(QPixmap::fromImage(LQImage));
+	//sceneL->setSceneRect(0, 0, ui.graphicsView_L->size().width(), ui.graphicsView_L->size().height());
+
+	QRectF bounds = sceneL->itemsBoundingRect();
+	bounds.setWidth(bounds.width());         // to tighten-up margins
+	bounds.setHeight(bounds.height());       // same as above
+	ui.graphicsView_L->fitInView(bounds, Qt::KeepAspectRatio);
+	ui.graphicsView_L->centerOn(0, 0);
+
+
+
+	//sceneL->itemsBoundingRect();
 	ui.graphicsView_L->setScene(sceneL);
 	//ui.Viewer_CalibrateL->resize(LQImage.width() + 10, LQImage.height() + 10);
 	ui.graphicsView_L->show();
@@ -558,6 +570,13 @@ void EvisionView::onParamChanged_imgRtoShow()
 	QImage RQImage = EvisionUtils::cvMat2QImage(m_entity->getImageRtoShow());
 	QGraphicsScene *sceneR = new QGraphicsScene;
 	sceneR->addPixmap(QPixmap::fromImage(RQImage));
+
+	QRectF bounds = sceneR->itemsBoundingRect();
+	bounds.setWidth(bounds.width());         // to tighten-up margins
+	bounds.setHeight(bounds.height());       // same as above
+	ui.graphicsView_R->fitInView(bounds, Qt::KeepAspectRatio);
+	ui.graphicsView_R->centerOn(0, 0);
+
 	ui.graphicsView_R->setScene(sceneR);
 	//ui.Viewer_CalibrateR->resize(RQImage.width() + 10, RQImage.height() + 10);
 	ui.graphicsView_R->show();

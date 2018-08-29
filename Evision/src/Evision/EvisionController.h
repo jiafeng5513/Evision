@@ -1,5 +1,6 @@
 #pragma once
 #include "EvisionParamEntity.h"
+#include <qstringlist.h>
 
 class EvisionController
 {
@@ -13,13 +14,5 @@ public:
 	void CalibrateCommand();
 	void setDefaultMatchParamCommand();
 	void MatchCommand();
-private:
-	void CalibrateFromImage();
-	void StereoCalib(const std::vector<std::string>& imagelist, 
-					cv::Size boardSize, 
-					float squareSize, 
-					bool displayCorners, 
-					bool useCalibrated , 
-					bool showRectified );
 };
 
