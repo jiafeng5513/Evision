@@ -46,7 +46,7 @@ private:
 	bool VAR = false;
 
 	float Distance=0.0f;
-	cv::Mat imgLtoShow, imgRtoShow;
+	cv::Mat imgLtoShow, imgRtoShow, imgDtoShow;
 	QString StatusBarText="";
 #pragma endregion 
 
@@ -84,6 +84,7 @@ signals:
 
 	void paramChanged_ImageLtoShow();
 	void paramChanged_ImageRtoShow();
+	void paramChanged_ImageDtoShow();
 
 	void paramChanged_StatusBar();
 #pragma endregion 
@@ -172,6 +173,9 @@ public:
 
 	cv::Mat getImageRtoShow();
 	void setImageRtoShow(cv::Mat value);
+
+	cv::Mat getImageDtoShow();
+	void setImageDtoShow(cv::Mat value);
 
 	QString getStatusBarText();
 	void setStatusBarText(QString value);

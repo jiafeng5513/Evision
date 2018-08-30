@@ -42,7 +42,7 @@ public:
     QWidget *centralWidget;
     QGraphicsView *graphicsView_L;
     QGraphicsView *graphicsView_R;
-    QGraphicsView *graphicsView_3;
+    QGraphicsView *graphicsView_D;
     QGroupBox *groupBox;
     QGridLayout *gridLayout;
     QLabel *label_5;
@@ -164,9 +164,9 @@ public:
         graphicsView_R = new QGraphicsView(centralWidget);
         graphicsView_R->setObjectName(QStringLiteral("graphicsView_R"));
         graphicsView_R->setGeometry(QRect(340, 10, 320, 240));
-        graphicsView_3 = new QGraphicsView(centralWidget);
-        graphicsView_3->setObjectName(QStringLiteral("graphicsView_3"));
-        graphicsView_3->setGeometry(QRect(670, 10, 320, 240));
+        graphicsView_D = new QGraphicsView(centralWidget);
+        graphicsView_D->setObjectName(QStringLiteral("graphicsView_D"));
+        graphicsView_D->setGeometry(QRect(670, 10, 320, 240));
         groupBox = new QGroupBox(centralWidget);
         groupBox->setObjectName(QStringLiteral("groupBox"));
         groupBox->setGeometry(QRect(10, 260, 321, 161));

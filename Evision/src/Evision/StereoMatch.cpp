@@ -1,9 +1,29 @@
 #include "StereoMatch.h"
+#include <QFileDialog>
 
-StereoMatch::StereoMatch()
+
+StereoMatch::StereoMatch(std::string img1_filename, std::string img2_filename, std::string intrinsic_filename, std::string extrinsic_filename)
 {
-}
+	m_entity = EvisionParamEntity::getInstance();
+	this->img1_filename = img1_filename;
+	this->img2_filename = img2_filename;
+	QFileInfo *_fileInfo1 = new QFileInfo(QString::fromStdString(img1_filename));
+	QFileInfo *_fileInfo2 = new QFileInfo(QString::fromStdString(img2_filename));
+	
+	if(_fileInfo1->absolutePath()!=_fileInfo2->absolutePath())
+	{
+		//左右视图不在一起
+		//先把左右视图拷贝到一起
+	}
 
+	this->intrinsic_filename = intrinsic_filename;
+	this->extrinsic_filename = extrinsic_filename;
+	std::string midname = _fileInfo1->baseName().toStdString();
+	midname.append("_");
+	midname.append(_fileInfo2->baseName().toStdString());
+	this->disparity_filename = _fileInfo1->absolutePath().toStdString().append("/disp-"+ midname+".jpg");
+	this->point_cloud_filename = _fileInfo1->absolutePath().toStdString().append("/pointcloud-"+ midname +".xml");
+}
 
 StereoMatch::~StereoMatch()
 {
@@ -19,15 +39,10 @@ void StereoMatch::run()
 	cv::Mat img1 = cv::imread(img1_filename, color_mode);
 	cv::Mat img2 = cv::imread(img2_filename, color_mode);
 
-	if (img1.empty())
+	if (img1.empty()||img2.empty())
 	{
-		printf("Command-line parameter error: could not load the first input image file\n");
-		/*return -1;*/
-	}
-	if (img2.empty())
-	{
-		printf("Command-line parameter error: could not load the second input image file\n");
-		//return -1;
+		emit openMessageBox(QStringLiteral("错误"), QStringLiteral("输入图像为空!"));
+		return;
 	}
 
 	if (scale != 1.f)
@@ -47,12 +62,12 @@ void StereoMatch::run()
 
 	if (!intrinsic_filename.empty())
 	{
-		// reading intrinsic parameters
+		// 读取内参文件
 		cv::FileStorage fs(intrinsic_filename, cv::FileStorage::READ);
 		if (!fs.isOpened())
 		{
-			printf("Failed to open file %s\n", intrinsic_filename.c_str());
-			//return -1;
+			emit openMessageBox(QStringLiteral("错误"), QStringLiteral("读取内部参数文件失败!"));
+			return;
 		}
 
 		cv::Mat M1, D1, M2, D2;
@@ -63,14 +78,14 @@ void StereoMatch::run()
 
 		M1 *= scale;
 		M2 *= scale;
-
+		//读取外参文件
 		fs.open(extrinsic_filename, cv::FileStorage::READ);
 		if (!fs.isOpened())
 		{
-			printf("Failed to open file %s\n", extrinsic_filename.c_str());
-			//return -1;
+			emit openMessageBox(QStringLiteral("错误"), QStringLiteral("读取外部参数文件失败!"));
+			return ;
 		}
-
+		m_entity->setStatusBarText(QStringLiteral("参数就位,开始StereoMatch计算..."));
 		cv::Mat R, T, R1, P1, R2, P2;
 		fs["R"] >> R;
 		fs["T"] >> T;
@@ -135,39 +150,35 @@ void StereoMatch::run()
 	else if (alg == STEREO_SGBM || alg == STEREO_HH || alg == STEREO_3WAY)
 		sgbm->compute(img1, img2, disp);
 	t = cv::getTickCount() - t;
-	printf("Time elapsed: %fms\n", t * 1000 / cv::getTickFrequency());
+	char buff[128];
+	sprintf(buff,"Time elapsed: %fms\n,StereoMatch计算完毕,正在输出...", t * 1000 / cv::getTickFrequency());
+	m_entity->setStatusBarText(QString::fromStdString(buff));
 
 	//disp = dispp.colRange(numberOfDisparities, img1p.cols);
 	if (alg != STEREO_VAR)
 		disp.convertTo(disp8, CV_8U, 255 / (numberOfDisparities*16.));
 	else
 		disp.convertTo(disp8, CV_8U);
-	if (!no_display)
-	{
-		cv::namedWindow("left", 1);
-		imshow("left", img1);
-		cv::namedWindow("right", 1);
-		imshow("right", img2);
-		cv::namedWindow("disparity", 0);
-		imshow("disparity", disp8);
-		printf("press any key to continue...");
-		fflush(stdout);
-		cv::waitKey();
-		printf("\n");
-	}
+
+	m_entity->setImageLtoShow(img1);
+	m_entity->setImageRtoShow(img2);
+	m_entity->setImageDtoShow(disp8);
+
 
 	if (!disparity_filename.empty())
 		imwrite(disparity_filename, disp8);
 
 	if (!point_cloud_filename.empty())
 	{
-		printf("storing the point cloud...");
-		fflush(stdout);
+		//printf("storing the point cloud...");
+		m_entity->setStatusBarText(QStringLiteral("正在输出点云文件..."));
+		//fflush(stdout);
 		cv::Mat xyz;
 		reprojectImageTo3D(disp, xyz, Q, true);
 		saveXYZ(point_cloud_filename.c_str(), xyz);
-		printf("\n");
+		//printf("\n");
 	}
+	m_entity->setStatusBarText(QStringLiteral("就绪"));
 
 	return ;
 }

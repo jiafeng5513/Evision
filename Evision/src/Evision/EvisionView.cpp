@@ -58,6 +58,8 @@ EvisionView::EvisionView(QWidget *parent)
 
 	connect(m_entity, SIGNAL(paramChanged_ImageLtoShow()), this, SLOT(onParamChanged_imgLtoShow())/*, Qt::QueuedConnection*/);
 	connect(m_entity, SIGNAL(paramChanged_ImageRtoShow()), this, SLOT(onParamChanged_imgRtoShow())/*, Qt::QueuedConnection*/);
+	connect(m_entity, SIGNAL(paramChanged_ImageDtoShow()), this, SLOT(onParamChanged_imgDtoShow())/*, Qt::QueuedConnection*/);
+
 	connect(m_entity, SIGNAL(paramChanged_StatusBar()), this, SLOT(onParamChanged_StatusBarText()), Qt::QueuedConnection);
 
 }
@@ -80,6 +82,7 @@ void EvisionView::setDefaultMatchParam()
 //Æ¥Åä
 void EvisionView::doMatch()
 {
+	m_controller->MatchCommand();
 }
 
 void EvisionView::getDistance()
@@ -475,19 +478,12 @@ void EvisionView::onParamChanged_imgLtoShow()
 	QImage LQImage = EvisionUtils::cvMat2QImage(m_entity->getImageLtoShow());
 	QGraphicsScene *sceneL = new QGraphicsScene;
 	sceneL->addPixmap(QPixmap::fromImage(LQImage));
-	//sceneL->setSceneRect(0, 0, ui.graphicsView_L->size().width(), ui.graphicsView_L->size().height());
-
+	ui.graphicsView_L->setScene(sceneL);
 	QRectF bounds = sceneL->itemsBoundingRect();
 	bounds.setWidth(bounds.width());         // to tighten-up margins
 	bounds.setHeight(bounds.height());       // same as above
 	ui.graphicsView_L->fitInView(bounds, Qt::KeepAspectRatio);
 	ui.graphicsView_L->centerOn(0, 0);
-
-
-
-	//sceneL->itemsBoundingRect();
-	ui.graphicsView_L->setScene(sceneL);
-	//ui.Viewer_CalibrateL->resize(LQImage.width() + 10, LQImage.height() + 10);
 	ui.graphicsView_L->show();
 	ui.graphicsView_L->update();
 }
@@ -497,17 +493,29 @@ void EvisionView::onParamChanged_imgRtoShow()
 	QImage RQImage = EvisionUtils::cvMat2QImage(m_entity->getImageRtoShow());
 	QGraphicsScene *sceneR = new QGraphicsScene;
 	sceneR->addPixmap(QPixmap::fromImage(RQImage));
-
+	ui.graphicsView_R->setScene(sceneR);
 	QRectF bounds = sceneR->itemsBoundingRect();
 	bounds.setWidth(bounds.width());         // to tighten-up margins
 	bounds.setHeight(bounds.height());       // same as above
 	ui.graphicsView_R->fitInView(bounds, Qt::KeepAspectRatio);
 	ui.graphicsView_R->centerOn(0, 0);
-
-	ui.graphicsView_R->setScene(sceneR);
-	//ui.Viewer_CalibrateR->resize(RQImage.width() + 10, RQImage.height() + 10);
 	ui.graphicsView_R->show();
 	ui.graphicsView_R->update();
+}
+
+void EvisionView::onParamChanged_imgDtoShow()
+{
+	QImage DQImage = EvisionUtils::cvMat2QImage(m_entity->getImageDtoShow());
+	QGraphicsScene *sceneD = new QGraphicsScene;
+	sceneD->addPixmap(QPixmap::fromImage(DQImage));
+	ui.graphicsView_D->setScene(sceneD);
+	QRectF bounds = sceneD->itemsBoundingRect();
+	bounds.setWidth(bounds.width());         // to tighten-up margins
+	bounds.setHeight(bounds.height());       // same as above
+	ui.graphicsView_D->fitInView(bounds, Qt::KeepAspectRatio);
+	ui.graphicsView_D->centerOn(0, 0);
+	ui.graphicsView_D->show();
+	ui.graphicsView_D->update();
 }
 
 //µ÷ÊÔ·½·¨

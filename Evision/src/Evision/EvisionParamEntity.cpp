@@ -312,6 +312,17 @@ void EvisionParamEntity::setImageRtoShow(cv::Mat value)
 	emit paramChanged_ImageRtoShow();
 }
 
+cv::Mat EvisionParamEntity::getImageDtoShow()
+{
+	return imgDtoShow;
+}
+
+void EvisionParamEntity::setImageDtoShow(cv::Mat value)
+{
+	imgDtoShow = value;
+	emit paramChanged_ImageDtoShow();
+}
+
 QString EvisionParamEntity::getStatusBarText()
 {
 	return StatusBarText;

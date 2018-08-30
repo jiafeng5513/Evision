@@ -14,6 +14,9 @@ private:
 	float squareSize;
 	bool useCalibrated; //true=使用BOUGUET矫正方法,false=使用HARTLEY矫正方法
 	bool showRectified; //是否显示标定图片的矫正结果
+
+	std::string intrFilename;
+	std::string extrFilename;
 	EvisionParamEntity *m_entity;
 public:
 	//交错列表

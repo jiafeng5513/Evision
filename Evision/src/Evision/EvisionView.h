@@ -84,6 +84,8 @@ public slots:
 	//更新左视图和右视图
 	void onParamChanged_imgLtoShow();
 	void onParamChanged_imgRtoShow();
+	void onParamChanged_imgDtoShow();
+
 	void onTestAlltheParam();
 	//状态栏
 	void onParamChanged_StatusBarText();

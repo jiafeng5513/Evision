@@ -76,7 +76,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QGraphicsView" name="graphicsView_3">
+   <widget class="QGraphicsView" name="graphicsView_D">
     <property name="geometry">
      <rect>
       <x>670</x>

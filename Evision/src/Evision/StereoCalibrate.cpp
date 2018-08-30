@@ -29,6 +29,10 @@ StereoCalibrate::StereoCalibrate(std::vector<std::string>* imagelistL, std::vect
 	this->squareSize = squareSize;
 	this->useCalibrated = useCalibrated;
 	this->showRectified = showRectified;
+
+	QFileInfo *_fileInfo = new QFileInfo(QString::fromStdString(imagelistL->at(0)));
+	this->intrFilename = _fileInfo->absolutePath().toStdString().append("/intrinsics.yml");
+	this->extrFilename = _fileInfo->absolutePath().toStdString().append("/extrinsics.yml");
 }
 
 StereoCalibrate::~StereoCalibrate()
@@ -501,7 +505,7 @@ void StereoCalibrate::run()
 	emit openMessageBox(QStringLiteral("平均极线误差"), QString::fromStdString(tmp));
 
 	// 保存内部参数
-	cv::FileStorage fs("intrinsics.yml", cv::FileStorage::WRITE);
+	cv::FileStorage fs(intrFilename, cv::FileStorage::WRITE);
 	if (fs.isOpened())
 	{
 		fs << "M1" << cameraMatrix[0] << "D1" << distCoeffs[0] <<
@@ -518,7 +522,7 @@ void StereoCalibrate::run()
 		imageSize, R, T, R1, R2, P1, P2, Q,
 		cv::CALIB_ZERO_DISPARITY, 1, imageSize, &validRoi[0], &validRoi[1]);
 	// 保存外部参数
-	fs.open("extrinsics.yml", cv::FileStorage::WRITE);
+	fs.open(extrFilename, cv::FileStorage::WRITE);
 	if (fs.isOpened())
 	{
 		fs << "R" << R << "T" << T << "R1" << R1 << "R2" << R2 << "P1" << P1 << "P2" << P2 << "Q" << Q;

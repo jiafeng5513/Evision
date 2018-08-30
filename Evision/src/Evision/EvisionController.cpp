@@ -8,6 +8,7 @@
 #include <calib3d/calib3d.hpp>
 #include "StereoCalibrate.h"
 #include "QMessageBox"
+#include "StereoMatch.h"
 
 EvisionController::EvisionController(QObject * parent):QObject(parent)
 {
@@ -137,6 +138,70 @@ void EvisionController::setDefaultMatchParamCommand()
 	else
 	{
 		QMessageBox::information(NULL, QStringLiteral("错误"), QStringLiteral("没有选择匹配算法"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+	}
+}
+
+void EvisionController::MatchCommand()
+{
+	QString ImageL, ImageR,insFile,extFile;
+
+	QFileDialog * fileDialog = new QFileDialog();
+	fileDialog->setWindowTitle(QStringLiteral("请选择左摄像头拍摄的图片"));
+	fileDialog->setNameFilter(QStringLiteral("图片文件(*.jpg *.png *.jpeg)"));
+	fileDialog->setFileMode(QFileDialog::ExistingFile);
+	if (fileDialog->exec() == QDialog::Accepted)
+	{
+		ImageL = fileDialog->selectedFiles().at(0);
+		fileDialog->setWindowTitle(QStringLiteral("请选择右摄像头拍摄的图片"));
+		if (fileDialog->exec() == QDialog::Accepted)
+		{
+			ImageR = fileDialog->selectedFiles().at(0);
+			if (!ImageL.isEmpty()&&!ImageR.isEmpty())
+			{
+				//两侧图片文件正常
+				QFileDialog * fileDialog2 = new QFileDialog();
+				fileDialog2->setWindowTitle(QStringLiteral("请选择内参文件"));
+				fileDialog2->setNameFilter(QStringLiteral("YML/XML文件(*.yml *.yaml *.xml)"));
+				fileDialog2->setFileMode(QFileDialog::ExistingFile);
+				if (fileDialog2->exec() == QDialog::Accepted)
+				{
+					insFile= fileDialog2->selectedFiles().at(0);
+					fileDialog2->setWindowTitle(QStringLiteral("请选择外参文件"));
+					if (fileDialog2->exec() == QDialog::Accepted)
+					{
+						extFile = fileDialog2->selectedFiles().at(0);
+						if (!insFile.isEmpty()&&!extFile.isEmpty())
+						{
+							//内外参数文件正常
+							StereoMatch *_stereoMatch = new StereoMatch(ImageL.toStdString(),
+								ImageR.toStdString(), insFile.toStdString(), extFile.toStdString());
+							connect(_stereoMatch, SIGNAL(openMessageBox(QString, QString)), this, SLOT(onOpenMessageBox(QString, QString)));
+							_stereoMatch->start();
+						}
+						else
+						{
+							QMessageBox::information(NULL, QStringLiteral("错误"), QStringLiteral("请选择有效的内外参文件!"));
+							return;
+						}
+					}
+				}else
+				{
+					return;
+				}
+
+			}else
+			{
+				QMessageBox::information(NULL, QStringLiteral("错误"), QStringLiteral("请选择有效的两侧图片!"));
+				return;
+			}
+
+		}else
+		{
+			return;
+		}
+	}else
+	{
+		return;
 	}
 }
 
