@@ -46,21 +46,14 @@ public:
     QGroupBox *groupBox;
     QGridLayout *gridLayout;
     QLabel *label_5;
-    QLabel *label_6;
     QLineEdit *lineEdit_BoardWidth;
-    QLabel *label_7;
-    QCheckBox *checkBox_FI;
-    QCheckBox *checkBox_UIG;
-    QLabel *label_8;
+    QCheckBox *checkBox_showRectified;
+    QLabel *label_6;
     QLineEdit *lineEdit_SquareSize;
-    QLabel *label_10;
     QLineEdit *lineEdit_BoardHeight;
-    QLineEdit *lineEdit_Alpha;
-    QCheckBox *checkBox_SFL;
-    QLabel *label_9;
-    QCheckBox *checkBox_FAR;
-    QCheckBox *checkBox_FPP;
-    QLineEdit *lineEdit__nBoards;
+    QLabel *label_8;
+    QRadioButton *radioButton_Hartley;
+    QRadioButton *radioButton_Bouguet;
     QGroupBox *groupBox_2;
     QGridLayout *gridLayout_2;
     QSlider *horizontalSlider_PolyN;
@@ -123,10 +116,8 @@ public:
     QRadioButton *radioButton_SGBM;
     QGroupBox *groupBox_4;
     QGridLayout *gridLayout_5;
-    QPushButton *pushButton_CalibDefault;
     QPushButton *pushButton;
-    QRadioButton *radioButton_Bouguet;
-    QRadioButton *radioButton_Hartley;
+    QPushButton *pushButton_CalibDefault;
     QMenuBar *menuBar;
     QMenu *menu;
     QMenu *menu_2;
@@ -188,11 +179,6 @@ public:
 
         gridLayout->addWidget(label_5, 0, 0, 1, 1);
 
-        label_6 = new QLabel(groupBox);
-        label_6->setObjectName(QStringLiteral("label_6"));
-
-        gridLayout->addWidget(label_6, 0, 2, 1, 1);
-
         lineEdit_BoardWidth = new QLineEdit(groupBox);
         lineEdit_BoardWidth->setObjectName(QStringLiteral("lineEdit_BoardWidth"));
         lineEdit_BoardWidth->setMinimumSize(QSize(50, 20));
@@ -200,25 +186,15 @@ public:
 
         gridLayout->addWidget(lineEdit_BoardWidth, 0, 1, 1, 1);
 
-        label_7 = new QLabel(groupBox);
-        label_7->setObjectName(QStringLiteral("label_7"));
+        checkBox_showRectified = new QCheckBox(groupBox);
+        checkBox_showRectified->setObjectName(QStringLiteral("checkBox_showRectified"));
 
-        gridLayout->addWidget(label_7, 0, 4, 1, 1);
+        gridLayout->addWidget(checkBox_showRectified, 0, 2, 1, 1);
 
-        checkBox_FI = new QCheckBox(groupBox);
-        checkBox_FI->setObjectName(QStringLiteral("checkBox_FI"));
+        label_6 = new QLabel(groupBox);
+        label_6->setObjectName(QStringLiteral("label_6"));
 
-        gridLayout->addWidget(checkBox_FI, 0, 5, 1, 1);
-
-        checkBox_UIG = new QCheckBox(groupBox);
-        checkBox_UIG->setObjectName(QStringLiteral("checkBox_UIG"));
-
-        gridLayout->addWidget(checkBox_UIG, 0, 6, 1, 1);
-
-        label_8 = new QLabel(groupBox);
-        label_8->setObjectName(QStringLiteral("label_8"));
-
-        gridLayout->addWidget(label_8, 2, 0, 1, 1);
+        gridLayout->addWidget(label_6, 1, 0, 1, 1);
 
         lineEdit_SquareSize = new QLineEdit(groupBox);
         lineEdit_SquareSize->setObjectName(QStringLiteral("lineEdit_SquareSize"));
@@ -227,52 +203,27 @@ public:
 
         gridLayout->addWidget(lineEdit_SquareSize, 2, 1, 1, 1);
 
-        label_10 = new QLabel(groupBox);
-        label_10->setObjectName(QStringLiteral("label_10"));
-        label_10->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        gridLayout->addWidget(label_10, 2, 2, 1, 1);
-
         lineEdit_BoardHeight = new QLineEdit(groupBox);
         lineEdit_BoardHeight->setObjectName(QStringLiteral("lineEdit_BoardHeight"));
         lineEdit_BoardHeight->setMinimumSize(QSize(50, 20));
         lineEdit_BoardHeight->setMaximumSize(QSize(50, 20));
 
-        gridLayout->addWidget(lineEdit_BoardHeight, 0, 3, 1, 1);
+        gridLayout->addWidget(lineEdit_BoardHeight, 1, 1, 1, 1);
 
-        lineEdit_Alpha = new QLineEdit(groupBox);
-        lineEdit_Alpha->setObjectName(QStringLiteral("lineEdit_Alpha"));
-        lineEdit_Alpha->setMinimumSize(QSize(50, 20));
-        lineEdit_Alpha->setMaximumSize(QSize(50, 20));
+        label_8 = new QLabel(groupBox);
+        label_8->setObjectName(QStringLiteral("label_8"));
 
-        gridLayout->addWidget(lineEdit_Alpha, 2, 3, 1, 1);
+        gridLayout->addWidget(label_8, 2, 0, 1, 1);
 
-        checkBox_SFL = new QCheckBox(groupBox);
-        checkBox_SFL->setObjectName(QStringLiteral("checkBox_SFL"));
+        radioButton_Hartley = new QRadioButton(groupBox);
+        radioButton_Hartley->setObjectName(QStringLiteral("radioButton_Hartley"));
 
-        gridLayout->addWidget(checkBox_SFL, 2, 5, 1, 1);
+        gridLayout->addWidget(radioButton_Hartley, 2, 2, 1, 1);
 
-        label_9 = new QLabel(groupBox);
-        label_9->setObjectName(QStringLiteral("label_9"));
+        radioButton_Bouguet = new QRadioButton(groupBox);
+        radioButton_Bouguet->setObjectName(QStringLiteral("radioButton_Bouguet"));
 
-        gridLayout->addWidget(label_9, 3, 0, 1, 1);
-
-        checkBox_FAR = new QCheckBox(groupBox);
-        checkBox_FAR->setObjectName(QStringLiteral("checkBox_FAR"));
-
-        gridLayout->addWidget(checkBox_FAR, 3, 5, 1, 1);
-
-        checkBox_FPP = new QCheckBox(groupBox);
-        checkBox_FPP->setObjectName(QStringLiteral("checkBox_FPP"));
-
-        gridLayout->addWidget(checkBox_FPP, 2, 6, 1, 1);
-
-        lineEdit__nBoards = new QLineEdit(groupBox);
-        lineEdit__nBoards->setObjectName(QStringLiteral("lineEdit__nBoards"));
-        lineEdit__nBoards->setMinimumSize(QSize(50, 20));
-        lineEdit__nBoards->setMaximumSize(QSize(50, 20));
-
-        gridLayout->addWidget(lineEdit__nBoards, 3, 1, 1, 1);
+        gridLayout->addWidget(radioButton_Bouguet, 1, 2, 1, 1);
 
         groupBox_2 = new QGroupBox(centralWidget);
         groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
@@ -694,25 +645,15 @@ public:
         gridLayout_5->setSpacing(6);
         gridLayout_5->setContentsMargins(11, 11, 11, 11);
         gridLayout_5->setObjectName(QStringLiteral("gridLayout_5"));
-        pushButton_CalibDefault = new QPushButton(groupBox_4);
-        pushButton_CalibDefault->setObjectName(QStringLiteral("pushButton_CalibDefault"));
-
-        gridLayout_5->addWidget(pushButton_CalibDefault, 0, 1, 1, 1);
-
         pushButton = new QPushButton(groupBox_4);
         pushButton->setObjectName(QStringLiteral("pushButton"));
 
         gridLayout_5->addWidget(pushButton, 4, 1, 1, 1);
 
-        radioButton_Bouguet = new QRadioButton(groupBox_4);
-        radioButton_Bouguet->setObjectName(QStringLiteral("radioButton_Bouguet"));
+        pushButton_CalibDefault = new QPushButton(groupBox_4);
+        pushButton_CalibDefault->setObjectName(QStringLiteral("pushButton_CalibDefault"));
 
-        gridLayout_5->addWidget(radioButton_Bouguet, 0, 0, 1, 1);
-
-        radioButton_Hartley = new QRadioButton(groupBox_4);
-        radioButton_Hartley->setObjectName(QStringLiteral("radioButton_Hartley"));
-
-        gridLayout_5->addWidget(radioButton_Hartley, 4, 0, 1, 1);
+        gridLayout_5->addWidget(pushButton_CalibDefault, 0, 1, 1, 1);
 
         EvisionClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(EvisionClass);
@@ -749,13 +690,7 @@ public:
         QObject::connect(lineEdit_BoardWidth, SIGNAL(textChanged(QString)), EvisionClass, SLOT(onValueChanged_BoardWidth(QString)));
         QObject::connect(lineEdit_BoardHeight, SIGNAL(textChanged(QString)), EvisionClass, SLOT(onValueChanged_BoardHeight(QString)));
         QObject::connect(lineEdit_SquareSize, SIGNAL(textChanged(QString)), EvisionClass, SLOT(onValueChanged_SquareSize(QString)));
-        QObject::connect(lineEdit_Alpha, SIGNAL(textChanged(QString)), EvisionClass, SLOT(onValueChanged_Alpha(QString)));
-        QObject::connect(lineEdit__nBoards, SIGNAL(textChanged(QString)), EvisionClass, SLOT(onValueChanged_nBoards(QString)));
-        QObject::connect(checkBox_FI, SIGNAL(clicked(bool)), EvisionClass, SLOT(onClicked_FI(bool)));
-        QObject::connect(checkBox_UIG, SIGNAL(clicked(bool)), EvisionClass, SLOT(onClicked_UIG(bool)));
-        QObject::connect(checkBox_SFL, SIGNAL(clicked(bool)), EvisionClass, SLOT(onClicked_SFL(bool)));
-        QObject::connect(checkBox_FPP, SIGNAL(clicked(bool)), EvisionClass, SLOT(onClicked_FPP(bool)));
-        QObject::connect(checkBox_FAR, SIGNAL(clicked(bool)), EvisionClass, SLOT(onClicked_FAR(bool)));
+        QObject::connect(checkBox_showRectified, SIGNAL(clicked(bool)), EvisionClass, SLOT(onClicked_FPP(bool)));
         QObject::connect(radioButton_Bouguet, SIGNAL(clicked(bool)), EvisionClass, SLOT(onClicked_Bouguet(bool)));
         QObject::connect(radioButton_Hartley, SIGNAL(clicked(bool)), EvisionClass, SLOT(onClicked_Hartley(bool)));
         QObject::connect(horizontalSlider_MinDisp, SIGNAL(valueChanged(int)), EvisionClass, SLOT(valueChanged_MinDisp(int)));
@@ -791,17 +726,12 @@ public:
         action_5->setText(QApplication::translate("EvisionClass", "\345\205\263\344\272\216", nullptr));
         actionDebug->setText(QApplication::translate("EvisionClass", "Debug", nullptr));
         groupBox->setTitle(QApplication::translate("EvisionClass", "\346\240\207\345\256\232\345\217\202\346\225\260", nullptr));
-        label_5->setText(QApplication::translate("EvisionClass", "\350\247\222\347\202\271\346\225\260\351\207\217:", nullptr));
-        label_6->setText(QApplication::translate("EvisionClass", "\350\241\214", nullptr));
-        label_7->setText(QApplication::translate("EvisionClass", "\345\210\227", nullptr));
-        checkBox_FI->setText(QApplication::translate("EvisionClass", "FI", nullptr));
-        checkBox_UIG->setText(QApplication::translate("EvisionClass", "UIG", nullptr));
-        label_8->setText(QApplication::translate("EvisionClass", "\346\226\271\346\240\274\350\276\271\351\225\277:", nullptr));
-        label_10->setText(QApplication::translate("EvisionClass", "\316\261:", nullptr));
-        checkBox_SFL->setText(QApplication::translate("EvisionClass", "SFL", nullptr));
-        label_9->setText(QApplication::translate("EvisionClass", "\350\277\255\344\273\243\346\254\241\346\225\260:", nullptr));
-        checkBox_FAR->setText(QApplication::translate("EvisionClass", "FAR", nullptr));
-        checkBox_FPP->setText(QApplication::translate("EvisionClass", "FPP", nullptr));
+        label_5->setText(QApplication::translate("EvisionClass", "Width:", nullptr));
+        checkBox_showRectified->setText(QApplication::translate("EvisionClass", "\346\230\276\347\244\272\347\237\253\346\255\243\347\273\223\346\236\234", nullptr));
+        label_6->setText(QApplication::translate("EvisionClass", "Height:", nullptr));
+        label_8->setText(QApplication::translate("EvisionClass", "Size:", nullptr));
+        radioButton_Hartley->setText(QApplication::translate("EvisionClass", "\344\275\277\347\224\250Hartley\347\237\253\346\255\243\346\226\271\346\263\225", nullptr));
+        radioButton_Bouguet->setText(QApplication::translate("EvisionClass", "\344\275\277\347\224\250Bouguet\347\237\253\346\255\243\346\226\271\346\263\225", nullptr));
         groupBox_2->setTitle(QApplication::translate("EvisionClass", "\345\214\271\351\205\215\345\217\202\346\225\260", nullptr));
         label_20->setText(QApplication::translate("EvisionClass", "MinDisp", nullptr));
         label_26->setText(QApplication::translate("EvisionClass", "specrange", nullptr));
@@ -843,11 +773,9 @@ public:
         pushButton_MatchDefault->setText(QApplication::translate("EvisionClass", "\351\273\230\350\256\244\345\217\202\346\225\260", nullptr));
         pushButton_MatchChooseFiles->setText(QApplication::translate("EvisionClass", "\345\217\214\347\233\256\345\214\271\351\205\215", nullptr));
         radioButton_SGBM->setText(QApplication::translate("EvisionClass", "SGBM", nullptr));
-        groupBox_4->setTitle(QApplication::translate("EvisionClass", "\346\240\207\345\256\232\347\256\227\346\263\225", nullptr));
-        pushButton_CalibDefault->setText(QApplication::translate("EvisionClass", "\351\273\230\350\256\244\345\217\202\346\225\260", nullptr));
+        groupBox_4->setTitle(QApplication::translate("EvisionClass", "\346\240\207\345\256\232", nullptr));
         pushButton->setText(QApplication::translate("EvisionClass", "\346\240\207\345\256\232", nullptr));
-        radioButton_Bouguet->setText(QApplication::translate("EvisionClass", "Bouguet", nullptr));
-        radioButton_Hartley->setText(QApplication::translate("EvisionClass", "Hartley", nullptr));
+        pushButton_CalibDefault->setText(QApplication::translate("EvisionClass", "\351\273\230\350\256\244\345\217\202\346\225\260", nullptr));
         menu->setTitle(QApplication::translate("EvisionClass", "\345\267\245\345\205\267", nullptr));
         menu_2->setTitle(QApplication::translate("EvisionClass", "\345\270\256\345\212\251", nullptr));
     } // retranslateUi

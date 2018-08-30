@@ -33,13 +33,7 @@ EvisionView::EvisionView(QWidget *parent)
 	connect(m_entity, SIGNAL(paramChanged_BoardWidth()), this, SLOT(onParamChanged_BoardWidth()));
 	connect(m_entity, SIGNAL(paramChanged_BoardHeight()), this, SLOT(onParamChanged_BoardHeight()));
 	connect(m_entity, SIGNAL(paramChanged_SquareSize()), this, SLOT(onParamChanged_SquareSize()));
-	connect(m_entity, SIGNAL(paramChanged_Alpha()), this, SLOT(onParamChanged_Alpha()));
-	connect(m_entity, SIGNAL(paramChanged_nBoards()), this, SLOT(onParamChanged_nBoards()));
-	connect(m_entity, SIGNAL(paramChanged_FI()), this, SLOT(onParamChanged_FI()));
-	connect(m_entity, SIGNAL(paramChanged_UIG()), this, SLOT(onParamChanged_UIG()));
-	connect(m_entity, SIGNAL(paramChanged_SFL()), this, SLOT(onParamChanged_SFL()));
-	connect(m_entity, SIGNAL(paramChanged_FPP()), this, SLOT(onParamChanged_FPP()));
-	connect(m_entity, SIGNAL(paramChanged_FAR()), this, SLOT(onParamChanged_FAR()));
+	connect(m_entity, SIGNAL(paramChanged_showRectified()), this, SLOT(onParamChanged_showRectified()));
 	connect(m_entity, SIGNAL(paramChanged_Bouguet()), this, SLOT(onParamChanged_Bouguet()));
 	connect(m_entity, SIGNAL(paramChanged_Hartley()), this, SLOT(onParamChanged_Hartley()));
 	connect(m_entity, SIGNAL(paramChanged_MinDisp()), this, SLOT(onParamChanged_MinDisp()));
@@ -138,83 +132,16 @@ void EvisionView::onParamChanged_SquareSize()
 	}
 }
 
-void EvisionView::onValueChanged_Alpha(QString value)
+void EvisionView::onClicked_showRectified(bool value)
 {
-	m_entity->setAlpha(value.toInt());
+	m_entity->setshowRectified(value);
 }
 
-void EvisionView::onParamChanged_Alpha()
+void EvisionView::onParamChanged_showRectified()
 {
-	QString tmp = QString::fromStdString(std::to_string(m_entity->getAlpha()));
-	if (tmp != ui.lineEdit_Alpha->text())
-	{
-		ui.lineEdit_Alpha->setText(tmp);
-	}
+	ui.checkBox_showRectified->setChecked(m_entity->getshowRectified());
 }
 
-void EvisionView::onValueChanged_nBoards(QString value)
-{
-	m_entity->setnBoards(value.toInt());
-}
-
-void EvisionView::onParamChanged_nBoards()
-{
-	QString tmp = QString::fromStdString(std::to_string(m_entity->getnBoards()));
-	if (tmp != ui.lineEdit__nBoards->text())
-	{
-		ui.lineEdit__nBoards->setText(tmp);
-	}
-}
-
-void EvisionView::onClicked_FI(bool value)
-{
-	m_entity->setFI(value);
-}
-
-void EvisionView::onParamChanged_FI()
-{
-	ui.checkBox_FI->setChecked(m_entity->getFI());
-}
-
-void EvisionView::onClicked_UIG(bool value)
-{
-	m_entity->setUIG(value);
-}
-
-void EvisionView::onParamChanged_UIG()
-{
-	ui.checkBox_UIG->setChecked(m_entity->getUIG());
-}
-
-void EvisionView::onClicked_SFL(bool value)
-{
-	m_entity->setSFL(value);
-}
-
-void EvisionView::onParamChanged_SFL()
-{
-	ui.checkBox_SFL->setChecked(m_entity->getSFL());
-}
-
-void EvisionView::onClicked_FPP(bool value)
-{
-	m_entity->setFPP(value);
-}
-
-void EvisionView::onParamChanged_FPP()
-{
-	ui.checkBox_FPP->setChecked(m_entity->getFPP());
-}
-
-void EvisionView::onClicked_FAR(bool value)
-{
-	m_entity->setFAR(value);
-}
-
-void EvisionView::onParamChanged_FAR()
-{
-	ui.checkBox_FAR->setChecked(m_entity->getFAR());
-}
 
 void EvisionView::onClicked_Bouguet(bool value)
 {
@@ -590,13 +517,7 @@ void EvisionView::onTestAlltheParam()
 	qDebug() << "BoardWidth:  " << m_entity->getBoardWidth() << "\n"
 		<< "BoardHeight:  " << m_entity->getBoardHeight() << "\n"
 		<< "SquareSize:  " << m_entity->getSquareSize() << "\n"
-		<< "Alpha:  " << m_entity->getAlpha() << "\n"
-		<< "nBoards:  " << m_entity->getnBoards() << "\n"
-		<< "FI:  " << m_entity->getFI() << "\n"
-		<< "UIG:  " << m_entity->getUIG() << "\n"
-		<< "SFL:  " << m_entity->getSFL() << "\n"
-		<< "FPP:  " << m_entity->getFPP() << "\n"
-		<< "FAR:  " << m_entity->getFAR() << "\n"
+		<< "FPP:  " << m_entity->getshowRectified() << "\n"
 		<< "Bouguet:  " << m_entity->getBouguet() << "\n"
 		<< "Hartley:  " << m_entity->getHartley() << "\n"
 		<< "MinDisp:  " << m_entity->getMinDisp() << "\n"

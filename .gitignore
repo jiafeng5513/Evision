@@ -51,6 +51,8 @@
 *.scc
 *.VC.DB
 *.VC.db
+*.VC.db-shm
+*.VC.db-wal
 *.ipch
 *.opendb
 # Visual C++ cache files

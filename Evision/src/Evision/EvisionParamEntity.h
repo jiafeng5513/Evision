@@ -21,13 +21,7 @@ private:
 	int BoardHeight=0;
 	int SquareSize=0;
 	int Alpha=0;
-	int nBoards=0;
-
-	bool FI=false;
-	bool UIG = false;
-	bool SFL = false;
-	bool FPP = false;
-	bool FAR = false;
+	bool showRectified = false;
 	bool Bouguet = false;
 	bool Hartley = false;
 
@@ -62,13 +56,7 @@ signals:
 	void paramChanged_BoardWidth();
 	void paramChanged_BoardHeight();
 	void paramChanged_SquareSize();
-	void paramChanged_Alpha();
-	void paramChanged_nBoards();
-	void paramChanged_FI();
-	void paramChanged_UIG();
-	void paramChanged_SFL();
-	void paramChanged_FPP();
-	void paramChanged_FAR();
+	void paramChanged_showRectified();
 	void paramChanged_Bouguet();
 	void paramChanged_Hartley();
 
@@ -113,26 +101,8 @@ public:
 	int getSquareSize();
 	void setSquareSize(int value);
 
-	int getAlpha();
-	void setAlpha(int value);
-
-	int getnBoards();
-	void setnBoards(int value);
-
-	bool getFI();
-	void setFI(bool value);
-
-	bool getUIG();
-	void setUIG(bool value);
-
-	bool getSFL();
-	void setSFL(bool value);
-
-	bool getFPP();
-	void setFPP(bool value);
-
-	bool getFAR();
-	void setFAR(bool value);
+	bool getshowRectified();
+	void setshowRectified(bool value);
 
 	bool getBouguet();
 	void setBouguet(bool value);

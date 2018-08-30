@@ -33,21 +33,9 @@ public slots:
 	void onParamChanged_BoardHeight();
 	void onValueChanged_SquareSize(QString value);
 	void onParamChanged_SquareSize();
-	void onValueChanged_Alpha(QString value);
-	void onParamChanged_Alpha();
-	void onValueChanged_nBoards(QString value);
-	void onParamChanged_nBoards();
 	//标定标志位值更改事件
-	void onClicked_FI(bool value);
-	void onParamChanged_FI();
-	void onClicked_UIG(bool value);
-	void onParamChanged_UIG();
-	void onClicked_SFL(bool value);
-	void onParamChanged_SFL();
-	void onClicked_FPP(bool value);
-	void onParamChanged_FPP();
-	void onClicked_FAR(bool value);
-	void onParamChanged_FAR();
+	void onClicked_showRectified(bool value);
+	void onParamChanged_showRectified();
 	//标定算法
 	void onClicked_Bouguet(bool value);
 	void onParamChanged_Bouguet();

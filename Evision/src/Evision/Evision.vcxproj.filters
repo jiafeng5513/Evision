@@ -48,6 +48,9 @@
     <ClCompile Include="StereoCalibrate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="StereoMatch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="EvisionView.h">
@@ -60,6 +63,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="EvisionController.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="StereoMatch.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

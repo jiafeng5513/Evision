@@ -49,74 +49,14 @@ void EvisionParamEntity::setSquareSize(int value)
 	emit paramChanged_SquareSize();
 }
 
-int EvisionParamEntity::getAlpha()
+bool EvisionParamEntity::getshowRectified()
 {
-	return Alpha;
+	return showRectified;
 }
-void EvisionParamEntity::setAlpha(int value)
+void EvisionParamEntity::setshowRectified(bool value)
 {
-	Alpha = value;
-	emit paramChanged_Alpha();
-}
-
-int EvisionParamEntity::getnBoards()
-{
-	return nBoards;
-}
-void EvisionParamEntity::setnBoards(int value)
-{
-	nBoards = value;
-	emit paramChanged_nBoards();
-}
-
-bool EvisionParamEntity::getFI()
-{
-	return FI;
-}
-void EvisionParamEntity::setFI(bool value)
-{
-	FI = value;
-	emit paramChanged_FI();
-}
-
-bool EvisionParamEntity::getUIG()
-{
-	return UIG;
-}
-void EvisionParamEntity::setUIG(bool value)
-{
-	UIG = value;
-	emit paramChanged_UIG();
-}
-
-bool EvisionParamEntity::getSFL()
-{
-	return SFL;
-}
-void EvisionParamEntity::setSFL(bool value)
-{
-	SFL = value;
-	emit paramChanged_SFL();
-}
-
-bool EvisionParamEntity::getFPP()
-{
-	return FPP;
-}
-void EvisionParamEntity::setFPP(bool value)
-{
-	FPP = value;
-	emit paramChanged_FPP();
-}
-
-bool EvisionParamEntity::getFAR()
-{
-	return FAR;
-}
-void EvisionParamEntity::setFAR(bool value)
-{
-	FAR = value;
-	emit paramChanged_FAR();
+	showRectified = value;
+	emit paramChanged_showRectified();
 }
 
 bool EvisionParamEntity::getBouguet()

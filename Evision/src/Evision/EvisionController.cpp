@@ -24,20 +24,14 @@ void EvisionController::setDefaultCalibParamCommand()
 	m_entity->setBoardWidth(9);
 	m_entity->setBoardHeight(6);
 	m_entity->setSquareSize(25);
-	m_entity->setnBoards(20);
-	m_entity->setAlpha(-1);
-	m_entity->setFPP(true);
-	m_entity->setUIG(true);
-	m_entity->setFAR(true);
-	m_entity->setSFL(true);
-	m_entity->setFI(false);
+	m_entity->setshowRectified(false);
 	m_entity->setBouguet(true);
 }
 //命令:标定
 void EvisionController::CalibrateCommand()
 {
 	//1.验证参数
-	if (m_entity->getBoardWidth()*m_entity->getBoardHeight()*m_entity->getnBoards()*m_entity->getSquareSize()<=0)
+	if (m_entity->getBoardWidth()*m_entity->getBoardHeight()*m_entity->getSquareSize()<=0)
 	{
 		//未通过参数完整性验证
 		QMessageBox::information(NULL, QStringLiteral("错误"), QStringLiteral("参数有误!请检查!"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
@@ -82,7 +76,7 @@ void EvisionController::CalibrateCommand()
 				cv::Size * _size = new cv::Size();
 				_size->width = m_entity->getBoardWidth();
 				_size->height = m_entity->getBoardHeight();
-				StereoCalibrate * _stereoCalib = new StereoCalibrate(imagelistL, imagelistR, *_size,m_entity->getSquareSize(),true,true);
+				StereoCalibrate * _stereoCalib = new StereoCalibrate(imagelistL, imagelistR, *_size,m_entity->getSquareSize(),m_entity->getBouguet(),m_entity->getshowRectified());
 				connect(_stereoCalib,SIGNAL(openMessageBox(QString, QString)),this,SLOT(onOpenMessageBox(QString,QString)));
 				_stereoCalib->start();
 			}
