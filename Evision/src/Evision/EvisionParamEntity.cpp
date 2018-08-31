@@ -117,14 +117,14 @@ void EvisionParamEntity::setSpecwinsz(int value)
 	emit paramChanged_Specwinsz();
 }
 
-int EvisionParamEntity::getMaxDisp()
+int EvisionParamEntity::getNumDisparities()
 {
-	return MaxDisp;
+	return NumDisparities;
 }
-void EvisionParamEntity::setMaxDisp(int value)
+void EvisionParamEntity::setNumDisparities(int value)
 {
-	MaxDisp = value;
-	emit paramChanged_MaxDisp();
+	NumDisparities = value;
+	emit paramChanged_NumDisparities();
 }
 
 int EvisionParamEntity::getSpecrange()

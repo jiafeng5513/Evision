@@ -105,7 +105,7 @@ void EvisionController::setDefaultMatchParamCommand()
 		m_entity->setPrefilcap(31);
 		m_entity->setSadWinsz(51);
 		m_entity->setMinDisp(0);
-		m_entity->setMaxDisp(144);
+		m_entity->setNumDisparities(144);
 		m_entity->setUniradio(15);
 		m_entity->setSpecwinsz(100);
 		m_entity->setSpecrange(32);
@@ -117,7 +117,7 @@ void EvisionController::setDefaultMatchParamCommand()
 		m_entity->setMinDisp(0);
 		m_entity->setUniradio(10);
 		m_entity->setSpecwinsz(100);
-		m_entity->setMaxDisp(144);
+		m_entity->setNumDisparities(144);
 		m_entity->setSpecrange(32);
 		m_entity->setPrefilcap(63);
 		m_entity->setSadWinsz(25);
@@ -126,7 +126,7 @@ void EvisionController::setDefaultMatchParamCommand()
 	else if (m_entity->getMODE_HH())
 	{
 		m_entity->setMinDisp(-64);
-		m_entity->setMaxDisp(64);
+		m_entity->setNumDisparities(64);
 	}
 	else
 	{

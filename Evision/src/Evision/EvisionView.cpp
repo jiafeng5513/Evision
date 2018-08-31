@@ -39,7 +39,7 @@ EvisionView::EvisionView(QWidget *parent)
 	connect(m_entity, SIGNAL(paramChanged_MinDisp()), this, SLOT(onParamChanged_MinDisp()));
 	connect(m_entity, SIGNAL(paramChanged_Uniradio()), this, SLOT(onParamChanged_uniradio()));
 	connect(m_entity, SIGNAL(paramChanged_Specwinsz()), this, SLOT(onParamChanged_specwinsz()));
-	connect(m_entity, SIGNAL(paramChanged_MaxDisp()), this, SLOT(onParamChanged_MaxDisp()));
+	connect(m_entity, SIGNAL(paramChanged_NumDisparities()), this, SLOT(onParamChanged_MaxDisp()));
 	connect(m_entity, SIGNAL(paramChanged_Specrange()), this, SLOT(onParamChanged_Specrange()));
 	connect(m_entity, SIGNAL(paramChanged_Prefilcap()), this, SLOT(onParamChanged_Prefilcap()));
 	connect(m_entity, SIGNAL(paramChanged_SadWinsz()), this, SLOT(onParamChanged_SadWinSize()));
@@ -202,18 +202,18 @@ void EvisionView::onParamChanged_specwinsz()
 	ui.horizontalSlider_specwinsz->setValue(m_entity->getSpecwinsz());
 }
 
-void EvisionView::valueChanged_MaxDisp(int value)
+void EvisionView::valueChanged_NumDisparities(int value)
 {
-	ui.lineEdit_MaxDisp->setText(QString::fromStdString(std::to_string(value)));
-	if (m_entity->getMaxDisp()!=value)
+	ui.lineEdit_NumDisparities->setText(QString::fromStdString(std::to_string(value)));
+	if (m_entity->getNumDisparities()!=value)
 	{
-		m_entity->setMaxDisp(value);
+		m_entity->setNumDisparities(value);
 	}
 }
 
-void EvisionView::onParamChanged_MaxDisp()
+void EvisionView::onParamChanged_NumDisparities()
 {
-	ui.horizontalSlider_MaxDisp->setValue(m_entity->getMaxDisp());
+	ui.horizontalSlider_NumDisparities->setValue(m_entity->getNumDisparities());
 }
 
 void EvisionView::valueChanged_Specrange(int value)
@@ -417,7 +417,7 @@ void EvisionView::onTestAlltheParam()
 		<< "MinDisp:  " << m_entity->getMinDisp() << "\n"
 		<< "Uniradio:  " << m_entity->getUniradio() << "\n"
 		<< "Specwinsz:  " << m_entity->getSpecwinsz() << "\n"
-		<< "MaxDisp:  " << m_entity->getMaxDisp() << "\n"
+		<< "MaxDisp:  " << m_entity->getNumDisparities() << "\n"
 		<< "Specrange:  " << m_entity->getSpecrange() << "\n"
 		<< "Prefilcap:  " << m_entity->getPrefilcap() << "\n"
 		<< "SadWinsz:  " << m_entity->getSadWinsz() << "\n"

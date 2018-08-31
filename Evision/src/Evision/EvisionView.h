@@ -48,8 +48,8 @@ public slots:
 	void onParamChanged_uniradio();
 	void valueChanged_specwinsz(int value);
 	void onParamChanged_specwinsz();
-	void valueChanged_MaxDisp(int value);
-	void onParamChanged_MaxDisp();
+	void valueChanged_NumDisparities(int value);
+	void onParamChanged_NumDisparities();
 	void valueChanged_Specrange(int value);
 	void onParamChanged_Specrange();
 	void valueChanged_Prefilcap(int value);

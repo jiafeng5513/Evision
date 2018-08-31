@@ -824,7 +824,7 @@
       <string>0</string>
      </property>
     </widget>
-    <widget class="QSlider" name="horizontalSlider_MaxDisp">
+    <widget class="QSlider" name="horizontalSlider_NumDisparities">
      <property name="geometry">
       <rect>
        <x>380</x>
@@ -858,7 +858,7 @@
       <enum>Qt::Horizontal</enum>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit_MaxDisp">
+    <widget class="QLineEdit" name="lineEdit_NumDisparities">
      <property name="geometry">
       <rect>
        <x>340</x>
@@ -1424,10 +1424,10 @@
    </hints>
   </connection>
   <connection>
-   <sender>horizontalSlider_MaxDisp</sender>
+   <sender>horizontalSlider_NumDisparities</sender>
    <signal>valueChanged(int)</signal>
    <receiver>EvisionClass</receiver>
-   <slot>valueChanged_MaxDisp(int)</slot>
+   <slot>paramChanged_NumDisparities(int)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>774</x>
@@ -1638,7 +1638,7 @@
   <slot>valueChanged_MinDisp(int)</slot>
   <slot>valueChanged_uniradio(int)</slot>
   <slot>valueChanged_specwinsz(int)</slot>
-  <slot>valueChanged_MaxDisp(int)</slot>
+  <slot>paramChanged_NumDisparities(int)</slot>
   <slot>valueChanged_Specrange(int)</slot>
   <slot>valueChanged_Prefilcap(int)</slot>
   <slot>valueChanged_SadWinSize(int)</slot>

@@ -30,8 +30,7 @@ private:
 	std::string disparity_filename = "";
 	std::string point_cloud_filename = "";
 	int alg = STEREO_SGBM;
-	int SADWindowSize=51; 
-	int numberOfDisparities=144;
+
 	float scale=1.0;
 	bool no_display=false;
 signals:

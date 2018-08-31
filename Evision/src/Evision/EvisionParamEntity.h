@@ -31,7 +31,7 @@ private:
 	int SadWinsz = 0;//
 	int MinDisp = 0;//
 	int TextThread = 0;//
-	int MaxDisp = 0;//¸Ä³ÉnumDisparities	
+	int NumDisparities = 0;// numDisparities	
 	int Specrange = 0;//	
 	int Maxdifdisp12 = 0;//	
 	
@@ -60,7 +60,7 @@ signals:
 	void paramChanged_MinDisp();
 	void paramChanged_Uniradio();
 	void paramChanged_Specwinsz();
-	void paramChanged_MaxDisp();
+	void paramChanged_NumDisparities();
 	void paramChanged_Specrange();
 	void paramChanged_Prefilcap();
 	void paramChanged_SadWinsz();
@@ -120,8 +120,8 @@ public:
 	int getSpecwinsz();
 	void setSpecwinsz(int value);
 
-	int getMaxDisp();
-	void setMaxDisp(int value);
+	int getNumDisparities();
+	void setNumDisparities(int value);
 
 	int getSpecrange();
 	void setSpecrange(int value);

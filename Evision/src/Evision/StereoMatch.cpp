@@ -104,39 +104,36 @@ void StereoMatch::run()
 		img2 = img2r;
 	}
 
-	numberOfDisparities = numberOfDisparities > 0 ? numberOfDisparities : ((img_size.width / 8) + 15) & -16;
+	//numberOfDisparities = numberOfDisparities > 0 ? numberOfDisparities : ((img_size.width / 8) + 15) & -16;
 
 	bm->setROI1(roi1);
 	bm->setROI2(roi2);
-	bm->setPreFilterCap(31);
-	bm->setBlockSize(SADWindowSize > 0 ? SADWindowSize : 9);
-	bm->setMinDisparity(0);
-	bm->setNumDisparities(numberOfDisparities);
-	bm->setTextureThreshold(10);
-	bm->setUniquenessRatio(15);
-	bm->setSpeckleWindowSize(100);
-	bm->setSpeckleRange(32);
-	bm->setDisp12MaxDiff(1);
+	bm->setPreFilterCap(m_entity->getPrefilcap());
+	bm->setBlockSize(m_entity->getSadWinsz());
+	bm->setMinDisparity(m_entity->getMinDisp());
+	bm->setNumDisparities(m_entity->getNumDisparities());
+	bm->setTextureThreshold(m_entity->getTextThread());
+	bm->setUniquenessRatio(m_entity->getUniradio());
+	bm->setSpeckleWindowSize(m_entity->getSpecwinsz());
+	bm->setSpeckleRange(m_entity->getSpecrange());
+	bm->setDisp12MaxDiff(m_entity->getMaxdifdisp12());
 
-	sgbm->setPreFilterCap(63);
-	int sgbmWinSize = SADWindowSize > 0 ? SADWindowSize : 3;
-	sgbm->setBlockSize(sgbmWinSize);
-
+	sgbm->setPreFilterCap(m_entity->getPrefilcap());
+	sgbm->setBlockSize(m_entity->getSadWinsz());
 	int cn = img1.channels();
-
-	sgbm->setP1(8 * cn*sgbmWinSize*sgbmWinSize);
-	sgbm->setP2(32 * cn*sgbmWinSize*sgbmWinSize);
-	sgbm->setMinDisparity(0);
-	sgbm->setNumDisparities(numberOfDisparities);
-	sgbm->setUniquenessRatio(10);
-	sgbm->setSpeckleWindowSize(100);
-	sgbm->setSpeckleRange(32);
-	sgbm->setDisp12MaxDiff(1);
-	if (alg == STEREO_HH)
+	sgbm->setP1(8 * cn*m_entity->getSadWinsz()*m_entity->getSadWinsz());
+	sgbm->setP2(32 * cn*m_entity->getSadWinsz()*m_entity->getSadWinsz());
+	sgbm->setMinDisparity(m_entity->getMinDisp());
+	sgbm->setNumDisparities(m_entity->getNumDisparities());
+	sgbm->setUniquenessRatio(m_entity->getUniradio());
+	sgbm->setSpeckleWindowSize(m_entity->getSpecwinsz());
+	sgbm->setSpeckleRange(m_entity->getSpecrange());
+	sgbm->setDisp12MaxDiff(m_entity->getMaxdifdisp12());
+	if (m_entity->getMODE_HH())
 		sgbm->setMode(cv::StereoSGBM::MODE_HH);
-	else if (alg == STEREO_SGBM)
+	else if (m_entity->getMODE_SGBM())
 		sgbm->setMode(cv::StereoSGBM::MODE_SGBM);
-	else if (alg == STEREO_3WAY)
+	else if (m_entity->getMODE_3WAY())
 		sgbm->setMode(cv::StereoSGBM::MODE_SGBM_3WAY);
 
 	cv::Mat disp, disp8;
@@ -145,9 +142,9 @@ void StereoMatch::run()
 	//copyMakeBorder(img2, img2p, 0, 0, numberOfDisparities, 0, IPL_BORDER_REPLICATE);
 
 	int64 t = cv::getTickCount();
-	if (alg == STEREO_BM)
+	if (m_entity->getBM())
 		bm->compute(img1, img2, disp);
-	else if (alg == STEREO_SGBM || alg == STEREO_HH || alg == STEREO_3WAY)
+	else if (m_entity->getSGBM())
 		sgbm->compute(img1, img2, disp);
 	t = cv::getTickCount() - t;
 	char buff[128];
@@ -155,15 +152,13 @@ void StereoMatch::run()
 	m_entity->setStatusBarText(QString::fromStdString(buff));
 
 	//disp = dispp.colRange(numberOfDisparities, img1p.cols);
-	if (alg != STEREO_VAR)
-		disp.convertTo(disp8, CV_8U, 255 / (numberOfDisparities*16.));
-	else
-		disp.convertTo(disp8, CV_8U);
-
+	
+	disp.convertTo(disp8, CV_8U, 255 / (m_entity->getNumDisparities()*16.));
+	
 	m_entity->setImageLtoShow(img1);
 	m_entity->setImageRtoShow(img2);
 	m_entity->setImageDtoShow(disp8);
-
+	//d
 
 	if (!disparity_filename.empty())
 		imwrite(disparity_filename, disp8);
