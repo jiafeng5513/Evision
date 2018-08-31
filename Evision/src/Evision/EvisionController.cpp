@@ -128,12 +128,6 @@ void EvisionController::setDefaultMatchParamCommand()
 	{
 		m_entity->setMinDisp(-64);
 		m_entity->setMaxDisp(64);
-		m_entity->setLevels(1);
-		m_entity->setPyrScale(0.1);
-		m_entity->setPolyN(5);
-		m_entity->setPolySigma(52.6);
-		m_entity->setFi(90);
-		m_entity->setLambda(0.82);
 	}
 	else
 	{

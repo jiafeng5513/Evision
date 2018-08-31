@@ -45,12 +45,6 @@ EvisionView::EvisionView(QWidget *parent)
 	connect(m_entity, SIGNAL(paramChanged_SadWinsz()), this, SLOT(onParamChanged_SadWinSize()));
 	connect(m_entity, SIGNAL(paramChanged_TextThread()), this, SLOT(onParamChanged_TextThread()));
 	connect(m_entity, SIGNAL(paramChanged_Maxdifdisp12()), this, SLOT(onParamChanged_MaxDifdisp2()));
-	connect(m_entity, SIGNAL(paramChanged_Levels()), this, SLOT(onParamChanged_Levels()));
-	connect(m_entity, SIGNAL(paramChanged_pyrScale()), this, SLOT(onParamChanged_PyrScale()));
-	connect(m_entity, SIGNAL(paramChanged_PolyN()), this, SLOT(onParamChanged_PolyN()));
-	connect(m_entity, SIGNAL(paramChanged_PolySigma()), this, SLOT(onParamChanged_PolySigma()));
-	connect(m_entity, SIGNAL(paramChanged_Fi()), this, SLOT(onParamChanged_Fi()));
-	connect(m_entity, SIGNAL(paramChanged_Lambda()), this, SLOT(onParamChanged_Lambda()));
 	connect(m_entity, SIGNAL(paramChanged_BM()), this, SLOT(onParamChanged_BM()));
 	connect(m_entity, SIGNAL(paramChanged_SGBM()), this, SLOT(onParamChanged_SGBM()));
 	connect(m_entity, SIGNAL(paramChanged_VAR()), this, SLOT(onParamChanged_VAR()));
@@ -292,99 +286,6 @@ void EvisionView::onParamChanged_MaxDifdisp2()
 	ui.horizontalSlider_maxdifdisp12->setValue(m_entity->getMaxdifdisp12());
 }
 
-void EvisionView::valueChanged_Levels(int value)
-{
-	ui.lineEdit_Levels->setText(QString::fromStdString(std::to_string(value)));
-	if (m_entity->getLevels()!=value)
-	{
-		m_entity->setLevels(value);
-	}
-}
-
-void EvisionView::onParamChanged_Levels()
-{
-	ui.horizontalSlider_Levels->setValue(m_entity->getLevels());
-}
-
-void EvisionView::valueChanged_PyrScale(int value)
-{
-	char s[100];
-	sprintf(s, "%.1f", value / 10.00f);
-	ui.lineEdit_pyrScale->setText(QString::fromStdString(s));
-	if (!IsAlmostEqual(m_entity->getPyrScale(),value / 10.00f))
-	{
-		m_entity->setPyrScale(value / 10.00f);
-	}
-}
-
-void EvisionView::onParamChanged_PyrScale()
-{
-	ui.horizontalSlider_pyrScale->setValue(int(m_entity->getPyrScale()*10.00f));
-}
-
-void EvisionView::valueChanged_PolyN(int value)
-{
-	ui.lineEdit_PolyN->setText(QString::fromStdString(std::to_string(value)));
-	if (m_entity->getPolyN()!=value)
-	{
-		m_entity->setPolyN(value);
-	}
-}
-
-void EvisionView::onParamChanged_PolyN()
-{
-	ui.horizontalSlider_PolyN->setValue(m_entity->getPolyN());
-}
-
-void EvisionView::valueChanged_PolySigma(int value)
-{
-	char s[100];
-	sprintf(s, "%.1f", value / 10.00f);
-	ui.lineEdit_PolySigma->setText(QString::fromStdString(s));
-
-	if (!IsAlmostEqual(m_entity->getPolySigma(),value /10.00f))
-	{
-		m_entity->setPolySigma(value / 10.00f);
-	}
-}
-
-void EvisionView::onParamChanged_PolySigma()
-{
-	ui.horizontalSlider_PolySigma->setValue(int(m_entity->getPolySigma()*10));
-}
-
-void EvisionView::valueChanged_Fi(int value)
-{
-	char s[100];
-	sprintf(s, "%.1f", value / 10.00f);
-	ui.lineEdit_Fi->setText(QString::fromStdString(s));
-	if (!IsAlmostEqual(m_entity->getFi(),value / 10.00f))
-	{
-		m_entity->setFi(value / 10.00f);
-	}
-}
-
-void EvisionView::onParamChanged_Fi()
-{
-	ui.horizontalSlider_Fi->setValue(int(m_entity->getFi()*10.0f));
-}
-
-void EvisionView::valueChanged_Lambda(int value)
-{
-	char s[100];
-	sprintf(s, "%.2f", value / 100.00f);
-	ui.lineEdit_Lambda->setText(QString::fromStdString(s));
-	if (!IsAlmostEqual(m_entity->getLambda(),value / 100.00f))
-	{
-		m_entity->setLambda(value / 100.00f);
-	}
-}
-
-void EvisionView::onParamChanged_Lambda()
-{
-	ui.horizontalSlider_Lambda->setValue(int(m_entity->getLambda()*100.0f));
-}
-
 void EvisionView::onClicked_BM(bool value)
 {
 	if (m_entity->getBM()!=value)
@@ -400,12 +301,7 @@ void EvisionView::onClicked_BM(bool value)
 	ui.horizontalSlider_SadWinSiz->setEnabled(true);
 	ui.horizontalSlider_textThread->setEnabled(true);
 	ui.horizontalSlider_maxdifdisp12->setEnabled(true);
-	ui.horizontalSlider_Levels->setEnabled(false);
-	ui.horizontalSlider_pyrScale->setEnabled(false);
-	ui.horizontalSlider_PolyN->setEnabled(false);
-	ui.horizontalSlider_PolySigma->setEnabled(false);
-	ui.horizontalSlider_Fi->setEnabled(false);
-	ui.horizontalSlider_Lambda->setEnabled(false);
+
 }
 
 void EvisionView::onParamChanged_BM()
@@ -428,12 +324,6 @@ void EvisionView::onClicked_SGBM(bool value)
 	ui.horizontalSlider_SadWinSiz->setEnabled(true);
 	ui.horizontalSlider_textThread->setEnabled(false);
 	ui.horizontalSlider_maxdifdisp12->setEnabled(true);
-	ui.horizontalSlider_Levels->setEnabled(false);
-	ui.horizontalSlider_pyrScale->setEnabled(false);
-	ui.horizontalSlider_PolyN->setEnabled(false);
-	ui.horizontalSlider_PolySigma->setEnabled(false);
-	ui.horizontalSlider_Fi->setEnabled(false);
-	ui.horizontalSlider_Lambda->setEnabled(false);
 }
 
 void EvisionView::onParamChanged_SGBM()
@@ -456,12 +346,7 @@ void EvisionView::onClicked_VAR(bool value)
 	ui.horizontalSlider_SadWinSiz->setEnabled(false);
 	ui.horizontalSlider_textThread->setEnabled(false);
 	ui.horizontalSlider_maxdifdisp12->setEnabled(false);
-	ui.horizontalSlider_Levels->setEnabled(true);
-	ui.horizontalSlider_pyrScale->setEnabled(true);
-	ui.horizontalSlider_PolyN->setEnabled(true);
-	ui.horizontalSlider_PolySigma->setEnabled(true);
-	ui.horizontalSlider_Fi->setEnabled(true);
-	ui.horizontalSlider_Lambda->setEnabled(true);
+
 }
 
 void EvisionView::onParamChanged_VAR()
@@ -537,12 +422,6 @@ void EvisionView::onTestAlltheParam()
 		<< "SadWinsz:  " << m_entity->getSadWinsz() << "\n"
 		<< "TextThread:  " << m_entity->getTextThread() << "\n"
 		<< "Maxdifdisp12:  " << m_entity->getMaxdifdisp12() << "\n"
-		<< "Levels:  " << m_entity->getLevels() << "\n"
-		<< "PyrScale:  " << m_entity->getPyrScale() << "\n"
-		<< "PolyN:  " << m_entity->getPolyN() << "\n"
-		<< "PolySigma:  " << m_entity->getPolySigma() << "\n"
-		<< "Fi:  " << m_entity->getFi() << "\n"
-		<< "Lambda:  " << m_entity->getLambda() << "\n"
 		<< "BM:  " << m_entity->getBM() << "\n"
 		<< "SGBM:  " << m_entity->getSGBM() << "\n"
 		<< "VAR:  " << m_entity->getVAR() << "\n"

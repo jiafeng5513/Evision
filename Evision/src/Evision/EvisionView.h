@@ -60,18 +60,7 @@ public slots:
 	void onParamChanged_TextThread();
 	void valueChanged_MaxDifdisp2(int value);
 	void onParamChanged_MaxDifdisp2();
-	void valueChanged_Levels(int value);
-	void onParamChanged_Levels();
-	void valueChanged_PyrScale(int value);
-	void onParamChanged_PyrScale();
-	void valueChanged_PolyN(int value);
-	void onParamChanged_PolyN();
-	void valueChanged_PolySigma(int value);
-	void onParamChanged_PolySigma();
-	void valueChanged_Fi(int value);
-	void onParamChanged_Fi();
-	void valueChanged_Lambda(int value);
-	void onParamChanged_Lambda();
+
 	//∆•≈‰À„∑®
 	void onClicked_BM(bool value);
 	void onParamChanged_BM();

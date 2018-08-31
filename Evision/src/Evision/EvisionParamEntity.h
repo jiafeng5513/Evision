@@ -25,22 +25,16 @@ private:
 	bool Bouguet = false;
 	bool Hartley = false;
 
-	int MinDisp = 0;
-	int Uniradio = 0;
-	int Specwinsz = 0;
-	int MaxDisp = 0;
-	int Specrange = 0;
-	int Prefilcap = 0;
-	int SadWinsz = 0;
-	int TextThread = 0;
-	int Maxdifdisp12 = 0;
-	int Levels = 0;
-	float PyrScale = 0;
-	int PolyN = 0;
-	float PolySigma = 0;
-	float Fi = 0;
-	float Lambda = 0;
-
+	int Uniradio = 0;//
+	int Prefilcap = 0;//
+	int Specwinsz = 0;//
+	int SadWinsz = 0;//
+	int MinDisp = 0;//
+	int TextThread = 0;//
+	int MaxDisp = 0;//¸Ä³ÉnumDisparities	
+	int Specrange = 0;//	
+	int Maxdifdisp12 = 0;//	
+	
 	bool BM = false;
 	bool SGBM = false;
 	bool VAR = false;
@@ -137,24 +131,6 @@ public:
 
 	int getMaxdifdisp12();
 	void setMaxdifdisp12(int value);
-
-	int getLevels();
-	void setLevels(int value);
-
-	float getPyrScale();
-	void setPyrScale(float value);
-
-	int getPolyN();
-	void setPolyN(int value);
-
-	float getPolySigma();
-	void setPolySigma(float value);
-
-	float getFi();
-	void setFi(float value);
-
-	float getLambda();
-	void setLambda(float value);
 
 	bool getBM();
 	void setBM(bool value);

@@ -177,66 +177,6 @@ void EvisionParamEntity::setMaxdifdisp12(int value)
 	emit paramChanged_Maxdifdisp12();
 }
 
-int EvisionParamEntity::getLevels()
-{
-	return Levels;
-}
-void EvisionParamEntity::setLevels(int value)
-{
-	Levels = value;
-	paramChanged_Levels();
-}
-
-float EvisionParamEntity::getPyrScale()
-{
-	return PyrScale;
-}
-void EvisionParamEntity::setPyrScale(float value)
-{
-	PyrScale = value;
-	emit paramChanged_pyrScale();
-}
-
-int EvisionParamEntity::getPolyN()
-{
-	return PolyN;
-}
-void EvisionParamEntity::setPolyN(int value)
-{
-	PolyN = value;
-	emit paramChanged_PolyN();
-}
-
-float EvisionParamEntity::getPolySigma()
-{
-	return PolySigma;
-}
-void EvisionParamEntity::setPolySigma(float value)
-{
-	PolySigma = value;
-	emit paramChanged_PolySigma();
-}
-
-float EvisionParamEntity::getFi()
-{
-	return Fi;
-}
-void EvisionParamEntity::setFi(float value)
-{
-	Fi = value;
-	emit paramChanged_Fi();
-}
-
-float EvisionParamEntity::getLambda()
-{
-	return Lambda;
-}
-void EvisionParamEntity::setLambda(float value)
-{
-	Lambda = value;
-	emit paramChanged_Lambda();
-}
-
 bool EvisionParamEntity::getBM()
 {
 	return BM;
