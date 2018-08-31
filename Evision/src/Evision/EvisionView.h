@@ -66,8 +66,13 @@ public slots:
 	void onParamChanged_BM();
 	void onClicked_SGBM(bool value);
 	void onParamChanged_SGBM();
-	void onClicked_VAR(bool value);
-	void onParamChanged_VAR();
+	//SGBM_MODE
+	void onClicked_MODE_HH(bool value);
+	void onParamChanged_MODE_HH();
+	void onClicked_MODE_SGBM(bool value);
+	void onParamChanged_MODE_SGBM();
+	void onClicked_MODE_3WAY(bool value);
+	void onParamChanged_MODE_3WAY();
 
 	void onParamChanged_Distance();
 	//更新左视图和右视图

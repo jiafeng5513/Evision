@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1000</width>
-    <height>636</height>
+    <height>630</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,13 +19,13 @@
   <property name="minimumSize">
    <size>
     <width>1000</width>
-    <height>590</height>
+    <height>630</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>16777215</width>
-    <height>16777215</height>
+    <width>1000</width>
+    <height>630</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -171,7 +171,7 @@
      <item row="3" column="2">
       <widget class="QCheckBox" name="checkBox_showRectified">
        <property name="text">
-        <string>显示矫正结果</string>
+        <string>显示矫正结果(By OpenCV NamedWindow)</string>
        </property>
       </widget>
      </item>
@@ -397,7 +397,7 @@
      <property name="title">
       <string>MODE</string>
      </property>
-     <widget class="QRadioButton" name="radioButton_VAR_4">
+     <widget class="QRadioButton" name="radioButton_MODE_SGBM">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -410,7 +410,7 @@
        <string>SGBM</string>
       </property>
      </widget>
-     <widget class="QRadioButton" name="radioButton_VAR_3">
+     <widget class="QRadioButton" name="radioButton_MODE_3WAY">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -423,7 +423,7 @@
        <string>3WAY</string>
       </property>
      </widget>
-     <widget class="QRadioButton" name="radioButton_VAR">
+     <widget class="QRadioButton" name="radioButton_MODE_HH">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -1190,8 +1190,8 @@
    <slot>setDefaultCalibParam()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>283</x>
-     <y>505</y>
+     <x>293</x>
+     <y>561</y>
     </hint>
     <hint type="destinationlabel">
      <x>283</x>
@@ -1206,8 +1206,8 @@
    <slot>doCalib()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>252</x>
-     <y>534</y>
+     <x>262</x>
+     <y>592</y>
     </hint>
     <hint type="destinationlabel">
      <x>253</x>
@@ -1222,8 +1222,8 @@
    <slot>setDefaultMatchParam()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>925</x>
-     <y>330</y>
+     <x>861</x>
+     <y>477</y>
     </hint>
     <hint type="destinationlabel">
      <x>990</x>
@@ -1238,8 +1238,8 @@
    <slot>doMatch()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>936</x>
-     <y>370</y>
+     <x>971</x>
+     <y>477</y>
     </hint>
     <hint type="destinationlabel">
      <x>989</x>
@@ -1254,8 +1254,8 @@
    <slot>getDistance()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>947</x>
-     <y>466</y>
+     <x>967</x>
+     <y>529</y>
     </hint>
     <hint type="destinationlabel">
      <x>993</x>
@@ -1270,8 +1270,8 @@
    <slot>getGap()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>947</x>
-     <y>499</y>
+     <x>967</x>
+     <y>558</y>
     </hint>
     <hint type="destinationlabel">
      <x>991</x>
@@ -1302,8 +1302,8 @@
    <slot>onValueChanged_BoardHeight(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>206</x>
-     <y>333</y>
+     <x>264</x>
+     <y>376</y>
     </hint>
     <hint type="destinationlabel">
      <x>3</x>
@@ -1318,8 +1318,8 @@
    <slot>onValueChanged_SquareSize(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>109</x>
-     <y>383</y>
+     <x>167</x>
+     <y>409</y>
     </hint>
     <hint type="destinationlabel">
      <x>4</x>
@@ -1334,8 +1334,8 @@
    <slot>onClicked_FPP(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>293</x>
-     <y>379</y>
+     <x>320</x>
+     <y>438</y>
     </hint>
     <hint type="destinationlabel">
      <x>334</x>
@@ -1350,8 +1350,8 @@
    <slot>onClicked_Bouguet(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>37</x>
-     <y>503</y>
+     <x>95</x>
+     <y>496</y>
     </hint>
     <hint type="destinationlabel">
      <x>3</x>
@@ -1366,8 +1366,8 @@
    <slot>onClicked_Hartley(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>71</x>
-     <y>536</y>
+     <x>129</x>
+     <y>467</y>
     </hint>
     <hint type="destinationlabel">
      <x>18</x>
@@ -1382,8 +1382,8 @@
    <slot>valueChanged_MinDisp(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>429</x>
-     <y>347</y>
+     <x>489</x>
+     <y>554</y>
     </hint>
     <hint type="destinationlabel">
      <x>436</x>
@@ -1414,8 +1414,8 @@
    <slot>valueChanged_specwinsz(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>671</x>
-     <y>344</y>
+     <x>630</x>
+     <y>454</y>
     </hint>
     <hint type="destinationlabel">
      <x>783</x>
@@ -1430,8 +1430,8 @@
    <slot>valueChanged_MaxDisp(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>394</x>
-     <y>395</y>
+     <x>774</x>
+     <y>354</y>
     </hint>
     <hint type="destinationlabel">
      <x>336</x>
@@ -1446,7 +1446,7 @@
    <slot>valueChanged_Specrange(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>496</x>
+     <x>876</x>
      <y>394</y>
     </hint>
     <hint type="destinationlabel">
@@ -1462,8 +1462,8 @@
    <slot>valueChanged_Prefilcap(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>631</x>
-     <y>400</y>
+     <x>630</x>
+     <y>404</y>
     </hint>
     <hint type="destinationlabel">
      <x>744</x>
@@ -1478,8 +1478,8 @@
    <slot>valueChanged_SadWinSize(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>378</x>
-     <y>445</y>
+     <x>438</x>
+     <y>504</y>
     </hint>
     <hint type="destinationlabel">
      <x>334</x>
@@ -1494,8 +1494,8 @@
    <slot>valueChanged_TextThread(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>521</x>
-     <y>446</y>
+     <x>581</x>
+     <y>594</y>
     </hint>
     <hint type="destinationlabel">
      <x>335</x>
@@ -1510,8 +1510,8 @@
    <slot>valueChanged_MaxDifdisp2(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>646</x>
-     <y>445</y>
+     <x>970</x>
+     <y>444</y>
     </hint>
     <hint type="destinationlabel">
      <x>746</x>
@@ -1526,8 +1526,8 @@
    <slot>onClicked_BM(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>796</x>
-     <y>338</y>
+     <x>736</x>
+     <y>490</y>
     </hint>
     <hint type="destinationlabel">
      <x>995</x>
@@ -1542,8 +1542,8 @@
    <slot>onClicked_SGBM(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>776</x>
-     <y>364</y>
+     <x>716</x>
+     <y>510</y>
     </hint>
     <hint type="destinationlabel">
      <x>996</x>
@@ -1552,14 +1552,14 @@
    </hints>
   </connection>
   <connection>
-   <sender>radioButton_VAR</sender>
+   <sender>radioButton_MODE_HH</sender>
    <signal>clicked(bool)</signal>
    <receiver>EvisionClass</receiver>
-   <slot>onClicked_VAR(bool)</slot>
+   <slot>onClicked_MODE_HH(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>824</x>
-     <y>403</y>
+     <x>740</x>
+     <y>550</y>
     </hint>
     <hint type="destinationlabel">
      <x>995</x>
@@ -1580,6 +1580,38 @@
     <hint type="destinationlabel">
      <x>499</x>
      <y>294</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_MODE_SGBM</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>onClicked_MODE_SGBM(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>710</x>
+     <y>559</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>996</x>
+     <y>553</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_MODE_3WAY</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>onClicked_MODE_3WAY(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>728</x>
+     <y>584</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>996</x>
+     <y>597</y>
     </hint>
    </hints>
   </connection>
@@ -1612,15 +1644,11 @@
   <slot>valueChanged_SadWinSize(int)</slot>
   <slot>valueChanged_TextThread(int)</slot>
   <slot>valueChanged_MaxDifdisp2(int)</slot>
-  <slot>valueChanged_Levels(int)</slot>
-  <slot>valueChanged_PyrScale(int)</slot>
-  <slot>valueChanged_PolyN(int)</slot>
-  <slot>valueChanged_PolySigma(int)</slot>
-  <slot>valueChanged_Fi(int)</slot>
-  <slot>valueChanged_Lambda(int)</slot>
   <slot>onClicked_BM(bool)</slot>
   <slot>onClicked_SGBM(bool)</slot>
-  <slot>onClicked_VAR(bool)</slot>
+  <slot>onClicked_MODE_HH(bool)</slot>
   <slot>onTestAlltheParam()</slot>
+  <slot>onClicked_MODE_SGBM(bool)</slot>
+  <slot>onClicked_MODE_3WAY(bool)</slot>
  </slots>
 </ui>

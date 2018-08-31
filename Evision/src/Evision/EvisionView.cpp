@@ -47,7 +47,7 @@ EvisionView::EvisionView(QWidget *parent)
 	connect(m_entity, SIGNAL(paramChanged_Maxdifdisp12()), this, SLOT(onParamChanged_MaxDifdisp2()));
 	connect(m_entity, SIGNAL(paramChanged_BM()), this, SLOT(onParamChanged_BM()));
 	connect(m_entity, SIGNAL(paramChanged_SGBM()), this, SLOT(onParamChanged_SGBM()));
-	connect(m_entity, SIGNAL(paramChanged_VAR()), this, SLOT(onParamChanged_VAR()));
+	connect(m_entity, SIGNAL(paramChanged_MODE_HH()), this, SLOT(onParamChanged_MODE_HH()));
 	connect(m_entity, SIGNAL(paramChanged_distance()), this, SLOT(onParamChanged_Distance()));
 
 	connect(m_entity, SIGNAL(paramChanged_ImageLtoShow()), this, SLOT(onParamChanged_imgLtoShow())/*, Qt::QueuedConnection*/);
@@ -292,18 +292,12 @@ void EvisionView::onClicked_BM(bool value)
 	{
 		m_entity->setBM(value);
 	}
-	ui.horizontalSlider_MinDisp->setEnabled(true);
-	ui.horizontalSlider_uniradio->setEnabled(true);
-	ui.horizontalSlider_specwinsz->setEnabled(true);
-	ui.horizontalSlider_MaxDisp->setEnabled(true);
-	ui.horizontalSlider_specrange->setEnabled(true);
-	ui.horizontalSlider_prefilcap->setEnabled(true);
-	ui.horizontalSlider_SadWinSiz->setEnabled(true);
 	ui.horizontalSlider_textThread->setEnabled(true);
-	ui.horizontalSlider_maxdifdisp12->setEnabled(true);
+	ui.radioButton_MODE_HH->setEnabled(false);
+	ui.radioButton_MODE_SGBM->setEnabled(false);
+	ui.radioButton_MODE_3WAY->setEnabled(false);
 
 }
-
 void EvisionView::onParamChanged_BM()
 {
 	ui.radioButton_BM->setChecked(m_entity->getBM());
@@ -315,49 +309,58 @@ void EvisionView::onClicked_SGBM(bool value)
 	{
 		m_entity->setSGBM(value);
 	}
-	ui.horizontalSlider_MinDisp->setEnabled(true);
-	ui.horizontalSlider_uniradio->setEnabled(true);
-	ui.horizontalSlider_specwinsz->setEnabled(true);
-	ui.horizontalSlider_MaxDisp->setEnabled(true);
-	ui.horizontalSlider_specrange->setEnabled(true);
-	ui.horizontalSlider_prefilcap->setEnabled(true);
-	ui.horizontalSlider_SadWinSiz->setEnabled(true);
-	ui.horizontalSlider_textThread->setEnabled(false);
-	ui.horizontalSlider_maxdifdisp12->setEnabled(true);
-}
 
+	ui.horizontalSlider_textThread->setEnabled(false);
+	ui.radioButton_MODE_HH->setEnabled(true);
+	ui.radioButton_MODE_SGBM->setEnabled(true);
+	ui.radioButton_MODE_3WAY->setEnabled(true);
+}
 void EvisionView::onParamChanged_SGBM()
 {
 	ui.radioButton_SGBM->setChecked(m_entity->getSGBM());
 }
 
-void EvisionView::onClicked_VAR(bool value)
+void EvisionView::onClicked_MODE_HH(bool value)
 {
-	if (m_entity->getVAR()!=value)
+	if (m_entity->getMODE_HH()!=value)
 	{
-		m_entity->setVAR(value);
+		m_entity->setMODE_HH(value);
 	}
-	ui.horizontalSlider_MinDisp->setEnabled(true);
-	ui.horizontalSlider_uniradio->setEnabled(false);
-	ui.horizontalSlider_specwinsz->setEnabled(false);
-	ui.horizontalSlider_MaxDisp->setEnabled(true);
-	ui.horizontalSlider_specrange->setEnabled(false);
-	ui.horizontalSlider_prefilcap->setEnabled(false);
-	ui.horizontalSlider_SadWinSiz->setEnabled(false);
-	ui.horizontalSlider_textThread->setEnabled(false);
-	ui.horizontalSlider_maxdifdisp12->setEnabled(false);
-
+}
+void EvisionView::onParamChanged_MODE_HH()
+{
+	ui.radioButton_MODE_HH->setChecked(m_entity->getMODE_HH());
 }
 
-void EvisionView::onParamChanged_VAR()
+void EvisionView::onClicked_MODE_SGBM(bool value)
 {
-	ui.radioButton_VAR->setChecked(m_entity->getVAR());
+	if (m_entity->getMODE_SGBM() != value)
+	{
+		m_entity->setMODE_SGBM(value);
+	}
+}
+void EvisionView::onParamChanged_MODE_SGBM()
+{
+	ui.radioButton_MODE_SGBM->setChecked(m_entity->getMODE_SGBM());
+}
+
+void EvisionView::onClicked_MODE_3WAY(bool value)
+{
+	if (m_entity->getMODE_3WAY() != value)
+	{
+		m_entity->setMODE_3WAY(value);
+	}
+}
+void EvisionView::onParamChanged_MODE_3WAY()
+{
+	ui.radioButton_MODE_3WAY->setChecked(m_entity->getMODE_3WAY());
 }
 
 void EvisionView::onParamChanged_Distance()
 {
 	ui.lineEdit_Result->setText(QString::fromStdString(std::to_string(m_entity->getDistance())));
 }
+
 void EvisionView::onParamChanged_imgLtoShow()
 {
 	QImage LQImage = EvisionUtils::cvMat2QImage(m_entity->getImageLtoShow());
@@ -372,7 +375,6 @@ void EvisionView::onParamChanged_imgLtoShow()
 	ui.graphicsView_L->show();
 	ui.graphicsView_L->update();
 }
-
 void EvisionView::onParamChanged_imgRtoShow()
 {
 	QImage RQImage = EvisionUtils::cvMat2QImage(m_entity->getImageRtoShow());
@@ -387,7 +389,6 @@ void EvisionView::onParamChanged_imgRtoShow()
 	ui.graphicsView_R->show();
 	ui.graphicsView_R->update();
 }
-
 void EvisionView::onParamChanged_imgDtoShow()
 {
 	QImage DQImage = EvisionUtils::cvMat2QImage(m_entity->getImageDtoShow());
@@ -424,7 +425,7 @@ void EvisionView::onTestAlltheParam()
 		<< "Maxdifdisp12:  " << m_entity->getMaxdifdisp12() << "\n"
 		<< "BM:  " << m_entity->getBM() << "\n"
 		<< "SGBM:  " << m_entity->getSGBM() << "\n"
-		<< "VAR:  " << m_entity->getVAR() << "\n"
+		<< "VAR:  " << m_entity->getMODE_HH() << "\n"
 		<< "Distance:  " << m_entity->getDistance();
 }
 //×´Ì¬À¸¸üÐÂ

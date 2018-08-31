@@ -37,7 +37,10 @@ private:
 	
 	bool BM = false;
 	bool SGBM = false;
-	bool VAR = false;
+
+	bool MODE_HH = false;
+	bool MODE_SGBM = false;
+	bool MODE_3WAY = false;
 
 	float Distance=0.0f;
 	cv::Mat imgLtoShow, imgRtoShow, imgDtoShow;
@@ -72,7 +75,10 @@ signals:
 
 	void paramChanged_BM();
 	void paramChanged_SGBM();
-	void paramChanged_VAR();
+	void paramChanged_MODE_HH();
+	void paramChanged_MODE_SGBM();
+	void paramChanged_MODE_3WAY();
+
 
 	void paramChanged_distance();
 
@@ -138,8 +144,14 @@ public:
 	bool getSGBM();
 	void setSGBM(bool value);
 
-	bool getVAR();
-	void setVAR(bool value);
+	bool getMODE_HH();
+	void setMODE_HH(bool value);
+
+	bool getMODE_SGBM();
+	void setMODE_SGBM(bool value);
+
+	bool getMODE_3WAY();
+	void setMODE_3WAY(bool value);
 
 	float getDistance();
 	void setDistance(float value);

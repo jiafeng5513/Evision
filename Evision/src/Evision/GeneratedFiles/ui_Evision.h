@@ -70,9 +70,9 @@ public:
     QLabel *label_35;
     QLabel *label_40;
     QGroupBox *groupBox_8;
-    QRadioButton *radioButton_VAR_4;
-    QRadioButton *radioButton_VAR_3;
-    QRadioButton *radioButton_VAR;
+    QRadioButton *radioButton_MODE_SGBM;
+    QRadioButton *radioButton_MODE_3WAY;
+    QRadioButton *radioButton_MODE_HH;
     QGroupBox *groupBox_9;
     QRadioButton *radioButton_BM;
     QRadioButton *radioButton_SGBM;
@@ -114,14 +114,14 @@ public:
     {
         if (EvisionClass->objectName().isEmpty())
             EvisionClass->setObjectName(QStringLiteral("EvisionClass"));
-        EvisionClass->resize(1000, 636);
+        EvisionClass->resize(1000, 630);
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(EvisionClass->sizePolicy().hasHeightForWidth());
         EvisionClass->setSizePolicy(sizePolicy);
-        EvisionClass->setMinimumSize(QSize(1000, 590));
-        EvisionClass->setMaximumSize(QSize(16777215, 16777215));
+        EvisionClass->setMinimumSize(QSize(1000, 630));
+        EvisionClass->setMaximumSize(QSize(1000, 630));
         action = new QAction(EvisionClass);
         action->setObjectName(QStringLiteral("action"));
         action_2 = new QAction(EvisionClass);
@@ -267,15 +267,15 @@ public:
         groupBox_8 = new QGroupBox(groupBox_6);
         groupBox_8->setObjectName(QStringLiteral("groupBox_8"));
         groupBox_8->setGeometry(QRect(340, 220, 71, 80));
-        radioButton_VAR_4 = new QRadioButton(groupBox_8);
-        radioButton_VAR_4->setObjectName(QStringLiteral("radioButton_VAR_4"));
-        radioButton_VAR_4->setGeometry(QRect(10, 40, 47, 16));
-        radioButton_VAR_3 = new QRadioButton(groupBox_8);
-        radioButton_VAR_3->setObjectName(QStringLiteral("radioButton_VAR_3"));
-        radioButton_VAR_3->setGeometry(QRect(10, 60, 47, 16));
-        radioButton_VAR = new QRadioButton(groupBox_8);
-        radioButton_VAR->setObjectName(QStringLiteral("radioButton_VAR"));
-        radioButton_VAR->setGeometry(QRect(10, 20, 51, 16));
+        radioButton_MODE_SGBM = new QRadioButton(groupBox_8);
+        radioButton_MODE_SGBM->setObjectName(QStringLiteral("radioButton_MODE_SGBM"));
+        radioButton_MODE_SGBM->setGeometry(QRect(10, 40, 47, 16));
+        radioButton_MODE_3WAY = new QRadioButton(groupBox_8);
+        radioButton_MODE_3WAY->setObjectName(QStringLiteral("radioButton_MODE_3WAY"));
+        radioButton_MODE_3WAY->setGeometry(QRect(10, 60, 47, 16));
+        radioButton_MODE_HH = new QRadioButton(groupBox_8);
+        radioButton_MODE_HH->setObjectName(QStringLiteral("radioButton_MODE_HH"));
+        radioButton_MODE_HH->setGeometry(QRect(10, 20, 51, 16));
         groupBox_9 = new QGroupBox(groupBox_6);
         groupBox_9->setObjectName(QStringLiteral("groupBox_9"));
         groupBox_9->setGeometry(QRect(340, 160, 71, 61));
@@ -504,8 +504,10 @@ public:
         QObject::connect(horizontalSlider_maxdifdisp12, SIGNAL(valueChanged(int)), EvisionClass, SLOT(valueChanged_MaxDifdisp2(int)));
         QObject::connect(radioButton_BM, SIGNAL(clicked(bool)), EvisionClass, SLOT(onClicked_BM(bool)));
         QObject::connect(radioButton_SGBM, SIGNAL(clicked(bool)), EvisionClass, SLOT(onClicked_SGBM(bool)));
-        QObject::connect(radioButton_VAR, SIGNAL(clicked(bool)), EvisionClass, SLOT(onClicked_VAR(bool)));
+        QObject::connect(radioButton_MODE_HH, SIGNAL(clicked(bool)), EvisionClass, SLOT(onClicked_MODE_HH(bool)));
         QObject::connect(actionDebug, SIGNAL(triggered()), EvisionClass, SLOT(onTestAlltheParam()));
+        QObject::connect(radioButton_MODE_SGBM, SIGNAL(clicked(bool)), EvisionClass, SLOT(onClicked_MODE_SGBM(bool)));
+        QObject::connect(radioButton_MODE_3WAY, SIGNAL(clicked(bool)), EvisionClass, SLOT(onClicked_MODE_3WAY(bool)));
 
         QMetaObject::connectSlotsByName(EvisionClass);
     } // setupUi
@@ -523,7 +525,7 @@ public:
         label_8->setText(QApplication::translate("EvisionClass", "Size:", nullptr));
         label_5->setText(QApplication::translate("EvisionClass", "Width:", nullptr));
         label_6->setText(QApplication::translate("EvisionClass", "Height:", nullptr));
-        checkBox_showRectified->setText(QApplication::translate("EvisionClass", "\346\230\276\347\244\272\347\237\253\346\255\243\347\273\223\346\236\234", nullptr));
+        checkBox_showRectified->setText(QApplication::translate("EvisionClass", "\346\230\276\347\244\272\347\237\253\346\255\243\347\273\223\346\236\234(By OpenCV NamedWindow)", nullptr));
         radioButton_Hartley->setText(QApplication::translate("EvisionClass", "\344\275\277\347\224\250Hartley\347\237\253\346\255\243\346\226\271\346\263\225", nullptr));
         radioButton_Bouguet->setText(QApplication::translate("EvisionClass", "\344\275\277\347\224\250Bouguet\347\237\253\346\255\243\346\226\271\346\263\225", nullptr));
         groupBox_4->setTitle(QApplication::translate("EvisionClass", "\346\240\207\345\256\232", nullptr));
@@ -540,9 +542,9 @@ public:
         label_35->setText(QApplication::translate("EvisionClass", "TextureThreshold(\344\275\216\347\272\271\347\220\206\345\214\272\345\237\237\347\232\204\345\210\244\346\226\255\351\230\210\345\200\274)", nullptr));
         label_40->setText(QApplication::translate("EvisionClass", "uniquenessRatio(\350\247\206\345\267\256\345\224\257\344\270\200\346\200\247\347\231\276\345\210\206\346\257\224)", nullptr));
         groupBox_8->setTitle(QApplication::translate("EvisionClass", "MODE", nullptr));
-        radioButton_VAR_4->setText(QApplication::translate("EvisionClass", "SGBM", nullptr));
-        radioButton_VAR_3->setText(QApplication::translate("EvisionClass", "3WAY", nullptr));
-        radioButton_VAR->setText(QApplication::translate("EvisionClass", "HH", nullptr));
+        radioButton_MODE_SGBM->setText(QApplication::translate("EvisionClass", "SGBM", nullptr));
+        radioButton_MODE_3WAY->setText(QApplication::translate("EvisionClass", "3WAY", nullptr));
+        radioButton_MODE_HH->setText(QApplication::translate("EvisionClass", "HH", nullptr));
         groupBox_9->setTitle(QApplication::translate("EvisionClass", "Function", nullptr));
         radioButton_BM->setText(QApplication::translate("EvisionClass", "BM", nullptr));
         radioButton_SGBM->setText(QApplication::translate("EvisionClass", "SGBM", nullptr));

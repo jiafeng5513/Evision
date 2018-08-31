@@ -187,7 +187,7 @@ void EvisionParamEntity::setBM(bool value)
 	if (value)
 	{
 		SGBM = false;
-		VAR = false;
+		MODE_HH = false;
 	}
 	emit paramChanged_BM();
 }
@@ -202,24 +202,56 @@ void EvisionParamEntity::setSGBM(bool value)
 	if (value)
 	{
 		BM = false;
-		VAR = false;
+		MODE_HH = false;
 	}
 	emit paramChanged_SGBM();
 }
 
-bool EvisionParamEntity::getVAR()
+bool EvisionParamEntity::getMODE_HH()
 {
-	return VAR;
+	return MODE_HH;
 }
-void EvisionParamEntity::setVAR(bool value)
+void EvisionParamEntity::setMODE_HH(bool value)
 {
-	VAR = value;
+	MODE_HH = value;
 	if (value)
 	{
 		BM = false;
 		SGBM = false;
 	}
-	emit paramChanged_VAR();
+	emit paramChanged_MODE_HH();
+}
+
+bool EvisionParamEntity::getMODE_SGBM()
+{
+	return MODE_SGBM;
+}
+
+void EvisionParamEntity::setMODE_SGBM(bool value)
+{
+	MODE_SGBM = value;
+	if (value)
+	{
+		MODE_HH = false;
+		MODE_3WAY = false;
+	}
+	emit paramChanged_MODE_SGBM();
+}
+
+bool EvisionParamEntity::getMODE_3WAY()
+{
+	return MODE_3WAY;
+}
+
+void EvisionParamEntity::setMODE_3WAY(bool value)
+{
+	MODE_3WAY = value;
+	if (value)
+	{
+		MODE_HH = false;
+		MODE_SGBM = false;
+	}
+	emit paramChanged_MODE_3WAY();
 }
 
 float EvisionParamEntity::getDistance()
