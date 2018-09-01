@@ -20,13 +20,6 @@
 echo copy dlls from the opencv version :
 $(SolutionDir)..\package\opencv\build\x64\vc15\bin\opencv_version.exe
 
-if not exist $(OutDir)opencv_world341.dll (
-    copy $(SolutionDir)..\package\opencv\build\x64\vc15\bin\opencv_world341d.dll $(OutDir)opencv_world341.dll
-    echo copy opencv_world341.dll done
-)else (
-    echo opencv_world341.dll is already exist!
-)
-
 if not exist $(OutDir)opencv_ffmpeg341_64.dll (
     copy $(SolutionDir)..\package\opencv\build\x64\vc15\bin\opencv_ffmpeg341_64.dll $(OutDir)opencv_ffmpeg341_64.dll
     echo copy opencv_ffmpeg341_64.dll done

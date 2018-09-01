@@ -97,7 +97,7 @@ public:
 	* 参数 : squareWidth	[in]	棋盘方块宽度
 	* 参数 : cornerDatas	[out]	初始化后的棋盘角点数据
 	*/
-	int initCornerData(int nImages, cv::Size imageSize, cv::Size boardSize, float squareWidth, CornerDatas& cornerDatas);
+	int initCornerData(int nImages, cv::Size imageSize, cv::Size boardSize, double squareWidth, CornerDatas& cornerDatas);
 
 	/*----------------------------
 	* 功能 : 根据成功检测的棋盘数目修改棋盘角点数据

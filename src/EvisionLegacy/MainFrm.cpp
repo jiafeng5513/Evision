@@ -13,8 +13,8 @@
 //
 
 #include "stdafx.h"
-#include "SkyEyes.h"
-#include "SkyEyesView.h"
+#include "EvisionLegacy.h"
+#include "EvisionLegacyView.h"
 #include "MainFrm.h"
 #include "NewProject.h"
 //#include "CameraDS.h"
@@ -144,7 +144,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	CDockingManager::SetDockingMode(DT_SMART);
 	// 启用 Visual Studio 2005 样式停靠窗口自动隐藏行为
 	EnableAutoHidePanes(CBRS_ALIGN_ANY);
-	//EnableLoadDockState(FALSE);//禁止程序记忆界面状态
+	EnableLoadDockState(FALSE);//禁止程序记忆界面状态
 	// 创建停靠窗口
 	if (!CreateDockingWindows())
 	{
@@ -158,6 +158,10 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	//m_wndOutput.SetControlBarStyle(AFX_CBRS_RESIZE);//禁止用户对输出窗口执行拆分命令
 	// 基于持久值设置视觉管理器和样式
 	OnApplicationLook(theApp.m_nAppLook);
+	CSize temp;
+	m_wndOutput.GetMinSize(temp);
+
+	//m_wndOutput.DockToWindow(CEvisionLegacyView, CBRS_LEFT);
 	return 0;
 }
 
@@ -177,7 +181,7 @@ BOOL CMainFrame::CreateDockingWindows()
 	CString strOutputWnd;
 	bNameValid = strOutputWnd.LoadString(IDS_OUTPUT_WND);
 	ASSERT(bNameValid);
-	if (!m_wndOutput.Create(strOutputWnd, this, CRect(0, 0, 100, 100), TRUE, ID_VIEW_OUTPUTWND, WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_CLIPCHILDREN | CBRS_BOTTOM | CBRS_FLOAT_MULTI))
+	if (!m_wndOutput.Create(strOutputWnd, this, CRect(0, 0, 100, 100), TRUE, ID_VIEW_OUTPUTWND, WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_CLIPCHILDREN | CBRS_LEFT | CBRS_FLOAT_MULTI))
 	{
 		TRACE0("未能创建输出窗口\n");
 		return FALSE; // 未能创建
@@ -335,7 +339,7 @@ void CMainFrame::OnPaint()
 /*                        以下是一组响应自定义消息的监听器                              */
 /*======================================================================================*/
 
-//响应自定义消息,该消息从SkyEyes.cpp(APP类)中发出,收到此消息,即可进行初始化操作
+//响应自定义消息,该消息从EvisionLegacy.cpp(APP类)中发出,收到此消息,即可进行初始化操作
 afx_msg LRESULT CMainFrame::OnUserInitializable(WPARAM wParam, LPARAM lParam)
 {
 	//收到此消息表明界面已经完成加载,可以进行用户定义的初始化操作了
@@ -765,7 +769,7 @@ void CMainFrame::SetSolver(int imgChannels)
 		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_minDisp))->GetWindowText(temp);
 		m_stereoMatcher.m_VAR.minDisp = atoi(temp);
 		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_maxDisp))->GetWindowText(temp);
-		m_stereoMatcher.m_VAR.maxDisp = atoi(temp);
+		m_stereoMatcher.m_VAR.maxDisp =atoi(temp);
 		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_Levels))->GetWindowText(temp);
 		m_stereoMatcher.m_VAR.levels = atoi(temp);// 如果设置USE_AUTO_PARAMS,算法将会自动设置该值
 		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_PyrScale))->GetWindowText(temp);
@@ -773,7 +777,7 @@ void CMainFrame::SetSolver(int imgChannels)
 		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_PolyN))->GetWindowText(temp);
 		m_stereoMatcher.m_VAR.poly_n = atoi(temp);
 		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_PolySigma))->GetWindowText(temp);
-		m_stereoMatcher.m_VAR.poly_sigma = atof(temp);
+		m_stereoMatcher.m_VAR.poly_sigma =atof(temp);
 		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_Fi))->GetWindowText(temp);
 		m_stereoMatcher.m_VAR.fi = atof(temp);
 		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_Lambda))->GetWindowText(temp);

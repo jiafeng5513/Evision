@@ -9,18 +9,18 @@
 // 版权所有(C) Microsoft Corporation
 // 保留所有权利。
 
-// SkyEyesView.cpp : CSkyEyesView 类的实现
+// EvisionLegacyView.cpp : CEvisionLegacyView 类的实现
 //
 
 #include "stdafx.h"
 // SHARED_HANDLERS 可以在实现预览、缩略图和搜索筛选器句柄的
 // ATL 项目中进行定义，并允许与该项目共享文档代码。
 #ifndef SHARED_HANDLERS
-#include "SkyEyes.h"
+#include "EvisionLegacy.h"
 #endif
 
-#include "SkyEyesDoc.h"
-#include "SkyEyesView.h"
+#include "EvisionLegacyDoc.h"
+#include "EvisionLegacyView.h"
 #include "OutputWnd.h"
 #include "MainFrm.h"
 
@@ -29,22 +29,22 @@
 #endif
 
 
-// CSkyEyesView
+// CEvisionLegacyView
 
-IMPLEMENT_DYNCREATE(CSkyEyesView, CFormView)
+IMPLEMENT_DYNCREATE(CEvisionLegacyView, CFormView)
 
-BEGIN_MESSAGE_MAP(CSkyEyesView, CFormView)
+BEGIN_MESSAGE_MAP(CEvisionLegacyView, CFormView)
 	ON_WM_CONTEXTMENU()
 	ON_WM_RBUTTONUP()
-	ON_NOTIFY(TCN_SELCHANGE, IDC_TAB, &CSkyEyesView::OnTcnSelchangeTab)
+	ON_NOTIFY(TCN_SELCHANGE, IDC_TAB, &CEvisionLegacyView::OnTcnSelchangeTab)
 //	ON_WM_PAINT()
 //	ON_WM_CREATE()
 END_MESSAGE_MAP()
 
-// CSkyEyesView 构造/析构
+// CEvisionLegacyView 构造/析构
 
-CSkyEyesView::CSkyEyesView()
-	: CFormView(CSkyEyesView::IDD)
+CEvisionLegacyView::CEvisionLegacyView()
+	: CFormView(CEvisionLegacyView::IDD)
 {
 	// TODO:  在此处添加构造代码
 	m_para1 = CPara1::getInstance();
@@ -53,17 +53,17 @@ CSkyEyesView::CSkyEyesView()
 	m_para4 = CPara4::getInstance();
 }
 
-CSkyEyesView::~CSkyEyesView()
+CEvisionLegacyView::~CEvisionLegacyView()
 {
 }
 
-void CSkyEyesView::DoDataExchange(CDataExchange* pDX)
+void CEvisionLegacyView::DoDataExchange(CDataExchange* pDX)
 {
 	CFormView::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_TAB, m_tab);
 }
 
-BOOL CSkyEyesView::PreCreateWindow(CREATESTRUCT& cs)
+BOOL CEvisionLegacyView::PreCreateWindow(CREATESTRUCT& cs)
 {
 	// TODO:  在此处通过修改
 	//  CREATESTRUCT cs 来修改窗口类或样式
@@ -71,7 +71,7 @@ BOOL CSkyEyesView::PreCreateWindow(CREATESTRUCT& cs)
 	return CFormView::PreCreateWindow(cs);
 }
 
-void CSkyEyesView::OnInitialUpdate()
+void CEvisionLegacyView::OnInitialUpdate()
 {
 	CFormView::OnInitialUpdate();
 	GetParentFrame()->RecalcLayout();
@@ -108,13 +108,13 @@ void CSkyEyesView::OnInitialUpdate()
 	//注意,此时,这三个子窗口其实是叠在一起的,所以需要使用监听程序来调整显示的是哪一个,以实现切换页的效果
 }
 
-void CSkyEyesView::OnRButtonUp(UINT /* nFlags */, CPoint point)
+void CEvisionLegacyView::OnRButtonUp(UINT /* nFlags */, CPoint point)
 {
 	ClientToScreen(&point);
 	OnContextMenu(this, point);
 }
 
-void CSkyEyesView::OnContextMenu(CWnd* /* pWnd */, CPoint point)
+void CEvisionLegacyView::OnContextMenu(CWnd* /* pWnd */, CPoint point)
 {
 #ifndef SHARED_HANDLERS
 	theApp.GetContextMenuManager()->ShowPopupMenu(IDR_POPUP_EDIT, point.x, point.y, this, TRUE);
@@ -122,31 +122,31 @@ void CSkyEyesView::OnContextMenu(CWnd* /* pWnd */, CPoint point)
 }
 
 
-// CSkyEyesView 诊断
+// CEvisionLegacyView 诊断
 
 #ifdef _DEBUG
-void CSkyEyesView::AssertValid() const
+void CEvisionLegacyView::AssertValid() const
 {
 	CFormView::AssertValid();
 }
 
-void CSkyEyesView::Dump(CDumpContext& dc) const
+void CEvisionLegacyView::Dump(CDumpContext& dc) const
 {
 	CFormView::Dump(dc);
 }
 
-CSkyEyesDoc* CSkyEyesView::GetDocument() const // 非调试版本是内联的
+CEvisionLegacyDoc* CEvisionLegacyView::GetDocument() const // 非调试版本是内联的
 {
-	ASSERT(m_pDocument->IsKindOf(RUNTIME_CLASS(CSkyEyesDoc)));
-	return (CSkyEyesDoc*)m_pDocument;
+	ASSERT(m_pDocument->IsKindOf(RUNTIME_CLASS(CEvisionLegacyDoc)));
+	return (CEvisionLegacyDoc*)m_pDocument;
 }
 #endif //_DEBUG
 
 
-// CSkyEyesView 消息处理程序
+// CEvisionLegacyView 消息处理程序
 
 
-void CSkyEyesView::OnTcnSelchangeTab(NMHDR *pNMHDR, LRESULT *pResult)
+void CEvisionLegacyView::OnTcnSelchangeTab(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	// TODO:  在此添加控件通知处理程序代码
 	int CurSel = m_tab.GetCurSel();

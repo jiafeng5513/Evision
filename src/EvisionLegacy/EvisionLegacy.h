@@ -9,7 +9,7 @@
 // 版权所有(C) Microsoft Corporation
 // 保留所有权利。
 
-// SkyEyes.h : SkyEyes 应用程序的主头文件
+// EvisionLegacy.h : EvisionLegacy 应用程序的主头文件
 //
 #pragma once
 
@@ -20,14 +20,14 @@
 #include "resource.h"       // 主符号
 
 
-// CSkyEyesApp:
-// 有关此类的实现，请参阅 SkyEyes.cpp
+// CEvisionLegacyApp:
+// 有关此类的实现，请参阅 EvisionLegacy.cpp
 //
 
-class CSkyEyesApp : public CWinAppEx
+class CEvisionLegacyApp : public CWinAppEx
 {
 public:
-	CSkyEyesApp();
+	CEvisionLegacyApp();
 
 
 // 重写
@@ -46,4 +46,4 @@ public:
 	DECLARE_MESSAGE_MAP()
 };
 
-extern CSkyEyesApp theApp;
+extern CEvisionLegacyApp theApp;

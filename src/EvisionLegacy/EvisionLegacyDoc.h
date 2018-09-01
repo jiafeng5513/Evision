@@ -9,18 +9,18 @@
 // 版权所有(C) Microsoft Corporation
 // 保留所有权利。
 
-// SkyEyesDoc.h : CSkyEyesDoc 类的接口
+// EvisionLegacyDoc.h : CEvisionLegacyDoc 类的接口
 //
 
 
 #pragma once
 
 
-class CSkyEyesDoc : public CDocument
+class CEvisionLegacyDoc : public CDocument
 {
 protected: // 仅从序列化创建
-	CSkyEyesDoc();
-	DECLARE_DYNCREATE(CSkyEyesDoc)
+	CEvisionLegacyDoc();
+	DECLARE_DYNCREATE(CEvisionLegacyDoc)
 
 // 特性
 public:
@@ -39,7 +39,7 @@ public:
 
 // 实现
 public:
-	virtual ~CSkyEyesDoc();
+	virtual ~CEvisionLegacyDoc();
 #ifdef _DEBUG
 	virtual void AssertValid() const;
 	virtual void Dump(CDumpContext& dc) const;

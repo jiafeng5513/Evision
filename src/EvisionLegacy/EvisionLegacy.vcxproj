@@ -12,7 +12,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FE973CBB-0CB6-4E21-827F-2E92468C4C32}</ProjectGuid>
-    <RootNamespace>SkyEyes</RootNamespace>
+    <RootNamespace>EvisionLegacy</RootNamespace>
     <Keyword>MFCProj</Keyword>
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
     <ProjectName>Evision-Legacy</ProjectName>
@@ -122,9 +122,9 @@
     <ClInclude Include="Para4.h" />
     <ClInclude Include="PointCloudAnalyzer.h" />
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="SkyEyes.h" />
-    <ClInclude Include="SkyEyesDoc.h" />
-    <ClInclude Include="SkyEyesView.h" />
+    <ClInclude Include="EvisionLegacy.h" />
+    <ClInclude Include="EvisionLegacyDoc.h" />
+    <ClInclude Include="EvisionLegacyView.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="StereoMatch.h" />
     <ClInclude Include="targetver.h" />
@@ -141,9 +141,9 @@
     <ClCompile Include="Para3.cpp" />
     <ClCompile Include="Para4.cpp" />
     <ClCompile Include="PointCloudAnalyzer.cpp" />
-    <ClCompile Include="SkyEyes.cpp" />
-    <ClCompile Include="SkyEyesDoc.cpp" />
-    <ClCompile Include="SkyEyesView.cpp" />
+    <ClCompile Include="EvisionLegacy.cpp" />
+    <ClCompile Include="EvisionLegacyDoc.cpp" />
+    <ClCompile Include="EvisionLegacyView.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -152,23 +152,22 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="res\ribbon.mfcribbon-ms" />
-    <None Include="res\SkyEyes.rc2" />
-    <None Include="SkyEyes.reg" />
+    <None Include="res\Evision.rc2" />
+    <None Include="EvisionLegacy.reg" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="SkyEyes.rc" />
+    <ResourceCompile Include="Evision.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="I:\下载\main.bmp" />
+    <Image Include="res\main.bmp" />
     <Image Include="res\bitmap1.bmp" />
     <Image Include="res\buttons.bmp" />
     <Image Include="res\filelarge.bmp" />
     <Image Include="res\filesmall.bmp" />
-    <Image Include="res\main.bmp" />
     <Image Include="res\output_wnd.ico" />
     <Image Include="res\output_wnd_hc.ico" />
-    <Image Include="res\SkyEyes.ico" />
-    <Image Include="res\SkyEyesDoc.ico" />
+    <Image Include="res\Evision.ico" />
+    <Image Include="res\EvisionDoc.ico" />
     <Image Include="res\Toolbar.bmp" />
     <Image Include="res\Toolbar256.bmp" />
     <Image Include="res\writelarge.bmp" />
@@ -178,7 +177,7 @@
   <ImportGroup Label="ExtensionTargets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties RESOURCE_FILE="SkyEyes.rc" />
+      <UserProperties RESOURCE_FILE="Evision.rc" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

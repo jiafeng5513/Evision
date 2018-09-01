@@ -17,7 +17,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stereo_match", "stereo_matc
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "legacy", "legacy", "{93BD32B4-4994-4478-AE43-ADF9262808A9}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SkyEyes", "SkyEyes\SkyEyes.vcxproj", "{FE973CBB-0CB6-4E21-827F-2E92468C4C32}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Evision-Legacy", "EvisionLegacy\EvisionLegacy.vcxproj", "{FE973CBB-0CB6-4E21-827F-2E92468C4C32}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,7 +58,6 @@ Global
 		{19AE22D4-56E0-490A-91E6-D3E2FF376980}.Release|x64.Build.0 = Release|x64
 		{19AE22D4-56E0-490A-91E6-D3E2FF376980}.Release|x86.ActiveCfg = Release|x64
 		{FE973CBB-0CB6-4E21-827F-2E92468C4C32}.Debug|x64.ActiveCfg = Debug|Win32
-		{FE973CBB-0CB6-4E21-827F-2E92468C4C32}.Debug|x64.Build.0 = Debug|Win32
 		{FE973CBB-0CB6-4E21-827F-2E92468C4C32}.Debug|x86.ActiveCfg = Debug|Win32
 		{FE973CBB-0CB6-4E21-827F-2E92468C4C32}.Debug|x86.Build.0 = Debug|Win32
 		{FE973CBB-0CB6-4E21-827F-2E92468C4C32}.Release|x64.ActiveCfg = Release|Win32

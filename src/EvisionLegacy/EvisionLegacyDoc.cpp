@@ -9,17 +9,17 @@
 // 版权所有(C) Microsoft Corporation
 // 保留所有权利。
 
-// SkyEyesDoc.cpp : CSkyEyesDoc 类的实现
+// EvisionLegacyDoc.cpp : CEvisionLegacyDoc 类的实现
 //
 
 #include "stdafx.h"
 // SHARED_HANDLERS 可以在实现预览、缩略图和搜索筛选器句柄的
 // ATL 项目中进行定义，并允许与该项目共享文档代码。
 #ifndef SHARED_HANDLERS
-#include "SkyEyes.h"
+#include "EvisionLegacy.h"
 #endif
 
-#include "SkyEyesDoc.h"
+#include "EvisionLegacyDoc.h"
 
 #include <propkey.h>
 
@@ -27,27 +27,27 @@
 #define new DEBUG_NEW
 #endif
 
-// CSkyEyesDoc
+// CEvisionLegacyDoc
 
-IMPLEMENT_DYNCREATE(CSkyEyesDoc, CDocument)
+IMPLEMENT_DYNCREATE(CEvisionLegacyDoc, CDocument)
 
-BEGIN_MESSAGE_MAP(CSkyEyesDoc, CDocument)
+BEGIN_MESSAGE_MAP(CEvisionLegacyDoc, CDocument)
 END_MESSAGE_MAP()
 
 
-// CSkyEyesDoc 构造/析构
+// CEvisionLegacyDoc 构造/析构
 
-CSkyEyesDoc::CSkyEyesDoc()
+CEvisionLegacyDoc::CEvisionLegacyDoc()
 {
 	// TODO:  在此添加一次性构造代码
 
 }
 
-CSkyEyesDoc::~CSkyEyesDoc()
+CEvisionLegacyDoc::~CEvisionLegacyDoc()
 {
 }
 
-BOOL CSkyEyesDoc::OnNewDocument()
+BOOL CEvisionLegacyDoc::OnNewDocument()
 {
 	if (!CDocument::OnNewDocument())
 		return FALSE;
@@ -61,9 +61,9 @@ BOOL CSkyEyesDoc::OnNewDocument()
 
 
 
-// CSkyEyesDoc 序列化
+// CEvisionLegacyDoc 序列化
 
-void CSkyEyesDoc::Serialize(CArchive& ar)
+void CEvisionLegacyDoc::Serialize(CArchive& ar)
 {
 	if (ar.IsStoring())
 	{
@@ -78,7 +78,7 @@ void CSkyEyesDoc::Serialize(CArchive& ar)
 #ifdef SHARED_HANDLERS
 
 // 缩略图的支持
-void CSkyEyesDoc::OnDrawThumbnail(CDC& dc, LPRECT lprcBounds)
+void CEvisionLegacyDoc::OnDrawThumbnail(CDC& dc, LPRECT lprcBounds)
 {
 	// 修改此代码以绘制文档数据
 	dc.FillSolidRect(lprcBounds, RGB(255, 255, 255));
@@ -99,7 +99,7 @@ void CSkyEyesDoc::OnDrawThumbnail(CDC& dc, LPRECT lprcBounds)
 }
 
 // 搜索处理程序的支持
-void CSkyEyesDoc::InitializeSearchContent()
+void CEvisionLegacyDoc::InitializeSearchContent()
 {
 	CString strSearchContent;
 	// 从文档数据设置搜索内容。
@@ -109,7 +109,7 @@ void CSkyEyesDoc::InitializeSearchContent()
 	SetSearchContent(strSearchContent);
 }
 
-void CSkyEyesDoc::SetSearchContent(const CString& value)
+void CEvisionLegacyDoc::SetSearchContent(const CString& value)
 {
 	if (value.IsEmpty())
 	{
@@ -129,19 +129,19 @@ void CSkyEyesDoc::SetSearchContent(const CString& value)
 
 #endif // SHARED_HANDLERS
 
-// CSkyEyesDoc 诊断
+// CEvisionLegacyDoc 诊断
 
 #ifdef _DEBUG
-void CSkyEyesDoc::AssertValid() const
+void CEvisionLegacyDoc::AssertValid() const
 {
 	CDocument::AssertValid();
 }
 
-void CSkyEyesDoc::Dump(CDumpContext& dc) const
+void CEvisionLegacyDoc::Dump(CDumpContext& dc) const
 {
 	CDocument::Dump(dc);
 }
 #endif //_DEBUG
 
 
-// CSkyEyesDoc 命令
+// CEvisionLegacyDoc 命令

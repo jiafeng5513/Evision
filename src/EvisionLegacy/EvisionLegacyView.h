@@ -9,31 +9,31 @@
 // 版权所有(C) Microsoft Corporation
 // 保留所有权利。
 
-// SkyEyesView.h : CSkyEyesView 类的接口
+// EvisionLegacyView.h : CEvisionLegacyView 类的接口
 //
 
 #pragma once
 
 #include "resource.h"
 #include "afxcmn.h"
-#include "SkyEyesDoc.h"
+#include "EvisionLegacyDoc.h"
 #include "Para1.h"
 #include "Para2.h"
 #include "Para3.h"
 #include "Para4.h"
 
-class CSkyEyesView : public CFormView
+class CEvisionLegacyView : public CFormView
 {
 protected: // 仅从序列化创建
-	CSkyEyesView();
-	DECLARE_DYNCREATE(CSkyEyesView)
+	CEvisionLegacyView();
+	DECLARE_DYNCREATE(CEvisionLegacyView)
 
 public:
 	enum{ IDD = IDD_SKYEYES_FORM };
 
 // 特性
 public:
-	CSkyEyesDoc* GetDocument() const;
+	CEvisionLegacyDoc* GetDocument() const;
 
 // 操作
 public:
@@ -47,7 +47,7 @@ protected:
 
 // 实现
 public:
-	virtual ~CSkyEyesView();
+	virtual ~CEvisionLegacyView();
 #ifdef _DEBUG
 	virtual void AssertValid() const;
 	virtual void Dump(CDumpContext& dc) const;
@@ -74,8 +74,8 @@ public:
 //	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 };
 
-#ifndef _DEBUG  // SkyEyesView.cpp 中的调试版本
-inline CSkyEyesDoc* CSkyEyesView::GetDocument() const
-   { return reinterpret_cast<CSkyEyesDoc*>(m_pDocument); }
+#ifndef _DEBUG  // EvisionLegacyView.cpp 中的调试版本
+inline CEvisionLegacyDoc* CEvisionLegacyView::GetDocument() const
+   { return reinterpret_cast<CEvisionLegacyDoc*>(m_pDocument); }
 #endif
 

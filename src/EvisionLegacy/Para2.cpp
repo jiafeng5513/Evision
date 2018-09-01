@@ -2,7 +2,7 @@
 //
 
 #include "stdafx.h"
-#include "SkyEyes.h"
+#include "EvisionLegacy.h"
 #include "Para2.h"
 #include "afxdialogex.h"
 
@@ -29,7 +29,7 @@ CPara2::CPara2(CWnd* pParent /*=NULL*/)
 	, v_nPreFiltCap(1)
 	, v_nDisp12MaxDiff(0)
 	, v_nLevels(1)
-	, v_nPyrScale(0.1)
+	, v_nPyrScale(0.1f)
 	, v_nPolyN(1)
 	, v_nPolySigma(0)
 	, v_nFi(0)
@@ -144,11 +144,11 @@ void CPara2::SetSlider()
 	s_nDisp12MaxDiff.SetPos(v_nDisp12MaxDiff);
 
 	s_nLevels.SetPos(v_nLevels);
-	s_nPyrScale.SetPos(v_nPyrScale*10);
+	s_nPyrScale.SetPos(int(v_nPyrScale*10));
 	s_nPolyn.SetPos((v_nPolyN-1)/2);
-	s_nPolySigma.SetPos(v_nPolySigma*10);
-	s_nFi.SetPos(v_nFi*10);
-	s_nLambda.SetPos(v_nLambda*100);
+	s_nPolySigma.SetPos(int(v_nPolySigma*10));
+	s_nFi.SetPos(int(v_nFi*10));
+	s_nLambda.SetPos(int(v_nLambda*100));
 
 
 }
@@ -259,13 +259,13 @@ void CPara2::OnChangeEditLevels()
 void CPara2::OnChangeEditFi()
 {
 	UpdateData(TRUE);
-	s_nFi.SetPos(v_nFi * 10);
+	s_nFi.SetPos(int(v_nFi * 10));
 }
 
 void CPara2::OnChangeEditLambda()
 {
 	UpdateData(TRUE);
-	s_nLambda.SetPos(v_nLambda * 100);
+	s_nLambda.SetPos(int(v_nLambda * 100));
 }
 
 void CPara2::OnChangeEditPolyn()
@@ -277,11 +277,11 @@ void CPara2::OnChangeEditPolyn()
 void CPara2::OnChangeEditPolysigma()
 {
 	UpdateData(TRUE);
-	s_nPolySigma.SetPos(v_nPolySigma * 10);
+	s_nPolySigma.SetPos(int(v_nPolySigma * 10));
 }
 
 void CPara2::OnChangeEditPyrscale()
 {
 	UpdateData(TRUE);
-	s_nPyrScale.SetPos(v_nPyrScale * 10);
+	s_nPyrScale.SetPos(int(v_nPyrScale * 10));
 }

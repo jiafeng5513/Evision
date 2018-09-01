@@ -26,7 +26,7 @@ calib::~calib()
 * 参数 : squareWidth	[in]	棋盘方块宽度
 * 参数 : cornerDatas	[out]	初始化后的棋盘角点数据
 */
-int calib::initCornerData(int nImages, cv::Size imageSize, cv::Size boardSize, float squareWidth, CornerDatas& cornerDatas)
+int calib::initCornerData(int nImages, cv::Size imageSize, cv::Size boardSize, double squareWidth, CornerDatas& cornerDatas)
 {
 	cornerDatas.nImages = nImages;
 	cornerDatas.imageSize = imageSize;
@@ -44,7 +44,7 @@ int calib::initCornerData(int nImages, cv::Size imageSize, cv::Size boardSize, f
 		n = 0;
 		for (j = 0; j < boardSize.height; j++)
 		for (k = 0; k < boardSize.width; k++)
-			cornerDatas.objectPoints[i][n++] = cv::Point3f(j*squareWidth, k*squareWidth, 0);
+			cornerDatas.objectPoints[i][n++] = cv::Point3f(float(j*squareWidth), float(k*squareWidth), 0);
 	}
 
 	return 1;
@@ -432,14 +432,14 @@ int calib::saveCameraParams(const CameraParams& cameraParams, const char* filena
 
 		int nImages = cameraParams.rotations.size();
 		fs << "nImages" << nImages;
-		for (UINT i = 0; i < nImages; i++)
+		for (int i = 0; i < nImages; i++)
 		{
 			char matName[50];
 			sprintf_s(matName, "rotaionMatrix_%d", i);
 
 			fs << matName << cameraParams.rotations[i];
 		}
-		for (UINT i = 0; i < nImages; i++)
+		for (int i = 0; i < nImages; i++)
 		{
 			char matName[50];
 			sprintf_s(matName, "translationMatrix_%d", i);
@@ -591,7 +591,7 @@ int calib::getCameraCalibrateError(vector<vector<cv::Point3f> >& _objectPoints, 
 
 	size_t nImages = _objectPoints.size();
 
-	for (int i = 0; i < nImages; i++)
+	for (unsigned int i = 0; i < nImages; i++)
 	{
 		// 提取当前棋盘对应的角点坐标子矩阵
 		vector<cv::Point3f>& objectPoints = _objectPoints[i];

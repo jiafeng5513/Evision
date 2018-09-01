@@ -52,7 +52,7 @@ BEGIN
     "\r\n"
     "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
     "LANGUAGE 4, 2\r\n"
-    "#include ""res\\SkyEyes.rc2""  // 非 Microsoft Visual C++ 编辑的资源\r\n"
+    "#include ""res\\Evision.rc2""  // 非 Microsoft Visual C++ 编辑的资源\r\n"
     "#include ""l.CHS\\afxres.rc""      // 标准组件\r\n"
     "#if !defined(_AFXDLL)\r\n"
     "#include ""l.CHS\\afxprint.rc""        // 打印/打印预览资源\r\n"
@@ -72,9 +72,9 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDR_MAINFRAME           ICON                    "res\\SkyEyes.ico"
+IDR_MAINFRAME           ICON                    "res\\Evision.ico"
 
-IDR_SkyEyesTYPE         ICON                    "res\\SkyEyesDoc.ico"
+IDR_SkyEyesTYPE         ICON                    "res\\EvisionDoc.ico"
 
 IDI_OUTPUT_WND          ICON                    "res\\output_wnd.ico"
 
@@ -177,7 +177,7 @@ BEGIN
     END
     POPUP "帮助(&H)"
     BEGIN
-        MENUITEM "关于 SkyEyes(&A)...",           ID_APP_ABOUT
+        MENUITEM "关于 EvisionLegacy(&A)...",     ID_APP_ABOUT
     END
 END
 
@@ -209,7 +209,7 @@ END
 
 IDR_HELP_MENU MENU
 BEGIN
-    MENUITEM "关于 SkyEyes(&A)...",           ID_APP_ABOUT
+    MENUITEM "关于 EvisionLegacy(&A)...",     ID_APP_ABOUT
 END
 
 IDR_THEME_MENU MENU
@@ -256,7 +256,7 @@ CAPTION "关于本程序 "
 FONT 9, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,14,14,20,20
-    LTEXT           "天眼测距系统(SkyEyes)，1.0 版",IDC_STATIC,60,14,114,8,SS_NOPREFIX
+    LTEXT           "Evision(Legacy)，1.0 版",IDC_STATIC,60,14,114,8,SS_NOPREFIX
     LTEXT           "Copyright (C) 2016",IDC_STATIC,60,58,114,8
     DEFPUSHBUTTON   "确定",IDOK,152,55,50,14,WS_GROUP
     LTEXT           "天使微积分工作室",IDC_STATIC,60,30,107,8
@@ -438,12 +438,12 @@ BEGIN
         BLOCK "080404b0"
         BEGIN
             VALUE "CompanyName", "TODO:  <天使微积分工作室>"
-            VALUE "FileDescription", "SkyEyes"
+            VALUE "FileDescription", "EvisionLegacy"
             VALUE "FileVersion", "1.0.1626.0"
-            VALUE "InternalName", "SkyEyes.exe"
+            VALUE "InternalName", "EvisionLegacy.exe"
             VALUE "LegalCopyright", "TODO:  (C) <天使微积分工作室>。  保留所有权利。"
-            VALUE "OriginalFilename", "SkyEyes.exe"
-            VALUE "ProductName", "TODO:  <天眼测距系统>"
+            VALUE "OriginalFilename", "EvisionLegacy.exe"
+            VALUE "ProductName", "TODO:  <Evision(Legacy)>"
             VALUE "ProductVersion", "1.0.1626.0"
         END
     END
@@ -572,7 +572,7 @@ END
 
 STRINGTABLE
 BEGIN
-    IDR_MAINFRAME           "SkyEyes\n\nSkyEyes\nSkyEyes Files (*.xml)\n.xml\nSkyEyes.Document\nSkyEyes.Document"
+    IDR_MAINFRAME           "EvisionLegacy\n\nEvisionLegacy\nEvisionLegacy Files (*.xml)\n.xml\nEvisionLegacy.Document\nEvisionLegacy.Document"
 END
 
 STRINGTABLE
@@ -723,7 +723,7 @@ END
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
 LANGUAGE 4, 2
-#include "res\SkyEyes.rc2"  // 非 Microsoft Visual C++ 编辑的资源
+#include "res\Evision.rc2"  // 非 Microsoft Visual C++ 编辑的资源
 #include "l.CHS\afxres.rc"      // 标准组件
 #if !defined(_AFXDLL)
 #include "l.CHS\afxprint.rc"        // 打印/打印预览资源

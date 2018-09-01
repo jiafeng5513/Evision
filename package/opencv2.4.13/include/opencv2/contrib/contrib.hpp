@@ -592,8 +592,8 @@ namespace cv
         CV_PROP_RW int      maxDisp;
         CV_PROP_RW int      poly_n;
         CV_PROP_RW double   poly_sigma;
-        CV_PROP_RW float    fi;
-        CV_PROP_RW float    lambda;
+        CV_PROP_RW double    fi;
+        CV_PROP_RW double    lambda;
         CV_PROP_RW int      penalization;
         CV_PROP_RW int      cycle;
         CV_PROP_RW int      flags;

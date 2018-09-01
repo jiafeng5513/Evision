@@ -2,7 +2,7 @@
 //
 
 #include "stdafx.h"
-#include "SkyEyes.h"
+#include "EvisionLegacy.h"
 #include "Para1.h"
 #include "afxdialogex.h"
 

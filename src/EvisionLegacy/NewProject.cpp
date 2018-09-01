@@ -2,9 +2,10 @@
 //
 
 #include "stdafx.h"
-#include "SkyEyes.h"
+#include "EvisionLegacy.h"
 #include "NewProject.h"
 #include "afxdialogex.h"
+#include "Resource.h"
 
 
 // CNewProject ¶Ô»°¿ò

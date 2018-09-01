@@ -109,7 +109,7 @@ int StereoMatch::loadCalibData(const char* xmlFilePath)
 		}
 
 	}
-	catch (std::exception& e)
+	catch (std::exception)
 	{
 		m_Calib_Data_Loaded = false;
 		return (-99);

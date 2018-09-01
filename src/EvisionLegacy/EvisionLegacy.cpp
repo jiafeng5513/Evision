@@ -9,35 +9,36 @@
 // 版权所有(C) Microsoft Corporation
 // 保留所有权利。
 
-// SkyEyes.cpp : 定义应用程序的类行为。
+// EvisionLegacy.cpp : 定义应用程序的类行为。
 //
 
 #include "stdafx.h"
 #include "afxwinappex.h"
 #include "afxdialogex.h"
-#include "SkyEyes.h"
+
 #include "MainFrm.h"
 
-#include "SkyEyesDoc.h"
-#include "SkyEyesView.h"
+#include "EvisionLegacyDoc.h"
+#include "EvisionLegacyView.h"
+#include "EvisionLegacy.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
 
-// CSkyEyesApp
+// CEvisionLegacyApp
 
-BEGIN_MESSAGE_MAP(CSkyEyesApp, CWinAppEx)
-	ON_COMMAND(ID_APP_ABOUT, &CSkyEyesApp::OnAppAbout)
+BEGIN_MESSAGE_MAP(CEvisionLegacyApp, CWinAppEx)
+	ON_COMMAND(ID_APP_ABOUT, &CEvisionLegacyApp::OnAppAbout)
 	// 基于文件的标准文档命令
 	ON_COMMAND(ID_FILE_NEW, &CWinAppEx::OnFileNew)
 	ON_COMMAND(ID_FILE_OPEN, &CWinAppEx::OnFileOpen)
 END_MESSAGE_MAP()
 
-// CSkyEyesApp 构造
+// CEvisionLegacyApp 构造
 
-CSkyEyesApp::CSkyEyesApp()
+CEvisionLegacyApp::CEvisionLegacyApp()
 {
 	m_bHiColorIcons = TRUE;
 
@@ -52,23 +53,23 @@ CSkyEyesApp::CSkyEyesApp()
 
 	// TODO:  将以下应用程序 ID 字符串替换为唯一的 ID 字符串；建议的字符串格式
 	//为 CompanyName.ProductName.SubProduct.VersionInformation
-	SetAppID(_T("SkyEyes.AppID.NoVersion"));
+	SetAppID(_T("EvisionLegacy.AppID.NoVersion"));
 
 	// TODO:  在此处添加构造代码，
 	// 将所有重要的初始化放置在 InitInstance 中
 }
 
-// 唯一的一个 CSkyEyesApp 对象
+// 唯一的一个 CEvisionLegacyApp 对象
 
-CSkyEyesApp theApp;
+CEvisionLegacyApp theApp;
 
 
-// CSkyEyesApp 初始化
+// CEvisionLegacyApp 初始化
 // 在这里会发出一个用户消息到全局,这个消息的发出会导致用户区界面的初始化开始
 // 因为DocBase的程序里面,用户区是最后初始化的,为了界面好看,我修改了用户区的基类,导致了初始化的时间冲突,所以
 // 采用了全局消息来通知初始化的适当时机
 // 天使微积分注
-BOOL CSkyEyesApp::InitInstance()
+BOOL CEvisionLegacyApp::InitInstance()
 {
 	// 如果一个运行在 Windows XP 上的应用程序清单指定要
 	// 使用 ComCtl32.dll 版本 6 或更高版本来启用可视化方式，
@@ -104,7 +105,7 @@ BOOL CSkyEyesApp::InitInstance()
 	// 更改用于存储设置的注册表项
 	// TODO:  应适当修改该字符串，
 	// 例如修改为公司或组织名
-	SetRegistryKey(_T("应用程序向导生成的本地应用程序"));
+	SetRegistryKey(_T("Evision-Legacy"));
 	LoadStdProfileSettings(4);  // 加载标准 INI 文件选项(包括 MRU)
 
 
@@ -123,9 +124,9 @@ BOOL CSkyEyesApp::InitInstance()
 	CSingleDocTemplate* pDocTemplate;
 	pDocTemplate = new CSingleDocTemplate(
 		IDR_MAINFRAME,
-		RUNTIME_CLASS(CSkyEyesDoc),
+		RUNTIME_CLASS(CEvisionLegacyDoc),
 		RUNTIME_CLASS(CMainFrame),       // 主 SDI 框架窗口
-		RUNTIME_CLASS(CSkyEyesView));
+		RUNTIME_CLASS(CEvisionLegacyView));
 	if (!pDocTemplate)
 		return FALSE;
 	AddDocTemplate(pDocTemplate);
@@ -156,7 +157,7 @@ BOOL CSkyEyesApp::InitInstance()
 	return TRUE;
 }
 
-int CSkyEyesApp::ExitInstance()
+int CEvisionLegacyApp::ExitInstance()
 {
 	//TODO:  处理可能已添加的附加资源
 	AfxOleTerm(FALSE);
@@ -164,7 +165,7 @@ int CSkyEyesApp::ExitInstance()
 	return CWinAppEx::ExitInstance();
 }
 
-// CSkyEyesApp 消息处理程序
+// CEvisionLegacyApp 消息处理程序
 
 
 // 用于应用程序“关于”菜单项的 CAboutDlg 对话框
@@ -198,15 +199,15 @@ BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
 END_MESSAGE_MAP()
 
 // 用于运行对话框的应用程序命令
-void CSkyEyesApp::OnAppAbout()
+void CEvisionLegacyApp::OnAppAbout()
 {
 	CAboutDlg aboutDlg;
 	aboutDlg.DoModal();
 }
 
-// CSkyEyesApp 自定义加载/保存方法
+// CEvisionLegacyApp 自定义加载/保存方法
 
-void CSkyEyesApp::PreLoadState()
+void CEvisionLegacyApp::PreLoadState()
 {
 	BOOL bNameValid;
 	CString strName;
@@ -215,15 +216,15 @@ void CSkyEyesApp::PreLoadState()
 	GetContextMenuManager()->AddMenu(strName, IDR_POPUP_EDIT);
 }
 
-void CSkyEyesApp::LoadCustomState()
+void CEvisionLegacyApp::LoadCustomState()
 {
 }
 
-void CSkyEyesApp::SaveCustomState()
+void CEvisionLegacyApp::SaveCustomState()
 {
 }
 
-// CSkyEyesApp 消息处理程序
+// CEvisionLegacyApp 消息处理程序
 
 
 
