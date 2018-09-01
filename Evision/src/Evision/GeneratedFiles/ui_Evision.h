@@ -104,6 +104,7 @@ public:
     QPushButton *pushButton_RangeSinglePoint;
     QPushButton *pushButton_RangeDualPoint;
     QFrame *line_2;
+    QPushButton *pushButton_RefreshStereoMatch;
     QMenuBar *menuBar;
     QMenu *menu;
     QMenu *menu_2;
@@ -416,11 +417,11 @@ public:
         line->setFrameShadow(QFrame::Sunken);
         pushButton_MatchDefault = new QPushButton(groupBox_6);
         pushButton_MatchDefault->setObjectName(QStringLiteral("pushButton_MatchDefault"));
-        pushButton_MatchDefault->setGeometry(QRect(420, 160, 102, 23));
+        pushButton_MatchDefault->setGeometry(QRect(420, 160, 71, 23));
         pushButton_MatchDefault->setMinimumSize(QSize(0, 20));
         pushButton_MatchChooseFiles = new QPushButton(groupBox_6);
         pushButton_MatchChooseFiles->setObjectName(QStringLiteral("pushButton_MatchChooseFiles"));
-        pushButton_MatchChooseFiles->setGeometry(QRect(530, 160, 102, 23));
+        pushButton_MatchChooseFiles->setGeometry(QRect(500, 160, 71, 23));
         pushButton_MatchChooseFiles->setMinimumSize(QSize(0, 20));
         groupBox_3 = new QGroupBox(groupBox_6);
         groupBox_3->setObjectName(QStringLiteral("groupBox_3"));
@@ -455,6 +456,9 @@ public:
         line_2->setGeometry(QRect(320, 20, 20, 281));
         line_2->setFrameShape(QFrame::VLine);
         line_2->setFrameShadow(QFrame::Sunken);
+        pushButton_RefreshStereoMatch = new QPushButton(groupBox_6);
+        pushButton_RefreshStereoMatch->setObjectName(QStringLiteral("pushButton_RefreshStereoMatch"));
+        pushButton_RefreshStereoMatch->setGeometry(QRect(580, 160, 61, 23));
         EvisionClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(EvisionClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -496,7 +500,7 @@ public:
         QObject::connect(horizontalSlider_MinDisp, SIGNAL(valueChanged(int)), EvisionClass, SLOT(valueChanged_MinDisp(int)));
         QObject::connect(horizontalSlider_uniradio, SIGNAL(valueChanged(int)), EvisionClass, SLOT(valueChanged_uniradio(int)));
         QObject::connect(horizontalSlider_specwinsz, SIGNAL(valueChanged(int)), EvisionClass, SLOT(valueChanged_specwinsz(int)));
-        QObject::connect(horizontalSlider_NumDisparities, SIGNAL(valueChanged(int)), EvisionClass, SLOT(paramChanged_NumDisparities(int)));
+        QObject::connect(horizontalSlider_NumDisparities, SIGNAL(valueChanged(int)), EvisionClass, SLOT(valueChanged_NumDisparities(int)));
         QObject::connect(horizontalSlider_specrange, SIGNAL(valueChanged(int)), EvisionClass, SLOT(valueChanged_Specrange(int)));
         QObject::connect(horizontalSlider_prefilcap, SIGNAL(valueChanged(int)), EvisionClass, SLOT(valueChanged_Prefilcap(int)));
         QObject::connect(horizontalSlider_SadWinSiz, SIGNAL(valueChanged(int)), EvisionClass, SLOT(valueChanged_SadWinSize(int)));
@@ -508,6 +512,7 @@ public:
         QObject::connect(actionDebug, SIGNAL(triggered()), EvisionClass, SLOT(onTestAlltheParam()));
         QObject::connect(radioButton_MODE_SGBM, SIGNAL(clicked(bool)), EvisionClass, SLOT(onClicked_MODE_SGBM(bool)));
         QObject::connect(radioButton_MODE_3WAY, SIGNAL(clicked(bool)), EvisionClass, SLOT(onClicked_MODE_3WAY(bool)));
+        QObject::connect(pushButton_RefreshStereoMatch, SIGNAL(clicked()), EvisionClass, SLOT(RefreshStereoMatch()));
 
         QMetaObject::connectSlotsByName(EvisionClass);
     } // setupUi
@@ -563,6 +568,7 @@ public:
         label_38->setText(QApplication::translate("EvisionClass", "\350\267\235\347\246\273\345\200\274:", nullptr));
         pushButton_RangeSinglePoint->setText(QApplication::translate("EvisionClass", "\346\265\213\351\207\217\345\205\211\345\255\246\344\270\255\345\277\203\345\210\260\347\233\256\346\240\207\347\202\271\347\232\204\350\267\235\347\246\273", nullptr));
         pushButton_RangeDualPoint->setText(QApplication::translate("EvisionClass", "\346\265\213\351\207\217\345\233\276\344\270\255\344\270\244\347\202\271\347\232\204\350\267\235\347\246\273", nullptr));
+        pushButton_RefreshStereoMatch->setText(QApplication::translate("EvisionClass", "\345\210\267\346\226\260", nullptr));
         menu->setTitle(QApplication::translate("EvisionClass", "\345\267\245\345\205\267", nullptr));
         menu_2->setTitle(QApplication::translate("EvisionClass", "\345\270\256\345\212\251", nullptr));
     } // retranslateUi

@@ -122,6 +122,7 @@ void EvisionController::setDefaultMatchParamCommand()
 		m_entity->setPrefilcap(63);
 		m_entity->setSadWinsz(25);
 		m_entity->setMaxdifdisp12(1);
+		m_entity->setMODE_HH(true);
 	}
 	else if (m_entity->getMODE_HH())
 	{
@@ -136,7 +137,7 @@ void EvisionController::setDefaultMatchParamCommand()
 
 void EvisionController::MatchCommand()
 {
-	QString ImageL, ImageR,insFile,extFile;
+	
 
 	QFileDialog * fileDialog = new QFileDialog();
 	fileDialog->setWindowTitle(QStringLiteral("ÇëÑ¡Ôñ×óÉãÏñÍ·ÅÄÉãµÄÍ¼Æ¬"));
@@ -170,6 +171,7 @@ void EvisionController::MatchCommand()
 								ImageR.toStdString(), insFile.toStdString(), extFile.toStdString());
 							connect(_stereoMatch, SIGNAL(openMessageBox(QString, QString)), this, SLOT(onOpenMessageBox(QString, QString)));
 							_stereoMatch->start();
+							
 						}
 						else
 						{
@@ -196,6 +198,14 @@ void EvisionController::MatchCommand()
 	{
 		return;
 	}
+}
+//Ë¢ÐÂ
+void EvisionController::RefreshStereoMatchCommand()
+{
+	StereoMatch *_stereoMatch = new StereoMatch(ImageL.toStdString(),
+		ImageR.toStdString(), insFile.toStdString(), extFile.toStdString());
+	connect(_stereoMatch, SIGNAL(openMessageBox(QString, QString)), this, SLOT(onOpenMessageBox(QString, QString)));
+	_stereoMatch->start();
 }
 
 //µ¯³ö¶Ô»°¿ò

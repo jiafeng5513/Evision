@@ -8,6 +8,7 @@ class EvisionController: public QObject
 private:
 	EvisionParamEntity * m_entity;
 	QStringList ImageListL, ImageListR;//从图片标定时需要的两组图片
+	QString ImageL, ImageR, insFile, extFile;
 public:
 	EvisionController(QObject *parent = Q_NULLPTR);
 	~EvisionController();
@@ -15,6 +16,7 @@ public:
 	void CalibrateCommand();
 	void setDefaultMatchParamCommand();
 	void MatchCommand();
+	void RefreshStereoMatchCommand();
 public slots:
 	void onOpenMessageBox(QString title, QString msg);
 };

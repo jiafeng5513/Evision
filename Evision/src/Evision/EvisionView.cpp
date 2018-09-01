@@ -39,7 +39,7 @@ EvisionView::EvisionView(QWidget *parent)
 	connect(m_entity, SIGNAL(paramChanged_MinDisp()), this, SLOT(onParamChanged_MinDisp()));
 	connect(m_entity, SIGNAL(paramChanged_Uniradio()), this, SLOT(onParamChanged_uniradio()));
 	connect(m_entity, SIGNAL(paramChanged_Specwinsz()), this, SLOT(onParamChanged_specwinsz()));
-	connect(m_entity, SIGNAL(paramChanged_NumDisparities()), this, SLOT(onParamChanged_MaxDisp()));
+	connect(m_entity, SIGNAL(paramChanged_NumDisparities()), this, SLOT(onParamChanged_NumDisparities()));
 	connect(m_entity, SIGNAL(paramChanged_Specrange()), this, SLOT(onParamChanged_Specrange()));
 	connect(m_entity, SIGNAL(paramChanged_Prefilcap()), this, SLOT(onParamChanged_Prefilcap()));
 	connect(m_entity, SIGNAL(paramChanged_SadWinsz()), this, SLOT(onParamChanged_SadWinSize()));
@@ -86,6 +86,12 @@ void EvisionView::getDistance()
 void EvisionView::getGap()
 {
 }
+//刷新匹配结果
+void EvisionView::RefreshStereoMatch()
+{
+	m_controller->RefreshStereoMatchCommand();
+}
+
 /*=============标定参数===============*/
 void EvisionView::onValueChanged_BoardWidth(QString value)
 {
@@ -425,7 +431,10 @@ void EvisionView::onTestAlltheParam()
 		<< "Maxdifdisp12:  " << m_entity->getMaxdifdisp12() << "\n"
 		<< "BM:  " << m_entity->getBM() << "\n"
 		<< "SGBM:  " << m_entity->getSGBM() << "\n"
-		<< "VAR:  " << m_entity->getMODE_HH() << "\n"
+		<< "Mode-HH:  " << m_entity->getMODE_HH() << "\n"
+		<< "Mode-SGBM:  " << m_entity->getMODE_SGBM() << "\n"
+		<< "Mode-3WAY:  " << m_entity->getMODE_3WAY() << "\n"
+
 		<< "Distance:  " << m_entity->getDistance();
 }
 //状态栏更新

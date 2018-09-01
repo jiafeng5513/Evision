@@ -187,7 +187,6 @@ void EvisionParamEntity::setBM(bool value)
 	if (value)
 	{
 		SGBM = false;
-		MODE_HH = false;
 	}
 	emit paramChanged_BM();
 }
@@ -202,7 +201,6 @@ void EvisionParamEntity::setSGBM(bool value)
 	if (value)
 	{
 		BM = false;
-		MODE_HH = false;
 	}
 	emit paramChanged_SGBM();
 }
@@ -216,8 +214,8 @@ void EvisionParamEntity::setMODE_HH(bool value)
 	MODE_HH = value;
 	if (value)
 	{
-		BM = false;
-		SGBM = false;
+		MODE_SGBM = false;
+		MODE_3WAY = false;
 	}
 	emit paramChanged_MODE_HH();
 }
