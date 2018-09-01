@@ -1,8 +1,9 @@
-双目视觉系统
+![image](https://github.com/AngelaViVi/BinocularVision/blob/master/src/EvisionLegacy/res/Evision.ico) Evision
 ===========
+#### 双目视觉系统
 
 Feature:
-===
+=========
 1. 双目测距<br>
 2. 标定,畸变校正<br>
 3. 三维点云获取<br>
@@ -12,13 +13,34 @@ Feature:
 
 Comming soon
 ===
-1. 准备写一个Qt的,界面简单实用简单,能用Cmake的版本<br>
-2. 写完之后这个东西就可以告一段落了<br>
-3. 希望这次能彻底解决大家开发环境的问题,我这次尽量让他不依赖与windows<br>
+1. 改repo的名字.<br>
+2. 修改B站视频和CSDN博客文章上的github链接.<br>
+3. 测距部分的优化.<br>
+4. 录制新的视频.<br>
+5. 发布release版本.<br>
+6. 链接持续集成工具.<br> 
+7. 更新博客:<br>
+> 1. 极线约束.<br>
+> 2. 标定方法原理.<br>
+> 3. 匹配方法原理,参数意义以及调整参数的方法.<br>
+> 4. 测距算法解释.<br>
+
 
 build
 ===
-#### MFC
+#### 路径说明
+1. `data`文件夹存储测试用例<br>
+2. `package`文件夹存储项目所需的依赖<br>
+3. `scripts`文件夹存储编译脚本,由于使用了VisualStudio宏,这些脚本不能直接运行.<br>
+4. `src`文件夹中存放工程目录和解决方案文件.<br>
+#### 工程说明
+使用VS2017打开`src/Evision.sln`,你将看到6个工程.
+1. calibration是标定的sample,是一个控制台程序.<br>
+2. imagelist_creator是文件序列化sample,控制台程序.<br>
+3. stereo_match是立体匹配sample,控制台程序.<br>
+4. EvisionLegacy是MFC版本的Evision主程序,GUI程序<br>
+5. Evision是Qt版的Evision主程序,GUI.<br>
+#### MFC(EvisionLegacy)
 1. OpenCV版本:2.4.13,解决方案文件夹已经内置了一个OpenCV<br>
 2. VS2017,兼容msvc15-2017,V140.v141工具集<br>
 3. 需要安装Windows 10 SDK<br>
@@ -30,7 +52,7 @@ build
 > 2. VS要安装如下组件:使用C++的桌面开发,windows 10 SDK (10.0.17134.0),Windows 通用C运行时,用于x86和x64的Visual C++ ATL,用于x86和x64的Visual C++ MFC,Visual C++核心功能,VC++2017版本15.8 v14.15最新v141工具集,Windows 通用CRT SDK,对C++的Windows XP支持.<br>
 > 3. 如果您没有安装上述组件,将会在编译运行中遇到不可预知的错误,若发生这些情况,请检查您的VS2017是否安装了上述组件.<br>
 8. 由于MFC程序年代久远,已经停止维护并且已经失去了可维护性,在这段时间内,OpenCV也已经发生了巨大的变化,本人强烈建议不要再使用MFC版本,更不要尝试修改或者扩展MFC的程序.目前,基于Qt的新程序已经基本开发完毕,届时MFC版本将会删除,项目也将会改名.<br>
-#### Qt
+#### Qt(Evision)
 1. Qt版本:Qt 5.11.1<br>
 2. Vs版本:2017<br>
 3. Opencv:3.4.1,程序自带依赖,不需要下载opencv,不要随意修改成其他版本,不保证能用.
