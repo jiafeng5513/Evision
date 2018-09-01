@@ -1,6 +1,6 @@
 <div align=center><img width="100" height="100" src="https://github.com/AngelaViVi/BinocularVision/blob/master/src/EvisionLegacy/res/Evision.ico"/></div>
 
-#### Evision 双目视觉系统
+<div align=center>Evision 双目视觉系统</div>
 
 Feature:
 =========
