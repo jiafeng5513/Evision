@@ -1,0 +1,736 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#ifndef APSTUDIO_INVOKED
+#include "targetver.h"
+#endif
+#include "afxres.h"
+#include "verrsrc.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 中文(简体，中国) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#ifndef APSTUDIO_INVOKED\r\n"
+    "#include ""targetver.h""\r\n"
+    "#endif\r\n"
+    "#include ""afxres.h""\r\n"
+    "#include ""verrsrc.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#include ""res\\SkyEyes.rc2""  // 非 Microsoft Visual C++ 编辑的资源\r\n"
+    "#include ""l.CHS\\afxres.rc""      // 标准组件\r\n"
+    "#if !defined(_AFXDLL)\r\n"
+    "#include ""l.CHS\\afxprint.rc""        // 打印/打印预览资源\r\n"
+    "#include ""l.CHS\\afxribbon.rc""        // MFC 功能区和控件条资源\r\n"
+    "#endif\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\SkyEyes.ico"
+
+IDR_SkyEyesTYPE         ICON                    "res\\SkyEyesDoc.ico"
+
+IDI_OUTPUT_WND          ICON                    "res\\output_wnd.ico"
+
+IDI_OUTPUT_WND_HC       ICON                    "res\\output_wnd_hc.ico"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
+
+IDR_MAINFRAME_256       BITMAP                  "res\\Toolbar256.bmp"
+
+IDB_MAIN                BITMAP                  "res\\main.bmp"
+
+IDB_FILELARGE           BITMAP                  "res\\filelarge.bmp"
+
+IDB_FILESMALL           BITMAP                  "res\\filesmall.bmp"
+
+IDB_WRITELARGE          BITMAP                  "res\\writelarge.bmp"
+
+IDB_WRITESMALL          BITMAP                  "res\\writesmall.bmp"
+
+IDB_BUTTONS             BITMAP                  "res\\buttons.bmp"
+
+IDB_BITMAP1             BITMAP                  "res\\main.bmp"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR 16, 15
+BEGIN
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    SEPARATOR
+    BUTTON      ID_EDIT_CUT
+    BUTTON      ID_EDIT_COPY
+    BUTTON      ID_EDIT_PASTE
+    SEPARATOR
+    BUTTON      ID_FILE_PRINT
+    BUTTON      ID_APP_ABOUT
+END
+
+IDR_MAINFRAME_256 TOOLBAR 16, 15
+BEGIN
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    SEPARATOR
+    BUTTON      ID_EDIT_CUT
+    BUTTON      ID_EDIT_COPY
+    BUTTON      ID_EDIT_PASTE
+    SEPARATOR
+    BUTTON      ID_FILE_PRINT
+    BUTTON      ID_APP_ABOUT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU
+BEGIN
+    POPUP "工程(&F)"
+    BEGIN
+        MENUITEM "新工程",                         ID_32806
+        MENUITEM "查看工作路径",                      ID_Menu
+        MENUITEM SEPARATOR
+        MENUITEM "最近的文件",                       ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "退出(&X)",                      ID_APP_EXIT
+    END
+    POPUP "视图(&V)"
+    BEGIN
+        MENUITEM "状态栏(&S)",                     ID_VIEW_STATUS_BAR
+        POPUP "应用程序外观(&A)"
+        BEGIN
+            MENUITEM "Windows 2000(&2)",            ID_VIEW_APPLOOK_WIN_2000
+            MENUITEM "Office XP(&X)",               ID_VIEW_APPLOOK_OFF_XP
+            MENUITEM "Windows XP(&W)",              ID_VIEW_APPLOOK_WIN_XP
+            MENUITEM "Office 2003(&3)",             ID_VIEW_APPLOOK_OFF_2003
+            MENUITEM "Visual Studio 200&5",         ID_VIEW_APPLOOK_VS_2005
+            MENUITEM "Visual Studio 200&8",         ID_VIEW_APPLOOK_VS_2008
+            POPUP "Office 2007(&7)"
+            BEGIN
+                MENUITEM "蓝色样式(&B)",                    ID_VIEW_APPLOOK_OFF_2007_BLUE
+                MENUITEM "黑色样式(&L)",                    ID_VIEW_APPLOOK_OFF_2007_BLACK
+                MENUITEM "银色样式(&S)",                    ID_VIEW_APPLOOK_OFF_2007_SILVER
+                MENUITEM "水绿色样式(&A)",                   ID_VIEW_APPLOOK_OFF_2007_AQUA
+            END
+        END
+    END
+    POPUP "帮助(&H)"
+    BEGIN
+        MENUITEM "关于 SkyEyes(&A)...",           ID_APP_ABOUT
+    END
+END
+
+IDR_POPUP_EDIT MENU
+BEGIN
+    POPUP "编辑"
+    BEGIN
+        MENUITEM "剪切(&T)\tCtrl+X",              ID_EDIT_CUT
+        MENUITEM "复制(&C)\tCtrl+C",              ID_EDIT_COPY
+        MENUITEM "粘贴(&P)\tCtrl+V",              ID_EDIT_PASTE
+    END
+END
+
+IDR_WINDOWS_MENU MENU
+BEGIN
+    MENUITEM "新建窗口(&N)",                    ID_WINDOW_NEW
+END
+
+IDR_OUTPUT_POPUP MENU
+BEGIN
+    POPUP "弹出项"
+    BEGIN
+        MENUITEM "复制(&C)",                      ID_EDIT_COPY
+        MENUITEM "清除(&C)",                      ID_EDIT_CLEAR
+        MENUITEM SEPARATOR
+        MENUITEM "隐藏(&H)",                      ID_VIEW_OUTPUTWND
+    END
+END
+
+IDR_HELP_MENU MENU
+BEGIN
+    MENUITEM "关于 SkyEyes(&A)...",           ID_APP_ABOUT
+END
+
+IDR_THEME_MENU MENU
+BEGIN
+    MENUITEM "Office 2007 (蓝色样式)(&B)",      ID_VIEW_APPLOOK_OFF_2007_BLUE
+    MENUITEM "Office 2007 (黑色样式)(&L)",      ID_VIEW_APPLOOK_OFF_2007_BLACK
+    MENUITEM "Office 2007 (银色样式)(&S)",      ID_VIEW_APPLOOK_OFF_2007_SILVER
+    MENUITEM "Office 2007 (水绿色样式)(&A)",     ID_VIEW_APPLOOK_OFF_2007_AQUA
+    MENUITEM "Windows 7(&D)",               ID_VIEW_APPLOOK_WINDOWS_7
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS
+BEGIN
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY 
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 209, 80
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "关于本程序 "
+FONT 9, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,14,14,20,20
+    LTEXT           "天眼测距系统(SkyEyes)，1.0 版",IDC_STATIC,60,14,114,8,SS_NOPREFIX
+    LTEXT           "Copyright (C) 2016",IDC_STATIC,60,58,114,8
+    DEFPUSHBUTTON   "确定",IDOK,152,55,50,14,WS_GROUP
+    LTEXT           "天使微积分工作室",IDC_STATIC,60,30,107,8
+    LTEXT           "联系方式:jiafeng5513@outlook.com",IDC_STATIC,60,44,112,8
+END
+
+IDD_SKYEYES_FORM DIALOGEX 0, 0, 396, 295
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 9, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_TAB,"SysTabControl32",0x0,205,149,182,137
+    CONTROL         "",IDC_PicLfCam,"Static",SS_BLACKFRAME,11,11,181,134
+    CONTROL         "",IDC_PicRiCam,"Static",SS_BLACKFRAME,205,10,181,134
+    CONTROL         "",IDC_PicSynImg,"Static",SS_BLACKFRAME,11,151,181,134
+END
+
+IDD_PARA1 DIALOGEX 0, 0, 223, 142
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    GROUPBOX        "标定盘参数",IDC_STATIC,10,7,194,65
+    EDITTEXT        IDC_BoardWidth,60,18,20,14,ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_BoardHeight,101,18,20,14,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "角点数量:",IDC_STATIC,18,22,36,8
+    LTEXT           "行",IDC_STATIC,87,21,9,8
+    LTEXT           "列",IDC_STATIC,126,20,9,8
+    LTEXT           "边长:",IDC_STATIC,142,20,20,8
+    EDITTEXT        IDC_SquareSize,162,17,29,14,ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_nBoards,60,38,21,14,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "迭代次数:",IDC_STATIC,18,41,36,8
+    GROUPBOX        "摄像头",IDC_STATIC,10,74,194,55
+    LTEXT           "α:",IDC_STATIC,89,40,8,8
+    EDITTEXT        IDC_Alpha,100,37,22,14,ES_AUTOHSCROLL
+    LTEXT           "(0.0~1.0,或-1)",IDC_STATIC,141,39,50,8
+    LTEXT           "标志位:",IDC_STATIC,19,57,28,8
+    CONTROL         "FPP",IDC_CHK_FPP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,60,56,28,10
+    CONTROL         "UIG",IDC_CHK_UIG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,89,56,28,10
+    CONTROL         "FAR",IDC_CHK_FAR,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,118,56,29,10
+    CONTROL         "SFL",IDC_CHK_SFL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,147,57,27,10
+    CONTROL         "FI",IDC_CHK_FI,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,176,57,23,10
+    LTEXT           "左镜头:",IDC_STATIC,17,86,28,8
+    LTEXT           "右镜头:",IDC_STATIC,17,101,28,8
+    LTEXT           "分辨率:",IDC_STATIC,17,116,28,8
+    COMBOBOX        IDC_CP1CamList_L,53,80,137,62,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_CP1CamList_R,53,98,137,53,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_CP1Resolution,53,113,137,53,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_PARA2 DIALOGEX 0, 0, 222, 137
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_SLIDER_minDisp,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,2,20,63,11
+    EDITTEXT        IDC_EDIT_minDisp,39,6,22,14,ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN | ES_NUMBER
+    LTEXT           "MinDisp",IDC_STATIC,4,7,25,8
+    CONTROL         "",IDC_SLIDER_maxDisp,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,2,46,63,11
+    EDITTEXT        IDC_EDIT_maxDisp,40,32,22,14,ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN | ES_NUMBER
+    LTEXT           "MaxDisp",IDC_STATIC,3,34,28,8
+    CONTROL         "",IDC_SLIDER_SADWinSiz,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,2,73,63,11
+    EDITTEXT        IDC_EDIT_SADWinSiz,40,57,22,14,ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN | ES_NUMBER
+    LTEXT           "SadWinSiz",IDC_STATIC,3,60,34,8
+    CONTROL         "",IDC_SLIDER_textThres,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,76,72,63,11
+    EDITTEXT        IDC_EDIT_textThres,113,58,22,14,ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN | ES_NUMBER
+    LTEXT           "textThread",IDC_STATIC,75,61,37,8
+    CONTROL         "",IDC_SLIDER_preFiltCap,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,145,47,63,11
+    EDITTEXT        IDC_EDIT_preFiltCap,186,31,22,14,ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN | ES_NUMBER
+    LTEXT           "prefilcap",IDC_STATIC,146,33,28,8
+    CONTROL         "",IDC_SLIDER_uniqRatio,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,75,19,63,11
+    EDITTEXT        IDC_EDIT_uniqRatio,114,5,22,14,ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN | ES_NUMBER
+    LTEXT           "uniradio",IDC_STATIC,76,8,26,8
+    CONTROL         "",IDC_SLIDER_speckRange,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,76,47,63,11
+    EDITTEXT        IDC_EDIT_speckRange,113,30,22,14,ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN | ES_NUMBER
+    LTEXT           "specrange",IDC_STATIC,76,33,34,8
+    CONTROL         "",IDC_SLIDER_speckWinSiz,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,145,19,63,11
+    EDITTEXT        IDC_EDIT_speckWinSiz,186,5,22,14,ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN | ES_NUMBER
+    LTEXT           "specwinsz",IDC_STATIC,147,7,33,8
+    LTEXT           "maxdifdisp12",IDC_STATIC,142,60,43,8
+    EDITTEXT        IDC_EDIT_disp12MaxDiff,186,59,22,13,ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN | ES_NUMBER
+    CONTROL         "",IDC_SLIDER_disp12MaxDiff,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,145,72,63,11
+    LTEXT           "Levels",IDC_STATIC,4,85,21,8
+    EDITTEXT        IDC_EDIT_Levels,40,82,22,14,ES_AUTOHSCROLL | ES_READONLY
+    CONTROL         "",IDC_SLIDER_Levels,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,2,96,63,11
+    LTEXT           "PolySigma",IDC_STATIC,5,111,33,8
+    EDITTEXT        IDC_EDIT_PolySigma,40,108,22,14,ES_AUTOHSCROLL | ES_READONLY
+    CONTROL         "",IDC_SLIDER_PolySigma,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,2,123,63,11
+    LTEXT           "pyrScale",IDC_STATIC,79,85,28,8
+    EDITTEXT        IDC_EDIT_PyrScale,113,82,22,14,ES_AUTOHSCROLL | ES_READONLY
+    CONTROL         "",IDC_SLIDER_PyrScale,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,76,96,63,11
+    LTEXT           "Fi",IDC_STATIC,79,110,8,8
+    EDITTEXT        IDC_EDIT_Fi,113,107,22,14,ES_AUTOHSCROLL | ES_READONLY
+    CONTROL         "",IDC_SLIDER_Fi,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,75,122,63,11
+    LTEXT           "PolyN",IDC_STATIC,149,86,19,8
+    EDITTEXT        IDC_EDIT_PolyN,186,82,22,14,ES_AUTOHSCROLL | ES_READONLY
+    CONTROL         "",IDC_SLIDER_PolyN,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,145,96,63,11
+    LTEXT           "Lambda",IDC_STATIC,148,110,26,8
+    EDITTEXT        IDC_EDIT_Lambda,186,107,22,14,ES_AUTOHSCROLL | ES_READONLY
+    CONTROL         "",IDC_SLIDER_Lambda,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,145,122,63,11
+END
+
+IDD_PARA3 DIALOGEX 0, 0, 222, 136
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    GROUPBOX        "距离信息",IDC_STATIC,12,11,193,40
+    LTEXT           "目标距离 :",IDC_STATIC,35,28,38,8
+    EDITTEXT        IDC_e7ObjDist,94,26,89,15,ES_AUTOHSCROLL | ES_READONLY
+    GROUPBOX        "坐标信息",IDC_STATIC,12,56,194,71
+    LTEXT           "图像坐标系:",IDC_STATIC,21,72,44,8
+    LTEXT           "世界坐标系:",IDC_STATIC,20,89,44,8
+    LTEXT           "X:",IDC_STATIC,68,73,8,8
+    LTEXT           "Y:",IDC_STATIC,116,74,8,8
+    LTEXT           "X:",IDC_STATIC,68,90,8,8
+    LTEXT           "Y:",IDC_STATIC,115,91,8,8
+    LTEXT           "Z:",IDC_STATIC,160,90,8,8
+    EDITTEXT        IDC_EDIT_ImageX,79,71,30,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT_ImageY,124,71,30,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT_WorldX,79,89,30,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT_WorldY,124,88,30,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT_WorldZ,170,88,29,14,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "世界坐标系的量纲取决于标定板参数中""边长""的量纲",IDC_STATIC,18,108,182,8
+END
+
+IDD_NewProject DIALOGEX 0, 0, 255, 68
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "新建工程"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,7,48,50,14
+    PUSHBUTTON      "取消",IDCANCEL,198,47,50,14
+    EDITTEXT        IDC_EDIT_ProjectName,59,24,176,14,ES_AUTOHSCROLL
+    LTEXT           "新工程名:",IDC_STATIC,19,27,36,8
+    LTEXT           "提示:将会覆盖同名文件夹!",IDC_STATIC,19,10,94,8
+END
+
+IDD_PARA4 DIALOGEX 0, 0, 223, 135
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "左镜头:",IDC_STATIC,26,16,28,8
+    LTEXT           "右镜头:",IDC_STATIC,26,31,28,8
+    LTEXT           "分辨率:",IDC_STATIC,26,46,28,8
+    GROUPBOX        "摄像头",IDC_STATIC,12,6,191,59
+    GROUPBOX        "帧处理",IDC_STATIC,10,66,193,62
+    LTEXT           "处理方式:",IDC_STATIC,22,76,36,8
+    GROUPBOX        "色彩空间变换",IDC_STATIC,17,88,178,36
+    CONTROL         "RGB2HSV",IDC_RAD_ToHSV,"Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,24,99,46,10
+    CONTROL         "RGB2LAB",IDC_RAD_ToLab,"Button",BS_AUTORADIOBUTTON | WS_TABSTOP,24,112,45,10
+    CONTROL         "RGB2HLS",IDC_RAD_ToHLS,"Button",BS_AUTORADIOBUTTON | WS_TABSTOP,82,99,45,10
+    CONTROL         "RGB2LUV",IDC_RAD_ToLuv,"Button",BS_AUTORADIOBUTTON | WS_TABSTOP,82,112,45,10
+    CONTROL         "RGB2YCrCb",IDC_RAD_ToYCrCb,"Button",BS_AUTORADIOBUTTON | WS_TABSTOP,140,99,53,10
+    CONTROL         "RGB2XYZ",IDC_RAD_ToXYZ,"Button",BS_AUTORADIOBUTTON | WS_TABSTOP,140,112,45,10
+    COMBOBOX        IDC_CP4CamList_L,71,14,114,47,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_CP4CamList_R,71,30,113,55,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_CP4Resolution,71,47,114,44,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_CP4MethodList,70,74,115,63,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,1626,0
+ PRODUCTVERSION 1,0,1626,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080404b0"
+        BEGIN
+            VALUE "CompanyName", "TODO:  <天使微积分工作室>"
+            VALUE "FileDescription", "SkyEyes"
+            VALUE "FileVersion", "1.0.1626.0"
+            VALUE "InternalName", "SkyEyes.exe"
+            VALUE "LegalCopyright", "TODO:  (C) <天使微积分工作室>。  保留所有权利。"
+            VALUE "OriginalFilename", "SkyEyes.exe"
+            VALUE "ProductName", "TODO:  <天眼测距系统>"
+            VALUE "ProductVersion", "1.0.1626.0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 202
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 73
+    END
+
+    IDD_SKYEYES_FORM, DIALOG
+    BEGIN
+        LEFTMARGIN, 6
+        RIGHTMARGIN, 389
+        TOPMARGIN, 8
+        BOTTOMMARGIN, 288
+    END
+
+    IDD_PARA1, DIALOG
+    BEGIN
+    END
+
+    IDD_PARA2, DIALOG
+    BEGIN
+    END
+
+    IDD_PARA3, DIALOG
+    BEGIN
+    END
+
+    IDD_NewProject, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 248
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 61
+    END
+
+    IDD_PARA4, DIALOG
+    BEGIN
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Ribbon
+//
+
+IDR_RIBBON              RT_RIBBON_XML           "res\\ribbon.mfcribbon-ms"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_PARA1 DLGINIT
+BEGIN
+    IDC_CP1Resolution, 0x403, 11, 0
+0x3931, 0x3032, 0xc1a1, 0x3031, 0x3038, "\000" 
+    IDC_CP1Resolution, 0x403, 9, 0
+0x3533, 0xa132, 0x32c1, 0x3838, "\000" 
+    IDC_CP1Resolution, 0x403, 9, 0
+0x3233, 0xa130, 0x32c1, 0x3034, "\000" 
+    0
+END
+
+IDD_PARA4 DLGINIT
+BEGIN
+    IDC_CP4Resolution, 0x403, 9, 0
+0x3436, 0xa130, 0x34c1, 0x3038, "\000" 
+    IDC_CP4Resolution, 0x403, 9, 0
+0x3533, 0xa132, 0x32c1, 0x3838, "\000" 
+    IDC_CP4Resolution, 0x403, 9, 0
+0x3233, 0xa130, 0x32c1, 0x3034, "\000" 
+    IDC_CP4MethodList, 0x403, 13, 0
+0xd4cf, 0xbeca, 0xadd4, 0xbcca, 0xadbb, 0xe6c3, "\000" 
+    IDC_CP4MethodList, 0x403, 14, 0
+0x6143, 0x6e6e, 0xb179, 0xd4df, 0xbcb5, 0xb2ec, 0x00e2, 
+    IDC_CP4MethodList, 0x403, 11, 0
+0xb1d6, 0xbdb7, 0xbccd, 0xf9be, 0xe2ba, "\000" 
+    IDC_CP4MethodList, 0x403, 13, 0
+0xabc9, 0xcab2, 0xd5bf, 0xe4bc, 0xe4b1, 0xbbbb, "\000" 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_PARA1 AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDP_OLE_INIT_FAILED     "OLE 初始化失败。  请确保 OLE 库是正确的版本。"
+END
+
+STRINGTABLE
+BEGIN
+    IDR_MAINFRAME           "SkyEyes\n\nSkyEyes\nSkyEyes Files (*.xml)\n.xml\nSkyEyes.Document\nSkyEyes.Document"
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_APP_TITLE       "Evision-Legacy"
+    AFX_IDS_IDLEMESSAGE     "就绪"
+END
+
+STRINGTABLE
+BEGIN
+    ID_INDICATOR_EXT        "EXT"
+    ID_INDICATOR_CAPS       "CAP"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "SCRL"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "REC"
+END
+
+STRINGTABLE
+BEGIN
+    ID_FILE_NEW             "创建新文档\n新建"
+    ID_FILE_OPEN            "打开现有文档\n打开"
+    ID_FILE_CLOSE           "关闭活动文档\n关闭"
+    ID_FILE_SAVE            "保存活动文档\n保存"
+    ID_FILE_SAVE_AS         "用新名称保存活动文档\n另存为"
+END
+
+STRINGTABLE
+BEGIN
+    ID_APP_ABOUT            "显示程序信息、版本号和版权信息\n关于"
+    ID_APP_EXIT             "退出应用程序；提示保存文档\n退出"
+END
+
+STRINGTABLE
+BEGIN
+    ID_FILE_MRU_FILE1       "打开此文档"
+    ID_FILE_MRU_FILE2       "打开此文档"
+    ID_FILE_MRU_FILE3       "打开此文档"
+    ID_FILE_MRU_FILE4       "打开此文档"
+    ID_FILE_MRU_FILE5       "打开此文档"
+    ID_FILE_MRU_FILE6       "打开此文档"
+    ID_FILE_MRU_FILE7       "打开此文档"
+    ID_FILE_MRU_FILE8       "打开此文档"
+    ID_FILE_MRU_FILE9       "打开此文档"
+    ID_FILE_MRU_FILE10      "打开此文档"
+    ID_FILE_MRU_FILE11      "打开此文档"
+    ID_FILE_MRU_FILE12      "打开此文档"
+    ID_FILE_MRU_FILE13      "打开此文档"
+    ID_FILE_MRU_FILE14      "打开此文档"
+    ID_FILE_MRU_FILE15      "打开此文档"
+    ID_FILE_MRU_FILE16      "打开此文档"
+END
+
+STRINGTABLE
+BEGIN
+    ID_NEXT_PANE            "切换到下一个窗格\n下一窗格"
+    ID_PREV_PANE            "切换回上一个窗格\n上一窗格"
+END
+
+STRINGTABLE
+BEGIN
+    ID_WINDOW_SPLIT         "将活动窗口拆分为多个窗格\n拆分"
+END
+
+STRINGTABLE
+BEGIN
+    ID_EDIT_CLEAR           "清除所选内容\n清除"
+    ID_EDIT_CLEAR_ALL       "清除全部内容\n全部清除"
+    ID_EDIT_COPY            "复制所选内容，将其放入剪贴板\n复制"
+    ID_EDIT_CUT             "剪切所选内容，将其放入剪贴板\n剪切"
+    ID_EDIT_FIND            "查找指定的文本\n查找"
+    ID_EDIT_PASTE           "插入剪贴板内容\n粘贴"
+    ID_EDIT_REPEAT          "重复上一操作\n重复"
+    ID_EDIT_REPLACE         "用其他文本替换特定的文本\n替换"
+    ID_EDIT_SELECT_ALL      "选定整个文档\n全选"
+    ID_EDIT_UNDO            "撤消上一操作\n撤消"
+    ID_EDIT_REDO            "重做上次撤消的操作\n重做"
+END
+
+STRINGTABLE
+BEGIN
+    ID_VIEW_TOOLBAR         "显示或隐藏工具栏\n切换工具栏"
+    ID_VIEW_STATUS_BAR      "显示或隐藏状态栏\n切换状态栏"
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_SCSIZE          "更改窗口大小"
+    AFX_IDS_SCMOVE          "更改窗口位置"
+    AFX_IDS_SCMINIMIZE      "将窗口缩小成图标"
+    AFX_IDS_SCMAXIMIZE      "将窗口放大到最大尺寸"
+    AFX_IDS_SCNEXTWINDOW    "切换到下一个文档窗口"
+    AFX_IDS_SCPREVWINDOW    "切换到上一个文档窗口"
+    AFX_IDS_SCCLOSE         "关闭活动窗口并提示保存文档"
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_SCRESTORE       "将窗口恢复到正常大小"
+    AFX_IDS_SCTASKLIST      "激活任务列表"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_STATUS_PANE1        "窗格 1"
+    IDS_STATUS_PANE2        "窗格 2"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_OUTPUT_WND          "输出"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_BUILD_TAB           "生成"
+    IDS_DEBUG_TAB           "调试"
+    IDS_FIND_TAB            "查找"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_EDIT_MENU           "编辑"
+END
+
+STRINGTABLE
+BEGIN
+    ID_NewProject           "新建一个测距工程\n新建"
+    ID_OpenPath             "查看当前的工作目录\n查看"
+    ID_HelpDoc              "打开帮助文档\n帮助"
+    ID_OpenProject          "打开以前建立的工程\n打开"
+    ID_CloseProject         "关闭当前工程\n关闭"
+END
+
+#endif    // 中文(简体，中国) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+LANGUAGE 4, 2
+#include "res\SkyEyes.rc2"  // 非 Microsoft Visual C++ 编辑的资源
+#include "l.CHS\afxres.rc"      // 标准组件
+#if !defined(_AFXDLL)
+#include "l.CHS\afxprint.rc"        // 打印/打印预览资源
+#include "l.CHS\afxribbon.rc"        // MFC 功能区和控件条资源
+#endif
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
