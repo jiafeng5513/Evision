@@ -17,6 +17,7 @@
 #include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
@@ -70,12 +71,14 @@ public:
     QLabel *label_35;
     QLabel *label_40;
     QGroupBox *groupBox_8;
-    QRadioButton *radioButton_MODE_SGBM;
-    QRadioButton *radioButton_MODE_3WAY;
+    QHBoxLayout *horizontalLayout;
     QRadioButton *radioButton_MODE_HH;
+    QRadioButton *radioButton_MODE_3WAY;
+    QRadioButton *radioButton_MODE_SGBM;
     QGroupBox *groupBox_9;
-    QRadioButton *radioButton_BM;
+    QHBoxLayout *horizontalLayout_2;
     QRadioButton *radioButton_SGBM;
+    QRadioButton *radioButton_BM;
     QSlider *horizontalSlider_uniradio;
     QLineEdit *lineEdit_uniradio;
     QSlider *horizontalSlider_prefilcap;
@@ -97,14 +100,9 @@ public:
     QFrame *line;
     QPushButton *pushButton_MatchDefault;
     QPushButton *pushButton_MatchChooseFiles;
-    QGroupBox *groupBox_3;
-    QGridLayout *gridLayout_3;
-    QLabel *label_38;
-    QLineEdit *lineEdit_Result;
-    QPushButton *pushButton_RangeSinglePoint;
-    QPushButton *pushButton_RangeDualPoint;
     QFrame *line_2;
     QPushButton *pushButton_RefreshStereoMatch;
+    QPushButton *pushButton_RangeSinglePoint;
     QMenuBar *menuBar;
     QMenu *menu;
     QMenu *menu_2;
@@ -115,14 +113,14 @@ public:
     {
         if (EvisionClass->objectName().isEmpty())
             EvisionClass->setObjectName(QStringLiteral("EvisionClass"));
-        EvisionClass->resize(1000, 630);
+        EvisionClass->resize(1000, 580);
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(EvisionClass->sizePolicy().hasHeightForWidth());
         EvisionClass->setSizePolicy(sizePolicy);
-        EvisionClass->setMinimumSize(QSize(1000, 630));
-        EvisionClass->setMaximumSize(QSize(1000, 630));
+        EvisionClass->setMinimumSize(QSize(1000, 580));
+        EvisionClass->setMaximumSize(QSize(1000, 580));
         action = new QAction(EvisionClass);
         action->setObjectName(QStringLiteral("action"));
         action_2 = new QAction(EvisionClass);
@@ -156,7 +154,7 @@ public:
         graphicsView_D->setGeometry(QRect(670, 10, 320, 240));
         groupBox = new QGroupBox(centralWidget);
         groupBox->setObjectName(QStringLiteral("groupBox"));
-        groupBox->setGeometry(QRect(10, 260, 321, 221));
+        groupBox->setGeometry(QRect(10, 260, 321, 181));
         gridLayout = new QGridLayout(groupBox);
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
@@ -214,7 +212,7 @@ public:
 
         groupBox_4 = new QGroupBox(centralWidget);
         groupBox_4->setObjectName(QStringLiteral("groupBox_4"));
-        groupBox_4->setGeometry(QRect(10, 480, 321, 91));
+        groupBox_4->setGeometry(QRect(10, 440, 321, 81));
         gridLayout_5 = new QGridLayout(groupBox_4);
         gridLayout_5->setSpacing(6);
         gridLayout_5->setContentsMargins(11, 11, 11, 11);
@@ -231,7 +229,7 @@ public:
 
         groupBox_6 = new QGroupBox(centralWidget);
         groupBox_6->setObjectName(QStringLiteral("groupBox_6"));
-        groupBox_6->setGeometry(QRect(340, 260, 651, 311));
+        groupBox_6->setGeometry(QRect(340, 260, 651, 261));
         label_36 = new QLabel(groupBox_6);
         label_36->setObjectName(QStringLiteral("label_36"));
         label_36->setGeometry(QRect(20, 110, 316, 29));
@@ -245,7 +243,7 @@ public:
         label_42->setGeometry(QRect(340, 60, 228, 16));
         label_43 = new QLabel(groupBox_6);
         label_43->setObjectName(QStringLiteral("label_43"));
-        label_43->setGeometry(QRect(340, 110, 234, 16));
+        label_43->setGeometry(QRect(340, 100, 234, 16));
         label_44 = new QLabel(groupBox_6);
         label_44->setObjectName(QStringLiteral("label_44"));
         label_44->setGeometry(QRect(340, 20, 168, 16));
@@ -256,10 +254,10 @@ public:
         label_37->setMaximumSize(QSize(310, 29));
         label_41 = new QLabel(groupBox_6);
         label_41->setObjectName(QStringLiteral("label_41"));
-        label_41->setGeometry(QRect(20, 220, 161, 16));
+        label_41->setGeometry(QRect(20, 210, 161, 16));
         label_35 = new QLabel(groupBox_6);
         label_35->setObjectName(QStringLiteral("label_35"));
-        label_35->setGeometry(QRect(20, 260, 241, 16));
+        label_35->setGeometry(QRect(340, 140, 241, 16));
         label_40 = new QLabel(groupBox_6);
         label_40->setObjectName(QStringLiteral("label_40"));
         label_40->setGeometry(QRect(20, 10, 316, 29));
@@ -267,25 +265,43 @@ public:
         label_40->setMaximumSize(QSize(316, 29));
         groupBox_8 = new QGroupBox(groupBox_6);
         groupBox_8->setObjectName(QStringLiteral("groupBox_8"));
-        groupBox_8->setGeometry(QRect(340, 220, 71, 80));
-        radioButton_MODE_SGBM = new QRadioButton(groupBox_8);
-        radioButton_MODE_SGBM->setObjectName(QStringLiteral("radioButton_MODE_SGBM"));
-        radioButton_MODE_SGBM->setGeometry(QRect(10, 40, 47, 16));
-        radioButton_MODE_3WAY = new QRadioButton(groupBox_8);
-        radioButton_MODE_3WAY->setObjectName(QStringLiteral("radioButton_MODE_3WAY"));
-        radioButton_MODE_3WAY->setGeometry(QRect(10, 60, 47, 16));
+        groupBox_8->setGeometry(QRect(460, 180, 171, 48));
+        horizontalLayout = new QHBoxLayout(groupBox_8);
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         radioButton_MODE_HH = new QRadioButton(groupBox_8);
         radioButton_MODE_HH->setObjectName(QStringLiteral("radioButton_MODE_HH"));
-        radioButton_MODE_HH->setGeometry(QRect(10, 20, 51, 16));
+
+        horizontalLayout->addWidget(radioButton_MODE_HH);
+
+        radioButton_MODE_3WAY = new QRadioButton(groupBox_8);
+        radioButton_MODE_3WAY->setObjectName(QStringLiteral("radioButton_MODE_3WAY"));
+
+        horizontalLayout->addWidget(radioButton_MODE_3WAY);
+
+        radioButton_MODE_SGBM = new QRadioButton(groupBox_8);
+        radioButton_MODE_SGBM->setObjectName(QStringLiteral("radioButton_MODE_SGBM"));
+
+        horizontalLayout->addWidget(radioButton_MODE_SGBM);
+
         groupBox_9 = new QGroupBox(groupBox_6);
         groupBox_9->setObjectName(QStringLiteral("groupBox_9"));
-        groupBox_9->setGeometry(QRect(340, 160, 71, 61));
-        radioButton_BM = new QRadioButton(groupBox_9);
-        radioButton_BM->setObjectName(QStringLiteral("radioButton_BM"));
-        radioButton_BM->setGeometry(QRect(10, 20, 51, 16));
+        groupBox_9->setGeometry(QRect(340, 180, 108, 48));
+        horizontalLayout_2 = new QHBoxLayout(groupBox_9);
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         radioButton_SGBM = new QRadioButton(groupBox_9);
         radioButton_SGBM->setObjectName(QStringLiteral("radioButton_SGBM"));
-        radioButton_SGBM->setGeometry(QRect(10, 40, 51, 16));
+
+        horizontalLayout_2->addWidget(radioButton_SGBM);
+
+        radioButton_BM = new QRadioButton(groupBox_9);
+        radioButton_BM->setObjectName(QStringLiteral("radioButton_BM"));
+
+        horizontalLayout_2->addWidget(radioButton_BM);
+
         horizontalSlider_uniradio = new QSlider(groupBox_6);
         horizontalSlider_uniradio->setObjectName(QStringLiteral("horizontalSlider_uniradio"));
         horizontalSlider_uniradio->setGeometry(QRect(60, 40, 231, 20));
@@ -343,7 +359,7 @@ public:
         lineEdit_SadWinSiz->setReadOnly(true);
         horizontalSlider_MinDisp = new QSlider(groupBox_6);
         horizontalSlider_MinDisp->setObjectName(QStringLiteral("horizontalSlider_MinDisp"));
-        horizontalSlider_MinDisp->setGeometry(QRect(60, 240, 231, 20));
+        horizontalSlider_MinDisp->setGeometry(QRect(60, 230, 231, 20));
         horizontalSlider_MinDisp->setMinimumSize(QSize(0, 20));
         horizontalSlider_MinDisp->setMaximumSize(QSize(16777215, 15));
         horizontalSlider_MinDisp->setMinimum(-64);
@@ -351,20 +367,20 @@ public:
         horizontalSlider_MinDisp->setOrientation(Qt::Horizontal);
         lineEdit_MinDisp = new QLineEdit(groupBox_6);
         lineEdit_MinDisp->setObjectName(QStringLiteral("lineEdit_MinDisp"));
-        lineEdit_MinDisp->setGeometry(QRect(20, 240, 35, 20));
+        lineEdit_MinDisp->setGeometry(QRect(20, 230, 35, 20));
         lineEdit_MinDisp->setMinimumSize(QSize(35, 20));
         lineEdit_MinDisp->setMaximumSize(QSize(30, 20));
         lineEdit_MinDisp->setReadOnly(true);
         horizontalSlider_textThread = new QSlider(groupBox_6);
         horizontalSlider_textThread->setObjectName(QStringLiteral("horizontalSlider_textThread"));
-        horizontalSlider_textThread->setGeometry(QRect(60, 280, 231, 20));
+        horizontalSlider_textThread->setGeometry(QRect(380, 160, 251, 20));
         horizontalSlider_textThread->setMinimumSize(QSize(0, 20));
         horizontalSlider_textThread->setMaximumSize(QSize(16777215, 15));
         horizontalSlider_textThread->setMaximum(50);
         horizontalSlider_textThread->setOrientation(Qt::Horizontal);
         lineEdit_textThread = new QLineEdit(groupBox_6);
         lineEdit_textThread->setObjectName(QStringLiteral("lineEdit_textThread"));
-        lineEdit_textThread->setGeometry(QRect(20, 280, 35, 20));
+        lineEdit_textThread->setGeometry(QRect(340, 160, 35, 20));
         lineEdit_textThread->setMinimumSize(QSize(35, 20));
         lineEdit_textThread->setMaximumSize(QSize(30, 20));
         lineEdit_textThread->setReadOnly(true);
@@ -398,7 +414,7 @@ public:
         lineEdit_specrange->setReadOnly(true);
         horizontalSlider_maxdifdisp12 = new QSlider(groupBox_6);
         horizontalSlider_maxdifdisp12->setObjectName(QStringLiteral("horizontalSlider_maxdifdisp12"));
-        horizontalSlider_maxdifdisp12->setGeometry(QRect(380, 130, 251, 20));
+        horizontalSlider_maxdifdisp12->setGeometry(QRect(380, 120, 251, 20));
         horizontalSlider_maxdifdisp12->setMinimumSize(QSize(0, 20));
         horizontalSlider_maxdifdisp12->setMaximumSize(QSize(16777215, 15));
         horizontalSlider_maxdifdisp12->setMinimum(-1);
@@ -406,59 +422,34 @@ public:
         horizontalSlider_maxdifdisp12->setOrientation(Qt::Horizontal);
         lineEdit_maxdifdisp12 = new QLineEdit(groupBox_6);
         lineEdit_maxdifdisp12->setObjectName(QStringLiteral("lineEdit_maxdifdisp12"));
-        lineEdit_maxdifdisp12->setGeometry(QRect(340, 130, 35, 20));
+        lineEdit_maxdifdisp12->setGeometry(QRect(340, 120, 35, 20));
         lineEdit_maxdifdisp12->setMinimumSize(QSize(35, 20));
         lineEdit_maxdifdisp12->setMaximumSize(QSize(30, 20));
         lineEdit_maxdifdisp12->setReadOnly(true);
         line = new QFrame(groupBox_6);
         line->setObjectName(QStringLiteral("line"));
-        line->setGeometry(QRect(310, 20, 20, 281));
+        line->setGeometry(QRect(310, 20, 20, 231));
         line->setFrameShape(QFrame::VLine);
         line->setFrameShadow(QFrame::Sunken);
         pushButton_MatchDefault = new QPushButton(groupBox_6);
         pushButton_MatchDefault->setObjectName(QStringLiteral("pushButton_MatchDefault"));
-        pushButton_MatchDefault->setGeometry(QRect(420, 160, 71, 23));
+        pushButton_MatchDefault->setGeometry(QRect(340, 230, 71, 23));
         pushButton_MatchDefault->setMinimumSize(QSize(0, 20));
         pushButton_MatchChooseFiles = new QPushButton(groupBox_6);
         pushButton_MatchChooseFiles->setObjectName(QStringLiteral("pushButton_MatchChooseFiles"));
-        pushButton_MatchChooseFiles->setGeometry(QRect(500, 160, 71, 23));
+        pushButton_MatchChooseFiles->setGeometry(QRect(420, 230, 71, 23));
         pushButton_MatchChooseFiles->setMinimumSize(QSize(0, 20));
-        groupBox_3 = new QGroupBox(groupBox_6);
-        groupBox_3->setObjectName(QStringLiteral("groupBox_3"));
-        groupBox_3->setGeometry(QRect(420, 190, 221, 111));
-        gridLayout_3 = new QGridLayout(groupBox_3);
-        gridLayout_3->setSpacing(6);
-        gridLayout_3->setContentsMargins(11, 11, 11, 11);
-        gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
-        label_38 = new QLabel(groupBox_3);
-        label_38->setObjectName(QStringLiteral("label_38"));
-
-        gridLayout_3->addWidget(label_38, 2, 0, 1, 1);
-
-        lineEdit_Result = new QLineEdit(groupBox_3);
-        lineEdit_Result->setObjectName(QStringLiteral("lineEdit_Result"));
-        lineEdit_Result->setReadOnly(true);
-
-        gridLayout_3->addWidget(lineEdit_Result, 2, 1, 1, 1);
-
-        pushButton_RangeSinglePoint = new QPushButton(groupBox_3);
-        pushButton_RangeSinglePoint->setObjectName(QStringLiteral("pushButton_RangeSinglePoint"));
-
-        gridLayout_3->addWidget(pushButton_RangeSinglePoint, 0, 0, 1, 2);
-
-        pushButton_RangeDualPoint = new QPushButton(groupBox_3);
-        pushButton_RangeDualPoint->setObjectName(QStringLiteral("pushButton_RangeDualPoint"));
-
-        gridLayout_3->addWidget(pushButton_RangeDualPoint, 1, 0, 1, 2);
-
         line_2 = new QFrame(groupBox_6);
         line_2->setObjectName(QStringLiteral("line_2"));
-        line_2->setGeometry(QRect(320, 20, 20, 281));
+        line_2->setGeometry(QRect(320, 20, 20, 231));
         line_2->setFrameShape(QFrame::VLine);
         line_2->setFrameShadow(QFrame::Sunken);
         pushButton_RefreshStereoMatch = new QPushButton(groupBox_6);
         pushButton_RefreshStereoMatch->setObjectName(QStringLiteral("pushButton_RefreshStereoMatch"));
-        pushButton_RefreshStereoMatch->setGeometry(QRect(580, 160, 61, 23));
+        pushButton_RefreshStereoMatch->setGeometry(QRect(500, 230, 61, 23));
+        pushButton_RangeSinglePoint = new QPushButton(groupBox_6);
+        pushButton_RangeSinglePoint->setObjectName(QStringLiteral("pushButton_RangeSinglePoint"));
+        pushButton_RangeSinglePoint->setGeometry(QRect(570, 230, 71, 23));
         EvisionClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(EvisionClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -490,7 +481,6 @@ public:
         QObject::connect(pushButton_MatchDefault, SIGNAL(clicked()), EvisionClass, SLOT(setDefaultMatchParam()));
         QObject::connect(pushButton_MatchChooseFiles, SIGNAL(clicked()), EvisionClass, SLOT(doMatch()));
         QObject::connect(pushButton_RangeSinglePoint, SIGNAL(clicked()), EvisionClass, SLOT(getDistance()));
-        QObject::connect(pushButton_RangeDualPoint, SIGNAL(clicked()), EvisionClass, SLOT(getGap()));
         QObject::connect(lineEdit_BoardWidth, SIGNAL(textChanged(QString)), EvisionClass, SLOT(onValueChanged_BoardWidth(QString)));
         QObject::connect(lineEdit_BoardHeight, SIGNAL(textChanged(QString)), EvisionClass, SLOT(onValueChanged_BoardHeight(QString)));
         QObject::connect(lineEdit_SquareSize, SIGNAL(textChanged(QString)), EvisionClass, SLOT(onValueChanged_SquareSize(QString)));
@@ -547,12 +537,12 @@ public:
         label_35->setText(QApplication::translate("EvisionClass", "TextureThreshold(\344\275\216\347\272\271\347\220\206\345\214\272\345\237\237\347\232\204\345\210\244\346\226\255\351\230\210\345\200\274)", nullptr));
         label_40->setText(QApplication::translate("EvisionClass", "uniquenessRatio(\350\247\206\345\267\256\345\224\257\344\270\200\346\200\247\347\231\276\345\210\206\346\257\224)", nullptr));
         groupBox_8->setTitle(QApplication::translate("EvisionClass", "MODE", nullptr));
-        radioButton_MODE_SGBM->setText(QApplication::translate("EvisionClass", "SGBM", nullptr));
-        radioButton_MODE_3WAY->setText(QApplication::translate("EvisionClass", "3WAY", nullptr));
         radioButton_MODE_HH->setText(QApplication::translate("EvisionClass", "HH", nullptr));
+        radioButton_MODE_3WAY->setText(QApplication::translate("EvisionClass", "3WAY", nullptr));
+        radioButton_MODE_SGBM->setText(QApplication::translate("EvisionClass", "SGBM", nullptr));
         groupBox_9->setTitle(QApplication::translate("EvisionClass", "Function", nullptr));
-        radioButton_BM->setText(QApplication::translate("EvisionClass", "BM", nullptr));
         radioButton_SGBM->setText(QApplication::translate("EvisionClass", "SGBM", nullptr));
+        radioButton_BM->setText(QApplication::translate("EvisionClass", "BM", nullptr));
         lineEdit_uniradio->setPlaceholderText(QApplication::translate("EvisionClass", "0", nullptr));
         lineEdit_prefilcap->setPlaceholderText(QApplication::translate("EvisionClass", "1", nullptr));
         lineEdit_specwinsz->setPlaceholderText(QApplication::translate("EvisionClass", "0", nullptr));
@@ -564,11 +554,8 @@ public:
         lineEdit_maxdifdisp12->setPlaceholderText(QApplication::translate("EvisionClass", "0", nullptr));
         pushButton_MatchDefault->setText(QApplication::translate("EvisionClass", "\351\273\230\350\256\244\345\217\202\346\225\260", nullptr));
         pushButton_MatchChooseFiles->setText(QApplication::translate("EvisionClass", "\345\217\214\347\233\256\345\214\271\351\205\215", nullptr));
-        groupBox_3->setTitle(QApplication::translate("EvisionClass", "\346\265\213\350\267\235", nullptr));
-        label_38->setText(QApplication::translate("EvisionClass", "\350\267\235\347\246\273\345\200\274:", nullptr));
-        pushButton_RangeSinglePoint->setText(QApplication::translate("EvisionClass", "\346\265\213\351\207\217\345\205\211\345\255\246\344\270\255\345\277\203\345\210\260\347\233\256\346\240\207\347\202\271\347\232\204\350\267\235\347\246\273", nullptr));
-        pushButton_RangeDualPoint->setText(QApplication::translate("EvisionClass", "\346\265\213\351\207\217\345\233\276\344\270\255\344\270\244\347\202\271\347\232\204\350\267\235\347\246\273", nullptr));
         pushButton_RefreshStereoMatch->setText(QApplication::translate("EvisionClass", "\345\210\267\346\226\260", nullptr));
+        pushButton_RangeSinglePoint->setText(QApplication::translate("EvisionClass", "\346\265\213\351\207\217", nullptr));
         menu->setTitle(QApplication::translate("EvisionClass", "\345\267\245\345\205\267", nullptr));
         menu_2->setTitle(QApplication::translate("EvisionClass", "\345\270\256\345\212\251", nullptr));
     } // retranslateUi

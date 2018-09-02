@@ -302,3 +302,33 @@ void EvisionParamEntity::setStatusBarText(QString value=QStringLiteral("¾ÍÐ÷"))
 	StatusBarText = value;
 	emit paramChanged_StatusBar();
 }
+
+cv::Mat EvisionParamEntity::getDisparity()
+{
+	return disparity;
+}
+
+void EvisionParamEntity::setDisparity(cv::Mat value)
+{
+	disparity = value;
+}
+
+cv::Mat EvisionParamEntity::getXYZ()
+{
+	return xyz;
+}
+
+void EvisionParamEntity::setXYZ(cv::Mat value)
+{
+	xyz = value;
+}
+
+cv::Mat EvisionParamEntity::getQ()
+{
+	return Q;
+}
+
+void EvisionParamEntity::setQ(cv::Mat value)
+{
+	Q = value;
+}

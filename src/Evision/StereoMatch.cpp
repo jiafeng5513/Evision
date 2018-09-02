@@ -170,6 +170,9 @@ void StereoMatch::run()
 		//fflush(stdout);
 		cv::Mat xyz;
 		reprojectImageTo3D(disp, xyz, Q, true);
+		m_entity->setDisparity(disp);
+		m_entity->setXYZ(xyz);
+		m_entity->setQ(Q);
 		saveXYZ(point_cloud_filename.c_str(), xyz);
 		//printf("\n");
 	}

@@ -48,12 +48,10 @@ EvisionView::EvisionView(QWidget *parent)
 	connect(m_entity, SIGNAL(paramChanged_BM()), this, SLOT(onParamChanged_BM()));
 	connect(m_entity, SIGNAL(paramChanged_SGBM()), this, SLOT(onParamChanged_SGBM()));
 	connect(m_entity, SIGNAL(paramChanged_MODE_HH()), this, SLOT(onParamChanged_MODE_HH()));
-	connect(m_entity, SIGNAL(paramChanged_distance()), this, SLOT(onParamChanged_Distance()));
 
 	connect(m_entity, SIGNAL(paramChanged_ImageLtoShow()), this, SLOT(onParamChanged_imgLtoShow())/*, Qt::QueuedConnection*/);
 	connect(m_entity, SIGNAL(paramChanged_ImageRtoShow()), this, SLOT(onParamChanged_imgRtoShow())/*, Qt::QueuedConnection*/);
 	connect(m_entity, SIGNAL(paramChanged_ImageDtoShow()), this, SLOT(onParamChanged_imgDtoShow())/*, Qt::QueuedConnection*/);
-
 	connect(m_entity, SIGNAL(paramChanged_StatusBar()), this, SLOT(onParamChanged_StatusBarText()), Qt::QueuedConnection);
 
 }
@@ -78,14 +76,12 @@ void EvisionView::doMatch()
 {
 	m_controller->MatchCommand();
 }
-
+//²â¾à
 void EvisionView::getDistance()
 {
+	m_controller->getDistanceCommand();
 }
 
-void EvisionView::getGap()
-{
-}
 //Ë¢ÐÂÆ¥Åä½á¹û
 void EvisionView::RefreshStereoMatch()
 {
@@ -362,10 +358,6 @@ void EvisionView::onParamChanged_MODE_3WAY()
 	ui.radioButton_MODE_3WAY->setChecked(m_entity->getMODE_3WAY());
 }
 
-void EvisionView::onParamChanged_Distance()
-{
-	ui.lineEdit_Result->setText(QString::fromStdString(std::to_string(m_entity->getDistance())));
-}
 
 void EvisionView::onParamChanged_imgLtoShow()
 {

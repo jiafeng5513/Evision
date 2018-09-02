@@ -45,6 +45,10 @@ private:
 	float Distance=0.0f;
 	cv::Mat imgLtoShow, imgRtoShow, imgDtoShow;
 	QString StatusBarText="";
+
+	cv::Mat disparity;
+	cv::Mat xyz;
+	cv::Mat Q;
 #pragma endregion 
 
 	
@@ -167,6 +171,16 @@ public:
 
 	QString getStatusBarText();
 	void setStatusBarText(QString value);
+
+	cv::Mat getDisparity();
+	void setDisparity(cv::Mat value);
+
+	cv::Mat getXYZ();
+	void setXYZ(cv::Mat value);
+
+	cv::Mat getQ();
+	void setQ(cv::Mat value);
+
 #pragma endregion 
 };
 

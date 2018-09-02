@@ -9,6 +9,9 @@
 #include "StereoCalibrate.h"
 #include "QMessageBox"
 #include "StereoMatch.h"
+#include "PointCloudUtils.h"
+#include "RFinterface.h"
+
 
 EvisionController::EvisionController(QObject * parent):QObject(parent)
 {
@@ -96,7 +99,6 @@ void EvisionController::CalibrateCommand()
 
 	//3.起飞
 }
-
 //命令:匹配默认参数
 void EvisionController::setDefaultMatchParamCommand()
 {
@@ -134,11 +136,9 @@ void EvisionController::setDefaultMatchParamCommand()
 		QMessageBox::information(NULL, QStringLiteral("错误"), QStringLiteral("没有选择匹配算法"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
 	}
 }
-
+//命令:匹配
 void EvisionController::MatchCommand()
 {
-	
-
 	QFileDialog * fileDialog = new QFileDialog();
 	fileDialog->setWindowTitle(QStringLiteral("请选择左摄像头拍摄的图片"));
 	fileDialog->setNameFilter(QStringLiteral("图片文件(*.jpg *.png *.jpeg)"));
@@ -199,7 +199,7 @@ void EvisionController::MatchCommand()
 		return;
 	}
 }
-//刷新
+//命令:刷新视差图
 void EvisionController::RefreshStereoMatchCommand()
 {
 	StereoMatch *_stereoMatch = new StereoMatch(ImageL.toStdString(),
@@ -207,9 +207,47 @@ void EvisionController::RefreshStereoMatchCommand()
 	connect(_stereoMatch, SIGNAL(openMessageBox(QString, QString)), this, SLOT(onOpenMessageBox(QString, QString)));
 	_stereoMatch->start();
 }
+//命令:测量光学中心到目标点的距离
+void EvisionController::getDistanceCommand()
+{
+	cv::Mat img, disp, xyz;
+	//测试Entity中视差图,左视图,点云这三个变量的值是否非空
+	if (m_entity->getImageLtoShow().empty()||m_entity->getDisparity().empty()||m_entity->getXYZ().empty())
+	{
+		//询问文件位置并载入变量
+		cv::Mat temp = cv::imread("E:\\VisualStudio\\BinocularVision\\data\\stereo_calib_1\\left01.jpg");
 
-//弹出对话框
+		RFinterface * _Rfinterface = new RFinterface(temp, temp, temp);
+		_Rfinterface->show();
+	}
+	else
+	{
+		//状态良好,转移变量值
+		img = m_entity->getImageLtoShow();
+		disp = m_entity->getDisparity();
+		xyz = m_entity->getXYZ();
+	}
+	std::vector<PointCloudUtils::ObjectInfo> objectInfos;
+	PointCloudUtils pointCloudAnalyzer;
+	if (pointCloudAnalyzer.detectNearObject(disp, xyz, objectInfos) == 0)
+	{
+		//失败处理
+		return;
+	}
+	pointCloudAnalyzer.showObjectInfo(objectInfos, img);//在左视图上面叠加轮廓识别的框
+
+	//准备工作结束,启动交互式测量的view
+
+
+	//m_ObjectDistance = objectInfos[0].distance;
+	//m_ObjectDistance = (int)(m_ObjectDistance * 10000) / 10000.;
+	//m_ObjectDistance = -16 * m_ObjectDistance;//这个16倍是精度的核心问题
+}
+
+
+//消息响应:弹出对话框
 void EvisionController::onOpenMessageBox(QString title, QString msg)
 {
 	QMessageBox::information(NULL, title, msg);
 }
+

@@ -24,7 +24,6 @@ public slots:
 	void setDefaultMatchParam();
 	void doMatch();
 	void getDistance();
-	void getGap();
 	void RefreshStereoMatch();
 	//值更改事件,响应UI元素的变化
 	//标定参数值更改事件
@@ -75,7 +74,6 @@ public slots:
 	void onClicked_MODE_3WAY(bool value);
 	void onParamChanged_MODE_3WAY();
 
-	void onParamChanged_Distance();
 	//更新左视图和右视图
 	void onParamChanged_imgLtoShow();
 	void onParamChanged_imgRtoShow();

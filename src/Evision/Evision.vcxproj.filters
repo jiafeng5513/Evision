@@ -54,6 +54,12 @@
     <ClCompile Include="PointCloudUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RFinterface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RFScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="EvisionView.h">
@@ -71,9 +77,18 @@
     <QtMoc Include="StereoMatch.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="RFinterface.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="RFScene.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="Evision.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="RFinterface.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

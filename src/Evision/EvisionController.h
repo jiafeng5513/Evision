@@ -9,6 +9,7 @@ private:
 	EvisionParamEntity * m_entity;
 	QStringList ImageListL, ImageListR;//从图片标定时需要的两组图片
 	QString ImageL, ImageR, insFile, extFile;
+	cv::Mat depth;
 public:
 	EvisionController(QObject *parent = Q_NULLPTR);
 	~EvisionController();
@@ -17,6 +18,7 @@ public:
 	void setDefaultMatchParamCommand();
 	void MatchCommand();
 	void RefreshStereoMatchCommand();
+	void getDistanceCommand();
 public slots:
 	void onOpenMessageBox(QString title, QString msg);
 };
