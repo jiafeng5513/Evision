@@ -20,7 +20,7 @@ public:
 	~StereoMatch();
 	void run();
 	enum { STEREO_BM = 0, STEREO_SGBM = 1, STEREO_HH = 2, STEREO_VAR = 3, STEREO_3WAY = 4 };
-
+	static  cv::Mat readXYZ(const char* filename);
 private:
 	EvisionParamEntity * m_entity;
 	std::string img1_filename = "";

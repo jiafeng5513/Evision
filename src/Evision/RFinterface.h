@@ -22,6 +22,7 @@ private:
 	cv::Mat disp;
 	cv::Mat xyz;
 	cv::Mat depth;
+	double m_ObjectDistance;
 private:
 	void printImgToO(cv::Mat value);
 	void printImgToD(cv::Mat value);

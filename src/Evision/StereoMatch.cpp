@@ -170,7 +170,7 @@ void StereoMatch::run()
 		//fflush(stdout);
 		cv::Mat xyz;
 		reprojectImageTo3D(disp, xyz, Q, true);
-		m_entity->setDisparity(disp);
+		m_entity->setDisparity(disp8);
 		m_entity->setXYZ(xyz);
 		m_entity->setQ(Q);
 		saveXYZ(point_cloud_filename.c_str(), xyz);
@@ -195,4 +195,10 @@ void StereoMatch::saveXYZ(const char* filename, const cv::Mat& mat)
 		}
 	}
 	fclose(fp);
+}
+
+//读取点云文件
+cv::Mat StereoMatch::readXYZ(const char* filename)
+{
+	FILE* fp = fopen(filename, "rt");
 }

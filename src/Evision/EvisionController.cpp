@@ -215,10 +215,42 @@ void EvisionController::getDistanceCommand()
 	if (m_entity->getImageLtoShow().empty()||m_entity->getDisparity().empty()||m_entity->getXYZ().empty())
 	{
 		//询问文件位置并载入变量
-		cv::Mat temp = cv::imread("E:\\VisualStudio\\BinocularVision\\data\\stereo_calib_1\\left01.jpg");
+		QString imgFile, dispFile, xyzFile;
+		QFileDialog * fileDialog = new QFileDialog();
+		fileDialog->setWindowTitle(QStringLiteral("请选择视差图"));
+		fileDialog->setNameFilter(QStringLiteral("图片文件(*.jpg *.png *.jpeg)"));
+		fileDialog->setFileMode(QFileDialog::ExistingFile);
+		if (fileDialog->exec() == QDialog::Accepted)
+		{
+			imgFile = fileDialog->selectedFiles().at(0);
+			fileDialog->setWindowTitle(QStringLiteral("请选择参与生成所选视差图的左视图"));
+			if (fileDialog->exec() == QDialog::Accepted)
+			{
+				dispFile = fileDialog->selectedFiles().at(0);
 
-		RFinterface * _Rfinterface = new RFinterface(temp, temp, temp);
-		_Rfinterface->show();
+				QFileDialog * fileDialog2 = new QFileDialog();
+				fileDialog2->setWindowTitle(QStringLiteral("请选择点云文件"));
+				fileDialog2->setNameFilter(QStringLiteral("点云文件(*.xml *.yml *.yaml)"));
+				fileDialog2->setFileMode(QFileDialog::ExistingFile);
+				if (fileDialog2->exec() == QDialog::Accepted)
+				{
+					xyzFile = fileDialog2->selectedFiles().at(0);
+					if (imgFile.isEmpty()||dispFile.isEmpty()||xyzFile.isEmpty())
+					{
+						//文件不全,弹出提示退出
+						QMessageBox::information(NULL, QStringLiteral("错误"), QStringLiteral("请选择有效的文件!"));
+						return;
+					}
+					else
+					{
+						//文件齐全,读取内容
+						img= cv::imread(imgFile.toStdString());
+						disp= cv::imread(dispFile.toStdString());
+
+					}
+				}
+			}
+		}
 	}
 	else
 	{
@@ -227,21 +259,10 @@ void EvisionController::getDistanceCommand()
 		disp = m_entity->getDisparity();
 		xyz = m_entity->getXYZ();
 	}
-	std::vector<PointCloudUtils::ObjectInfo> objectInfos;
-	PointCloudUtils pointCloudAnalyzer;
-	if (pointCloudAnalyzer.detectNearObject(disp, xyz, objectInfos) == 0)
-	{
-		//失败处理
-		return;
-	}
-	pointCloudAnalyzer.showObjectInfo(objectInfos, img);//在左视图上面叠加轮廓识别的框
-
-	//准备工作结束,启动交互式测量的view
-
-
-	//m_ObjectDistance = objectInfos[0].distance;
-	//m_ObjectDistance = (int)(m_ObjectDistance * 10000) / 10000.;
-	//m_ObjectDistance = -16 * m_ObjectDistance;//这个16倍是精度的核心问题
+	//准备工作结束,如果程序运行到这个位置,说明三个变量的值都有了有效值,此时可以启动交互式测量的view
+	//img,disp.xyz
+	RFinterface * _Rfinterface = new RFinterface(img, disp, xyz);
+	_Rfinterface->show();
 }
 
 

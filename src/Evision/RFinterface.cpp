@@ -1,6 +1,8 @@
 #include "RFinterface.h"
 #include "EvisionUtils.h"
 #include "QGraphicsScene"
+#include "PointCloudUtils.h"
+
 RFinterface::RFinterface(QWidget *parent)
 	: QWidget(parent)
 {
@@ -17,6 +19,15 @@ RFinterface::RFinterface(cv::Mat img, cv::Mat disp, cv::Mat xyz, QWidget* parent
 	std::vector<cv::Mat> xyzSet;
 	split(xyz, xyzSet);
 	xyzSet[2].copyTo(depth);
+
+	std::vector<PointCloudUtils::ObjectInfo> objectInfos;
+	PointCloudUtils pointCloudAnalyzer;
+	if (pointCloudAnalyzer.detectNearObject(disp, xyz, objectInfos) == 0)
+	{
+		//失败处理
+		return;
+	}
+	pointCloudAnalyzer.showObjectInfo(objectInfos, img);//在左视图上面叠加轮廓识别的框
 
 	printImgToD(disp);
 	printImgToO(img);
@@ -60,7 +71,8 @@ void RFinterface::onMouseMove(int x, int y)
 //响应鼠标左键击键
 void RFinterface::onMouseLButtonDown(int x, int y)
 {
-
+	m_ObjectDistance = -16 * depth.at<float>(x,y);
+	ui.lineEdit_Res->setText(QString::fromStdString(std::to_string(m_ObjectDistance)));
 }
 //响应鼠标右键击键
 void RFinterface::onMouseRButtonDown(int x, int y)
