@@ -10,6 +10,7 @@
 #define UI_EVISION_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QIcon>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QCheckBox>
@@ -121,6 +122,9 @@ public:
         EvisionClass->setSizePolicy(sizePolicy);
         EvisionClass->setMinimumSize(QSize(1000, 580));
         EvisionClass->setMaximumSize(QSize(1000, 580));
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/Evision/resource/Evision.ico"), QSize(), QIcon::Normal, QIcon::Off);
+        EvisionClass->setWindowIcon(icon);
         action = new QAction(EvisionClass);
         action->setObjectName(QStringLiteral("action"));
         action_2 = new QAction(EvisionClass);

@@ -31,6 +31,10 @@
   <property name="windowTitle">
    <string>Evision</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="Evision.qrc">
+    <normaloff>:/Evision/resource/Evision.ico</normaloff>:/Evision/resource/Evision.ico</iconset>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QGraphicsView" name="graphicsView_L">
     <property name="geometry">

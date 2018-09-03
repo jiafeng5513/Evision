@@ -48,7 +48,7 @@ public:
     {
         if (RFinterface->objectName().isEmpty())
             RFinterface->setObjectName(QStringLiteral("RFinterface"));
-        RFinterface->resize(986, 571);
+        RFinterface->resize(978, 566);
         gridLayout_2 = new QGridLayout(RFinterface);
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);

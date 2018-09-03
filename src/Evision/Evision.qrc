@@ -1,4 +1,5 @@
 <RCC>
-    <qresource prefix="Evision">
+    <qresource prefix="/Evision">
+        <file>resource/Evision.ico</file>
     </qresource>
 </RCC>
