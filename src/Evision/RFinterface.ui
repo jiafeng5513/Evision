@@ -6,15 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>498</width>
-    <height>374</height>
+    <width>978</width>
+    <height>566</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>交互测量</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_4">
-   <item row="0" column="0">
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="0" colspan="2">
     <widget class="QGroupBox" name="groupBox">
      <property name="minimumSize">
       <size>
@@ -112,28 +112,170 @@
      </layout>
     </widget>
    </item>
-   <item row="1" column="0">
-    <widget class="QSplitter" name="splitter">
-     <property name="minimumSize">
-      <size>
-       <width>480</width>
-       <height>240</height>
-      </size>
+   <item row="1" column="1">
+    <widget class="CustomGraphicsView" name="customGraphicsView_D">
+     <property name="verticalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOff</enum>
      </property>
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOff</enum>
+     </property>
+     <property name="sizeAdjustPolicy">
+      <enum>QAbstractScrollArea::AdjustToContents</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="CustomGraphicsView" name="customGraphicsView_O">
+     <property name="verticalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOff</enum>
+     </property>
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOff</enum>
+     </property>
+     <property name="sizeAdjustPolicy">
+      <enum>QAbstractScrollArea::AdjustToContents</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="2">
+    <spacer name="horizontalSpacer_2">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
-     <widget class="QWidget" name="gridLayoutWidget">
-      <layout class="QGridLayout" name="gridLayout_O"/>
-     </widget>
-     <widget class="QWidget" name="gridLayoutWidget_2">
-      <layout class="QGridLayout" name="gridLayout_D"/>
-     </widget>
-    </widget>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="2" column="1">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
    </item>
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>CustomGraphicsView</class>
+   <extends>QGraphicsView</extends>
+   <header>CustomGraphicsView.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>customGraphicsView_O</sender>
+   <signal>mouseMove(int,int)</signal>
+   <receiver>RFinterface</receiver>
+   <slot>onMouseMove(int,int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>265</x>
+     <y>322</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>57</x>
+     <y>122</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>customGraphicsView_O</sender>
+   <signal>mouseLDown(int,int)</signal>
+   <receiver>RFinterface</receiver>
+   <slot>onMouseLButtonDown(int,int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>78</x>
+     <y>302</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>5</x>
+     <y>183</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>customGraphicsView_O</sender>
+   <signal>mouseRDown(int,int)</signal>
+   <receiver>RFinterface</receiver>
+   <slot>onMouseRButtonDown(int,int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>136</x>
+     <y>389</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>3</x>
+     <y>373</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>customGraphicsView_D</sender>
+   <signal>mouseLDown(int,int)</signal>
+   <receiver>RFinterface</receiver>
+   <slot>onMouseLButtonDown(int,int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>797</x>
+     <y>210</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>680</x>
+     <y>122</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>customGraphicsView_D</sender>
+   <signal>mouseMove(int,int)</signal>
+   <receiver>RFinterface</receiver>
+   <slot>onMouseMove(int,int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>844</x>
+     <y>289</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>935</x>
+     <y>202</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>customGraphicsView_D</sender>
+   <signal>mouseRDown(int,int)</signal>
+   <receiver>RFinterface</receiver>
+   <slot>onMouseRButtonDown(int,int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>802</x>
+     <y>423</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>936</x>
+     <y>484</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>onMouseMove(int,int)</slot>
+  <slot>onMouseLButtonDown(int,int)</slot>
+  <slot>onMouseRButtonDown(int,int)</slot>
+ </slots>
 </ui>

@@ -17,15 +17,15 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
-#include <QtWidgets/QSplitter>
 #include <QtWidgets/QWidget>
+#include "CustomGraphicsView.h"
 
 QT_BEGIN_NAMESPACE
 
 class Ui_RFinterface
 {
 public:
-    QGridLayout *gridLayout_4;
+    QGridLayout *gridLayout_2;
     QGroupBox *groupBox;
     QGridLayout *gridLayout;
     QLabel *label_4;
@@ -39,21 +39,20 @@ public:
     QSpacerItem *horizontalSpacer;
     QPushButton *pushButton_getGap;
     QPushButton *pushButton_ShowCursor;
-    QSplitter *splitter;
-    QWidget *gridLayoutWidget;
-    QGridLayout *gridLayout_O;
-    QWidget *gridLayoutWidget_2;
-    QGridLayout *gridLayout_D;
+    CustomGraphicsView *customGraphicsView_D;
+    CustomGraphicsView *customGraphicsView_O;
+    QSpacerItem *horizontalSpacer_2;
+    QSpacerItem *verticalSpacer;
 
     void setupUi(QWidget *RFinterface)
     {
         if (RFinterface->objectName().isEmpty())
             RFinterface->setObjectName(QStringLiteral("RFinterface"));
-        RFinterface->resize(498, 374);
-        gridLayout_4 = new QGridLayout(RFinterface);
-        gridLayout_4->setSpacing(6);
-        gridLayout_4->setContentsMargins(11, 11, 11, 11);
-        gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
+        RFinterface->resize(986, 571);
+        gridLayout_2 = new QGridLayout(RFinterface);
+        gridLayout_2->setSpacing(6);
+        gridLayout_2->setContentsMargins(11, 11, 11, 11);
+        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
         groupBox = new QGroupBox(RFinterface);
         groupBox->setObjectName(QStringLiteral("groupBox"));
         groupBox->setMinimumSize(QSize(0, 110));
@@ -119,33 +118,40 @@ public:
         gridLayout->addWidget(pushButton_ShowCursor, 2, 5, 1, 1);
 
 
-        gridLayout_4->addWidget(groupBox, 0, 0, 1, 1);
+        gridLayout_2->addWidget(groupBox, 0, 0, 1, 2);
 
-        splitter = new QSplitter(RFinterface);
-        splitter->setObjectName(QStringLiteral("splitter"));
-        splitter->setMinimumSize(QSize(480, 240));
-        splitter->setOrientation(Qt::Horizontal);
-        gridLayoutWidget = new QWidget(splitter);
-        gridLayoutWidget->setObjectName(QStringLiteral("gridLayoutWidget"));
-        gridLayout_O = new QGridLayout(gridLayoutWidget);
-        gridLayout_O->setSpacing(6);
-        gridLayout_O->setContentsMargins(11, 11, 11, 11);
-        gridLayout_O->setObjectName(QStringLiteral("gridLayout_O"));
-        gridLayout_O->setContentsMargins(0, 0, 0, 0);
-        splitter->addWidget(gridLayoutWidget);
-        gridLayoutWidget_2 = new QWidget(splitter);
-        gridLayoutWidget_2->setObjectName(QStringLiteral("gridLayoutWidget_2"));
-        gridLayout_D = new QGridLayout(gridLayoutWidget_2);
-        gridLayout_D->setSpacing(6);
-        gridLayout_D->setContentsMargins(11, 11, 11, 11);
-        gridLayout_D->setObjectName(QStringLiteral("gridLayout_D"));
-        gridLayout_D->setContentsMargins(0, 0, 0, 0);
-        splitter->addWidget(gridLayoutWidget_2);
+        customGraphicsView_D = new CustomGraphicsView(RFinterface);
+        customGraphicsView_D->setObjectName(QStringLiteral("customGraphicsView_D"));
+        customGraphicsView_D->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        customGraphicsView_D->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        customGraphicsView_D->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
 
-        gridLayout_4->addWidget(splitter, 1, 0, 1, 1);
+        gridLayout_2->addWidget(customGraphicsView_D, 1, 1, 1, 1);
+
+        customGraphicsView_O = new CustomGraphicsView(RFinterface);
+        customGraphicsView_O->setObjectName(QStringLiteral("customGraphicsView_O"));
+        customGraphicsView_O->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        customGraphicsView_O->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        customGraphicsView_O->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
+
+        gridLayout_2->addWidget(customGraphicsView_O, 1, 0, 1, 1);
+
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_2->addItem(horizontalSpacer_2, 1, 2, 1, 1);
+
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout_2->addItem(verticalSpacer, 2, 1, 1, 1);
 
 
         retranslateUi(RFinterface);
+        QObject::connect(customGraphicsView_O, SIGNAL(mouseMove(int,int)), RFinterface, SLOT(onMouseMove(int,int)));
+        QObject::connect(customGraphicsView_O, SIGNAL(mouseLDown(int,int)), RFinterface, SLOT(onMouseLButtonDown(int,int)));
+        QObject::connect(customGraphicsView_O, SIGNAL(mouseRDown(int,int)), RFinterface, SLOT(onMouseRButtonDown(int,int)));
+        QObject::connect(customGraphicsView_D, SIGNAL(mouseLDown(int,int)), RFinterface, SLOT(onMouseLButtonDown(int,int)));
+        QObject::connect(customGraphicsView_D, SIGNAL(mouseMove(int,int)), RFinterface, SLOT(onMouseMove(int,int)));
+        QObject::connect(customGraphicsView_D, SIGNAL(mouseRDown(int,int)), RFinterface, SLOT(onMouseRButtonDown(int,int)));
 
         QMetaObject::connectSlotsByName(RFinterface);
     } // setupUi

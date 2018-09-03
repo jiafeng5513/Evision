@@ -2,8 +2,8 @@
 
 #include <QWidget>
 #include "ui_RFinterface.h"
-#include "RFScene.h"
-
+#include <core/core.hpp>
+#include <QtWidgets/QGraphicsView>
 /*
  * 负责交互式测量功能的view
  */
@@ -18,8 +18,6 @@ public:
 
 private:
 	Ui::RFinterface ui;
-	RFScene * m_graphicsViewOrigin;
-	RFScene * m_graphicsViewDisparity;
 	cv::Mat img;
 	cv::Mat disp;
 	cv::Mat xyz;

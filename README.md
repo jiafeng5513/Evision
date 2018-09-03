@@ -24,6 +24,8 @@ Comming soon
 > 2. 标定方法原理.<br>
 > 3. 匹配方法原理,参数意义以及调整参数的方法.<br>
 > 4. 测距算法解释.<br>
+> 5. Visual Studio编译期脚本的使用.<br>
+> 6. QtDesigner插件编写.<br>
 
 
 build

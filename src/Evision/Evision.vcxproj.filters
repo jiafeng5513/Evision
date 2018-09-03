@@ -57,9 +57,6 @@
     <ClCompile Include="RFinterface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RFScene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="EvisionView.h">
@@ -78,9 +75,6 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="RFinterface.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="RFScene.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

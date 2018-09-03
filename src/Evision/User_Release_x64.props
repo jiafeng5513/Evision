@@ -3,14 +3,14 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <IncludePath>$(SolutionDir)..\package\opencv\build\include;$(SolutionDir)..\package\opencv\build\include\opencv;$(SolutionDir)..\package\opencv\build\include\opencv2;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)..\package\opencv\build\x64\vc15\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)..\package\opencv\build\include;$(SolutionDir)..\package\opencv\build\include\opencv;$(SolutionDir)..\package\opencv\build\include\opencv2;$(SolutionDir)CustomGraphicsView;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)..\package\opencv\build\x64\vc15\lib;$(OutDir);$(LibraryPath)</LibraryPath>
     <_PropertySheetDisplayName>User_Release_x64</_PropertySheetDisplayName>
     <OutDir>$(SolutionDir)..\bin\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
-      <AdditionalDependencies>opencv_world341.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opencv_world341.lib;CustomGraphicsView.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ClCompile>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
