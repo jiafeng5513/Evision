@@ -12,23 +12,19 @@ Camera::Camera(QWidget *parent)
 
 	//Camera devices:
 
-	//QActionGroup *videoDevicesGroup = new QActionGroup(this);
-	//videoDevicesGroup->setExclusive(true);
-	//const QList<QCameraInfo> availableCameras = QCameraInfo::availableCameras();
-	//for (const QCameraInfo &cameraInfo : availableCameras) {
-	//	QAction *videoDeviceAction = new QAction(cameraInfo.description(), videoDevicesGroup);
-	//	videoDeviceAction->setCheckable(true);
-	//	videoDeviceAction->setData(QVariant::fromValue(cameraInfo));
-	//	if (cameraInfo == QCameraInfo::defaultCamera())
-	//		videoDeviceAction->setChecked(true);
 
-	//	ui->menuDevices->addAction(videoDeviceAction);
-	//}
 
-	//connect(videoDevicesGroup, &QActionGroup::triggered, this, &Camera::updateCameraDevice);
-	//connect(ui->captureWidget, &QTabWidget::currentChanged, this, &Camera::updateCaptureMode);
+	const QList<QCameraInfo> availableCameras = QCameraInfo::availableCameras();
+	for (const QCameraInfo &cameraInfo : availableCameras) {
+		ui.comboBox_CameraDevice->addItem(cameraInfo.description(),QVariant::fromValue(cameraInfo));
+	}
 
-	//setCamera(QCameraInfo::defaultCamera());
+
+
+	connect(videoDevicesGroup, &QActionGroup::triggered, this, &Camera::updateCameraDevice);
+	connect(ui->captureWidget, &QTabWidget::currentChanged, this, &Camera::updateCaptureMode);
+
+	setCamera(QCameraInfo::defaultCamera());
 }
 
 Camera::~Camera()

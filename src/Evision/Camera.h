@@ -17,6 +17,7 @@ public:
 
 private:
 	Ui::Camera ui;
+
 	QScopedPointer<QCamera> m_camera;
 	QScopedPointer<QCameraImageCapture> m_imageCapture;
 	QScopedPointer<QMediaRecorder> m_mediaRecorder;
@@ -25,8 +26,10 @@ private:
 	QAudioEncoderSettings m_audioSettings;
 	QVideoEncoderSettings m_videoSettings;
 	QString m_videoContainerFormat;
+
 	bool m_isCapturingImage = false;
 	bool m_applicationExiting = false;
+
 private slots:
 	void OnFindSavePath();
 	void OnCameraPowerOn();
