@@ -19,6 +19,7 @@ public:
 	void MatchCommand();
 	void RefreshStereoMatchCommand();
 	void getDistanceCommand();
+	void ShowPointCloudCommand();
 public slots:
 	void onOpenMessageBox(QString title, QString msg);
 };

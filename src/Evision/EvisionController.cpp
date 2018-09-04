@@ -18,7 +18,6 @@ EvisionController::EvisionController(QObject * parent):QObject(parent)
 	m_entity = EvisionParamEntity::getInstance();
 }
 
-
 EvisionController::~EvisionController()
 {
 }
@@ -277,6 +276,26 @@ void EvisionController::getDistanceCommand()
 	RFinterface * _Rfinterface = new RFinterface(img, disp, xyz);
 	_Rfinterface->show();
 }
+//命令:显示点云
+void EvisionController::ShowPointCloudCommand()
+{
+	QFileDialog * fileDialog2 = new QFileDialog();
+	fileDialog2->setWindowTitle(QStringLiteral("请选择点云文件"));
+	fileDialog2->setNameFilter(QStringLiteral("点云文件(*.xml *.yml *.yaml)"));
+	fileDialog2->setFileMode(QFileDialog::ExistingFile);
+	if (fileDialog2->exec() == QDialog::Accepted)
+	{
+		QString xyzFile = fileDialog2->selectedFiles().at(0);
+		cv::Mat xyz = StereoMatch::readXYZ(xyzFile.toStdString().c_str());
+	}
+	else
+	{
+		QMessageBox::information(NULL, QStringLiteral("错误"), QStringLiteral("请选择有效的点云文件!"));
+		return;
+	}
+	//点云获取ok,准备显示
+}
+
 //消息响应:弹出对话框
 void EvisionController::onOpenMessageBox(QString title, QString msg)
 {

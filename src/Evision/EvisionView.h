@@ -25,6 +25,9 @@ public slots:
 	void doMatch();
 	void getDistance();
 	void RefreshStereoMatch();
+	//菜单
+	//显示点云
+	void onShowPointCloud();
 	//值更改事件,响应UI元素的变化
 	//标定参数值更改事件
 	void onValueChanged_BoardWidth(QString value);

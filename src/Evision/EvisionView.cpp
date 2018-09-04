@@ -87,6 +87,11 @@ void EvisionView::RefreshStereoMatch()
 {
 	m_controller->RefreshStereoMatchCommand();
 }
+//显示点云
+void EvisionView::onShowPointCloud()
+{
+	m_controller->ShowPointCloudCommand();
+}
 
 /*=============标定参数===============*/
 void EvisionView::onValueChanged_BoardWidth(QString value)

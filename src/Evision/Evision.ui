@@ -1086,7 +1086,7 @@
     </property>
     <addaction name="action"/>
     <addaction name="action_3"/>
-    <addaction name="action_2"/>
+    <addaction name="action_ShowPointCloud"/>
     <addaction name="actionDebug"/>
    </widget>
    <widget class="QMenu" name="menu_2">
@@ -1113,14 +1113,14 @@
     <string>拍摄双镜头照片</string>
    </property>
   </action>
-  <action name="action_2">
+  <action name="action_ShowPointCloud">
    <property name="text">
     <string>显示点云</string>
    </property>
   </action>
   <action name="action_3">
    <property name="text">
-    <string>拍摄单镜投照片</string>
+    <string>拍摄单镜头照片</string>
    </property>
   </action>
   <action name="action_4">
@@ -1576,6 +1576,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>action_ShowPointCloud</sender>
+   <signal>triggered()</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>onShowPointCloud()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>499</x>
+     <y>289</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>setDefaultCalibParam()</slot>
@@ -1611,5 +1627,6 @@
   <slot>onClicked_MODE_SGBM(bool)</slot>
   <slot>onClicked_MODE_3WAY(bool)</slot>
   <slot>RefreshStereoMatch()</slot>
+  <slot>onShowPointCloud()</slot>
  </slots>
 </ui>
