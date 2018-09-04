@@ -3,6 +3,7 @@
 CustomGraphicsView::CustomGraphicsView(QWidget *parent)
 	: QGraphicsView(parent)
 {
+	setMouseTracking(true);
 }
 //Êó±ê»÷¼üÊÂ¼ş
 void CustomGraphicsView::mousePressEvent(QMouseEvent* event)

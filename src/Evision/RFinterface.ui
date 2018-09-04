@@ -46,13 +46,6 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>Y=</string>
-        </property>
-       </widget>
-      </item>
       <item row="0" column="1">
        <widget class="QLabel" name="label_2">
         <property name="text">
@@ -63,23 +56,13 @@
       <item row="1" column="2">
        <widget class="QLineEdit" name="lineEdit_ImgY"/>
       </item>
-      <item row="0" column="2">
-       <widget class="QLineEdit" name="lineEdit_ImgX"/>
-      </item>
       <item row="2" column="2">
        <widget class="QLineEdit" name="lineEdit_Res"/>
       </item>
-      <item row="0" column="5">
-       <widget class="QPushButton" name="pushButton_getDis">
-        <property name="text">
-         <string>测量光学中心到目标点的距离</string>
-        </property>
-        <property name="checkable">
-         <bool>true</bool>
-        </property>
-       </widget>
+      <item row="0" column="2">
+       <widget class="QLineEdit" name="lineEdit_ImgX"/>
       </item>
-      <item row="0" column="6">
+      <item row="0" column="5">
        <spacer name="horizontalSpacer">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -92,20 +75,10 @@
         </property>
        </spacer>
       </item>
-      <item row="1" column="5">
-       <widget class="QPushButton" name="pushButton_getGap">
+      <item row="1" column="1">
+       <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>测量目标点之间的距离</string>
-        </property>
-        <property name="checkable">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="5">
-       <widget class="QPushButton" name="pushButton_ShowCursor">
-        <property name="text">
-         <string>显示游标</string>
+         <string>Y=</string>
         </property>
        </widget>
       </item>
@@ -215,8 +188,8 @@
    <slot>onMouseRButtonDown(int,int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>136</x>
-     <y>389</y>
+     <x>145</x>
+     <y>337</y>
     </hint>
     <hint type="destinationlabel">
      <x>3</x>
@@ -231,8 +204,8 @@
    <slot>onMouseLButtonDown(int,int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>797</x>
-     <y>210</y>
+     <x>646</x>
+     <y>335</y>
     </hint>
     <hint type="destinationlabel">
      <x>680</x>
@@ -247,8 +220,8 @@
    <slot>onMouseMove(int,int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>844</x>
-     <y>289</y>
+     <x>646</x>
+     <y>337</y>
     </hint>
     <hint type="destinationlabel">
      <x>935</x>
@@ -263,8 +236,8 @@
    <slot>onMouseRButtonDown(int,int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>802</x>
-     <y>423</y>
+     <x>646</x>
+     <y>337</y>
     </hint>
     <hint type="destinationlabel">
      <x>936</x>

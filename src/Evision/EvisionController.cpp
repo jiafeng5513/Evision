@@ -96,8 +96,6 @@ void EvisionController::CalibrateCommand()
 		//选择左图的时候退出
 		return;
 	}
-
-	//3.起飞
 }
 //命令:匹配默认参数
 void EvisionController::setDefaultMatchParamCommand()
@@ -207,7 +205,7 @@ void EvisionController::RefreshStereoMatchCommand()
 	connect(_stereoMatch, SIGNAL(openMessageBox(QString, QString)), this, SLOT(onOpenMessageBox(QString, QString)));
 	_stereoMatch->start();
 }
-//命令:测量光学中心到目标点的距离
+//命令:测量
 void EvisionController::getDistanceCommand()
 {
 	cv::Mat img, disp, xyz;
@@ -249,7 +247,22 @@ void EvisionController::getDistanceCommand()
 						xyz = StereoMatch::readXYZ(xyzFile.toStdString().c_str());
 					}
 				}
+				else
+				{
+					QMessageBox::information(NULL, QStringLiteral("错误"), QStringLiteral("请选择有效的文件!"));
+					return;
+				}
 			}
+			else
+			{
+				QMessageBox::information(NULL, QStringLiteral("错误"), QStringLiteral("请选择有效的文件!"));
+				return;
+			}
+		}
+		else
+		{
+			QMessageBox::information(NULL, QStringLiteral("错误"), QStringLiteral("请选择有效的文件!"));
+			return;
 		}
 	}
 	else
@@ -264,8 +277,6 @@ void EvisionController::getDistanceCommand()
 	RFinterface * _Rfinterface = new RFinterface(img, disp, xyz);
 	_Rfinterface->show();
 }
-
-
 //消息响应:弹出对话框
 void EvisionController::onOpenMessageBox(QString title, QString msg)
 {

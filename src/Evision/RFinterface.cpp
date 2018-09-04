@@ -71,7 +71,7 @@ void RFinterface::onMouseMove(int x, int y)
 //ÏìÓ¦Êó±ê×ó¼ü»÷¼ü
 void RFinterface::onMouseLButtonDown(int x, int y)
 {
-	m_ObjectDistance = -16 * depth.at<float>(x,y);
+	m_ObjectDistance = 16 * depth.at<float>(y,x);
 	ui.lineEdit_Res->setText(QString::fromStdString(std::to_string(m_ObjectDistance)));
 }
 //ÏìÓ¦Êó±êÓÒ¼ü»÷¼ü
