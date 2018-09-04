@@ -115,6 +115,7 @@
     </QtRcc>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="EvisionView.cpp" />
     <ClCompile Include="EvisionController.cpp" />
     <ClCompile Include="main.cpp" />
@@ -123,6 +124,7 @@
     <ClCompile Include="PointCloudUtils.cpp" />
     <ClCompile Include="RFinterface.cpp" />
     <ClCompile Include="StereoCalibrate.cpp" />
+    <ClCompile Include="StereoCamera.cpp" />
     <ClCompile Include="StereoMatch.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -132,8 +134,10 @@
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
+    <QtUic Include="Camera.ui" />
     <QtUic Include="Evision.ui" />
     <QtUic Include="RFinterface.ui" />
+    <QtUic Include="StereoCamera.ui" />
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Evision.qrc" />
@@ -148,7 +152,15 @@
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="Camera.h">
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;_CRT_SECURE_NO_WARNINGS</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;_CRT_SECURE_NO_WARNINGS</Define>
+    </QtMoc>
     <ClInclude Include="PointCloudUtils.h" />
+    <QtMoc Include="StereoCamera.h">
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;_CRT_SECURE_NO_WARNINGS</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;_CRT_SECURE_NO_WARNINGS</Define>
+    </QtMoc>
     <QtMoc Include="RFinterface.h">
       <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;_CRT_SECURE_NO_WARNINGS</Define>
       <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;_CRT_SECURE_NO_WARNINGS</Define>

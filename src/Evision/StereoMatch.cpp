@@ -143,7 +143,14 @@ void StereoMatch::run()
 
 	int64 t = cv::getTickCount();
 	if (m_entity->getBM())
+	{
+		cv::namedWindow("img1");
+		cv::imshow("img1",img1);
+		cv::namedWindow("img2");
+		cv::imshow("img2", img2);
 		bm->compute(img1, img2, disp);
+	}
+		
 	else if (m_entity->getSGBM())
 		sgbm->compute(img1, img2, disp);
 	t = cv::getTickCount() - t;

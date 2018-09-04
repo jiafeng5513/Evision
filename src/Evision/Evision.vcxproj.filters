@@ -57,6 +57,12 @@
     <ClCompile Include="RFinterface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="StereoCamera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="EvisionView.h">
@@ -77,12 +83,24 @@
     <QtMoc Include="RFinterface.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="StereoCamera.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Camera.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="Evision.ui">
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="RFinterface.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="StereoCamera.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="Camera.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
