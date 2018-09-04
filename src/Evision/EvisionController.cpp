@@ -246,7 +246,7 @@ void EvisionController::getDistanceCommand()
 						//文件齐全,读取内容
 						img= cv::imread(imgFile.toStdString());
 						disp= cv::imread(dispFile.toStdString());
-
+						xyz = StereoMatch::readXYZ(xyzFile.toStdString().c_str());
 					}
 				}
 			}

@@ -183,7 +183,8 @@ void StereoMatch::run()
 
 void StereoMatch::saveXYZ(const char* filename, const cv::Mat& mat)
 {
-	const double max_z = 1.0e4;
+	//文本文件
+	/*const double max_z = 1.0e4;
 	FILE* fp = fopen(filename, "wt");
 	for (int y = 0; y < mat.rows; y++)
 	{
@@ -194,11 +195,20 @@ void StereoMatch::saveXYZ(const char* filename, const cv::Mat& mat)
 			fprintf(fp, "%f %f %f\n", point[0], point[1], point[2]);
 		}
 	}
-	fclose(fp);
+	fclose(fp);*/
+	//使用OpenCV FileStorage序列化
+	cv::FileStorage fs(filename, cv::FileStorage::WRITE);
+	fs << "PointCloudMatrix" << mat;
+	fs.release();
 }
 
 //读取点云文件
 cv::Mat StereoMatch::readXYZ(const char* filename)
 {
-	FILE* fp = fopen(filename, "rt");
+	//读取使用OpenCV FileStorage序列化的点云文件
+	cv::Mat xyz;
+	cv::FileStorage fs(filename, cv::FileStorage::READ);
+	fs["PointCloudMatrix"] >> xyz;
+	fs.release();
+	return xyz;
 }
