@@ -1084,8 +1084,8 @@
     <property name="title">
      <string>工具</string>
     </property>
-    <addaction name="action"/>
-    <addaction name="action_3"/>
+    <addaction name="action_StereoCamera"/>
+    <addaction name="action_Camera"/>
     <addaction name="action_ShowPointCloud"/>
     <addaction name="actionDebug"/>
    </widget>
@@ -1108,7 +1108,7 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <action name="action">
+  <action name="action_StereoCamera">
    <property name="text">
     <string>拍摄双镜头照片</string>
    </property>
@@ -1118,7 +1118,7 @@
     <string>显示点云</string>
    </property>
   </action>
-  <action name="action_3">
+  <action name="action_Camera">
    <property name="text">
     <string>拍摄单镜头照片</string>
    </property>
@@ -1592,6 +1592,38 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>action_StereoCamera</sender>
+   <signal>triggered()</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>onStereoCamera()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>499</x>
+     <y>289</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action_Camera</sender>
+   <signal>triggered()</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>onCamera()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>499</x>
+     <y>289</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>setDefaultCalibParam()</slot>
@@ -1628,5 +1660,7 @@
   <slot>onClicked_MODE_3WAY(bool)</slot>
   <slot>RefreshStereoMatch()</slot>
   <slot>onShowPointCloud()</slot>
+  <slot>onCamera()</slot>
+  <slot>onStereoCamera()</slot>
  </slots>
 </ui>

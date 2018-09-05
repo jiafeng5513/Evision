@@ -17,19 +17,12 @@ public:
 
 private:
 	Ui::Camera ui;
-
-	QScopedPointer<QCamera> m_camera;
-	QScopedPointer<QCameraImageCapture> m_imageCapture;
-	QScopedPointer<QMediaRecorder> m_mediaRecorder;
-
-	QImageEncoderSettings m_imageSettings;
-	QAudioEncoderSettings m_audioSettings;
-	QVideoEncoderSettings m_videoSettings;
-	QString m_videoContainerFormat;
-
-	bool m_isCapturingImage = false;
-	bool m_applicationExiting = false;
-
+	QScopedPointer<QCamera> m_pCamera;
+	QScopedPointer<QCameraImageCapture> m_pImageCapture;
+	QString saveToHere;
+private:
+	void setCamera(QCameraInfo *cameraInfo);
+	void refreshResAndCodecList();
 private slots:
 	void OnFindSavePath();
 	void OnCameraPowerOn();
@@ -41,5 +34,6 @@ private slots:
 	void OnSelectedChanged_CameraDevice(QString value);
 	void OnSelectedChanged_Resolution(QString value);
 	void OnSelectedChanged_Codec(QString value);
+
 
 };

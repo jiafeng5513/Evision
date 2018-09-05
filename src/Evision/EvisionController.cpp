@@ -11,6 +11,8 @@
 #include "StereoMatch.h"
 #include "PointCloudUtils.h"
 #include "RFinterface.h"
+#include "Camera.h"
+#include "StereoCamera.h"
 
 
 EvisionController::EvisionController(QObject * parent):QObject(parent)
@@ -294,6 +296,18 @@ void EvisionController::ShowPointCloudCommand()
 		return;
 	}
 	//点云获取ok,准备显示
+}
+//命令:启动相机
+void EvisionController::openCameraCommand()
+{
+	Camera * _camera = new Camera();
+	_camera->show();
+}
+//命令:启动双目相机
+void EvisionController::openStereoCameraCommand()
+{
+	StereoCamera * _stereoCamera = new StereoCamera();
+	_stereoCamera->show();
 }
 
 //消息响应:弹出对话框

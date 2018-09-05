@@ -36,9 +36,9 @@ QT_BEGIN_NAMESPACE
 class Ui_EvisionClass
 {
 public:
-    QAction *action;
-    QAction *action_2;
-    QAction *action_3;
+    QAction *action_StereoCamera;
+    QAction *action_ShowPointCloud;
+    QAction *action_Camera;
     QAction *action_4;
     QAction *action_5;
     QAction *actionDebug;
@@ -125,12 +125,12 @@ public:
         QIcon icon;
         icon.addFile(QStringLiteral(":/Evision/resource/Evision.ico"), QSize(), QIcon::Normal, QIcon::Off);
         EvisionClass->setWindowIcon(icon);
-        action = new QAction(EvisionClass);
-        action->setObjectName(QStringLiteral("action"));
-        action_2 = new QAction(EvisionClass);
-        action_2->setObjectName(QStringLiteral("action_2"));
-        action_3 = new QAction(EvisionClass);
-        action_3->setObjectName(QStringLiteral("action_3"));
+        action_StereoCamera = new QAction(EvisionClass);
+        action_StereoCamera->setObjectName(QStringLiteral("action_StereoCamera"));
+        action_ShowPointCloud = new QAction(EvisionClass);
+        action_ShowPointCloud->setObjectName(QStringLiteral("action_ShowPointCloud"));
+        action_Camera = new QAction(EvisionClass);
+        action_Camera->setObjectName(QStringLiteral("action_Camera"));
         action_4 = new QAction(EvisionClass);
         action_4->setObjectName(QStringLiteral("action_4"));
         action_5 = new QAction(EvisionClass);
@@ -472,9 +472,9 @@ public:
 
         menuBar->addAction(menu->menuAction());
         menuBar->addAction(menu_2->menuAction());
-        menu->addAction(action);
-        menu->addAction(action_3);
-        menu->addAction(action_2);
+        menu->addAction(action_StereoCamera);
+        menu->addAction(action_Camera);
+        menu->addAction(action_ShowPointCloud);
         menu->addAction(actionDebug);
         menu_2->addAction(action_4);
         menu_2->addAction(action_5);
@@ -507,6 +507,9 @@ public:
         QObject::connect(radioButton_MODE_SGBM, SIGNAL(clicked(bool)), EvisionClass, SLOT(onClicked_MODE_SGBM(bool)));
         QObject::connect(radioButton_MODE_3WAY, SIGNAL(clicked(bool)), EvisionClass, SLOT(onClicked_MODE_3WAY(bool)));
         QObject::connect(pushButton_RefreshStereoMatch, SIGNAL(clicked()), EvisionClass, SLOT(RefreshStereoMatch()));
+        QObject::connect(action_ShowPointCloud, SIGNAL(triggered()), EvisionClass, SLOT(onShowPointCloud()));
+        QObject::connect(action_StereoCamera, SIGNAL(triggered()), EvisionClass, SLOT(onStereoCamera()));
+        QObject::connect(action_Camera, SIGNAL(triggered()), EvisionClass, SLOT(onCamera()));
 
         QMetaObject::connectSlotsByName(EvisionClass);
     } // setupUi
@@ -514,9 +517,9 @@ public:
     void retranslateUi(QMainWindow *EvisionClass)
     {
         EvisionClass->setWindowTitle(QApplication::translate("EvisionClass", "Evision", nullptr));
-        action->setText(QApplication::translate("EvisionClass", "\346\213\215\346\221\204\345\217\214\351\225\234\345\244\264\347\205\247\347\211\207", nullptr));
-        action_2->setText(QApplication::translate("EvisionClass", "\346\230\276\347\244\272\347\202\271\344\272\221", nullptr));
-        action_3->setText(QApplication::translate("EvisionClass", "\346\213\215\346\221\204\345\215\225\351\225\234\346\212\225\347\205\247\347\211\207", nullptr));
+        action_StereoCamera->setText(QApplication::translate("EvisionClass", "\346\213\215\346\221\204\345\217\214\351\225\234\345\244\264\347\205\247\347\211\207", nullptr));
+        action_ShowPointCloud->setText(QApplication::translate("EvisionClass", "\346\230\276\347\244\272\347\202\271\344\272\221", nullptr));
+        action_Camera->setText(QApplication::translate("EvisionClass", "\346\213\215\346\221\204\345\215\225\351\225\234\345\244\264\347\205\247\347\211\207", nullptr));
         action_4->setText(QApplication::translate("EvisionClass", "\345\270\256\345\212\251\344\277\241\346\201\257", nullptr));
         action_5->setText(QApplication::translate("EvisionClass", "\345\205\263\344\272\216", nullptr));
         actionDebug->setText(QApplication::translate("EvisionClass", "Debug", nullptr));

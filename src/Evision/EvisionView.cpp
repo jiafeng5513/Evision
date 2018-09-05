@@ -87,6 +87,17 @@ void EvisionView::RefreshStereoMatch()
 {
 	m_controller->RefreshStereoMatchCommand();
 }
+
+void EvisionView::onCamera()
+{
+	m_controller->openCameraCommand();
+}
+
+void EvisionView::onStereoCamera()
+{
+	m_controller->openStereoCameraCommand();
+}
+
 //œ‘ æµ„‘∆
 void EvisionView::onShowPointCloud()
 {

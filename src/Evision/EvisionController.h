@@ -20,6 +20,8 @@ public:
 	void RefreshStereoMatchCommand();
 	void getDistanceCommand();
 	void ShowPointCloudCommand();
+	void openCameraCommand();
+	void openStereoCameraCommand();
 public slots:
 	void onOpenMessageBox(QString title, QString msg);
 };
