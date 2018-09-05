@@ -58,6 +58,16 @@ void Camera::refreshResAndCodecList()
 		ui.comboBox_Resolution->addItem(QString("%1x%2").arg(resolution.width()).arg(resolution.height()),
 			QVariant(resolution));
 	}
+	ui.horizontalSlider_Quality->setRange(0, int(QMultimedia::VeryHighQuality));
+}
+
+QVariant Camera::boxValue(const QComboBox* box) const
+{
+	int idx = box->currentIndex();
+	if (idx == -1)
+		return QVariant();
+
+	return box->itemData(idx);
 }
 
 void Camera::OnFindSavePath()
@@ -90,23 +100,36 @@ void Camera::OnCameraPowerOff()
 	//ui.pushButton_Shot->setEnabled(false);
 	//ui.horizontalSlider_exposureCompensation->setEnabled(false);
 	//ui.horizontalSlider_Quality->setEnabled(false);
-	ui.viewfinder->close();
+	//ui.viewfinder->close();
 }
 
 void Camera::OnFocus()
 {
+	switch (m_pCamera->lockStatus()) {
+	case QCamera::Searching:
+	case QCamera::Locked:
+		m_pCamera->unlock();
+		break;
+	case QCamera::Unlocked:
+		m_pCamera->searchAndLock();
+	}
 }
 
 void Camera::OnShot()
 {
+	m_pImageCapture->capture();
 }
 
 void Camera::OnValueChanged_ExposureCompensation(int value)
 {
+	m_pCamera->exposure()->setExposureCompensation(value*0.5);
 }
 
 void Camera::OnValueChanged_Quality(int value)
 {
+	QImageEncoderSettings settings = m_pImageCapture->encodingSettings();
+	settings.setQuality(QMultimedia::EncodingQuality(ui.horizontalSlider_Quality->value()));
+	m_pImageCapture->setEncodingSettings(settings);
 }
 
 void Camera::OnSelectedChanged_CameraDevice(QString value)
@@ -116,10 +139,16 @@ void Camera::OnSelectedChanged_CameraDevice(QString value)
 
 void Camera::OnSelectedChanged_Resolution(QString value)
 {
+	QImageEncoderSettings settings = m_pImageCapture->encodingSettings();
+	settings.setResolution(boxValue(ui.comboBox_Resolution).toSize());
+	m_pImageCapture->setEncodingSettings(settings);
 }
 
 void Camera::OnSelectedChanged_Codec(QString value)
 {
+	QImageEncoderSettings settings = m_pImageCapture->encodingSettings();
+	settings.setCodec(boxValue(ui.comboBox_Codec).toString());
+	m_pImageCapture->setEncodingSettings(settings);
 }
 
 

@@ -125,6 +125,9 @@ public:
         horizontalSlider_exposureCompensation->setMinimumSize(QSize(170, 0));
         horizontalSlider_exposureCompensation->setMaximumSize(QSize(170, 16777215));
         horizontalSlider_exposureCompensation->setContextMenuPolicy(Qt::NoContextMenu);
+        horizontalSlider_exposureCompensation->setMinimum(-4);
+        horizontalSlider_exposureCompensation->setMaximum(4);
+        horizontalSlider_exposureCompensation->setPageStep(2);
         horizontalSlider_exposureCompensation->setOrientation(Qt::Horizontal);
         horizontalSlider_exposureCompensation->setTickPosition(QSlider::TicksAbove);
 

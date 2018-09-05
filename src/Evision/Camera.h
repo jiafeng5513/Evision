@@ -23,6 +23,7 @@ private:
 private:
 	void setCamera(QCameraInfo *cameraInfo);
 	void refreshResAndCodecList();
+	QVariant boxValue(const QComboBox *box) const;
 private slots:
 	void OnFindSavePath();
 	void OnCameraPowerOn();
