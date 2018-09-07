@@ -6,7 +6,9 @@ Qt 安装指南
 > [VS2017的Qt插件下载地址](http://download.qt.io/archive/vsaddin/qt-vsaddin-msvc2017-2.2.1.vsix)
 
 2. 执行安装程序,注意第三张图片中所选择的组件.<br>
-
+![image](https://github.com/AngelaViVi/Evision/blob/master/doc/qtinstall_1.png)
+![image](https://github.com/AngelaViVi/Evision/blob/master/doc/qtinstall_2.png)
+![image](https://github.com/AngelaViVi/Evision/blob/master/doc/qtinstall_3.png)
 3. 等待安装完毕.<br>
 
 4. 设置环境变量.<br>

@@ -1,4 +1,4 @@
-<div align=center><img width="100" height="100" src="https://github.com/AngelaViVi/BinocularVision/blob/master/src/EvisionLegacy/res/Evision.ico"/></div>
+<div align=center><img width="100" height="100" src="https://github.com/AngelaViVi/Evision/blob/master/src/EvisionLegacy/res/Evision.ico"/></div>
 
 <div align=center>Evision 双目视觉系统</div>
 
@@ -13,13 +13,12 @@ Feature:
 
 Comming soon
 ===
-1. 改repo的名字.<br>
-2. 修改B站视频和CSDN博客文章上的github链接.<br>
-3. 测距部分的优化.<br>
-4. 录制新的视频.<br>
-5. 发布release版本.<br>
-6. 链接持续集成工具.<br> 
-7. 更新博客:<br>
+
+1. 测距部分的优化.<br>
+2. 录制新的视频.<br>
+3. 发布release版本.<br>
+4. 链接持续集成工具.<br> 
+5. 更新博客:<br>
 > 1. 极线约束.<br>
 > 2. 标定方法原理.<br>
 > 3. 匹配方法原理,参数意义以及调整参数的方法.<br>
@@ -27,6 +26,11 @@ Comming soon
 > 5. Visual Studio编译期脚本的使用.<br>
 > 6. QtDesigner插件编写.<br>
 
+#### 安装指南
+
+1. [Qt安装指南](https://github.com/AngelaViVi/Evision/blob/master/doc/Qt_Install.md)<br>
+2. [VS2017安装指南](https://github.com/AngelaViVi/Evision/blob/master/doc/VS2017_Install.md)<br>
+3. [VS2017-Qt配置指南](https://github.com/AngelaViVi/Evision/blob/master/doc/qt_vs_config.md)<br>
 
 build
 ===
@@ -37,13 +41,13 @@ build
 4. `src`文件夹中存放工程目录和解决方案文件.<br>
 #### 使用须知
 1. 为了对新手友好,写的比较详细(啰嗦),请谅解.如果您并不是一个写过很多相关程序的用户,请仔细阅读.<br>
-1. 使用该项目需要准备Visual Studio 2017,Qt 5.11.1.如果您没有这两个IDE的使用经验,请务必按照此处(链接)提供的安装教程进行安装.<br>
+1. 使用该项目需要准备Visual Studio 2017,Qt 5.11.1.如果您没有这两个IDE的使用经验,请务必按照上面提供的安装教程进行安装.<br>
 2. 本项目已经将所需的依赖内置好,如果您对Visual Studio并不熟悉,请不要修改项目属性.<br>
 3. 请不要按照其他教程(形如"OpenCV和VS2017环境搭建"之类)中的步骤修改本项目的配置.<br>
 4. 项目中带有很多脚本,在不清楚这些脚本的作用的情况下,请不要修改删除或者随意执行.<br>
 #### 工程说明
 本项目只有一个解决方案,其中含有使用7个工程.VS2017打开`src/Evision.sln`,你将看到:
-(图片:sln_and_projs.png)
+![image](https://github.com/AngelaViVi/Evision/blob/master/doc/sln_and_projs.png)
 1. calibration是标定的sample,是一个控制台程序.<br>
 2. imagelist_creator是文件序列化sample,控制台程序.<br>
 3. stereo_match是立体匹配sample,控制台程序.<br>
@@ -74,3 +78,4 @@ build
 1. 这个程序将会开始更新,由于主要作者比较忙,更新时间不确定<br>
 2. 这是本人编程路上第一个稍微像样的程序,在编写中得到了许多前辈的帮助,无法一一列举.当时寻找靠谱的教程和参考价值高的代码异常费劲,这个经历让我决定,以后我写的所有代码尽量都开放,如果有应用价值,我也会尽量写博客,编程是一件需要大家互相帮助的事情,尤其是对于初学者,他们更需要社区环境的关爱.<br>
 3. 感谢大家的关注,新版本的程序已经接近完成,届时该repo将会改名,相关的博客和视频连接都会同步更新,博客会不定期发布最新的算法的相关文章,欢迎大家继续关注,等一切准备妥当,将会放链接.
+4. 作者所用的设备:![image](https://github.com/AngelaViVi/Evision/blob/master/doc/device.png)
