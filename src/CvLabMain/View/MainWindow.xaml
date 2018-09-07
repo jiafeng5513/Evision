@@ -1,0 +1,71 @@
+﻿<Window x:Class="CvLabMain.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CvLabMain"
+        xmlns:ui="clr-namespace:Emgu.CV.UI;assembly=Emgu.CV.UI"
+        xmlns:WinFormHost="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
+        xmlns:model="clr-namespace:CvLabMain.Model"
+        xmlns:viewModel="clr-namespace:CvLabMain.ViewModel"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="623.14" Width="1029.39">
+    <Grid UseLayoutRounding="False">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*" MinHeight="320" />
+            <RowDefinition Height="3*" MinHeight="260" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <WindowsFormsHost Margin="0,32,10,10" x:Name="windowsFormsHost1">
+            <!-- ReSharper disable once Xaml.InvalidType -->
+            <ui:ImageBox x:Name="LBox" FunctionalMode="Everything" />
+        </WindowsFormsHost>
+        <WindowsFormsHost Margin="6,32,0,10" x:Name="windowsFormsHost1_Copy" Grid.Column="1">
+            <!-- ReSharper disable once Xaml.InvalidType -->
+            <ui:ImageBox x:Name="RBox" FunctionalMode="Everything" />
+        </WindowsFormsHost>
+
+        <Menu Height="27" VerticalAlignment="Top" Grid.ColumnSpan="2">
+            <MenuItem Header="File"  Height="28" Width="54" FontSize="20"/>
+        </Menu>
+        <Grid HorizontalAlignment="Left" Height="260" Grid.Row="1" VerticalAlignment="Top" Width="493" Grid.ColumnSpan="2">
+            <StackPanel HorizontalAlignment="Left" Width="493"/>
+        </Grid>
+        <GroupBox Header="Video Capture" Height="118" Grid.Row="1" VerticalAlignment="Top" Margin="10,0">
+            <Grid Height="96" Margin="0,0,-2,0" VerticalAlignment="Bottom">
+                <Label Content="LCamera:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <Label Content="RCamera:" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top"/>
+                <ComboBox ItemsSource="{Binding m_cameraDevice.DeviceList_L,Mode=TwoWay}" 
+                          DisplayMemberPath="Value.Name" 
+                          SelectedIndex="0"
+                          Margin="81,14,9,0" VerticalAlignment="Top" Width="371"/>
+                <ComboBox ItemsSource="{Binding m_cameraDevice.DeviceList_R}" 
+                          DisplayMemberPath="Value.Name" 
+                          SelectedIndex="0"
+                          Margin="81,44,9,0" VerticalAlignment="Top" Width="371"/>
+                <Button Command="{Binding SwitchCameraCommand}" Content="Camera Switch" HorizontalAlignment="Left" Margin="91,72,0,0" VerticalAlignment="Top" Width="123"/>
+                <Button Command="{Binding RefreshCameraCommand}" Content="Refresh Camera" HorizontalAlignment="Left" Margin="218,72,0,0" VerticalAlignment="Top" Width="116"/>
+                <Button Command="{Binding ReleaseCameraCommand}" Content="Release Camera" HorizontalAlignment="Left" Margin="339,72,0,0" VerticalAlignment="Top" Width="123"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Calibration" Height="127" Margin="10,123,10,0" Grid.Row="1" VerticalAlignment="Top">
+            <Grid Height="117" Margin="0,0,-2,-12" VerticalAlignment="Top">
+                <TextBox Text="{Binding m_calibrate.Rows}"  HorizontalAlignment="Left" Height="23" Margin="112,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="97"/>
+                <TextBox Text="{Binding m_calibrate.Columns}" HorizontalAlignment="Left" Height="23" Margin="352,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="97"/>
+                <TextBox Text="{Binding m_calibrate.SizeOfSquare}" HorizontalAlignment="Left" Height="23" Margin="112,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="97"/>
+                <TextBox Text="{Binding m_calibrate.NumOfImages}" HorizontalAlignment="Left" Height="23" Margin="352,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="97"/>
+                <Button Command="{Binding DoCalibrateCommand}" Content="Calibrate" HorizontalAlignment="Left" Margin="236,72,0,0" VerticalAlignment="Top" Width="213" RenderTransformOrigin="0.452,1.035"/>
+                <Button Command="{Binding DefaultCalibParaCommand}" Content="Default Parameters" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top" Width="199"/>
+            </Grid>
+        </GroupBox>
+        <Label Content="Num Of Rows:" HorizontalAlignment="Left" Margin="26,152,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Content="Num Of Columns:" HorizontalAlignment="Left" Margin="250,152,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Content="Num Of Images:" HorizontalAlignment="Left" Margin="250,177,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Content="Square Size:" HorizontalAlignment="Left" Margin="26,177,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+
+
+    </Grid>
+</Window>
