@@ -55,7 +55,7 @@ build
 5. CustomGraphicsView是自定义QtDesigner插件.<br>
 6. Evision是Qt版的Evision主程序,GUI.<br>
 用VS2017打开`src/CvLib.sln`,你将会看到两个工程:<br>
-![image](https://github.com/AngelaViVi/Evision/blob/master/doc/cvlib_sln_proj.png)
+![image](https://github.com/AngelaViVi/Evision/blob/CvLib/doc/cvlib_sln_proj.png)
 1. CvLabMain是用WPF框架写的.<br>
 2. CvLabSandbox是用WinFrom写的.<br>
 
