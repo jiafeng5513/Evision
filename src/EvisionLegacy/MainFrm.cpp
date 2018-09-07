@@ -503,32 +503,6 @@ void CMainFrame::RefalshCamera()
 }
 
 
-
-// 这个函数现在已经不用了....已经没有调用点了
-void CMainFrame::FixDisp(Mat_<float> & disp, int numofdisp)
-{
-	/*
-	Mat_<float> disp1;
-	float lastPixel = 10;
-	int minDisparity = 23;
-	//	disp.at<float>(0,144) = lastPixel;
-	for (int i = 0; i < disp.rows; i++)
-	{
-		for (int j = numofdisp; j < disp.cols; j++)
-		{
-			if (disp(i, j) <= minDisparity) disp(i, j) = lastPixel;
-			else lastPixel = disp(i, j);
-		}
-	}
-	int an = 4;
-	copyMakeBorder(disp, disp1, an, an, an, an, BORDER_REPLICATE);
-	Mat element = getStructuringElement(MORPH_ELLIPSE, Size(an * 2 + 1, an * 2 + 1));
-	morphologyEx(disp1, disp1, CV_MOP_OPEN, element);
-	morphologyEx(disp1, disp1, CV_MOP_CLOSE, element);
-	disp = disp1(Range(an, disp.rows - an), Range(an, disp.cols - an)).clone();
-	*/
-}
-
 // 显示摄像头实时画面
 void CMainFrame::DoShowOrigFrame()
 {
@@ -2267,14 +2241,6 @@ void CMainFrame::OnBnMouseon()
 		}
 		destroyWindow("鼠标点击测距-按ESC退出");
 		break;//break-case
-
-		//由于两点模式需要有一些绘制工作要做,所以为了提高效率,不能使用上面的循环方法
-		//1 做一个视差图的副本,这个变量应该是全局变量
-		//2 显示那个副本
-		//3 这里只需要循环就行了
-		//4 相应坐标分析的函数中,要这样做:
-			//4-1 取第一个点,用视差图原件覆盖已经叠绘过的副本,在全局副本上面划线,每次点击,五个坐标都要输出
-			//4-2 去第二个点,在全局副本上划线,并计算两点的距离,把这个距离输出到距离窗口
 		break;
 	default:
 		break;

@@ -21,20 +21,20 @@
 #include "opencv2\core\core.hpp"
 #include "afxwin.h"
 #include "afxcmn.h"
-#include "stdlib.h"
+//#include "stdlib.h"
 #include <vector>
 #include <string>
 #include <algorithm>
 #include <ctype.h>
-#include <stdarg.h>
+//#include <stdarg.h>
 #include <string.h>
 #include <time.h>
-#include <stdio.h>
+//#include <stdio.h>
 #include "afxdialogex.h"
 #include "calib.h"
 #include "StereoMatch.h"
 #include "PointCloudAnalyzer.h"
-#include "string.h"
+//#include "string.h"
 #include "cvaux.h"
 #include "cxcore.h"
 #include "highgui.h"
@@ -43,7 +43,7 @@
 #include "opencv2/highgui/highgui.hpp"
 #include "CvvImage.h"
 #include "calib.h"
-#include <math.h>
+//#include <math.h>
 #define CalibWnd 541301
 #define MatchWnd 541302
 #define RangeWnd 541303
@@ -73,8 +73,8 @@ public:
 public:
 	virtual ~CMainFrame();
 #ifdef _DEBUG
-	virtual void AssertValid() const;
-	virtual void Dump(CDumpContext& dc) const;
+	void AssertValid() const override;
+	void Dump(CDumpContext& dc) const override;
 #endif
 
 protected:  // 控件条嵌入成员
@@ -169,8 +169,6 @@ private:
 	
 private:
 	/*===================================本类的工具方法==================================*/
-	// 清除立体匹配的参数
-	void DoClearParamsOfStereoMatch();
 	// 文件选择器对话框
 	vector<CStringA> DoSelectFiles(LPCTSTR lpszDefExt, DWORD dwFlags, LPCTSTR lpszFilter, LPCTSTR lpstrTitle, LPCTSTR lpstrInitialDir);
 	// 处理图片的显示
@@ -178,7 +176,7 @@ private:
 	// 向输出窗口的指定位置输出指定文本信息,
 	void PutMessage(int wndID, LPCTSTR message);
 	// 保存图片之前的调整操作,唯一一个调用点已经被注释
-	void FixDisp(Mat_<float> & disp, int numofdisp);
+	//void FixDisp(Mat_<float> & disp, int numofdisp);
 	// 鼠标定点函数
 	static void On_Mouse(int event, int x, int y, int flags, void *);
 	// 刷新摄像头
@@ -202,21 +200,17 @@ public:
 	afx_msg LRESULT OnUserChangeFrameProcMethod(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnUserCPara4ChangeCameraL(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnUserCPara4ChangeCameraR(WPARAM wParam, LPARAM lParam);
-	afx_msg LRESULT OnUserChangedpi(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnRefreshDisparityMap(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnXYZAnalyse(WPARAM wParam, LPARAM lParam);
 	/*===============================以下是界面事件处理程序==============================*/
 	afx_msg void OnBnDefaultcamcalibparam();
 	afx_msg void OnBndetectag();
-	afx_msg void OnBn2stereocalib();
 	afx_msg void OnBnStereodefparam();
 	afx_msg void OnBngivedisp();
 	afx_msg void OnBnCompdisp();
 	afx_msg void OnRadBm();
 	afx_msg void OnRadSgbm();
 	afx_msg void OnBnMouseon();
-	afx_msg void OnUpdateRadCalibfromimg(CCmdUI *pCmdUI);
-	afx_msg void OnRadCalibfromimg();
 	afx_msg void OnRadBouguet();
 	afx_msg void OnUpdateRadBouguet(CCmdUI *pCmdUI);
 	afx_msg void OnRadHartley();
@@ -230,7 +224,6 @@ public:
 	afx_msg void OnUpdateBnDefaultcamcalibparam(CCmdUI *pCmdUI);
 	afx_msg void OnUpdateBnDeletecamcalibparam(CCmdUI *pCmdUI);
 	afx_msg void OnUpdateBndetectag(CCmdUI *pCmdUI);
-	afx_msg void OnUpdateBn2stereocalib(CCmdUI *pCmdUI);
 	afx_msg void OnUpdateBnStereodefparam(CCmdUI *pCmdUI);
 	afx_msg void OnUpdateBnStereodeleteparam(CCmdUI *pCmdUI);
 	afx_msg void OnUpdateBngivedisp(CCmdUI *pCmdUI);
@@ -244,7 +237,6 @@ public:
 	afx_msg void OnBn2stopcam();
 	afx_msg void OnTestcalib();
 	afx_msg void OnStopcalib();
-	afx_msg void OnChkCalculate();
 	afx_msg void OnPhotograph();
 	afx_msg void OnCalibfromyml();
 	afx_msg void OnUpdateTestcalib(CCmdUI *pCmdUI);
@@ -254,8 +246,6 @@ public:
 	afx_msg void OnBnStereodeleteparam();
 	afx_msg void OnCheck2();
 	afx_msg void OnUpdateCheck2(CCmdUI *pCmdUI);
-	afx_msg void OnChkGc();
-	afx_msg void OnUpdateChkGc(CCmdUI *pCmdUI);
 	afx_msg void OnDorefreshdisparitymap();
 	afx_msg void OnUpdateDorefreshdisparitymap(CCmdUI *pCmdUI);
 	afx_msg void OnChkGetdepth();
