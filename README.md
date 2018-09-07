@@ -7,7 +7,7 @@ Feature:
 1. 双目测距<br>
 2. 标定,畸变校正<br>
 3. 三维点云获取<br>
-4. 关于双目的中文资料重复度太高,希望各位后来者能够析取前人精化,摒弃前人的糟粕,多多自行探索,不要抄来抄去<br>
+4. 关于双目的中文资料重复度太高,希望各位后来者能够析取前人精华,摒弃前人的糟粕,多多自行探索,不要抄来抄去<br>
 5. 关于程序使用方面的问题,可以联系邮件jiafeng5513@outlook.com<br>
 6. 有关课程设计和毕业论文(Windows程序开发,机器视觉,深度学习,图像处理)的相关事宜也可以联系作者.<br>
 
@@ -35,13 +35,21 @@ build
 2. `package`文件夹存储项目所需的依赖<br>
 3. `scripts`文件夹存储编译脚本,由于使用了VisualStudio宏,这些脚本不能直接运行.<br>
 4. `src`文件夹中存放工程目录和解决方案文件.<br>
+#### 使用须知
+1. 为了对新手友好,写的比较详细(啰嗦),请谅解.如果您并不是一个写过很多相关程序的用户,请仔细阅读.<br>
+1. 使用该项目需要准备Visual Studio 2017,Qt 5.11.1.如果您没有这两个IDE的使用经验,请务必按照此处(链接)提供的安装教程进行安装.<br>
+2. 本项目已经将所需的依赖内置好,如果您对Visual Studio并不熟悉,请不要修改项目属性.<br>
+3. 请不要按照其他教程(形如"OpenCV和VS2017环境搭建"之类)中的步骤修改本项目的配置.<br>
+4. 项目中带有很多脚本,在不清楚这些脚本的作用的情况下,请不要修改删除或者随意执行.<br>
 #### 工程说明
-使用VS2017打开`src/Evision.sln`,你将看到6个工程.
+本项目只有一个解决方案,其中含有使用7个工程.VS2017打开`src/Evision.sln`,你将看到:
+(图片:sln_and_projs.png)
 1. calibration是标定的sample,是一个控制台程序.<br>
 2. imagelist_creator是文件序列化sample,控制台程序.<br>
 3. stereo_match是立体匹配sample,控制台程序.<br>
 4. EvisionLegacy是MFC版本的Evision主程序,GUI程序<br>
-5. Evision是Qt版的Evision主程序,GUI.<br>
+5. CustomGraphicsView是自定义QtDesigner插件.<br>
+6. Evision是Qt版的Evision主程序,GUI.<br>
 #### MFC(EvisionLegacy)
 1. OpenCV版本:2.4.13,解决方案文件夹已经内置了一个OpenCV<br>
 2. VS2017,兼容msvc15-2017,V140.v141工具集<br>
