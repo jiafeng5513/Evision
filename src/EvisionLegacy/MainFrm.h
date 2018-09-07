@@ -20,30 +20,11 @@
 #include "OutputWnd.h"
 #include "opencv2\core\core.hpp"
 #include "afxwin.h"
-#include "afxcmn.h"
-//#include "stdlib.h"
 #include <vector>
-#include <string>
-#include <algorithm>
-#include <ctype.h>
-//#include <stdarg.h>
-#include <string.h>
-#include <time.h>
-//#include <stdio.h>
-#include "afxdialogex.h"
 #include "calib.h"
 #include "StereoMatch.h"
-#include "PointCloudAnalyzer.h"
-//#include "string.h"
-#include "cvaux.h"
-#include "cxcore.h"
-#include "highgui.h"
 #include "cv.h"
-#include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/highgui/highgui.hpp"
-#include "CvvImage.h"
-#include "calib.h"
-//#include <math.h>
 #define CalibWnd 541301
 #define MatchWnd 541302
 #define RangeWnd 541303

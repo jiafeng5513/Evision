@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "calib.h"
+#include "opencv2/calib3d/calib3d.hpp"
+#include "opencv2/imgproc/imgproc.hpp"
 
 
 calib::calib()
@@ -456,41 +458,6 @@ int calib::saveCameraParams(const CameraParams& cameraParams, const char* filena
 	}
 }
 
-
-/*----------------------------
-* 功能 : 执行单目摄像机标定
-*		 注意此函数不能在 calibrateStereoCamera 中调用，只适合外部调用
-*		 棋盘角点的图像坐标默认存放在 cornerDatas.imagePoints1 中
-*----------------------------
-* 函数 : StereoCalib::calibrateSingleCamera
-* 访问 : public
-* 返回 : 0 - 操作失败，1 - 操作成功
-*
-* 参数 : cornerDatas			[in]	棋盘角点数据
-* 参数 : cameraParams			[out]	双目标定数据
-*/
-int calib::calibrateSingleCamera(CornerDatas& cornerDatas, CameraParams& cameraParams)
-{
-	cameraParams.imageSize = cornerDatas.imageSize;
-
-	/***
-	*	执行单目定标
-	*/
-	cv::calibrateCamera(
-		cornerDatas.objectPoints,
-		cornerDatas.imagePoints1,
-		cornerDatas.imageSize,
-		cameraParams.cameraMatrix,
-		cameraParams.distortionCoefficients,
-		cameraParams.rotations,
-		cameraParams.translations,
-		cameraParams.flags
-		);
-
-	return 1;
-}
-
-
 /*----------------------------
 * 功能 : 执行双目摄像机标定
 *		 若每个摄像机尚未标定，则首先进行单目标定，再进行双目标定
@@ -570,55 +537,6 @@ int calib::calibrateStereoCamera(CornerDatas& cornerDatas, StereoParams& stereoP
 	return 1;
 }
 
-
-/*----------------------------
-* 功能 : 计算单目标定误差
-*----------------------------
-* 函数 : StereoCalib::getCameraCalibrateError
-* 访问 : public
-* 返回 : 0 - 操作失败，1 - 操作成功
-*
-* 参数 : _objectPoints	[in]	棋盘角点的世界坐标
-* 参数 : _imagePoints	[in]	棋盘角点的图像坐标
-* 参数 : cameraParams	[in]	标定的摄像机参数
-* 参数 : err			[out]	单目标定误差
-*/
-int calib::getCameraCalibrateError(vector<vector<cv::Point3f> >& _objectPoints, vector<vector<cv::Point2f> >& _imagePoints, CameraParams& cameraParams, double err)
-{
-	cv::Mat imagePoints2;
-	int totalPoints = 0;
-	double totalErr = 0;
-
-	size_t nImages = _objectPoints.size();
-
-	for (unsigned int i = 0; i < nImages; i++)
-	{
-		// 提取当前棋盘对应的角点坐标子矩阵
-		vector<cv::Point3f>& objectPoints = _objectPoints[i];
-		vector<cv::Point2f>& imagePoints = _imagePoints[i];
-		totalPoints += objectPoints.size();
-
-		// 计算重投影点的坐标
-		projectPoints(
-			objectPoints,
-			cameraParams.rotations[i],
-			cameraParams.translations[i],
-			cameraParams.cameraMatrix,
-			cameraParams.distortionCoefficients,
-			imagePoints2);
-
-		// 计算重投影误差
-		double erri = norm(imagePoints, imagePoints2, CV_L2);
-		totalErr += erri * erri;
-	}
-
-	// 平均的重投影误差
-	err = std::sqrt(totalErr / totalPoints);
-
-	return 1;
-}
-
-
 /*----------------------------
 * 功能 : 计算双目标定误差
 *----------------------------
@@ -678,36 +596,6 @@ int calib::getStereoCalibrateError(CornerDatas& cornerDatas, StereoParams& stere
 
 	return 1;
 }
-
-
-/*----------------------------------
-* 功能 : 生成单个摄像头的校正矩阵
-*----------------------------------
-* 函数 : StereoCalib::rectifySingleCamera
-* 访问 : public
-* 返回 : 0 - 操作失败，1 - 操作成功
-*
-* 参数 : cameraParams	[in]	标定的摄像机参数
-* 参数 : remapMatrixs	[out]	单目校正结果
-*/
-int calib::rectifySingleCamera(CameraParams& cameraParams, RemapMatrixs& remapMatrixs)
-{
-	cv::initUndistortRectifyMap(
-		cameraParams.cameraMatrix,
-		cameraParams.distortionCoefficients,
-		cv::Mat(),
-		getOptimalNewCameraMatrix(
-		cameraParams.cameraMatrix,
-		cameraParams.distortionCoefficients,
-		cameraParams.imageSize, 1, cameraParams.imageSize, 0),
-		cameraParams.imageSize,
-		CV_16SC2,
-		remapMatrixs.mX1,
-		remapMatrixs.mY1);
-
-	return 1;
-}
-
 
 /*----------------------------
 * 功能 : 执行双目摄像机校正，生成双目校正数据

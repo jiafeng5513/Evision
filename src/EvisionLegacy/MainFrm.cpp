@@ -1,24 +1,11 @@
-// 这段 MFC 示例源代码演示如何使用 MFC Microsoft Office Fluent 用户界面 
-// (“Fluent UI”)。该示例仅供参考，
-// 用以补充《Microsoft 基础类参考》和 
-// MFC C++ 库软件随附的相关电子文档。  
-// 复制、使用或分发 Fluent UI 的许可条款是单独提供的。  
-// 若要了解有关 Fluent UI 许可计划的详细信息，请访问  
-// http://go.microsoft.com/fwlink/?LinkId=238214。
-//
-// 版权所有(C) Microsoft Corporation
-// 保留所有权利。
-
-// MainFrm.cpp : CMainFrame 类的实现
-//
-
 #include "stdafx.h"
 #include "EvisionLegacy.h"
 #include "EvisionLegacyView.h"
 #include "MainFrm.h"
 #include "NewProject.h"
-//#include "CameraDS.h"
 #include "DirectShowHelper.h"
+#include "PointCloudAnalyzer.h"
+#include "CvvImage.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -181,7 +168,7 @@ BOOL CMainFrame::CreateDockingWindows()
 	CString strOutputWnd;
 	bNameValid = strOutputWnd.LoadString(IDS_OUTPUT_WND);
 	ASSERT(bNameValid);
-	if (!m_wndOutput.Create(strOutputWnd, this, CRect(0, 0, 100, 100), TRUE, ID_VIEW_OUTPUTWND, WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_CLIPCHILDREN | CBRS_LEFT | CBRS_FLOAT_MULTI))
+	if (!m_wndOutput.Create(strOutputWnd, this, CRect(0, 0, 200, 100), TRUE, ID_VIEW_OUTPUTWND, WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_CLIPCHILDREN | CBRS_LEFT | CBRS_FLOAT_MULTI))
 	{
 		TRACE0("未能创建输出窗口\n");
 		return FALSE; // 未能创建
@@ -723,7 +710,7 @@ void CMainFrame::SetSolver(int imgChannels)
 		m_stereoMatcher.m_SGBM.preFilterCap = atoi(temp);
 		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_SADWinSiz))->GetWindowText(temp);
 		m_stereoMatcher.m_SGBM.SADWindowSize = atoi(temp);
-		m_stereoMatcher.m_SGBM.P1 = 48 * imgChannels * atoi(temp) * atoi(temp);//48??????!!!!!!?!?!?!?!!?!??
+		m_stereoMatcher.m_SGBM.P1 = 48 * imgChannels * atoi(temp) * atoi(temp);
 		m_stereoMatcher.m_SGBM.P2 = 48 * imgChannels * atoi(temp) * atoi(temp);
 		(CPara2::getInstance()->GetDlgItem(IDC_EDIT_minDisp))->GetWindowText(temp);
 		m_stereoMatcher.m_SGBM.minDisparity = atoi(temp);
@@ -922,7 +909,7 @@ void CMainFrame::F_ShowImage(Mat& src, Mat& des, UINT ID)
 	else
 	{
 		// 对图片 src 进行缩放，并存入到 des 中
-		resize(src, desRoi, desRoi.size());//===================================
+		resize(src, desRoi, desRoi.size());
 	}
 
 	CDC* pDC = this->GetActiveView()->GetDlgItem(ID)->GetDC();		// 获得显示控件的 DC
@@ -1304,21 +1291,7 @@ void CMainFrame::OnBn1runcam()
 		riCam.set(CV_CAP_PROP_FRAME_WIDTH, m_nImageWidth);
 		riCam.set(CV_CAP_PROP_FRAME_HEIGHT, m_nImageHeight);
 	}
-	/*
-	// 使部分按钮生效
-	GetDlgItem(IDC_BN2StopCam)->EnableWindow(TRUE);
-	
-	GetDlgItem(IDC_BN_CompDisp)->EnableWindow(TRUE);
-	// 使部分按钮失效
-	GetDlgItem(IDC_BN1RunCam)->EnableWindow(FALSE);
-	GetDlgItem(IDC_CBN1CamList_L)->EnableWindow(FALSE);
-	GetDlgItem(IDC_CBN1CamList_R)->EnableWindow(FALSE);
-	GetDlgItem(IDC_CBN_Resolution)->EnableWindow(FALSE);
-	*/
 
-
-	// 启动摄像头后显示实时画面
-	DoShowOrigFrame();
 }
 
 //Ribbon->标定/采样->关闭相机(按键)
@@ -1340,15 +1313,6 @@ void CMainFrame::OnBn2stopcam()
 			F_ShowImage(m_riImage, m_riImage, IDC_PicRiCam);
 			riCam.release();
 		}
-
-		// 使启动摄像头按钮和摄像头选择列表生效
-		/*
-		GetDlgItem(IDC_BN1RunCam)->EnableWindow(TRUE);
-		GetDlgItem(IDC_CBN1CamList_L)->EnableWindow(TRUE);
-		GetDlgItem(IDC_CBN1CamList_R)->EnableWindow(TRUE);
-		GetDlgItem(IDC_CBN_Resolution)->EnableWindow(TRUE);
-		GetDlgItem(IDC_BN_CompDisp)->EnableWindow(FALSE);
-		*/
 	}
 	return;
 }
@@ -1407,7 +1371,7 @@ void CMainFrame::OnBndetectag()
 		}
 		imageSize = img0.size();
 
-		optCalib.numberBoards = MIN(optCalib.numberBoards, MIN(img0Files.size(), img1Files.size()));
+		optCalib.numberBoards = std::min(optCalib.numberBoards, int(std::min(img0Files.size(), img1Files.size())));
 			
 		m_stereoCalibrator.initCornerData(optCalib.numberBoards, imageSize, optCalib.cornerSize, optCalib.squareSize, cornerDatas);
 
@@ -1490,18 +1454,15 @@ void CMainFrame::OnBndetectag()
 		sprintf_s(err, "发生错误: %s", e.what());
 		CString errInfo;
 		errInfo = err;
-		//AfxMessageBox(_T(errInfo));
 		PutMessage(CalibWnd, _T(errInfo));
 		return;
 	}
 	catch (...)
 	{
-		//AfxMessageBox(_T("发生未知错误！"));
 		PutMessage(CalibWnd, _T("发生未知错误！"));
 		return;
 	}
 	
-	//stereoParams.flags = optCalib.flagStereoCalib;
 	stereoParams.flags = 0;
 	stereoParams.alpha = optCalib.alpha;
 	m_stereoCalibrator.calibrateStereoCamera(cornerDatas, stereoParams, FALSE);
@@ -1634,7 +1595,6 @@ void CMainFrame::OnTestcalib()
 		const char* cornerFile = CornerDataFile.GetBuffer(CornerDataFile.GetLength());
 		m_stereoCalibrator.saveCornerData(cornerFile, cornerDatas);
 
-		//AfxMessageBox(_T("棋盘角点检测结束"));
 		PutMessage(CalibWnd, _T("棋盘角点检测结束\n"));//输出标定误差
 		
 	}
@@ -1656,8 +1616,6 @@ void CMainFrame::OnTestcalib()
 	// 已获取角点坐标数据
 
 	// 传递标定参数
-	//stereoParams.cameraParams1.flags = optCalib.flagCameraCalib;
-	//stereoParams.cameraParams2.flags = optCalib.flagCameraCalib;
 	stereoParams.flags = optCalib.flagStereoCalib;
 	stereoParams.alpha = optCalib.alpha;
 	//执行立体相机标定(最后一个参数代表不需要先进行单目标定)
@@ -1671,11 +1629,9 @@ void CMainFrame::OnTestcalib()
 	CString ss;
 	ss = info;
 	PutMessage(CalibWnd, ss);//输出标定误差
-	//AfxMessageBox(ss);
 
 	// 执行立体相机矫正
 	m_stereoCalibrator.rectifyStereoCamera(cornerDatas, stereoParams, remapMatrixs, optCalib.rectifyMethod);
-	//AfxMessageBox(_T("已完成双目校正"));
 	PutMessage(CalibWnd, _T("已完成双目校正\n"));//输出标定误差
 
 	// 保存摄像头定标参数	
@@ -1683,7 +1639,6 @@ void CMainFrame::OnTestcalib()
 	CalibParasFile.Format(_T("%s\\%s"), WorkPath, _T("\\DATA\\calib_paras.xml"));
 	const char* calibparasfile = CalibParasFile.GetBuffer(CalibParasFile.GetLength());
 	m_stereoCalibrator.saveCalibrationDatas(calibparasfile, optCalib.rectifyMethod, cornerDatas, stereoParams, remapMatrixs);
-	//AfxMessageBox(_T("已保存定标参数"));
 	PutMessage(CalibWnd, _T("已保存定标参数\n"));//输出标定误差
 		
 	MSG msg;
@@ -1721,10 +1676,6 @@ void CMainFrame::OnTestcalib()
 		F_ShowImage(img1, m_riImage, IDC_PicRiCam);
 	}
 	
-
-	// 禁用退出摄像机定标按钮
-
-	//////////////////////////////////////////////////////////////////////////	
 	if (lfCam.isOpened() || riCam.isOpened())
 	{
 		// 定标结束，恢复双目定标按钮
@@ -1732,9 +1683,6 @@ void CMainFrame::OnTestcalib()
 		DoShowOrigFrame();
 	}
 	return;
-	MatchDefaultParamEnable = true;      // 启用匹配->默认参数
-	MatchDeleteParamEnable = true;      // 启用匹配->清除参数
-	MatchBngivedispEnable = true;      // 启用匹配->生成视差图
 }
  
 //Ribbon->标定->从文件标定(按键)
@@ -1756,10 +1704,6 @@ void CMainFrame::OnCalibfromyml()
 			_T("选择标定盘坐标文件"),
 			WorkPath
 			);
-		/*_T("*.bmp"),
-				OFN_ENABLESIZING | OFN_EXPLORER | OFN_ALLOWMULTISELECT | OFN_HIDEREADONLY,
-				_T("image files (*.bmp; *.png; *.jpg) |*.bmp; *.png; *.jpg; *.jpeg| All Files (*.*) |*.*||"),
-				_T("选择左视图文件"),*/
 		if (YmlFilePath.empty())
 		{
 			AfxMessageBox(_T("没有选中有效的坐标文件!"));
@@ -1769,7 +1713,6 @@ void CMainFrame::OnCalibfromyml()
 		// 从本地文件读入角点坐标数据YML
 		if (m_stereoCalibrator.loadCornerData(YMLFile, cornerDatas))
 		{
-			//AfxMessageBox(_T("已读入坐标数据"));
 			PutMessage(CalibWnd, _T("已读入坐标数据"));
 		}
 		else
@@ -1799,8 +1742,6 @@ void CMainFrame::OnCalibfromyml()
 	// 已获取角点坐标数据
 
 	// 进行摄像头标定
-
-	//stereoParams.flags = optCalib.flagStereoCalib;
 	stereoParams.flags = 0;
 	stereoParams.alpha = optCalib.alpha;
 	m_stereoCalibrator.calibrateStereoCamera(cornerDatas, stereoParams, FALSE);
@@ -1818,7 +1759,6 @@ void CMainFrame::OnCalibfromyml()
 	// 执行双目校正
 	m_stereoCalibrator.rectifyStereoCamera(cornerDatas, stereoParams, remapMatrixs, optCalib.rectifyMethod);
 	PutMessage(CalibWnd, _T("已完成双目校正\n"));
-	//AfxMessageBox(_T("已完成双目校正"));
 
 	// 保存定标参数
 	CString CalibParasFile;
@@ -1826,7 +1766,6 @@ void CMainFrame::OnCalibfromyml()
 	const char* calibparasFile = CalibParasFile.GetBuffer(CalibParasFile.GetLength());
 	m_stereoCalibrator.saveCalibrationDatas(calibparasFile, optCalib.rectifyMethod, cornerDatas, stereoParams, remapMatrixs);
 
-	//AfxMessageBox(_T("已保存定标参数"));
 	PutMessage(CalibWnd, _T("已保存定标参数\n"));
 	MatchDefaultParamEnable = true;      // 启用匹配->默认参数
 	MatchDeleteParamEnable = true;      // 启用匹配->清除参数
@@ -2191,10 +2130,9 @@ void CMainFrame::OnPhotograph()
 		bitwise_not(frame1, frame1);
 	}
 	
-	//if (lfCam.isOpened() || riCam.isOpened())
-	//{
-		DoShowOrigFrame();
-	//}
+
+	DoShowOrigFrame();
+
 	return;
 }
 
@@ -2252,20 +2190,11 @@ void CMainFrame::OnBnMouseon()
 // 鼠标定点函数 
 void CMainFrame::On_Mouse(int event, int x, int y, int flags, void *)
 {
-	switch (event)
-	{
-	case CV_EVENT_LBUTTONDOWN:
+	if(event== CV_EVENT_LBUTTONDOWN)
 	{
 		moupoint.x = x;
 		moupoint.y = y;
 		AfxGetApp()->GetMainWnd()->SendMessage(WM_USER_XYZAnalyse, 0, 0);
-	}
-		break;
-	case CV_EVENT_LBUTTONUP:
-	{
-							   
-	}
-		break;
 	}
 }
 
@@ -2305,7 +2234,6 @@ afx_msg LRESULT CMainFrame::OnXYZAnalyse(WPARAM wParam, LPARAM lParam)
 				CPara3::getInstance()->GetDlgItem(IDC_e7ObjDist)->SetWindowText(DIS);//目标距离(主点模式下,该值为Z坐标)
 				break;
 			case GetLength:
-				//翻牌子
 				//是不是第一个点-初值必须设置为true
 				IsSecondPoint = !IsSecondPoint;
 
@@ -2349,12 +2277,3 @@ afx_msg LRESULT CMainFrame::OnXYZAnalyse(WPARAM wParam, LPARAM lParam)
 	}
 	return 0;
 }
-
-
-
-
-
-
-
-
-

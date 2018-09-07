@@ -64,7 +64,6 @@ int COutputWnd::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	}
 
 	UpdateFonts();
-
 	CString strTabName;
 	//BOOL bNameValid;
 

@@ -10,9 +10,6 @@
 
 #include <vector>
 #include "opencv2/core/core.hpp"
-#include "opencv2/imgproc/imgproc.hpp"
-#include "opencv2/highgui/highgui.hpp"
-#include "opencv2/calib3d//calib3d.hpp"
 
 using namespace std;
 class calib
@@ -174,18 +171,6 @@ public:
 	int saveCameraParams(const CameraParams& cameraParams, const char* filename = "cameraParams.yml");
 
 	/*----------------------------
-	* 功能 : 执行单目摄像机标定
-	*----------------------------
-	* 函数 : calib::calibrateSingleCamera
-	* 访问 : public
-	* 返回 : 0 - 操作失败，1 - 操作成功
-	*
-	* 参数 : cornerDatas			[in]	棋盘角点数据
-	* 参数 : cameraParams			[out]	双目标定数据
-	*/
-	int calibrateSingleCamera(CornerDatas& cornerDatas, CameraParams& cameraParams);
-
-	/*----------------------------
 	* 功能 : 执行双目摄像机标定
 	*		 若每个摄像机尚未标定，则首先进行单目标定，再进行双目标定
 	*----------------------------
@@ -200,20 +185,6 @@ public:
 	int calibrateStereoCamera(CornerDatas& cornerDatas, StereoParams& stereoParams, bool cameraUncalibrated = false);
 
 	/*----------------------------
-	* 功能 : 计算单目标定误差
-	*----------------------------
-	* 函数 : calib::getCameraCalibrateError
-	* 访问 : public
-	* 返回 : 0 - 操作失败，1 - 操作成功
-	*
-	* 参数 : _objectPoints	[in]	棋盘角点的世界坐标
-	* 参数 : _imagePoints	[in]	棋盘角点的图像坐标
-	* 参数 : cameraParams	[in]	标定的摄像机参数
-	* 参数 : err			[out]	单目标定误差
-	*/
-	int getCameraCalibrateError(vector<vector<cv::Point3f> >& objectPoints, vector<vector<cv::Point2f> >& imagePoints, CameraParams& cameraParams, double err);
-
-	/*----------------------------
 	* 功能 : 计算双目标定误差
 	*----------------------------
 	* 函数 : calib::getStereoCalibrateError
@@ -225,18 +196,6 @@ public:
 	* 参数 : err			[out]	双目标定误差
 	*/
 	int getStereoCalibrateError(CornerDatas& cornerDatas, StereoParams& sterepParams, double& err);
-
-	/*----------------------------------
-	* 功能 : 生成单个摄像头的校正矩阵
-	*----------------------------------
-	* 函数 : calib::rectifySingleCamera
-	* 访问 : public
-	* 返回 : 0 - 操作失败，1 - 操作成功
-	*
-	* 参数 : cameraParams	[in]	标定的摄像机参数
-	* 参数 : remapMatrixs	[out]	单目校正结果
-	*/
-	int rectifySingleCamera(CameraParams& cameraParams, RemapMatrixs& remapMatrixs);
 
 	/*----------------------------
 	* 功能 : 执行双目摄像机校正

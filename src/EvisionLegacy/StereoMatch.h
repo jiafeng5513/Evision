@@ -3,16 +3,9 @@
 
 #pragma once
 
-#include <vector>
-#include "opencv2/imgproc/imgproc.hpp"
-#include "opencv2/highgui/highgui.hpp"
 #include "opencv2/calib3d/calib3d.hpp"
-#include "opencv2/imgproc/types_c.h"
 #include "opencv2/contrib/contrib.hpp"
-#include "cvaux.h"
-#include "cxcore.h"
-#include "highgui.h"
-#include "cv.h"
+
 
 
 
@@ -112,33 +105,6 @@ public:
 	*/
 	int getDisparityImage(cv::Mat& disparity, cv::Mat& disparityImage, bool isColor = true);
 
-	/*----------------------------
-	* 功能 : 保存三维点云到本地 txt 文件
-	*----------------------------
-	* 函数 : StereoMatch::savePointClouds
-	* 访问 : public
-	* 返回 : void
-	*
-	* 参数 : pointClouds	[in]	三维点云数据
-	* 参数 : filename		[in]	文件路径
-	*/
-	void savePointClouds(cv::Mat& pointClouds, const char* filename);
-
-	/*----------------------------
-	* 功能 : 基于 GC 算法计算视差..............这个函数并没有实现
-	*----------------------------
-	* 函数 : StereoMatch::GcMatch
-	* 访问 : public
-	* 返回 : 0 - 失败，1 - 成功
-	*
-	* 参数 : Left		    [in]	左摄像机帧图
-	* 参数 : Right		    [in]	右摄像机帧图
-	* 参数 : Left_disp	    [out]	处理后的左视图，用于显示
-	* 参数 : Right_disp		[out]	处理后的右视图，用于显示
-	*/
-
-	void GcMatch(IplImage * Left, IplImage * Right, CvMat * Left_disp, CvMat * Right_disp);
-	int GcMatch(cv::Mat& frameLeft, cv::Mat& frameRight, cv::Mat& disparity, cv::Mat& imageLeft, cv::Mat& imageRight);
 
 	/***
 	*	公开变量
@@ -165,9 +131,6 @@ private:
 	*/
 	int loadCalibData(const char* xmlFilePath);
 
-	/***
-	*	私有变量
-	*/
 	bool	m_Calib_Data_Loaded;		// 是否成功载入定标参数
 	cv::Mat m_Calib_Mat_Q;				// Q 矩阵
 	cv::Mat m_Calib_Mat_Remap_X_L;		// 左视图畸变校正像素坐标映射矩阵 X
