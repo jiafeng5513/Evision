@@ -13,8 +13,8 @@ namespace CvLabMain.View
         {
             InitializeComponent();
             this.DataContext = new CvLabViewModel();
-            LBox.Image = CvInvoke.Imread("F:\\cj.jpg");
-            RBox.Image = CvInvoke.Imread("F:\\cj.jpg");
+            LBox.Image = CvInvoke.Imread("D:\\图片\\素材\\timg.jpg");
+            RBox.Image = CvInvoke.Imread("D:\\图片\\素材\\timg.jpg");
         }
     }
 }

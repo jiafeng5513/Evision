@@ -3,6 +3,7 @@
 #include <QPalette>
 #include <QMediaMetaData>
 #include <QtWidgets>
+#include <QVariant>
 
 Q_DECLARE_METATYPE(QCameraInfo)
 
@@ -14,8 +15,10 @@ Camera::Camera(QWidget *parent)
 	//Camera devices:
 
 	const QList<QCameraInfo> availableCameras = QCameraInfo::availableCameras();
+	int id = 0;
 	for (const QCameraInfo &cameraInfo : availableCameras) {
-		ui.comboBox_CameraDevice->addItem(cameraInfo.description(),QVariant::fromValue(cameraInfo));
+		ui.comboBox_CameraDevice->addItem(QString::fromStdString(std::to_string(id)+"-")+cameraInfo.description(),QVariant::fromValue(cameraInfo));
+		id++;
 	}
 
 	setCamera(static_cast<QCameraInfo*>(ui.comboBox_CameraDevice->currentData().data()));
@@ -24,7 +27,12 @@ Camera::Camera(QWidget *parent)
 Camera::~Camera()
 {
 }
-
+/*
+ *setCamera：设置相机
+ *QCameraInfo* ：相机信息的指针
+ *
+ *return：void
+ */
 void Camera::setCamera(QCameraInfo* cameraInfo)
 {	
 	m_pCamera.reset(new QCamera(*cameraInfo));

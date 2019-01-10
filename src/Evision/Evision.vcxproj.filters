@@ -23,7 +23,7 @@
       <Extensions>qrc;*</Extensions>
       <ParseFiles>false</ParseFiles>
     </Filter>
-    <Filter Include="Generated Files">
+    <Filter Include="GeneratedFiles">
       <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
       <Extensions>moc;h;cpp</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
@@ -83,10 +83,10 @@
     <QtMoc Include="RFinterface.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="StereoCamera.h">
+    <QtMoc Include="Camera.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Camera.h">
+    <QtMoc Include="StereoCamera.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -119,8 +119,5 @@
     <ClInclude Include="PointCloudUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

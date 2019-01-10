@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'RFinterface.ui'
 **
-** Created by: Qt User Interface Compiler version 5.11.1
+** Created by: Qt User Interface Compiler version 5.12.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -43,47 +43,47 @@ public:
     void setupUi(QWidget *RFinterface)
     {
         if (RFinterface->objectName().isEmpty())
-            RFinterface->setObjectName(QStringLiteral("RFinterface"));
+            RFinterface->setObjectName(QString::fromUtf8("RFinterface"));
         RFinterface->resize(978, 566);
         gridLayout_2 = new QGridLayout(RFinterface);
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
-        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
+        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
         groupBox = new QGroupBox(RFinterface);
-        groupBox->setObjectName(QStringLiteral("groupBox"));
+        groupBox->setObjectName(QString::fromUtf8("groupBox"));
         groupBox->setMinimumSize(QSize(0, 110));
         groupBox->setMaximumSize(QSize(16777215, 110));
         gridLayout = new QGridLayout(groupBox);
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
-        gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         label_4 = new QLabel(groupBox);
-        label_4->setObjectName(QStringLiteral("label_4"));
+        label_4->setObjectName(QString::fromUtf8("label_4"));
 
         gridLayout->addWidget(label_4, 2, 0, 1, 1);
 
         label = new QLabel(groupBox);
-        label->setObjectName(QStringLiteral("label"));
+        label->setObjectName(QString::fromUtf8("label"));
 
         gridLayout->addWidget(label, 0, 0, 1, 1);
 
         label_2 = new QLabel(groupBox);
-        label_2->setObjectName(QStringLiteral("label_2"));
+        label_2->setObjectName(QString::fromUtf8("label_2"));
 
         gridLayout->addWidget(label_2, 0, 1, 1, 1);
 
         lineEdit_ImgY = new QLineEdit(groupBox);
-        lineEdit_ImgY->setObjectName(QStringLiteral("lineEdit_ImgY"));
+        lineEdit_ImgY->setObjectName(QString::fromUtf8("lineEdit_ImgY"));
 
         gridLayout->addWidget(lineEdit_ImgY, 1, 2, 1, 1);
 
         lineEdit_Res = new QLineEdit(groupBox);
-        lineEdit_Res->setObjectName(QStringLiteral("lineEdit_Res"));
+        lineEdit_Res->setObjectName(QString::fromUtf8("lineEdit_Res"));
 
         gridLayout->addWidget(lineEdit_Res, 2, 2, 1, 1);
 
         lineEdit_ImgX = new QLineEdit(groupBox);
-        lineEdit_ImgX->setObjectName(QStringLiteral("lineEdit_ImgX"));
+        lineEdit_ImgX->setObjectName(QString::fromUtf8("lineEdit_ImgX"));
 
         gridLayout->addWidget(lineEdit_ImgX, 0, 2, 1, 1);
 
@@ -92,7 +92,7 @@ public:
         gridLayout->addItem(horizontalSpacer, 0, 5, 1, 1);
 
         label_3 = new QLabel(groupBox);
-        label_3->setObjectName(QStringLiteral("label_3"));
+        label_3->setObjectName(QString::fromUtf8("label_3"));
 
         gridLayout->addWidget(label_3, 1, 1, 1, 1);
 
@@ -100,7 +100,7 @@ public:
         gridLayout_2->addWidget(groupBox, 0, 0, 1, 2);
 
         customGraphicsView_D = new CustomGraphicsView(RFinterface);
-        customGraphicsView_D->setObjectName(QStringLiteral("customGraphicsView_D"));
+        customGraphicsView_D->setObjectName(QString::fromUtf8("customGraphicsView_D"));
         customGraphicsView_D->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         customGraphicsView_D->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         customGraphicsView_D->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
@@ -108,7 +108,7 @@ public:
         gridLayout_2->addWidget(customGraphicsView_D, 1, 1, 1, 1);
 
         customGraphicsView_O = new CustomGraphicsView(RFinterface);
-        customGraphicsView_O->setObjectName(QStringLiteral("customGraphicsView_O"));
+        customGraphicsView_O->setObjectName(QString::fromUtf8("customGraphicsView_O"));
         customGraphicsView_O->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         customGraphicsView_O->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         customGraphicsView_O->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);

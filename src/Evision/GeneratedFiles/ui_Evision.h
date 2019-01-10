@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'Evision.ui'
 **
-** Created by: Qt User Interface Compiler version 5.11.1
+** Created by: Qt User Interface Compiler version 5.12.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -113,7 +113,7 @@ public:
     void setupUi(QMainWindow *EvisionClass)
     {
         if (EvisionClass->objectName().isEmpty())
-            EvisionClass->setObjectName(QStringLiteral("EvisionClass"));
+            EvisionClass->setObjectName(QString::fromUtf8("EvisionClass"));
         EvisionClass->resize(1000, 580);
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
@@ -123,24 +123,24 @@ public:
         EvisionClass->setMinimumSize(QSize(1000, 580));
         EvisionClass->setMaximumSize(QSize(1000, 580));
         QIcon icon;
-        icon.addFile(QStringLiteral(":/Evision/resource/Evision.ico"), QSize(), QIcon::Normal, QIcon::Off);
+        icon.addFile(QString::fromUtf8(":/Evision/resource/Evision.ico"), QSize(), QIcon::Normal, QIcon::Off);
         EvisionClass->setWindowIcon(icon);
         action_StereoCamera = new QAction(EvisionClass);
-        action_StereoCamera->setObjectName(QStringLiteral("action_StereoCamera"));
+        action_StereoCamera->setObjectName(QString::fromUtf8("action_StereoCamera"));
         action_ShowPointCloud = new QAction(EvisionClass);
-        action_ShowPointCloud->setObjectName(QStringLiteral("action_ShowPointCloud"));
+        action_ShowPointCloud->setObjectName(QString::fromUtf8("action_ShowPointCloud"));
         action_Camera = new QAction(EvisionClass);
-        action_Camera->setObjectName(QStringLiteral("action_Camera"));
+        action_Camera->setObjectName(QString::fromUtf8("action_Camera"));
         action_4 = new QAction(EvisionClass);
-        action_4->setObjectName(QStringLiteral("action_4"));
+        action_4->setObjectName(QString::fromUtf8("action_4"));
         action_5 = new QAction(EvisionClass);
-        action_5->setObjectName(QStringLiteral("action_5"));
+        action_5->setObjectName(QString::fromUtf8("action_5"));
         actionDebug = new QAction(EvisionClass);
-        actionDebug->setObjectName(QStringLiteral("actionDebug"));
+        actionDebug->setObjectName(QString::fromUtf8("actionDebug"));
         centralWidget = new QWidget(EvisionClass);
-        centralWidget->setObjectName(QStringLiteral("centralWidget"));
+        centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         graphicsView_L = new QGraphicsView(centralWidget);
-        graphicsView_L->setObjectName(QStringLiteral("graphicsView_L"));
+        graphicsView_L->setObjectName(QString::fromUtf8("graphicsView_L"));
         graphicsView_L->setGeometry(QRect(10, 10, 320, 240));
         graphicsView_L->setContextMenuPolicy(Qt::ActionsContextMenu);
         graphicsView_L->setAutoFillBackground(false);
@@ -151,176 +151,176 @@ public:
         brush.setStyle(Qt::SolidPattern);
         graphicsView_L->setBackgroundBrush(brush);
         graphicsView_R = new QGraphicsView(centralWidget);
-        graphicsView_R->setObjectName(QStringLiteral("graphicsView_R"));
+        graphicsView_R->setObjectName(QString::fromUtf8("graphicsView_R"));
         graphicsView_R->setGeometry(QRect(340, 10, 320, 240));
         graphicsView_D = new QGraphicsView(centralWidget);
-        graphicsView_D->setObjectName(QStringLiteral("graphicsView_D"));
+        graphicsView_D->setObjectName(QString::fromUtf8("graphicsView_D"));
         graphicsView_D->setGeometry(QRect(670, 10, 320, 240));
         groupBox = new QGroupBox(centralWidget);
-        groupBox->setObjectName(QStringLiteral("groupBox"));
+        groupBox->setObjectName(QString::fromUtf8("groupBox"));
         groupBox->setGeometry(QRect(10, 260, 321, 181));
         gridLayout = new QGridLayout(groupBox);
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
-        gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         lineEdit_BoardHeight = new QLineEdit(groupBox);
-        lineEdit_BoardHeight->setObjectName(QStringLiteral("lineEdit_BoardHeight"));
+        lineEdit_BoardHeight->setObjectName(QString::fromUtf8("lineEdit_BoardHeight"));
         lineEdit_BoardHeight->setMinimumSize(QSize(50, 20));
         lineEdit_BoardHeight->setMaximumSize(QSize(16777215, 16777215));
 
         gridLayout->addWidget(lineEdit_BoardHeight, 1, 2, 1, 1);
 
         lineEdit_BoardWidth = new QLineEdit(groupBox);
-        lineEdit_BoardWidth->setObjectName(QStringLiteral("lineEdit_BoardWidth"));
+        lineEdit_BoardWidth->setObjectName(QString::fromUtf8("lineEdit_BoardWidth"));
         lineEdit_BoardWidth->setMinimumSize(QSize(50, 20));
         lineEdit_BoardWidth->setMaximumSize(QSize(16777215, 16777215));
 
         gridLayout->addWidget(lineEdit_BoardWidth, 0, 2, 1, 1);
 
         label_8 = new QLabel(groupBox);
-        label_8->setObjectName(QStringLiteral("label_8"));
+        label_8->setObjectName(QString::fromUtf8("label_8"));
 
         gridLayout->addWidget(label_8, 2, 0, 1, 1);
 
         label_5 = new QLabel(groupBox);
-        label_5->setObjectName(QStringLiteral("label_5"));
+        label_5->setObjectName(QString::fromUtf8("label_5"));
 
         gridLayout->addWidget(label_5, 0, 0, 1, 1);
 
         label_6 = new QLabel(groupBox);
-        label_6->setObjectName(QStringLiteral("label_6"));
+        label_6->setObjectName(QString::fromUtf8("label_6"));
 
         gridLayout->addWidget(label_6, 1, 0, 1, 1);
 
         lineEdit_SquareSize = new QLineEdit(groupBox);
-        lineEdit_SquareSize->setObjectName(QStringLiteral("lineEdit_SquareSize"));
+        lineEdit_SquareSize->setObjectName(QString::fromUtf8("lineEdit_SquareSize"));
         lineEdit_SquareSize->setMinimumSize(QSize(50, 20));
         lineEdit_SquareSize->setMaximumSize(QSize(16777215, 16777215));
 
         gridLayout->addWidget(lineEdit_SquareSize, 2, 2, 1, 1);
 
         checkBox_showRectified = new QCheckBox(groupBox);
-        checkBox_showRectified->setObjectName(QStringLiteral("checkBox_showRectified"));
+        checkBox_showRectified->setObjectName(QString::fromUtf8("checkBox_showRectified"));
 
         gridLayout->addWidget(checkBox_showRectified, 3, 2, 1, 1);
 
         radioButton_Hartley = new QRadioButton(groupBox);
-        radioButton_Hartley->setObjectName(QStringLiteral("radioButton_Hartley"));
+        radioButton_Hartley->setObjectName(QString::fromUtf8("radioButton_Hartley"));
 
         gridLayout->addWidget(radioButton_Hartley, 4, 2, 1, 1);
 
         radioButton_Bouguet = new QRadioButton(groupBox);
-        radioButton_Bouguet->setObjectName(QStringLiteral("radioButton_Bouguet"));
+        radioButton_Bouguet->setObjectName(QString::fromUtf8("radioButton_Bouguet"));
 
         gridLayout->addWidget(radioButton_Bouguet, 5, 2, 1, 1);
 
         groupBox_4 = new QGroupBox(centralWidget);
-        groupBox_4->setObjectName(QStringLiteral("groupBox_4"));
+        groupBox_4->setObjectName(QString::fromUtf8("groupBox_4"));
         groupBox_4->setGeometry(QRect(10, 440, 321, 81));
         gridLayout_5 = new QGridLayout(groupBox_4);
         gridLayout_5->setSpacing(6);
         gridLayout_5->setContentsMargins(11, 11, 11, 11);
-        gridLayout_5->setObjectName(QStringLiteral("gridLayout_5"));
+        gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
         pushButton = new QPushButton(groupBox_4);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
+        pushButton->setObjectName(QString::fromUtf8("pushButton"));
 
         gridLayout_5->addWidget(pushButton, 4, 1, 1, 1);
 
         pushButton_CalibDefault = new QPushButton(groupBox_4);
-        pushButton_CalibDefault->setObjectName(QStringLiteral("pushButton_CalibDefault"));
+        pushButton_CalibDefault->setObjectName(QString::fromUtf8("pushButton_CalibDefault"));
 
         gridLayout_5->addWidget(pushButton_CalibDefault, 0, 1, 1, 1);
 
         groupBox_6 = new QGroupBox(centralWidget);
-        groupBox_6->setObjectName(QStringLiteral("groupBox_6"));
+        groupBox_6->setObjectName(QString::fromUtf8("groupBox_6"));
         groupBox_6->setGeometry(QRect(340, 260, 651, 261));
         label_36 = new QLabel(groupBox_6);
-        label_36->setObjectName(QStringLiteral("label_36"));
+        label_36->setObjectName(QString::fromUtf8("label_36"));
         label_36->setGeometry(QRect(20, 110, 316, 29));
         label_36->setMinimumSize(QSize(316, 29));
         label_36->setMaximumSize(QSize(316, 29));
         label_39 = new QLabel(groupBox_6);
-        label_39->setObjectName(QStringLiteral("label_39"));
+        label_39->setObjectName(QString::fromUtf8("label_39"));
         label_39->setGeometry(QRect(20, 70, 180, 16));
         label_42 = new QLabel(groupBox_6);
-        label_42->setObjectName(QStringLiteral("label_42"));
+        label_42->setObjectName(QString::fromUtf8("label_42"));
         label_42->setGeometry(QRect(340, 60, 228, 16));
         label_43 = new QLabel(groupBox_6);
-        label_43->setObjectName(QStringLiteral("label_43"));
+        label_43->setObjectName(QString::fromUtf8("label_43"));
         label_43->setGeometry(QRect(340, 100, 234, 16));
         label_44 = new QLabel(groupBox_6);
-        label_44->setObjectName(QStringLiteral("label_44"));
+        label_44->setObjectName(QString::fromUtf8("label_44"));
         label_44->setGeometry(QRect(340, 20, 168, 16));
         label_37 = new QLabel(groupBox_6);
-        label_37->setObjectName(QStringLiteral("label_37"));
+        label_37->setObjectName(QString::fromUtf8("label_37"));
         label_37->setGeometry(QRect(20, 160, 310, 29));
         label_37->setMinimumSize(QSize(310, 29));
         label_37->setMaximumSize(QSize(310, 29));
         label_41 = new QLabel(groupBox_6);
-        label_41->setObjectName(QStringLiteral("label_41"));
+        label_41->setObjectName(QString::fromUtf8("label_41"));
         label_41->setGeometry(QRect(20, 210, 161, 16));
         label_35 = new QLabel(groupBox_6);
-        label_35->setObjectName(QStringLiteral("label_35"));
+        label_35->setObjectName(QString::fromUtf8("label_35"));
         label_35->setGeometry(QRect(340, 140, 241, 16));
         label_40 = new QLabel(groupBox_6);
-        label_40->setObjectName(QStringLiteral("label_40"));
+        label_40->setObjectName(QString::fromUtf8("label_40"));
         label_40->setGeometry(QRect(20, 10, 316, 29));
         label_40->setMinimumSize(QSize(316, 29));
         label_40->setMaximumSize(QSize(316, 29));
         groupBox_8 = new QGroupBox(groupBox_6);
-        groupBox_8->setObjectName(QStringLiteral("groupBox_8"));
+        groupBox_8->setObjectName(QString::fromUtf8("groupBox_8"));
         groupBox_8->setGeometry(QRect(460, 180, 171, 48));
         horizontalLayout = new QHBoxLayout(groupBox_8);
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         radioButton_MODE_HH = new QRadioButton(groupBox_8);
-        radioButton_MODE_HH->setObjectName(QStringLiteral("radioButton_MODE_HH"));
+        radioButton_MODE_HH->setObjectName(QString::fromUtf8("radioButton_MODE_HH"));
 
         horizontalLayout->addWidget(radioButton_MODE_HH);
 
         radioButton_MODE_3WAY = new QRadioButton(groupBox_8);
-        radioButton_MODE_3WAY->setObjectName(QStringLiteral("radioButton_MODE_3WAY"));
+        radioButton_MODE_3WAY->setObjectName(QString::fromUtf8("radioButton_MODE_3WAY"));
 
         horizontalLayout->addWidget(radioButton_MODE_3WAY);
 
         radioButton_MODE_SGBM = new QRadioButton(groupBox_8);
-        radioButton_MODE_SGBM->setObjectName(QStringLiteral("radioButton_MODE_SGBM"));
+        radioButton_MODE_SGBM->setObjectName(QString::fromUtf8("radioButton_MODE_SGBM"));
 
         horizontalLayout->addWidget(radioButton_MODE_SGBM);
 
         groupBox_9 = new QGroupBox(groupBox_6);
-        groupBox_9->setObjectName(QStringLiteral("groupBox_9"));
+        groupBox_9->setObjectName(QString::fromUtf8("groupBox_9"));
         groupBox_9->setGeometry(QRect(340, 180, 108, 48));
         horizontalLayout_2 = new QHBoxLayout(groupBox_9);
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         radioButton_SGBM = new QRadioButton(groupBox_9);
-        radioButton_SGBM->setObjectName(QStringLiteral("radioButton_SGBM"));
+        radioButton_SGBM->setObjectName(QString::fromUtf8("radioButton_SGBM"));
 
         horizontalLayout_2->addWidget(radioButton_SGBM);
 
         radioButton_BM = new QRadioButton(groupBox_9);
-        radioButton_BM->setObjectName(QStringLiteral("radioButton_BM"));
+        radioButton_BM->setObjectName(QString::fromUtf8("radioButton_BM"));
 
         horizontalLayout_2->addWidget(radioButton_BM);
 
         horizontalSlider_uniradio = new QSlider(groupBox_6);
-        horizontalSlider_uniradio->setObjectName(QStringLiteral("horizontalSlider_uniradio"));
+        horizontalSlider_uniradio->setObjectName(QString::fromUtf8("horizontalSlider_uniradio"));
         horizontalSlider_uniradio->setGeometry(QRect(60, 40, 231, 20));
         horizontalSlider_uniradio->setMinimumSize(QSize(0, 20));
         horizontalSlider_uniradio->setMaximumSize(QSize(16777215, 15));
         horizontalSlider_uniradio->setMaximum(50);
         horizontalSlider_uniradio->setOrientation(Qt::Horizontal);
         lineEdit_uniradio = new QLineEdit(groupBox_6);
-        lineEdit_uniradio->setObjectName(QStringLiteral("lineEdit_uniradio"));
+        lineEdit_uniradio->setObjectName(QString::fromUtf8("lineEdit_uniradio"));
         lineEdit_uniradio->setGeometry(QRect(20, 40, 35, 20));
         lineEdit_uniradio->setMinimumSize(QSize(35, 20));
         lineEdit_uniradio->setMaximumSize(QSize(30, 20));
         lineEdit_uniradio->setReadOnly(true);
         horizontalSlider_prefilcap = new QSlider(groupBox_6);
-        horizontalSlider_prefilcap->setObjectName(QStringLiteral("horizontalSlider_prefilcap"));
+        horizontalSlider_prefilcap->setObjectName(QString::fromUtf8("horizontalSlider_prefilcap"));
         horizontalSlider_prefilcap->setGeometry(QRect(60, 90, 231, 20));
         horizontalSlider_prefilcap->setMinimumSize(QSize(0, 20));
         horizontalSlider_prefilcap->setMaximumSize(QSize(16777215, 15));
@@ -328,26 +328,26 @@ public:
         horizontalSlider_prefilcap->setMaximum(100);
         horizontalSlider_prefilcap->setOrientation(Qt::Horizontal);
         lineEdit_prefilcap = new QLineEdit(groupBox_6);
-        lineEdit_prefilcap->setObjectName(QStringLiteral("lineEdit_prefilcap"));
+        lineEdit_prefilcap->setObjectName(QString::fromUtf8("lineEdit_prefilcap"));
         lineEdit_prefilcap->setGeometry(QRect(20, 90, 35, 20));
         lineEdit_prefilcap->setMinimumSize(QSize(35, 20));
         lineEdit_prefilcap->setMaximumSize(QSize(30, 20));
         lineEdit_prefilcap->setReadOnly(true);
         horizontalSlider_specwinsz = new QSlider(groupBox_6);
-        horizontalSlider_specwinsz->setObjectName(QStringLiteral("horizontalSlider_specwinsz"));
+        horizontalSlider_specwinsz->setObjectName(QString::fromUtf8("horizontalSlider_specwinsz"));
         horizontalSlider_specwinsz->setGeometry(QRect(60, 140, 231, 20));
         horizontalSlider_specwinsz->setMinimumSize(QSize(0, 20));
         horizontalSlider_specwinsz->setMaximumSize(QSize(16777215, 15));
         horizontalSlider_specwinsz->setMaximum(200);
         horizontalSlider_specwinsz->setOrientation(Qt::Horizontal);
         lineEdit_specwinsz = new QLineEdit(groupBox_6);
-        lineEdit_specwinsz->setObjectName(QStringLiteral("lineEdit_specwinsz"));
+        lineEdit_specwinsz->setObjectName(QString::fromUtf8("lineEdit_specwinsz"));
         lineEdit_specwinsz->setGeometry(QRect(20, 140, 35, 20));
         lineEdit_specwinsz->setMinimumSize(QSize(35, 20));
         lineEdit_specwinsz->setMaximumSize(QSize(30, 20));
         lineEdit_specwinsz->setReadOnly(true);
         horizontalSlider_SadWinSiz = new QSlider(groupBox_6);
-        horizontalSlider_SadWinSiz->setObjectName(QStringLiteral("horizontalSlider_SadWinSiz"));
+        horizontalSlider_SadWinSiz->setObjectName(QString::fromUtf8("horizontalSlider_SadWinSiz"));
         horizontalSlider_SadWinSiz->setGeometry(QRect(60, 190, 231, 20));
         horizontalSlider_SadWinSiz->setMinimumSize(QSize(0, 20));
         horizontalSlider_SadWinSiz->setMaximumSize(QSize(16777215, 15));
@@ -356,13 +356,13 @@ public:
         horizontalSlider_SadWinSiz->setSingleStep(2);
         horizontalSlider_SadWinSiz->setOrientation(Qt::Horizontal);
         lineEdit_SadWinSiz = new QLineEdit(groupBox_6);
-        lineEdit_SadWinSiz->setObjectName(QStringLiteral("lineEdit_SadWinSiz"));
+        lineEdit_SadWinSiz->setObjectName(QString::fromUtf8("lineEdit_SadWinSiz"));
         lineEdit_SadWinSiz->setGeometry(QRect(20, 190, 35, 20));
         lineEdit_SadWinSiz->setMinimumSize(QSize(35, 20));
         lineEdit_SadWinSiz->setMaximumSize(QSize(30, 20));
         lineEdit_SadWinSiz->setReadOnly(true);
         horizontalSlider_MinDisp = new QSlider(groupBox_6);
-        horizontalSlider_MinDisp->setObjectName(QStringLiteral("horizontalSlider_MinDisp"));
+        horizontalSlider_MinDisp->setObjectName(QString::fromUtf8("horizontalSlider_MinDisp"));
         horizontalSlider_MinDisp->setGeometry(QRect(60, 230, 231, 20));
         horizontalSlider_MinDisp->setMinimumSize(QSize(0, 20));
         horizontalSlider_MinDisp->setMaximumSize(QSize(16777215, 15));
@@ -370,26 +370,26 @@ public:
         horizontalSlider_MinDisp->setMaximum(16);
         horizontalSlider_MinDisp->setOrientation(Qt::Horizontal);
         lineEdit_MinDisp = new QLineEdit(groupBox_6);
-        lineEdit_MinDisp->setObjectName(QStringLiteral("lineEdit_MinDisp"));
+        lineEdit_MinDisp->setObjectName(QString::fromUtf8("lineEdit_MinDisp"));
         lineEdit_MinDisp->setGeometry(QRect(20, 230, 35, 20));
         lineEdit_MinDisp->setMinimumSize(QSize(35, 20));
         lineEdit_MinDisp->setMaximumSize(QSize(30, 20));
         lineEdit_MinDisp->setReadOnly(true);
         horizontalSlider_textThread = new QSlider(groupBox_6);
-        horizontalSlider_textThread->setObjectName(QStringLiteral("horizontalSlider_textThread"));
+        horizontalSlider_textThread->setObjectName(QString::fromUtf8("horizontalSlider_textThread"));
         horizontalSlider_textThread->setGeometry(QRect(380, 160, 251, 20));
         horizontalSlider_textThread->setMinimumSize(QSize(0, 20));
         horizontalSlider_textThread->setMaximumSize(QSize(16777215, 15));
         horizontalSlider_textThread->setMaximum(50);
         horizontalSlider_textThread->setOrientation(Qt::Horizontal);
         lineEdit_textThread = new QLineEdit(groupBox_6);
-        lineEdit_textThread->setObjectName(QStringLiteral("lineEdit_textThread"));
+        lineEdit_textThread->setObjectName(QString::fromUtf8("lineEdit_textThread"));
         lineEdit_textThread->setGeometry(QRect(340, 160, 35, 20));
         lineEdit_textThread->setMinimumSize(QSize(35, 20));
         lineEdit_textThread->setMaximumSize(QSize(30, 20));
         lineEdit_textThread->setReadOnly(true);
         horizontalSlider_NumDisparities = new QSlider(groupBox_6);
-        horizontalSlider_NumDisparities->setObjectName(QStringLiteral("horizontalSlider_NumDisparities"));
+        horizontalSlider_NumDisparities->setObjectName(QString::fromUtf8("horizontalSlider_NumDisparities"));
         horizontalSlider_NumDisparities->setGeometry(QRect(380, 40, 251, 20));
         horizontalSlider_NumDisparities->setMinimumSize(QSize(0, 20));
         horizontalSlider_NumDisparities->setMaximumSize(QSize(16777215, 15));
@@ -398,26 +398,26 @@ public:
         horizontalSlider_NumDisparities->setSingleStep(16);
         horizontalSlider_NumDisparities->setOrientation(Qt::Horizontal);
         lineEdit_NumDisparities = new QLineEdit(groupBox_6);
-        lineEdit_NumDisparities->setObjectName(QStringLiteral("lineEdit_NumDisparities"));
+        lineEdit_NumDisparities->setObjectName(QString::fromUtf8("lineEdit_NumDisparities"));
         lineEdit_NumDisparities->setGeometry(QRect(340, 40, 35, 20));
         lineEdit_NumDisparities->setMinimumSize(QSize(35, 20));
         lineEdit_NumDisparities->setMaximumSize(QSize(30, 20));
         lineEdit_NumDisparities->setReadOnly(true);
         horizontalSlider_specrange = new QSlider(groupBox_6);
-        horizontalSlider_specrange->setObjectName(QStringLiteral("horizontalSlider_specrange"));
+        horizontalSlider_specrange->setObjectName(QString::fromUtf8("horizontalSlider_specrange"));
         horizontalSlider_specrange->setGeometry(QRect(380, 80, 251, 20));
         horizontalSlider_specrange->setMinimumSize(QSize(0, 20));
         horizontalSlider_specrange->setMaximumSize(QSize(16777215, 15));
         horizontalSlider_specrange->setMaximum(64);
         horizontalSlider_specrange->setOrientation(Qt::Horizontal);
         lineEdit_specrange = new QLineEdit(groupBox_6);
-        lineEdit_specrange->setObjectName(QStringLiteral("lineEdit_specrange"));
+        lineEdit_specrange->setObjectName(QString::fromUtf8("lineEdit_specrange"));
         lineEdit_specrange->setGeometry(QRect(340, 80, 35, 20));
         lineEdit_specrange->setMinimumSize(QSize(35, 20));
         lineEdit_specrange->setMaximumSize(QSize(30, 20));
         lineEdit_specrange->setReadOnly(true);
         horizontalSlider_maxdifdisp12 = new QSlider(groupBox_6);
-        horizontalSlider_maxdifdisp12->setObjectName(QStringLiteral("horizontalSlider_maxdifdisp12"));
+        horizontalSlider_maxdifdisp12->setObjectName(QString::fromUtf8("horizontalSlider_maxdifdisp12"));
         horizontalSlider_maxdifdisp12->setGeometry(QRect(380, 120, 251, 20));
         horizontalSlider_maxdifdisp12->setMinimumSize(QSize(0, 20));
         horizontalSlider_maxdifdisp12->setMaximumSize(QSize(16777215, 15));
@@ -425,49 +425,49 @@ public:
         horizontalSlider_maxdifdisp12->setMaximum(5);
         horizontalSlider_maxdifdisp12->setOrientation(Qt::Horizontal);
         lineEdit_maxdifdisp12 = new QLineEdit(groupBox_6);
-        lineEdit_maxdifdisp12->setObjectName(QStringLiteral("lineEdit_maxdifdisp12"));
+        lineEdit_maxdifdisp12->setObjectName(QString::fromUtf8("lineEdit_maxdifdisp12"));
         lineEdit_maxdifdisp12->setGeometry(QRect(340, 120, 35, 20));
         lineEdit_maxdifdisp12->setMinimumSize(QSize(35, 20));
         lineEdit_maxdifdisp12->setMaximumSize(QSize(30, 20));
         lineEdit_maxdifdisp12->setReadOnly(true);
         line = new QFrame(groupBox_6);
-        line->setObjectName(QStringLiteral("line"));
+        line->setObjectName(QString::fromUtf8("line"));
         line->setGeometry(QRect(310, 20, 20, 231));
         line->setFrameShape(QFrame::VLine);
         line->setFrameShadow(QFrame::Sunken);
         pushButton_MatchDefault = new QPushButton(groupBox_6);
-        pushButton_MatchDefault->setObjectName(QStringLiteral("pushButton_MatchDefault"));
+        pushButton_MatchDefault->setObjectName(QString::fromUtf8("pushButton_MatchDefault"));
         pushButton_MatchDefault->setGeometry(QRect(340, 230, 71, 23));
         pushButton_MatchDefault->setMinimumSize(QSize(0, 20));
         pushButton_MatchChooseFiles = new QPushButton(groupBox_6);
-        pushButton_MatchChooseFiles->setObjectName(QStringLiteral("pushButton_MatchChooseFiles"));
+        pushButton_MatchChooseFiles->setObjectName(QString::fromUtf8("pushButton_MatchChooseFiles"));
         pushButton_MatchChooseFiles->setGeometry(QRect(420, 230, 71, 23));
         pushButton_MatchChooseFiles->setMinimumSize(QSize(0, 20));
         line_2 = new QFrame(groupBox_6);
-        line_2->setObjectName(QStringLiteral("line_2"));
+        line_2->setObjectName(QString::fromUtf8("line_2"));
         line_2->setGeometry(QRect(320, 20, 20, 231));
         line_2->setFrameShape(QFrame::VLine);
         line_2->setFrameShadow(QFrame::Sunken);
         pushButton_RefreshStereoMatch = new QPushButton(groupBox_6);
-        pushButton_RefreshStereoMatch->setObjectName(QStringLiteral("pushButton_RefreshStereoMatch"));
+        pushButton_RefreshStereoMatch->setObjectName(QString::fromUtf8("pushButton_RefreshStereoMatch"));
         pushButton_RefreshStereoMatch->setGeometry(QRect(500, 230, 61, 23));
         pushButton_RangeSinglePoint = new QPushButton(groupBox_6);
-        pushButton_RangeSinglePoint->setObjectName(QStringLiteral("pushButton_RangeSinglePoint"));
+        pushButton_RangeSinglePoint->setObjectName(QString::fromUtf8("pushButton_RangeSinglePoint"));
         pushButton_RangeSinglePoint->setGeometry(QRect(570, 230, 71, 23));
         EvisionClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(EvisionClass);
-        menuBar->setObjectName(QStringLiteral("menuBar"));
+        menuBar->setObjectName(QString::fromUtf8("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 1000, 23));
         menu = new QMenu(menuBar);
-        menu->setObjectName(QStringLiteral("menu"));
+        menu->setObjectName(QString::fromUtf8("menu"));
         menu_2 = new QMenu(menuBar);
-        menu_2->setObjectName(QStringLiteral("menu_2"));
+        menu_2->setObjectName(QString::fromUtf8("menu_2"));
         EvisionClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(EvisionClass);
-        mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
+        mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
         EvisionClass->addToolBar(Qt::TopToolBarArea, mainToolBar);
         statusBar = new QStatusBar(EvisionClass);
-        statusBar->setObjectName(QStringLiteral("statusBar"));
+        statusBar->setObjectName(QString::fromUtf8("statusBar"));
         EvisionClass->setStatusBar(statusBar);
 
         menuBar->addAction(menu->menuAction());

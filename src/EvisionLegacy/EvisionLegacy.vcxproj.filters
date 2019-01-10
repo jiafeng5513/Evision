@@ -166,9 +166,6 @@
     <Image Include="res\bitmap1.bmp">
       <Filter>资源文件</Filter>
     </Image>
-    <Image Include="I:\下载\main.bmp">
-      <Filter>资源文件</Filter>
-    </Image>
     <Image Include="res\Evision.ico">
       <Filter>资源文件</Filter>
     </Image>
