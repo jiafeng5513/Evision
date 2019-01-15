@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1000</width>
-    <height>580</height>
+    <height>605</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,13 +19,13 @@
   <property name="minimumSize">
    <size>
     <width>1000</width>
-    <height>580</height>
+    <height>605</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>1000</width>
-    <height>580</height>
+    <height>605</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -1087,6 +1087,7 @@
     <addaction name="action_StereoCamera"/>
     <addaction name="action_Camera"/>
     <addaction name="action_ShowPointCloud"/>
+    <addaction name="action_CameraParam"/>
     <addaction name="actionDebug"/>
    </widget>
    <widget class="QMenu" name="menu_2">
@@ -1106,19 +1107,35 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="action_Camera"/>
+   <addaction name="action_StereoCamera"/>
+   <addaction name="action_ShowPointCloud"/>
+   <addaction name="action_CameraParam"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="action_StereoCamera">
+   <property name="icon">
+    <iconset resource="Evision.qrc">
+     <normaloff>:/Evision/resource/dualshot.ico</normaloff>:/Evision/resource/dualshot.ico</iconset>
+   </property>
    <property name="text">
     <string>拍摄双镜头照片</string>
    </property>
   </action>
   <action name="action_ShowPointCloud">
+   <property name="icon">
+    <iconset resource="Evision.qrc">
+     <normaloff>:/Evision/resource/cloud_128px_1156707_easyicon.net.ico</normaloff>:/Evision/resource/cloud_128px_1156707_easyicon.net.ico</iconset>
+   </property>
    <property name="text">
     <string>显示点云</string>
    </property>
   </action>
   <action name="action_Camera">
+   <property name="icon">
+    <iconset resource="Evision.qrc">
+     <normaloff>:/Evision/resource/shot2.ico</normaloff>:/Evision/resource/shot2.ico</iconset>
+   </property>
    <property name="text">
     <string>拍摄单镜头照片</string>
    </property>
@@ -1136,6 +1153,15 @@
   <action name="actionDebug">
    <property name="text">
     <string>Debug</string>
+   </property>
+  </action>
+  <action name="action_CameraParam">
+   <property name="icon">
+    <iconset resource="Evision.qrc">
+     <normaloff>:/Evision/resource/params_128px_1101042_easyicon.net.ico</normaloff>:/Evision/resource/params_128px_1101042_easyicon.net.ico</iconset>
+   </property>
+   <property name="text">
+    <string>相机参数</string>
    </property>
   </action>
  </widget>

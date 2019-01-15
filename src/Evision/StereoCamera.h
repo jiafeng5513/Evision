@@ -29,9 +29,12 @@ private:
 	void refreshResAndCodecListL();
 	void refreshResAndCodecListR();
 	QVariant boxValue(const QComboBox *box) const;
+	void closeEvent(QCloseEvent * e) override;
 private slots:
 	void OnFindSavePath();
 	void OnShot();
+	void OnCloseCamera();
+	void OnOpenCamera();
 
 	void OnValueChanged_LExposureCompensation(int value);
 	void OnValueChanged_LQuality(int value);

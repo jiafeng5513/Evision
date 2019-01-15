@@ -6,15 +6,97 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>975</width>
-    <height>487</height>
+    <width>1046</width>
+    <height>700</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_3">
-   <item row="1" column="0" colspan="9">
+  <layout class="QGridLayout" name="gridLayout_5">
+   <item row="0" column="0" colspan="2">
+    <widget class="QFrame" name="frame_3">
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>43</height>
+      </size>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Save To:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineEdit_SaveTo"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_FindSaveTo">
+        <property name="maximumSize">
+         <size>
+          <width>75</width>
+          <height>23</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>浏览</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>计数器:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLCDNumber" name="lcdNumber">
+        <property name="font">
+         <font>
+          <family>Adobe Devanagari</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Box</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <property name="lineWidth">
+         <number>1</number>
+        </property>
+        <property name="midLineWidth">
+         <number>0</number>
+        </property>
+        <property name="smallDecimalPoint">
+         <bool>false</bool>
+        </property>
+        <property name="digitCount">
+         <number>6</number>
+        </property>
+        <property name="mode">
+         <enum>QLCDNumber::Dec</enum>
+        </property>
+        <property name="value" stdset="0">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="1" column="0" colspan="2">
     <widget class="QSplitter" name="splitter">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -86,141 +168,172 @@
     </widget>
    </item>
    <item row="2" column="0">
-    <widget class="QLabel" name="label_3">
-     <property name="text">
-      <string>L摄像头:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1" colspan="3">
-    <widget class="QComboBox" name="comboBox_Lcam"/>
-   </item>
-   <item row="2" column="4">
-    <widget class="QLabel" name="label_9">
-     <property name="text">
-      <string>R摄像头:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="5" colspan="4">
-    <widget class="QComboBox" name="comboBox_Rcam"/>
-   </item>
-   <item row="3" column="0">
-    <widget class="QLabel" name="label_4">
-     <property name="text">
-      <string>L分辨率:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1">
-    <widget class="QComboBox" name="comboBox_Lresolution"/>
-   </item>
-   <item row="3" column="2">
-    <widget class="QLabel" name="label_5">
-     <property name="text">
-      <string>图片格式:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="3">
-    <widget class="QComboBox" name="comboBox_LCodec"/>
-   </item>
-   <item row="3" column="4">
-    <widget class="QLabel" name="label_10">
-     <property name="text">
-      <string>R分辨率:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="5">
-    <widget class="QComboBox" name="comboBox_Rresolution"/>
-   </item>
-   <item row="3" column="6">
-    <widget class="QLabel" name="label_12">
-     <property name="text">
-      <string>图片格式:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="7" colspan="2">
-    <widget class="QComboBox" name="comboBox_RCodec"/>
-   </item>
-   <item row="4" column="0">
-    <widget class="QLabel" name="label_6">
-     <property name="text">
-      <string>质量:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="1">
-    <widget class="QSlider" name="horizontalSlider_LQuality">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="2">
-    <widget class="QLabel" name="label_7">
-     <property name="text">
-      <string>曝光补偿:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="3">
-    <widget class="QSlider" name="horizontalSlider_LexposureCompensation">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="4">
-    <widget class="QLabel" name="label_8">
-     <property name="text">
-      <string>质量:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="5">
-    <widget class="QSlider" name="horizontalSlider_RQuality">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="6">
-    <widget class="QLabel" name="label_11">
-     <property name="text">
-      <string>曝光补偿:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="7" colspan="2">
-    <widget class="QSlider" name="horizontalSlider_RexposureCompensation">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="7">
-    <widget class="QPushButton" name="pushButton_RefreshCam">
-     <property name="text">
-      <string>刷新摄像头</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="8">
-    <widget class="QPushButton" name="pushButton_Shot">
-     <property name="text">
-      <string>拍照</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="0" colspan="9">
-    <widget class="QFrame" name="frame_3">
+    <widget class="QSplitter" name="splitter_2">
      <property name="maximumSize">
       <size>
        <width>16777215</width>
-       <height>43</height>
+       <height>130</height>
+      </size>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <widget class="QFrame" name="frame_5">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>130</height>
+       </size>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>L摄像头:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>L分辨率:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QComboBox" name="comboBox_Lresolution"/>
+       </item>
+       <item row="1" column="2">
+        <widget class="QLabel" name="label_5">
+         <property name="text">
+          <string>图片格式:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <widget class="QComboBox" name="comboBox_LCodec"/>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_6">
+         <property name="text">
+          <string>质量:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QSlider" name="horizontalSlider_LQuality">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QLabel" name="label_7">
+         <property name="text">
+          <string>曝光补偿:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="3">
+        <widget class="QSlider" name="horizontalSlider_LexposureCompensation">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1" colspan="3">
+        <widget class="QComboBox" name="comboBox_Lcam"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QFrame" name="frame_6">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>130</height>
+       </size>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_9">
+         <property name="text">
+          <string>R摄像头:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_10">
+         <property name="text">
+          <string>R分辨率:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QComboBox" name="comboBox_Rresolution"/>
+       </item>
+       <item row="1" column="2">
+        <widget class="QLabel" name="label_12">
+         <property name="text">
+          <string>图片格式:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <widget class="QComboBox" name="comboBox_RCodec"/>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_8">
+         <property name="text">
+          <string>质量:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QSlider" name="horizontalSlider_RQuality">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QLabel" name="label_11">
+         <property name="text">
+          <string>曝光补偿:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="3">
+        <widget class="QSlider" name="horizontalSlider_RexposureCompensation">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1" colspan="3">
+        <widget class="QComboBox" name="comboBox_Rcam"/>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QFrame" name="frame_4">
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>25</height>
       </size>
      </property>
      <property name="frameShape">
@@ -229,39 +342,62 @@
      <property name="frameShadow">
       <enum>QFrame::Raised</enum>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout">
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
       <item>
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>Save To:</string>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
         </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="lineEdit_SaveTo"/>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_FindSaveTo">
-        <property name="maximumSize">
+        <property name="sizeHint" stdset="0">
          <size>
-          <width>75</width>
-          <height>23</height>
+          <width>40</width>
+          <height>20</height>
          </size>
         </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_OpenCamera">
         <property name="text">
-         <string>浏览</string>
+         <string>开启摄像头</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_2">
+       <widget class="QPushButton" name="pushButton_CloseCamera">
         <property name="text">
-         <string>Prefix:</string>
+         <string>关闭摄像头</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="lineEdit_Prefix"/>
+       <widget class="QPushButton" name="pushButton_RefreshCam">
+        <property name="text">
+         <string>刷新摄像头</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_Shot">
+        <property name="text">
+         <string>拍照</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -285,8 +421,8 @@
    <slot>OnFindSavePath()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>484</x>
-     <y>28</y>
+     <x>899</x>
+     <y>41</y>
     </hint>
     <hint type="destinationlabel">
      <x>496</x>
@@ -301,8 +437,8 @@
    <slot>OnSelectedChanged_LCameraDevice(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>77</x>
-     <y>389</y>
+     <x>87</x>
+     <y>563</y>
     </hint>
     <hint type="destinationlabel">
      <x>5</x>
@@ -317,8 +453,8 @@
    <slot>OnSelectedChanged_LResolution(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>175</x>
-     <y>412</y>
+     <x>185</x>
+     <y>595</y>
     </hint>
     <hint type="destinationlabel">
      <x>5</x>
@@ -333,8 +469,8 @@
    <slot>OnSelectedChanged_LCodec(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>329</x>
-     <y>409</y>
+     <x>339</x>
+     <y>592</y>
     </hint>
     <hint type="destinationlabel">
      <x>4</x>
@@ -349,8 +485,8 @@
    <slot>OnChanged_LQuality(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>138</x>
-     <y>430</y>
+     <x>148</x>
+     <y>622</y>
     </hint>
     <hint type="destinationlabel">
      <x>4</x>
@@ -365,8 +501,8 @@
    <slot>OnChanged_LExposureCompensation(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>383</x>
-     <y>440</y>
+     <x>393</x>
+     <y>632</y>
     </hint>
     <hint type="destinationlabel">
      <x>4</x>
@@ -381,8 +517,8 @@
    <slot>OnSelectedChanged_RCameraDevice(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>914</x>
-     <y>383</y>
+     <x>942</x>
+     <y>557</y>
     </hint>
     <hint type="destinationlabel">
      <x>969</x>
@@ -397,8 +533,8 @@
    <slot>OnSelectedChanged_RResolution(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>702</x>
-     <y>401</y>
+     <x>730</x>
+     <y>584</y>
     </hint>
     <hint type="destinationlabel">
      <x>969</x>
@@ -413,8 +549,8 @@
    <slot>OnSelectedChanged_RCodec(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>829</x>
-     <y>406</y>
+     <x>856</x>
+     <y>589</y>
     </hint>
     <hint type="destinationlabel">
      <x>970</x>
@@ -429,8 +565,8 @@
    <slot>OnChanged_RQuality(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>634</x>
-     <y>431</y>
+     <x>662</x>
+     <y>623</y>
     </hint>
     <hint type="destinationlabel">
      <x>972</x>
@@ -445,8 +581,8 @@
    <slot>OnChanged_RExposureCompensation(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>883</x>
-     <y>445</y>
+     <x>910</x>
+     <y>637</y>
     </hint>
     <hint type="destinationlabel">
      <x>971</x>
@@ -461,12 +597,44 @@
    <slot>OnShot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>930</x>
-     <y>468</y>
+     <x>994</x>
+     <y>680</y>
     </hint>
     <hint type="destinationlabel">
      <x>973</x>
      <y>424</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_CloseCamera</sender>
+   <signal>clicked()</signal>
+   <receiver>StereoCamera</receiver>
+   <slot>OnCloseCamera()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>852</x>
+     <y>678</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>971</x>
+     <y>49</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_OpenCamera</sender>
+   <signal>clicked()</signal>
+   <receiver>StereoCamera</receiver>
+   <slot>OnOpenCamera()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>786</x>
+     <y>682</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>743</x>
+     <y>695</y>
     </hint>
    </hints>
   </connection>
@@ -484,5 +652,7 @@
   <slot>OnSelectedChanged_RCameraDevice(QString)</slot>
   <slot>OnSelectedChanged_RResolution(QString)</slot>
   <slot>OnSelectedChanged_RCodec(QString)</slot>
+  <slot>OnCloseCamera()</slot>
+  <slot>OnOpenCamera()</slot>
  </slots>
 </ui>

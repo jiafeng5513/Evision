@@ -4,6 +4,8 @@
 #include <QMediaMetaData>
 #include <QtWidgets>
 #include <QVariant>
+#include <QCameraInfo>
+#include <QCameraImageCapture>
 
 Q_DECLARE_METATYPE(QCameraInfo)
 
@@ -22,10 +24,16 @@ Camera::Camera(QWidget *parent)
 	}
 
 	setCamera(static_cast<QCameraInfo*>(ui.comboBox_CameraDevice->currentData().data()));
+	ui.lcdNumber->display(0);
+	ui.pushButton_CameraOn->setEnabled(false);
+	ui.pushButton_CameraOff->setEnabled(true);
+
+	ui.lineEdit_SavePath->setText(QDir::currentPath());
 }
 
 Camera::~Camera()
 {
+	m_pCamera->stop();
 }
 /*
  *setCamera£ºÉèÖÃÏà»ú
@@ -78,6 +86,11 @@ QVariant Camera::boxValue(const QComboBox* box) const
 	return box->itemData(idx);
 }
 
+void Camera::closeEvent(QCloseEvent * e)
+{
+	m_pCamera->stop();
+}
+
 void Camera::OnFindSavePath()
 {
 	QFileDialog * fileDialog2 = new QFileDialog();
@@ -94,21 +107,23 @@ void Camera::OnFindSavePath()
 void Camera::OnCameraPowerOn()
 {
 	setCamera(static_cast<QCameraInfo*>(ui.comboBox_CameraDevice->currentData().data()));
-	//ui.pushButton_CameraOff->setEnabled(true);
-	//ui.pushButton_Focus->setEnabled(true);
-	//ui.pushButton_Shot->setEnabled(true);
-	//ui.horizontalSlider_exposureCompensation->setEnabled(true);
-	//ui.horizontalSlider_Quality->setEnabled(true);
+	ui.pushButton_CameraOn->setEnabled(false);
+	ui.pushButton_CameraOff->setEnabled(true);
+	ui.pushButton_Focus->setEnabled(true);
+	ui.pushButton_Shot->setEnabled(true);
+	ui.horizontalSlider_exposureCompensation->setEnabled(true);
+	ui.horizontalSlider_Quality->setEnabled(true);
 }
 
 void Camera::OnCameraPowerOff()
 {
-	//ui.pushButton_CameraOff->setEnabled(false);
-	//ui.pushButton_Focus->setEnabled(false);
-	//ui.pushButton_Shot->setEnabled(false);
-	//ui.horizontalSlider_exposureCompensation->setEnabled(false);
-	//ui.horizontalSlider_Quality->setEnabled(false);
-	//ui.viewfinder->close();
+	ui.pushButton_CameraOff->setEnabled(false);
+	ui.pushButton_CameraOn->setEnabled(true);
+	ui.pushButton_Focus->setEnabled(false);
+	ui.pushButton_Shot->setEnabled(false);
+	ui.horizontalSlider_exposureCompensation->setEnabled(false);
+	ui.horizontalSlider_Quality->setEnabled(false);
+	m_pCamera->stop();
 }
 
 void Camera::OnFocus()
@@ -125,7 +140,9 @@ void Camera::OnFocus()
 
 void Camera::OnShot()
 {
-	m_pImageCapture->capture();
+	QString idt = QDateTime::currentDateTime().toString("yyyyMMddhhmmsszzz");
+	m_pImageCapture->capture(ui.lineEdit_SavePath->text() + "/S" + idt + ".jpg");
+	ui.lcdNumber->display(ui.lcdNumber->intValue()+1);
 }
 
 void Camera::OnValueChanged_ExposureCompensation(int value)

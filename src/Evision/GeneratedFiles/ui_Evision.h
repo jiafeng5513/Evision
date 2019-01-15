@@ -42,6 +42,7 @@ public:
     QAction *action_4;
     QAction *action_5;
     QAction *actionDebug;
+    QAction *action_CameraParam;
     QWidget *centralWidget;
     QGraphicsView *graphicsView_L;
     QGraphicsView *graphicsView_R;
@@ -114,29 +115,43 @@ public:
     {
         if (EvisionClass->objectName().isEmpty())
             EvisionClass->setObjectName(QString::fromUtf8("EvisionClass"));
-        EvisionClass->resize(1000, 580);
+        EvisionClass->resize(1000, 605);
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(EvisionClass->sizePolicy().hasHeightForWidth());
         EvisionClass->setSizePolicy(sizePolicy);
-        EvisionClass->setMinimumSize(QSize(1000, 580));
-        EvisionClass->setMaximumSize(QSize(1000, 580));
+        EvisionClass->setMinimumSize(QSize(1000, 605));
+        EvisionClass->setMaximumSize(QSize(1000, 605));
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/Evision/resource/Evision.ico"), QSize(), QIcon::Normal, QIcon::Off);
         EvisionClass->setWindowIcon(icon);
         action_StereoCamera = new QAction(EvisionClass);
         action_StereoCamera->setObjectName(QString::fromUtf8("action_StereoCamera"));
+        QIcon icon1;
+        icon1.addFile(QString::fromUtf8(":/Evision/resource/dualshot.ico"), QSize(), QIcon::Normal, QIcon::Off);
+        action_StereoCamera->setIcon(icon1);
         action_ShowPointCloud = new QAction(EvisionClass);
         action_ShowPointCloud->setObjectName(QString::fromUtf8("action_ShowPointCloud"));
+        QIcon icon2;
+        icon2.addFile(QString::fromUtf8(":/Evision/resource/cloud_128px_1156707_easyicon.net.ico"), QSize(), QIcon::Normal, QIcon::Off);
+        action_ShowPointCloud->setIcon(icon2);
         action_Camera = new QAction(EvisionClass);
         action_Camera->setObjectName(QString::fromUtf8("action_Camera"));
+        QIcon icon3;
+        icon3.addFile(QString::fromUtf8(":/Evision/resource/shot2.ico"), QSize(), QIcon::Normal, QIcon::Off);
+        action_Camera->setIcon(icon3);
         action_4 = new QAction(EvisionClass);
         action_4->setObjectName(QString::fromUtf8("action_4"));
         action_5 = new QAction(EvisionClass);
         action_5->setObjectName(QString::fromUtf8("action_5"));
         actionDebug = new QAction(EvisionClass);
         actionDebug->setObjectName(QString::fromUtf8("actionDebug"));
+        action_CameraParam = new QAction(EvisionClass);
+        action_CameraParam->setObjectName(QString::fromUtf8("action_CameraParam"));
+        QIcon icon4;
+        icon4.addFile(QString::fromUtf8(":/Evision/resource/params_128px_1101042_easyicon.net.ico"), QSize(), QIcon::Normal, QIcon::Off);
+        action_CameraParam->setIcon(icon4);
         centralWidget = new QWidget(EvisionClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         graphicsView_L = new QGraphicsView(centralWidget);
@@ -475,9 +490,14 @@ public:
         menu->addAction(action_StereoCamera);
         menu->addAction(action_Camera);
         menu->addAction(action_ShowPointCloud);
+        menu->addAction(action_CameraParam);
         menu->addAction(actionDebug);
         menu_2->addAction(action_4);
         menu_2->addAction(action_5);
+        mainToolBar->addAction(action_Camera);
+        mainToolBar->addAction(action_StereoCamera);
+        mainToolBar->addAction(action_ShowPointCloud);
+        mainToolBar->addAction(action_CameraParam);
 
         retranslateUi(EvisionClass);
         QObject::connect(pushButton_CalibDefault, SIGNAL(clicked()), EvisionClass, SLOT(setDefaultCalibParam()));
@@ -523,6 +543,7 @@ public:
         action_4->setText(QApplication::translate("EvisionClass", "\345\270\256\345\212\251\344\277\241\346\201\257", nullptr));
         action_5->setText(QApplication::translate("EvisionClass", "\345\205\263\344\272\216", nullptr));
         actionDebug->setText(QApplication::translate("EvisionClass", "Debug", nullptr));
+        action_CameraParam->setText(QApplication::translate("EvisionClass", "\347\233\270\346\234\272\345\217\202\346\225\260", nullptr));
         groupBox->setTitle(QApplication::translate("EvisionClass", "\346\240\207\345\256\232\345\217\202\346\225\260", nullptr));
         label_8->setText(QApplication::translate("EvisionClass", "Size:", nullptr));
         label_5->setText(QApplication::translate("EvisionClass", "Width:", nullptr));

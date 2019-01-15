@@ -16,6 +16,8 @@
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QLCDNumber>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSlider>
@@ -58,6 +60,8 @@ public:
     QHBoxLayout *horizontalLayout_3;
     QPushButton *pushButton_FindSavePath;
     QLineEdit *lineEdit_SavePath;
+    QLabel *label;
+    QLCDNumber *lcdNumber;
 
     void setupUi(QWidget *Camera)
     {
@@ -255,6 +259,16 @@ public:
 
         horizontalLayout_3->addWidget(lineEdit_SavePath);
 
+        label = new QLabel(frame_4);
+        label->setObjectName(QString::fromUtf8("label"));
+
+        horizontalLayout_3->addWidget(label);
+
+        lcdNumber = new QLCDNumber(frame_4);
+        lcdNumber->setObjectName(QString::fromUtf8("lcdNumber"));
+
+        horizontalLayout_3->addWidget(lcdNumber);
+
 
         gridLayout_6->addWidget(frame_4, 0, 0, 1, 2);
 
@@ -287,6 +301,7 @@ public:
         groupBox_4->setTitle(QApplication::translate("Camera", "\345\210\206\350\276\250\347\216\207", nullptr));
         groupBox_5->setTitle(QApplication::translate("Camera", "\345\233\276\347\211\207\346\240\274\345\274\217", nullptr));
         pushButton_FindSavePath->setText(QApplication::translate("Camera", "\344\277\235\345\255\230\345\210\260", nullptr));
+        label->setText(QApplication::translate("Camera", "\350\256\241\346\225\260\345\231\250:", nullptr));
     } // retranslateUi
 
 };

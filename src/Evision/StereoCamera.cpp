@@ -30,10 +30,16 @@ StereoCamera::StereoCamera(QWidget *parent)
 	setLCamera(static_cast<QCameraInfo*>(ui.comboBox_Lcam->currentData().data()));
 	setRCamera(static_cast<QCameraInfo*>(ui.comboBox_Rcam->currentData().data()));
 
+	ui.pushButton_CloseCamera->setEnabled(true);
+	ui.pushButton_OpenCamera->setEnabled(false);
+	ui.lcdNumber->display(0);
+	ui.lineEdit_SaveTo->setText(QDir::currentPath());
 }
 
 StereoCamera::~StereoCamera()
 {
+	m_pLCamera->stop();
+	m_pRCamera->stop();
 }
 //ÉèÖÃ×óÏà»ú
 void StereoCamera::setLCamera(QCameraInfo* cameraInfo)
@@ -115,6 +121,12 @@ QVariant StereoCamera::boxValue(const QComboBox* box) const
 	return box->itemData(idx);
 }
 
+void StereoCamera::closeEvent(QCloseEvent* e)
+{
+	m_pLCamera->stop();
+	m_pRCamera->stop();
+}
+
 void StereoCamera::OnFindSavePath()
 {
 	QFileDialog * fileDialog2 = new QFileDialog();
@@ -131,8 +143,30 @@ void StereoCamera::OnFindSavePath()
 //ÅÄÕÕ
 void StereoCamera::OnShot()
 {
-	m_pLImageCapture->capture();
-	m_pRImageCapture->capture();
+	QString idt=QDateTime::currentDateTime().toString("yyyyMMddhhmmsszzz");
+	m_pLImageCapture->capture(ui.lineEdit_SaveTo->text() + "/L" + idt + ".jpg");
+	m_pRImageCapture->capture(ui.lineEdit_SaveTo->text() + "/R" + idt +".jpg");
+	ui.lcdNumber->display(ui.lcdNumber->intValue() + 1);
+}
+
+void StereoCamera::OnCloseCamera()
+{
+	m_pLCamera->stop();
+	m_pRCamera->stop();
+	ui.pushButton_Shot->setEnabled(false);
+	ui.pushButton_OpenCamera->setEnabled(true);
+	ui.pushButton_CloseCamera->setEnabled(false);
+}
+
+void StereoCamera::OnOpenCamera()
+{
+	ui.pushButton_Shot->setEnabled(true);
+	ui.pushButton_CloseCamera->setEnabled(true);
+	ui.pushButton_OpenCamera->setEnabled(false);
+	ui.comboBox_Lcam->setCurrentIndex(0);
+	ui.comboBox_Lcam->setCurrentIndex(1);
+	setLCamera(static_cast<QCameraInfo*>(ui.comboBox_Lcam->currentData().data()));
+	setRCamera(static_cast<QCameraInfo*>(ui.comboBox_Rcam->currentData().data()));
 }
 
 void StereoCamera::OnValueChanged_LExposureCompensation(int value)

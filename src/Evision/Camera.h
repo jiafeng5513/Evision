@@ -24,6 +24,7 @@ private:
 	void setCamera(QCameraInfo *cameraInfo);
 	void refreshResAndCodecList();
 	QVariant boxValue(const QComboBox *box) const;
+	void closeEvent(QCloseEvent * e) override;
 private slots:
 	void OnFindSavePath();
 	void OnCameraPowerOn();

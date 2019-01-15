@@ -87,7 +87,7 @@ Global
 		{FE973CBB-0CB6-4E21-827F-2E92468C4C32} = {93BD32B4-4994-4478-AE43-ADF9262808A9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		Qt5Version = msvc2017_64
 		SolutionGuid = {4E5A88CF-E7F9-487A-96B0-1A2E96298935}
+		Qt5Version = msvc2017_64
 	EndGlobalSection
 EndGlobal
