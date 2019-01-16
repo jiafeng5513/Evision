@@ -1,14 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
       <Extensions>qrc;*</Extensions>
@@ -23,71 +15,96 @@
       <Extensions>qrc;*</Extensions>
       <ParseFiles>false</ParseFiles>
     </Filter>
-    <Filter Include="GeneratedFiles">
-      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
-      <Extensions>moc;h;cpp</Extensions>
-      <SourceControlFiles>False</SourceControlFiles>
+    <Filter Include="View">
+      <UniqueIdentifier>{e9afc5d5-fc64-4c7f-ad7a-d1113cd335d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{affe819a-e427-4069-ad49-c18915976a3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controller">
+      <UniqueIdentifier>{186620d0-9af5-409f-800d-d887a2447d07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity">
+      <UniqueIdentifier>{1586942d-eae7-4787-8822-aeb3d2a7f05e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{55e13187-222f-48ce-9542-bda30c87c4a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main">
+      <UniqueIdentifier>{15b6209d-5425-4ba7-b6f3-d0c1863374dd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EvisionController.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EvisionUtils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EvisionView.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EvisionParamEntity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="StereoCalibrate.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="StereoMatch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PointCloudUtils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RFinterface.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="StereoCamera.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Calibrater.cpp">
+      <Filter>View</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>View</Filter>
+    </ClCompile>
+    <ClCompile Include="EvisionController.cpp">
+      <Filter>Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="EvisionParamEntity.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="EvisionUtils.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="EvisionView.cpp">
+      <Filter>View</Filter>
+    </ClCompile>
+    <ClCompile Include="Matcher.cpp">
+      <Filter>View</Filter>
+    </ClCompile>
+    <ClCompile Include="PointCloudUtils.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="RFinterface.cpp">
+      <Filter>View</Filter>
+    </ClCompile>
+    <ClCompile Include="StereoCalibrate.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="StereoCamera.cpp">
+      <Filter>View</Filter>
+    </ClCompile>
+    <ClCompile Include="StereoMatch.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>main</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="EvisionView.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="EvisionParamEntity.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="StereoCalibrate.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="EvisionController.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="StereoMatch.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="RFinterface.h">
-      <Filter>Header Files</Filter>
+    <QtMoc Include="Calibrater.h">
+      <Filter>View</Filter>
     </QtMoc>
     <QtMoc Include="Camera.h">
-      <Filter>Header Files</Filter>
+      <Filter>View</Filter>
+    </QtMoc>
+    <QtMoc Include="EvisionController.h">
+      <Filter>Controller</Filter>
+    </QtMoc>
+    <QtMoc Include="EvisionParamEntity.h">
+      <Filter>Entity</Filter>
+    </QtMoc>
+    <QtMoc Include="EvisionView.h">
+      <Filter>View</Filter>
+    </QtMoc>
+    <QtMoc Include="Matcher.h">
+      <Filter>View</Filter>
+    </QtMoc>
+    <QtMoc Include="RFinterface.h">
+      <Filter>View</Filter>
+    </QtMoc>
+    <QtMoc Include="StereoCalibrate.h">
+      <Filter>Engine</Filter>
     </QtMoc>
     <QtMoc Include="StereoCamera.h">
-      <Filter>Header Files</Filter>
+      <Filter>View</Filter>
+    </QtMoc>
+    <QtMoc Include="StereoMatch.h">
+      <Filter>Engine</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -103,6 +120,12 @@
     <QtUic Include="Camera.ui">
       <Filter>Form Files</Filter>
     </QtUic>
+    <QtUic Include="Calibrater.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="Matcher.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Evision.qrc">
@@ -114,10 +137,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EvisionUtils.h">
-      <Filter>Header Files</Filter>
+      <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="PointCloudUtils.h">
-      <Filter>Header Files</Filter>
+      <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -290,7 +290,7 @@ public:
 
     void retranslateUi(QWidget *Camera)
     {
-        Camera->setWindowTitle(QApplication::translate("Camera", "Camera", nullptr));
+        Camera->setWindowTitle(QApplication::translate("Camera", "\347\233\270\346\234\272", nullptr));
         pushButton_CameraOn->setText(QApplication::translate("Camera", "\346\221\204\345\203\217\346\234\272\345\274\200", nullptr));
         pushButton_CameraOff->setText(QApplication::translate("Camera", "\346\221\204\345\203\217\346\234\272\345\205\263", nullptr));
         pushButton_Focus->setText(QApplication::translate("Camera", "Focus", nullptr));

@@ -22,6 +22,7 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMdiArea>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
@@ -43,6 +44,12 @@ public:
     QAction *action_5;
     QAction *actionDebug;
     QAction *action_CameraParam;
+    QAction *action;
+    QAction *action_2;
+    QAction *action_3;
+    QAction *action_6;
+    QAction *actionSFM;
+    QAction *action_7;
     QWidget *centralWidget;
     QGraphicsView *graphicsView_L;
     QGraphicsView *graphicsView_R;
@@ -105,9 +112,12 @@ public:
     QFrame *line_2;
     QPushButton *pushButton_RefreshStereoMatch;
     QPushButton *pushButton_RangeSinglePoint;
+    QMdiArea *mdiArea;
     QMenuBar *menuBar;
     QMenu *menu;
     QMenu *menu_2;
+    QMenu *menu_3;
+    QMenu *menu_4;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -115,14 +125,14 @@ public:
     {
         if (EvisionClass->objectName().isEmpty())
             EvisionClass->setObjectName(QString::fromUtf8("EvisionClass"));
-        EvisionClass->resize(1000, 605);
+        EvisionClass->resize(1042, 730);
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(EvisionClass->sizePolicy().hasHeightForWidth());
         EvisionClass->setSizePolicy(sizePolicy);
-        EvisionClass->setMinimumSize(QSize(1000, 605));
-        EvisionClass->setMaximumSize(QSize(1000, 605));
+        EvisionClass->setMinimumSize(QSize(0, 0));
+        EvisionClass->setMaximumSize(QSize(16777215, 16777215));
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/Evision/resource/Evision.ico"), QSize(), QIcon::Normal, QIcon::Off);
         EvisionClass->setWindowIcon(icon);
@@ -152,6 +162,18 @@ public:
         QIcon icon4;
         icon4.addFile(QString::fromUtf8(":/Evision/resource/params_128px_1101042_easyicon.net.ico"), QSize(), QIcon::Normal, QIcon::Off);
         action_CameraParam->setIcon(icon4);
+        action = new QAction(EvisionClass);
+        action->setObjectName(QString::fromUtf8("action"));
+        action_2 = new QAction(EvisionClass);
+        action_2->setObjectName(QString::fromUtf8("action_2"));
+        action_3 = new QAction(EvisionClass);
+        action_3->setObjectName(QString::fromUtf8("action_3"));
+        action_6 = new QAction(EvisionClass);
+        action_6->setObjectName(QString::fromUtf8("action_6"));
+        actionSFM = new QAction(EvisionClass);
+        actionSFM->setObjectName(QString::fromUtf8("actionSFM"));
+        action_7 = new QAction(EvisionClass);
+        action_7->setObjectName(QString::fromUtf8("action_7"));
         centralWidget = new QWidget(EvisionClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         graphicsView_L = new QGraphicsView(centralWidget);
@@ -469,14 +491,22 @@ public:
         pushButton_RangeSinglePoint = new QPushButton(groupBox_6);
         pushButton_RangeSinglePoint->setObjectName(QString::fromUtf8("pushButton_RangeSinglePoint"));
         pushButton_RangeSinglePoint->setGeometry(QRect(570, 230, 71, 23));
+        mdiArea = new QMdiArea(centralWidget);
+        mdiArea->setObjectName(QString::fromUtf8("mdiArea"));
+        mdiArea->setGeometry(QRect(300, 560, 200, 160));
+        mdiArea->setAcceptDrops(true);
         EvisionClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(EvisionClass);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1000, 23));
+        menuBar->setGeometry(QRect(0, 0, 1042, 23));
         menu = new QMenu(menuBar);
         menu->setObjectName(QString::fromUtf8("menu"));
         menu_2 = new QMenu(menuBar);
         menu_2->setObjectName(QString::fromUtf8("menu_2"));
+        menu_3 = new QMenu(menuBar);
+        menu_3->setObjectName(QString::fromUtf8("menu_3"));
+        menu_4 = new QMenu(menuBar);
+        menu_4->setObjectName(QString::fromUtf8("menu_4"));
         EvisionClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(EvisionClass);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
@@ -486,6 +516,8 @@ public:
         EvisionClass->setStatusBar(statusBar);
 
         menuBar->addAction(menu->menuAction());
+        menuBar->addAction(menu_3->menuAction());
+        menuBar->addAction(menu_4->menuAction());
         menuBar->addAction(menu_2->menuAction());
         menu->addAction(action_StereoCamera);
         menu->addAction(action_Camera);
@@ -494,10 +526,17 @@ public:
         menu->addAction(actionDebug);
         menu_2->addAction(action_4);
         menu_2->addAction(action_5);
+        menu_3->addAction(action);
+        menu_3->addAction(action_2);
+        menu_3->addAction(action_3);
+        menu_3->addAction(action_6);
+        menu_4->addAction(actionSFM);
+        menu_4->addAction(action_7);
         mainToolBar->addAction(action_Camera);
         mainToolBar->addAction(action_StereoCamera);
         mainToolBar->addAction(action_ShowPointCloud);
         mainToolBar->addAction(action_CameraParam);
+        mainToolBar->addSeparator();
 
         retranslateUi(EvisionClass);
         QObject::connect(pushButton_CalibDefault, SIGNAL(clicked()), EvisionClass, SLOT(setDefaultCalibParam()));
@@ -538,12 +577,18 @@ public:
     {
         EvisionClass->setWindowTitle(QApplication::translate("EvisionClass", "Evision", nullptr));
         action_StereoCamera->setText(QApplication::translate("EvisionClass", "\346\213\215\346\221\204\345\217\214\351\225\234\345\244\264\347\205\247\347\211\207", nullptr));
-        action_ShowPointCloud->setText(QApplication::translate("EvisionClass", "\346\230\276\347\244\272\347\202\271\344\272\221", nullptr));
+        action_ShowPointCloud->setText(QApplication::translate("EvisionClass", "\347\202\271\344\272\221\345\217\257\350\247\206\345\214\226", nullptr));
         action_Camera->setText(QApplication::translate("EvisionClass", "\346\213\215\346\221\204\345\215\225\351\225\234\345\244\264\347\205\247\347\211\207", nullptr));
         action_4->setText(QApplication::translate("EvisionClass", "\345\270\256\345\212\251\344\277\241\346\201\257", nullptr));
         action_5->setText(QApplication::translate("EvisionClass", "\345\205\263\344\272\216", nullptr));
         actionDebug->setText(QApplication::translate("EvisionClass", "Debug", nullptr));
-        action_CameraParam->setText(QApplication::translate("EvisionClass", "\347\233\270\346\234\272\345\217\202\346\225\260", nullptr));
+        action_CameraParam->setText(QApplication::translate("EvisionClass", "\347\233\270\346\234\272\345\217\257\350\247\206\345\214\226", nullptr));
+        action->setText(QApplication::translate("EvisionClass", "\347\253\213\344\275\223\345\214\271\351\205\215", nullptr));
+        action_2->setText(QApplication::translate("EvisionClass", "\347\224\237\346\210\220\346\267\261\345\272\246\345\233\276", nullptr));
+        action_3->setText(QApplication::translate("EvisionClass", "\347\224\237\346\210\220\347\202\271\344\272\221", nullptr));
+        action_6->setText(QApplication::translate("EvisionClass", "\345\217\214\347\233\256\346\265\213\350\267\235", nullptr));
+        actionSFM->setText(QApplication::translate("EvisionClass", "SFM", nullptr));
+        action_7->setText(QApplication::translate("EvisionClass", "\344\270\211\347\273\264\351\207\215\345\273\272", nullptr));
         groupBox->setTitle(QApplication::translate("EvisionClass", "\346\240\207\345\256\232\345\217\202\346\225\260", nullptr));
         label_8->setText(QApplication::translate("EvisionClass", "Size:", nullptr));
         label_5->setText(QApplication::translate("EvisionClass", "Width:", nullptr));
@@ -586,6 +631,8 @@ public:
         pushButton_RangeSinglePoint->setText(QApplication::translate("EvisionClass", "\346\265\213\351\207\217", nullptr));
         menu->setTitle(QApplication::translate("EvisionClass", "\345\267\245\345\205\267", nullptr));
         menu_2->setTitle(QApplication::translate("EvisionClass", "\345\270\256\345\212\251", nullptr));
+        menu_3->setTitle(QApplication::translate("EvisionClass", "\345\217\214\347\233\256\350\247\206\350\247\211", nullptr));
+        menu_4->setTitle(QApplication::translate("EvisionClass", "SLAM", nullptr));
     } // retranslateUi
 
 };

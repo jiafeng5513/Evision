@@ -354,7 +354,7 @@ public:
 
     void retranslateUi(QWidget *StereoCamera)
     {
-        StereoCamera->setWindowTitle(QApplication::translate("StereoCamera", "Form", nullptr));
+        StereoCamera->setWindowTitle(QApplication::translate("StereoCamera", "\345\217\214\347\233\256\347\233\270\346\234\272", nullptr));
         label->setText(QApplication::translate("StereoCamera", "Save To:", nullptr));
         pushButton_FindSaveTo->setText(QApplication::translate("StereoCamera", "\346\265\217\350\247\210", nullptr));
         label_2->setText(QApplication::translate("StereoCamera", "\350\256\241\346\225\260\345\231\250:", nullptr));
