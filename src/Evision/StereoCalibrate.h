@@ -2,6 +2,7 @@
 #include <QThread>
 #include <core/mat.hpp>
 #include "EvisionParamEntity.h"
+#include "CalibrateParamEntity.h"
 
 class StereoCalibrate:public QThread
 {
@@ -17,7 +18,7 @@ private:
 
 	std::string intrFilename;
 	std::string extrFilename;
-	EvisionParamEntity *m_entity;
+	CalibrateParamEntity * m_entity;
 public:
 	//Ωª¥Ì¡–±Ì
 	StereoCalibrate(std::vector<std::string>* imagelist,

@@ -6,5 +6,10 @@
         <file>resource/shot2.ico</file>
         <file>resource/cloud_128px_1156707_easyicon.net.ico</file>
         <file>resource/params_128px_1101042_easyicon.net.ico</file>
+        <file>resource/checkered_128px_1155158_easyicon.net.ico</file>
+        <file>resource/networking_128px_1154117_easyicon.net.ico</file>
+        <file>resource/z_lowercase_128px_1168343_easyicon.net.ico</file>
+        <file>resource/cloud_128px_1156740_easyicon.net.ico</file>
+        <file>resource/measure_centimeter_76px_1116359_easyicon.net.ico</file>
     </qresource>
 </RCC>

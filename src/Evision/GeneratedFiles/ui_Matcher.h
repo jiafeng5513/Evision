@@ -30,6 +30,7 @@ public:
     QGridLayout *gridLayout_2;
     QGraphicsView *graphicsView_D;
     QGroupBox *groupBox;
+    QLabel *label;
     QGroupBox *groupBox_6;
     QGridLayout *gridLayout;
     QLabel *label_40;
@@ -77,7 +78,7 @@ public:
     {
         if (Matcher->objectName().isEmpty())
             Matcher->setObjectName(QString::fromUtf8("Matcher"));
-        Matcher->resize(943, 704);
+        Matcher->resize(977, 613);
         gridLayout_2 = new QGridLayout(Matcher);
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
@@ -92,6 +93,12 @@ public:
         groupBox->setMaximumSize(QSize(310, 16777215));
 
         gridLayout_2->addWidget(groupBox, 0, 1, 1, 1);
+
+        label = new QLabel(Matcher);
+        label->setObjectName(QString::fromUtf8("label"));
+        label->setMaximumSize(QSize(16777215, 20));
+
+        gridLayout_2->addWidget(label, 2, 0, 1, 1);
 
         groupBox_6 = new QGroupBox(Matcher);
         groupBox_6->setObjectName(QString::fromUtf8("groupBox_6"));
@@ -377,10 +384,27 @@ public:
         gridLayout->addWidget(horizontalSlider_specwinsz, 5, 1, 1, 5);
 
 
-        gridLayout_2->addWidget(groupBox_6, 1, 1, 1, 1);
+        gridLayout_2->addWidget(groupBox_6, 1, 1, 2, 1);
 
 
         retranslateUi(Matcher);
+        QObject::connect(pushButton_MatchDefault, SIGNAL(clicked()), Matcher, SLOT(setDefaultMatchParam()));
+        QObject::connect(pushButton_MatchChooseFiles, SIGNAL(clicked()), Matcher, SLOT(doMatch()));
+        QObject::connect(pushButton_RefreshStereoMatch, SIGNAL(clicked()), Matcher, SLOT(RefreshStereoMatch()));
+        QObject::connect(radioButton_SGBM, SIGNAL(clicked(bool)), Matcher, SLOT(onClicked_SGBM(bool)));
+        QObject::connect(radioButton_BM, SIGNAL(clicked(bool)), Matcher, SLOT(onClicked_BM(bool)));
+        QObject::connect(radioButton_MODE_HH, SIGNAL(clicked(bool)), Matcher, SLOT(onClicked_MODE_HH(bool)));
+        QObject::connect(radioButton_MODE_3WAY, SIGNAL(clicked(bool)), Matcher, SLOT(onClicked_MODE_3WAY(bool)));
+        QObject::connect(radioButton_MODE_SGBM, SIGNAL(clicked(bool)), Matcher, SLOT(onClicked_MODE_SGBM(bool)));
+        QObject::connect(horizontalSlider_uniradio, SIGNAL(valueChanged(int)), Matcher, SLOT(valueChanged_uniradio(int)));
+        QObject::connect(horizontalSlider_prefilcap, SIGNAL(valueChanged(int)), Matcher, SLOT(valueChanged_Prefilcap(int)));
+        QObject::connect(horizontalSlider_specwinsz, SIGNAL(valueChanged(int)), Matcher, SLOT(valueChanged_specwinsz(int)));
+        QObject::connect(horizontalSlider_SadWinSiz, SIGNAL(valueChanged(int)), Matcher, SLOT(valueChanged_SadWinSize(int)));
+        QObject::connect(horizontalSlider_MinDisp, SIGNAL(valueChanged(int)), Matcher, SLOT(valueChanged_MinDisp(int)));
+        QObject::connect(horizontalSlider_NumDisparities, SIGNAL(valueChanged(int)), Matcher, SLOT(valueChanged_NumDisparities(int)));
+        QObject::connect(horizontalSlider_specrange, SIGNAL(valueChanged(int)), Matcher, SLOT(valueChanged_Specrange(int)));
+        QObject::connect(horizontalSlider_maxdifdisp12, SIGNAL(valueChanged(int)), Matcher, SLOT(valueChanged_MaxDifdisp2(int)));
+        QObject::connect(horizontalSlider_textThread, SIGNAL(valueChanged(int)), Matcher, SLOT(valueChanged_TextThread(int)));
 
         QMetaObject::connectSlotsByName(Matcher);
     } // setupUi
@@ -389,6 +413,7 @@ public:
     {
         Matcher->setWindowTitle(QApplication::translate("Matcher", "\345\214\271\351\205\215", nullptr));
         groupBox->setTitle(QApplication::translate("Matcher", "\347\233\270\346\234\272\345\217\202\346\225\260", nullptr));
+        label->setText(QApplication::translate("Matcher", "TextLabel", nullptr));
         groupBox_6->setTitle(QApplication::translate("Matcher", "\345\214\271\351\205\215\345\217\202\346\225\260", nullptr));
         label_40->setText(QApplication::translate("Matcher", "uniquenessRatio(\350\247\206\345\267\256\345\224\257\344\270\200\346\200\247\347\231\276\345\210\206\346\257\224)", nullptr));
         lineEdit_uniradio->setPlaceholderText(QApplication::translate("Matcher", "0", nullptr));

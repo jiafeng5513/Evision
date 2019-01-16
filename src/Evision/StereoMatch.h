@@ -7,6 +7,7 @@
 #include "opencv2/highgui.hpp"
 #include "opencv2/core/utility.hpp"
 #include "EvisionParamEntity.h"
+#include "StereoMatchParamEntity.h"
 
 /*
  * 
@@ -22,7 +23,7 @@ public:
 	enum { STEREO_BM = 0, STEREO_SGBM = 1, STEREO_HH = 2, STEREO_VAR = 3, STEREO_3WAY = 4 };
 	static  cv::Mat readXYZ(const char* filename);
 private:
-	EvisionParamEntity * m_entity;
+	StereoMatchParamEntity * m_entity;
 	std::string img1_filename = "";
 	std::string img2_filename = "";
 	std::string intrinsic_filename = "";

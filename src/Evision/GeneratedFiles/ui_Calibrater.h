@@ -63,7 +63,7 @@ public:
     {
         if (Calibrater->objectName().isEmpty())
             Calibrater->setObjectName(QString::fromUtf8("Calibrater"));
-        Calibrater->resize(891, 629);
+        Calibrater->resize(823, 497);
         gridLayout_3 = new QGridLayout(Calibrater);
         gridLayout_3->setSpacing(6);
         gridLayout_3->setContentsMargins(11, 11, 11, 11);
@@ -73,6 +73,7 @@ public:
         splitter->setOrientation(Qt::Horizontal);
         graphicsView_L = new QGraphicsView(splitter);
         graphicsView_L->setObjectName(QString::fromUtf8("graphicsView_L"));
+        graphicsView_L->setMinimumSize(QSize(400, 300));
         graphicsView_L->setContextMenuPolicy(Qt::ActionsContextMenu);
         graphicsView_L->setAutoFillBackground(false);
         graphicsView_L->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
@@ -84,6 +85,7 @@ public:
         splitter->addWidget(graphicsView_L);
         graphicsView_R = new QGraphicsView(splitter);
         graphicsView_R->setObjectName(QString::fromUtf8("graphicsView_R"));
+        graphicsView_R->setMinimumSize(QSize(400, 300));
         splitter->addWidget(graphicsView_R);
 
         gridLayout_3->addWidget(splitter, 0, 0, 1, 1);
@@ -91,7 +93,7 @@ public:
         frame = new QFrame(Calibrater);
         frame->setObjectName(QString::fromUtf8("frame"));
         frame->setMaximumSize(QSize(16777215, 180));
-        frame->setFrameShape(QFrame::StyledPanel);
+        frame->setFrameShape(QFrame::Box);
         frame->setFrameShadow(QFrame::Raised);
         gridLayout_2 = new QGridLayout(frame);
         gridLayout_2->setSpacing(6);
@@ -169,9 +171,10 @@ public:
         groupBox_4 = new QGroupBox(frame);
         groupBox_4->setObjectName(QString::fromUtf8("groupBox_4"));
         horizontalLayout_3 = new QHBoxLayout(groupBox_4);
-        horizontalLayout_3->setSpacing(6);
+        horizontalLayout_3->setSpacing(4);
         horizontalLayout_3->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        horizontalLayout_3->setContentsMargins(4, 4, 4, 4);
         pushButton_CalibDefault = new QPushButton(groupBox_4);
         pushButton_CalibDefault->setObjectName(QString::fromUtf8("pushButton_CalibDefault"));
 
@@ -214,6 +217,14 @@ public:
 
 
         retranslateUi(Calibrater);
+        QObject::connect(lineEdit_BoardWidth, SIGNAL(textChanged(QString)), Calibrater, SLOT(onValueChanged_BoardWidth(QString)));
+        QObject::connect(lineEdit_BoardHeight, SIGNAL(textChanged(QString)), Calibrater, SLOT(onValueChanged_BoardHeight(QString)));
+        QObject::connect(lineEdit_SquareSize, SIGNAL(textChanged(QString)), Calibrater, SLOT(onValueChanged_SquareSize(QString)));
+        QObject::connect(checkBox_showRectified, SIGNAL(clicked(bool)), Calibrater, SLOT(onClicked_showRectified(bool)));
+        QObject::connect(radioButton_Bouguet, SIGNAL(clicked(bool)), Calibrater, SLOT(onClicked_Bouguet(bool)));
+        QObject::connect(radioButton_Hartley, SIGNAL(clicked(bool)), Calibrater, SLOT(onClicked_Hartley(bool)));
+        QObject::connect(pushButton_CalibDefault, SIGNAL(clicked()), Calibrater, SLOT(setDefaultCalibParam()));
+        QObject::connect(pushButton, SIGNAL(clicked()), Calibrater, SLOT(doCalib()));
 
         QMetaObject::connectSlotsByName(Calibrater);
     } // setupUi
@@ -233,8 +244,8 @@ public:
         pushButton_CalibDefault->setText(QApplication::translate("Calibrater", "\351\273\230\350\256\244\345\217\202\346\225\260", nullptr));
         pushButton->setText(QApplication::translate("Calibrater", "\346\240\207\345\256\232", nullptr));
         groupBox_2->setTitle(QApplication::translate("Calibrater", "Function", nullptr));
-        radioButton_Bouguet->setText(QApplication::translate("Calibrater", "\344\275\277\347\224\250Bouguet\347\237\253\346\255\243\346\226\271\346\263\225", nullptr));
-        radioButton_Hartley->setText(QApplication::translate("Calibrater", "\344\275\277\347\224\250Hartley\347\237\253\346\255\243\346\226\271\346\263\225", nullptr));
+        radioButton_Bouguet->setText(QApplication::translate("Calibrater", "Bouguet", nullptr));
+        radioButton_Hartley->setText(QApplication::translate("Calibrater", "Hartley", nullptr));
     } // retranslateUi
 
 };

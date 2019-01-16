@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>891</width>
-    <height>629</height>
+    <width>823</width>
+    <height>497</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,6 +20,12 @@
       <enum>Qt::Horizontal</enum>
      </property>
      <widget class="QGraphicsView" name="graphicsView_L">
+      <property name="minimumSize">
+       <size>
+        <width>400</width>
+        <height>300</height>
+       </size>
+      </property>
       <property name="contextMenuPolicy">
        <enum>Qt::ActionsContextMenu</enum>
       </property>
@@ -45,7 +51,14 @@
        </brush>
       </property>
      </widget>
-     <widget class="QGraphicsView" name="graphicsView_R"/>
+     <widget class="QGraphicsView" name="graphicsView_R">
+      <property name="minimumSize">
+       <size>
+        <width>400</width>
+        <height>300</height>
+       </size>
+      </property>
+     </widget>
     </widget>
    </item>
    <item row="1" column="0">
@@ -57,7 +70,7 @@
       </size>
      </property>
      <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
+      <enum>QFrame::Box</enum>
      </property>
      <property name="frameShadow">
       <enum>QFrame::Raised</enum>
@@ -177,6 +190,21 @@
          <string>标定</string>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <property name="spacing">
+          <number>4</number>
+         </property>
+         <property name="leftMargin">
+          <number>4</number>
+         </property>
+         <property name="topMargin">
+          <number>4</number>
+         </property>
+         <property name="rightMargin">
+          <number>4</number>
+         </property>
+         <property name="bottomMargin">
+          <number>4</number>
+         </property>
          <item>
           <widget class="QPushButton" name="pushButton_CalibDefault">
            <property name="text">
@@ -203,14 +231,14 @@
          <item>
           <widget class="QRadioButton" name="radioButton_Bouguet">
            <property name="text">
-            <string>使用Bouguet矫正方法</string>
+            <string>Bouguet</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QRadioButton" name="radioButton_Hartley">
            <property name="text">
-            <string>使用Hartley矫正方法</string>
+            <string>Hartley</string>
            </property>
           </widget>
          </item>
@@ -227,5 +255,144 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>lineEdit_BoardWidth</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>Calibrater</receiver>
+   <slot>onValueChanged_BoardWidth(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>225</x>
+     <y>329</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>246</x>
+     <y>282</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_BoardHeight</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>Calibrater</receiver>
+   <slot>onValueChanged_BoardHeight(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>141</x>
+     <y>365</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>131</x>
+     <y>282</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_SquareSize</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>Calibrater</receiver>
+   <slot>onValueChanged_SquareSize(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>280</x>
+     <y>396</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>174</x>
+     <y>283</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_showRectified</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>Calibrater</receiver>
+   <slot>onClicked_showRectified(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>110</x>
+     <y>432</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>105</x>
+     <y>472</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_Bouguet</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>Calibrater</receiver>
+   <slot>onClicked_Bouguet(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>435</x>
+     <y>326</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>411</x>
+     <y>5</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_Hartley</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>Calibrater</receiver>
+   <slot>onClicked_Hartley(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>572</x>
+     <y>331</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>514</x>
+     <y>5</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_CalibDefault</sender>
+   <signal>clicked()</signal>
+   <receiver>Calibrater</receiver>
+   <slot>setDefaultCalibParam()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>455</x>
+     <y>438</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>426</x>
+     <y>472</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>Calibrater</receiver>
+   <slot>doCalib()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>542</x>
+     <y>435</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>569</x>
+     <y>469</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>onValueChanged_BoardWidth(QString)</slot>
+  <slot>onValueChanged_BoardHeight(QString)</slot>
+  <slot>onValueChanged_SquareSize(QString)</slot>
+  <slot>onClicked_showRectified(bool)</slot>
+  <slot>onClicked_Bouguet(bool)</slot>
+  <slot>onClicked_Hartley(bool)</slot>
+  <slot>setDefaultCalibParam()</slot>
+  <slot>doCalib()</slot>
+ </slots>
 </ui>

@@ -33,6 +33,16 @@
     <Filter Include="main">
       <UniqueIdentifier>{15b6209d-5425-4ba7-b6f3-d0c1863374dd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+      <ParseFiles>true</ParseFiles>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+      <ParseFiles>true</ParseFiles>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Calibrater.cpp">
@@ -74,6 +84,18 @@
     <ClCompile Include="main.cpp">
       <Filter>main</Filter>
     </ClCompile>
+    <ClCompile Include="CalibrateParamEntity.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="CalibrateController.cpp">
+      <Filter>Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="StereoMatchParamEntity.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="StereoMatchController.cpp">
+      <Filter>Controller</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Calibrater.h">
@@ -105,6 +127,18 @@
     </QtMoc>
     <QtMoc Include="StereoMatch.h">
       <Filter>Engine</Filter>
+    </QtMoc>
+    <QtMoc Include="CalibrateParamEntity.h">
+      <Filter>Entity</Filter>
+    </QtMoc>
+    <QtMoc Include="CalibrateController.h">
+      <Filter>Controller</Filter>
+    </QtMoc>
+    <QtMoc Include="StereoMatchParamEntity.h">
+      <Filter>Entity</Filter>
+    </QtMoc>
+    <QtMoc Include="StereoMatchController.h">
+      <Filter>Controller</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

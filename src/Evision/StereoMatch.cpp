@@ -4,7 +4,7 @@
 
 StereoMatch::StereoMatch(std::string img1_filename, std::string img2_filename, std::string intrinsic_filename, std::string extrinsic_filename)
 {
-	m_entity = EvisionParamEntity::getInstance();
+	m_entity = StereoMatchParamEntity::getInstance();
 	this->img1_filename = img1_filename;
 	this->img2_filename = img2_filename;
 	QFileInfo *_fileInfo1 = new QFileInfo(QString::fromStdString(img1_filename));
@@ -85,7 +85,7 @@ void StereoMatch::run()
 			emit openMessageBox(QStringLiteral("错误"), QStringLiteral("读取外部参数文件失败!"));
 			return ;
 		}
-		m_entity->setStatusBarText(QStringLiteral("参数就位,开始StereoMatch计算..."));
+		m_entity->setmsgBuffer(QStringLiteral("参数就位,开始StereoMatch计算..."));
 		cv::Mat R, T, R1, P1, R2, P2;
 		fs["R"] >> R;
 		fs["T"] >> T;
@@ -156,14 +156,14 @@ void StereoMatch::run()
 	t = cv::getTickCount() - t;
 	char buff[128];
 	sprintf(buff,"Time elapsed: %fms\n,StereoMatch计算完毕,正在输出...", t * 1000 / cv::getTickFrequency());
-	m_entity->setStatusBarText(QString::fromStdString(buff));
+	m_entity->setmsgBuffer(QString::fromStdString(buff));
 
 	//disp = dispp.colRange(numberOfDisparities, img1p.cols);
 	
 	disp.convertTo(disp8, CV_8U, 255 / (m_entity->getNumDisparities()*16.));
 	
-	m_entity->setImageLtoShow(img1);
-	m_entity->setImageRtoShow(img2);
+	//m_entity->setImageLtoShow(img1);
+	//m_entity->setImageRtoShow(img2);
 	m_entity->setImageDtoShow(disp8);
 	//d
 
@@ -173,7 +173,7 @@ void StereoMatch::run()
 	if (!point_cloud_filename.empty())
 	{
 		//printf("storing the point cloud...");
-		m_entity->setStatusBarText(QStringLiteral("正在输出点云文件..."));
+		m_entity->setmsgBuffer(QStringLiteral("正在输出点云文件..."));
 		//fflush(stdout);
 		cv::Mat xyz;
 		reprojectImageTo3D(disp, xyz, Q, true);
@@ -183,7 +183,7 @@ void StereoMatch::run()
 		saveXYZ(point_cloud_filename.c_str(), xyz);
 		//printf("\n");
 	}
-	m_entity->setStatusBarText(QStringLiteral("就绪"));
+	m_entity->setmsgBuffer(QStringLiteral("就绪"));
 
 	return ;
 }

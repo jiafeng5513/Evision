@@ -12,7 +12,7 @@
 StereoCalibrate::StereoCalibrate(std::vector<std::string>* imagelist, cv::Size boardSize, float squareSize,
 	bool useCalibrated, bool showRectified, QObject *parent ) : QThread(parent)
 {
-	m_entity = EvisionParamEntity::getInstance();
+	m_entity = CalibrateParamEntity::getInstance();
 	this->imagelist= imagelist;
 	this->boardSize= boardSize;
 	this->squareSize= squareSize;
@@ -22,7 +22,7 @@ StereoCalibrate::StereoCalibrate(std::vector<std::string>* imagelist, cv::Size b
 
 StereoCalibrate::StereoCalibrate(std::vector<std::string>* imagelistL, std::vector<std::string>* imagelistR, cv::Size boardSize, float squareSize, bool useCalibrated, bool showRectified, QObject * parent)
 {
-	m_entity = EvisionParamEntity::getInstance();
+	m_entity = CalibrateParamEntity::getInstance();
 	this->imagelistL = imagelistL;
 	this->imagelistR = imagelistR;
 	this->boardSize = boardSize;
@@ -73,7 +73,7 @@ void StereoCalibrate::run_old()
 				imageSize = img.size();
 			else if (img.size() != imageSize)
 			{
-				m_entity->setStatusBarText(QString::fromStdString(filename) + "与第一张图片尺寸不同,跳过.");
+				m_entity->setmsgBuffer(QString::fromStdString(filename) + "与第一张图片尺寸不同,跳过.");
 				break;
 			}
 			bool found = false;
@@ -356,7 +356,7 @@ void StereoCalibrate::run()
 			imageSize = imgL.size();
 		else if (imgL.size() != imageSize|| imgL.size()!=imgR.size())
 		{
-			m_entity->setStatusBarText("图片尺寸有问题,跳过");
+			m_entity->setmsgBuffer("图片尺寸有问题,跳过");
 			break;
 		}
 		//bool found = false;
@@ -425,11 +425,11 @@ void StereoCalibrate::run()
 		j++;
 		std::string temp = std::to_string(j);
 		temp += "/"; temp += std::to_string(nimages);
-		m_entity->setStatusBarText(QString::fromStdString(temp));
+		m_entity->setmsgBuffer(QString::fromStdString(temp));
 	}//交点检测结束
 
 	//std::cout << j << " pairs have been successfully detected.\n";
-	m_entity->setStatusBarText(QStringLiteral("交点检测结束,正在标定运算..."));
+	m_entity->setmsgBuffer(QStringLiteral("交点检测结束,正在标定运算..."));
 	nimages = j;//只有找到交点的图片能用来标定,确定数量
 	if (nimages < 2)
 	{
@@ -469,7 +469,7 @@ void StereoCalibrate::run()
 		cv::TermCriteria(cv::TermCriteria::COUNT + cv::TermCriteria::EPS, 100, 1e-5));
 	std::string tmp = "RMS error = \n";
 	tmp += std::to_string(rms);
-	m_entity->setStatusBarText(QStringLiteral("标定完毕"));
+	m_entity->setmsgBuffer(QStringLiteral("标定完毕"));
 	emit openMessageBox(QStringLiteral("标定完毕"), QString::fromStdString(tmp));
 	// CALIBRATION QUALITY CHECK
 	// because the output fundamental matrix implicitly
@@ -530,7 +530,7 @@ void StereoCalibrate::run()
 	}
 	else
 		emit openMessageBox(QStringLiteral("文件访问错误"), QStringLiteral("无法写入:extrinsics.yml"));
-	m_entity->setStatusBarText(QStringLiteral("就绪"));
+	m_entity->setmsgBuffer(QStringLiteral("就绪"));
 	// OpenCV can handle left-right
 	// or up-down camera arrangements
 	bool isVerticalStereo = fabs(P2.at<double>(1, 3)) > fabs(P2.at<double>(0, 3));

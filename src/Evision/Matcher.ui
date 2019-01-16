@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>943</width>
-    <height>704</height>
+    <width>977</width>
+    <height>613</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,7 +30,20 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="1">
+   <item row="2" column="0">
+    <widget class="QLabel" name="label">
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1" rowspan="2">
     <widget class="QGroupBox" name="groupBox_6">
      <property name="maximumSize">
       <size>
@@ -658,5 +671,297 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton_MatchDefault</sender>
+   <signal>clicked()</signal>
+   <receiver>Matcher</receiver>
+   <slot>setDefaultMatchParam()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>708</x>
+     <y>578</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>663</x>
+     <y>607</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_MatchChooseFiles</sender>
+   <signal>clicked()</signal>
+   <receiver>Matcher</receiver>
+   <slot>doMatch()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>776</x>
+     <y>585</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>755</x>
+     <y>608</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_RefreshStereoMatch</sender>
+   <signal>clicked()</signal>
+   <receiver>Matcher</receiver>
+   <slot>RefreshStereoMatch()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>868</x>
+     <y>586</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>858</x>
+     <y>608</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_SGBM</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>Matcher</receiver>
+   <slot>onClicked_SGBM(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>684</x>
+     <y>548</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>656</x>
+     <y>526</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_BM</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>Matcher</receiver>
+   <slot>onClicked_BM(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>763</x>
+     <y>548</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>655</x>
+     <y>516</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_MODE_HH</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>Matcher</receiver>
+   <slot>onClicked_MODE_HH(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>817</x>
+     <y>548</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>971</x>
+     <y>435</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_MODE_3WAY</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>Matcher</receiver>
+   <slot>onClicked_MODE_3WAY(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>852</x>
+     <y>543</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>972</x>
+     <y>470</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_MODE_SGBM</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>Matcher</receiver>
+   <slot>onClicked_MODE_SGBM(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>927</x>
+     <y>553</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>971</x>
+     <y>507</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_uniradio</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>Matcher</receiver>
+   <slot>valueChanged_uniradio(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>732</x>
+     <y>116</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>656</x>
+     <y>70</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_prefilcap</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>Matcher</receiver>
+   <slot>valueChanged_Prefilcap(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>743</x>
+     <y>160</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>655</x>
+     <y>130</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_specwinsz</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>Matcher</receiver>
+   <slot>valueChanged_specwinsz(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>764</x>
+     <y>216</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>655</x>
+     <y>180</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_SadWinSiz</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>Matcher</receiver>
+   <slot>valueChanged_SadWinSize(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>735</x>
+     <y>282</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>654</x>
+     <y>238</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_MinDisp</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>Matcher</receiver>
+   <slot>valueChanged_MinDisp(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>755</x>
+     <y>323</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>656</x>
+     <y>296</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_NumDisparities</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>Matcher</receiver>
+   <slot>valueChanged_NumDisparities(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>794</x>
+     <y>375</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>654</x>
+     <y>341</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_specrange</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>Matcher</receiver>
+   <slot>valueChanged_Specrange(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>773</x>
+     <y>414</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>655</x>
+     <y>385</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_maxdifdisp12</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>Matcher</receiver>
+   <slot>valueChanged_MaxDifdisp2(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>729</x>
+     <y>458</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>656</x>
+     <y>433</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_textThread</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>Matcher</receiver>
+   <slot>valueChanged_TextThread(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>746</x>
+     <y>493</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>655</x>
+     <y>474</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>setDefaultMatchParam()</slot>
+  <slot>doMatch()</slot>
+  <slot>RefreshStereoMatch()</slot>
+  <slot>onClicked_BM(bool)</slot>
+  <slot>onClicked_SGBM(bool)</slot>
+  <slot>onClicked_MODE_HH(bool)</slot>
+  <slot>onClicked_MODE_SGBM(bool)</slot>
+  <slot>onClicked_MODE_3WAY(bool)</slot>
+  <slot>valueChanged_MinDisp(int)</slot>
+  <slot>valueChanged_uniradio(int)</slot>
+  <slot>valueChanged_specwinsz(int)</slot>
+  <slot>valueChanged_NumDisparities(int)</slot>
+  <slot>valueChanged_Specrange(int)</slot>
+  <slot>valueChanged_Prefilcap(int)</slot>
+  <slot>valueChanged_SadWinSize(int)</slot>
+  <slot>valueChanged_TextThread(int)</slot>
+  <slot>valueChanged_MaxDifdisp2(int)</slot>
+ </slots>
 </ui>

@@ -13,11 +13,10 @@ private:
 public:
 	EvisionController(QObject *parent = Q_NULLPTR);
 	~EvisionController();
-	void setDefaultCalibParamCommand();
-	void CalibrateCommand();
-	void setDefaultMatchParamCommand();
-	void MatchCommand();
-	void RefreshStereoMatchCommand();
+
+	//void setDefaultMatchParamCommand();
+	/*void MatchCommand();
+	void RefreshStereoMatchCommand();*/
 	void getDistanceCommand();
 	void ShowPointCloudCommand();
 	void openCameraCommand();
