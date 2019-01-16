@@ -36,32 +36,30 @@
     <normaloff>:/Evision/resource/Evision.ico</normaloff>:/Evision/resource/Evision.ico</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QMdiArea" name="mdiArea">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>661</width>
-      <height>341</height>
-     </rect>
+   <layout class="QGridLayout" name="gridLayout">
+    <property name="leftMargin">
+     <number>0</number>
     </property>
-    <property name="acceptDrops">
-     <bool>true</bool>
+    <property name="topMargin">
+     <number>0</number>
     </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_RangeSinglePoint">
-    <property name="geometry">
-     <rect>
-      <x>700</x>
-      <y>320</y>
-      <width>71</width>
-      <height>23</height>
-     </rect>
+    <property name="rightMargin">
+     <number>0</number>
     </property>
-    <property name="text">
-     <string>测量</string>
+    <property name="bottomMargin">
+     <number>0</number>
     </property>
-   </widget>
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <item row="0" column="0">
+     <widget class="QMdiArea" name="mdiArea">
+      <property name="acceptDrops">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -244,22 +242,6 @@
  </resources>
  <connections>
   <connection>
-   <sender>pushButton_RangeSinglePoint</sender>
-   <signal>clicked()</signal>
-   <receiver>EvisionClass</receiver>
-   <slot>getDistance()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>477</x>
-     <y>549</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>993</x>
-     <y>467</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>actionDebug</sender>
    <signal>triggered()</signal>
    <receiver>EvisionClass</receiver>
@@ -355,14 +337,30 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>action_Measure_View</sender>
+   <signal>triggered()</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>on_action_Measure_view()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>540</x>
+     <y>355</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
-  <slot>getDistance()</slot>
   <slot>onTestAlltheParam()</slot>
   <slot>onShowPointCloud()</slot>
   <slot>onCamera()</slot>
   <slot>onStereoCamera()</slot>
   <slot>on_action_calibrate_view()</slot>
   <slot>on_action_stereoMatch_view()</slot>
+  <slot>on_action_Measure_view()</slot>
  </slots>
 </ui>

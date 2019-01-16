@@ -13,11 +13,11 @@
 #include <QtGui/QIcon>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMdiArea>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
-#include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
@@ -42,8 +42,8 @@ public:
     QAction *action_3dReconstruct_View;
     QAction *action_CalibrateView;
     QWidget *centralWidget;
+    QGridLayout *gridLayout;
     QMdiArea *mdiArea;
-    QPushButton *pushButton_RangeSinglePoint;
     QMenuBar *menuBar;
     QMenu *menu;
     QMenu *menu_2;
@@ -124,13 +124,17 @@ public:
         action_CalibrateView->setIcon(icon9);
         centralWidget = new QWidget(EvisionClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
+        gridLayout = new QGridLayout(centralWidget);
+        gridLayout->setSpacing(0);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
+        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        gridLayout->setContentsMargins(0, 0, 0, 0);
         mdiArea = new QMdiArea(centralWidget);
         mdiArea->setObjectName(QString::fromUtf8("mdiArea"));
-        mdiArea->setGeometry(QRect(10, 10, 661, 341));
         mdiArea->setAcceptDrops(true);
-        pushButton_RangeSinglePoint = new QPushButton(centralWidget);
-        pushButton_RangeSinglePoint->setObjectName(QString::fromUtf8("pushButton_RangeSinglePoint"));
-        pushButton_RangeSinglePoint->setGeometry(QRect(700, 320, 71, 23));
+
+        gridLayout->addWidget(mdiArea, 0, 0, 1, 1);
+
         EvisionClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(EvisionClass);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
@@ -182,13 +186,13 @@ public:
         mainToolBar->addSeparator();
 
         retranslateUi(EvisionClass);
-        QObject::connect(pushButton_RangeSinglePoint, SIGNAL(clicked()), EvisionClass, SLOT(getDistance()));
         QObject::connect(actionDebug, SIGNAL(triggered()), EvisionClass, SLOT(onTestAlltheParam()));
         QObject::connect(action_ShowPointCloud, SIGNAL(triggered()), EvisionClass, SLOT(onShowPointCloud()));
         QObject::connect(action_StereoCamera, SIGNAL(triggered()), EvisionClass, SLOT(onStereoCamera()));
         QObject::connect(action_Camera, SIGNAL(triggered()), EvisionClass, SLOT(onCamera()));
         QObject::connect(action_CalibrateView, SIGNAL(triggered()), EvisionClass, SLOT(on_action_calibrate_view()));
         QObject::connect(action_StereoMatchView, SIGNAL(triggered()), EvisionClass, SLOT(on_action_stereoMatch_view()));
+        QObject::connect(action_Measure_View, SIGNAL(triggered()), EvisionClass, SLOT(on_action_Measure_view()));
 
         QMetaObject::connectSlotsByName(EvisionClass);
     } // setupUi
@@ -210,7 +214,6 @@ public:
         action_SFM_View->setText(QApplication::translate("EvisionClass", "SFM", nullptr));
         action_3dReconstruct_View->setText(QApplication::translate("EvisionClass", "\344\270\211\347\273\264\351\207\215\345\273\272", nullptr));
         action_CalibrateView->setText(QApplication::translate("EvisionClass", "\347\233\270\346\234\272\346\240\207\345\256\232", nullptr));
-        pushButton_RangeSinglePoint->setText(QApplication::translate("EvisionClass", "\346\265\213\351\207\217", nullptr));
         menu->setTitle(QApplication::translate("EvisionClass", "\345\267\245\345\205\267", nullptr));
         menu_2->setTitle(QApplication::translate("EvisionClass", "\345\270\256\345\212\251", nullptr));
         menu_3->setTitle(QApplication::translate("EvisionClass", "\345\217\214\347\233\256\350\247\206\350\247\211", nullptr));

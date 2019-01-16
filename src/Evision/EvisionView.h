@@ -28,6 +28,8 @@ public slots:
 
 	void on_action_calibrate_view();//启动标定视图
 	void on_action_stereoMatch_view();//启动匹配视图
+	void on_action_Measure_view();//启动测量界面
+
 	void onTestAlltheParam();
 	//状态栏
 	void onParamChanged_StatusBarText();

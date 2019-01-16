@@ -87,6 +87,11 @@ void EvisionView::on_action_stereoMatch_view()
 	m_matcher->show();
 }
 
+void EvisionView::on_action_Measure_view()
+{
+	m_controller->getDistanceCommand();
+}
+
 //µ÷ÊÔ·½·¨
 void EvisionView::onTestAlltheParam()
 {
