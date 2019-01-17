@@ -11,11 +11,15 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QCheckBox>
+#include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
-#include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QSplitter>
 #include <QtWidgets/QWidget>
 #include "CustomGraphicsView.h"
 
@@ -24,31 +28,98 @@ QT_BEGIN_NAMESPACE
 class Ui_RFinterface
 {
 public:
+    QGridLayout *gridLayout_3;
+    QGroupBox *groupBox_2;
     QGridLayout *gridLayout_2;
+    QPushButton *pushButton_selectDisp;
+    QPushButton *pushButton_selectLeft;
+    QPushButton *pushButton_selectPointCloud;
+    QPushButton *pushButton_start;
+    QFrame *frame;
+    QHBoxLayout *horizontalLayout;
+    QCheckBox *checkBox_dispOK;
+    QCheckBox *checkBox_leftOK;
+    QCheckBox *checkBox_pointcloudOK;
     QGroupBox *groupBox;
     QGridLayout *gridLayout;
-    QLabel *label_4;
-    QLabel *label;
-    QLabel *label_2;
-    QLineEdit *lineEdit_ImgY;
-    QLineEdit *lineEdit_Res;
-    QLineEdit *lineEdit_ImgX;
-    QSpacerItem *horizontalSpacer;
     QLabel *label_3;
-    CustomGraphicsView *customGraphicsView_D;
+    QLineEdit *lineEdit_ImgX;
+    QLineEdit *lineEdit_ImgY;
+    QLabel *label;
+    QLabel *label_4;
+    QLabel *label_2;
+    QLineEdit *lineEdit_Res;
+    QSplitter *splitter;
     CustomGraphicsView *customGraphicsView_O;
-    QSpacerItem *horizontalSpacer_2;
-    QSpacerItem *verticalSpacer;
+    CustomGraphicsView *customGraphicsView_D;
 
     void setupUi(QWidget *RFinterface)
     {
         if (RFinterface->objectName().isEmpty())
             RFinterface->setObjectName(QString::fromUtf8("RFinterface"));
-        RFinterface->resize(978, 566);
-        gridLayout_2 = new QGridLayout(RFinterface);
+        RFinterface->resize(1074, 715);
+        gridLayout_3 = new QGridLayout(RFinterface);
+        gridLayout_3->setSpacing(6);
+        gridLayout_3->setContentsMargins(11, 11, 11, 11);
+        gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
+        groupBox_2 = new QGroupBox(RFinterface);
+        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
+        gridLayout_2 = new QGridLayout(groupBox_2);
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
+        pushButton_selectDisp = new QPushButton(groupBox_2);
+        pushButton_selectDisp->setObjectName(QString::fromUtf8("pushButton_selectDisp"));
+
+        gridLayout_2->addWidget(pushButton_selectDisp, 1, 0, 1, 1);
+
+        pushButton_selectLeft = new QPushButton(groupBox_2);
+        pushButton_selectLeft->setObjectName(QString::fromUtf8("pushButton_selectLeft"));
+
+        gridLayout_2->addWidget(pushButton_selectLeft, 1, 1, 1, 1);
+
+        pushButton_selectPointCloud = new QPushButton(groupBox_2);
+        pushButton_selectPointCloud->setObjectName(QString::fromUtf8("pushButton_selectPointCloud"));
+
+        gridLayout_2->addWidget(pushButton_selectPointCloud, 1, 2, 1, 1);
+
+        pushButton_start = new QPushButton(groupBox_2);
+        pushButton_start->setObjectName(QString::fromUtf8("pushButton_start"));
+
+        gridLayout_2->addWidget(pushButton_start, 1, 3, 1, 1);
+
+        frame = new QFrame(groupBox_2);
+        frame->setObjectName(QString::fromUtf8("frame"));
+        frame->setFrameShape(QFrame::StyledPanel);
+        frame->setFrameShadow(QFrame::Raised);
+        horizontalLayout = new QHBoxLayout(frame);
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        checkBox_dispOK = new QCheckBox(frame);
+        checkBox_dispOK->setObjectName(QString::fromUtf8("checkBox_dispOK"));
+        checkBox_dispOK->setCheckable(true);
+
+        horizontalLayout->addWidget(checkBox_dispOK);
+
+        checkBox_leftOK = new QCheckBox(frame);
+        checkBox_leftOK->setObjectName(QString::fromUtf8("checkBox_leftOK"));
+        checkBox_leftOK->setCheckable(true);
+
+        horizontalLayout->addWidget(checkBox_leftOK);
+
+        checkBox_pointcloudOK = new QCheckBox(frame);
+        checkBox_pointcloudOK->setObjectName(QString::fromUtf8("checkBox_pointcloudOK"));
+        checkBox_pointcloudOK->setCheckable(true);
+
+        horizontalLayout->addWidget(checkBox_pointcloudOK);
+
+
+        gridLayout_2->addWidget(frame, 0, 0, 1, 4);
+
+
+        gridLayout_3->addWidget(groupBox_2, 0, 0, 1, 1);
+
         groupBox = new QGroupBox(RFinterface);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
         groupBox->setMinimumSize(QSize(0, 110));
@@ -57,71 +128,61 @@ public:
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        label_4 = new QLabel(groupBox);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_3 = new QLabel(groupBox);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
 
-        gridLayout->addWidget(label_4, 2, 0, 1, 1);
-
-        label = new QLabel(groupBox);
-        label->setObjectName(QString::fromUtf8("label"));
-
-        gridLayout->addWidget(label, 0, 0, 1, 1);
-
-        label_2 = new QLabel(groupBox);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-
-        gridLayout->addWidget(label_2, 0, 1, 1, 1);
-
-        lineEdit_ImgY = new QLineEdit(groupBox);
-        lineEdit_ImgY->setObjectName(QString::fromUtf8("lineEdit_ImgY"));
-
-        gridLayout->addWidget(lineEdit_ImgY, 1, 2, 1, 1);
-
-        lineEdit_Res = new QLineEdit(groupBox);
-        lineEdit_Res->setObjectName(QString::fromUtf8("lineEdit_Res"));
-
-        gridLayout->addWidget(lineEdit_Res, 2, 2, 1, 1);
+        gridLayout->addWidget(label_3, 1, 1, 1, 1);
 
         lineEdit_ImgX = new QLineEdit(groupBox);
         lineEdit_ImgX->setObjectName(QString::fromUtf8("lineEdit_ImgX"));
 
         gridLayout->addWidget(lineEdit_ImgX, 0, 2, 1, 1);
 
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        lineEdit_ImgY = new QLineEdit(groupBox);
+        lineEdit_ImgY->setObjectName(QString::fromUtf8("lineEdit_ImgY"));
 
-        gridLayout->addItem(horizontalSpacer, 0, 5, 1, 1);
+        gridLayout->addWidget(lineEdit_ImgY, 1, 2, 1, 1);
 
-        label_3 = new QLabel(groupBox);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label = new QLabel(groupBox);
+        label->setObjectName(QString::fromUtf8("label"));
 
-        gridLayout->addWidget(label_3, 1, 1, 1, 1);
+        gridLayout->addWidget(label, 0, 0, 1, 1);
+
+        label_4 = new QLabel(groupBox);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+
+        gridLayout->addWidget(label_4, 2, 0, 1, 1);
+
+        label_2 = new QLabel(groupBox);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+
+        gridLayout->addWidget(label_2, 0, 1, 1, 1);
+
+        lineEdit_Res = new QLineEdit(groupBox);
+        lineEdit_Res->setObjectName(QString::fromUtf8("lineEdit_Res"));
+
+        gridLayout->addWidget(lineEdit_Res, 2, 2, 1, 1);
 
 
-        gridLayout_2->addWidget(groupBox, 0, 0, 1, 2);
+        gridLayout_3->addWidget(groupBox, 0, 1, 1, 1);
 
-        customGraphicsView_D = new CustomGraphicsView(RFinterface);
-        customGraphicsView_D->setObjectName(QString::fromUtf8("customGraphicsView_D"));
-        customGraphicsView_D->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-        customGraphicsView_D->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-        customGraphicsView_D->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
-
-        gridLayout_2->addWidget(customGraphicsView_D, 1, 1, 1, 1);
-
-        customGraphicsView_O = new CustomGraphicsView(RFinterface);
+        splitter = new QSplitter(RFinterface);
+        splitter->setObjectName(QString::fromUtf8("splitter"));
+        splitter->setOrientation(Qt::Horizontal);
+        customGraphicsView_O = new CustomGraphicsView(splitter);
         customGraphicsView_O->setObjectName(QString::fromUtf8("customGraphicsView_O"));
         customGraphicsView_O->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         customGraphicsView_O->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         customGraphicsView_O->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
+        splitter->addWidget(customGraphicsView_O);
+        customGraphicsView_D = new CustomGraphicsView(splitter);
+        customGraphicsView_D->setObjectName(QString::fromUtf8("customGraphicsView_D"));
+        customGraphicsView_D->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        customGraphicsView_D->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        customGraphicsView_D->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
+        splitter->addWidget(customGraphicsView_D);
 
-        gridLayout_2->addWidget(customGraphicsView_O, 1, 0, 1, 1);
-
-        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout_2->addItem(horizontalSpacer_2, 1, 2, 1, 1);
-
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout_2->addItem(verticalSpacer, 2, 1, 1, 1);
+        gridLayout_3->addWidget(splitter, 1, 0, 1, 2);
 
 
         retranslateUi(RFinterface);
@@ -131,6 +192,10 @@ public:
         QObject::connect(customGraphicsView_D, SIGNAL(mouseLDown(int,int)), RFinterface, SLOT(onMouseLButtonDown(int,int)));
         QObject::connect(customGraphicsView_D, SIGNAL(mouseMove(int,int)), RFinterface, SLOT(onMouseMove(int,int)));
         QObject::connect(customGraphicsView_D, SIGNAL(mouseRDown(int,int)), RFinterface, SLOT(onMouseRButtonDown(int,int)));
+        QObject::connect(pushButton_selectDisp, SIGNAL(clicked()), RFinterface, SLOT(onSelectDisparityMap()));
+        QObject::connect(pushButton_selectLeft, SIGNAL(clicked()), RFinterface, SLOT(onSelectleftMap()));
+        QObject::connect(pushButton_selectPointCloud, SIGNAL(clicked()), RFinterface, SLOT(onSelectPointcloudFile()));
+        QObject::connect(pushButton_start, SIGNAL(clicked()), RFinterface, SLOT(onStart()));
 
         QMetaObject::connectSlotsByName(RFinterface);
     } // setupUi
@@ -138,11 +203,19 @@ public:
     void retranslateUi(QWidget *RFinterface)
     {
         RFinterface->setWindowTitle(QApplication::translate("RFinterface", "\344\272\244\344\272\222\346\265\213\351\207\217", nullptr));
+        groupBox_2->setTitle(QApplication::translate("RFinterface", "\350\276\223\345\205\245", nullptr));
+        pushButton_selectDisp->setText(QApplication::translate("RFinterface", "\350\247\206\345\267\256\345\233\276", nullptr));
+        pushButton_selectLeft->setText(QApplication::translate("RFinterface", "\345\267\246\350\247\206\345\233\276", nullptr));
+        pushButton_selectPointCloud->setText(QApplication::translate("RFinterface", "\347\202\271\344\272\221", nullptr));
+        pushButton_start->setText(QApplication::translate("RFinterface", "\345\274\200\345\247\213\346\265\213\351\207\217", nullptr));
+        checkBox_dispOK->setText(QApplication::translate("RFinterface", "\350\247\206\345\267\256\345\233\276", nullptr));
+        checkBox_leftOK->setText(QApplication::translate("RFinterface", "\345\267\246\350\247\206\345\233\276", nullptr));
+        checkBox_pointcloudOK->setText(QApplication::translate("RFinterface", "\347\202\271\344\272\221\346\226\207\344\273\266", nullptr));
         groupBox->setTitle(QApplication::translate("RFinterface", "Function and Result", nullptr));
-        label_4->setText(QApplication::translate("RFinterface", "\350\256\241\347\256\227\347\273\223\346\236\234:", nullptr));
-        label->setText(QApplication::translate("RFinterface", "\345\233\276\345\203\217\347\251\272\351\227\264\345\235\220\346\240\207:", nullptr));
-        label_2->setText(QApplication::translate("RFinterface", "X=", nullptr));
         label_3->setText(QApplication::translate("RFinterface", "Y=", nullptr));
+        label->setText(QApplication::translate("RFinterface", "\345\233\276\345\203\217\347\251\272\351\227\264\345\235\220\346\240\207:", nullptr));
+        label_4->setText(QApplication::translate("RFinterface", "\350\256\241\347\256\227\347\273\223\346\236\234:", nullptr));
+        label_2->setText(QApplication::translate("RFinterface", "X=", nullptr));
     } // retranslateUi
 
 };

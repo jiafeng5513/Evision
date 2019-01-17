@@ -23,12 +23,18 @@ private:
 	cv::Mat xyz;
 	cv::Mat depth;
 	double m_ObjectDistance;
+	bool started = false;
 private:
 	void printImgToO(cv::Mat value);
 	void printImgToD(cv::Mat value);
+	void checkEnable();
 public slots:
 	void onMouseMove(int x, int y);
 	void onMouseLButtonDown(int x, int y);
 	void onMouseRButtonDown(int x, int y);
 
+	void onSelectDisparityMap();
+	void onSelectleftMap();
+	void onSelectPointcloudFile();
+	void onStart();
 };

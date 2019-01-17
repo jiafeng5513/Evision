@@ -6,15 +6,94 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>978</width>
-    <height>566</height>
+    <width>1074</width>
+    <height>715</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>交互测量</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_2">
-   <item row="0" column="0" colspan="2">
+  <layout class="QGridLayout" name="gridLayout_3">
+   <item row="0" column="0">
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
+      <string>输入</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="1" column="0">
+       <widget class="QPushButton" name="pushButton_selectDisp">
+        <property name="text">
+         <string>视差图</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QPushButton" name="pushButton_selectLeft">
+        <property name="text">
+         <string>左视图</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QPushButton" name="pushButton_selectPointCloud">
+        <property name="text">
+         <string>点云</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QPushButton" name="pushButton_start">
+        <property name="text">
+         <string>开始测量</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" colspan="4">
+       <widget class="QFrame" name="frame">
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QCheckBox" name="checkBox_dispOK">
+           <property name="text">
+            <string>视差图</string>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="checkBox_leftOK">
+           <property name="text">
+            <string>左视图</string>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="checkBox_pointcloudOK">
+           <property name="text">
+            <string>点云文件</string>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="1">
     <widget class="QGroupBox" name="groupBox">
      <property name="minimumSize">
       <size>
@@ -32,17 +111,30 @@
       <string>Function and Result</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_4">
+      <item row="1" column="1">
+       <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>计算结果:</string>
+         <string>Y=</string>
         </property>
        </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLineEdit" name="lineEdit_ImgX"/>
+      </item>
+      <item row="1" column="2">
+       <widget class="QLineEdit" name="lineEdit_ImgY"/>
       </item>
       <item row="0" column="0">
        <widget class="QLabel" name="label">
         <property name="text">
          <string>图像空间坐标:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>计算结果:</string>
         </property>
        </widget>
       </item>
@@ -53,89 +145,40 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="2">
-       <widget class="QLineEdit" name="lineEdit_ImgY"/>
-      </item>
       <item row="2" column="2">
        <widget class="QLineEdit" name="lineEdit_Res"/>
-      </item>
-      <item row="0" column="2">
-       <widget class="QLineEdit" name="lineEdit_ImgX"/>
-      </item>
-      <item row="0" column="5">
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>Y=</string>
-        </property>
-       </widget>
       </item>
      </layout>
     </widget>
    </item>
-   <item row="1" column="1">
-    <widget class="CustomGraphicsView" name="customGraphicsView_D">
-     <property name="verticalScrollBarPolicy">
-      <enum>Qt::ScrollBarAlwaysOff</enum>
-     </property>
-     <property name="horizontalScrollBarPolicy">
-      <enum>Qt::ScrollBarAlwaysOff</enum>
-     </property>
-     <property name="sizeAdjustPolicy">
-      <enum>QAbstractScrollArea::AdjustToContents</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="CustomGraphicsView" name="customGraphicsView_O">
-     <property name="verticalScrollBarPolicy">
-      <enum>Qt::ScrollBarAlwaysOff</enum>
-     </property>
-     <property name="horizontalScrollBarPolicy">
-      <enum>Qt::ScrollBarAlwaysOff</enum>
-     </property>
-     <property name="sizeAdjustPolicy">
-      <enum>QAbstractScrollArea::AdjustToContents</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="2">
-    <spacer name="horizontalSpacer_2">
+   <item row="1" column="0" colspan="2">
+    <widget class="QSplitter" name="splitter">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>40</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="2" column="1">
-    <spacer name="verticalSpacer">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
-     </property>
-    </spacer>
+     <widget class="CustomGraphicsView" name="customGraphicsView_O">
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <property name="horizontalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <property name="sizeAdjustPolicy">
+       <enum>QAbstractScrollArea::AdjustToContents</enum>
+      </property>
+     </widget>
+     <widget class="CustomGraphicsView" name="customGraphicsView_D">
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <property name="horizontalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <property name="sizeAdjustPolicy">
+       <enum>QAbstractScrollArea::AdjustToContents</enum>
+      </property>
+     </widget>
+    </widget>
    </item>
   </layout>
  </widget>
@@ -245,10 +288,78 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton_selectDisp</sender>
+   <signal>clicked()</signal>
+   <receiver>RFinterface</receiver>
+   <slot>onSelectDisparityMap()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>87</x>
+     <y>93</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>58</x>
+     <y>4</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_selectLeft</sender>
+   <signal>clicked()</signal>
+   <receiver>RFinterface</receiver>
+   <slot>onSelectleftMap()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>151</x>
+     <y>96</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>113</x>
+     <y>5</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_selectPointCloud</sender>
+   <signal>clicked()</signal>
+   <receiver>RFinterface</receiver>
+   <slot>onSelectPointcloudFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>227</x>
+     <y>92</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>169</x>
+     <y>6</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_start</sender>
+   <signal>clicked()</signal>
+   <receiver>RFinterface</receiver>
+   <slot>onStart()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>286</x>
+     <y>102</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>265</x>
+     <y>6</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>onMouseMove(int,int)</slot>
   <slot>onMouseLButtonDown(int,int)</slot>
   <slot>onMouseRButtonDown(int,int)</slot>
+  <slot>onSelectDisparityMap()</slot>
+  <slot>onSelectleftMap()</slot>
+  <slot>onSelectPointcloudFile()</slot>
+  <slot>onStart()</slot>
  </slots>
 </ui>
