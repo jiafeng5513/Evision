@@ -132,6 +132,7 @@
     <ClCompile Include="StereoMatch.cpp" />
     <ClCompile Include="StereoMatchController.cpp" />
     <ClCompile Include="StereoMatchParamEntity.cpp" />
+    <ClCompile Include="WatchImage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="EvisionView.h">
@@ -146,6 +147,7 @@
     <QtUic Include="Matcher.ui" />
     <QtUic Include="RFinterface.ui" />
     <QtUic Include="StereoCamera.ui" />
+    <QtUic Include="WatchImage.ui" />
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Evision.qrc" />
@@ -160,6 +162,12 @@
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="WatchImage.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtMultimediaWidgets</IncludePath>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;WIN32;WIN64;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;QT_MULTIMEDIA_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_IMAGE_LIB;_CRT_SECURE_NO_WARNINGS</Define>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtMultimediaWidgets</IncludePath>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;WIN32;WIN64;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;QT_MULTIMEDIA_LIB;QT_MULTIMEDIAWIDGETS_LIB;_CRT_SECURE_NO_WARNINGS</Define>
+    </QtMoc>
     <QtMoc Include="StereoMatchController.h">
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtMultimediaWidgets</IncludePath>
       <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;WIN32;WIN64;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;QT_MULTIMEDIA_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_IMAGE_LIB;_CRT_SECURE_NO_WARNINGS</Define>

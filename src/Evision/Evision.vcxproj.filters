@@ -96,6 +96,9 @@
     <ClCompile Include="StereoMatchController.cpp">
       <Filter>Controller</Filter>
     </ClCompile>
+    <ClCompile Include="WatchImage.cpp">
+      <Filter>View</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Calibrater.h">
@@ -140,6 +143,9 @@
     <QtMoc Include="StereoMatchController.h">
       <Filter>Controller</Filter>
     </QtMoc>
+    <QtMoc Include="WatchImage.h">
+      <Filter>View</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="Evision.ui">
@@ -158,6 +164,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="Matcher.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="WatchImage.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

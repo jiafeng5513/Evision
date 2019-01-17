@@ -56,8 +56,8 @@ public:
     {
         if (EvisionClass->objectName().isEmpty())
             EvisionClass->setObjectName(QString::fromUtf8("EvisionClass"));
-        EvisionClass->resize(1081, 712);
-        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        EvisionClass->resize(982, 660);
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(EvisionClass->sizePolicy().hasHeightForWidth());
@@ -131,14 +131,14 @@ public:
         gridLayout->setContentsMargins(0, 0, 0, 0);
         mdiArea = new QMdiArea(centralWidget);
         mdiArea->setObjectName(QString::fromUtf8("mdiArea"));
-        mdiArea->setAcceptDrops(true);
+        mdiArea->setAcceptDrops(false);
 
         gridLayout->addWidget(mdiArea, 0, 0, 1, 1);
 
         EvisionClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(EvisionClass);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1081, 23));
+        menuBar->setGeometry(QRect(0, 0, 982, 23));
         menu = new QMenu(menuBar);
         menu->setObjectName(QString::fromUtf8("menu"));
         menu_2 = new QMenu(menuBar);
@@ -150,6 +150,7 @@ public:
         EvisionClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(EvisionClass);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
+        mainToolBar->setAcceptDrops(true);
         EvisionClass->addToolBar(Qt::TopToolBarArea, mainToolBar);
         statusBar = new QStatusBar(EvisionClass);
         statusBar->setObjectName(QString::fromUtf8("statusBar"));

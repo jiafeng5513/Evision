@@ -4,6 +4,12 @@
 #include "EvisionUtils.h"
 #include "Calibrater.h"
 #include "Matcher.h"
+#include <qevent.h>
+#include <qmimedata.h>
+#include <QFileDialog>
+#include "RFinterface.h"
+#include "StereoCamera.h"
+#include "Camera.h"
 // 浮点数判等
 // ulp: units in the last place.
 template <typename T>
@@ -22,7 +28,7 @@ EvisionView::EvisionView(QWidget *parent)
 	: QMainWindow(parent)
 {
 	ui.setupUi(this);
-
+	setAcceptDrops(true);
 	msgLabel = new QLabel;
 	msgLabel->setMinimumSize(msgLabel->sizeHint());
 	msgLabel->setAlignment(Qt::AlignHCenter);
@@ -33,95 +39,186 @@ EvisionView::EvisionView(QWidget *parent)
 	m_entity = EvisionParamEntity::getInstance();
 	m_controller = new EvisionController();
 
-	//connect(m_entity, SIGNAL(paramChanged_MinDisp()), this, SLOT(onParamChanged_MinDisp()));
-	//connect(m_entity, SIGNAL(paramChanged_Uniradio()), this, SLOT(onParamChanged_uniradio()));
-	//connect(m_entity, SIGNAL(paramChanged_Specwinsz()), this, SLOT(onParamChanged_specwinsz()));
-	//connect(m_entity, SIGNAL(paramChanged_NumDisparities()), this, SLOT(onParamChanged_NumDisparities()));
-	//connect(m_entity, SIGNAL(paramChanged_Specrange()), this, SLOT(onParamChanged_Specrange()));
-	//connect(m_entity, SIGNAL(paramChanged_Prefilcap()), this, SLOT(onParamChanged_Prefilcap()));
-	//connect(m_entity, SIGNAL(paramChanged_SadWinsz()), this, SLOT(onParamChanged_SadWinSize()));
-	//connect(m_entity, SIGNAL(paramChanged_TextThread()), this, SLOT(onParamChanged_TextThread()));
-	//connect(m_entity, SIGNAL(paramChanged_Maxdifdisp12()), this, SLOT(onParamChanged_MaxDifdisp2()));
-	//connect(m_entity, SIGNAL(paramChanged_BM()), this, SLOT(onParamChanged_BM()));
-	//connect(m_entity, SIGNAL(paramChanged_SGBM()), this, SLOT(onParamChanged_SGBM()));
-	//connect(m_entity, SIGNAL(paramChanged_MODE_HH()), this, SLOT(onParamChanged_MODE_HH()));
 
-	connect(m_entity, SIGNAL(paramChanged_ImageLtoShow()), this, SLOT(onParamChanged_imgLtoShow())/*, Qt::QueuedConnection*/);
-	connect(m_entity, SIGNAL(paramChanged_ImageRtoShow()), this, SLOT(onParamChanged_imgRtoShow())/*, Qt::QueuedConnection*/);
-	connect(m_entity, SIGNAL(paramChanged_ImageDtoShow()), this, SLOT(onParamChanged_imgDtoShow())/*, Qt::QueuedConnection*/);
 	connect(m_entity, SIGNAL(paramChanged_StatusBar()), this, SLOT(onParamChanged_StatusBarText()), Qt::QueuedConnection);
 
 }
 
-//测距
-void EvisionView::getDistance()
-{
-	m_controller->getDistanceCommand();
-}
 
+//显示单目相机视图
 void EvisionView::onCamera()
 {
-	m_controller->openCameraCommand();
+	Camera * _camera = new Camera();
+	ui.mdiArea->addSubWindow(_camera);
+	_camera->show();
 }
-
+//显示双目相机视图
 void EvisionView::onStereoCamera()
 {
-	m_controller->openStereoCameraCommand();
+	StereoCamera * _stereoCamera = new StereoCamera();
+	ui.mdiArea->addSubWindow(_stereoCamera);
+	_stereoCamera->show();
 }
 
 //显示点云
 void EvisionView::onShowPointCloud()
 {
-	m_controller->ShowPointCloudCommand();
+	//TODO:need refactor
+	QFileDialog * fileDialog2 = new QFileDialog();
+	fileDialog2->setWindowTitle(QStringLiteral("请选择点云文件"));
+	fileDialog2->setNameFilter(QStringLiteral("点云文件(*.xml *.yml *.yaml)"));
+	fileDialog2->setFileMode(QFileDialog::ExistingFile);
+	if (fileDialog2->exec() == QDialog::Accepted)
+	{
+		QString xyzFile = fileDialog2->selectedFiles().at(0);
+		cv::Mat xyz = StereoMatch::readXYZ(xyzFile.toStdString().c_str());
+	}
+	else
+	{
+		QMessageBox::information(NULL, QStringLiteral("错误"), QStringLiteral("请选择有效的点云文件!"));
+		return;
+	}
+	//点云获取ok,准备显示
 }
 //显示标定视图
 void EvisionView::on_action_calibrate_view()
 {
 	Calibrater * m_calibrate = new Calibrater();
+	ui.mdiArea->addSubWindow(m_calibrate);
 	m_calibrate->show();
 }
 //显示立体匹配视图
 void EvisionView::on_action_stereoMatch_view()
 {
 	Matcher * m_matcher = new Matcher();
+	ui.mdiArea->addSubWindow(m_matcher);
 	m_matcher->show();
 }
-
+//显示交互式测距视图
 void EvisionView::on_action_Measure_view()
 {
-	m_controller->getDistanceCommand();
+	cv::Mat img, disp, xyz;
+
+	//询问文件位置并载入变量
+	QString imgFile, dispFile, xyzFile;
+	QFileDialog * fileDialog = new QFileDialog();
+	fileDialog->setWindowTitle(QStringLiteral("请选择视差图"));
+	fileDialog->setNameFilter(QStringLiteral("图片文件(*.jpg *.png *.jpeg)"));
+	fileDialog->setFileMode(QFileDialog::ExistingFile);
+	if (fileDialog->exec() == QDialog::Accepted)
+	{
+		imgFile = fileDialog->selectedFiles().at(0);
+		fileDialog->setWindowTitle(QStringLiteral("请选择参与生成所选视差图的左视图"));
+		if (fileDialog->exec() == QDialog::Accepted)
+		{
+			dispFile = fileDialog->selectedFiles().at(0);
+
+			QFileDialog * fileDialog2 = new QFileDialog();
+			fileDialog2->setWindowTitle(QStringLiteral("请选择点云文件"));
+			fileDialog2->setNameFilter(QStringLiteral("点云文件(*.xml *.yml *.yaml)"));
+			fileDialog2->setFileMode(QFileDialog::ExistingFile);
+			if (fileDialog2->exec() == QDialog::Accepted)
+			{
+				xyzFile = fileDialog2->selectedFiles().at(0);
+				if (imgFile.isEmpty() || dispFile.isEmpty() || xyzFile.isEmpty())
+				{
+					//文件不全,弹出提示退出
+					QMessageBox::information(NULL, QStringLiteral("错误"), QStringLiteral("请选择有效的文件!"));
+					return;
+				}
+				else
+				{
+					//文件齐全,读取内容
+					img = cv::imread(imgFile.toStdString());
+					disp = cv::imread(dispFile.toStdString());
+					xyz = StereoMatch::readXYZ(xyzFile.toStdString().c_str());
+				}
+			}
+			else
+			{
+				QMessageBox::information(NULL, QStringLiteral("错误"), QStringLiteral("请选择有效的文件!"));
+				return;
+			}
+		}
+		else
+		{
+			QMessageBox::information(NULL, QStringLiteral("错误"), QStringLiteral("请选择有效的文件!"));
+			return;
+		}
+	}
+	else
+	{
+		QMessageBox::information(NULL, QStringLiteral("错误"), QStringLiteral("请选择有效的文件!"));
+		return;
+	}
+
+
+	//准备工作结束,如果程序运行到这个位置,说明三个变量的值都有了有效值,此时可以启动交互式测量的view
+	//img,disp.xyz
+	RFinterface * _Rfinterface = new RFinterface(img, disp, xyz);
+	ui.mdiArea->addSubWindow(_Rfinterface);
+	_Rfinterface->show();
 }
 
 //调试方法
 void EvisionView::onTestAlltheParam()
 {
-	////输出所有的参数
-	//qDebug() << "BoardWidth:  " << m_entity->getBoardWidth() << "\n"
-	//	<< "BoardHeight:  " << m_entity->getBoardHeight() << "\n"
-	//	<< "SquareSize:  " << m_entity->getSquareSize() << "\n"
-	//	<< "FPP:  " << m_entity->getshowRectified() << "\n"
-	//	<< "Bouguet:  " << m_entity->getBouguet() << "\n"
-	//	<< "Hartley:  " << m_entity->getHartley() << "\n"
-	//	<< "MinDisp:  " << m_entity->getMinDisp() << "\n"
-	//	<< "Uniradio:  " << m_entity->getUniradio() << "\n"
-	//	<< "Specwinsz:  " << m_entity->getSpecwinsz() << "\n"
-	//	<< "MaxDisp:  " << m_entity->getNumDisparities() << "\n"
-	//	<< "Specrange:  " << m_entity->getSpecrange() << "\n"
-	//	<< "Prefilcap:  " << m_entity->getPrefilcap() << "\n"
-	//	<< "SadWinsz:  " << m_entity->getSadWinsz() << "\n"
-	//	<< "TextThread:  " << m_entity->getTextThread() << "\n"
-	//	<< "Maxdifdisp12:  " << m_entity->getMaxdifdisp12() << "\n"
-	//	<< "BM:  " << m_entity->getBM() << "\n"
-	//	<< "SGBM:  " << m_entity->getSGBM() << "\n"
-	//	<< "Mode-HH:  " << m_entity->getMODE_HH() << "\n"
-	//	<< "Mode-SGBM:  " << m_entity->getMODE_SGBM() << "\n"
-	//	<< "Mode-3WAY:  " << m_entity->getMODE_3WAY() << "\n"
 
-	//	<< "Distance:  " << m_entity->getDistance();
 }
 //状态栏更新
 void EvisionView::onParamChanged_StatusBarText()
 {
 	msgLabel->setText(m_entity->getStatusBarText());
+}
+//文件被拖到窗口区域上
+void EvisionView::dragEnterEvent(QDragEnterEvent * event)
+{
+	if (event->mimeData()->hasFormat("text/uri-list"))
+	{
+		event->acceptProposedAction();
+		//QMessageBox::information(NULL, QStringLiteral("消息"), QStringLiteral("文件被拖上来"));
+		m_entity->setStatusBarText("Drop the file for open!");
+	}
+}
+//文件在窗口区域上被放下
+void EvisionView::dropEvent(QDropEvent * event)
+{
+	m_entity->setStatusBarText(QStringLiteral("就绪"));
+	//QMessageBox::information(NULL, QStringLiteral("消息"), QStringLiteral("文件被释放在窗口上"));
+	QList<QUrl> urls = event->mimeData()->urls();
+	if (urls.isEmpty())
+	{
+		return;
+	}
+	else if(urls.size()>1)
+	{
+		QMessageBox::information(NULL, QStringLiteral("消息"), QStringLiteral("多于一个文件"));
+	}else if(urls.size()==1)
+	{
+		QMessageBox::information(NULL, QStringLiteral("消息"), QStringLiteral("一个文件"));
+		//文件分类识别和打开
+		QFileInfo fileinfo(urls[0].toString());
+		if (!fileinfo.isFile())//不是文件
+		{
+			return;
+		}
+		else
+		{
+			if (fileinfo.suffix() == "png"|| fileinfo.suffix() == "jpg"||
+				fileinfo.suffix() == "jpeg")
+			{
+				
+			}
+		}
+	}
+		
+}
+//鼠标释放事件
+void EvisionView::mouseReleaseEvent(QMouseEvent * event)
+{
+	if (event->button() == Qt::LeftButton)
+	{
+		m_entity->setStatusBarText(QStringLiteral("就绪"));
+	}
 }
 

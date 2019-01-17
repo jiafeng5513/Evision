@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1081</width>
-    <height>712</height>
+    <width>982</width>
+    <height>660</height>
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
@@ -55,7 +55,7 @@
     <item row="0" column="0">
      <widget class="QMdiArea" name="mdiArea">
       <property name="acceptDrops">
-       <bool>true</bool>
+       <bool>false</bool>
       </property>
      </widget>
     </item>
@@ -66,7 +66,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1081</width>
+     <width>982</width>
      <height>23</height>
     </rect>
    </property>
@@ -110,6 +110,9 @@
    <addaction name="menu_2"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
+   <property name="acceptDrops">
+    <bool>true</bool>
+   </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
    </attribute>

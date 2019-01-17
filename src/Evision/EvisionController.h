@@ -14,13 +14,7 @@ public:
 	EvisionController(QObject *parent = Q_NULLPTR);
 	~EvisionController();
 
-	//void setDefaultMatchParamCommand();
-	/*void MatchCommand();
-	void RefreshStereoMatchCommand();*/
-	void getDistanceCommand();
-	void ShowPointCloudCommand();
-	void openCameraCommand();
-	void openStereoCameraCommand();
+
 public slots:
 	void onOpenMessageBox(QString title, QString msg);
 };

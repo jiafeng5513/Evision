@@ -19,7 +19,7 @@ private:
 	EvisionController * m_controller;
 	QLabel *msgLabel;
 public slots:
-	void getDistance();//按钮
+	
 
 	//菜单
 	void onCamera();
@@ -33,12 +33,8 @@ public slots:
 	void onTestAlltheParam();
 	//状态栏
 	void onParamChanged_StatusBarText();
-	
-	/*
-	 * 被动更新的组件:
-	 *	图片显示区域
-	 *	匹配参数的textarea
-	 *	距离值显示
-	 * 用函数监控某个变量,变量发生变化的时候更新界面
-	 */
+private:
+	void dragEnterEvent(QDragEnterEvent *event) override;//文件被拖到窗口区域上
+	void dropEvent(QDropEvent *event) override;//文件在窗口区域上被放下
+	void mouseReleaseEvent(QMouseEvent *event) override;//鼠标释放事件
 };
