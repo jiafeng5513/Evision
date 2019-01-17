@@ -10,6 +10,7 @@
 #include "RFinterface.h"
 #include "StereoCamera.h"
 #include "Camera.h"
+#include "WatchImage.h"
 // 浮点数判等
 // ulp: units in the last place.
 template <typename T>
@@ -134,12 +135,13 @@ void EvisionView::dropEvent(QDropEvent * event)
 	}
 	else if(urls.size()>1)
 	{
-		QMessageBox::information(NULL, QStringLiteral("消息"), QStringLiteral("多于一个文件"));
+		//QMessageBox::information(NULL, QStringLiteral("消息"), QStringLiteral("多于一个文件"));
 	}else if(urls.size()==1)
 	{
-		QMessageBox::information(NULL, QStringLiteral("消息"), QStringLiteral("一个文件"));
+		//QMessageBox::information(NULL, QStringLiteral("消息"), QStringLiteral("一个文件"));
 		//文件分类识别和打开
-		QFileInfo fileinfo(urls[0].toString());
+		QString file_name = urls[0].toLocalFile();
+		QFileInfo fileinfo(file_name);
 		if (!fileinfo.isFile())//不是文件
 		{
 			return;
@@ -149,7 +151,9 @@ void EvisionView::dropEvent(QDropEvent * event)
 			if (fileinfo.suffix() == "png"|| fileinfo.suffix() == "jpg"||
 				fileinfo.suffix() == "jpeg")
 			{
-				
+				WatchImage * m_WatchImage = new WatchImage(file_name);
+				ui.mdiArea->addSubWindow(m_WatchImage);
+				m_WatchImage->show();
 			}
 		}
 	}

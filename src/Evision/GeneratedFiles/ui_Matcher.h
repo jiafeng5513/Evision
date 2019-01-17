@@ -70,9 +70,8 @@ public:
     QRadioButton *radioButton_MODE_SGBM;
     QPushButton *pushButton_MatchDefault;
     QPushButton *pushButton_MatchChooseFiles;
-    QPushButton *pushButton_RefreshStereoMatch;
-    QPushButton *pushButton_RangeSinglePoint;
     QSlider *horizontalSlider_specwinsz;
+    QPushButton *pushButton_RefreshStereoMatch;
 
     void setupUi(QWidget *Matcher)
     {
@@ -364,16 +363,6 @@ public:
 
         gridLayout->addWidget(pushButton_MatchChooseFiles, 19, 2, 1, 2);
 
-        pushButton_RefreshStereoMatch = new QPushButton(groupBox_6);
-        pushButton_RefreshStereoMatch->setObjectName(QString::fromUtf8("pushButton_RefreshStereoMatch"));
-
-        gridLayout->addWidget(pushButton_RefreshStereoMatch, 19, 4, 1, 1);
-
-        pushButton_RangeSinglePoint = new QPushButton(groupBox_6);
-        pushButton_RangeSinglePoint->setObjectName(QString::fromUtf8("pushButton_RangeSinglePoint"));
-
-        gridLayout->addWidget(pushButton_RangeSinglePoint, 19, 5, 1, 1);
-
         horizontalSlider_specwinsz = new QSlider(groupBox_6);
         horizontalSlider_specwinsz->setObjectName(QString::fromUtf8("horizontalSlider_specwinsz"));
         horizontalSlider_specwinsz->setMinimumSize(QSize(0, 20));
@@ -382,6 +371,11 @@ public:
         horizontalSlider_specwinsz->setOrientation(Qt::Horizontal);
 
         gridLayout->addWidget(horizontalSlider_specwinsz, 5, 1, 1, 5);
+
+        pushButton_RefreshStereoMatch = new QPushButton(groupBox_6);
+        pushButton_RefreshStereoMatch->setObjectName(QString::fromUtf8("pushButton_RefreshStereoMatch"));
+
+        gridLayout->addWidget(pushButton_RefreshStereoMatch, 19, 4, 1, 2);
 
 
         gridLayout_2->addWidget(groupBox_6, 1, 1, 2, 1);
@@ -413,7 +407,7 @@ public:
     {
         Matcher->setWindowTitle(QApplication::translate("Matcher", "\345\214\271\351\205\215", nullptr));
         groupBox->setTitle(QApplication::translate("Matcher", "\347\233\270\346\234\272\345\217\202\346\225\260", nullptr));
-        label->setText(QApplication::translate("Matcher", "TextLabel", nullptr));
+        label->setText(QString());
         groupBox_6->setTitle(QApplication::translate("Matcher", "\345\214\271\351\205\215\345\217\202\346\225\260", nullptr));
         label_40->setText(QApplication::translate("Matcher", "uniquenessRatio(\350\247\206\345\267\256\345\224\257\344\270\200\346\200\247\347\231\276\345\210\206\346\257\224)", nullptr));
         lineEdit_uniradio->setPlaceholderText(QApplication::translate("Matcher", "0", nullptr));
@@ -443,7 +437,6 @@ public:
         pushButton_MatchDefault->setText(QApplication::translate("Matcher", "\351\273\230\350\256\244\345\217\202\346\225\260", nullptr));
         pushButton_MatchChooseFiles->setText(QApplication::translate("Matcher", "\345\217\214\347\233\256\345\214\271\351\205\215", nullptr));
         pushButton_RefreshStereoMatch->setText(QApplication::translate("Matcher", "\345\210\267\346\226\260", nullptr));
-        pushButton_RangeSinglePoint->setText(QApplication::translate("Matcher", "\346\265\213\351\207\217", nullptr));
     } // retranslateUi
 
 };

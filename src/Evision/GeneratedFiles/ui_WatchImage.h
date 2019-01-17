@@ -11,7 +11,6 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QWidget>
 
@@ -21,7 +20,6 @@ class Ui_WatchImage
 {
 public:
     QGridLayout *gridLayout;
-    QGraphicsView *graphicsView;
 
     void setupUi(QWidget *WatchImage)
     {
@@ -29,15 +27,10 @@ public:
             WatchImage->setObjectName(QString::fromUtf8("WatchImage"));
         WatchImage->resize(783, 578);
         gridLayout = new QGridLayout(WatchImage);
-        gridLayout->setSpacing(2);
+        gridLayout->setSpacing(0);
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        gridLayout->setContentsMargins(2, 2, 2, 2);
-        graphicsView = new QGraphicsView(WatchImage);
-        graphicsView->setObjectName(QString::fromUtf8("graphicsView"));
-
-        gridLayout->addWidget(graphicsView, 0, 0, 1, 1);
-
+        gridLayout->setContentsMargins(0, 0, 0, 0);
 
         retranslateUi(WatchImage);
 
