@@ -1,4 +1,4 @@
-<div align=center><img width="100" height="100" src="https://github.com/AngelaViVi/Evision/blob/master/src/EvisionLegacy/res/Evision.ico"/></div>
+<div align=center><img width="100" height="100" src="https://github.com/jiafeng5513/Evision/blob/master/src/EvisionLegacy/res/Evision.ico"/></div>
 
 <div align=center>Evision 双目视觉系统</div>
 
@@ -28,9 +28,9 @@ Comming soon
 
 #### 安装指南
 
-1. [Qt安装指南](https://github.com/AngelaViVi/Evision/blob/master/doc/Qt_Install.md)<br>
-2. [VS2017安装指南](https://github.com/AngelaViVi/Evision/blob/master/doc/VS2017_Install.md)<br>
-3. [VS2017-Qt配置指南](https://github.com/AngelaViVi/Evision/blob/master/doc/qt_vs_config.md)<br>
+1. [Qt安装指南](https://github.com/jiafeng5513/Evision/blob/master/doc/Qt_Install.md)<br>
+2. [VS2017安装指南](https://github.com/jiafeng5513/Evision/blob/master/doc/VS2017_Install.md)<br>
+3. [VS2017-Qt配置指南](https://github.com/jiafeng5513/Evision/blob/master/doc/qt_vs_config.md)<br>
 
 build
 ===
@@ -47,7 +47,7 @@ build
 4. 项目中带有很多脚本,在不清楚这些脚本的作用的情况下,请不要修改删除或者随意执行.<br>
 #### 工程说明
 本项目有两个解决方案,用VS2017打开`src/Evision.sln`,你将看到其中含有使用7个工程:<br>
-![image](https://github.com/AngelaViVi/Evision/blob/master/doc/sln_and_projs.png)
+![image](https://github.com/jiafeng5513/Evision/blob/master/doc/sln_and_projs.png)
 1. calibration是标定的sample,是一个控制台程序.<br>
 2. imagelist_creator是文件序列化sample,控制台程序.<br>
 3. stereo_match是立体匹配sample,控制台程序.<br>
@@ -55,7 +55,7 @@ build
 5. CustomGraphicsView是自定义QtDesigner插件.<br>
 6. Evision是Qt版的Evision主程序,GUI.<br>
 用VS2017打开`src/CvLib.sln`,你将会看到两个工程:<br>
-![image](https://github.com/AngelaViVi/Evision/blob/CvLib/doc/cvlib_sln_proj.png)
+![image](https://github.com/jiafeng5513/Evision/blob/CvLib/doc/cvlib_sln_proj.png)
 1. CvLabMain是用WPF框架写的.<br>
 2. CvLabSandbox是用WinFrom写的.<br>
 
@@ -101,10 +101,13 @@ build
 1. 这个程序将会开始更新,由于主要作者比较忙,更新时间不确定<br>
 2. 这是本人编程路上第一个稍微像样的程序,在编写中得到了许多前辈的帮助,无法一一列举.当时寻找靠谱的教程和参考价值高的代码异常费劲,这个经历让我决定,以后我写的所有代码尽量都开放,如果有应用价值,我也会尽量写博客,编程是一件需要大家互相帮助的事情,尤其是对于初学者,他们更需要社区环境的关爱.<br>
 3. 感谢大家的关注,新版本的程序已经接近完成,届时该repo将会改名,相关的博客和视频连接都会同步更新,博客会不定期发布最新的算法的相关文章,欢迎大家继续关注,等一切准备妥当,将会放链接.<br>
-4. 作者所用的设备:![image](https://github.com/AngelaViVi/Evision/blob/master/doc/device.png)<br>
+4. 作者所用的设备:![image](https://github.com/jiafeng5513/Evision/blob/master/doc/device.png)<br>
 
 
 参考文献
 ===
 1. [相机标定+畸变矫正](https://blog.csdn.net/Loser__Wang/article/details/51811347)
-2. 
+
+部分框图
+===
+<div align=center><img width="100" height="100" src="https://github.com/jiafeng5513/Evision/blob/master/doc/立体视觉.png"/></div>
