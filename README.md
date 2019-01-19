@@ -110,4 +110,4 @@ build
 
 部分框图
 ===
-<div align=center><img width="100" height="100" src="https://github.com/jiafeng5513/Evision/blob/master/doc/立体视觉.png"/></div>
+<div align=center><img src="https://github.com/jiafeng5513/Evision/blob/master/doc/立体视觉.png"/></div>
