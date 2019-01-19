@@ -104,6 +104,7 @@ build
 4. 作者所用的设备:![image](https://github.com/AngelaViVi/Evision/blob/master/doc/device.png)<br>
 
 
-更新说明
-====
-1. 2019年1月11日00:16:26,添加双镜头拍照的功能,Qt版本更新到5.12.0.<br>
+参考文献
+===
+1. [相机标定+畸变矫正](https://blog.csdn.net/Loser__Wang/article/details/51811347)
+2. 

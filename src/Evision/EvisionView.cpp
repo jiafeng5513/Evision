@@ -72,7 +72,10 @@ void EvisionView::onShowPointCloud()
 	if (fileDialog2->exec() == QDialog::Accepted)
 	{
 		QString xyzFile = fileDialog2->selectedFiles().at(0);
-		cv::Mat xyz = StereoMatch::readXYZ(xyzFile.toStdString().c_str());
+		cv::Mat xyz;
+		if (EvisionUtils::read_PointCloud(xyzFile.toStdString(), &xyz))
+		{
+		}
 	}
 	else
 	{

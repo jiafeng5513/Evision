@@ -67,30 +67,33 @@ void StereoMatchController::MatchCommand()
 			{
 				//两侧图片文件正常
 				QFileDialog * fileDialog2 = new QFileDialog();
-				fileDialog2->setWindowTitle(QStringLiteral("请选择内参文件"));
+				fileDialog2->setWindowTitle(QStringLiteral("请选择相机参数文件"));
 				fileDialog2->setNameFilter(QStringLiteral("YML/XML文件(*.yml *.yaml *.xml)"));
 				fileDialog2->setFileMode(QFileDialog::ExistingFile);
 				if (fileDialog2->exec() == QDialog::Accepted)
 				{
-					insFile = fileDialog2->selectedFiles().at(0);
-					fileDialog2->setWindowTitle(QStringLiteral("请选择外参文件"));
-					if (fileDialog2->exec() == QDialog::Accepted)
+					paramsFile = fileDialog2->selectedFiles().at(0);
+					if (!paramsFile.isEmpty())
 					{
-						extFile = fileDialog2->selectedFiles().at(0);
-						if (!insFile.isEmpty() && !extFile.isEmpty())
+						//参数文件正常
+						StereoMatch *_stereoMatch = new StereoMatch(ImageL.toStdString(),
+							ImageR.toStdString(), paramsFile.toStdString());
+						if (_stereoMatch->init())
 						{
-							//内外参数文件正常
-							StereoMatch *_stereoMatch = new StereoMatch(ImageL.toStdString(),
-								ImageR.toStdString(), insFile.toStdString(), extFile.toStdString());
 							connect(_stereoMatch, SIGNAL(openMessageBox(QString, QString)), this, SLOT(onOpenMessageBox(QString, QString)));
 							_stereoMatch->start();
-
 						}
 						else
 						{
-							QMessageBox::information(NULL, QStringLiteral("错误"), QStringLiteral("请选择有效的内外参文件!"));
+							QMessageBox::information(NULL, QStringLiteral("错误"), QStringLiteral("匹配初始化失败!"));
 							return;
 						}
+						
+					}
+					else
+					{
+						QMessageBox::information(NULL, QStringLiteral("错误"), QStringLiteral("请选择有效的相机参数文件!"));
+						return;
 					}
 				}
 				else
@@ -120,9 +123,16 @@ void StereoMatchController::MatchCommand()
 void StereoMatchController::RefreshStereoMatchCommand()
 {
 	StereoMatch *_stereoMatch = new StereoMatch(ImageL.toStdString(),
-		ImageR.toStdString(), insFile.toStdString(), extFile.toStdString());
-	connect(_stereoMatch, SIGNAL(openMessageBox(QString, QString)), this, SLOT(onOpenMessageBox(QString, QString)));
-	_stereoMatch->start();
+		ImageR.toStdString(), paramsFile.toStdString());
+	if (_stereoMatch->init())
+	{
+		connect(_stereoMatch, SIGNAL(openMessageBox(QString, QString)), this, SLOT(onOpenMessageBox(QString, QString)));
+		_stereoMatch->start();
+	}
+	else
+	{
+		QMessageBox::information(NULL, QStringLiteral("错误"), QStringLiteral("匹配初始化失败!"));
+	}
 }
 //消息响应:弹出对话框
 void StereoMatchController::onOpenMessageBox(QString title, QString msg)

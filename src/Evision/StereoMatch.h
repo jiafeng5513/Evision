@@ -16,27 +16,34 @@ class StereoMatch :public QThread
 {
 	Q_OBJECT
 public:
-	StereoMatch(std::string img1_filename, std::string img2_filename, 
-		std::string intrinsic_filename, std::string extrinsic_filename);
+	StereoMatch(std::string img1_filename, std::string img2_filename, std::string cameraParams_filename);
 	~StereoMatch();
+	bool init();
 	void run();
 	enum { STEREO_BM = 0, STEREO_SGBM = 1, STEREO_HH = 2, STEREO_VAR = 3, STEREO_3WAY = 4 };
-	static  cv::Mat readXYZ(const char* filename);
 private:
 	StereoMatchParamEntity * m_entity;
+	//即将读取的文件
 	std::string img1_filename = "";
 	std::string img2_filename = "";
-	std::string intrinsic_filename = "";
-	std::string extrinsic_filename = "";
-	std::string disparity_filename = "";
-	std::string point_cloud_filename = "";
+	std::string cameraParams_filename = "";
+	//用于保存的文件
+	std::string disparity_filename = "";//视差图
+	std::string point_cloud_filename = "";//点云文件
+	//
+	cv::Mat img1, img2;
+	cv::Size img_size;
+
+	cv::Mat cameraMatrix1;
+	cv::Mat distCoeffs1;
+	cv::Mat cameraMatrix2;
+	cv::Mat distCoeffs2;
+	cv::Mat R1, P1, R2, P2,Q;
+	cv::Rect roi1;
+	cv::Rect roi2;
 	int alg = STEREO_SGBM;
 
-	float scale=1.0;
 	bool no_display=false;
 signals:
 	void openMessageBox(QString, QString);
-private:
-	void saveXYZ(const char* filename, const cv::Mat& mat);
 };
-

@@ -1,8 +1,9 @@
 #include "StereoMatch.h"
 #include <QFileDialog>
+#include "EvisionUtils.h"
 
 
-StereoMatch::StereoMatch(std::string img1_filename, std::string img2_filename, std::string intrinsic_filename, std::string extrinsic_filename)
+StereoMatch::StereoMatch(std::string img1_filename, std::string img2_filename, std::string cameraParams_filename)
 {
 	m_entity = StereoMatchParamEntity::getInstance();
 	this->img1_filename = img1_filename;
@@ -16,93 +17,79 @@ StereoMatch::StereoMatch(std::string img1_filename, std::string img2_filename, s
 		//先把左右视图拷贝到一起
 	}
 
-	this->intrinsic_filename = intrinsic_filename;
-	this->extrinsic_filename = extrinsic_filename;
+	this->cameraParams_filename = cameraParams_filename;
+	//构造midname:左视图名_右视图名
 	std::string midname = _fileInfo1->baseName().toStdString();
 	midname.append("_");
 	midname.append(_fileInfo2->baseName().toStdString());
+
 	this->disparity_filename = _fileInfo1->absolutePath().toStdString().append("/disp-"+ midname+".jpg");
 	this->point_cloud_filename = _fileInfo1->absolutePath().toStdString().append("/pointcloud-"+ midname +".xml");
+
+	//
 }
 
 StereoMatch::~StereoMatch()
 {
 }
-
-
-void StereoMatch::run()
+/*
+ * 初始化
+ */
+bool StereoMatch::init()
 {
-	cv::Ptr<cv::StereoBM> bm = cv::StereoBM::create(16, 9);
-	cv::Ptr<cv::StereoSGBM> sgbm = cv::StereoSGBM::create(0, 16, 3);
-
-	int color_mode = alg == STEREO_BM ? 0 : -1;
-	cv::Mat img1 = cv::imread(img1_filename, color_mode);
-	cv::Mat img2 = cv::imread(img2_filename, color_mode);
-
-	if (img1.empty()||img2.empty())
+	m_entity->setmsgBuffer(QStringLiteral("初始化..."));
+	try
 	{
-		emit openMessageBox(QStringLiteral("错误"), QStringLiteral("输入图像为空!"));
-		return;
-	}
+		//1.打开图片
+		m_entity->setmsgBuffer(QStringLiteral("加载图片..."));
 
-	if (scale != 1.f)
-	{
-		cv::Mat temp1, temp2;
-		int method = scale < 1 ? cv::INTER_AREA : cv::INTER_CUBIC;
-		resize(img1, temp1, cv::Size(), scale, scale, method);
-		img1 = temp1;
-		resize(img2, temp2, cv::Size(), scale, scale, method);
-		img2 = temp2;
-	}
-
-	cv::Size img_size = img1.size();
-
-	cv::Rect roi1, roi2;
-	cv::Mat Q;
-
-	if (!intrinsic_filename.empty())
-	{
-		// 读取内参文件
-		cv::FileStorage fs(intrinsic_filename, cv::FileStorage::READ);
-		if (!fs.isOpened())
+		int color_mode = alg == STEREO_BM ? 0 : -1;
+		img1 = cv::imread(img1_filename, color_mode);
+		img2 = cv::imread(img2_filename, color_mode);
+		if (img1.empty() || img2.empty())
 		{
-			emit openMessageBox(QStringLiteral("错误"), QStringLiteral("读取内部参数文件失败!"));
-			return;
+			emit openMessageBox(QStringLiteral("错误"), QStringLiteral("输入图像为空!"));
+			return false;
 		}
+		img_size = img1.size();
+		//2.打开参数文件,读取参数
+		m_entity->setmsgBuffer(QStringLiteral("加载参数..."));
 
-		cv::Mat M1, D1, M2, D2;
-		fs["M1"] >> M1;
-		fs["D1"] >> D1;
-		fs["M2"] >> M2;
-		fs["D2"] >> D2;
-
-		M1 *= scale;
-		M2 *= scale;
-		//读取外参文件
-		fs.open(extrinsic_filename, cv::FileStorage::READ);
-		if (!fs.isOpened())
+		bool flag = EvisionUtils::read_ParamsForStereoMatch(cameraParams_filename,
+			&cameraMatrix1, &distCoeffs1, &cameraMatrix2, &distCoeffs2, &R1, &P1, &R2, &P2, &Q,&roi1,&roi2);
+		if (flag == false)
 		{
-			emit openMessageBox(QStringLiteral("错误"), QStringLiteral("读取外部参数文件失败!"));
-			return ;
+			return false;
 		}
-		m_entity->setmsgBuffer(QStringLiteral("参数就位,开始StereoMatch计算..."));
-		cv::Mat R, T, R1, P1, R2, P2;
-		fs["R"] >> R;
-		fs["T"] >> T;
+		//3.矫正左右视图
+		m_entity->setmsgBuffer(QStringLiteral("矫正图片..."));
 
-		stereoRectify(M1, D1, M2, D2, img_size, R, T, R1, R2, P1, P2, Q, cv::CALIB_ZERO_DISPARITY, -1, img_size, &roi1, &roi2);
-
-		cv::Mat map11, map12, map21, map22;
-		initUndistortRectifyMap(M1, D1, R1, P1, img_size, CV_16SC2, map11, map12);
-		initUndistortRectifyMap(M2, D2, R2, P2, img_size, CV_16SC2, map21, map22);
+		cv::Mat mapx1, mapy1, mapx2, mapy2;
+		initUndistortRectifyMap(cameraMatrix1, distCoeffs1, R1, P1, img_size, CV_16SC2, mapx1, mapy1);
+		initUndistortRectifyMap(cameraMatrix2, distCoeffs2, R2, P2, img_size, CV_16SC2, mapx2, mapy2);
 
 		cv::Mat img1r, img2r;
-		remap(img1, img1r, map11, map12, cv::INTER_LINEAR);
-		remap(img2, img2r, map21, map22, cv::INTER_LINEAR);
+		remap(img1, img1r, mapx1, mapy1, cv::INTER_LINEAR);
+		remap(img2, img2r, mapx2, mapy2, cv::INTER_LINEAR);
 
 		img1 = img1r;
 		img2 = img2r;
 	}
+	catch (...)
+	{
+		return false;
+	}
+	m_entity->setmsgBuffer(QStringLiteral("初始化完毕"));
+	return true;
+}
+
+
+void StereoMatch::run()
+{
+	m_entity->setmsgBuffer(QStringLiteral("开始计算..."));
+	cv::Ptr<cv::StereoBM> bm = cv::StereoBM::create(16, 9);
+	cv::Ptr<cv::StereoSGBM> sgbm = cv::StereoSGBM::create(0, 16, 3);
+
 
 	//numberOfDisparities = numberOfDisparities > 0 ? numberOfDisparities : ((img_size.width / 8) + 15) & -16;
 
@@ -170,52 +157,18 @@ void StereoMatch::run()
 	if (!disparity_filename.empty())
 		imwrite(disparity_filename, disp8);
 
-	if (!point_cloud_filename.empty())
+	m_entity->setmsgBuffer(QStringLiteral("正在输出点云文件..."));
+	cv::Mat xyz;
+	reprojectImageTo3D(disp, xyz, Q, true);
+
+	if (EvisionUtils::write_PointCloud(point_cloud_filename,xyz))
 	{
-		//printf("storing the point cloud...");
-		m_entity->setmsgBuffer(QStringLiteral("正在输出点云文件..."));
-		//fflush(stdout);
-		cv::Mat xyz;
-		reprojectImageTo3D(disp, xyz, Q, true);
-		m_entity->setDisparity(disp8);
 		m_entity->setXYZ(xyz);
-		m_entity->setQ(Q);
-		saveXYZ(point_cloud_filename.c_str(), xyz);
-		//printf("\n");
+	}
+	else
+	{
+		m_entity->setmsgBuffer(QStringLiteral("点云保存失败!"));
 	}
 	m_entity->setmsgBuffer(QStringLiteral("就绪"));
-
 	return ;
-}
-
-void StereoMatch::saveXYZ(const char* filename, const cv::Mat& mat)
-{
-	//文本文件
-	/*const double max_z = 1.0e4;
-	FILE* fp = fopen(filename, "wt");
-	for (int y = 0; y < mat.rows; y++)
-	{
-		for (int x = 0; x < mat.cols; x++)
-		{
-			cv::Vec3f point = mat.at<cv::Vec3f>(y, x);
-			if (fabs(point[2] - max_z) < FLT_EPSILON || fabs(point[2]) > max_z) continue;
-			fprintf(fp, "%f %f %f\n", point[0], point[1], point[2]);
-		}
-	}
-	fclose(fp);*/
-	//使用OpenCV FileStorage序列化
-	cv::FileStorage fs(filename, cv::FileStorage::WRITE);
-	fs << "PointCloudMatrix" << mat;
-	fs.release();
-}
-
-//读取点云文件
-cv::Mat StereoMatch::readXYZ(const char* filename)
-{
-	//读取使用OpenCV FileStorage序列化的点云文件
-	cv::Mat xyz;
-	cv::FileStorage fs(filename, cv::FileStorage::READ);
-	fs["PointCloudMatrix"] >> xyz;
-	fs.release();
-	return xyz;
 }

@@ -11,6 +11,9 @@ EvisionUtils::~EvisionUtils()
 {
 }
 
+/*
+ * cv::Mat转换为QImage
+ */
 QImage EvisionUtils::cvMat2QImage(const cv::Mat& mat)
 {
 	// 8-bits unsigned, NO. OF CHANNELS = 1  
@@ -58,6 +61,9 @@ QImage EvisionUtils::cvMat2QImage(const cv::Mat& mat)
 	}
 }
 
+/*
+ * QImage转换为cv::Mat
+ */
 cv::Mat EvisionUtils::QImage2cvMat(QImage image)
 {
 	cv::Mat mat;
@@ -78,4 +84,231 @@ cv::Mat EvisionUtils::QImage2cvMat(QImage image)
 		break;
 	}
 	return mat;
+}
+
+/*
+ * 把双目标定得到的所有参数写入文件
+ * 1.文件名							std::string filename
+ * 2.相机矩阵1(相对焦距和主点坐标)	cv::Mat& cameraMatrix1
+ * 3.畸变系数1						cv::Mat& distCoeffs1
+ * 4.相机矩阵2						cv::Mat& cameraMatrix2
+ * 5.畸变系数2						cv::Mat& distCoeffs2
+ * 6.两个相机之间的旋转				cv::Mat& R
+ * 7.两个相机之间的平移				cv::Mat& T
+ * 8.本质矩阵						cv::Mat& E
+ * 9.基本矩阵						cv::Mat& F
+ * 10.图片尺寸						cv::Size& imageSize,
+ * 11.旋转映射矩阵1                 cv::Mat& R1,
+ * 12.投影映射矩阵1                 cv::Mat& P1,
+ * 13.旋转映射矩阵2                 cv::Mat& R2,
+ * 14.投影映射矩阵2                 cv::Mat& P2,
+ * 15.三维映射矩阵                  cv::Mat& Q,
+ * 16.矫正后的roi1                  cv::Rect& roi1,
+ * 17.矫正后的roi2                  cv::Rect& roi2
+ * 返回值:
+ *	成功:true,失败和出错:false
+ */
+bool EvisionUtils::write_AllCameraParams(std::string& filename, cv::Mat& cameraMatrix1, cv::Mat& distCoeffs1,
+	cv::Mat& cameraMatrix2, cv::Mat& distCoeffs2, cv::Mat& R, cv::Mat& T, cv::Mat& E, cv::Mat& F, cv::Size& imageSize,
+	cv::Mat& R1, cv::Mat& P1, cv::Mat& R2, cv::Mat& P2, cv::Mat& Q, cv::Rect& roi1, cv::Rect& roi2)
+{
+	if (filename.empty() == true)
+	{
+		return false;
+	}
+	try
+	{
+		cv::FileStorage fs(filename, cv::FileStorage::WRITE);
+		if (fs.isOpened())
+		{
+			fs << "cameraMatrix1" << cameraMatrix1;
+			fs << "distCoeffs1" << distCoeffs1;
+			fs << "cameraMatrix2" << cameraMatrix2;
+			fs << "distCoeffs2" << distCoeffs2;
+			fs << "R" << R;
+			fs << "T" << T;
+			fs << "E" << E;
+			fs << "F" << F;
+			fs << "imageSize" << imageSize;
+			fs << "R1" << R1;
+			fs << "P1" << P1;
+			fs << "R2" << R2;
+			fs << "P2" << P2;
+			fs << "Q" << Q;
+			fs << "roi1" << roi1;
+			fs << "roi2" << roi2;
+			fs.release();
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	catch (...)
+	{
+		return false;
+	}
+}
+
+/*
+ * 从文件中读取双目标定得到的参数
+ * 1.文件名							std::string filename
+ * 2.相机矩阵1(相对焦距和主点坐标)	cv::Mat* cameraMatrix1
+ * 3.畸变系数1						cv::Mat* distCoeffs1
+ * 4.相机矩阵2						cv::Mat* cameraMatrix2
+ * 5.畸变系数2						cv::Mat* distCoeffs2
+ * 6.两个相机之间的旋转				cv::Mat* R
+ * 7.两个相机之间的平移				cv::Mat* T
+ * 8.本质矩阵						cv::Mat* E
+ * 9.基本矩阵						cv::Mat* F
+ * 10.图片尺寸						cv::Size* imageSize,
+ * 11.旋转映射矩阵1                 cv::Mat* R1,
+ * 12.投影映射矩阵1                 cv::Mat* P1,
+ * 13.旋转映射矩阵2                 cv::Mat* R2,
+ * 14.投影映射矩阵2                 cv::Mat* P2,
+ * 15.三维映射矩阵                  cv::Mat* Q,
+ * 16.矫正后的roi1                  cv::Rect* roi1,
+ * 17.矫正后的roi2                  cv::Rect* roi2
+ * 返回值:
+ *	成功:true,失败和出错:false
+ */
+bool EvisionUtils::read_AllCameraParams(std::string& filename, cv::Mat* cameraMatrix1, cv::Mat* distCoeffs1,
+	cv::Mat* cameraMatrix2, cv::Mat* distCoeffs2, cv::Mat* R, cv::Mat* T, cv::Mat* E, cv::Mat* F, cv::Size* imageSize,
+	cv::Mat* R1, cv::Mat* P1, cv::Mat* R2, cv::Mat* P2, cv::Mat* Q, cv::Rect* roi1, cv::Rect* roi2)
+{
+	if (filename.empty() == true)
+	{
+		return false;
+	}
+	try
+	{
+		cv::FileStorage fs(filename, cv::FileStorage::READ);
+		if (fs.isOpened())
+		{
+			fs["cameraMatrix1"] >> *cameraMatrix1;
+			fs["distCoeffs1"] >> *distCoeffs1;
+			fs["cameraMatrix2"] >> *cameraMatrix2;
+			fs["distCoeffs2"] >> *distCoeffs2;
+			fs["R"] >> *R;
+			fs["T"] >> *T;
+			fs["E"] >> *E;
+			fs["F"] >> *F;
+			fs["imageSize"] >> *imageSize;
+			fs["R1"] >> *R1;
+			fs["P1"] >> *P1;
+			fs["R2"] >> *R2;
+			fs["P2"] >> *P2;
+			fs["Q"] >> *Q;
+			fs["roi1"] >> *roi1;
+			fs["roi2"] >> *roi2;
+			fs.release();
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	catch (...)
+	{
+		return false;
+	}
+}
+/*
+ * 读取匹配所需的参数
+ */
+bool EvisionUtils::read_ParamsForStereoMatch(std::string& filename, cv::Mat* cameraMatrix1, cv::Mat* distCoeffs1,
+	cv::Mat* cameraMatrix2, cv::Mat* distCoeffs2, cv::Mat* R1, cv::Mat* P1, cv::Mat* R2, cv::Mat* P2, cv::Mat* Q, cv::Rect* roi1,
+	cv::Rect* roi2)
+{
+	if (filename.empty()==true)
+	{
+		return false;
+	}
+	try
+	{
+		cv::FileStorage fs(filename, cv::FileStorage::READ);
+		if (fs.isOpened())
+		{
+			fs["cameraMatrix1"] >> *cameraMatrix1;
+			fs["distCoeffs1"] >> *distCoeffs1;
+			fs["cameraMatrix2"] >> *cameraMatrix2;
+			fs["distCoeffs2"] >> *distCoeffs2;
+			fs["R1"] >> *R1;
+			fs["P1"] >> *P1;
+			fs["R2"] >> *R2;
+			fs["P2"] >> *P2;
+			fs["Q"] >> *Q;
+			fs["roi1"] >> *roi1;
+			fs["roi2"] >> *roi2;
+			fs.release();
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	catch (...)
+	{
+		return false;
+	}
+}
+/*
+ * 把点云保存在文件中
+ */
+bool EvisionUtils::write_PointCloud(std::string& filename, cv::Mat& PointCloudMatrix)
+{
+	if (filename.empty() == true)
+	{
+		return false;
+	}
+	try
+	{
+		cv::FileStorage fs(filename, cv::FileStorage::WRITE);
+		if (fs.isOpened())
+		{
+			fs<<"PointCloudMatrix"<< PointCloudMatrix;
+			fs.release();
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	catch (...)
+	{
+		return false;
+	}
+}
+
+/*
+ * 从文件中读取点云
+ */
+bool EvisionUtils::read_PointCloud(std::string& filename, cv::Mat* PointCloudMatrix)
+{
+	if (filename.empty() == true)
+	{
+		return false;
+	}
+	try
+	{
+		cv::FileStorage fs(filename, cv::FileStorage::READ);
+		if (fs.isOpened())
+		{
+			fs["PointCloudMatrix"] >> *PointCloudMatrix;
+			fs.release();
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	catch (...)
+	{
+		return false;
+	}
 }

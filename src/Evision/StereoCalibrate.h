@@ -16,18 +16,9 @@ private:
 	bool useCalibrated; //true=使用BOUGUET矫正方法,false=使用HARTLEY矫正方法
 	bool showRectified; //是否显示标定图片的矫正结果
 
-	std::string intrFilename;
-	std::string extrFilename;
+	std::string cameraParamsFilename;
 	CalibrateParamEntity * m_entity;
 public:
-	//交错列表
-	StereoCalibrate(std::vector<std::string>* imagelist,
-		cv::Size boardSize,
-		float squareSize,
-		bool useCalibrated,
-		bool showRectified,
-		QObject *parent = 0);
-	//两个独立列表
 	StereoCalibrate(std::vector<std::string>* imagelistL,
 		std::vector<std::string>* imagelistR,
 		cv::Size boardSize,

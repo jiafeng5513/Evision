@@ -4,6 +4,7 @@
 #include "PointCloudUtils.h"
 #include <QFileDialog>
 #include "StereoMatch.h"
+#include <QMessageBox>
 
 //直接启动视图,后设置参数
 RFinterface::RFinterface(QWidget *parent)
@@ -135,9 +136,16 @@ void RFinterface::onSelectPointcloudFile()
 	fileDialog->setFileMode(QFileDialog::ExistingFile);
 	if (fileDialog->exec() == QDialog::Accepted)
 	{
-		xyz = StereoMatch::readXYZ(fileDialog->selectedFiles().at(0).toStdString().c_str());
-		ui.checkBox_pointcloudOK->setChecked(true);
-		checkEnable();
+		if (EvisionUtils::read_PointCloud(fileDialog->selectedFiles().at(0).toStdString(), &xyz))
+		{
+			ui.checkBox_pointcloudOK->setChecked(true);
+			checkEnable();
+		}
+		else
+		{
+			QMessageBox::information(NULL, QStringLiteral("错误"), QStringLiteral("点云读取失败!"));
+		}
+
 	}
 }
 

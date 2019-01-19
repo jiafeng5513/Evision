@@ -9,7 +9,7 @@ class StereoMatchController : public QObject
 
 private:
 	StereoMatchParamEntity * m_entity;
-	QString ImageL, ImageR, insFile, extFile;
+	QString ImageL, ImageR, paramsFile;
 public:
 	StereoMatchController(QObject *parent=0);
 	~StereoMatchController();

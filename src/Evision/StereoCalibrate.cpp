@@ -6,19 +6,9 @@
 #include <highgui.hpp>
 #include <iostream>
 #include <calib3d/calib3d.hpp>
+#include "EvisionUtils.h"
 
 
-
-StereoCalibrate::StereoCalibrate(std::vector<std::string>* imagelist, cv::Size boardSize, float squareSize,
-	bool useCalibrated, bool showRectified, QObject *parent ) : QThread(parent)
-{
-	m_entity = CalibrateParamEntity::getInstance();
-	this->imagelist= imagelist;
-	this->boardSize= boardSize;
-	this->squareSize= squareSize;
-	this->useCalibrated= useCalibrated;
-	this->showRectified= showRectified;
-}
 
 StereoCalibrate::StereoCalibrate(std::vector<std::string>* imagelistL, std::vector<std::string>* imagelistR, cv::Size boardSize, float squareSize, bool useCalibrated, bool showRectified, QObject * parent)
 {
@@ -31,8 +21,7 @@ StereoCalibrate::StereoCalibrate(std::vector<std::string>* imagelistL, std::vect
 	this->showRectified = showRectified;
 
 	QFileInfo *_fileInfo = new QFileInfo(QString::fromStdString(imagelistL->at(0)));
-	this->intrFilename = _fileInfo->absolutePath().toStdString().append("/intrinsics.yml");
-	this->extrFilename = _fileInfo->absolutePath().toStdString().append("/extrinsics.yml");
+	this->cameraParamsFilename = _fileInfo->absolutePath().toStdString().append("/cameraParams.yml");
 }
 
 StereoCalibrate::~StereoCalibrate()
@@ -129,7 +118,6 @@ void StereoCalibrate::run_old()
 		}
 	}//交点检测结束
 
-	std::cout << j << " pairs have been successfully detected.\n";
 	nimages = j;//只有找到交点的图片能用来标定,确定数量
 	if (nimages < 2)
 	{
@@ -433,7 +421,6 @@ void StereoCalibrate::run()
 	nimages = j;//只有找到交点的图片能用来标定,确定数量
 	if (nimages < 2)
 	{
-		//std::cout << "Error: too little pairs to run the calibration\n";
 		emit openMessageBox(QStringLiteral("错误"), QStringLiteral("可用图片太少,请选择足够的标定图片!"));
 		return;
 	}
@@ -504,117 +491,27 @@ void StereoCalibrate::run()
 	tmp += std::to_string(err / npoints);
 	emit openMessageBox(QStringLiteral("平均极线误差"), QString::fromStdString(tmp));
 
-	// 保存内部参数
-	cv::FileStorage fs(intrFilename, cv::FileStorage::WRITE);
-	if (fs.isOpened())
+	//映射计算
+
+	cv::Mat R1, P1, R2, P2, Q;//stereoRectify的输出
+	cv::Rect roi1, roi2;	  //stereoRectify的输出
+	stereoRectify(cameraMatrix[0], distCoeffs[0],cameraMatrix[1], distCoeffs[1], imageSize, R, T, 
+					R1, R2, P1, P2, Q, cv::CALIB_ZERO_DISPARITY, -1, imageSize, &roi1, &roi2);
+	//计算矫正矩阵
+
+	cv::Mat map1x, map1y, map2x, map2y;//矫正矩阵
+	initUndistortRectifyMap(cameraMatrix[0], distCoeffs[0], R1, P1, imageSize, CV_16SC2, map1x, map1y);
+	initUndistortRectifyMap(cameraMatrix[1], distCoeffs[1], R2, P2, imageSize, CV_16SC2, map2x, map2y);
+
+	//至此所有的相机参数和衍生参数都计算完了
+
+	// 保存参数
+	bool flag = EvisionUtils::write_AllCameraParams(cameraParamsFilename, cameraMatrix[0], distCoeffs[0],
+												cameraMatrix[1], distCoeffs[1], R, T, E, F,
+												imageSize,R1,P1,R2,P2,Q,roi1,roi2);
+	if (!flag)
 	{
-		fs << "M1" << cameraMatrix[0] << "D1" << distCoeffs[0] <<
-			"M2" << cameraMatrix[1] << "D2" << distCoeffs[1];
-		fs.release();
-	}
-	else
-		emit openMessageBox(QStringLiteral("文件访问错误"), QStringLiteral("无法写入:intrinsics.yml"));
-	cv::Mat R1, R2, P1, P2, Q;
-	cv::Rect validRoi[2];
+		emit openMessageBox(QStringLiteral("文件访问错误"), QStringLiteral("无法写入:cameraParams.yml"));
 
-	stereoRectify(cameraMatrix[0], distCoeffs[0],
-		cameraMatrix[1], distCoeffs[1],
-		imageSize, R, T, R1, R2, P1, P2, Q,
-		cv::CALIB_ZERO_DISPARITY, 1, imageSize, &validRoi[0], &validRoi[1]);
-	// 保存外部参数
-	fs.open(extrFilename, cv::FileStorage::WRITE);
-	if (fs.isOpened())
-	{
-		fs << "R" << R << "T" << T << "R1" << R1 << "R2" << R2 << "P1" << P1 << "P2" << P2 << "Q" << Q;
-		fs.release();
-	}
-	else
-		emit openMessageBox(QStringLiteral("文件访问错误"), QStringLiteral("无法写入:extrinsics.yml"));
-	m_entity->setmsgBuffer(QStringLiteral("就绪"));
-	// OpenCV can handle left-right
-	// or up-down camera arrangements
-	bool isVerticalStereo = fabs(P2.at<double>(1, 3)) > fabs(P2.at<double>(0, 3));
-
-	// COMPUTE AND DISPLAY RECTIFICATION
-	if (!showRectified)
-		return;
-
-	cv::Mat rmap[2][2];
-	// IF BY CALIBRATED (BOUGUET'S METHOD)
-	if (useCalibrated)
-	{
-		// we already computed everything
-	}
-	// OR ELSE HARTLEY'S METHOD
-	else
-		// use intrinsic parameters of each camera, but
-		// compute the rectification transformation directly
-		// from the fundamental matrix
-	{
-		std::vector<cv::Point2f> allimgpt[2];
-		for (k = 0; k < 2; k++)
-		{
-			for (i = 0; i < nimages; i++)
-				std::copy(imagePoints[k][i].begin(), imagePoints[k][i].end(), back_inserter(allimgpt[k]));
-		}
-		F = cv::findFundamentalMat(cv::Mat(allimgpt[0]), cv::Mat(allimgpt[1]), cv::FM_8POINT, 0, 0);
-		cv::Mat H1, H2;
-		stereoRectifyUncalibrated(cv::Mat(allimgpt[0]), cv::Mat(allimgpt[1]), F, imageSize, H1, H2, 3);
-
-		R1 = cameraMatrix[0].inv()*H1*cameraMatrix[0];
-		R2 = cameraMatrix[1].inv()*H2*cameraMatrix[1];
-		P1 = cameraMatrix[0];
-		P2 = cameraMatrix[1];
-	}
-
-	//Precompute maps for cv::remap()
-	initUndistortRectifyMap(cameraMatrix[0], distCoeffs[0], R1, P1, imageSize, CV_16SC2, rmap[0][0], rmap[0][1]);
-	initUndistortRectifyMap(cameraMatrix[1], distCoeffs[1], R2, P2, imageSize, CV_16SC2, rmap[1][0], rmap[1][1]);
-
-	cv::Mat canvas;
-	double sf;
-	int w, h;
-	if (!isVerticalStereo)
-	{
-		sf = 600. / MAX(imageSize.width, imageSize.height);
-		w = cvRound(imageSize.width*sf);
-		h = cvRound(imageSize.height*sf);
-		canvas.create(h, w * 2, CV_8UC3);
-	}
-	else
-	{
-		sf = 300. / MAX(imageSize.width, imageSize.height);
-		w = cvRound(imageSize.width*sf);
-		h = cvRound(imageSize.height*sf);
-		canvas.create(h * 2, w, CV_8UC3);
-	}
-
-	for (i = 0; i < nimages; i++)
-	{
-		for (k = 0; k < 2; k++)
-		{
-			cv::Mat img = cv::imread(goodImageList[i * 2 + k], 0), rimg, cimg;
-			remap(img, rimg, rmap[k][0], rmap[k][1], cv::INTER_LINEAR);
-			cvtColor(rimg, cimg, cv::COLOR_GRAY2BGR);
-			cv::Mat canvasPart = !isVerticalStereo ? canvas(cv::Rect(w*k, 0, w, h)) : canvas(cv::Rect(0, h*k, w, h));
-			resize(cimg, canvasPart, canvasPart.size(), 0, 0, cv::INTER_AREA);
-			if (useCalibrated)
-			{
-				cv::Rect vroi(cvRound(validRoi[k].x*sf), cvRound(validRoi[k].y*sf),
-					cvRound(validRoi[k].width*sf), cvRound(validRoi[k].height*sf));
-				rectangle(canvasPart, vroi, cv::Scalar(0, 0, 255), 3, 8);
-			}
-		}
-
-		if (!isVerticalStereo)
-			for (j = 0; j < canvas.rows; j += 16)
-				line(canvas, cv::Point(0, j), cv::Point(canvas.cols, j), cv::Scalar(0, 255, 0), 1, 8);
-		else
-			for (j = 0; j < canvas.cols; j += 16)
-				line(canvas, cv::Point(j, 0), cv::Point(j, canvas.rows), cv::Scalar(0, 255, 0), 1, 8);
-		imshow("rectified", canvas);
-		char c = (char)cv::waitKey();
-		if (c == 27 || c == 'q' || c == 'Q')
-			break;
 	}
 }
