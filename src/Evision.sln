@@ -24,6 +24,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Evision-Legacy", "EvisionLe
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CustomGraphicsView", "CustomGraphicsView\CustomGraphicsView.vcxproj", "{4131CC28-7736-416D-980B-AB548052684A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "yolo_gpu", "yolo\yolo_gpu.vcxproj", "{4CF5694F-12A5-4012-8D94-9A0915E9FEB5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "yoloTest", "yoloTest\yoloTest.vcxproj", "{F6B9F03A-DE9B-47A2-9ABC-8B5826A5A07F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -75,6 +79,22 @@ Global
 		{4131CC28-7736-416D-980B-AB548052684A}.Release|x64.ActiveCfg = Release|x64
 		{4131CC28-7736-416D-980B-AB548052684A}.Release|x64.Build.0 = Release|x64
 		{4131CC28-7736-416D-980B-AB548052684A}.Release|x86.ActiveCfg = Release|x64
+		{4CF5694F-12A5-4012-8D94-9A0915E9FEB5}.Debug|x64.ActiveCfg = Debug|x64
+		{4CF5694F-12A5-4012-8D94-9A0915E9FEB5}.Debug|x64.Build.0 = Debug|x64
+		{4CF5694F-12A5-4012-8D94-9A0915E9FEB5}.Debug|x86.ActiveCfg = Debug|Win32
+		{4CF5694F-12A5-4012-8D94-9A0915E9FEB5}.Debug|x86.Build.0 = Debug|Win32
+		{4CF5694F-12A5-4012-8D94-9A0915E9FEB5}.Release|x64.ActiveCfg = Release|x64
+		{4CF5694F-12A5-4012-8D94-9A0915E9FEB5}.Release|x64.Build.0 = Release|x64
+		{4CF5694F-12A5-4012-8D94-9A0915E9FEB5}.Release|x86.ActiveCfg = Release|Win32
+		{4CF5694F-12A5-4012-8D94-9A0915E9FEB5}.Release|x86.Build.0 = Release|Win32
+		{F6B9F03A-DE9B-47A2-9ABC-8B5826A5A07F}.Debug|x64.ActiveCfg = Debug|x64
+		{F6B9F03A-DE9B-47A2-9ABC-8B5826A5A07F}.Debug|x64.Build.0 = Debug|x64
+		{F6B9F03A-DE9B-47A2-9ABC-8B5826A5A07F}.Debug|x86.ActiveCfg = Debug|Win32
+		{F6B9F03A-DE9B-47A2-9ABC-8B5826A5A07F}.Debug|x86.Build.0 = Debug|Win32
+		{F6B9F03A-DE9B-47A2-9ABC-8B5826A5A07F}.Release|x64.ActiveCfg = Release|x64
+		{F6B9F03A-DE9B-47A2-9ABC-8B5826A5A07F}.Release|x64.Build.0 = Release|x64
+		{F6B9F03A-DE9B-47A2-9ABC-8B5826A5A07F}.Release|x86.ActiveCfg = Release|Win32
+		{F6B9F03A-DE9B-47A2-9ABC-8B5826A5A07F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -85,9 +105,10 @@ Global
 		{F18726BB-A1B0-486C-961A-4F8AE3BBF70F} = {D8A75711-49E4-4A02-BD33-823924EDD371}
 		{19AE22D4-56E0-490A-91E6-D3E2FF376980} = {D8A75711-49E4-4A02-BD33-823924EDD371}
 		{FE973CBB-0CB6-4E21-827F-2E92468C4C32} = {93BD32B4-4994-4478-AE43-ADF9262808A9}
+		{F6B9F03A-DE9B-47A2-9ABC-8B5826A5A07F} = {D8A75711-49E4-4A02-BD33-823924EDD371}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		Qt5Version = msvc2017_64
 		SolutionGuid = {4E5A88CF-E7F9-487A-96B0-1A2E96298935}
+		Qt5Version = msvc2017_64
 	EndGlobalSection
 EndGlobal
