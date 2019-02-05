@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'StereoCamera.ui'
+** Form generated from reading UI file 'StereoCameraView.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.12.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef UI_STEREOCAMERA_H
-#define UI_STEREOCAMERA_H
+#ifndef UI_STEREOCAMERAVIEW_H
+#define UI_STEREOCAMERAVIEW_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
@@ -27,7 +27,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_StereoCamera
+class Ui_StereoCameraView
 {
 public:
     QGridLayout *gridLayout_5;
@@ -78,14 +78,14 @@ public:
     QPushButton *pushButton_RefreshCam;
     QPushButton *pushButton_Shot;
 
-    void setupUi(QWidget *StereoCamera)
+    void setupUi(QWidget *StereoCameraView)
     {
-        if (StereoCamera->objectName().isEmpty())
-            StereoCamera->setObjectName(QString::fromUtf8("StereoCamera"));
-        StereoCamera->resize(1046, 700);
-        gridLayout_5 = new QGridLayout(StereoCamera);
+        if (StereoCameraView->objectName().isEmpty())
+            StereoCameraView->setObjectName(QString::fromUtf8("StereoCameraView"));
+        StereoCameraView->resize(1046, 700);
+        gridLayout_5 = new QGridLayout(StereoCameraView);
         gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
-        frame_3 = new QFrame(StereoCamera);
+        frame_3 = new QFrame(StereoCameraView);
         frame_3->setObjectName(QString::fromUtf8("frame_3"));
         frame_3->setMaximumSize(QSize(16777215, 43));
         frame_3->setFrameShape(QFrame::StyledPanel);
@@ -133,7 +133,7 @@ public:
 
         gridLayout_5->addWidget(frame_3, 0, 0, 1, 2);
 
-        splitter = new QSplitter(StereoCamera);
+        splitter = new QSplitter(StereoCameraView);
         splitter->setObjectName(QString::fromUtf8("splitter"));
         splitter->setOrientation(Qt::Horizontal);
         frame = new QFrame(splitter);
@@ -169,7 +169,7 @@ public:
 
         gridLayout_5->addWidget(splitter, 1, 0, 1, 2);
 
-        splitter_2 = new QSplitter(StereoCamera);
+        splitter_2 = new QSplitter(StereoCameraView);
         splitter_2->setObjectName(QString::fromUtf8("splitter_2"));
         splitter_2->setMaximumSize(QSize(16777215, 130));
         splitter_2->setOrientation(Qt::Horizontal);
@@ -296,7 +296,7 @@ public:
 
         gridLayout_5->addWidget(splitter_2, 2, 0, 1, 1);
 
-        frame_4 = new QFrame(StereoCamera);
+        frame_4 = new QFrame(StereoCameraView);
         frame_4->setObjectName(QString::fromUtf8("frame_4"));
         frame_4->setMaximumSize(QSize(16777215, 25));
         frame_4->setFrameShape(QFrame::StyledPanel);
@@ -333,53 +333,53 @@ public:
         gridLayout_5->addWidget(frame_4, 3, 0, 1, 1);
 
 
-        retranslateUi(StereoCamera);
-        QObject::connect(pushButton_FindSaveTo, SIGNAL(clicked()), StereoCamera, SLOT(OnFindSavePath()));
-        QObject::connect(comboBox_Lcam, SIGNAL(currentIndexChanged(QString)), StereoCamera, SLOT(OnSelectedChanged_LCameraDevice(QString)));
-        QObject::connect(comboBox_Lresolution, SIGNAL(currentIndexChanged(QString)), StereoCamera, SLOT(OnSelectedChanged_LResolution(QString)));
-        QObject::connect(comboBox_LCodec, SIGNAL(currentIndexChanged(QString)), StereoCamera, SLOT(OnSelectedChanged_LCodec(QString)));
-        QObject::connect(horizontalSlider_LQuality, SIGNAL(valueChanged(int)), StereoCamera, SLOT(OnChanged_LQuality(int)));
-        QObject::connect(horizontalSlider_LexposureCompensation, SIGNAL(valueChanged(int)), StereoCamera, SLOT(OnChanged_LExposureCompensation(int)));
-        QObject::connect(comboBox_Rcam, SIGNAL(currentIndexChanged(QString)), StereoCamera, SLOT(OnSelectedChanged_RCameraDevice(QString)));
-        QObject::connect(comboBox_Rresolution, SIGNAL(currentIndexChanged(QString)), StereoCamera, SLOT(OnSelectedChanged_RResolution(QString)));
-        QObject::connect(comboBox_RCodec, SIGNAL(currentIndexChanged(QString)), StereoCamera, SLOT(OnSelectedChanged_RCodec(QString)));
-        QObject::connect(horizontalSlider_RQuality, SIGNAL(valueChanged(int)), StereoCamera, SLOT(OnChanged_RQuality(int)));
-        QObject::connect(horizontalSlider_RexposureCompensation, SIGNAL(valueChanged(int)), StereoCamera, SLOT(OnChanged_RExposureCompensation(int)));
-        QObject::connect(pushButton_Shot, SIGNAL(clicked()), StereoCamera, SLOT(OnShot()));
-        QObject::connect(pushButton_CloseCamera, SIGNAL(clicked()), StereoCamera, SLOT(OnCloseCamera()));
-        QObject::connect(pushButton_OpenCamera, SIGNAL(clicked()), StereoCamera, SLOT(OnOpenCamera()));
+        retranslateUi(StereoCameraView);
+        QObject::connect(pushButton_FindSaveTo, SIGNAL(clicked()), StereoCameraView, SLOT(OnFindSavePath()));
+        QObject::connect(comboBox_Lcam, SIGNAL(currentIndexChanged(QString)), StereoCameraView, SLOT(OnSelectedChanged_LCameraDevice(QString)));
+        QObject::connect(comboBox_Lresolution, SIGNAL(currentIndexChanged(QString)), StereoCameraView, SLOT(OnSelectedChanged_LResolution(QString)));
+        QObject::connect(comboBox_LCodec, SIGNAL(currentIndexChanged(QString)), StereoCameraView, SLOT(OnSelectedChanged_LCodec(QString)));
+        QObject::connect(horizontalSlider_LQuality, SIGNAL(valueChanged(int)), StereoCameraView, SLOT(OnChanged_LQuality(int)));
+        QObject::connect(horizontalSlider_LexposureCompensation, SIGNAL(valueChanged(int)), StereoCameraView, SLOT(OnChanged_LExposureCompensation(int)));
+        QObject::connect(comboBox_Rcam, SIGNAL(currentIndexChanged(QString)), StereoCameraView, SLOT(OnSelectedChanged_RCameraDevice(QString)));
+        QObject::connect(comboBox_Rresolution, SIGNAL(currentIndexChanged(QString)), StereoCameraView, SLOT(OnSelectedChanged_RResolution(QString)));
+        QObject::connect(comboBox_RCodec, SIGNAL(currentIndexChanged(QString)), StereoCameraView, SLOT(OnSelectedChanged_RCodec(QString)));
+        QObject::connect(horizontalSlider_RQuality, SIGNAL(valueChanged(int)), StereoCameraView, SLOT(OnChanged_RQuality(int)));
+        QObject::connect(horizontalSlider_RexposureCompensation, SIGNAL(valueChanged(int)), StereoCameraView, SLOT(OnChanged_RExposureCompensation(int)));
+        QObject::connect(pushButton_Shot, SIGNAL(clicked()), StereoCameraView, SLOT(OnShot()));
+        QObject::connect(pushButton_CloseCamera, SIGNAL(clicked()), StereoCameraView, SLOT(OnCloseCamera()));
+        QObject::connect(pushButton_OpenCamera, SIGNAL(clicked()), StereoCameraView, SLOT(OnOpenCamera()));
 
-        QMetaObject::connectSlotsByName(StereoCamera);
+        QMetaObject::connectSlotsByName(StereoCameraView);
     } // setupUi
 
-    void retranslateUi(QWidget *StereoCamera)
+    void retranslateUi(QWidget *StereoCameraView)
     {
-        StereoCamera->setWindowTitle(QApplication::translate("StereoCamera", "\345\217\214\347\233\256\347\233\270\346\234\272", nullptr));
-        label->setText(QApplication::translate("StereoCamera", "Save To:", nullptr));
-        pushButton_FindSaveTo->setText(QApplication::translate("StereoCamera", "\346\265\217\350\247\210", nullptr));
-        label_2->setText(QApplication::translate("StereoCamera", "\350\256\241\346\225\260\345\231\250:", nullptr));
-        label_3->setText(QApplication::translate("StereoCamera", "L\346\221\204\345\203\217\345\244\264:", nullptr));
-        label_4->setText(QApplication::translate("StereoCamera", "L\345\210\206\350\276\250\347\216\207:", nullptr));
-        label_5->setText(QApplication::translate("StereoCamera", "\345\233\276\347\211\207\346\240\274\345\274\217:", nullptr));
-        label_6->setText(QApplication::translate("StereoCamera", "\350\264\250\351\207\217:", nullptr));
-        label_7->setText(QApplication::translate("StereoCamera", "\346\233\235\345\205\211\350\241\245\345\201\277:", nullptr));
-        label_9->setText(QApplication::translate("StereoCamera", "R\346\221\204\345\203\217\345\244\264:", nullptr));
-        label_10->setText(QApplication::translate("StereoCamera", "R\345\210\206\350\276\250\347\216\207:", nullptr));
-        label_12->setText(QApplication::translate("StereoCamera", "\345\233\276\347\211\207\346\240\274\345\274\217:", nullptr));
-        label_8->setText(QApplication::translate("StereoCamera", "\350\264\250\351\207\217:", nullptr));
-        label_11->setText(QApplication::translate("StereoCamera", "\346\233\235\345\205\211\350\241\245\345\201\277:", nullptr));
-        pushButton_OpenCamera->setText(QApplication::translate("StereoCamera", "\345\274\200\345\220\257\346\221\204\345\203\217\345\244\264", nullptr));
-        pushButton_CloseCamera->setText(QApplication::translate("StereoCamera", "\345\205\263\351\227\255\346\221\204\345\203\217\345\244\264", nullptr));
-        pushButton_RefreshCam->setText(QApplication::translate("StereoCamera", "\345\210\267\346\226\260\346\221\204\345\203\217\345\244\264", nullptr));
-        pushButton_Shot->setText(QApplication::translate("StereoCamera", "\346\213\215\347\205\247", nullptr));
+        StereoCameraView->setWindowTitle(QApplication::translate("StereoCameraView", "\345\217\214\347\233\256\347\233\270\346\234\272", nullptr));
+        label->setText(QApplication::translate("StereoCameraView", "Save To:", nullptr));
+        pushButton_FindSaveTo->setText(QApplication::translate("StereoCameraView", "\346\265\217\350\247\210", nullptr));
+        label_2->setText(QApplication::translate("StereoCameraView", "\350\256\241\346\225\260\345\231\250:", nullptr));
+        label_3->setText(QApplication::translate("StereoCameraView", "L\346\221\204\345\203\217\345\244\264:", nullptr));
+        label_4->setText(QApplication::translate("StereoCameraView", "L\345\210\206\350\276\250\347\216\207:", nullptr));
+        label_5->setText(QApplication::translate("StereoCameraView", "\345\233\276\347\211\207\346\240\274\345\274\217:", nullptr));
+        label_6->setText(QApplication::translate("StereoCameraView", "\350\264\250\351\207\217:", nullptr));
+        label_7->setText(QApplication::translate("StereoCameraView", "\346\233\235\345\205\211\350\241\245\345\201\277:", nullptr));
+        label_9->setText(QApplication::translate("StereoCameraView", "R\346\221\204\345\203\217\345\244\264:", nullptr));
+        label_10->setText(QApplication::translate("StereoCameraView", "R\345\210\206\350\276\250\347\216\207:", nullptr));
+        label_12->setText(QApplication::translate("StereoCameraView", "\345\233\276\347\211\207\346\240\274\345\274\217:", nullptr));
+        label_8->setText(QApplication::translate("StereoCameraView", "\350\264\250\351\207\217:", nullptr));
+        label_11->setText(QApplication::translate("StereoCameraView", "\346\233\235\345\205\211\350\241\245\345\201\277:", nullptr));
+        pushButton_OpenCamera->setText(QApplication::translate("StereoCameraView", "\345\274\200\345\220\257\346\221\204\345\203\217\345\244\264", nullptr));
+        pushButton_CloseCamera->setText(QApplication::translate("StereoCameraView", "\345\205\263\351\227\255\346\221\204\345\203\217\345\244\264", nullptr));
+        pushButton_RefreshCam->setText(QApplication::translate("StereoCameraView", "\345\210\267\346\226\260\346\221\204\345\203\217\345\244\264", nullptr));
+        pushButton_Shot->setText(QApplication::translate("StereoCameraView", "\346\213\215\347\205\247", nullptr));
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class StereoCamera: public Ui_StereoCamera {};
+    class StereoCameraView: public Ui_StereoCameraView {};
 } // namespace Ui
 
 QT_END_NAMESPACE
 
-#endif // UI_STEREOCAMERA_H
+#endif // UI_STEREOCAMERAVIEW_H

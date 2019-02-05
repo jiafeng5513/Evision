@@ -45,12 +45,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Calibrater.cpp">
-      <Filter>View</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>View</Filter>
-    </ClCompile>
     <ClCompile Include="EvisionController.cpp">
       <Filter>Controller</Filter>
     </ClCompile>
@@ -63,20 +57,11 @@
     <ClCompile Include="EvisionView.cpp">
       <Filter>View</Filter>
     </ClCompile>
-    <ClCompile Include="Matcher.cpp">
-      <Filter>View</Filter>
-    </ClCompile>
     <ClCompile Include="PointCloudUtils.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="RFinterface.cpp">
-      <Filter>View</Filter>
-    </ClCompile>
     <ClCompile Include="StereoCalibrate.cpp">
       <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="StereoCamera.cpp">
-      <Filter>View</Filter>
     </ClCompile>
     <ClCompile Include="StereoMatch.cpp">
       <Filter>Engine</Filter>
@@ -96,17 +81,29 @@
     <ClCompile Include="StereoMatchController.cpp">
       <Filter>Controller</Filter>
     </ClCompile>
-    <ClCompile Include="WatchImage.cpp">
+    <ClCompile Include="ObjectDetectionView.cpp">
+      <Filter>View</Filter>
+    </ClCompile>
+    <ClCompile Include="CalibraterView.cpp">
+      <Filter>View</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraView.cpp">
+      <Filter>View</Filter>
+    </ClCompile>
+    <ClCompile Include="MatcherView.cpp">
+      <Filter>View</Filter>
+    </ClCompile>
+    <ClCompile Include="RulerView.cpp">
+      <Filter>View</Filter>
+    </ClCompile>
+    <ClCompile Include="StereoCameraView.cpp">
+      <Filter>View</Filter>
+    </ClCompile>
+    <ClCompile Include="WatchImageView.cpp">
       <Filter>View</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="Calibrater.h">
-      <Filter>View</Filter>
-    </QtMoc>
-    <QtMoc Include="Camera.h">
-      <Filter>View</Filter>
-    </QtMoc>
     <QtMoc Include="EvisionController.h">
       <Filter>Controller</Filter>
     </QtMoc>
@@ -116,17 +113,8 @@
     <QtMoc Include="EvisionView.h">
       <Filter>View</Filter>
     </QtMoc>
-    <QtMoc Include="Matcher.h">
-      <Filter>View</Filter>
-    </QtMoc>
-    <QtMoc Include="RFinterface.h">
-      <Filter>View</Filter>
-    </QtMoc>
     <QtMoc Include="StereoCalibrate.h">
       <Filter>Engine</Filter>
-    </QtMoc>
-    <QtMoc Include="StereoCamera.h">
-      <Filter>View</Filter>
     </QtMoc>
     <QtMoc Include="StereoMatch.h">
       <Filter>Engine</Filter>
@@ -143,7 +131,25 @@
     <QtMoc Include="StereoMatchController.h">
       <Filter>Controller</Filter>
     </QtMoc>
-    <QtMoc Include="WatchImage.h">
+    <QtMoc Include="ObjectDetectionView.h">
+      <Filter>View</Filter>
+    </QtMoc>
+    <QtMoc Include="CalibraterView.h">
+      <Filter>View</Filter>
+    </QtMoc>
+    <QtMoc Include="CameraView.h">
+      <Filter>View</Filter>
+    </QtMoc>
+    <QtMoc Include="MatcherView.h">
+      <Filter>View</Filter>
+    </QtMoc>
+    <QtMoc Include="RulerView.h">
+      <Filter>View</Filter>
+    </QtMoc>
+    <QtMoc Include="StereoCameraView.h">
+      <Filter>View</Filter>
+    </QtMoc>
+    <QtMoc Include="WatchImageView.h">
       <Filter>View</Filter>
     </QtMoc>
   </ItemGroup>
@@ -151,22 +157,25 @@
     <QtUic Include="Evision.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="RFinterface.ui">
+    <QtUic Include="ObjectDetectionView.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="StereoCamera.ui">
+    <QtUic Include="CalibraterView.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="Camera.ui">
+    <QtUic Include="CameraView.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="Calibrater.ui">
+    <QtUic Include="MatcherView.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="Matcher.ui">
+    <QtUic Include="RulerView.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="WatchImage.ui">
+    <QtUic Include="StereoCameraView.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="WatchImageView.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

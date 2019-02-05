@@ -1,23 +1,23 @@
 #pragma once
 
 #include <QWidget>
-#include "ui_StereoCamera.h"
+#include "ui_StereoCameraView.h"
 #include <QtMultimedia/QCamera>
 #include <QtMultimedia/QCameraImageCapture>
 #include <QtMultimedia/QMediaRecorder>
 #include <QtMultimedia/QCameraInfo>
 #include <QScopedPointer>
 
-class StereoCamera : public QWidget
+class StereoCameraView : public QWidget
 {
 	Q_OBJECT
 
 public:
-	StereoCamera(QWidget *parent = Q_NULLPTR);
-	~StereoCamera();
+	StereoCameraView(QWidget *parent = Q_NULLPTR);
+	~StereoCameraView();
 
 private:
-	Ui::StereoCamera ui;
+	Ui::StereoCameraView ui;
 	QScopedPointer<QCamera> m_pLCamera;
 	QScopedPointer<QCamera> m_pRCamera;
 	QScopedPointer<QCameraImageCapture> m_pLImageCapture;

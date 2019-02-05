@@ -41,6 +41,7 @@ public:
     QAction *action_SFM_View;
     QAction *action_3dReconstruct_View;
     QAction *action_CalibrateView;
+    QAction *action_ObjectDetection;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QMdiArea *mdiArea;
@@ -49,6 +50,7 @@ public:
     QMenu *menu_2;
     QMenu *menu_3;
     QMenu *menu_4;
+    QMenu *menuAi;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -122,6 +124,11 @@ public:
         QIcon icon9;
         icon9.addFile(QString::fromUtf8(":/Evision/resource/checkered_128px_1155158_easyicon.net.ico"), QSize(), QIcon::Normal, QIcon::Off);
         action_CalibrateView->setIcon(icon9);
+        action_ObjectDetection = new QAction(EvisionClass);
+        action_ObjectDetection->setObjectName(QString::fromUtf8("action_ObjectDetection"));
+        QIcon icon10;
+        icon10.addFile(QString::fromUtf8(":/Evision/resource/face_detection_128px_1218199_easyicon.net.ico"), QSize(), QIcon::Normal, QIcon::Off);
+        action_ObjectDetection->setIcon(icon10);
         centralWidget = new QWidget(EvisionClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -147,6 +154,8 @@ public:
         menu_3->setObjectName(QString::fromUtf8("menu_3"));
         menu_4 = new QMenu(menuBar);
         menu_4->setObjectName(QString::fromUtf8("menu_4"));
+        menuAi = new QMenu(menuBar);
+        menuAi->setObjectName(QString::fromUtf8("menuAi"));
         EvisionClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(EvisionClass);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
@@ -160,6 +169,7 @@ public:
         menuBar->addAction(menu_3->menuAction());
         menuBar->addAction(menu_4->menuAction());
         menuBar->addAction(menu_2->menuAction());
+        menuBar->addAction(menuAi->menuAction());
         menu->addAction(action_StereoCamera);
         menu->addAction(action_Camera);
         menu->addAction(action_ShowPointCloud);
@@ -174,6 +184,7 @@ public:
         menu_3->addAction(action_Measure_View);
         menu_4->addAction(action_SFM_View);
         menu_4->addAction(action_3dReconstruct_View);
+        menuAi->addAction(action_ObjectDetection);
         mainToolBar->addAction(action_Camera);
         mainToolBar->addAction(action_StereoCamera);
         mainToolBar->addAction(action_ShowPointCloud);
@@ -185,6 +196,7 @@ public:
         mainToolBar->addAction(action_PointCloud_View);
         mainToolBar->addAction(action_Measure_View);
         mainToolBar->addSeparator();
+        mainToolBar->addAction(action_ObjectDetection);
 
         retranslateUi(EvisionClass);
         QObject::connect(actionDebug, SIGNAL(triggered()), EvisionClass, SLOT(onTestAlltheParam()));
@@ -215,10 +227,12 @@ public:
         action_SFM_View->setText(QApplication::translate("EvisionClass", "SFM", nullptr));
         action_3dReconstruct_View->setText(QApplication::translate("EvisionClass", "\344\270\211\347\273\264\351\207\215\345\273\272", nullptr));
         action_CalibrateView->setText(QApplication::translate("EvisionClass", "\347\233\270\346\234\272\346\240\207\345\256\232", nullptr));
+        action_ObjectDetection->setText(QApplication::translate("EvisionClass", "\347\233\256\346\240\207\346\243\200\346\265\213", nullptr));
         menu->setTitle(QApplication::translate("EvisionClass", "\345\267\245\345\205\267", nullptr));
         menu_2->setTitle(QApplication::translate("EvisionClass", "\345\270\256\345\212\251", nullptr));
         menu_3->setTitle(QApplication::translate("EvisionClass", "\345\217\214\347\233\256\350\247\206\350\247\211", nullptr));
         menu_4->setTitle(QApplication::translate("EvisionClass", "SLAM", nullptr));
+        menuAi->setTitle(QApplication::translate("EvisionClass", "Ai", nullptr));
     } // retranslateUi
 
 };

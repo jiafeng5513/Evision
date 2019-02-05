@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'RFinterface.ui'
+** Form generated from reading UI file 'RulerView.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.12.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef UI_RFINTERFACE_H
-#define UI_RFINTERFACE_H
+#ifndef UI_RULERVIEW_H
+#define UI_RULERVIEW_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
@@ -25,7 +25,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_RFinterface
+class Ui_RulerView
 {
 public:
     QGridLayout *gridLayout_3;
@@ -53,16 +53,16 @@ public:
     CustomGraphicsView *customGraphicsView_O;
     CustomGraphicsView *customGraphicsView_D;
 
-    void setupUi(QWidget *RFinterface)
+    void setupUi(QWidget *RulerView)
     {
-        if (RFinterface->objectName().isEmpty())
-            RFinterface->setObjectName(QString::fromUtf8("RFinterface"));
-        RFinterface->resize(1074, 715);
-        gridLayout_3 = new QGridLayout(RFinterface);
+        if (RulerView->objectName().isEmpty())
+            RulerView->setObjectName(QString::fromUtf8("RulerView"));
+        RulerView->resize(1074, 715);
+        gridLayout_3 = new QGridLayout(RulerView);
         gridLayout_3->setSpacing(6);
         gridLayout_3->setContentsMargins(11, 11, 11, 11);
         gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
-        groupBox_2 = new QGroupBox(RFinterface);
+        groupBox_2 = new QGroupBox(RulerView);
         groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
         gridLayout_2 = new QGridLayout(groupBox_2);
         gridLayout_2->setSpacing(6);
@@ -120,7 +120,7 @@ public:
 
         gridLayout_3->addWidget(groupBox_2, 0, 0, 1, 1);
 
-        groupBox = new QGroupBox(RFinterface);
+        groupBox = new QGroupBox(RulerView);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
         groupBox->setMinimumSize(QSize(0, 110));
         groupBox->setMaximumSize(QSize(16777215, 110));
@@ -166,7 +166,7 @@ public:
 
         gridLayout_3->addWidget(groupBox, 0, 1, 1, 1);
 
-        splitter = new QSplitter(RFinterface);
+        splitter = new QSplitter(RulerView);
         splitter->setObjectName(QString::fromUtf8("splitter"));
         splitter->setOrientation(Qt::Horizontal);
         customGraphicsView_O = new CustomGraphicsView(splitter);
@@ -185,45 +185,45 @@ public:
         gridLayout_3->addWidget(splitter, 1, 0, 1, 2);
 
 
-        retranslateUi(RFinterface);
-        QObject::connect(customGraphicsView_O, SIGNAL(mouseMove(int,int)), RFinterface, SLOT(onMouseMove(int,int)));
-        QObject::connect(customGraphicsView_O, SIGNAL(mouseLDown(int,int)), RFinterface, SLOT(onMouseLButtonDown(int,int)));
-        QObject::connect(customGraphicsView_O, SIGNAL(mouseRDown(int,int)), RFinterface, SLOT(onMouseRButtonDown(int,int)));
-        QObject::connect(customGraphicsView_D, SIGNAL(mouseLDown(int,int)), RFinterface, SLOT(onMouseLButtonDown(int,int)));
-        QObject::connect(customGraphicsView_D, SIGNAL(mouseMove(int,int)), RFinterface, SLOT(onMouseMove(int,int)));
-        QObject::connect(customGraphicsView_D, SIGNAL(mouseRDown(int,int)), RFinterface, SLOT(onMouseRButtonDown(int,int)));
-        QObject::connect(pushButton_selectDisp, SIGNAL(clicked()), RFinterface, SLOT(onSelectDisparityMap()));
-        QObject::connect(pushButton_selectLeft, SIGNAL(clicked()), RFinterface, SLOT(onSelectleftMap()));
-        QObject::connect(pushButton_selectPointCloud, SIGNAL(clicked()), RFinterface, SLOT(onSelectPointcloudFile()));
-        QObject::connect(pushButton_start, SIGNAL(clicked()), RFinterface, SLOT(onStart()));
+        retranslateUi(RulerView);
+        QObject::connect(customGraphicsView_O, SIGNAL(mouseMove(int,int)), RulerView, SLOT(onMouseMove(int,int)));
+        QObject::connect(customGraphicsView_O, SIGNAL(mouseLDown(int,int)), RulerView, SLOT(onMouseLButtonDown(int,int)));
+        QObject::connect(customGraphicsView_O, SIGNAL(mouseRDown(int,int)), RulerView, SLOT(onMouseRButtonDown(int,int)));
+        QObject::connect(customGraphicsView_D, SIGNAL(mouseLDown(int,int)), RulerView, SLOT(onMouseLButtonDown(int,int)));
+        QObject::connect(customGraphicsView_D, SIGNAL(mouseMove(int,int)), RulerView, SLOT(onMouseMove(int,int)));
+        QObject::connect(customGraphicsView_D, SIGNAL(mouseRDown(int,int)), RulerView, SLOT(onMouseRButtonDown(int,int)));
+        QObject::connect(pushButton_selectDisp, SIGNAL(clicked()), RulerView, SLOT(onSelectDisparityMap()));
+        QObject::connect(pushButton_selectLeft, SIGNAL(clicked()), RulerView, SLOT(onSelectleftMap()));
+        QObject::connect(pushButton_selectPointCloud, SIGNAL(clicked()), RulerView, SLOT(onSelectPointcloudFile()));
+        QObject::connect(pushButton_start, SIGNAL(clicked()), RulerView, SLOT(onStart()));
 
-        QMetaObject::connectSlotsByName(RFinterface);
+        QMetaObject::connectSlotsByName(RulerView);
     } // setupUi
 
-    void retranslateUi(QWidget *RFinterface)
+    void retranslateUi(QWidget *RulerView)
     {
-        RFinterface->setWindowTitle(QApplication::translate("RFinterface", "\344\272\244\344\272\222\346\265\213\351\207\217", nullptr));
-        groupBox_2->setTitle(QApplication::translate("RFinterface", "\350\276\223\345\205\245", nullptr));
-        pushButton_selectDisp->setText(QApplication::translate("RFinterface", "\350\247\206\345\267\256\345\233\276", nullptr));
-        pushButton_selectLeft->setText(QApplication::translate("RFinterface", "\345\267\246\350\247\206\345\233\276", nullptr));
-        pushButton_selectPointCloud->setText(QApplication::translate("RFinterface", "\347\202\271\344\272\221", nullptr));
-        pushButton_start->setText(QApplication::translate("RFinterface", "\345\274\200\345\247\213\346\265\213\351\207\217", nullptr));
-        checkBox_dispOK->setText(QApplication::translate("RFinterface", "\350\247\206\345\267\256\345\233\276", nullptr));
-        checkBox_leftOK->setText(QApplication::translate("RFinterface", "\345\267\246\350\247\206\345\233\276", nullptr));
-        checkBox_pointcloudOK->setText(QApplication::translate("RFinterface", "\347\202\271\344\272\221\346\226\207\344\273\266", nullptr));
-        groupBox->setTitle(QApplication::translate("RFinterface", "Function and Result", nullptr));
-        label_3->setText(QApplication::translate("RFinterface", "Y=", nullptr));
-        label->setText(QApplication::translate("RFinterface", "\345\233\276\345\203\217\347\251\272\351\227\264\345\235\220\346\240\207:", nullptr));
-        label_4->setText(QApplication::translate("RFinterface", "\350\256\241\347\256\227\347\273\223\346\236\234:", nullptr));
-        label_2->setText(QApplication::translate("RFinterface", "X=", nullptr));
+        RulerView->setWindowTitle(QApplication::translate("RulerView", "\344\272\244\344\272\222\346\265\213\351\207\217", nullptr));
+        groupBox_2->setTitle(QApplication::translate("RulerView", "\350\276\223\345\205\245", nullptr));
+        pushButton_selectDisp->setText(QApplication::translate("RulerView", "\350\247\206\345\267\256\345\233\276", nullptr));
+        pushButton_selectLeft->setText(QApplication::translate("RulerView", "\345\267\246\350\247\206\345\233\276", nullptr));
+        pushButton_selectPointCloud->setText(QApplication::translate("RulerView", "\347\202\271\344\272\221", nullptr));
+        pushButton_start->setText(QApplication::translate("RulerView", "\345\274\200\345\247\213\346\265\213\351\207\217", nullptr));
+        checkBox_dispOK->setText(QApplication::translate("RulerView", "\350\247\206\345\267\256\345\233\276", nullptr));
+        checkBox_leftOK->setText(QApplication::translate("RulerView", "\345\267\246\350\247\206\345\233\276", nullptr));
+        checkBox_pointcloudOK->setText(QApplication::translate("RulerView", "\347\202\271\344\272\221\346\226\207\344\273\266", nullptr));
+        groupBox->setTitle(QApplication::translate("RulerView", "Function and Result", nullptr));
+        label_3->setText(QApplication::translate("RulerView", "Y=", nullptr));
+        label->setText(QApplication::translate("RulerView", "\345\233\276\345\203\217\347\251\272\351\227\264\345\235\220\346\240\207:", nullptr));
+        label_4->setText(QApplication::translate("RulerView", "\350\256\241\347\256\227\347\273\223\346\236\234:", nullptr));
+        label_2->setText(QApplication::translate("RulerView", "X=", nullptr));
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class RFinterface: public Ui_RFinterface {};
+    class RulerView: public Ui_RulerView {};
 } // namespace Ui
 
 QT_END_NAMESPACE
 
-#endif // UI_RFINTERFACE_H
+#endif // UI_RULERVIEW_H

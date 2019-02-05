@@ -10,9 +10,9 @@
 #include "QMessageBox"
 #include "StereoMatch.h"
 #include "PointCloudUtils.h"
-#include "RFinterface.h"
-#include "Camera.h"
-#include "StereoCamera.h"
+#include "RulerView.h"
+#include "CameraView.h"
+#include "StereoCameraView.h"
 
 EvisionController::EvisionController(QObject * parent):QObject(parent)
 {

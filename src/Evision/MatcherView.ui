@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Matcher</class>
- <widget class="QWidget" name="Matcher">
+ <class>MatcherView</class>
+ <widget class="QWidget" name="MatcherView">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -668,7 +668,7 @@
   <connection>
    <sender>pushButton_MatchDefault</sender>
    <signal>clicked()</signal>
-   <receiver>Matcher</receiver>
+   <receiver>MatcherView</receiver>
    <slot>setDefaultMatchParam()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -684,7 +684,7 @@
   <connection>
    <sender>pushButton_MatchChooseFiles</sender>
    <signal>clicked()</signal>
-   <receiver>Matcher</receiver>
+   <receiver>MatcherView</receiver>
    <slot>doMatch()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -700,7 +700,7 @@
   <connection>
    <sender>pushButton_RefreshStereoMatch</sender>
    <signal>clicked()</signal>
-   <receiver>Matcher</receiver>
+   <receiver>MatcherView</receiver>
    <slot>RefreshStereoMatch()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -716,7 +716,7 @@
   <connection>
    <sender>radioButton_SGBM</sender>
    <signal>clicked(bool)</signal>
-   <receiver>Matcher</receiver>
+   <receiver>MatcherView</receiver>
    <slot>onClicked_SGBM(bool)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -732,7 +732,7 @@
   <connection>
    <sender>radioButton_BM</sender>
    <signal>clicked(bool)</signal>
-   <receiver>Matcher</receiver>
+   <receiver>MatcherView</receiver>
    <slot>onClicked_BM(bool)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -748,7 +748,7 @@
   <connection>
    <sender>radioButton_MODE_HH</sender>
    <signal>clicked(bool)</signal>
-   <receiver>Matcher</receiver>
+   <receiver>MatcherView</receiver>
    <slot>onClicked_MODE_HH(bool)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -764,7 +764,7 @@
   <connection>
    <sender>radioButton_MODE_3WAY</sender>
    <signal>clicked(bool)</signal>
-   <receiver>Matcher</receiver>
+   <receiver>MatcherView</receiver>
    <slot>onClicked_MODE_3WAY(bool)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -780,7 +780,7 @@
   <connection>
    <sender>radioButton_MODE_SGBM</sender>
    <signal>clicked(bool)</signal>
-   <receiver>Matcher</receiver>
+   <receiver>MatcherView</receiver>
    <slot>onClicked_MODE_SGBM(bool)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -796,7 +796,7 @@
   <connection>
    <sender>horizontalSlider_uniradio</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>Matcher</receiver>
+   <receiver>MatcherView</receiver>
    <slot>valueChanged_uniradio(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -812,7 +812,7 @@
   <connection>
    <sender>horizontalSlider_prefilcap</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>Matcher</receiver>
+   <receiver>MatcherView</receiver>
    <slot>valueChanged_Prefilcap(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -828,7 +828,7 @@
   <connection>
    <sender>horizontalSlider_specwinsz</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>Matcher</receiver>
+   <receiver>MatcherView</receiver>
    <slot>valueChanged_specwinsz(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -844,7 +844,7 @@
   <connection>
    <sender>horizontalSlider_SadWinSiz</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>Matcher</receiver>
+   <receiver>MatcherView</receiver>
    <slot>valueChanged_SadWinSize(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -860,7 +860,7 @@
   <connection>
    <sender>horizontalSlider_MinDisp</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>Matcher</receiver>
+   <receiver>MatcherView</receiver>
    <slot>valueChanged_MinDisp(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -876,7 +876,7 @@
   <connection>
    <sender>horizontalSlider_NumDisparities</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>Matcher</receiver>
+   <receiver>MatcherView</receiver>
    <slot>valueChanged_NumDisparities(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -892,7 +892,7 @@
   <connection>
    <sender>horizontalSlider_specrange</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>Matcher</receiver>
+   <receiver>MatcherView</receiver>
    <slot>valueChanged_Specrange(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -908,7 +908,7 @@
   <connection>
    <sender>horizontalSlider_maxdifdisp12</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>Matcher</receiver>
+   <receiver>MatcherView</receiver>
    <slot>valueChanged_MaxDifdisp2(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -924,7 +924,7 @@
   <connection>
    <sender>horizontalSlider_textThread</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>Matcher</receiver>
+   <receiver>MatcherView</receiver>
    <slot>valueChanged_TextThread(int)</slot>
    <hints>
     <hint type="sourcelabel">

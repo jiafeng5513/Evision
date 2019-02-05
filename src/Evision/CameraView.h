@@ -1,22 +1,22 @@
 #pragma once
 
 #include <QWidget>
-#include "ui_Camera.h"
+#include "ui_CameraView.h"
 #include <QtMultimedia/QCamera>
 #include <QtMultimedia/QCameraImageCapture>
 #include <QtMultimedia/QMediaRecorder>
 #include <QtMultimedia/QCameraInfo>
 #include <QScopedPointer>
-class Camera : public QWidget
+class CameraView : public QWidget
 {
 	Q_OBJECT
 
 public:
-	Camera(QWidget *parent = Q_NULLPTR);
-	~Camera();
+	CameraView(QWidget *parent = Q_NULLPTR);
+	~CameraView();
 
 private:
-	Ui::Camera ui;
+	Ui::CameraView ui;
 	QScopedPointer<QCamera> m_pCamera;
 	QScopedPointer<QCameraImageCapture> m_pImageCapture;
 	QString saveToHere;

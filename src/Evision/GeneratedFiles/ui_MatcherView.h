@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'Matcher.ui'
+** Form generated from reading UI file 'MatcherView.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.12.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef UI_MATCHER_H
-#define UI_MATCHER_H
+#ifndef UI_MATCHERVIEW_H
+#define UI_MATCHERVIEW_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
@@ -24,7 +24,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_Matcher
+class Ui_MatcherView
 {
 public:
     QGridLayout *gridLayout_2;
@@ -73,33 +73,33 @@ public:
     QSlider *horizontalSlider_specwinsz;
     QPushButton *pushButton_RefreshStereoMatch;
 
-    void setupUi(QWidget *Matcher)
+    void setupUi(QWidget *MatcherView)
     {
-        if (Matcher->objectName().isEmpty())
-            Matcher->setObjectName(QString::fromUtf8("Matcher"));
-        Matcher->resize(977, 613);
-        gridLayout_2 = new QGridLayout(Matcher);
+        if (MatcherView->objectName().isEmpty())
+            MatcherView->setObjectName(QString::fromUtf8("MatcherView"));
+        MatcherView->resize(977, 613);
+        gridLayout_2 = new QGridLayout(MatcherView);
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-        graphicsView_D = new QGraphicsView(Matcher);
+        graphicsView_D = new QGraphicsView(MatcherView);
         graphicsView_D->setObjectName(QString::fromUtf8("graphicsView_D"));
 
         gridLayout_2->addWidget(graphicsView_D, 0, 0, 2, 1);
 
-        groupBox = new QGroupBox(Matcher);
+        groupBox = new QGroupBox(MatcherView);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
         groupBox->setMaximumSize(QSize(310, 16777215));
 
         gridLayout_2->addWidget(groupBox, 0, 1, 1, 1);
 
-        label = new QLabel(Matcher);
+        label = new QLabel(MatcherView);
         label->setObjectName(QString::fromUtf8("label"));
         label->setMaximumSize(QSize(16777215, 20));
 
         gridLayout_2->addWidget(label, 2, 0, 1, 1);
 
-        groupBox_6 = new QGroupBox(Matcher);
+        groupBox_6 = new QGroupBox(MatcherView);
         groupBox_6->setObjectName(QString::fromUtf8("groupBox_6"));
         groupBox_6->setMaximumSize(QSize(310, 16777215));
         gridLayout = new QGridLayout(groupBox_6);
@@ -381,70 +381,70 @@ public:
         gridLayout_2->addWidget(groupBox_6, 1, 1, 2, 1);
 
 
-        retranslateUi(Matcher);
-        QObject::connect(pushButton_MatchDefault, SIGNAL(clicked()), Matcher, SLOT(setDefaultMatchParam()));
-        QObject::connect(pushButton_MatchChooseFiles, SIGNAL(clicked()), Matcher, SLOT(doMatch()));
-        QObject::connect(pushButton_RefreshStereoMatch, SIGNAL(clicked()), Matcher, SLOT(RefreshStereoMatch()));
-        QObject::connect(radioButton_SGBM, SIGNAL(clicked(bool)), Matcher, SLOT(onClicked_SGBM(bool)));
-        QObject::connect(radioButton_BM, SIGNAL(clicked(bool)), Matcher, SLOT(onClicked_BM(bool)));
-        QObject::connect(radioButton_MODE_HH, SIGNAL(clicked(bool)), Matcher, SLOT(onClicked_MODE_HH(bool)));
-        QObject::connect(radioButton_MODE_3WAY, SIGNAL(clicked(bool)), Matcher, SLOT(onClicked_MODE_3WAY(bool)));
-        QObject::connect(radioButton_MODE_SGBM, SIGNAL(clicked(bool)), Matcher, SLOT(onClicked_MODE_SGBM(bool)));
-        QObject::connect(horizontalSlider_uniradio, SIGNAL(valueChanged(int)), Matcher, SLOT(valueChanged_uniradio(int)));
-        QObject::connect(horizontalSlider_prefilcap, SIGNAL(valueChanged(int)), Matcher, SLOT(valueChanged_Prefilcap(int)));
-        QObject::connect(horizontalSlider_specwinsz, SIGNAL(valueChanged(int)), Matcher, SLOT(valueChanged_specwinsz(int)));
-        QObject::connect(horizontalSlider_SadWinSiz, SIGNAL(valueChanged(int)), Matcher, SLOT(valueChanged_SadWinSize(int)));
-        QObject::connect(horizontalSlider_MinDisp, SIGNAL(valueChanged(int)), Matcher, SLOT(valueChanged_MinDisp(int)));
-        QObject::connect(horizontalSlider_NumDisparities, SIGNAL(valueChanged(int)), Matcher, SLOT(valueChanged_NumDisparities(int)));
-        QObject::connect(horizontalSlider_specrange, SIGNAL(valueChanged(int)), Matcher, SLOT(valueChanged_Specrange(int)));
-        QObject::connect(horizontalSlider_maxdifdisp12, SIGNAL(valueChanged(int)), Matcher, SLOT(valueChanged_MaxDifdisp2(int)));
-        QObject::connect(horizontalSlider_textThread, SIGNAL(valueChanged(int)), Matcher, SLOT(valueChanged_TextThread(int)));
+        retranslateUi(MatcherView);
+        QObject::connect(pushButton_MatchDefault, SIGNAL(clicked()), MatcherView, SLOT(setDefaultMatchParam()));
+        QObject::connect(pushButton_MatchChooseFiles, SIGNAL(clicked()), MatcherView, SLOT(doMatch()));
+        QObject::connect(pushButton_RefreshStereoMatch, SIGNAL(clicked()), MatcherView, SLOT(RefreshStereoMatch()));
+        QObject::connect(radioButton_SGBM, SIGNAL(clicked(bool)), MatcherView, SLOT(onClicked_SGBM(bool)));
+        QObject::connect(radioButton_BM, SIGNAL(clicked(bool)), MatcherView, SLOT(onClicked_BM(bool)));
+        QObject::connect(radioButton_MODE_HH, SIGNAL(clicked(bool)), MatcherView, SLOT(onClicked_MODE_HH(bool)));
+        QObject::connect(radioButton_MODE_3WAY, SIGNAL(clicked(bool)), MatcherView, SLOT(onClicked_MODE_3WAY(bool)));
+        QObject::connect(radioButton_MODE_SGBM, SIGNAL(clicked(bool)), MatcherView, SLOT(onClicked_MODE_SGBM(bool)));
+        QObject::connect(horizontalSlider_uniradio, SIGNAL(valueChanged(int)), MatcherView, SLOT(valueChanged_uniradio(int)));
+        QObject::connect(horizontalSlider_prefilcap, SIGNAL(valueChanged(int)), MatcherView, SLOT(valueChanged_Prefilcap(int)));
+        QObject::connect(horizontalSlider_specwinsz, SIGNAL(valueChanged(int)), MatcherView, SLOT(valueChanged_specwinsz(int)));
+        QObject::connect(horizontalSlider_SadWinSiz, SIGNAL(valueChanged(int)), MatcherView, SLOT(valueChanged_SadWinSize(int)));
+        QObject::connect(horizontalSlider_MinDisp, SIGNAL(valueChanged(int)), MatcherView, SLOT(valueChanged_MinDisp(int)));
+        QObject::connect(horizontalSlider_NumDisparities, SIGNAL(valueChanged(int)), MatcherView, SLOT(valueChanged_NumDisparities(int)));
+        QObject::connect(horizontalSlider_specrange, SIGNAL(valueChanged(int)), MatcherView, SLOT(valueChanged_Specrange(int)));
+        QObject::connect(horizontalSlider_maxdifdisp12, SIGNAL(valueChanged(int)), MatcherView, SLOT(valueChanged_MaxDifdisp2(int)));
+        QObject::connect(horizontalSlider_textThread, SIGNAL(valueChanged(int)), MatcherView, SLOT(valueChanged_TextThread(int)));
 
-        QMetaObject::connectSlotsByName(Matcher);
+        QMetaObject::connectSlotsByName(MatcherView);
     } // setupUi
 
-    void retranslateUi(QWidget *Matcher)
+    void retranslateUi(QWidget *MatcherView)
     {
-        Matcher->setWindowTitle(QApplication::translate("Matcher", "\345\214\271\351\205\215", nullptr));
-        groupBox->setTitle(QApplication::translate("Matcher", "\347\233\270\346\234\272\345\217\202\346\225\260", nullptr));
+        MatcherView->setWindowTitle(QApplication::translate("MatcherView", "\345\214\271\351\205\215", nullptr));
+        groupBox->setTitle(QApplication::translate("MatcherView", "\347\233\270\346\234\272\345\217\202\346\225\260", nullptr));
         label->setText(QString());
-        groupBox_6->setTitle(QApplication::translate("Matcher", "\345\214\271\351\205\215\345\217\202\346\225\260", nullptr));
-        label_40->setText(QApplication::translate("Matcher", "uniquenessRatio(\350\247\206\345\267\256\345\224\257\344\270\200\346\200\247\347\231\276\345\210\206\346\257\224)", nullptr));
-        lineEdit_uniradio->setPlaceholderText(QApplication::translate("Matcher", "0", nullptr));
-        label_39->setText(QApplication::translate("Matcher", "preFilterCap(\345\211\215\347\275\256\346\273\244\346\263\242\345\231\250\346\210\252\346\226\255\345\200\274)", nullptr));
-        lineEdit_prefilcap->setPlaceholderText(QApplication::translate("Matcher", "1", nullptr));
-        label_36->setText(QApplication::translate("Matcher", "SpeckleWindowSize(\350\247\206\345\267\256\350\277\236\351\200\232\345\214\272\345\237\237\345\217\230\345\214\226\345\272\246\347\232\204\347\252\227\345\217\243\345\244\247\345\260\217)", nullptr));
-        lineEdit_specwinsz->setPlaceholderText(QApplication::translate("Matcher", "0", nullptr));
-        label_37->setText(QApplication::translate("Matcher", "SADWindowSize(SAD\347\252\227\345\217\243\345\244\247\345\260\217)", nullptr));
-        lineEdit_SadWinSiz->setPlaceholderText(QApplication::translate("Matcher", "5", nullptr));
-        label_41->setText(QApplication::translate("Matcher", "minDisparity(\346\234\200\345\260\217\350\247\206\345\267\256\345\200\274)", nullptr));
-        lineEdit_MinDisp->setPlaceholderText(QApplication::translate("Matcher", "0", nullptr));
-        label_44->setText(QApplication::translate("Matcher", "numDisparities(\350\247\206\345\267\256\347\252\227\345\217\243\345\244\247\345\260\217)", nullptr));
-        lineEdit_NumDisparities->setPlaceholderText(QApplication::translate("Matcher", "16", nullptr));
-        label_42->setText(QApplication::translate("Matcher", "speckleRange(\350\277\236\351\200\232\345\214\272\345\237\237\345\206\205\347\232\204\346\234\200\345\244\247\350\247\206\345\267\256\345\217\230\345\214\226)", nullptr));
-        lineEdit_specrange->setPlaceholderText(QApplication::translate("Matcher", "0", nullptr));
-        label_43->setText(QApplication::translate("Matcher", "disp12MaxDiff(\345\267\246\345\217\263\350\247\206\345\267\256\345\233\276\347\232\204\346\234\200\345\244\247\345\256\271\350\256\270\345\267\256\345\274\202)", nullptr));
-        lineEdit_maxdifdisp12->setPlaceholderText(QApplication::translate("Matcher", "0", nullptr));
-        label_35->setText(QApplication::translate("Matcher", "TextureThreshold(\344\275\216\347\272\271\347\220\206\345\214\272\345\237\237\347\232\204\345\210\244\346\226\255\351\230\210\345\200\274)", nullptr));
-        lineEdit_textThread->setPlaceholderText(QApplication::translate("Matcher", "0", nullptr));
-        groupBox_9->setTitle(QApplication::translate("Matcher", "Function", nullptr));
-        radioButton_SGBM->setText(QApplication::translate("Matcher", "SGBM", nullptr));
-        radioButton_BM->setText(QApplication::translate("Matcher", "BM", nullptr));
-        groupBox_8->setTitle(QApplication::translate("Matcher", "MODE", nullptr));
-        radioButton_MODE_HH->setText(QApplication::translate("Matcher", "HH", nullptr));
-        radioButton_MODE_3WAY->setText(QApplication::translate("Matcher", "3WAY", nullptr));
-        radioButton_MODE_SGBM->setText(QApplication::translate("Matcher", "SGBM", nullptr));
-        pushButton_MatchDefault->setText(QApplication::translate("Matcher", "\351\273\230\350\256\244\345\217\202\346\225\260", nullptr));
-        pushButton_MatchChooseFiles->setText(QApplication::translate("Matcher", "\345\217\214\347\233\256\345\214\271\351\205\215", nullptr));
-        pushButton_RefreshStereoMatch->setText(QApplication::translate("Matcher", "\345\210\267\346\226\260", nullptr));
+        groupBox_6->setTitle(QApplication::translate("MatcherView", "\345\214\271\351\205\215\345\217\202\346\225\260", nullptr));
+        label_40->setText(QApplication::translate("MatcherView", "uniquenessRatio(\350\247\206\345\267\256\345\224\257\344\270\200\346\200\247\347\231\276\345\210\206\346\257\224)", nullptr));
+        lineEdit_uniradio->setPlaceholderText(QApplication::translate("MatcherView", "0", nullptr));
+        label_39->setText(QApplication::translate("MatcherView", "preFilterCap(\345\211\215\347\275\256\346\273\244\346\263\242\345\231\250\346\210\252\346\226\255\345\200\274)", nullptr));
+        lineEdit_prefilcap->setPlaceholderText(QApplication::translate("MatcherView", "1", nullptr));
+        label_36->setText(QApplication::translate("MatcherView", "SpeckleWindowSize(\350\247\206\345\267\256\350\277\236\351\200\232\345\214\272\345\237\237\345\217\230\345\214\226\345\272\246\347\232\204\347\252\227\345\217\243\345\244\247\345\260\217)", nullptr));
+        lineEdit_specwinsz->setPlaceholderText(QApplication::translate("MatcherView", "0", nullptr));
+        label_37->setText(QApplication::translate("MatcherView", "SADWindowSize(SAD\347\252\227\345\217\243\345\244\247\345\260\217)", nullptr));
+        lineEdit_SadWinSiz->setPlaceholderText(QApplication::translate("MatcherView", "5", nullptr));
+        label_41->setText(QApplication::translate("MatcherView", "minDisparity(\346\234\200\345\260\217\350\247\206\345\267\256\345\200\274)", nullptr));
+        lineEdit_MinDisp->setPlaceholderText(QApplication::translate("MatcherView", "0", nullptr));
+        label_44->setText(QApplication::translate("MatcherView", "numDisparities(\350\247\206\345\267\256\347\252\227\345\217\243\345\244\247\345\260\217)", nullptr));
+        lineEdit_NumDisparities->setPlaceholderText(QApplication::translate("MatcherView", "16", nullptr));
+        label_42->setText(QApplication::translate("MatcherView", "speckleRange(\350\277\236\351\200\232\345\214\272\345\237\237\345\206\205\347\232\204\346\234\200\345\244\247\350\247\206\345\267\256\345\217\230\345\214\226)", nullptr));
+        lineEdit_specrange->setPlaceholderText(QApplication::translate("MatcherView", "0", nullptr));
+        label_43->setText(QApplication::translate("MatcherView", "disp12MaxDiff(\345\267\246\345\217\263\350\247\206\345\267\256\345\233\276\347\232\204\346\234\200\345\244\247\345\256\271\350\256\270\345\267\256\345\274\202)", nullptr));
+        lineEdit_maxdifdisp12->setPlaceholderText(QApplication::translate("MatcherView", "0", nullptr));
+        label_35->setText(QApplication::translate("MatcherView", "TextureThreshold(\344\275\216\347\272\271\347\220\206\345\214\272\345\237\237\347\232\204\345\210\244\346\226\255\351\230\210\345\200\274)", nullptr));
+        lineEdit_textThread->setPlaceholderText(QApplication::translate("MatcherView", "0", nullptr));
+        groupBox_9->setTitle(QApplication::translate("MatcherView", "Function", nullptr));
+        radioButton_SGBM->setText(QApplication::translate("MatcherView", "SGBM", nullptr));
+        radioButton_BM->setText(QApplication::translate("MatcherView", "BM", nullptr));
+        groupBox_8->setTitle(QApplication::translate("MatcherView", "MODE", nullptr));
+        radioButton_MODE_HH->setText(QApplication::translate("MatcherView", "HH", nullptr));
+        radioButton_MODE_3WAY->setText(QApplication::translate("MatcherView", "3WAY", nullptr));
+        radioButton_MODE_SGBM->setText(QApplication::translate("MatcherView", "SGBM", nullptr));
+        pushButton_MatchDefault->setText(QApplication::translate("MatcherView", "\351\273\230\350\256\244\345\217\202\346\225\260", nullptr));
+        pushButton_MatchChooseFiles->setText(QApplication::translate("MatcherView", "\345\217\214\347\233\256\345\214\271\351\205\215", nullptr));
+        pushButton_RefreshStereoMatch->setText(QApplication::translate("MatcherView", "\345\210\267\346\226\260", nullptr));
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class Matcher: public Ui_Matcher {};
+    class MatcherView: public Ui_MatcherView {};
 } // namespace Ui
 
 QT_END_NAMESPACE
 
-#endif // UI_MATCHER_H
+#endif // UI_MATCHERVIEW_H

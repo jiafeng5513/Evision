@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Calibrater</class>
- <widget class="QWidget" name="Calibrater">
+ <class>CalibraterView</class>
+ <widget class="QWidget" name="CalibraterView">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -259,7 +259,7 @@
   <connection>
    <sender>lineEdit_BoardWidth</sender>
    <signal>textChanged(QString)</signal>
-   <receiver>Calibrater</receiver>
+   <receiver>CalibraterView</receiver>
    <slot>onValueChanged_BoardWidth(QString)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -275,7 +275,7 @@
   <connection>
    <sender>lineEdit_BoardHeight</sender>
    <signal>textChanged(QString)</signal>
-   <receiver>Calibrater</receiver>
+   <receiver>CalibraterView</receiver>
    <slot>onValueChanged_BoardHeight(QString)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -291,7 +291,7 @@
   <connection>
    <sender>lineEdit_SquareSize</sender>
    <signal>textChanged(QString)</signal>
-   <receiver>Calibrater</receiver>
+   <receiver>CalibraterView</receiver>
    <slot>onValueChanged_SquareSize(QString)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -307,7 +307,7 @@
   <connection>
    <sender>checkBox_showRectified</sender>
    <signal>clicked(bool)</signal>
-   <receiver>Calibrater</receiver>
+   <receiver>CalibraterView</receiver>
    <slot>onClicked_showRectified(bool)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -323,7 +323,7 @@
   <connection>
    <sender>radioButton_Bouguet</sender>
    <signal>clicked(bool)</signal>
-   <receiver>Calibrater</receiver>
+   <receiver>CalibraterView</receiver>
    <slot>onClicked_Bouguet(bool)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -339,7 +339,7 @@
   <connection>
    <sender>radioButton_Hartley</sender>
    <signal>clicked(bool)</signal>
-   <receiver>Calibrater</receiver>
+   <receiver>CalibraterView</receiver>
    <slot>onClicked_Hartley(bool)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -355,7 +355,7 @@
   <connection>
    <sender>pushButton_CalibDefault</sender>
    <signal>clicked()</signal>
-   <receiver>Calibrater</receiver>
+   <receiver>CalibraterView</receiver>
    <slot>setDefaultCalibParam()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -371,7 +371,7 @@
   <connection>
    <sender>pushButton</sender>
    <signal>clicked()</signal>
-   <receiver>Calibrater</receiver>
+   <receiver>CalibraterView</receiver>
    <slot>doCalib()</slot>
    <hints>
     <hint type="sourcelabel">

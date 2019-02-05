@@ -1,22 +1,22 @@
 #pragma once
 
 #include <QWidget>
-#include "ui_Calibrater.h"
+#include "ui_CalibraterView.h"
 #include "CalibrateParamEntity.h"
 #include "CalibrateController.h"
 /*
  * ±ê¶¨:view
  */
-class Calibrater : public QWidget
+class CalibraterView : public QWidget
 {
 	Q_OBJECT
 
 public:
-	Calibrater(QWidget *parent = Q_NULLPTR);
-	~Calibrater();
+	CalibraterView(QWidget *parent = Q_NULLPTR);
+	~CalibraterView();
 
 private:
-	Ui::Calibrater ui;
+	Ui::CalibraterView ui;
 	CalibrateParamEntity * m_calib_entity;
 	CalibrateController * m_calib_controller;
 public slots:

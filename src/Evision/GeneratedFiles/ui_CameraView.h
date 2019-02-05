@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'Camera.ui'
+** Form generated from reading UI file 'CameraView.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.12.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef UI_CAMERA_H
-#define UI_CAMERA_H
+#ifndef UI_CAMERAVIEW_H
+#define UI_CAMERAVIEW_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
@@ -27,7 +27,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_Camera
+class Ui_CameraView
 {
 public:
     QGridLayout *gridLayout_6;
@@ -63,16 +63,16 @@ public:
     QLabel *label;
     QLCDNumber *lcdNumber;
 
-    void setupUi(QWidget *Camera)
+    void setupUi(QWidget *CameraView)
     {
-        if (Camera->objectName().isEmpty())
-            Camera->setObjectName(QString::fromUtf8("Camera"));
-        Camera->resize(858, 547);
-        gridLayout_6 = new QGridLayout(Camera);
+        if (CameraView->objectName().isEmpty())
+            CameraView->setObjectName(QString::fromUtf8("CameraView"));
+        CameraView->resize(858, 547);
+        gridLayout_6 = new QGridLayout(CameraView);
         gridLayout_6->setSpacing(6);
         gridLayout_6->setContentsMargins(11, 11, 11, 11);
         gridLayout_6->setObjectName(QString::fromUtf8("gridLayout_6"));
-        frame = new QFrame(Camera);
+        frame = new QFrame(CameraView);
         frame->setObjectName(QString::fromUtf8("frame"));
         frame->setMaximumSize(QSize(200, 16777215));
         frame->setFrameShape(QFrame::Box);
@@ -115,7 +115,7 @@ public:
 
         gridLayout_6->addWidget(frame, 1, 1, 1, 1);
 
-        groupBox_2 = new QGroupBox(Camera);
+        groupBox_2 = new QGroupBox(CameraView);
         groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
         groupBox_2->setMaximumSize(QSize(200, 16777215));
         groupBox_2->setFlat(true);
@@ -140,7 +140,7 @@ public:
 
         gridLayout_6->addWidget(groupBox_2, 2, 1, 1, 1);
 
-        groupBox_3 = new QGroupBox(Camera);
+        groupBox_3 = new QGroupBox(CameraView);
         groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
         groupBox_3->setMaximumSize(QSize(200, 16777215));
         groupBox_3->setFlat(true);
@@ -162,7 +162,7 @@ public:
 
         gridLayout_6->addWidget(groupBox_3, 3, 1, 1, 1);
 
-        groupBox = new QGroupBox(Camera);
+        groupBox = new QGroupBox(CameraView);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
         groupBox->setMaximumSize(QSize(200, 16777215));
         groupBox->setFlat(true);
@@ -181,7 +181,7 @@ public:
 
         gridLayout_6->addWidget(groupBox, 4, 1, 1, 1);
 
-        groupBox_4 = new QGroupBox(Camera);
+        groupBox_4 = new QGroupBox(CameraView);
         groupBox_4->setObjectName(QString::fromUtf8("groupBox_4"));
         groupBox_4->setMaximumSize(QSize(200, 16777215));
         groupBox_4->setFlat(true);
@@ -199,7 +199,7 @@ public:
 
         gridLayout_6->addWidget(groupBox_4, 5, 1, 1, 1);
 
-        groupBox_5 = new QGroupBox(Camera);
+        groupBox_5 = new QGroupBox(CameraView);
         groupBox_5->setObjectName(QString::fromUtf8("groupBox_5"));
         groupBox_5->setMaximumSize(QSize(200, 16777215));
         groupBox_5->setFlat(true);
@@ -221,7 +221,7 @@ public:
 
         gridLayout_6->addItem(verticalSpacer, 7, 1, 1, 1);
 
-        frame_2 = new QFrame(Camera);
+        frame_2 = new QFrame(CameraView);
         frame_2->setObjectName(QString::fromUtf8("frame_2"));
         frame_2->setFrameShape(QFrame::Box);
         frame_2->setFrameShadow(QFrame::Raised);
@@ -239,7 +239,7 @@ public:
 
         gridLayout_6->addWidget(frame_2, 1, 0, 7, 1);
 
-        frame_4 = new QFrame(Camera);
+        frame_4 = new QFrame(CameraView);
         frame_4->setObjectName(QString::fromUtf8("frame_4"));
         frame_4->setMaximumSize(QSize(16777215, 16777215));
         frame_4->setFrameShape(QFrame::Box);
@@ -273,43 +273,43 @@ public:
         gridLayout_6->addWidget(frame_4, 0, 0, 1, 2);
 
 
-        retranslateUi(Camera);
-        QObject::connect(pushButton_FindSavePath, SIGNAL(clicked()), Camera, SLOT(OnFindSavePath()));
-        QObject::connect(pushButton_CameraOn, SIGNAL(clicked()), Camera, SLOT(OnCameraPowerOn()));
-        QObject::connect(pushButton_CameraOff, SIGNAL(clicked()), Camera, SLOT(OnCameraPowerOff()));
-        QObject::connect(pushButton_Focus, SIGNAL(clicked()), Camera, SLOT(OnFocus()));
-        QObject::connect(pushButton_Shot, SIGNAL(clicked()), Camera, SLOT(OnShot()));
-        QObject::connect(horizontalSlider_exposureCompensation, SIGNAL(valueChanged(int)), Camera, SLOT(OnValueChanged_ExposureCompensation(int)));
-        QObject::connect(horizontalSlider_Quality, SIGNAL(valueChanged(int)), Camera, SLOT(OnValueChanged_Quality(int)));
-        QObject::connect(comboBox_CameraDevice, SIGNAL(currentIndexChanged(QString)), Camera, SLOT(OnSelectedChanged_CameraDevice(QString)));
-        QObject::connect(comboBox_Resolution, SIGNAL(currentIndexChanged(QString)), Camera, SLOT(OnSelectedChanged_Resolution(QString)));
-        QObject::connect(comboBox_Codec, SIGNAL(currentIndexChanged(QString)), Camera, SLOT(OnSelectedChanged_Codec(QString)));
+        retranslateUi(CameraView);
+        QObject::connect(pushButton_FindSavePath, SIGNAL(clicked()), CameraView, SLOT(OnFindSavePath()));
+        QObject::connect(pushButton_CameraOn, SIGNAL(clicked()), CameraView, SLOT(OnCameraPowerOn()));
+        QObject::connect(pushButton_CameraOff, SIGNAL(clicked()), CameraView, SLOT(OnCameraPowerOff()));
+        QObject::connect(pushButton_Focus, SIGNAL(clicked()), CameraView, SLOT(OnFocus()));
+        QObject::connect(pushButton_Shot, SIGNAL(clicked()), CameraView, SLOT(OnShot()));
+        QObject::connect(horizontalSlider_exposureCompensation, SIGNAL(valueChanged(int)), CameraView, SLOT(OnValueChanged_ExposureCompensation(int)));
+        QObject::connect(horizontalSlider_Quality, SIGNAL(valueChanged(int)), CameraView, SLOT(OnValueChanged_Quality(int)));
+        QObject::connect(comboBox_CameraDevice, SIGNAL(currentIndexChanged(QString)), CameraView, SLOT(OnSelectedChanged_CameraDevice(QString)));
+        QObject::connect(comboBox_Resolution, SIGNAL(currentIndexChanged(QString)), CameraView, SLOT(OnSelectedChanged_Resolution(QString)));
+        QObject::connect(comboBox_Codec, SIGNAL(currentIndexChanged(QString)), CameraView, SLOT(OnSelectedChanged_Codec(QString)));
 
-        QMetaObject::connectSlotsByName(Camera);
+        QMetaObject::connectSlotsByName(CameraView);
     } // setupUi
 
-    void retranslateUi(QWidget *Camera)
+    void retranslateUi(QWidget *CameraView)
     {
-        Camera->setWindowTitle(QApplication::translate("Camera", "\347\233\270\346\234\272", nullptr));
-        pushButton_CameraOn->setText(QApplication::translate("Camera", "\346\221\204\345\203\217\346\234\272\345\274\200", nullptr));
-        pushButton_CameraOff->setText(QApplication::translate("Camera", "\346\221\204\345\203\217\346\234\272\345\205\263", nullptr));
-        pushButton_Focus->setText(QApplication::translate("Camera", "Focus", nullptr));
-        pushButton_Shot->setText(QApplication::translate("Camera", "\346\213\215\347\205\247", nullptr));
-        groupBox_2->setTitle(QApplication::translate("Camera", "\346\233\235\345\205\211\350\241\245\345\201\277", nullptr));
-        groupBox_3->setTitle(QApplication::translate("Camera", "\345\233\276\347\211\207\350\264\250\351\207\217", nullptr));
-        groupBox->setTitle(QApplication::translate("Camera", "\346\221\204\345\203\217\345\244\264", nullptr));
-        groupBox_4->setTitle(QApplication::translate("Camera", "\345\210\206\350\276\250\347\216\207", nullptr));
-        groupBox_5->setTitle(QApplication::translate("Camera", "\345\233\276\347\211\207\346\240\274\345\274\217", nullptr));
-        pushButton_FindSavePath->setText(QApplication::translate("Camera", "\344\277\235\345\255\230\345\210\260", nullptr));
-        label->setText(QApplication::translate("Camera", "\350\256\241\346\225\260\345\231\250:", nullptr));
+        CameraView->setWindowTitle(QApplication::translate("CameraView", "\347\233\270\346\234\272", nullptr));
+        pushButton_CameraOn->setText(QApplication::translate("CameraView", "\346\221\204\345\203\217\346\234\272\345\274\200", nullptr));
+        pushButton_CameraOff->setText(QApplication::translate("CameraView", "\346\221\204\345\203\217\346\234\272\345\205\263", nullptr));
+        pushButton_Focus->setText(QApplication::translate("CameraView", "Focus", nullptr));
+        pushButton_Shot->setText(QApplication::translate("CameraView", "\346\213\215\347\205\247", nullptr));
+        groupBox_2->setTitle(QApplication::translate("CameraView", "\346\233\235\345\205\211\350\241\245\345\201\277", nullptr));
+        groupBox_3->setTitle(QApplication::translate("CameraView", "\345\233\276\347\211\207\350\264\250\351\207\217", nullptr));
+        groupBox->setTitle(QApplication::translate("CameraView", "\346\221\204\345\203\217\345\244\264", nullptr));
+        groupBox_4->setTitle(QApplication::translate("CameraView", "\345\210\206\350\276\250\347\216\207", nullptr));
+        groupBox_5->setTitle(QApplication::translate("CameraView", "\345\233\276\347\211\207\346\240\274\345\274\217", nullptr));
+        pushButton_FindSavePath->setText(QApplication::translate("CameraView", "\344\277\235\345\255\230\345\210\260", nullptr));
+        label->setText(QApplication::translate("CameraView", "\350\256\241\346\225\260\345\231\250:", nullptr));
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class Camera: public Ui_Camera {};
+    class CameraView: public Ui_CameraView {};
 } // namespace Ui
 
 QT_END_NAMESPACE
 
-#endif // UI_CAMERA_H
+#endif // UI_CAMERAVIEW_H

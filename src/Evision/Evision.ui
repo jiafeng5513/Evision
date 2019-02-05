@@ -104,10 +104,17 @@
     <addaction name="action_SFM_View"/>
     <addaction name="action_3dReconstruct_View"/>
    </widget>
+   <widget class="QMenu" name="menuAi">
+    <property name="title">
+     <string>Ai</string>
+    </property>
+    <addaction name="action_ObjectDetection"/>
+   </widget>
    <addaction name="menu"/>
    <addaction name="menu_3"/>
    <addaction name="menu_4"/>
    <addaction name="menu_2"/>
+   <addaction name="menuAi"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <property name="acceptDrops">
@@ -130,6 +137,7 @@
    <addaction name="action_PointCloud_View"/>
    <addaction name="action_Measure_View"/>
    <addaction name="separator"/>
+   <addaction name="action_ObjectDetection"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="action_StereoCamera">
@@ -236,6 +244,15 @@
    </property>
    <property name="text">
     <string>相机标定</string>
+   </property>
+  </action>
+  <action name="action_ObjectDetection">
+   <property name="icon">
+    <iconset resource="Evision.qrc">
+     <normaloff>:/Evision/resource/face_detection_128px_1218199_easyicon.net.ico</normaloff>:/Evision/resource/face_detection_128px_1218199_easyicon.net.ico</iconset>
+   </property>
+   <property name="text">
+    <string>目标检测</string>
    </property>
   </action>
  </widget>

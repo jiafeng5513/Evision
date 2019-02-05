@@ -1,7 +1,7 @@
 #pragma once
 
 #include <QWidget>
-#include "ui_WatchImage.h"
+#include "ui_WatchImageView.h"
 #include "QGraphicsView"
 class MyGraphicsView:public QGraphicsView
 {
@@ -11,17 +11,17 @@ public:
 signals:
 	void mouseWheelZoom(int delta);
 };
-class WatchImage : public QWidget
+class WatchImageView : public QWidget
 {
 	Q_OBJECT
 
 public:
-	WatchImage(QWidget *parent = Q_NULLPTR);
-	WatchImage(QString filename, QWidget *parent = Q_NULLPTR);
-	~WatchImage();
+	WatchImageView(QWidget *parent = Q_NULLPTR);
+	WatchImageView(QString filename, QWidget *parent = Q_NULLPTR);
+	~WatchImageView();
 
 private:
-	Ui::WatchImage ui;
+	Ui::WatchImageView ui;
 	QImage *image;
 	MyGraphicsView *m_GraphicsView;
 	float scaleFactor = 30;

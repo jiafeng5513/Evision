@@ -1,21 +1,21 @@
 #pragma once
 
 #include <QWidget>
-#include "ui_Matcher.h"
+#include "ui_MatcherView.h"
 #include "StereoMatch.h"
 #include "StereoMatchParamEntity.h"
 #include "StereoMatchController.h"
 
-class Matcher : public QWidget
+class MatcherView : public QWidget
 {
 	Q_OBJECT
 
 public:
-	Matcher(QWidget *parent = Q_NULLPTR);
-	~Matcher();
+	MatcherView(QWidget *parent = Q_NULLPTR);
+	~MatcherView();
 
 private:
-	Ui::Matcher ui;
+	Ui::MatcherView ui;
 	StereoMatchParamEntity * m_entity;
 	StereoMatchController * m_controller;
 public slots:

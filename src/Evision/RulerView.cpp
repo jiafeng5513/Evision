@@ -1,4 +1,4 @@
-#include "RFinterface.h"
+#include "RulerView.h"
 #include "EvisionUtils.h"
 #include "QGraphicsScene"
 #include "PointCloudUtils.h"
@@ -7,7 +7,7 @@
 #include <QMessageBox>
 
 //直接启动视图,后设置参数
-RFinterface::RFinterface(QWidget *parent)
+RulerView::RulerView(QWidget *parent)
 	: QWidget(parent)
 {
 	ui.setupUi(this);
@@ -18,7 +18,7 @@ RFinterface::RFinterface(QWidget *parent)
 }
 
 //外部设置参数,再启动视图
-RFinterface::RFinterface(cv::Mat img, cv::Mat disp, cv::Mat xyz, QWidget* parent) : QWidget(parent)
+RulerView::RulerView(cv::Mat img, cv::Mat disp, cv::Mat xyz, QWidget* parent) : QWidget(parent)
 {
 	ui.setupUi(this);
 	this->img  = img;
@@ -42,11 +42,11 @@ RFinterface::RFinterface(cv::Mat img, cv::Mat disp, cv::Mat xyz, QWidget* parent
 	printImgToO(img);
 }
 
-RFinterface::~RFinterface()
+RulerView::~RulerView()
 {
 }
 //向O窗口画图
-void RFinterface::printImgToO(cv::Mat value)
+void RulerView::printImgToO(cv::Mat value)
 {
 	QImage QImage = EvisionUtils::cvMat2QImage(value);
 	QGraphicsScene *sceneL = new QGraphicsScene;
@@ -58,7 +58,7 @@ void RFinterface::printImgToO(cv::Mat value)
 	ui.customGraphicsView_O->update();
 }
 //向D窗口画图
-void RFinterface::printImgToD(cv::Mat value)
+void RulerView::printImgToD(cv::Mat value)
 {
 	QImage QImage = EvisionUtils::cvMat2QImage(value);
 	QGraphicsScene *sceneL = new QGraphicsScene;
@@ -70,7 +70,7 @@ void RFinterface::printImgToD(cv::Mat value)
 	ui.customGraphicsView_D->update();
 }
 
-void RFinterface::checkEnable()
+void RulerView::checkEnable()
 {
 	if(ui.checkBox_leftOK->isChecked()&&ui.checkBox_dispOK->isChecked()&&ui.checkBox_pointcloudOK->isChecked())
 	{
@@ -79,14 +79,14 @@ void RFinterface::checkEnable()
 }
 
 //响应鼠标移动
-void RFinterface::onMouseMove(int x, int y)
+void RulerView::onMouseMove(int x, int y)
 {
 	ui.lineEdit_ImgX->setText(QString::fromStdString(std::to_string(x)));
 	ui.lineEdit_ImgY->setText(QString::fromStdString(std::to_string(y)));
 
 }
 //响应鼠标左键击键
-void RFinterface::onMouseLButtonDown(int x, int y)
+void RulerView::onMouseLButtonDown(int x, int y)
 {
 	if (started)
 	{
@@ -95,12 +95,12 @@ void RFinterface::onMouseLButtonDown(int x, int y)
 	}
 }
 //响应鼠标右键击键
-void RFinterface::onMouseRButtonDown(int x, int y)
+void RulerView::onMouseRButtonDown(int x, int y)
 {
 
 }
 
-void RFinterface::onSelectDisparityMap()
+void RulerView::onSelectDisparityMap()
 {
 	QFileDialog * fileDialog = new QFileDialog();
 	fileDialog->setWindowTitle(QStringLiteral("请选择视差图"));
@@ -114,7 +114,7 @@ void RFinterface::onSelectDisparityMap()
 	}
 }
 
-void RFinterface::onSelectleftMap()
+void RulerView::onSelectleftMap()
 {
 	QFileDialog * fileDialog = new QFileDialog();
 	fileDialog->setWindowTitle(QStringLiteral("请选择参与生成所选视差图的左视图"));
@@ -128,7 +128,7 @@ void RFinterface::onSelectleftMap()
 	}
 }
 
-void RFinterface::onSelectPointcloudFile()
+void RulerView::onSelectPointcloudFile()
 {
 	QFileDialog * fileDialog = new QFileDialog();
 	fileDialog->setWindowTitle(QStringLiteral("请选择点云文件"));
@@ -149,7 +149,7 @@ void RFinterface::onSelectPointcloudFile()
 	}
 }
 
-void RFinterface::onStart()
+void RulerView::onStart()
 {
 
 	std::vector<cv::Mat> xyzSet;

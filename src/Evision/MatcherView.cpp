@@ -1,7 +1,7 @@
-#include "Matcher.h"
+#include "MatcherView.h"
 #include "EvisionUtils.h"
 
-Matcher::Matcher(QWidget *parent)
+MatcherView::MatcherView(QWidget *parent)
 	: QWidget(parent)
 {
 	ui.setupUi(this);
@@ -23,26 +23,26 @@ Matcher::Matcher(QWidget *parent)
 	connect(m_entity, SIGNAL(paramChanged_msgBuffer()), this, SLOT(onParamChanged_msgBuffer()));
 }
 
-Matcher::~Matcher()
+MatcherView::~MatcherView()
 {
 }
 //默认匹配参数
-void Matcher::setDefaultMatchParam()
+void MatcherView::setDefaultMatchParam()
 {
 	m_controller->setDefaultMatchParamCommand();
 }
 //匹配
-void Matcher::doMatch()
+void MatcherView::doMatch()
 {
 	m_controller->MatchCommand();
 }
 //刷新匹配结果
-void Matcher::RefreshStereoMatch()
+void MatcherView::RefreshStereoMatch()
 {
 	m_controller->RefreshStereoMatchCommand();
 }
 
-void Matcher::valueChanged_MinDisp(int value)
+void MatcherView::valueChanged_MinDisp(int value)
 {
 	ui.lineEdit_MinDisp->setText(QString::fromStdString(std::to_string(value)));
 	if (m_entity->getMinDisp() != value)
@@ -50,12 +50,12 @@ void Matcher::valueChanged_MinDisp(int value)
 		m_entity->setMinDisp(value);
 	}
 }
-void Matcher::onParamChanged_MinDisp()
+void MatcherView::onParamChanged_MinDisp()
 {
 	ui.horizontalSlider_MinDisp->setValue(m_entity->getMinDisp());
 }
 
-void Matcher::valueChanged_uniradio(int value)
+void MatcherView::valueChanged_uniradio(int value)
 {
 	ui.lineEdit_uniradio->setText(QString::fromStdString(std::to_string(value)));
 	if (m_entity->getUniradio() != value)
@@ -64,12 +64,12 @@ void Matcher::valueChanged_uniradio(int value)
 	}
 }
 
-void Matcher::onParamChanged_uniradio()
+void MatcherView::onParamChanged_uniradio()
 {
 	ui.horizontalSlider_uniradio->setValue(m_entity->getUniradio());
 }
 
-void Matcher::valueChanged_specwinsz(int value)
+void MatcherView::valueChanged_specwinsz(int value)
 {
 	ui.lineEdit_specwinsz->setText(QString::fromStdString(std::to_string(value)));
 	if (m_entity->getSpecwinsz() != value)
@@ -78,13 +78,13 @@ void Matcher::valueChanged_specwinsz(int value)
 	}
 }
 
-void Matcher::onParamChanged_specwinsz()
+void MatcherView::onParamChanged_specwinsz()
 {
 	ui.horizontalSlider_specwinsz->setValue(m_entity->getSpecwinsz());
 
 }
 
-void Matcher::valueChanged_NumDisparities(int value)
+void MatcherView::valueChanged_NumDisparities(int value)
 {
 	ui.lineEdit_NumDisparities->setText(QString::fromStdString(std::to_string(value)));
 	if (m_entity->getNumDisparities() != value)
@@ -93,13 +93,13 @@ void Matcher::valueChanged_NumDisparities(int value)
 	}
 }
 
-void Matcher::onParamChanged_NumDisparities()
+void MatcherView::onParamChanged_NumDisparities()
 {
 	ui.horizontalSlider_NumDisparities->setValue(m_entity->getNumDisparities());
 
 }
 
-void Matcher::valueChanged_Specrange(int value)
+void MatcherView::valueChanged_Specrange(int value)
 {
 	ui.lineEdit_specrange->setText(QString::fromStdString(std::to_string(value)));
 	if (m_entity->getSpecrange() != value)
@@ -108,13 +108,13 @@ void Matcher::valueChanged_Specrange(int value)
 	}
 }
 
-void Matcher::onParamChanged_Specrange()
+void MatcherView::onParamChanged_Specrange()
 {
 	ui.horizontalSlider_specrange->setValue(m_entity->getSpecrange());
 
 }
 
-void Matcher::valueChanged_Prefilcap(int value)
+void MatcherView::valueChanged_Prefilcap(int value)
 {
 	ui.lineEdit_prefilcap->setText(QString::fromStdString(std::to_string(value)));
 	if (m_entity->getPrefilcap() != value)
@@ -123,13 +123,13 @@ void Matcher::valueChanged_Prefilcap(int value)
 	}
 }
 
-void Matcher::onParamChanged_Prefilcap()
+void MatcherView::onParamChanged_Prefilcap()
 {
 	ui.horizontalSlider_prefilcap->setValue(m_entity->getPrefilcap());
 
 }
 
-void Matcher::valueChanged_SadWinSize(int value)
+void MatcherView::valueChanged_SadWinSize(int value)
 {
 	ui.lineEdit_SadWinSiz->setText(QString::fromStdString(std::to_string(value)));
 	if (m_entity->getSadWinsz() != value)
@@ -138,13 +138,13 @@ void Matcher::valueChanged_SadWinSize(int value)
 	}
 }
 
-void Matcher::onParamChanged_SadWinSize()
+void MatcherView::onParamChanged_SadWinSize()
 {
 	ui.horizontalSlider_SadWinSiz->setValue(m_entity->getSadWinsz());
 
 }
 
-void Matcher::valueChanged_TextThread(int value)
+void MatcherView::valueChanged_TextThread(int value)
 {
 	ui.lineEdit_textThread->setText(QString::fromStdString(std::to_string(value)));
 	if (m_entity->getTextThread() != value)
@@ -153,13 +153,13 @@ void Matcher::valueChanged_TextThread(int value)
 	}
 }
 
-void Matcher::onParamChanged_TextThread()
+void MatcherView::onParamChanged_TextThread()
 {
 	ui.horizontalSlider_textThread->setValue(m_entity->getTextThread());
 
 }
 
-void Matcher::valueChanged_MaxDifdisp2(int value)
+void MatcherView::valueChanged_MaxDifdisp2(int value)
 {
 	ui.lineEdit_maxdifdisp12->setText(QString::fromStdString(std::to_string(value)));
 	if (m_entity->getMaxdifdisp12() != value)
@@ -168,13 +168,13 @@ void Matcher::valueChanged_MaxDifdisp2(int value)
 	}
 }
 
-void Matcher::onParamChanged_MaxDifdisp2()
+void MatcherView::onParamChanged_MaxDifdisp2()
 {
 	ui.horizontalSlider_maxdifdisp12->setValue(m_entity->getMaxdifdisp12());
 
 }
 
-void Matcher::onClicked_BM(bool value)
+void MatcherView::onClicked_BM(bool value)
 {
 	if (m_entity->getBM() != value)
 	{
@@ -186,13 +186,13 @@ void Matcher::onClicked_BM(bool value)
 	ui.radioButton_MODE_3WAY->setEnabled(false);
 }
 
-void Matcher::onParamChanged_BM()
+void MatcherView::onParamChanged_BM()
 {
 	ui.radioButton_BM->setChecked(m_entity->getBM());
 
 }
 
-void Matcher::onClicked_SGBM(bool value)
+void MatcherView::onClicked_SGBM(bool value)
 {
 	if (m_entity->getSGBM() != value)
 	{
@@ -205,13 +205,13 @@ void Matcher::onClicked_SGBM(bool value)
 	ui.radioButton_MODE_3WAY->setEnabled(true);
 }
 
-void Matcher::onParamChanged_SGBM()
+void MatcherView::onParamChanged_SGBM()
 {
 	ui.radioButton_SGBM->setChecked(m_entity->getSGBM());
 
 }
 
-void Matcher::onClicked_MODE_HH(bool value)
+void MatcherView::onClicked_MODE_HH(bool value)
 {
 	if (m_entity->getMODE_HH() != value)
 	{
@@ -219,13 +219,13 @@ void Matcher::onClicked_MODE_HH(bool value)
 	}
 }
 
-void Matcher::onParamChanged_MODE_HH()
+void MatcherView::onParamChanged_MODE_HH()
 {
 	ui.radioButton_MODE_HH->setChecked(m_entity->getMODE_HH());
 
 }
 
-void Matcher::onClicked_MODE_SGBM(bool value)
+void MatcherView::onClicked_MODE_SGBM(bool value)
 {
 	if (m_entity->getMODE_SGBM() != value)
 	{
@@ -233,13 +233,13 @@ void Matcher::onClicked_MODE_SGBM(bool value)
 	}
 }
 
-void Matcher::onParamChanged_MODE_SGBM()
+void MatcherView::onParamChanged_MODE_SGBM()
 {
 	ui.radioButton_MODE_SGBM->setChecked(m_entity->getMODE_SGBM());
 
 }
 
-void Matcher::onClicked_MODE_3WAY(bool value)
+void MatcherView::onClicked_MODE_3WAY(bool value)
 {
 	if (m_entity->getMODE_3WAY() != value)
 	{
@@ -247,13 +247,13 @@ void Matcher::onClicked_MODE_3WAY(bool value)
 	}
 }
 
-void Matcher::onParamChanged_MODE_3WAY()
+void MatcherView::onParamChanged_MODE_3WAY()
 {
 	ui.radioButton_MODE_3WAY->setChecked(m_entity->getMODE_3WAY());
 
 }
 
-void Matcher::onParamChanged_imgDtoShow()
+void MatcherView::onParamChanged_imgDtoShow()
 {
 	QImage DQImage = EvisionUtils::cvMat2QImage(m_entity->getImageDtoShow());
 	QGraphicsScene *sceneD = new QGraphicsScene;
@@ -268,7 +268,7 @@ void Matcher::onParamChanged_imgDtoShow()
 	ui.graphicsView_D->update();
 }
 
-void Matcher::onParamChanged_msgBuffer()
+void MatcherView::onParamChanged_msgBuffer()
 {
 	ui.label->setText(m_entity->getmsgBuffer());
 }

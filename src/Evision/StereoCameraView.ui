@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>StereoCamera</class>
- <widget class="QWidget" name="StereoCamera">
+ <class>StereoCameraView</class>
+ <widget class="QWidget" name="StereoCameraView">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -417,7 +417,7 @@
   <connection>
    <sender>pushButton_FindSaveTo</sender>
    <signal>clicked()</signal>
-   <receiver>StereoCamera</receiver>
+   <receiver>StereoCameraView</receiver>
    <slot>OnFindSavePath()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -433,7 +433,7 @@
   <connection>
    <sender>comboBox_Lcam</sender>
    <signal>currentIndexChanged(QString)</signal>
-   <receiver>StereoCamera</receiver>
+   <receiver>StereoCameraView</receiver>
    <slot>OnSelectedChanged_LCameraDevice(QString)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -449,7 +449,7 @@
   <connection>
    <sender>comboBox_Lresolution</sender>
    <signal>currentIndexChanged(QString)</signal>
-   <receiver>StereoCamera</receiver>
+   <receiver>StereoCameraView</receiver>
    <slot>OnSelectedChanged_LResolution(QString)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -465,7 +465,7 @@
   <connection>
    <sender>comboBox_LCodec</sender>
    <signal>currentIndexChanged(QString)</signal>
-   <receiver>StereoCamera</receiver>
+   <receiver>StereoCameraView</receiver>
    <slot>OnSelectedChanged_LCodec(QString)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -481,7 +481,7 @@
   <connection>
    <sender>horizontalSlider_LQuality</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>StereoCamera</receiver>
+   <receiver>StereoCameraView</receiver>
    <slot>OnChanged_LQuality(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -497,7 +497,7 @@
   <connection>
    <sender>horizontalSlider_LexposureCompensation</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>StereoCamera</receiver>
+   <receiver>StereoCameraView</receiver>
    <slot>OnChanged_LExposureCompensation(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -513,7 +513,7 @@
   <connection>
    <sender>comboBox_Rcam</sender>
    <signal>currentIndexChanged(QString)</signal>
-   <receiver>StereoCamera</receiver>
+   <receiver>StereoCameraView</receiver>
    <slot>OnSelectedChanged_RCameraDevice(QString)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -529,7 +529,7 @@
   <connection>
    <sender>comboBox_Rresolution</sender>
    <signal>currentIndexChanged(QString)</signal>
-   <receiver>StereoCamera</receiver>
+   <receiver>StereoCameraView</receiver>
    <slot>OnSelectedChanged_RResolution(QString)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -545,7 +545,7 @@
   <connection>
    <sender>comboBox_RCodec</sender>
    <signal>currentIndexChanged(QString)</signal>
-   <receiver>StereoCamera</receiver>
+   <receiver>StereoCameraView</receiver>
    <slot>OnSelectedChanged_RCodec(QString)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -561,7 +561,7 @@
   <connection>
    <sender>horizontalSlider_RQuality</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>StereoCamera</receiver>
+   <receiver>StereoCameraView</receiver>
    <slot>OnChanged_RQuality(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -577,7 +577,7 @@
   <connection>
    <sender>horizontalSlider_RexposureCompensation</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>StereoCamera</receiver>
+   <receiver>StereoCameraView</receiver>
    <slot>OnChanged_RExposureCompensation(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -593,7 +593,7 @@
   <connection>
    <sender>pushButton_Shot</sender>
    <signal>clicked()</signal>
-   <receiver>StereoCamera</receiver>
+   <receiver>StereoCameraView</receiver>
    <slot>OnShot()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -609,7 +609,7 @@
   <connection>
    <sender>pushButton_CloseCamera</sender>
    <signal>clicked()</signal>
-   <receiver>StereoCamera</receiver>
+   <receiver>StereoCameraView</receiver>
    <slot>OnCloseCamera()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -625,7 +625,7 @@
   <connection>
    <sender>pushButton_OpenCamera</sender>
    <signal>clicked()</signal>
-   <receiver>StereoCamera</receiver>
+   <receiver>StereoCameraView</receiver>
    <slot>OnOpenCamera()</slot>
    <hints>
     <hint type="sourcelabel">

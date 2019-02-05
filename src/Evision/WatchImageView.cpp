@@ -1,4 +1,4 @@
-#include "WatchImage.h"
+#include "WatchImageView.h"
 #include"QWheelEvent"
 #include "qDebug"
 void MyGraphicsView::wheelEvent(QWheelEvent * event)
@@ -7,13 +7,13 @@ void MyGraphicsView::wheelEvent(QWheelEvent * event)
 }
 
 
-WatchImage::WatchImage(QWidget *parent)
+WatchImageView::WatchImageView(QWidget *parent)
 	: QWidget(parent)
 {
 	ui.setupUi(this);
 }
 //带参数直接打开
-WatchImage::WatchImage(QString filename, QWidget* parent)
+WatchImageView::WatchImageView(QString filename, QWidget* parent)
 {
 	ui.setupUi(this);
 	m_GraphicsView = new MyGraphicsView();
@@ -28,14 +28,14 @@ WatchImage::WatchImage(QString filename, QWidget* parent)
 	m_GraphicsView->setScene(scene);
 	//ui.graphicsView->resize(image->width() + 10, image->height() + 10);
 	m_GraphicsView->show();
-	this->setWindowTitle("WatchImage-"+filename);
+	this->setWindowTitle("WatchImageView-"+filename);
 }
 
-WatchImage::~WatchImage()
+WatchImageView::~WatchImageView()
 {
 }
 //响应鼠标滚轮的动作
-void WatchImage::onMouseWheelZoom(int delta)
+void WatchImageView::onMouseWheelZoom(int delta)
 {
 	qDebug() << QString::fromStdString(std::to_string(delta));
 	if (delta > 0 && scaleFactor >= 0)

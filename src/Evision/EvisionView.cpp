@@ -2,15 +2,15 @@
 #include "QDebug"
 #include "QMessageBox"
 #include "EvisionUtils.h"
-#include "Calibrater.h"
-#include "Matcher.h"
+#include "CalibraterView.h"
+#include "MatcherView.h"
 #include <qevent.h>
 #include <qmimedata.h>
 #include <QFileDialog>
-#include "RFinterface.h"
-#include "StereoCamera.h"
-#include "Camera.h"
-#include "WatchImage.h"
+#include "RulerView.h"
+#include "StereoCameraView.h"
+#include "CameraView.h"
+#include "WatchImageView.h"
 // 浮点数判等
 // ulp: units in the last place.
 template <typename T>
@@ -49,14 +49,14 @@ EvisionView::EvisionView(QWidget *parent)
 //显示单目相机视图
 void EvisionView::onCamera()
 {
-	Camera * _camera = new Camera();
+	CameraView * _camera = new CameraView();
 	ui.mdiArea->addSubWindow(_camera);
 	_camera->show();
 }
 //显示双目相机视图
 void EvisionView::onStereoCamera()
 {
-	StereoCamera * _stereoCamera = new StereoCamera();
+	StereoCameraView * _stereoCamera = new StereoCameraView();
 	ui.mdiArea->addSubWindow(_stereoCamera);
 	_stereoCamera->show();
 }
@@ -87,21 +87,21 @@ void EvisionView::onShowPointCloud()
 //显示标定视图
 void EvisionView::on_action_calibrate_view()
 {
-	Calibrater * m_calibrate = new Calibrater();
+	CalibraterView * m_calibrate = new CalibraterView();
 	ui.mdiArea->addSubWindow(m_calibrate);
 	m_calibrate->show();
 }
 //显示立体匹配视图
 void EvisionView::on_action_stereoMatch_view()
 {
-	Matcher * m_matcher = new Matcher();
+	MatcherView * m_matcher = new MatcherView();
 	ui.mdiArea->addSubWindow(m_matcher);
 	m_matcher->show();
 }
 //显示交互式测距视图
 void EvisionView::on_action_Measure_view()
 {
-	RFinterface * _Rfinterface = new RFinterface();
+	RulerView * _Rfinterface = new RulerView();
 	ui.mdiArea->addSubWindow(_Rfinterface);
 	_Rfinterface->show();
 }
@@ -154,7 +154,7 @@ void EvisionView::dropEvent(QDropEvent * event)
 			if (fileinfo.suffix() == "png"|| fileinfo.suffix() == "jpg"||
 				fileinfo.suffix() == "jpeg")
 			{
-				WatchImage * m_WatchImage = new WatchImage(file_name);
+				WatchImageView * m_WatchImage = new WatchImageView(file_name);
 				ui.mdiArea->addSubWindow(m_WatchImage);
 				m_WatchImage->show();
 			}

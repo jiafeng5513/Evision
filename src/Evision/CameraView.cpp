@@ -1,4 +1,4 @@
-#include "Camera.h"
+#include "CameraView.h"
 #include <QMessageBox>
 #include <QPalette>
 #include <QMediaMetaData>
@@ -9,12 +9,12 @@
 
 Q_DECLARE_METATYPE(QCameraInfo)
 
-Camera::Camera(QWidget *parent)
+CameraView::CameraView(QWidget *parent)
 	: QWidget(parent)
 {
 	ui.setupUi(this);
 
-	//Camera devices:
+	//CameraView devices:
 
 	const QList<QCameraInfo> availableCameras = QCameraInfo::availableCameras();
 	int id = 0;
@@ -31,7 +31,7 @@ Camera::Camera(QWidget *parent)
 	ui.lineEdit_SavePath->setText(QDir::currentPath());
 }
 
-Camera::~Camera()
+CameraView::~CameraView()
 {
 	m_pCamera->stop();
 }
@@ -41,7 +41,7 @@ Camera::~Camera()
  *
  *return£∫void
  */
-void Camera::setCamera(QCameraInfo* cameraInfo)
+void CameraView::setCamera(QCameraInfo* cameraInfo)
 {	
 	m_pCamera.reset(new QCamera(*cameraInfo));
 	m_pImageCapture.reset(new QCameraImageCapture(m_pCamera.data()));
@@ -58,7 +58,7 @@ void Camera::setCamera(QCameraInfo* cameraInfo)
 
 }
 
-void Camera::refreshResAndCodecList()
+void CameraView::refreshResAndCodecList()
 {
 	ui.comboBox_Codec->clear();
 	ui.comboBox_Codec->addItem(tr("Default image format"), QVariant(QString()));
@@ -77,7 +77,7 @@ void Camera::refreshResAndCodecList()
 	ui.horizontalSlider_Quality->setRange(0, int(QMultimedia::VeryHighQuality));
 }
 
-QVariant Camera::boxValue(const QComboBox* box) const
+QVariant CameraView::boxValue(const QComboBox* box) const
 {
 	int idx = box->currentIndex();
 	if (idx == -1)
@@ -86,12 +86,12 @@ QVariant Camera::boxValue(const QComboBox* box) const
 	return box->itemData(idx);
 }
 
-void Camera::closeEvent(QCloseEvent * e)
+void CameraView::closeEvent(QCloseEvent * e)
 {
 	m_pCamera->stop();
 }
 
-void Camera::OnFindSavePath()
+void CameraView::OnFindSavePath()
 {
 	QFileDialog * fileDialog2 = new QFileDialog();
 	fileDialog2->setWindowTitle(QStringLiteral("«Î—°‘Ò±£¥ÊŒª÷√"));
@@ -104,7 +104,7 @@ void Camera::OnFindSavePath()
 	}
 }
 
-void Camera::OnCameraPowerOn()
+void CameraView::OnCameraPowerOn()
 {
 	setCamera(static_cast<QCameraInfo*>(ui.comboBox_CameraDevice->currentData().data()));
 	ui.pushButton_CameraOn->setEnabled(false);
@@ -115,7 +115,7 @@ void Camera::OnCameraPowerOn()
 	ui.horizontalSlider_Quality->setEnabled(true);
 }
 
-void Camera::OnCameraPowerOff()
+void CameraView::OnCameraPowerOff()
 {
 	ui.pushButton_CameraOff->setEnabled(false);
 	ui.pushButton_CameraOn->setEnabled(true);
@@ -126,7 +126,7 @@ void Camera::OnCameraPowerOff()
 	m_pCamera->stop();
 }
 
-void Camera::OnFocus()
+void CameraView::OnFocus()
 {
 	switch (m_pCamera->lockStatus()) {
 	case QCamera::Searching:
@@ -138,38 +138,38 @@ void Camera::OnFocus()
 	}
 }
 
-void Camera::OnShot()
+void CameraView::OnShot()
 {
 	QString idt = QDateTime::currentDateTime().toString("yyyyMMddhhmmsszzz");
 	m_pImageCapture->capture(ui.lineEdit_SavePath->text() + "/S" + idt + ".jpg");
 	ui.lcdNumber->display(ui.lcdNumber->intValue()+1);
 }
 
-void Camera::OnValueChanged_ExposureCompensation(int value)
+void CameraView::OnValueChanged_ExposureCompensation(int value)
 {
 	m_pCamera->exposure()->setExposureCompensation(value*0.5);
 }
 
-void Camera::OnValueChanged_Quality(int value)
+void CameraView::OnValueChanged_Quality(int value)
 {
 	QImageEncoderSettings settings = m_pImageCapture->encodingSettings();
 	settings.setQuality(QMultimedia::EncodingQuality(ui.horizontalSlider_Quality->value()));
 	m_pImageCapture->setEncodingSettings(settings);
 }
 
-void Camera::OnSelectedChanged_CameraDevice(QString value)
+void CameraView::OnSelectedChanged_CameraDevice(QString value)
 {
 	setCamera(static_cast<QCameraInfo*>(ui.comboBox_CameraDevice->currentData().data()));
 }
 
-void Camera::OnSelectedChanged_Resolution(QString value)
+void CameraView::OnSelectedChanged_Resolution(QString value)
 {
 	QImageEncoderSettings settings = m_pImageCapture->encodingSettings();
 	settings.setResolution(boxValue(ui.comboBox_Resolution).toSize());
 	m_pImageCapture->setEncodingSettings(settings);
 }
 
-void Camera::OnSelectedChanged_Codec(QString value)
+void CameraView::OnSelectedChanged_Codec(QString value)
 {
 	QImageEncoderSettings settings = m_pImageCapture->encodingSettings();
 	settings.setCodec(boxValue(ui.comboBox_Codec).toString());

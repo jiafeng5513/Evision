@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'Calibrater.ui'
+** Form generated from reading UI file 'CalibraterView.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.12.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef UI_CALIBRATER_H
-#define UI_CALIBRATER_H
+#ifndef UI_CALIBRATERVIEW_H
+#define UI_CALIBRATERVIEW_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
@@ -27,7 +27,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_Calibrater
+class Ui_CalibraterView
 {
 public:
     QGridLayout *gridLayout_3;
@@ -59,16 +59,16 @@ public:
     QGraphicsView *graphicsView_L;
     QGraphicsView *graphicsView_R;
 
-    void setupUi(QWidget *Calibrater)
+    void setupUi(QWidget *CalibraterView)
     {
-        if (Calibrater->objectName().isEmpty())
-            Calibrater->setObjectName(QString::fromUtf8("Calibrater"));
-        Calibrater->resize(823, 499);
-        gridLayout_3 = new QGridLayout(Calibrater);
+        if (CalibraterView->objectName().isEmpty())
+            CalibraterView->setObjectName(QString::fromUtf8("CalibraterView"));
+        CalibraterView->resize(823, 499);
+        gridLayout_3 = new QGridLayout(CalibraterView);
         gridLayout_3->setSpacing(6);
         gridLayout_3->setContentsMargins(11, 11, 11, 11);
         gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
-        frame = new QFrame(Calibrater);
+        frame = new QFrame(CalibraterView);
         frame->setObjectName(QString::fromUtf8("frame"));
         frame->setMaximumSize(QSize(16777215, 180));
         frame->setFrameShape(QFrame::Box);
@@ -193,7 +193,7 @@ public:
 
         gridLayout_3->addWidget(frame, 1, 0, 1, 1);
 
-        splitter = new QSplitter(Calibrater);
+        splitter = new QSplitter(CalibraterView);
         splitter->setObjectName(QString::fromUtf8("splitter"));
         splitter->setOrientation(Qt::Horizontal);
         graphicsView_L = new QGraphicsView(splitter);
@@ -216,44 +216,44 @@ public:
         gridLayout_3->addWidget(splitter, 0, 0, 1, 1);
 
 
-        retranslateUi(Calibrater);
-        QObject::connect(lineEdit_BoardWidth, SIGNAL(textChanged(QString)), Calibrater, SLOT(onValueChanged_BoardWidth(QString)));
-        QObject::connect(lineEdit_BoardHeight, SIGNAL(textChanged(QString)), Calibrater, SLOT(onValueChanged_BoardHeight(QString)));
-        QObject::connect(lineEdit_SquareSize, SIGNAL(textChanged(QString)), Calibrater, SLOT(onValueChanged_SquareSize(QString)));
-        QObject::connect(checkBox_showRectified, SIGNAL(clicked(bool)), Calibrater, SLOT(onClicked_showRectified(bool)));
-        QObject::connect(radioButton_Bouguet, SIGNAL(clicked(bool)), Calibrater, SLOT(onClicked_Bouguet(bool)));
-        QObject::connect(radioButton_Hartley, SIGNAL(clicked(bool)), Calibrater, SLOT(onClicked_Hartley(bool)));
-        QObject::connect(pushButton_CalibDefault, SIGNAL(clicked()), Calibrater, SLOT(setDefaultCalibParam()));
-        QObject::connect(pushButton, SIGNAL(clicked()), Calibrater, SLOT(doCalib()));
+        retranslateUi(CalibraterView);
+        QObject::connect(lineEdit_BoardWidth, SIGNAL(textChanged(QString)), CalibraterView, SLOT(onValueChanged_BoardWidth(QString)));
+        QObject::connect(lineEdit_BoardHeight, SIGNAL(textChanged(QString)), CalibraterView, SLOT(onValueChanged_BoardHeight(QString)));
+        QObject::connect(lineEdit_SquareSize, SIGNAL(textChanged(QString)), CalibraterView, SLOT(onValueChanged_SquareSize(QString)));
+        QObject::connect(checkBox_showRectified, SIGNAL(clicked(bool)), CalibraterView, SLOT(onClicked_showRectified(bool)));
+        QObject::connect(radioButton_Bouguet, SIGNAL(clicked(bool)), CalibraterView, SLOT(onClicked_Bouguet(bool)));
+        QObject::connect(radioButton_Hartley, SIGNAL(clicked(bool)), CalibraterView, SLOT(onClicked_Hartley(bool)));
+        QObject::connect(pushButton_CalibDefault, SIGNAL(clicked()), CalibraterView, SLOT(setDefaultCalibParam()));
+        QObject::connect(pushButton, SIGNAL(clicked()), CalibraterView, SLOT(doCalib()));
 
-        QMetaObject::connectSlotsByName(Calibrater);
+        QMetaObject::connectSlotsByName(CalibraterView);
     } // setupUi
 
-    void retranslateUi(QWidget *Calibrater)
+    void retranslateUi(QWidget *CalibraterView)
     {
-        Calibrater->setWindowTitle(QApplication::translate("Calibrater", "\346\240\207\345\256\232", nullptr));
-        groupBox_4->setTitle(QApplication::translate("Calibrater", "\346\240\207\345\256\232", nullptr));
-        pushButton_CalibDefault->setText(QApplication::translate("Calibrater", "\351\273\230\350\256\244\345\217\202\346\225\260", nullptr));
-        pushButton->setText(QApplication::translate("Calibrater", "\346\240\207\345\256\232", nullptr));
-        groupBox->setTitle(QApplication::translate("Calibrater", "\346\240\207\345\256\232\345\217\202\346\225\260", nullptr));
-        label_6->setText(QApplication::translate("Calibrater", "Height:", nullptr));
-        label_5->setText(QApplication::translate("Calibrater", "Width:", nullptr));
-        label_8->setText(QApplication::translate("Calibrater", "Size:", nullptr));
-        checkBox_showRectified->setText(QApplication::translate("Calibrater", "\346\230\276\347\244\272\347\237\253\346\255\243\347\273\223\346\236\234(By OpenCV NamedWindow)", nullptr));
-        groupBox_2->setTitle(QApplication::translate("Calibrater", "Function", nullptr));
-        radioButton_Bouguet->setText(QApplication::translate("Calibrater", "Bouguet", nullptr));
-        radioButton_Hartley->setText(QApplication::translate("Calibrater", "Hartley", nullptr));
-        groupBox_3->setTitle(QApplication::translate("Calibrater", "\345\215\225/\345\217\214\347\233\256", nullptr));
-        radioButton->setText(QApplication::translate("Calibrater", "\345\215\225\347\233\256\346\240\207\345\256\232", nullptr));
-        radioButton_2->setText(QApplication::translate("Calibrater", "\345\217\214\347\233\256\346\240\207\345\256\232", nullptr));
+        CalibraterView->setWindowTitle(QApplication::translate("CalibraterView", "\346\240\207\345\256\232", nullptr));
+        groupBox_4->setTitle(QApplication::translate("CalibraterView", "\346\240\207\345\256\232", nullptr));
+        pushButton_CalibDefault->setText(QApplication::translate("CalibraterView", "\351\273\230\350\256\244\345\217\202\346\225\260", nullptr));
+        pushButton->setText(QApplication::translate("CalibraterView", "\346\240\207\345\256\232", nullptr));
+        groupBox->setTitle(QApplication::translate("CalibraterView", "\346\240\207\345\256\232\345\217\202\346\225\260", nullptr));
+        label_6->setText(QApplication::translate("CalibraterView", "Height:", nullptr));
+        label_5->setText(QApplication::translate("CalibraterView", "Width:", nullptr));
+        label_8->setText(QApplication::translate("CalibraterView", "Size:", nullptr));
+        checkBox_showRectified->setText(QApplication::translate("CalibraterView", "\346\230\276\347\244\272\347\237\253\346\255\243\347\273\223\346\236\234(By OpenCV NamedWindow)", nullptr));
+        groupBox_2->setTitle(QApplication::translate("CalibraterView", "Function", nullptr));
+        radioButton_Bouguet->setText(QApplication::translate("CalibraterView", "Bouguet", nullptr));
+        radioButton_Hartley->setText(QApplication::translate("CalibraterView", "Hartley", nullptr));
+        groupBox_3->setTitle(QApplication::translate("CalibraterView", "\345\215\225/\345\217\214\347\233\256", nullptr));
+        radioButton->setText(QApplication::translate("CalibraterView", "\345\215\225\347\233\256\346\240\207\345\256\232", nullptr));
+        radioButton_2->setText(QApplication::translate("CalibraterView", "\345\217\214\347\233\256\346\240\207\345\256\232", nullptr));
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class Calibrater: public Ui_Calibrater {};
+    class CalibraterView: public Ui_CalibraterView {};
 } // namespace Ui
 
 QT_END_NAMESPACE
 
-#endif // UI_CALIBRATER_H
+#endif // UI_CALIBRATERVIEW_H

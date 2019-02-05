@@ -1,4 +1,4 @@
-#include "StereoCamera.h"
+#include "StereoCameraView.h"
 #include <QMessageBox>
 #include <QPalette>
 #include <QMediaMetaData>
@@ -6,7 +6,7 @@
 #include <QVariant>
 Q_DECLARE_METATYPE(QCameraInfo)
 
-StereoCamera::StereoCamera(QWidget *parent)
+StereoCameraView::StereoCameraView(QWidget *parent)
 	: QWidget(parent)
 {
 	ui.setupUi(this);
@@ -36,13 +36,13 @@ StereoCamera::StereoCamera(QWidget *parent)
 	ui.lineEdit_SaveTo->setText(QDir::currentPath());
 }
 
-StereoCamera::~StereoCamera()
+StereoCameraView::~StereoCameraView()
 {
 	m_pLCamera->stop();
 	m_pRCamera->stop();
 }
 //设置左相机
-void StereoCamera::setLCamera(QCameraInfo* cameraInfo)
+void StereoCameraView::setLCamera(QCameraInfo* cameraInfo)
 {
 	m_pLCamera.reset(new QCamera(*cameraInfo));
 	m_pLImageCapture.reset(new QCameraImageCapture(m_pLCamera.data()));
@@ -58,7 +58,7 @@ void StereoCamera::setLCamera(QCameraInfo* cameraInfo)
 	m_pLCamera->start();
 }
 //设置右相机
-void StereoCamera::setRCamera(QCameraInfo* cameraInfo)
+void StereoCameraView::setRCamera(QCameraInfo* cameraInfo)
 {
 	m_pRCamera.reset(new QCamera(*cameraInfo));
 	m_pRImageCapture.reset(new QCameraImageCapture(m_pRCamera.data()));
@@ -74,7 +74,7 @@ void StereoCamera::setRCamera(QCameraInfo* cameraInfo)
 	m_pRCamera->start();
 }
 
-void StereoCamera::refreshResAndCodecListL()
+void StereoCameraView::refreshResAndCodecListL()
 {
 	ui.comboBox_LCodec->clear();
 	ui.comboBox_LCodec->addItem(tr("Default image format"), QVariant(QString()));
@@ -93,7 +93,7 @@ void StereoCamera::refreshResAndCodecListL()
 	ui.horizontalSlider_LQuality->setRange(0, int(QMultimedia::VeryHighQuality));
 }
 
-void StereoCamera::refreshResAndCodecListR()
+void StereoCameraView::refreshResAndCodecListR()
 {
 	ui.comboBox_RCodec->clear();
 	ui.comboBox_RCodec->addItem(tr("Default image format"), QVariant(QString()));
@@ -112,7 +112,7 @@ void StereoCamera::refreshResAndCodecListR()
 	ui.horizontalSlider_RQuality->setRange(0, int(QMultimedia::VeryHighQuality));
 }
 
-QVariant StereoCamera::boxValue(const QComboBox* box) const
+QVariant StereoCameraView::boxValue(const QComboBox* box) const
 {
 	int idx = box->currentIndex();
 	if (idx == -1)
@@ -121,13 +121,13 @@ QVariant StereoCamera::boxValue(const QComboBox* box) const
 	return box->itemData(idx);
 }
 
-void StereoCamera::closeEvent(QCloseEvent* e)
+void StereoCameraView::closeEvent(QCloseEvent* e)
 {
 	m_pLCamera->stop();
 	m_pRCamera->stop();
 }
 
-void StereoCamera::OnFindSavePath()
+void StereoCameraView::OnFindSavePath()
 {
 	QFileDialog * fileDialog2 = new QFileDialog();
 	fileDialog2->setWindowTitle(QStringLiteral("请选择保存位置"));
@@ -141,7 +141,7 @@ void StereoCamera::OnFindSavePath()
 }
 
 //拍照
-void StereoCamera::OnShot()
+void StereoCameraView::OnShot()
 {
 	QString idt=QDateTime::currentDateTime().toString("yyyyMMddhhmmsszzz");
 	m_pLImageCapture->capture(ui.lineEdit_SaveTo->text() + "/L" + idt + ".jpg");
@@ -149,7 +149,7 @@ void StereoCamera::OnShot()
 	ui.lcdNumber->display(ui.lcdNumber->intValue() + 1);
 }
 
-void StereoCamera::OnCloseCamera()
+void StereoCameraView::OnCloseCamera()
 {
 	m_pLCamera->stop();
 	m_pRCamera->stop();
@@ -158,7 +158,7 @@ void StereoCamera::OnCloseCamera()
 	ui.pushButton_CloseCamera->setEnabled(false);
 }
 
-void StereoCamera::OnOpenCamera()
+void StereoCameraView::OnOpenCamera()
 {
 	ui.pushButton_Shot->setEnabled(true);
 	ui.pushButton_CloseCamera->setEnabled(true);
@@ -169,62 +169,62 @@ void StereoCamera::OnOpenCamera()
 	setRCamera(static_cast<QCameraInfo*>(ui.comboBox_Rcam->currentData().data()));
 }
 
-void StereoCamera::OnValueChanged_LExposureCompensation(int value)
+void StereoCameraView::OnValueChanged_LExposureCompensation(int value)
 {
 	m_pLCamera->exposure()->setExposureCompensation(value*0.5);
 }
 
-void StereoCamera::OnValueChanged_RExposureCompensation(int value)
+void StereoCameraView::OnValueChanged_RExposureCompensation(int value)
 {
 	m_pRCamera->exposure()->setExposureCompensation(value*0.5);
 }
 
-void StereoCamera::OnValueChanged_LQuality(int value)
+void StereoCameraView::OnValueChanged_LQuality(int value)
 {
 	QImageEncoderSettings settings = m_pLImageCapture->encodingSettings();
 	settings.setQuality(QMultimedia::EncodingQuality(ui.horizontalSlider_LQuality->value()));
 	m_pLImageCapture->setEncodingSettings(settings);
 }
 
-void StereoCamera::OnValueChanged_RQuality(int value)
+void StereoCameraView::OnValueChanged_RQuality(int value)
 {
 	QImageEncoderSettings settings = m_pRImageCapture->encodingSettings();
 	settings.setQuality(QMultimedia::EncodingQuality(ui.horizontalSlider_RQuality->value()));
 	m_pRImageCapture->setEncodingSettings(settings);
 }
 
-void StereoCamera::OnSelectedChanged_LCameraDevice(QString value)
+void StereoCameraView::OnSelectedChanged_LCameraDevice(QString value)
 {
 	setLCamera(static_cast<QCameraInfo*>(ui.comboBox_Lcam->currentData().data()));
 }
 
-void StereoCamera::OnSelectedChanged_RCameraDevice(QString value)
+void StereoCameraView::OnSelectedChanged_RCameraDevice(QString value)
 {
 	setRCamera(static_cast<QCameraInfo*>(ui.comboBox_Rcam->currentData().data()));
 }
 
-void StereoCamera::OnSelectedChanged_LResolution(QString value)
+void StereoCameraView::OnSelectedChanged_LResolution(QString value)
 {
 	QImageEncoderSettings settings = m_pLImageCapture->encodingSettings();
 	settings.setResolution(boxValue(ui.comboBox_Lresolution).toSize());
 	m_pLImageCapture->setEncodingSettings(settings);
 }
 
-void StereoCamera::OnSelectedChanged_RResolution(QString value)
+void StereoCameraView::OnSelectedChanged_RResolution(QString value)
 {
 	QImageEncoderSettings settings = m_pRImageCapture->encodingSettings();
 	settings.setResolution(boxValue(ui.comboBox_Rresolution).toSize());
 	m_pRImageCapture->setEncodingSettings(settings);
 }
 
-void StereoCamera::OnSelectedChanged_LCodec(QString value)
+void StereoCameraView::OnSelectedChanged_LCodec(QString value)
 {
 	QImageEncoderSettings settings = m_pLImageCapture->encodingSettings();
 	settings.setCodec(boxValue(ui.comboBox_LCodec).toString());
 	m_pLImageCapture->setEncodingSettings(settings);
 }
 
-void StereoCamera::OnSelectedChanged_RCodec(QString value)
+void StereoCameraView::OnSelectedChanged_RCodec(QString value)
 {
 	QImageEncoderSettings settings = m_pRImageCapture->encodingSettings();
 	settings.setCodec(boxValue(ui.comboBox_RCodec).toString());

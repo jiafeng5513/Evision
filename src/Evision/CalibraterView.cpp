@@ -1,7 +1,7 @@
-#include "Calibrater.h"
+#include "CalibraterView.h"
 #include "EvisionUtils.h"
 
-Calibrater::Calibrater(QWidget *parent)
+CalibraterView::CalibraterView(QWidget *parent)
 	: QWidget(parent)
 {
 	ui.setupUi(this);
@@ -20,25 +20,25 @@ Calibrater::Calibrater(QWidget *parent)
 
 }
 
-Calibrater::~Calibrater()
+CalibraterView::~CalibraterView()
 {
 }
 //默认标定参数
-void Calibrater::setDefaultCalibParam()
+void CalibraterView::setDefaultCalibParam()
 {
 	m_calib_controller->setDefaultCalibParamCommand();
 }
 //标定
-void Calibrater::doCalib()
+void CalibraterView::doCalib()
 {
 	m_calib_controller->CalibrateCommand();
 }
 
-void Calibrater::onValueChanged_BoardWidth(QString value)
+void CalibraterView::onValueChanged_BoardWidth(QString value)
 {
 	m_calib_entity->setBoardWidth(value.toInt());
 }
-void Calibrater::onParamChanged_BoardWidth() const
+void CalibraterView::onParamChanged_BoardWidth() const
 {
 	QString tmp = QString::fromStdString(std::to_string(m_calib_entity->getBoardWidth()));
 	if (tmp != ui.lineEdit_BoardWidth->text())
@@ -47,11 +47,11 @@ void Calibrater::onParamChanged_BoardWidth() const
 	}
 }
 
-void Calibrater::onValueChanged_BoardHeight(QString value)
+void CalibraterView::onValueChanged_BoardHeight(QString value)
 {
 	m_calib_entity->setBoardHeight(value.toInt());
 }
-void Calibrater::onParamChanged_BoardHeight()
+void CalibraterView::onParamChanged_BoardHeight()
 {
 	QString tmp = QString::fromStdString(std::to_string(m_calib_entity->getBoardHeight()));
 	if (tmp != ui.lineEdit_BoardHeight->text())
@@ -60,12 +60,12 @@ void Calibrater::onParamChanged_BoardHeight()
 	}
 }
 
-void Calibrater::onValueChanged_SquareSize(QString value)
+void CalibraterView::onValueChanged_SquareSize(QString value)
 {
 	m_calib_entity->setSquareSize(value.toInt());
 }
 
-void Calibrater::onParamChanged_SquareSize()
+void CalibraterView::onParamChanged_SquareSize()
 {
 	QString tmp = QString::fromStdString(std::to_string(m_calib_entity->getSquareSize()));
 	if (tmp != ui.lineEdit_SquareSize->text())
@@ -74,36 +74,36 @@ void Calibrater::onParamChanged_SquareSize()
 	}
 }
 
-void Calibrater::onClicked_showRectified(bool value)
+void CalibraterView::onClicked_showRectified(bool value)
 {
 	m_calib_entity->setshowRectified(value);
 
 }
-void Calibrater::onParamChanged_showRectified()
+void CalibraterView::onParamChanged_showRectified()
 {
 	ui.checkBox_showRectified->setChecked(m_calib_entity->getshowRectified());
 
 }
 
-void Calibrater::onClicked_Bouguet(bool value)
+void CalibraterView::onClicked_Bouguet(bool value)
 {
 	m_calib_entity->setBouguet(value);
 }
-void Calibrater::onParamChanged_Bouguet()
+void CalibraterView::onParamChanged_Bouguet()
 {
 	ui.radioButton_Bouguet->setChecked(m_calib_entity->getBouguet());
 }
 
-void Calibrater::onClicked_Hartley(bool value)
+void CalibraterView::onClicked_Hartley(bool value)
 {
 	m_calib_entity->setHartley(value);
 }
-void Calibrater::onParamChanged_Hartley()
+void CalibraterView::onParamChanged_Hartley()
 {
 	ui.radioButton_Hartley->setChecked(m_calib_entity->getHartley());
 }
 
-void Calibrater::onParamChanged_imgLtoShow()
+void CalibraterView::onParamChanged_imgLtoShow()
 {
 	QImage LQImage = EvisionUtils::cvMat2QImage(m_calib_entity->getImageLtoShow());
 	QGraphicsScene *sceneL = new QGraphicsScene;
@@ -118,7 +118,7 @@ void Calibrater::onParamChanged_imgLtoShow()
 	ui.graphicsView_L->update();
 }
 
-void Calibrater::onParamChanged_imgRtoShow()
+void CalibraterView::onParamChanged_imgRtoShow()
 {
 	QImage RQImage = EvisionUtils::cvMat2QImage(m_calib_entity->getImageRtoShow());
 	QGraphicsScene *sceneR = new QGraphicsScene;
@@ -133,7 +133,7 @@ void Calibrater::onParamChanged_imgRtoShow()
 	ui.graphicsView_R->update();
 }
 //消息缓存更新
-void Calibrater::onParamChanged_msgBuffer()
+void CalibraterView::onParamChanged_msgBuffer()
 {
 	ui.textEdit->append(m_calib_entity->getmsgBuffer());
 }
