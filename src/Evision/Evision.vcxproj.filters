@@ -102,6 +102,18 @@
     <ClCompile Include="WatchImageView.cpp">
       <Filter>View</Filter>
     </ClCompile>
+    <ClCompile Include="ObjectDetectionEngine.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="extrapolate_coords_t.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectDetectionEntity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LogView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="EvisionController.h">
@@ -152,6 +164,15 @@
     <QtMoc Include="WatchImageView.h">
       <Filter>View</Filter>
     </QtMoc>
+    <QtMoc Include="ObjectDetectionEngine.h">
+      <Filter>Engine</Filter>
+    </QtMoc>
+    <QtMoc Include="ObjectDetectionEntity.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="LogView.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="Evision.ui">
@@ -178,6 +199,9 @@
     <QtUic Include="WatchImageView.ui">
       <Filter>Form Files</Filter>
     </QtUic>
+    <QtUic Include="LogView.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Evision.qrc">
@@ -192,6 +216,12 @@
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="PointCloudUtils.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="extrapolate_coords_t.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="yolo_v2_class.h">
       <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>

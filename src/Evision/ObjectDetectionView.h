@@ -2,6 +2,8 @@
 
 #include <QWidget>
 #include "ui_ObjectDetectionView.h"
+#include "ObjectDetectionEntity.h"
+#include "ObjectDetectionEngine.h"
 
 class ObjectDetectionView : public QWidget
 {
@@ -13,15 +15,16 @@ public:
 
 private:
 	Ui::ObjectDetectionView ui;
-	QString cfgFileName = "";
-	QString weightsFileName = "";
-	QString nameFileNames = "";
+	ObjectDetectionEntity * m_entity;
+	ObjectDetectionEngine * m_engine;
 public slots:
 	void OnBrowseCfg();
 	void OnBrowseWeights();
 	void OnBrowseNames();
 	void OnSwitch();
-	
-signals:
-	void frameRefresh();
+
+	void OnParamChanged_DetectionPlayer();
+	void OnParamChanged_cfgFilename();
+	void OnParamChanged_weightsFilename();
+	void OnParamChanged_namesFilename();
 };

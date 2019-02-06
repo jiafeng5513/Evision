@@ -110,5 +110,76 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton_cfg</sender>
+   <signal>clicked()</signal>
+   <receiver>ObjectDetectionView</receiver>
+   <slot>OnBrowseCfg()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1008</x>
+     <y>30</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1061</x>
+     <y>29</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_weight</sender>
+   <signal>clicked()</signal>
+   <receiver>ObjectDetectionView</receiver>
+   <slot>OnBrowseWeights()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1005</x>
+     <y>60</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>704</x>
+     <y>72</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_names</sender>
+   <signal>clicked()</signal>
+   <receiver>ObjectDetectionView</receiver>
+   <slot>OnBrowseNames()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>994</x>
+     <y>96</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>705</x>
+     <y>122</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_switch</sender>
+   <signal>clicked()</signal>
+   <receiver>ObjectDetectionView</receiver>
+   <slot>OnSwitch()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1010</x>
+     <y>118</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>704</x>
+     <y>226</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>OnBrowseCfg()</slot>
+  <slot>OnBrowseWeights()</slot>
+  <slot>OnBrowseNames()</slot>
+  <slot>OnSwitch()</slot>
+ </slots>
 </ui>

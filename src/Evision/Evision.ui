@@ -373,6 +373,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>action_ObjectDetection</sender>
+   <signal>triggered()</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>on_action_ObjectDetection_view()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>490</x>
+     <y>329</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>onTestAlltheParam()</slot>
@@ -382,5 +398,6 @@
   <slot>on_action_calibrate_view()</slot>
   <slot>on_action_stereoMatch_view()</slot>
   <slot>on_action_Measure_view()</slot>
+  <slot>on_action_ObjectDetection_view()</slot>
  </slots>
 </ui>

@@ -137,6 +137,10 @@ public:
 
 
         retranslateUi(ObjectDetectionView);
+        QObject::connect(pushButton_cfg, SIGNAL(clicked()), ObjectDetectionView, SLOT(OnBrowseCfg()));
+        QObject::connect(pushButton_weight, SIGNAL(clicked()), ObjectDetectionView, SLOT(OnBrowseWeights()));
+        QObject::connect(pushButton_names, SIGNAL(clicked()), ObjectDetectionView, SLOT(OnBrowseNames()));
+        QObject::connect(pushButton_switch, SIGNAL(clicked()), ObjectDetectionView, SLOT(OnSwitch()));
 
         QMetaObject::connectSlotsByName(ObjectDetectionView);
     } // setupUi

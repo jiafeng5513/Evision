@@ -206,6 +206,7 @@ public:
         QObject::connect(action_CalibrateView, SIGNAL(triggered()), EvisionClass, SLOT(on_action_calibrate_view()));
         QObject::connect(action_StereoMatchView, SIGNAL(triggered()), EvisionClass, SLOT(on_action_stereoMatch_view()));
         QObject::connect(action_Measure_View, SIGNAL(triggered()), EvisionClass, SLOT(on_action_Measure_view()));
+        QObject::connect(action_ObjectDetection, SIGNAL(triggered()), EvisionClass, SLOT(on_action_ObjectDetection_view()));
 
         QMetaObject::connectSlotsByName(EvisionClass);
     } // setupUi

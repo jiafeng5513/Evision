@@ -11,6 +11,7 @@
 #include "StereoCameraView.h"
 #include "CameraView.h"
 #include "WatchImageView.h"
+#include "ObjectDetectionView.h"
 // 浮点数判等
 // ulp: units in the last place.
 template <typename T>
@@ -43,6 +44,12 @@ EvisionView::EvisionView(QWidget *parent)
 
 	connect(m_entity, SIGNAL(paramChanged_StatusBar()), this, SLOT(onParamChanged_StatusBarText()), Qt::QueuedConnection);
 
+
+	logView = new LogView();
+	logView->show();
+	old_pos = this->pos();
+	old_size = this->size();
+	logView->move(*new QPoint(old_pos.x() + 10 + this->frameGeometry().width(), old_pos.y()));
 }
 
 
@@ -104,6 +111,13 @@ void EvisionView::on_action_Measure_view()
 	RulerView * _Rfinterface = new RulerView();
 	ui.mdiArea->addSubWindow(_Rfinterface);
 	_Rfinterface->show();
+}
+//启动目标检测视图
+void EvisionView::on_action_ObjectDetection_view()
+{
+	ObjectDetectionView* _ObjectDetectionView = new ObjectDetectionView();
+	ui.mdiArea->addSubWindow(_ObjectDetectionView);
+	_ObjectDetectionView->show();
 }
 
 //调试方法
@@ -169,5 +183,43 @@ void EvisionView::mouseReleaseEvent(QMouseEvent * event)
 	{
 		m_entity->setStatusBarText(QStringLiteral("就绪"));
 	}
+}
+//窗口移动事件
+void EvisionView::moveEvent(QMoveEvent* event)
+{
+	//QWidget::moveEvent(event);
+	QPoint delta = this->pos() - old_pos;
+	//算出主窗口的移动量
+	//子窗口进行等量移动
+	logView->move(delta + *new QPoint(old_pos.x() + 10 + this->frameGeometry().width(), old_pos.y()));
+	old_pos = this->pos();
+}
+
+void EvisionView::resizeEvent(QResizeEvent* event)
+{
+	if (this->size().width() != old_size.width())
+	{
+		logView->move(*new QPoint(old_pos.x() + 10 + this->frameGeometry().width(), old_pos.y()));
+		old_size = this->size();
+	}
+}
+
+void EvisionView::changeEvent(QEvent*event)
+{
+	if (event->type() != QEvent::WindowStateChange) return;
+	if (this->windowState() == Qt::WindowMaximized)//最大化
+	{
+		//logView->setWindowFlags(windowFlags() | Qt::WindowMaximizeButtonHint);
+	}
+	if (this->windowState() == Qt::WindowMinimized)//最小化
+	{
+		//logView->setWindowFlags(windowFlags() | Qt::WindowMinimizeButtonHint);
+
+	}
+}
+
+void EvisionView::closeEvent(QCloseEvent* event)
+{
+	logView->close();
 }
 
