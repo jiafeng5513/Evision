@@ -9,7 +9,8 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
-      <AdditionalDependencies>opencv_world341d.lib;CustomGraphicsView.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opencv_world341d.lib;CustomGraphicsView.lib;yolo_gpu.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <DelayLoadDLLs>yolo_gpu.dll</DelayLoadDLLs>
     </Link>
     <ClCompile>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
