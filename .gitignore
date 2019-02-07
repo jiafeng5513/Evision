@@ -167,3 +167,4 @@ $RECYCLE.BIN/
 MFC_version/.vs/*
 QuantEvision/.vs/*
 *.db
+*.weights

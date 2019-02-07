@@ -2,6 +2,7 @@
 
 #include <QWidget>
 #include "ui_LogView.h"
+#include "stdoutredirector.h"
 
 class LogView : public QWidget
 {
@@ -10,7 +11,10 @@ class LogView : public QWidget
 public:
 	LogView(QWidget *parent = Q_NULLPTR);
 	~LogView();
-
+	static LogView *getInstance();
 private:
 	Ui::LogView ui;
+	StdoutRedirector *redirector;
+public slots:
+	void readData();//接收重定向过来的信息
 };

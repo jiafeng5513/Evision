@@ -45,8 +45,9 @@ EvisionView::EvisionView(QWidget *parent)
 	connect(m_entity, SIGNAL(paramChanged_StatusBar()), this, SLOT(onParamChanged_StatusBarText()), Qt::QueuedConnection);
 
 
-	logView = new LogView();
+	logView =LogView::getInstance();
 	logView->show();
+
 	old_pos = this->pos();
 	old_size = this->size();
 	logView->move(*new QPoint(old_pos.x() + 10 + this->frameGeometry().width(), old_pos.y()));
@@ -123,7 +124,12 @@ void EvisionView::on_action_ObjectDetection_view()
 //调试方法
 void EvisionView::onTestAlltheParam()
 {
-
+	printf("From printf ... ");
+	fflush(stdout);
+	fprintf(stderr, "From fprintf...");
+	std::cout << "From std::cout..." << std::endl;
+	std::cerr << "From std::cerr..." << std::endl;
+	//qDebug() << "From qDebug ..." << QDateTime::currentDateTime().toString();
 }
 //状态栏更新
 void EvisionView::onParamChanged_StatusBarText()

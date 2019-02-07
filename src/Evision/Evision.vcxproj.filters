@@ -109,10 +109,13 @@
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="ObjectDetectionEntity.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Entity</Filter>
     </ClCompile>
     <ClCompile Include="LogView.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>View</Filter>
+    </ClCompile>
+    <ClCompile Include="StdoutRedirector.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -168,10 +171,13 @@
       <Filter>Engine</Filter>
     </QtMoc>
     <QtMoc Include="ObjectDetectionEntity.h">
-      <Filter>Header Files</Filter>
+      <Filter>Entity</Filter>
     </QtMoc>
     <QtMoc Include="LogView.h">
-      <Filter>Header Files</Filter>
+      <Filter>View</Filter>
+    </QtMoc>
+    <QtMoc Include="StdoutRedirector.h">
+      <Filter>Utils</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
