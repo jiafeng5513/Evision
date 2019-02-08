@@ -2,13 +2,21 @@
 
 <div align=center>Evision 双目视觉系统</div>
 
-<div align=center>
-|分支|master|Evision_without_cuda|
-|:------:|:------:|:------:|
-|分支情况|全功能版|没有CUDA和目标检测的版本|
-
-当前分支:Evision_without_cuda
-</div>
+<table align=center border="1">
+  <tr>
+    <th>分支</th>
+    <th>master</th>
+    <th>Evision_without_cuda</th>
+  </tr>
+  <tr>
+    <td>分支情况</td>
+    <td>全功能版</td>
+    <td>没有CUDA和目标检测的版本</td>
+  </tr>
+  <tr>
+    <td align=center colspan="3">当前分支:Evision_without_cuda</td>
+  </tr>
+</table>
 
 
 Introduction:
