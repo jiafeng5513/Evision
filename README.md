@@ -1,14 +1,15 @@
 <div align=center><img width="100" height="100" src="./src/EvisionLegacy/res/Evision.ico"/></div>
 
 <div align=center>Evision 双目视觉系统</div>
-<center>
+
+<div align=center>
 
 |分支|master|Evision_without_cuda|
 |:------:|:------:|:------:|
 |分支情况|全功能版|没有CUDA和目标检测的版本|
-<center>当前分支:Evision_without_cuda</center>
+当前分支:Evision_without_cuda
+</div>
 
-</center>
 
 Introduction:
 =========
