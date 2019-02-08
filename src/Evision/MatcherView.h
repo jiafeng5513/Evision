@@ -68,5 +68,4 @@ public slots:
 	void onParamChanged_MODE_3WAY();
 
 	void onParamChanged_imgDtoShow();
-	void onParamChanged_msgBuffer();//消息缓存更新
 };

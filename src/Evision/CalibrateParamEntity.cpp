@@ -113,14 +113,3 @@ void CalibrateParamEntity::setImageRtoShow(cv::Mat value)
 	imgRtoShow = value;
 	emit paramChanged_ImageRtoShow();
 }
-
-QString CalibrateParamEntity::getmsgBuffer()
-{
-	return msgBuffer;
-}
-
-void CalibrateParamEntity::setmsgBuffer(QString value)
-{
-	msgBuffer = value;
-	emit paramChanged_msgBuffer();
-}

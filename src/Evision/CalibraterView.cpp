@@ -16,7 +16,6 @@ CalibraterView::CalibraterView(QWidget *parent)
 	connect(m_calib_entity, SIGNAL(paramChanged_Hartley()), this, SLOT(onParamChanged_Hartley()));
 	connect(m_calib_entity, SIGNAL(paramChanged_ImageLtoShow()), this, SLOT(onParamChanged_imgLtoShow())/*, Qt::QueuedConnection*/);
 	connect(m_calib_entity, SIGNAL(paramChanged_ImageRtoShow()), this, SLOT(onParamChanged_imgRtoShow())/*, Qt::QueuedConnection*/);
-	connect(m_calib_entity, SIGNAL(paramChanged_msgBuffer()), this, SLOT(onParamChanged_msgBuffer()));
 
 }
 
@@ -132,8 +131,4 @@ void CalibraterView::onParamChanged_imgRtoShow()
 	ui.graphicsView_R->show();
 	ui.graphicsView_R->update();
 }
-//消息缓存更新
-void CalibraterView::onParamChanged_msgBuffer()
-{
-	ui.textEdit->append(m_calib_entity->getmsgBuffer());
-}
+

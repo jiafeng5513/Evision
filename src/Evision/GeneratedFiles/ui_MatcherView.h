@@ -28,9 +28,7 @@ class Ui_MatcherView
 {
 public:
     QGridLayout *gridLayout_2;
-    QGraphicsView *graphicsView_D;
     QGroupBox *groupBox;
-    QLabel *label;
     QGroupBox *groupBox_6;
     QGridLayout *gridLayout;
     QLabel *label_40;
@@ -72,6 +70,7 @@ public:
     QPushButton *pushButton_MatchChooseFiles;
     QSlider *horizontalSlider_specwinsz;
     QPushButton *pushButton_RefreshStereoMatch;
+    QGraphicsView *graphicsView_D;
 
     void setupUi(QWidget *MatcherView)
     {
@@ -82,22 +81,11 @@ public:
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-        graphicsView_D = new QGraphicsView(MatcherView);
-        graphicsView_D->setObjectName(QString::fromUtf8("graphicsView_D"));
-
-        gridLayout_2->addWidget(graphicsView_D, 0, 0, 2, 1);
-
         groupBox = new QGroupBox(MatcherView);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
         groupBox->setMaximumSize(QSize(310, 16777215));
 
         gridLayout_2->addWidget(groupBox, 0, 1, 1, 1);
-
-        label = new QLabel(MatcherView);
-        label->setObjectName(QString::fromUtf8("label"));
-        label->setMaximumSize(QSize(16777215, 20));
-
-        gridLayout_2->addWidget(label, 2, 0, 1, 1);
 
         groupBox_6 = new QGroupBox(MatcherView);
         groupBox_6->setObjectName(QString::fromUtf8("groupBox_6"));
@@ -380,6 +368,11 @@ public:
 
         gridLayout_2->addWidget(groupBox_6, 1, 1, 2, 1);
 
+        graphicsView_D = new QGraphicsView(MatcherView);
+        graphicsView_D->setObjectName(QString::fromUtf8("graphicsView_D"));
+
+        gridLayout_2->addWidget(graphicsView_D, 0, 0, 3, 1);
+
 
         retranslateUi(MatcherView);
         QObject::connect(pushButton_MatchDefault, SIGNAL(clicked()), MatcherView, SLOT(setDefaultMatchParam()));
@@ -407,7 +400,6 @@ public:
     {
         MatcherView->setWindowTitle(QApplication::translate("MatcherView", "\345\214\271\351\205\215", nullptr));
         groupBox->setTitle(QApplication::translate("MatcherView", "\347\233\270\346\234\272\345\217\202\346\225\260", nullptr));
-        label->setText(QString());
         groupBox_6->setTitle(QApplication::translate("MatcherView", "\345\214\271\351\205\215\345\217\202\346\225\260", nullptr));
         label_40->setText(QApplication::translate("MatcherView", "uniquenessRatio(\350\247\206\345\267\256\345\224\257\344\270\200\346\200\247\347\231\276\345\210\206\346\257\224)", nullptr));
         lineEdit_uniradio->setPlaceholderText(QApplication::translate("MatcherView", "0", nullptr));

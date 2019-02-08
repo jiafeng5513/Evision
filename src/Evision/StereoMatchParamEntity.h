@@ -32,7 +32,7 @@ private:
 	bool MODE_3WAY = false;
 
 	cv::Mat imgDtoShow;
-	QString msgBuffer="";
+
 
 	cv::Mat disparity;
 	cv::Mat xyz;
@@ -56,7 +56,7 @@ signals:
 	void paramChanged_MODE_SGBM();
 	void paramChanged_MODE_3WAY();
 	void paramChanged_ImageDtoShow();
-	void paramChanged_msgBuffer();
+
 #pragma endregion
 
 public:
@@ -105,9 +105,6 @@ public:
 
 	cv::Mat getImageDtoShow();
 	void setImageDtoShow(cv::Mat value);
-
-	QString getmsgBuffer();
-	void setmsgBuffer(QString value);
 
 	cv::Mat getDisparity();
 	void setDisparity(cv::Mat value);

@@ -20,7 +20,6 @@ MatcherView::MatcherView(QWidget *parent)
 	connect(m_entity, SIGNAL(paramChanged_SGBM()), this, SLOT(onParamChanged_SGBM()));
 	connect(m_entity, SIGNAL(paramChanged_MODE_HH()), this, SLOT(onParamChanged_MODE_HH()));
 	connect(m_entity, SIGNAL(paramChanged_ImageDtoShow()), this, SLOT(onParamChanged_imgDtoShow())/*, Qt::QueuedConnection*/);
-	connect(m_entity, SIGNAL(paramChanged_msgBuffer()), this, SLOT(onParamChanged_msgBuffer()));
 }
 
 MatcherView::~MatcherView()
@@ -266,9 +265,4 @@ void MatcherView::onParamChanged_imgDtoShow()
 	ui.graphicsView_D->centerOn(0, 0);
 	ui.graphicsView_D->show();
 	ui.graphicsView_D->update();
-}
-
-void MatcherView::onParamChanged_msgBuffer()
-{
-	ui.label->setText(m_entity->getmsgBuffer());
 }

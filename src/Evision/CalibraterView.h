@@ -44,6 +44,4 @@ public slots:
 
 	void onParamChanged_imgLtoShow();//更新左视图
 	void onParamChanged_imgRtoShow();//更新右视图
-
-	void onParamChanged_msgBuffer();//消息缓存更新
 };

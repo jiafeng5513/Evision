@@ -23,7 +23,6 @@ private:
 	bool Bouguet = false;
 	bool Hartley = false;
 	cv::Mat imgLtoShow, imgRtoShow;
-	QString msgBuffer="";
 #pragma endregion 
 
 #pragma region param_Changed_signals
@@ -36,7 +35,6 @@ signals:
 	void paramChanged_Hartley();
 	void paramChanged_ImageLtoShow();
 	void paramChanged_ImageRtoShow();
-	void paramChanged_msgBuffer();
 #pragma endregion 
 
 #pragma region getter And setter
@@ -64,8 +62,5 @@ public:
 
 	cv::Mat getImageRtoShow();
 	void setImageRtoShow(cv::Mat value);
-
-	QString getmsgBuffer();
-	void setmsgBuffer(QString value);
 #pragma endregion 
 };

@@ -62,7 +62,7 @@ void StereoCalibrate::run_old()
 				imageSize = img.size();
 			else if (img.size() != imageSize)
 			{
-				m_entity->setmsgBuffer(QString::fromStdString(filename) + "与第一张图片尺寸不同,跳过.");
+				//m_entity->setmsgBuffer(QString::fromStdString(filename) + "与第一张图片尺寸不同,跳过.");
 				break;
 			}
 			bool found = false;
@@ -344,7 +344,8 @@ void StereoCalibrate::run()
 			imageSize = imgL.size();
 		else if (imgL.size() != imageSize|| imgL.size()!=imgR.size())
 		{
-			m_entity->setmsgBuffer("图片尺寸有问题,跳过");
+			//m_entity->setmsgBuffer("图片尺寸有问题,跳过");
+			std::cout << "图片尺寸有问题,跳过" << std::endl;
 			break;
 		}
 		//bool found = false;
@@ -413,11 +414,13 @@ void StereoCalibrate::run()
 		j++;
 		std::string temp = std::to_string(j);
 		temp += "/"; temp += std::to_string(nimages);
-		m_entity->setmsgBuffer(QString::fromStdString(temp));
+		//m_entity->setmsgBuffer(QString::fromStdString(temp));
+		std::cout << temp << std::endl;
 	}//交点检测结束
 
 	//std::cout << j << " pairs have been successfully detected.\n";
-	m_entity->setmsgBuffer(QStringLiteral("交点检测结束,正在标定运算..."));
+	//m_entity->setmsgBuffer(QStringLiteral("交点检测结束,正在标定运算..."));
+	std::cout << "交点检测结束,正在标定运算..." << std::endl;
 	nimages = j;//只有找到交点的图片能用来标定,确定数量
 	if (nimages < 2)
 	{
@@ -454,10 +457,9 @@ void StereoCalibrate::run()
 		cv::CALIB_RATIONAL_MODEL +
 		cv::CALIB_FIX_K3 + cv::CALIB_FIX_K4 + cv::CALIB_FIX_K5,
 		cv::TermCriteria(cv::TermCriteria::COUNT + cv::TermCriteria::EPS, 100, 1e-5));
-	std::string tmp = "RMS error = \n";
-	tmp += std::to_string(rms);
-	m_entity->setmsgBuffer(QStringLiteral("标定完毕"));
-	emit openMessageBox(QStringLiteral("标定完毕"), QString::fromStdString(tmp));
+;
+	std::cout << "RMS error = " << rms << std::endl;
+
 	// CALIBRATION QUALITY CHECK
 	// because the output fundamental matrix implicitly
 	// includes all the output information,
@@ -487,28 +489,28 @@ void StereoCalibrate::run()
 		}
 		npoints += npt;
 	}
-	tmp = "average epipolar err = \n";
-	tmp += std::to_string(err / npoints);
-	emit openMessageBox(QStringLiteral("平均极线误差"), QString::fromStdString(tmp));
 
+	std::cout << "平均极线误差" << "(average epipolar err) =" << std::to_string(err / npoints) <<std::endl;
 	//映射计算
 
 	cv::Mat R1, P1, R2, P2, Q;//stereoRectify的输出
 	cv::Rect roi1, roi2;	  //stereoRectify的输出
 	stereoRectify(cameraMatrix[0], distCoeffs[0],cameraMatrix[1], distCoeffs[1], imageSize, R, T, 
 					R1, R2, P1, P2, Q, cv::CALIB_ZERO_DISPARITY, -1, imageSize, &roi1, &roi2);
+	std::cout << "映射(R1,P1,R2,P2,Q)计算完毕" << std::endl;
 	//计算矫正矩阵
 
 	cv::Mat map1x, map1y, map2x, map2y;//矫正矩阵
 	initUndistortRectifyMap(cameraMatrix[0], distCoeffs[0], R1, P1, imageSize, CV_16SC2, map1x, map1y);
 	initUndistortRectifyMap(cameraMatrix[1], distCoeffs[1], R2, P2, imageSize, CV_16SC2, map2x, map2y);
-
+	std::cout << "矫正矩阵(map1x, map1y, map2x, map2y)计算完毕" << std::endl;
 	//至此所有的相机参数和衍生参数都计算完了
 
 	// 保存参数
 	bool flag = EvisionUtils::write_AllCameraParams(cameraParamsFilename, cameraMatrix[0], distCoeffs[0],
 												cameraMatrix[1], distCoeffs[1], R, T, E, F,
 												imageSize,R1,P1,R2,P2,Q,roi1,roi2);
+	std::cout << "参数已经保存到:" << cameraParamsFilename << std::endl;
 	if (!flag)
 	{
 		emit openMessageBox(QStringLiteral("文件访问错误"), QStringLiteral("无法写入:cameraParams.yml"));

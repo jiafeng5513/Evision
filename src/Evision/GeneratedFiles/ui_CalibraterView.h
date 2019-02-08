@@ -22,7 +22,6 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
 #include <QtWidgets/QSplitter>
-#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -33,10 +32,6 @@ public:
     QGridLayout *gridLayout_3;
     QFrame *frame;
     QGridLayout *gridLayout_2;
-    QGroupBox *groupBox_4;
-    QHBoxLayout *horizontalLayout_3;
-    QPushButton *pushButton_CalibDefault;
-    QPushButton *pushButton;
     QGroupBox *groupBox;
     QGridLayout *gridLayout;
     QLineEdit *lineEdit_BoardHeight;
@@ -46,15 +41,18 @@ public:
     QLineEdit *lineEdit_SquareSize;
     QLabel *label_8;
     QCheckBox *checkBox_showRectified;
-    QGroupBox *groupBox_2;
-    QHBoxLayout *horizontalLayout;
-    QRadioButton *radioButton_Bouguet;
-    QRadioButton *radioButton_Hartley;
     QGroupBox *groupBox_3;
     QHBoxLayout *horizontalLayout_2;
     QRadioButton *radioButton;
     QRadioButton *radioButton_2;
-    QTextEdit *textEdit;
+    QGroupBox *groupBox_4;
+    QHBoxLayout *horizontalLayout_3;
+    QPushButton *pushButton_CalibDefault;
+    QPushButton *pushButton;
+    QGroupBox *groupBox_2;
+    QHBoxLayout *horizontalLayout;
+    QRadioButton *radioButton_Bouguet;
+    QRadioButton *radioButton_Hartley;
     QSplitter *splitter;
     QGraphicsView *graphicsView_L;
     QGraphicsView *graphicsView_R;
@@ -77,26 +75,6 @@ public:
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-        groupBox_4 = new QGroupBox(frame);
-        groupBox_4->setObjectName(QString::fromUtf8("groupBox_4"));
-        horizontalLayout_3 = new QHBoxLayout(groupBox_4);
-        horizontalLayout_3->setSpacing(4);
-        horizontalLayout_3->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
-        horizontalLayout_3->setContentsMargins(4, 4, 4, 4);
-        pushButton_CalibDefault = new QPushButton(groupBox_4);
-        pushButton_CalibDefault->setObjectName(QString::fromUtf8("pushButton_CalibDefault"));
-
-        horizontalLayout_3->addWidget(pushButton_CalibDefault);
-
-        pushButton = new QPushButton(groupBox_4);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
-
-        horizontalLayout_3->addWidget(pushButton);
-
-
-        gridLayout_2->addWidget(groupBox_4, 2, 2, 1, 1);
-
         groupBox = new QGroupBox(frame);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
         gridLayout = new QGridLayout(groupBox);
@@ -147,25 +125,6 @@ public:
 
         gridLayout_2->addWidget(groupBox, 0, 0, 3, 1);
 
-        groupBox_2 = new QGroupBox(frame);
-        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
-        horizontalLayout = new QHBoxLayout(groupBox_2);
-        horizontalLayout->setSpacing(6);
-        horizontalLayout->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        radioButton_Bouguet = new QRadioButton(groupBox_2);
-        radioButton_Bouguet->setObjectName(QString::fromUtf8("radioButton_Bouguet"));
-
-        horizontalLayout->addWidget(radioButton_Bouguet);
-
-        radioButton_Hartley = new QRadioButton(groupBox_2);
-        radioButton_Hartley->setObjectName(QString::fromUtf8("radioButton_Hartley"));
-
-        horizontalLayout->addWidget(radioButton_Hartley);
-
-
-        gridLayout_2->addWidget(groupBox_2, 0, 2, 1, 1);
-
         groupBox_3 = new QGroupBox(frame);
         groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
         horizontalLayout_2 = new QHBoxLayout(groupBox_3);
@@ -185,10 +144,44 @@ public:
 
         gridLayout_2->addWidget(groupBox_3, 1, 2, 1, 1);
 
-        textEdit = new QTextEdit(frame);
-        textEdit->setObjectName(QString::fromUtf8("textEdit"));
+        groupBox_4 = new QGroupBox(frame);
+        groupBox_4->setObjectName(QString::fromUtf8("groupBox_4"));
+        horizontalLayout_3 = new QHBoxLayout(groupBox_4);
+        horizontalLayout_3->setSpacing(4);
+        horizontalLayout_3->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        horizontalLayout_3->setContentsMargins(4, 4, 4, 4);
+        pushButton_CalibDefault = new QPushButton(groupBox_4);
+        pushButton_CalibDefault->setObjectName(QString::fromUtf8("pushButton_CalibDefault"));
 
-        gridLayout_2->addWidget(textEdit, 0, 3, 3, 1);
+        horizontalLayout_3->addWidget(pushButton_CalibDefault);
+
+        pushButton = new QPushButton(groupBox_4);
+        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+
+        horizontalLayout_3->addWidget(pushButton);
+
+
+        gridLayout_2->addWidget(groupBox_4, 2, 2, 1, 1);
+
+        groupBox_2 = new QGroupBox(frame);
+        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
+        horizontalLayout = new QHBoxLayout(groupBox_2);
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        radioButton_Bouguet = new QRadioButton(groupBox_2);
+        radioButton_Bouguet->setObjectName(QString::fromUtf8("radioButton_Bouguet"));
+
+        horizontalLayout->addWidget(radioButton_Bouguet);
+
+        radioButton_Hartley = new QRadioButton(groupBox_2);
+        radioButton_Hartley->setObjectName(QString::fromUtf8("radioButton_Hartley"));
+
+        horizontalLayout->addWidget(radioButton_Hartley);
+
+
+        gridLayout_2->addWidget(groupBox_2, 0, 2, 1, 1);
 
 
         gridLayout_3->addWidget(frame, 1, 0, 1, 1);
@@ -232,20 +225,20 @@ public:
     void retranslateUi(QWidget *CalibraterView)
     {
         CalibraterView->setWindowTitle(QApplication::translate("CalibraterView", "\346\240\207\345\256\232", nullptr));
-        groupBox_4->setTitle(QApplication::translate("CalibraterView", "\346\240\207\345\256\232", nullptr));
-        pushButton_CalibDefault->setText(QApplication::translate("CalibraterView", "\351\273\230\350\256\244\345\217\202\346\225\260", nullptr));
-        pushButton->setText(QApplication::translate("CalibraterView", "\346\240\207\345\256\232", nullptr));
         groupBox->setTitle(QApplication::translate("CalibraterView", "\346\240\207\345\256\232\345\217\202\346\225\260", nullptr));
         label_6->setText(QApplication::translate("CalibraterView", "Height:", nullptr));
         label_5->setText(QApplication::translate("CalibraterView", "Width:", nullptr));
         label_8->setText(QApplication::translate("CalibraterView", "Size:", nullptr));
         checkBox_showRectified->setText(QApplication::translate("CalibraterView", "\346\230\276\347\244\272\347\237\253\346\255\243\347\273\223\346\236\234(By OpenCV NamedWindow)", nullptr));
-        groupBox_2->setTitle(QApplication::translate("CalibraterView", "Function", nullptr));
-        radioButton_Bouguet->setText(QApplication::translate("CalibraterView", "Bouguet", nullptr));
-        radioButton_Hartley->setText(QApplication::translate("CalibraterView", "Hartley", nullptr));
         groupBox_3->setTitle(QApplication::translate("CalibraterView", "\345\215\225/\345\217\214\347\233\256", nullptr));
         radioButton->setText(QApplication::translate("CalibraterView", "\345\215\225\347\233\256\346\240\207\345\256\232", nullptr));
         radioButton_2->setText(QApplication::translate("CalibraterView", "\345\217\214\347\233\256\346\240\207\345\256\232", nullptr));
+        groupBox_4->setTitle(QApplication::translate("CalibraterView", "\346\240\207\345\256\232", nullptr));
+        pushButton_CalibDefault->setText(QApplication::translate("CalibraterView", "\351\273\230\350\256\244\345\217\202\346\225\260", nullptr));
+        pushButton->setText(QApplication::translate("CalibraterView", "\346\240\207\345\256\232", nullptr));
+        groupBox_2->setTitle(QApplication::translate("CalibraterView", "Function", nullptr));
+        radioButton_Bouguet->setText(QApplication::translate("CalibraterView", "Bouguet", nullptr));
+        radioButton_Hartley->setText(QApplication::translate("CalibraterView", "Hartley", nullptr));
     } // retranslateUi
 
 };

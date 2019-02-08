@@ -37,11 +37,12 @@ StereoMatch::~StereoMatch()
  */
 bool StereoMatch::init()
 {
-	m_entity->setmsgBuffer(QStringLiteral("初始化..."));
+	std::cout<<"初始化..." <<std::endl;
 	try
 	{
 		//1.打开图片
-		m_entity->setmsgBuffer(QStringLiteral("加载图片..."));
+		
+		std::cout << "加载图片..." << std::endl;
 
 		int color_mode = alg == STEREO_BM ? 0 : -1;
 		img1 = cv::imread(img1_filename, color_mode);
@@ -53,7 +54,8 @@ bool StereoMatch::init()
 		}
 		img_size = img1.size();
 		//2.打开参数文件,读取参数
-		m_entity->setmsgBuffer(QStringLiteral("加载参数..."));
+		
+		std::cout << "加载参数..." << std::endl;
 
 		bool flag = EvisionUtils::read_ParamsForStereoMatch(cameraParams_filename,
 			&cameraMatrix1, &distCoeffs1, &cameraMatrix2, &distCoeffs2, &R1, &P1, &R2, &P2, &Q,&roi1,&roi2);
@@ -62,7 +64,8 @@ bool StereoMatch::init()
 			return false;
 		}
 		//3.矫正左右视图
-		m_entity->setmsgBuffer(QStringLiteral("矫正图片..."));
+		
+		std::cout << "矫正图片..." << std::endl;
 
 		cv::Mat mapx1, mapy1, mapx2, mapy2;
 		initUndistortRectifyMap(cameraMatrix1, distCoeffs1, R1, P1, img_size, CV_16SC2, mapx1, mapy1);
@@ -79,14 +82,18 @@ bool StereoMatch::init()
 	{
 		return false;
 	}
-	m_entity->setmsgBuffer(QStringLiteral("初始化完毕"));
+	
+	std::cout << "初始化完毕..." << std::endl;
+
 	return true;
 }
 
 
 void StereoMatch::run()
 {
-	m_entity->setmsgBuffer(QStringLiteral("开始计算..."));
+	
+	std::cout << "开始计算..." << std::endl;
+
 	cv::Ptr<cv::StereoBM> bm = cv::StereoBM::create(16, 9);
 	cv::Ptr<cv::StereoSGBM> sgbm = cv::StereoSGBM::create(0, 16, 3);
 
@@ -141,9 +148,8 @@ void StereoMatch::run()
 	else if (m_entity->getSGBM())
 		sgbm->compute(img1, img2, disp);
 	t = cv::getTickCount() - t;
-	char buff[128];
-	sprintf(buff,"Time elapsed: %fms\n,StereoMatch计算完毕,正在输出...", t * 1000 / cv::getTickFrequency());
-	m_entity->setmsgBuffer(QString::fromStdString(buff));
+
+	std::cout << "Time elapsed: "<< t * 1000 / cv::getTickFrequency() <<"ms\n,StereoMatch计算完毕,正在输出..." << std::endl;
 
 	//disp = dispp.colRange(numberOfDisparities, img1p.cols);
 	
@@ -155,20 +161,26 @@ void StereoMatch::run()
 	//d
 
 	if (!disparity_filename.empty())
+	{
 		imwrite(disparity_filename, disp8);
+		std::cout << "视差图已经保存到:" << disparity_filename << std::endl;
+	}
+		
+	std::cout << "正在输出点云文件..." << std::endl;
 
-	m_entity->setmsgBuffer(QStringLiteral("正在输出点云文件..."));
 	cv::Mat xyz;
 	reprojectImageTo3D(disp, xyz, Q, true);
 
 	if (EvisionUtils::write_PointCloud(point_cloud_filename,xyz))
 	{
 		m_entity->setXYZ(xyz);
+		std::cout << "点云文件已经保存到:"<< point_cloud_filename << std::endl;
 	}
 	else
 	{
-		m_entity->setmsgBuffer(QStringLiteral("点云保存失败!"));
+		std::cout << "点云保存失败..." << std::endl;
 	}
-	m_entity->setmsgBuffer(QStringLiteral("就绪"));
+	std::cout << "计算完毕" << std::endl;
+
 	return ;
 }

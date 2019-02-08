@@ -190,16 +190,6 @@ void StereoMatchParamEntity::setImageDtoShow(cv::Mat value)
 	emit paramChanged_ImageDtoShow();
 }
 
-QString StereoMatchParamEntity::getmsgBuffer()
-{
-	return msgBuffer;
-}
-void StereoMatchParamEntity::setmsgBuffer(QString value)
-{
-	msgBuffer = value;
-	emit paramChanged_msgBuffer();
-}
-
 cv::Mat StereoMatchParamEntity::getDisparity()
 {
 	return disparity;
