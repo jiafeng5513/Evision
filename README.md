@@ -2,7 +2,7 @@
 
 <div align=center>Evision 双目视觉系统</div>
 
-<table align=center border="1">
+<table align=center width="400" border="1">
   <tr>
     <th>分支</th>
     <th>master</th>
