@@ -1,19 +1,26 @@
 <div align=center><img width="100" height="100" src="./src/EvisionLegacy/res/Evision.ico"/></div>
 
 <div align=center>Evision 双目视觉系统</div>
+<center>
+
+|分支|master|Evision_without_cuda|
+|:------:|:------:|:------:|
+|分支情况|全功能版|没有CUDA和目标检测的版本|
+<center>当前分支:Evision_without_cuda</center>
+
+</center>
 
 Introduction:
 =========
 1. 双目测距<br>
 2. 标定,畸变校正<br>
 3. 三维点云获取<br>
-4. 基于Yolo的实时目标检测.<br>
-5. 关于双目的中文资料重复度太高,希望各位后来者能够吸取前人精华,摒弃前人的糟粕,多多自行探索,不要抄来抄去<br>
-6. 如果您对于Visual Studio和Qt Creater并不是十分熟悉,请务必仔细阅读本文档.<br>
-7. 如果您需要安装依赖,请仔细阅读本文下方的安装指南,从官方网站下载安装包,并且不要按照其他形如"OpenCV和VS2017环境搭建"之类的教程进行所谓的环境配置.<br>
-8. 项目中自带了OpenCV,请不要修改项目的"包含目录,库目录和附加依赖项"等项目,除非您非常清楚这些东西的意义.<br>
-9. 关于程序使用方面的问题,可以联系邮件jiafeng5513@outlook.com,有关课程设计和毕业论文(Windows程序开发,机器视觉,深度学习,图像处理)也可以联系作者<br>
-10. 如果您不需要使用目标检测,只需要使用双目视觉方面的代码,那么可以直接使用[这个release](),或者按照[裁剪指南](./doc/build_without_CUDA.md)进行裁剪,这两种方法的却别在于,本项目的进一步更新所添加的功能并不包含在上述release中,而裁剪所得的版本含有这些新功能.<br>
+4. 关于双目的中文资料重复度太高,希望各位后来者能够吸取前人精华,摒弃前人的糟粕,多多自行探索,不要抄来抄去<br>
+5. 如果您对于Visual Studio和Qt Creater并不是十分熟悉,请务必仔细阅读本文档.<br>
+6. 如果您需要安装依赖,请仔细阅读本文下方的安装指南,从官方网站下载安装包,并且不要按照其他形如"OpenCV和VS2017环境搭建"之类的教程进行所谓的环境配置.<br>
+7. 项目中自带了OpenCV,请不要修改项目的"包含目录,库目录和附加依赖项"等项目,除非您非常清楚这些东西的意义.<br>
+8. 关于程序使用方面的问题,可以联系邮件jiafeng5513@outlook.com,有关课程设计和毕业论文(Windows程序开发,机器视觉,深度学习,图像处理)也可以联系作者<br>
+9. 当前分支是不含有CUDA和目标检测的版本,如果需要使用这些功能,请使用master分支.<br>
 
 目录
 =========
@@ -33,17 +40,13 @@ Introduction:
 #### 1.Dependencies
 1. Qt :5.12.0
 2. OpenCV : 3.4.1
-3. CUDA 10.0
-4. Visual Studio 2017
-5. cudnn (可选项)
-6. NVIDIA GTX 1060
+3. Visual Studio 2017
 
 #### 2.Installation_guide
 
 1. [Qt安装指南](./doc/Qt_Install.md)<br>
 2. [VS2017安装指南](./doc/VS2017_Install.md)<br>
 3. [VS2017-Qt配置指南](./doc/qt_vs_config.md)<br>
-4. [CUDA和GPU支持安装指南](./doc/cuda_install.md)<br>
 
 #### 3.Directory_specification
 1. `data`文件夹存储测试用例<br>
@@ -58,7 +61,6 @@ Introduction:
 1. EvisionLegacy是MFC版本的Evision主程序,生成目标是exe,已经停止更新,将会在未来的版本中移除.<br>
 2. CustomGraphicsView是自定义QtDesigner插件,生成目标是dll和lib.<br>
 3. Evision是Qt版的Evision主程序,生成目标是exe.<br>
-4. yolo_gpu是目标检测的支持,生成目标是dll和lib.<br>
 * 用VS2017打开`src/CvLib.sln`,你将会看到两个工程:<br>
 ![image](./doc/cvlib_sln_proj.png)
 1. CvLabMain是用WPF框架写的.<br>
@@ -78,11 +80,7 @@ Introduction:
 4. 带有编译脚本,可以自动将程序所需的dll复制到exe旁边,不需要设置环境变量.<br>
 5. 下载使用时,请不要修改这个项目的VS项目设置,我已经考虑了移植问题,该项目的工程文件(vcproj)比较复杂,如果您不是很熟悉VS的操作,请务必不要修改.<br>
 6. C++/Qt版本的程序更新活跃,未来的新功能会首先向该版本添加.<br>
-7. 通过预处理器定义控制的编译选项:
-   1. GPU:定义GPU将会编译yolo_gpu,可以使用目标检测功能.<br>
-   2. CUDNN:定义CUDNN将会启用CUDNN支持,在不启用CUDNN时,依然具备GPU支持的目标检测能力.<br>
-8. 在不使用目标检测功能时,程序最多需要占用200MB内存,使用目标检测功能时,最少需要占用4GB内存空间.<br>
-9. *重要提示*如果您只想使用双目视觉部分的功能,不想使用有关GPU,CUDA和目标检测的部分,务必看[裁剪指南](./doc/build_without_CUDA.md)
+7. 程序最多需要占用200MB内存.<br>
    
 #### 7.CvLabMain和CvLabSandbox(C#版本)
 1. Docking风格MDI界面<br>
@@ -106,9 +104,7 @@ Introduction:
 
 #### 9.参考文献
 1. [相机标定+畸变矫正](https://blog.csdn.net/Loser__Wang/article/details/51811347)
-2. [DarkNet](https://github.com/pjreddie/darknet)
-3. [DarkNet_Windows](https://github.com/AlexeyAB/darknet)
-4. [StdoutRedirector](https://github.com/dbzhang800/StdoutRedirector)
+2. [StdoutRedirector](https://github.com/dbzhang800/StdoutRedirector)
 
 #### 10.部分框图
 <div align=center><img src="./doc/立体视觉.png"/></div>

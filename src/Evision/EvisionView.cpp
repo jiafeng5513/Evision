@@ -11,7 +11,6 @@
 #include "StereoCameraView.h"
 #include "CameraView.h"
 #include "WatchImageView.h"
-#include "ObjectDetectionView.h"
 // 浮点数判等
 // ulp: units in the last place.
 template <typename T>
@@ -116,9 +115,7 @@ void EvisionView::on_action_Measure_view()
 //启动目标检测视图
 void EvisionView::on_action_ObjectDetection_view()
 {
-	ObjectDetectionView* _ObjectDetectionView = new ObjectDetectionView();
-	ui.mdiArea->addSubWindow(_ObjectDetectionView);
-	_ObjectDetectionView->show();
+
 }
 
 //调试方法

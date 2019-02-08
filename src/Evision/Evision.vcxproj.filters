@@ -81,9 +81,6 @@
     <ClCompile Include="StereoMatchController.cpp">
       <Filter>Controller</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectDetectionView.cpp">
-      <Filter>View</Filter>
-    </ClCompile>
     <ClCompile Include="CalibraterView.cpp">
       <Filter>View</Filter>
     </ClCompile>
@@ -101,12 +98,6 @@
     </ClCompile>
     <ClCompile Include="WatchImageView.cpp">
       <Filter>View</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectDetectionEngine.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectDetectionEntity.cpp">
-      <Filter>Entity</Filter>
     </ClCompile>
     <ClCompile Include="LogView.cpp">
       <Filter>View</Filter>
@@ -143,9 +134,6 @@
     <QtMoc Include="StereoMatchController.h">
       <Filter>Controller</Filter>
     </QtMoc>
-    <QtMoc Include="ObjectDetectionView.h">
-      <Filter>View</Filter>
-    </QtMoc>
     <QtMoc Include="CalibraterView.h">
       <Filter>View</Filter>
     </QtMoc>
@@ -164,12 +152,6 @@
     <QtMoc Include="WatchImageView.h">
       <Filter>View</Filter>
     </QtMoc>
-    <QtMoc Include="ObjectDetectionEngine.h">
-      <Filter>Engine</Filter>
-    </QtMoc>
-    <QtMoc Include="ObjectDetectionEntity.h">
-      <Filter>Entity</Filter>
-    </QtMoc>
     <QtMoc Include="LogView.h">
       <Filter>View</Filter>
     </QtMoc>
@@ -179,9 +161,6 @@
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="Evision.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
-    <QtUic Include="ObjectDetectionView.ui">
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="CalibraterView.ui">
