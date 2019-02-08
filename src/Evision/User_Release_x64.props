@@ -21,6 +21,13 @@
 echo copy dlls from the opencv version :
 $(SolutionDir)..\package\opencv\build\x64\vc15\bin\opencv_version.exe
 
+if not exist $(OutDir)opencv_world341.dll (
+    copy $(SolutionDir)..\package\opencv\build\x64\vc15\bin\opencv_world341.dll $(OutDir)opencv_world341.dll
+    echo copy opencv_world341.dll done
+) else (
+    echo opencv_world341.dll is already exist!
+)
+
 if not exist $(OutDir)opencv_ffmpeg341_64.dll (
     copy $(SolutionDir)..\package\opencv\build\x64\vc15\bin\opencv_ffmpeg341_64.dll $(OutDir)opencv_ffmpeg341_64.dll
     echo copy opencv_ffmpeg341_64.dll done
@@ -47,7 +54,22 @@ if not exist $(OutDir)Qt5Widgets.dll (
     echo copy Qt5Widgets.dll done
 ) else (
     echo Qt5Widgets.dll is already exist!
-)</Command>
+)
+
+if not exist $(OutDir)pthreadVC2.dll (
+    copy $(SolutionDir)..\package\pthread\dll\x64\pthreadVC2.dll $(OutDir)pthreadVC2.dll
+    echo copy pthreadVC2.dll done
+) else (
+    echo pthreadVC2.dll is already exist!
+)
+
+if not exist $(OutDir)pthreadGC2.dll (
+    copy $(SolutionDir)..\package\pthread\dll\x64\pthreadGC2.dll $(OutDir)pthreadGC2.dll
+    echo copy pthreadGC2.dll done
+) else (
+    echo pthreadGC2.dll is already exist!
+)
+</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup />
