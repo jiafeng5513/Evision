@@ -1,8 +1,8 @@
 <div align=center><img width="100" height="100" src="./src/EvisionLegacy/res/Evision.ico"/></div>
 
 <div align=center>Evision 双目视觉系统</div>
-
-<table align=center width="400" border="1">
+<div align=center>
+<table width="400" border="1">
   <tr>
     <th>分支</th>
     <th>master</th>
@@ -17,7 +17,7 @@
     <td align=center colspan="3">当前分支:Evision_without_cuda</td>
   </tr>
 </table>
-
+</div>
 
 Introduction:
 =========
