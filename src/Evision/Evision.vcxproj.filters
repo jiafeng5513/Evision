@@ -105,9 +105,6 @@
     <ClCompile Include="ObjectDetectionEngine.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="extrapolate_coords_t.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="ObjectDetectionEntity.cpp">
       <Filter>Entity</Filter>
     </ClCompile>
@@ -222,9 +219,6 @@
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="PointCloudUtils.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="extrapolate_coords_t.h">
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="yolo_v2_class.h">

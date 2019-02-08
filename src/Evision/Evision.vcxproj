@@ -124,7 +124,6 @@
     <ClCompile Include="CameraView.cpp" />
     <ClCompile Include="EvisionView.cpp" />
     <ClCompile Include="EvisionController.cpp" />
-    <ClCompile Include="extrapolate_coords_t.cpp" />
     <ClCompile Include="LogView.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="EvisionParamEntity.cpp" />
@@ -242,7 +241,6 @@
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtMultimediaWidgets</IncludePath>
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtMultimediaWidgets</IncludePath>
     </QtMoc>
-    <ClInclude Include="extrapolate_coords_t.h" />
     <ClInclude Include="PointCloudUtils.h" />
     <QtMoc Include="StereoCameraView.h">
       <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;WIN32;WIN64;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;QT_MULTIMEDIA_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_IMAGE_LIB;_CRT_SECURE_NO_WARNINGS</Define>
