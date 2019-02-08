@@ -71,7 +71,8 @@ Introduction:
 2. 依照[Installation guide (环境安装指南)](#2.Installation_guide)安装Visual Studio之后便可使用该项目.<br>
 3. MFC版本已经停止更新,未来的版本中将会删除.<br>
 4. 操作视频:<br>
-<iframe src="//player.bilibili.com/player.html?aid=8862669&cid=14623076&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+5. <center><iframe width="560" height="315" src="//player.bilibili.com/player.html?aid=8862669&cid=14623076&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe></center>
+
 
 #### 6.Evision(C++/Qt版本)
 1. Qt版本:Qt 5.12.0,请按照[Installation guide (环境安装指南)](#2.Installation_guide)进行安装.<br>
