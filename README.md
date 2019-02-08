@@ -9,13 +9,10 @@ Introduction:
 3. 三维点云获取<br>
 4. 基于Yolo的实时目标检测.<br>
 5. 关于双目的中文资料重复度太高,希望各位后来者能够吸取前人精华,摒弃前人的糟粕,多多自行探索,不要抄来抄去<br>
-6. 关于程序使用方面的问题,可以联系邮件jiafeng5513@outlook.com<br>
-7. 有关课程设计和毕业论文(Windows程序开发,机器视觉,深度学习,图像处理)的相关事宜也可以联系作者.<br>
-8. 为了对新手友好,写的比较详细(啰嗦),请谅解.如果您并不是一个写过很多相关程序的用户,请仔细阅读.<br>
-9. 使用该项目需要准备Visual Studio 2017,Qt 5.12.0.如果您没有这两个IDE的使用经验,请务必按照上面提供的安装教程进行安装.<br>
-10. 本项目已经将所需的依赖内置好,如果您对Visual Studio并不熟悉,请不要修改项目属性.<br>
-11. 请不要按照其他教程(形如"OpenCV和VS2017环境搭建"之类)中的步骤修改本项目的配置.<br>
-12. 项目中带有很多脚本,在不清楚这些脚本的作用的情况下,请不要修改删除或者随意执行.<br>
+6. 如果您对于Visual Studio和Qt Creater并不是十分熟悉,请务必仔细阅读本文档.<br>
+7. 如果您需要安装依赖,请仔细阅读本文下方的安装指南,从官方网站下载安装包,并且不要按照其他形如"OpenCV和VS2017环境搭建"之类的教程进行所谓的环境配置.<br>
+8. 项目中自带了OpenCV,请不要修改项目的"包含目录,库目录和附加依赖项"等项目,除非您非常清楚这些东西的意义.<br>
+9. 关于程序使用方面的问题,可以联系邮件jiafeng5513@outlook.com,有关课程设计和毕业论文(Windows程序开发,机器视觉,深度学习,图像处理)也可以联系作者<br>
 
 目录
 =========
@@ -70,8 +67,7 @@ Introduction:
 1. OpenCV版本:2.4.13,`package`文件夹中附带了该版本的OpenCV<br>
 2. 依照[Installation guide (环境安装指南)](#2.Installation_guide)安装Visual Studio之后便可使用该项目.<br>
 3. MFC版本已经停止更新,未来的版本中将会删除.<br>
-4. 操作视频:<br>
-5. <center><iframe width="560" height="315" src="//player.bilibili.com/player.html?aid=8862669&cid=14623076&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe></center>
+4. [操作视频](https://www.bilibili.com/video/av8862669/)<br>
 
 
 #### 6.Evision(C++/Qt版本)
