@@ -1,22 +1,23 @@
 <div align=center><img width="100" height="100" src="./src/EvisionLegacy/res/Evision.ico"/></div>
 
 <div align=center>Evision 双目视觉系统</div>
+
 <div align=center>
-<table width="400" border="1">
-  <tr>
-    <th>分支</th>
-    <th>master</th>
-    <th>Evision_without_cuda</th>
-  </tr>
-  <tr>
-    <td>分支情况</td>
-    <td>全功能版</td>
-    <td>没有CUDA和目标检测的版本</td>
-  </tr>
-  <tr>
-    <td align=center colspan="3">当前分支:Evision_without_cuda</td>
-  </tr>
-</table>
+    <table width="400">
+      <tr>
+        <th>分支</th>
+        <th>master</th>
+        <th >Evision_without_cuda</th>
+      </tr>
+      <tr>
+        <td align=center>分支情况</td>
+        <td align=center>全功能版</td>
+        <td align=center>没有CUDA和目标检测的版本</td>
+      </tr>
+      <tr>
+        <td align=center colspan="3">当前分支:Evision_without_cuda</td>
+      </tr>
+    </table>
 </div>
 
 Introduction:
