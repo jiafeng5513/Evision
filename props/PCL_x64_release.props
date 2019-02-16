@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <IncludePath>D:\Libraries\PCL\PCL-1.9.1\3rdParty\Qhull\include;D:\Libraries\PCL\PCL-1.9.1\3rdParty\FLANN\include;D:\Libraries\PCL\PCL-1.9.1\3rdParty\Eigen\eigen3;D:\Libraries\PCL\PCL-1.9.1\3rdParty\Boost\include\boost-1_68;D:\Libraries\PCL\PCL-1.9.1\include\pcl-1.9;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Libraries\PCL\PCL-1.9.1\lib;D:\Libraries\PCL\PCL-1.9.1\3rdParty\Boost\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <Link>
+      <AdditionalDependencies>pcl_common_release.lib;pcl_features_release.lib;pcl_search_release.lib;pcl_io_release.lib;pcl_surface_release.lib;pcl_visualization_release.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup />
+</Project>

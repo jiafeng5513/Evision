@@ -4,8 +4,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <OutDir>$(SolutionDir)..\bin\$(Platform)\$(Configuration)\</OutDir>
-    <IncludePath>$(SolutionDir)..\package\opencv\build\include;$(SolutionDir)..\package\pthread\include;$(ProjectDir)..\include\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)..\package\opencv\build\x64\vc15\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)..\package\pthread\lib\x64\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -18,7 +17,7 @@
       <WarningLevel>Level3</WarningLevel>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>$(SolutionDir)..\package\pthread\lib\x64\pthreadVC2.lib;cublas.lib;curand.lib;cudart.lib;opencv_world341.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>pthreadVC2.lib;cublas.lib;curand.lib;cudart.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>

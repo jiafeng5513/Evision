@@ -30,8 +30,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)..\bin\$(Platform)\$(Configuration)\</OutDir>
-    <IncludePath>D:\Libraries\PCL\PCL-1.9.1\3rdParty\Qhull\include;D:\Libraries\PCL\PCL-1.9.1\3rdParty\FLANN\include;D:\Libraries\PCL\PCL-1.9.1\3rdParty\Eigen\eigen3;D:\Libraries\PCL\PCL-1.9.1\3rdParty\Boost\include\boost-1_68;D:\Libraries\PCL\PCL-1.9.1\include\pcl-1.9;D:\Libraries\vtk\vtk8.1.0\install\include\vtk-8.1;E:\VisualStudio\Evision\src\Evision3dViz\GeneratedFiles\Debug;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Libraries\PCL\PCL-1.9.1\lib;D:\Libraries\PCL\PCL-1.9.1\3rdParty\Boost\lib;D:\Libraries\vtk\vtk8.1.0\install\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
@@ -46,9 +46,13 @@
   <ImportGroup Label="Shared" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\props\PCL_x64_debug.props" />
+    <Import Project="..\..\props\VTK_x64_debug.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\props\PCL_x64_release.props" />
+    <Import Project="..\..\props\VTK_x64_release.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -66,7 +70,7 @@
       <OutputFile>$(OutDir)\$(ProjectName).dll</OutputFile>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;pcl_common_debug.lib;pcl_features_debug.lib;pcl_search_debug.lib;pcl_io_debug.lib;pcl_surface_debug.lib;pcl_visualization_debug.lib;vtkCommonDataModel-8.1-gd.lib;vtkCommonCore-8.1-gd.lib;vtkCommonMath-8.1-gd.lib;vtkCommonExecutionModel-8.1-gd.lib;vtkFiltersSources-8.1-gd.lib;vtkGUISupportQt-8.1-gd.lib;vtkRenderingLOD-8.1-gd.lib;vtkRenderingOpenGL2-8.1-gd.lib;vtkInteractionStyle-8.1-gd.lib;vtkRenderingCore-8.1-gd.lib;Qt5Multimediad.lib;Qt5MultimediaWidgetsd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <QtMoc>
       <Define>UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;EVISION3DVIZ_LIB;QT_MULTIMEDIA_LIB;QT_MULTIMEDIAWIDGETS_LIB;%(PreprocessorDefinitions)</Define>

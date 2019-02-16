@@ -3,18 +3,19 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <IncludePath>$(SolutionDir)..\package\opencv\build\include;$(SolutionDir)..\package\opencv\build\include\opencv;$(SolutionDir)..\package\opencv\build\include\opencv2;$(SolutionDir)CustomGraphicsView;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)..\package\opencv\build\x64\vc15\lib;$(OutDir);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)CustomGraphicsView;$(SolutionDir)Evision3dViz\GeneratedFiles;$(IncludePath)</IncludePath>
+    <LibraryPath>$(OutDir);$(LibraryPath)</LibraryPath>
     <_PropertySheetDisplayName>User_Release_x64</_PropertySheetDisplayName>
     <OutDir>$(SolutionDir)..\bin\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
-      <AdditionalDependencies>opencv_world341.lib;CustomGraphicsView.lib;yolo_gpu.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>CustomGraphicsView.lib;yolo_gpu.lib;Evision3dViz.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <DelayLoadDLLs>yolo_gpu.dll</DelayLoadDLLs>
     </Link>
     <ClCompile>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(QTDIR)\include\QtCore\5.12.0\;$(QTDIR)\include\QtCore\5.12.0\QtCore\;$(QTDIR)\include\QtCore\5.12.0\QtCore\private;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <PreBuildEvent>
       <Command>@echo off
