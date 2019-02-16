@@ -1024,8 +1024,8 @@ void Evision3dViz::initial()
 	ui.dataTree->setSelectionMode(QAbstractItemView::ExtendedSelection); // 允许 dataTree 进行多选
 
 	// 设置默认主题
-	QString qss = darcula_qss;
-	qApp->setStyleSheet(qss);
+	//QString qss = darcula_qss;
+	//qApp->setStyleSheet(qss);
 
 	setPropertyTable();
 	//setConsoleTable();

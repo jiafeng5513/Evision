@@ -36,11 +36,11 @@ public:
 private:
 	struct MyCloud
 	{
-		PointCloudT::Ptr cloud;  //����ָ��
-		std::string filename;  //���Ƶ�ȫ·���ļ���
-		std::string subname;  //���Ƶ��ļ���
-		std::string dirname = "E:\\Date\\PointCloud\\";
-		bool visible = true;  //������ viewer ���Ƿ�ɼ�
+		PointCloudT::Ptr cloud;  
+		std::string filename;  
+		std::string subname;  
+		std::string dirname = "";
+		bool visible = true;  
 	};
 
 	Ui::Evision3dVizClass ui;
