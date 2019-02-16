@@ -1,0 +1,30 @@
+<RCC>
+    <qresource prefix="/PointCloudTool">
+        <file>Resources/about.png</file>
+        <file>Resources/add.png</file>
+        <file>Resources/angle view.png</file>
+        <file>Resources/bgcolor.png</file>
+        <file>Resources/change.png</file>
+        <file>Resources/clear.png</file>
+        <file>Resources/cube.png</file>
+        <file>Resources/cylinder.png</file>
+        <file>Resources/exit.png</file>
+        <file>Resources/frame.png</file>
+        <file>Resources/fushi.png</file>
+        <file>Resources/help.png</file>
+        <file>Resources/icon.ico</file>
+        <file>Resources/icon.png</file>
+        <file>Resources/language.png</file>
+        <file>Resources/mesh.png</file>
+        <file>Resources/open.png</file>
+        <file>Resources/pointcolor.png</file>
+        <file>Resources/save.png</file>
+        <file>Resources/saveBinary.png</file>
+        <file>Resources/shape.png</file>
+        <file>Resources/sphere.png</file>
+        <file>Resources/theme.png</file>
+        <file>Resources/zhengshi.png</file>
+        <file>Resources/zuoshi.png</file>
+        <file>Resources/roam_color_128px_1186912_easyicon.net.png</file>
+    </qresource>
+</RCC>

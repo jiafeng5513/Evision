@@ -12,6 +12,7 @@
 #include "CameraView.h"
 #include "WatchImageView.h"
 #include "ObjectDetectionView.h"
+#include "../Evision3dViz/Evision3dViz.h"
 // 浮点数判等
 // ulp: units in the last place.
 template <typename T>
@@ -72,25 +73,9 @@ void EvisionView::onStereoCamera()
 //显示点云
 void EvisionView::onShowPointCloud()
 {
-	//TODO:need refactor
-	QFileDialog * fileDialog2 = new QFileDialog();
-	fileDialog2->setWindowTitle(QStringLiteral("请选择点云文件"));
-	fileDialog2->setNameFilter(QStringLiteral("点云文件(*.xml *.yml *.yaml)"));
-	fileDialog2->setFileMode(QFileDialog::ExistingFile);
-	if (fileDialog2->exec() == QDialog::Accepted)
-	{
-		QString xyzFile = fileDialog2->selectedFiles().at(0);
-		cv::Mat xyz;
-		if (EvisionUtils::read_PointCloud(xyzFile.toStdString(), &xyz))
-		{
-		}
-	}
-	else
-	{
-		QMessageBox::information(NULL, QStringLiteral("错误"), QStringLiteral("请选择有效的点云文件!"));
-		return;
-	}
-	//点云获取ok,准备显示
+	Evision3dViz  * evision3dViz = new Evision3dViz();
+	ui.mdiArea->addSubWindow(evision3dViz);
+	evision3dViz->show();
 }
 //显示标定视图
 void EvisionView::on_action_calibrate_view()

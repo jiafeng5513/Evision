@@ -1,0 +1,1506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Evision3dVizClass</class>
+ <widget class="QWidget" name="Evision3dVizClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>897</width>
+    <height>579</height>
+   </rect>
+  </property>
+  <property name="contextMenuPolicy">
+   <enum>Qt::CustomContextMenu</enum>
+  </property>
+  <property name="windowTitle">
+   <string>PointCloudTool</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_3">
+   <item row="1" column="0">
+    <widget class="QTreeWidget" name="dataTree">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>180</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>300</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::CustomContextMenu</enum>
+     </property>
+     <column>
+      <property name="text">
+       <string>Point Cloud File</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QTableWidget" name="propertyTable">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>180</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>300</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Sunken</enum>
+     </property>
+     <property name="midLineWidth">
+      <number>0</number>
+     </property>
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarAsNeeded</enum>
+     </property>
+     <property name="sizeAdjustPolicy">
+      <enum>QAbstractScrollArea::AdjustIgnored</enum>
+     </property>
+     <property name="autoScroll">
+      <bool>true</bool>
+     </property>
+     <property name="editTriggers">
+      <set>QAbstractItemView::NoEditTriggers</set>
+     </property>
+     <property name="tabKeyNavigation">
+      <bool>true</bool>
+     </property>
+     <property name="showDropIndicator" stdset="0">
+      <bool>true</bool>
+     </property>
+     <property name="dragDropOverwriteMode">
+      <bool>true</bool>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>false</bool>
+     </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::ExtendedSelection</enum>
+     </property>
+     <property name="textElideMode">
+      <enum>Qt::ElideLeft</enum>
+     </property>
+     <property name="horizontalScrollMode">
+      <enum>QAbstractItemView::ScrollPerItem</enum>
+     </property>
+     <property name="showGrid">
+      <bool>false</bool>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+     <property name="cornerButtonEnabled">
+      <bool>true</bool>
+     </property>
+     <property name="rowCount">
+      <number>4</number>
+     </property>
+     <property name="columnCount">
+      <number>2</number>
+     </property>
+     <attribute name="horizontalHeaderCascadingSectionResizes">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="horizontalHeaderDefaultSectionSize">
+      <number>100</number>
+     </attribute>
+     <attribute name="horizontalHeaderHighlightSections">
+      <bool>true</bool>
+     </attribute>
+     <attribute name="horizontalHeaderMinimumSectionSize">
+      <number>25</number>
+     </attribute>
+     <attribute name="horizontalHeaderStretchLastSection">
+      <bool>true</bool>
+     </attribute>
+     <attribute name="verticalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="verticalHeaderCascadingSectionResizes">
+      <bool>false</bool>
+     </attribute>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <column>
+      <property name="text">
+       <string>Property</string>
+      </property>
+      <property name="textAlignment">
+       <set>AlignLeading|AlignVCenter</set>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Value</string>
+      </property>
+      <property name="textAlignment">
+       <set>AlignLeading|AlignVCenter</set>
+      </property>
+     </column>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QFrame" name="frame">
+     <property name="maximumSize">
+      <size>
+       <width>300</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Box</enum>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_1">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>微软雅黑</family>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Red</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLCDNumber" name="rLCD">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="inputMethodHints">
+         <set>Qt::ImhNone</set>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Panel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <property name="lineWidth">
+         <number>1</number>
+        </property>
+        <property name="smallDecimalPoint">
+         <bool>false</bool>
+        </property>
+        <property name="digitCount">
+         <number>3</number>
+        </property>
+        <property name="mode">
+         <enum>QLCDNumber::Dec</enum>
+        </property>
+        <property name="value" stdset="0">
+         <double>255.000000000000000</double>
+        </property>
+        <property name="intValue" stdset="0">
+         <number>255</number>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QSlider" name="rSlider">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>132</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximum">
+         <number>255</number>
+        </property>
+        <property name="sliderPosition">
+         <number>255</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>微软雅黑</family>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Green</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLCDNumber" name="gLCD">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Panel</enum>
+        </property>
+        <property name="digitCount">
+         <number>3</number>
+        </property>
+        <property name="intValue" stdset="0">
+         <number>255</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QSlider" name="gSlider">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>132</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximum">
+         <number>255</number>
+        </property>
+        <property name="sliderPosition">
+         <number>255</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>微软雅黑</family>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Blue</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLCDNumber" name="bLCD">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Panel</enum>
+        </property>
+        <property name="digitCount">
+         <number>3</number>
+        </property>
+        <property name="intValue" stdset="0">
+         <number>255</number>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QSlider" name="bSlider">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>132</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximum">
+         <number>255</number>
+        </property>
+        <property name="sliderPosition">
+         <number>255</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>微软雅黑</family>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Point Size</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLCDNumber" name="sizeLCD">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="digitCount">
+         <number>1</number>
+        </property>
+        <property name="segmentStyle">
+         <enum>QLCDNumber::Filled</enum>
+        </property>
+        <property name="intValue" stdset="0">
+         <number>1</number>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="2">
+       <widget class="QSlider" name="pSlider">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>132</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>10</number>
+        </property>
+        <property name="sliderPosition">
+         <number>1</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="2">
+    <widget class="QFrame" name="frame">
+     <property name="frameShape">
+      <enum>QFrame::Box</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <widget class="QPushButton" name="pushButton_Open">
+        <property name="maximumSize">
+         <size>
+          <width>31</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>打开</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="Evision3dViz.qrc">
+          <normaloff>:/PointCloudTool/Resources/open.png</normaloff>:/PointCloudTool/Resources/open.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>25</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QPushButton" name="pushButton_Add">
+        <property name="maximumSize">
+         <size>
+          <width>31</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>添加</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="Evision3dViz.qrc">
+          <normaloff>:/PointCloudTool/Resources/add.png</normaloff>:/PointCloudTool/Resources/add.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>25</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QPushButton" name="pushButton_Clean">
+        <property name="maximumSize">
+         <size>
+          <width>31</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>清除</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="Evision3dViz.qrc">
+          <normaloff>:/PointCloudTool/Resources/clear.png</normaloff>:/PointCloudTool/Resources/clear.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>25</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QPushButton" name="pushButton_Save">
+        <property name="maximumSize">
+         <size>
+          <width>31</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>保存</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="Evision3dViz.qrc">
+          <normaloff>:/PointCloudTool/Resources/save.png</normaloff>:/PointCloudTool/Resources/save.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>25</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="4">
+       <widget class="QPushButton" name="pushButton_SaveAs">
+        <property name="maximumSize">
+         <size>
+          <width>31</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>另存为</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="Evision3dViz.qrc">
+          <normaloff>:/PointCloudTool/Resources/saveBinary.png</normaloff>:/PointCloudTool/Resources/saveBinary.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>25</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="5">
+       <widget class="QPushButton" name="pushButton_Change">
+        <property name="maximumSize">
+         <size>
+          <width>31</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>更改</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="Evision3dViz.qrc">
+          <normaloff>:/PointCloudTool/Resources/change.png</normaloff>:/PointCloudTool/Resources/change.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>25</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="6">
+       <widget class="QPushButton" name="pushButton_Exit">
+        <property name="maximumSize">
+         <size>
+          <width>31</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>关闭</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="Evision3dViz.qrc">
+          <normaloff>:/PointCloudTool/Resources/exit.png</normaloff>:/PointCloudTool/Resources/exit.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>25</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="7">
+       <widget class="QPushButton" name="pushButton_PointColor">
+        <property name="maximumSize">
+         <size>
+          <width>31</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>点云颜色</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="Evision3dViz.qrc">
+          <normaloff>:/PointCloudTool/Resources/pointcolor.png</normaloff>:/PointCloudTool/Resources/pointcolor.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>25</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="8">
+       <widget class="QPushButton" name="pushButton_BackgroundColor">
+        <property name="maximumSize">
+         <size>
+          <width>31</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>背景颜色</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="Evision3dViz.qrc">
+          <normaloff>:/PointCloudTool/Resources/bgcolor.png</normaloff>:/PointCloudTool/Resources/bgcolor.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>25</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="9">
+       <widget class="QPushButton" name="pushButton_MainView">
+        <property name="maximumSize">
+         <size>
+          <width>31</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>主视图</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="Evision3dViz.qrc">
+          <normaloff>:/PointCloudTool/Resources/zhengshi.png</normaloff>:/PointCloudTool/Resources/zhengshi.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>25</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="10">
+       <widget class="QPushButton" name="pushButton_LeftView">
+        <property name="maximumSize">
+         <size>
+          <width>31</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>左视图</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="Evision3dViz.qrc">
+          <normaloff>:/PointCloudTool/Resources/zuoshi.png</normaloff>:/PointCloudTool/Resources/zuoshi.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>25</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="11">
+       <widget class="QPushButton" name="pushButton_TopView">
+        <property name="maximumSize">
+         <size>
+          <width>31</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>俯视图</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="Evision3dViz.qrc">
+          <normaloff>:/PointCloudTool/Resources/fushi.png</normaloff>:/PointCloudTool/Resources/fushi.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>25</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="12">
+       <widget class="QPushButton" name="pushButton_GenCube">
+        <property name="maximumSize">
+         <size>
+          <width>31</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>生成立方体</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="Evision3dViz.qrc">
+          <normaloff>:/PointCloudTool/Resources/cube.png</normaloff>:/PointCloudTool/Resources/cube.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>25</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="13">
+       <widget class="QPushButton" name="pushButton_GenSphere">
+        <property name="maximumSize">
+         <size>
+          <width>31</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>生成球</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="Evision3dViz.qrc">
+          <normaloff>:/PointCloudTool/Resources/sphere.png</normaloff>:/PointCloudTool/Resources/sphere.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>25</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="14">
+       <widget class="QPushButton" name="pushButton_GenCylinder">
+        <property name="maximumSize">
+         <size>
+          <width>31</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>生成圆柱体</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="Evision3dViz.qrc">
+          <normaloff>:/PointCloudTool/Resources/cylinder.png</normaloff>:/PointCloudTool/Resources/cylinder.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>25</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="15">
+       <widget class="QPushButton" name="pushButton_MeshSurface">
+        <property name="maximumSize">
+         <size>
+          <width>31</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Surface</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="Evision3dViz.qrc">
+          <normaloff>:/PointCloudTool/Resources/mesh.png</normaloff>:/PointCloudTool/Resources/mesh.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>25</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="16">
+       <widget class="QPushButton" name="pushButton_Wireframe">
+        <property name="maximumSize">
+         <size>
+          <width>31</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Wireframe</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="Evision3dViz.qrc">
+          <normaloff>:/PointCloudTool/Resources/frame.png</normaloff>:/PointCloudTool/Resources/frame.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>25</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="17">
+       <widget class="QPushButton" name="pushButton_RandomColor">
+        <property name="maximumSize">
+         <size>
+          <width>31</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>随机颜色</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="Evision3dViz.qrc">
+          <normaloff>:/PointCloudTool/Resources/roam_color_128px_1186912_easyicon.net.png</normaloff>:/PointCloudTool/Resources/roam_color_128px_1186912_easyicon.net.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>25</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="18">
+       <widget class="QCheckBox" name="bgcCbx">
+        <property name="maximumSize">
+         <size>
+          <width>90</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>微软雅黑</family>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Dark/Light</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="19">
+       <widget class="QCheckBox" name="cooCbx">
+        <property name="minimumSize">
+         <size>
+          <width>90</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>微软雅黑</family>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Coordinate</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="20">
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="1" column="1" rowspan="3">
+    <widget class="QVTKWidget" name="screen">
+     <property name="minimumSize">
+      <size>
+       <width>600</width>
+       <height>400</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>QVTKWidget</class>
+   <extends>QWidget</extends>
+   <header>QVTKWidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="Evision3dViz.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>pushButton_Open</sender>
+   <signal>clicked()</signal>
+   <receiver>Evision3dVizClass</receiver>
+   <slot>onPushButton_Open()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>34</x>
+     <y>31</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>47</x>
+     <y>5</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_Add</sender>
+   <signal>clicked()</signal>
+   <receiver>Evision3dVizClass</receiver>
+   <slot>onPushButton_Add()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>73</x>
+     <y>42</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>74</x>
+     <y>64</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_Clean</sender>
+   <signal>clicked()</signal>
+   <receiver>Evision3dVizClass</receiver>
+   <slot>onPushButton_Clean()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>115</x>
+     <y>40</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>191</x>
+     <y>2</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_Save</sender>
+   <signal>clicked()</signal>
+   <receiver>Evision3dVizClass</receiver>
+   <slot>onPushButton_Save()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>152</x>
+     <y>31</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>66</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_SaveAs</sender>
+   <signal>clicked()</signal>
+   <receiver>Evision3dVizClass</receiver>
+   <slot>onPushButton_SaveAs()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>185</x>
+     <y>37</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>335</x>
+     <y>6</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_Change</sender>
+   <signal>clicked()</signal>
+   <receiver>Evision3dVizClass</receiver>
+   <slot>onPushButton_Change()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>223</x>
+     <y>38</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>347</x>
+     <y>65</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_Exit</sender>
+   <signal>clicked()</signal>
+   <receiver>Evision3dVizClass</receiver>
+   <slot>onPushButton_Exit()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>267</x>
+     <y>33</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>481</x>
+     <y>5</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_PointColor</sender>
+   <signal>clicked()</signal>
+   <receiver>Evision3dVizClass</receiver>
+   <slot>onPushButton_PointColor()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>295</x>
+     <y>34</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>142</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_BackgroundColor</sender>
+   <signal>clicked()</signal>
+   <receiver>Evision3dVizClass</receiver>
+   <slot>onPushButton_BackgroundColor()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>331</x>
+     <y>40</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>285</x>
+     <y>217</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_MainView</sender>
+   <signal>clicked()</signal>
+   <receiver>Evision3dVizClass</receiver>
+   <slot>onPushButton_MainView()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>374</x>
+     <y>39</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>507</x>
+     <y>64</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_LeftView</sender>
+   <signal>clicked()</signal>
+   <receiver>Evision3dVizClass</receiver>
+   <slot>onPushButton_LeftView()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>413</x>
+     <y>32</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>609</x>
+     <y>6</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_TopView</sender>
+   <signal>clicked()</signal>
+   <receiver>Evision3dVizClass</receiver>
+   <slot>onPushButton_TopViewe()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>439</x>
+     <y>35</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>659</x>
+     <y>66</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_GenCube</sender>
+   <signal>clicked()</signal>
+   <receiver>Evision3dVizClass</receiver>
+   <slot>onPushButton_GenCube()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>485</x>
+     <y>41</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>759</x>
+     <y>6</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_GenSphere</sender>
+   <signal>clicked()</signal>
+   <receiver>Evision3dVizClass</receiver>
+   <slot>onPushButton_GenSphere()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>510</x>
+     <y>37</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>893</x>
+     <y>91</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_GenCylinder</sender>
+   <signal>clicked()</signal>
+   <receiver>Evision3dVizClass</receiver>
+   <slot>onPushButton_GenCylinder()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>551</x>
+     <y>39</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>894</x>
+     <y>143</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_MeshSurface</sender>
+   <signal>clicked()</signal>
+   <receiver>Evision3dVizClass</receiver>
+   <slot>onPushButton_MeshSurface()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>590</x>
+     <y>42</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>894</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_Wireframe</sender>
+   <signal>clicked()</signal>
+   <receiver>Evision3dVizClass</receiver>
+   <slot>onPushButton_Wireframe()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>632</x>
+     <y>42</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>894</x>
+     <y>259</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_RandomColor</sender>
+   <signal>clicked()</signal>
+   <receiver>Evision3dVizClass</receiver>
+   <slot>onPushButton_RandomColor()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>669</x>
+     <y>40</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>894</x>
+     <y>312</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bgcCbx</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>Evision3dVizClass</receiver>
+   <slot>onCheckboxStateChanged_DarkLight(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>707</x>
+     <y>41</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>896</x>
+     <y>363</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cooCbx</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>Evision3dVizClass</receiver>
+   <slot>onCheckboxStateChanged_Coordinate(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>819</x>
+     <y>33</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>894</x>
+     <y>423</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dataTree</sender>
+   <signal>itemClicked(QTreeWidgetItem*,int)</signal>
+   <receiver>Evision3dVizClass</receiver>
+   <slot>itemSelected(QTreeWidgetItem*,int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>54</x>
+     <y>145</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>285</x>
+     <y>264</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>rSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>Evision3dVizClass</receiver>
+   <slot>onValueChanged_r_Slider(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>148</x>
+     <y>471</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>284</x>
+     <y>334</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>gSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>Evision3dVizClass</receiver>
+   <slot>onValueChanged_g_Slider(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>209</x>
+     <y>500</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>370</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>Evision3dVizClass</receiver>
+   <slot>onValueChanged_b_Slider(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>200</x>
+     <y>529</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>285</x>
+     <y>407</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pSlider</sender>
+   <signal>sliderReleased()</signal>
+   <receiver>Evision3dVizClass</receiver>
+   <slot>onReleased_p_Slider()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>227</x>
+     <y>558</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>284</x>
+     <y>492</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>Evision3dVizClass</receiver>
+   <slot>onValueChanged_p_Slider(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>246</x>
+     <y>558</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>535</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>rSlider</sender>
+   <signal>sliderReleased()</signal>
+   <receiver>Evision3dVizClass</receiver>
+   <slot>onReleased_rgb_Slider()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>228</x>
+     <y>460</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>284</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>gSlider</sender>
+   <signal>sliderReleased()</signal>
+   <receiver>Evision3dVizClass</receiver>
+   <slot>onReleased_rgb_Slider()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>182</x>
+     <y>483</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>4</x>
+     <y>323</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bSlider</sender>
+   <signal>sliderReleased()</signal>
+   <receiver>Evision3dVizClass</receiver>
+   <slot>onReleased_rgb_Slider()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>168</x>
+     <y>515</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>3</x>
+     <y>373</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>onPushButton_Open()</slot>
+  <slot>onPushButton_Add()</slot>
+  <slot>onPushButton_Clean()</slot>
+  <slot>onPushButton_Save()</slot>
+  <slot>onPushButton_SaveAs()</slot>
+  <slot>onPushButton_Change()</slot>
+  <slot>onPushButton_Exit()</slot>
+  <slot>onPushButton_PointColor()</slot>
+  <slot>onPushButton_BackgroundColor()</slot>
+  <slot>onPushButton_MainView()</slot>
+  <slot>onPushButton_LeftView()</slot>
+  <slot>onPushButton_TopViewe()</slot>
+  <slot>onPushButton_GenCube()</slot>
+  <slot>onPushButton_GenSphere()</slot>
+  <slot>onPushButton_GenCylinder()</slot>
+  <slot>onPushButton_MeshSurface()</slot>
+  <slot>onPushButton_Wireframe()</slot>
+  <slot>onPushButton_RandomColor()</slot>
+  <slot>onValueChanged_r_Slider(int)</slot>
+  <slot>onValueChanged_g_Slider(int)</slot>
+  <slot>onValueChanged_b_Slider(int)</slot>
+  <slot>onValueChanged_p_Slider(int)</slot>
+  <slot>onReleased_p_Slider()</slot>
+  <slot>onCheckboxStateChanged_Coordinate(int)</slot>
+  <slot>onCheckboxStateChanged_DarkLight(int)</slot>
+  <slot>itemSelected(QTreeWidgetItem*,int)</slot>
+  <slot>onReleased_rgb_Slider()</slot>
+ </slots>
+</ui>

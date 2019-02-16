@@ -156,14 +156,17 @@ void RulerView::onStart()
 	split(xyz, xyzSet);
 	xyzSet[2].copyTo(depth);
 
-	std::vector<PointCloudUtils::ObjectInfo> objectInfos;
-	PointCloudUtils pointCloudAnalyzer;
-	if (pointCloudAnalyzer.detectNearObject(disp, xyz, objectInfos) == 0)
-	{
-		//失败处理
-		return;
-	}
-	pointCloudAnalyzer.showObjectInfo(objectInfos, img);//在左视图上面叠加轮廓识别的框
+	//std::vector<PointCloudUtils::ObjectInfo> objectInfos;
+	//PointCloudUtils pointCloudAnalyzer;
+	//if (pointCloudAnalyzer.detectNearObject(disp, xyz, objectInfos) == 0)
+	//{
+	//	//失败处理
+	//	return;
+	//}
+	//pointCloudAnalyzer.showObjectInfo(objectInfos, img);//在左视图上面叠加轮廓识别的框
+	//cv::imwrite("F:\\disp.jpg", disp);
+	//cv::imwrite("F:\\xyz.jpg", xyz);
+	//cv::imwrite("F:\\depth,jpg", depth);
 
 	printImgToD(disp);
 	printImgToO(img);

@@ -18,9 +18,9 @@ public:
 
 private:
 	Ui::RulerView ui;
-	cv::Mat img;
-	cv::Mat disp;
-	cv::Mat xyz;
+	cv::Mat img;//×óÊÓÍ¼
+	cv::Mat disp;//ÊÓ²îÍ¼
+	cv::Mat xyz;//µãÔÆ
 	cv::Mat depth;
 	double m_ObjectDistance;
 	bool started = false;
