@@ -43,8 +43,7 @@ bool StereoMatch::init()
 		//1.打开图片
 		
 		std::cout << "加载图片..." << std::endl;
-
-		int color_mode = alg == STEREO_BM ? 0 : -1;
+		int color_mode = (m_entity->getBM()==true ? cv::IMREAD_GRAYSCALE : cv::IMREAD_COLOR);
 		img1 = cv::imread(img1_filename, color_mode);
 		img2 = cv::imread(img2_filename, color_mode);
 		if (img1.empty() || img2.empty())
@@ -138,18 +137,13 @@ void StereoMatch::run()
 	int64 t = cv::getTickCount();
 	if (m_entity->getBM())
 	{
-		cv::namedWindow("img1");
-		cv::imshow("img1",img1);
-		cv::namedWindow("img2");
-		cv::imshow("img2", img2);
-		cv::Mat img01, img02;
-		img1.convertTo(img01, CV_8UC1);
-		img2.convertTo(img02, CV_8UC1);
-		bm->compute(img01, img02, disp);
+		bm->compute(img1, img2, disp);
+	}	
+	else if (m_entity->getSGBM())
+	{
+		sgbm->compute(img1, img2, disp);
 	}
 		
-	else if (m_entity->getSGBM())
-		sgbm->compute(img1, img2, disp);
 	t = cv::getTickCount() - t;
 
 	std::cout << "Time elapsed: "<< t * 1000 / cv::getTickFrequency() <<"ms\n,StereoMatch计算完毕,正在输出..." << std::endl;
