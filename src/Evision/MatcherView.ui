@@ -6,28 +6,25 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>977</width>
-    <height>613</height>
+    <width>1000</width>
+    <height>574</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>匹配</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
-   <item row="0" column="1">
-    <widget class="QGroupBox" name="groupBox">
-     <property name="maximumSize">
+   <item row="0" column="0" rowspan="3">
+    <widget class="QGraphicsView" name="graphicsView_D">
+     <property name="minimumSize">
       <size>
-       <width>310</width>
-       <height>16777215</height>
+       <width>666</width>
+       <height>0</height>
       </size>
-     </property>
-     <property name="title">
-      <string>相机参数</string>
      </property>
     </widget>
    </item>
-   <item row="1" column="1" rowspan="2">
+   <item row="0" column="1" rowspan="3">
     <widget class="QGroupBox" name="groupBox_6">
      <property name="maximumSize">
       <size>
@@ -261,6 +258,9 @@
         <property name="singleStep">
          <number>2</number>
         </property>
+        <property name="pageStep">
+         <number>2</number>
+        </property>
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
@@ -370,6 +370,9 @@
          <number>256</number>
         </property>
         <property name="singleStep">
+         <number>16</number>
+        </property>
+        <property name="pageStep">
          <number>16</number>
         </property>
         <property name="orientation">
@@ -644,9 +647,6 @@
      </layout>
     </widget>
    </item>
-   <item row="0" column="0" rowspan="3">
-    <widget class="QGraphicsView" name="graphicsView_D"/>
-   </item>
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
@@ -659,8 +659,8 @@
    <slot>setDefaultMatchParam()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>708</x>
-     <y>578</y>
+     <x>776</x>
+     <y>554</y>
     </hint>
     <hint type="destinationlabel">
      <x>663</x>
@@ -675,8 +675,8 @@
    <slot>doMatch()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>776</x>
-     <y>585</y>
+     <x>878</x>
+     <y>554</y>
     </hint>
     <hint type="destinationlabel">
      <x>755</x>
@@ -691,8 +691,8 @@
    <slot>RefreshStereoMatch()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>868</x>
-     <y>586</y>
+     <x>980</x>
+     <y>554</y>
     </hint>
     <hint type="destinationlabel">
      <x>858</x>
@@ -707,8 +707,8 @@
    <slot>onClicked_SGBM(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>684</x>
-     <y>548</y>
+     <x>756</x>
+     <y>515</y>
     </hint>
     <hint type="destinationlabel">
      <x>656</x>
@@ -723,8 +723,8 @@
    <slot>onClicked_BM(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>763</x>
-     <y>548</y>
+     <x>817</x>
+     <y>515</y>
     </hint>
     <hint type="destinationlabel">
      <x>655</x>
@@ -739,8 +739,8 @@
    <slot>onClicked_MODE_HH(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>817</x>
-     <y>548</y>
+     <x>878</x>
+     <y>515</y>
     </hint>
     <hint type="destinationlabel">
      <x>971</x>
@@ -755,8 +755,8 @@
    <slot>onClicked_MODE_3WAY(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>852</x>
-     <y>543</y>
+     <x>924</x>
+     <y>515</y>
     </hint>
     <hint type="destinationlabel">
      <x>972</x>
@@ -771,8 +771,8 @@
    <slot>onClicked_MODE_SGBM(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>927</x>
-     <y>553</y>
+     <x>970</x>
+     <y>515</y>
     </hint>
     <hint type="destinationlabel">
      <x>971</x>
@@ -787,8 +787,8 @@
    <slot>valueChanged_uniradio(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>732</x>
-     <y>116</y>
+     <x>980</x>
+     <y>87</y>
     </hint>
     <hint type="destinationlabel">
      <x>656</x>
@@ -803,8 +803,8 @@
    <slot>valueChanged_Prefilcap(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>743</x>
-     <y>160</y>
+     <x>980</x>
+     <y>131</y>
     </hint>
     <hint type="destinationlabel">
      <x>655</x>
@@ -819,8 +819,8 @@
    <slot>valueChanged_specwinsz(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>764</x>
-     <y>216</y>
+     <x>980</x>
+     <y>192</y>
     </hint>
     <hint type="destinationlabel">
      <x>655</x>
@@ -835,8 +835,8 @@
    <slot>valueChanged_SadWinSize(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>735</x>
-     <y>282</y>
+     <x>980</x>
+     <y>253</y>
     </hint>
     <hint type="destinationlabel">
      <x>654</x>
@@ -851,8 +851,8 @@
    <slot>valueChanged_MinDisp(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>755</x>
-     <y>323</y>
+     <x>980</x>
+     <y>297</y>
     </hint>
     <hint type="destinationlabel">
      <x>656</x>
@@ -867,8 +867,8 @@
    <slot>valueChanged_NumDisparities(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>794</x>
-     <y>375</y>
+     <x>980</x>
+     <y>341</y>
     </hint>
     <hint type="destinationlabel">
      <x>654</x>
@@ -883,8 +883,8 @@
    <slot>valueChanged_Specrange(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>773</x>
-     <y>414</y>
+     <x>980</x>
+     <y>385</y>
     </hint>
     <hint type="destinationlabel">
      <x>655</x>
@@ -899,8 +899,8 @@
    <slot>valueChanged_MaxDifdisp2(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>729</x>
-     <y>458</y>
+     <x>980</x>
+     <y>429</y>
     </hint>
     <hint type="destinationlabel">
      <x>656</x>
@@ -915,12 +915,76 @@
    <slot>valueChanged_TextThread(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>746</x>
-     <y>493</y>
+     <x>980</x>
+     <y>473</y>
     </hint>
     <hint type="destinationlabel">
      <x>655</x>
      <y>474</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_NumDisparities</sender>
+   <signal>sliderReleased()</signal>
+   <receiver>MatcherView</receiver>
+   <slot>onReleased_NumDisparities()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>844</x>
+     <y>327</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>996</x>
+     <y>307</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_NumDisparities</sender>
+   <signal>sliderPressed()</signal>
+   <receiver>MatcherView</receiver>
+   <slot>onReleased_NumDisparities()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>926</x>
+     <y>337</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>996</x>
+     <y>353</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_SadWinSiz</sender>
+   <signal>sliderPressed()</signal>
+   <receiver>MatcherView</receiver>
+   <slot>onReleased_SadWinSize()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>925</x>
+     <y>235</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>994</x>
+     <y>209</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_SadWinSiz</sender>
+   <signal>sliderReleased()</signal>
+   <receiver>MatcherView</receiver>
+   <slot>onReleased_SadWinSize()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>890</x>
+     <y>243</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>996</x>
+     <y>262</y>
     </hint>
    </hints>
   </connection>
@@ -943,5 +1007,7 @@
   <slot>valueChanged_SadWinSize(int)</slot>
   <slot>valueChanged_TextThread(int)</slot>
   <slot>valueChanged_MaxDifdisp2(int)</slot>
+  <slot>onReleased_NumDisparities()</slot>
+  <slot>onReleased_SadWinSize()</slot>
  </slots>
 </ui>

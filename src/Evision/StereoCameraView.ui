@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1046</width>
-    <height>700</height>
+    <width>671</width>
+    <height>442</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -126,6 +126,12 @@
        </property>
        <item row="0" column="0">
         <widget class="QCameraViewfinder" name="viewfinderL" native="true">
+         <property name="minimumSize">
+          <size>
+           <width>320</width>
+           <height>240</height>
+          </size>
+         </property>
          <property name="autoFillBackground">
           <bool>true</bool>
          </property>
@@ -158,6 +164,12 @@
        </property>
        <item row="0" column="0">
         <widget class="QCameraViewfinder" name="viewfinder_R" native="true">
+         <property name="minimumSize">
+          <size>
+           <width>320</width>
+           <height>240</height>
+          </size>
+         </property>
          <property name="autoFillBackground">
           <bool>true</bool>
          </property>

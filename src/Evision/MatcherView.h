@@ -35,6 +35,7 @@ public slots:
 
 	void valueChanged_NumDisparities(int value);
 	void onParamChanged_NumDisparities();
+	void onReleased_NumDisparities();//约束:被16 整除
 
 	void valueChanged_Specrange(int value);
 	void onParamChanged_Specrange();
@@ -44,6 +45,7 @@ public slots:
 
 	void valueChanged_SadWinSize(int value);
 	void onParamChanged_SadWinSize();
+	void onReleased_SadWinSize();//约束:奇数
 
 	void valueChanged_TextThread(int value);
 	void onParamChanged_TextThread();

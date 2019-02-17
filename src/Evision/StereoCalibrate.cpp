@@ -492,7 +492,15 @@ void StereoCalibrate::run()
 
 	std::cout << "平均极线误差" << "(average epipolar err) =" << std::to_string(err / npoints) <<std::endl;
 	//映射计算
-
+	/*相机矩阵cameraMatrix
+	 * fx   0   u0
+	 * 0    fy  v0
+	 * 0    0   1
+	 * 平移矩阵T
+	 * [x',y',z']
+	 * 旋转矩阵R
+	 * 
+	 */
 	cv::Mat R1, P1, R2, P2, Q;//stereoRectify的输出
 	cv::Rect roi1, roi2;	  //stereoRectify的输出
 	stereoRectify(cameraMatrix[0], distCoeffs[0],cameraMatrix[1], distCoeffs[1], imageSize, R, T, 

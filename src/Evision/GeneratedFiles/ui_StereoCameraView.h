@@ -82,7 +82,7 @@ public:
     {
         if (StereoCameraView->objectName().isEmpty())
             StereoCameraView->setObjectName(QString::fromUtf8("StereoCameraView"));
-        StereoCameraView->resize(1046, 700);
+        StereoCameraView->resize(671, 442);
         gridLayout_5 = new QGridLayout(StereoCameraView);
         gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
         frame_3 = new QFrame(StereoCameraView);
@@ -146,6 +146,7 @@ public:
         gridLayout->setContentsMargins(0, 0, 0, 0);
         viewfinderL = new QCameraViewfinder(frame);
         viewfinderL->setObjectName(QString::fromUtf8("viewfinderL"));
+        viewfinderL->setMinimumSize(QSize(320, 240));
         viewfinderL->setAutoFillBackground(true);
 
         gridLayout->addWidget(viewfinderL, 0, 0, 1, 1);
@@ -161,6 +162,7 @@ public:
         gridLayout_2->setContentsMargins(0, 0, 0, 0);
         viewfinder_R = new QCameraViewfinder(frame_2);
         viewfinder_R->setObjectName(QString::fromUtf8("viewfinder_R"));
+        viewfinder_R->setMinimumSize(QSize(320, 240));
         viewfinder_R->setAutoFillBackground(true);
 
         gridLayout_2->addWidget(viewfinder_R, 0, 0, 1, 1);

@@ -17,25 +17,26 @@ void StereoMatchController::setDefaultMatchParamCommand()
 {
 	if (m_entity->getBM())
 	{
+		m_entity->setUniradio(5);
 		m_entity->setPrefilcap(31);
-		m_entity->setSadWinsz(51);
-		m_entity->setMinDisp(0);
+		m_entity->setSpecwinsz(69);
+		m_entity->setSadWinsz(21);
+		m_entity->setMinDisp(-3);
 		m_entity->setNumDisparities(144);
-		m_entity->setUniradio(15);
-		m_entity->setSpecwinsz(100);
-		m_entity->setSpecrange(32);
-		m_entity->setTextThread(10);
-		m_entity->setMaxdifdisp12(1);
+		m_entity->setSpecrange(34);
+		m_entity->setMaxdifdisp12(2);
+		m_entity->setTextThread(50);
+
 	}
 	else if (m_entity->getSGBM())
 	{
-		m_entity->setMinDisp(0);
-		m_entity->setUniradio(10);
-		m_entity->setSpecwinsz(100);
-		m_entity->setNumDisparities(144);
-		m_entity->setSpecrange(32);
-		m_entity->setPrefilcap(63);
-		m_entity->setSadWinsz(25);
+		m_entity->setUniradio(5);
+		m_entity->setPrefilcap(47);
+		m_entity->setSpecwinsz(1);
+		m_entity->setSadWinsz(17);
+		m_entity->setMinDisp(1);
+		m_entity->setNumDisparities(64);
+		m_entity->setSpecrange(14);
 		m_entity->setMaxdifdisp12(1);
 		m_entity->setMODE_HH(true);
 	}

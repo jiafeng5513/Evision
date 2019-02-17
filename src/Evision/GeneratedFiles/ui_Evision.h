@@ -58,13 +58,13 @@ public:
     {
         if (EvisionClass->objectName().isEmpty())
             EvisionClass->setObjectName(QString::fromUtf8("EvisionClass"));
-        EvisionClass->resize(982, 660);
+        EvisionClass->resize(1024, 710);
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(EvisionClass->sizePolicy().hasHeightForWidth());
         EvisionClass->setSizePolicy(sizePolicy);
-        EvisionClass->setMinimumSize(QSize(0, 0));
+        EvisionClass->setMinimumSize(QSize(1024, 710));
         EvisionClass->setMaximumSize(QSize(16777215, 16777215));
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/Evision/resource/Evision.ico"), QSize(), QIcon::Normal, QIcon::Off);
@@ -145,7 +145,7 @@ public:
         EvisionClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(EvisionClass);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 982, 23));
+        menuBar->setGeometry(QRect(0, 0, 1024, 23));
         menu = new QMenu(menuBar);
         menu->setObjectName(QString::fromUtf8("menu"));
         menu_2 = new QMenu(menuBar);

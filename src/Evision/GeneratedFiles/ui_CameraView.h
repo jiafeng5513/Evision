@@ -67,7 +67,7 @@ public:
     {
         if (CameraView->objectName().isEmpty())
             CameraView->setObjectName(QString::fromUtf8("CameraView"));
-        CameraView->resize(858, 547);
+        CameraView->resize(858, 553);
         gridLayout_6 = new QGridLayout(CameraView);
         gridLayout_6->setSpacing(6);
         gridLayout_6->setContentsMargins(11, 11, 11, 11);
@@ -232,6 +232,7 @@ public:
         gridLayout_5->setContentsMargins(0, 0, 0, 0);
         viewfinder = new QCameraViewfinder(frame_2);
         viewfinder->setObjectName(QString::fromUtf8("viewfinder"));
+        viewfinder->setMinimumSize(QSize(640, 480));
         viewfinder->setAutoFillBackground(true);
 
         gridLayout_5->addWidget(viewfinder, 0, 0, 1, 1);

@@ -28,7 +28,7 @@ class Ui_MatcherView
 {
 public:
     QGridLayout *gridLayout_2;
-    QGroupBox *groupBox;
+    QGraphicsView *graphicsView_D;
     QGroupBox *groupBox_6;
     QGridLayout *gridLayout;
     QLabel *label_40;
@@ -70,22 +70,21 @@ public:
     QPushButton *pushButton_MatchChooseFiles;
     QSlider *horizontalSlider_specwinsz;
     QPushButton *pushButton_RefreshStereoMatch;
-    QGraphicsView *graphicsView_D;
 
     void setupUi(QWidget *MatcherView)
     {
         if (MatcherView->objectName().isEmpty())
             MatcherView->setObjectName(QString::fromUtf8("MatcherView"));
-        MatcherView->resize(977, 613);
+        MatcherView->resize(1000, 574);
         gridLayout_2 = new QGridLayout(MatcherView);
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-        groupBox = new QGroupBox(MatcherView);
-        groupBox->setObjectName(QString::fromUtf8("groupBox"));
-        groupBox->setMaximumSize(QSize(310, 16777215));
+        graphicsView_D = new QGraphicsView(MatcherView);
+        graphicsView_D->setObjectName(QString::fromUtf8("graphicsView_D"));
+        graphicsView_D->setMinimumSize(QSize(666, 0));
 
-        gridLayout_2->addWidget(groupBox, 0, 1, 1, 1);
+        gridLayout_2->addWidget(graphicsView_D, 0, 0, 3, 1);
 
         groupBox_6 = new QGroupBox(MatcherView);
         groupBox_6->setObjectName(QString::fromUtf8("groupBox_6"));
@@ -178,6 +177,7 @@ public:
         horizontalSlider_SadWinSiz->setMinimum(5);
         horizontalSlider_SadWinSiz->setMaximum(51);
         horizontalSlider_SadWinSiz->setSingleStep(2);
+        horizontalSlider_SadWinSiz->setPageStep(2);
         horizontalSlider_SadWinSiz->setOrientation(Qt::Horizontal);
 
         gridLayout->addWidget(horizontalSlider_SadWinSiz, 7, 1, 1, 5);
@@ -225,6 +225,7 @@ public:
         horizontalSlider_NumDisparities->setMinimum(16);
         horizontalSlider_NumDisparities->setMaximum(256);
         horizontalSlider_NumDisparities->setSingleStep(16);
+        horizontalSlider_NumDisparities->setPageStep(16);
         horizontalSlider_NumDisparities->setOrientation(Qt::Horizontal);
 
         gridLayout->addWidget(horizontalSlider_NumDisparities, 11, 1, 1, 5);
@@ -366,12 +367,7 @@ public:
         gridLayout->addWidget(pushButton_RefreshStereoMatch, 19, 4, 1, 2);
 
 
-        gridLayout_2->addWidget(groupBox_6, 1, 1, 2, 1);
-
-        graphicsView_D = new QGraphicsView(MatcherView);
-        graphicsView_D->setObjectName(QString::fromUtf8("graphicsView_D"));
-
-        gridLayout_2->addWidget(graphicsView_D, 0, 0, 3, 1);
+        gridLayout_2->addWidget(groupBox_6, 0, 1, 3, 1);
 
 
         retranslateUi(MatcherView);
@@ -392,6 +388,10 @@ public:
         QObject::connect(horizontalSlider_specrange, SIGNAL(valueChanged(int)), MatcherView, SLOT(valueChanged_Specrange(int)));
         QObject::connect(horizontalSlider_maxdifdisp12, SIGNAL(valueChanged(int)), MatcherView, SLOT(valueChanged_MaxDifdisp2(int)));
         QObject::connect(horizontalSlider_textThread, SIGNAL(valueChanged(int)), MatcherView, SLOT(valueChanged_TextThread(int)));
+        QObject::connect(horizontalSlider_NumDisparities, SIGNAL(sliderReleased()), MatcherView, SLOT(onReleased_NumDisparities()));
+        QObject::connect(horizontalSlider_NumDisparities, SIGNAL(sliderPressed()), MatcherView, SLOT(onReleased_NumDisparities()));
+        QObject::connect(horizontalSlider_SadWinSiz, SIGNAL(sliderPressed()), MatcherView, SLOT(onReleased_SadWinSize()));
+        QObject::connect(horizontalSlider_SadWinSiz, SIGNAL(sliderReleased()), MatcherView, SLOT(onReleased_SadWinSize()));
 
         QMetaObject::connectSlotsByName(MatcherView);
     } // setupUi
@@ -399,7 +399,6 @@ public:
     void retranslateUi(QWidget *MatcherView)
     {
         MatcherView->setWindowTitle(QApplication::translate("MatcherView", "\345\214\271\351\205\215", nullptr));
-        groupBox->setTitle(QApplication::translate("MatcherView", "\347\233\270\346\234\272\345\217\202\346\225\260", nullptr));
         groupBox_6->setTitle(QApplication::translate("MatcherView", "\345\214\271\351\205\215\345\217\202\346\225\260", nullptr));
         label_40->setText(QApplication::translate("MatcherView", "uniquenessRatio(\350\247\206\345\267\256\345\224\257\344\270\200\346\200\247\347\231\276\345\210\206\346\257\224)", nullptr));
         lineEdit_uniradio->setPlaceholderText(QApplication::translate("MatcherView", "0", nullptr));

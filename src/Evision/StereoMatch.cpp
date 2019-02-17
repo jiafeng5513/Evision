@@ -142,7 +142,10 @@ void StereoMatch::run()
 		cv::imshow("img1",img1);
 		cv::namedWindow("img2");
 		cv::imshow("img2", img2);
-		bm->compute(img1, img2, disp);
+		cv::Mat img01, img02;
+		img1.convertTo(img01, CV_8UC1);
+		img2.convertTo(img02, CV_8UC1);
+		bm->compute(img01, img02, disp);
 	}
 		
 	else if (m_entity->getSGBM())
@@ -162,7 +165,7 @@ void StereoMatch::run()
 
 	if (!disparity_filename.empty())
 	{
-		imwrite(disparity_filename, disp8);
+		imwrite(disparity_filename, disp);
 		std::cout << "视差图已经保存到:" << disparity_filename << std::endl;
 	}
 		
@@ -180,7 +183,41 @@ void StereoMatch::run()
 	{
 		std::cout << "点云保存失败..." << std::endl;
 	}
+	//保存PCL点云文件,PCL点云使用左视图和视差图构建
+	/*相机参数取自左摄像头
+	 * 视差图:disp
+	 * 左视图:img1
+	 * u0,v0 焦距
+	   fx,fy 主点
+	   Tx 基线长度
+	   doffs cx1-cx2,主点的横坐标差
+	前四个来自相机矩阵,极限长度来自...Tx来自...
+	 */
+	
 	std::cout << "计算完毕" << std::endl;
-
+	saveXYZ("F:\\xyz.txt", xyz);
+	std::cout << "F:\\xyz.txt保存完毕" << std::endl;
 	return ;
+}
+
+void StereoMatch::saveXYZ(const char* filename, const cv::Mat& mat)
+{
+	const double max_z = 1.0e4;
+	FILE* fp = fopen(filename, "wt");
+	for (int y = 0; y < mat.rows; y++)
+	{
+		for (int x = 0; x < mat.cols; x++)
+		{
+			cv::Vec3f point = mat.at<cv::Vec3f>(y, x);
+			if (fabs(point[2] - max_z) < FLT_EPSILON || fabs(point[2]) > max_z) {
+				continue;
+			}
+			if (point[2] > 10000)
+			{
+				continue;
+			}
+			fprintf(fp, "%f %f %f \n", point[0], point[1], point[2]);
+		}
+	}
+	fclose(fp);
 }

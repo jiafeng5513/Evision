@@ -21,6 +21,7 @@ public:
 	bool init();
 	void run();
 	enum { STEREO_BM = 0, STEREO_SGBM = 1, STEREO_HH = 2, STEREO_VAR = 3, STEREO_3WAY = 4 };
+	void saveXYZ(const char* filename, const cv::Mat& mat);
 private:
 	StereoMatchParamEntity * m_entity;
 	//即将读取的文件
@@ -34,11 +35,11 @@ private:
 	cv::Mat img1, img2;
 	cv::Size img_size;
 
-	cv::Mat cameraMatrix1;
-	cv::Mat distCoeffs1;
-	cv::Mat cameraMatrix2;
-	cv::Mat distCoeffs2;
-	cv::Mat R1, P1, R2, P2,Q;
+	cv::Mat cameraMatrix1;//左相机内参
+	cv::Mat distCoeffs1;//左相机畸变系数
+	cv::Mat cameraMatrix2;//右相机内参
+	cv::Mat distCoeffs2;//右相机畸变系数
+	cv::Mat R1, P1, R2, P2,Q;//映射计算结果
 	cv::Rect roi1;
 	cv::Rect roi2;
 	int alg = STEREO_SGBM;

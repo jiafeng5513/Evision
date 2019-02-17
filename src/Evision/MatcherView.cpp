@@ -98,6 +98,15 @@ void MatcherView::onParamChanged_NumDisparities()
 
 }
 
+void MatcherView::onReleased_NumDisparities()
+{
+	int oldvalue=ui.horizontalSlider_NumDisparities->value();
+	if(oldvalue%16!=0)
+	{
+		ui.horizontalSlider_NumDisparities->setValue(oldvalue - oldvalue % 16);
+	}
+}
+
 void MatcherView::valueChanged_Specrange(int value)
 {
 	ui.lineEdit_specrange->setText(QString::fromStdString(std::to_string(value)));
@@ -141,6 +150,15 @@ void MatcherView::onParamChanged_SadWinSize()
 {
 	ui.horizontalSlider_SadWinSiz->setValue(m_entity->getSadWinsz());
 
+}
+
+void MatcherView::onReleased_SadWinSize()
+{
+	int oldvalue = ui.horizontalSlider_SadWinSiz->value();
+	if(oldvalue%2==0)
+	{
+		ui.horizontalSlider_SadWinSiz->setValue(std::max(oldvalue-1,5));
+	}
 }
 
 void MatcherView::valueChanged_TextThread(int value)

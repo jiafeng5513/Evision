@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1074</width>
-    <height>715</height>
+    <width>663</width>
+    <height>374</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -157,6 +157,12 @@
       <enum>Qt::Horizontal</enum>
      </property>
      <widget class="CustomGraphicsView" name="customGraphicsView_O">
+      <property name="minimumSize">
+       <size>
+        <width>320</width>
+        <height>240</height>
+       </size>
+      </property>
       <property name="verticalScrollBarPolicy">
        <enum>Qt::ScrollBarAlwaysOff</enum>
       </property>
@@ -168,6 +174,12 @@
       </property>
      </widget>
      <widget class="CustomGraphicsView" name="customGraphicsView_D">
+      <property name="minimumSize">
+       <size>
+        <width>320</width>
+        <height>240</height>
+       </size>
+      </property>
       <property name="verticalScrollBarPolicy">
        <enum>Qt::ScrollBarAlwaysOff</enum>
       </property>

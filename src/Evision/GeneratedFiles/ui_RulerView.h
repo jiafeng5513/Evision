@@ -57,7 +57,7 @@ public:
     {
         if (RulerView->objectName().isEmpty())
             RulerView->setObjectName(QString::fromUtf8("RulerView"));
-        RulerView->resize(1074, 715);
+        RulerView->resize(663, 374);
         gridLayout_3 = new QGridLayout(RulerView);
         gridLayout_3->setSpacing(6);
         gridLayout_3->setContentsMargins(11, 11, 11, 11);
@@ -171,12 +171,14 @@ public:
         splitter->setOrientation(Qt::Horizontal);
         customGraphicsView_O = new CustomGraphicsView(splitter);
         customGraphicsView_O->setObjectName(QString::fromUtf8("customGraphicsView_O"));
+        customGraphicsView_O->setMinimumSize(QSize(320, 240));
         customGraphicsView_O->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         customGraphicsView_O->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         customGraphicsView_O->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
         splitter->addWidget(customGraphicsView_O);
         customGraphicsView_D = new CustomGraphicsView(splitter);
         customGraphicsView_D->setObjectName(QString::fromUtf8("customGraphicsView_D"));
+        customGraphicsView_D->setMinimumSize(QSize(320, 240));
         customGraphicsView_D->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         customGraphicsView_D->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         customGraphicsView_D->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);

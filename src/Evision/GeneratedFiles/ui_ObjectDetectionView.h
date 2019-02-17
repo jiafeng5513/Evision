@@ -48,13 +48,14 @@ public:
     {
         if (ObjectDetectionView->objectName().isEmpty())
             ObjectDetectionView->setObjectName(QString::fromUtf8("ObjectDetectionView"));
-        ObjectDetectionView->resize(1066, 652);
+        ObjectDetectionView->resize(884, 498);
         gridLayout_2 = new QGridLayout(ObjectDetectionView);
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
         graphicsView = new QGraphicsView(ObjectDetectionView);
         graphicsView->setObjectName(QString::fromUtf8("graphicsView"));
+        graphicsView->setMinimumSize(QSize(640, 480));
 
         gridLayout_2->addWidget(graphicsView, 0, 0, 1, 1);
 
