@@ -116,9 +116,9 @@ void EvisionView::onTestAlltheParam()
 	//std::cout << "From std::cout..." << std::endl;
 	//std::cerr << "From std::cerr..." << std::endl;
 	//qDebug() << "From qDebug ..." << QDateTime::currentDateTime().toString();	   
-	StereoMatcherView * _StereoMatcherView = new StereoMatcherView();
-	ui.mdiArea->addSubWindow(_StereoMatcherView);
-	_StereoMatcherView->show();
+	//StereoMatcherView * _StereoMatcherView = new StereoMatcherView();
+	//ui.mdiArea->addSubWindow(_StereoMatcherView);
+	//_StereoMatcherView->show();
 }
 //×´Ì¬À¸¸üÐÂ
 void EvisionView::onParamChanged_StatusBarText()

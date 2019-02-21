@@ -1,6 +1,6 @@
 #include "MatcherView.h"
 #include "EvisionUtils.h"
-
+#include "math.h"
 MatcherView::MatcherView(QWidget *parent)
 	: QWidget(parent)
 {
@@ -20,6 +20,12 @@ MatcherView::MatcherView(QWidget *parent)
 	connect(m_entity, SIGNAL(paramChanged_SGBM()), this, SLOT(onParamChanged_SGBM()));
 	connect(m_entity, SIGNAL(paramChanged_MODE_HH()), this, SLOT(onParamChanged_MODE_HH()));
 	connect(m_entity, SIGNAL(paramChanged_ImageDtoShow()), this, SLOT(onParamChanged_imgDtoShow())/*, Qt::QueuedConnection*/);
+	connect(m_entity, SIGNAL(paramChanged_IconImgL()), this, SLOT(onParamChanged_IconImgL()()));
+	connect(m_entity, SIGNAL(paramChanged_IconImgR()), this, SLOT(onParamChanged_IconImgR()));
+	connect(m_entity, SIGNAL(paramChanged_IconRawDisp()), this, SLOT(onParamChanged_IconRawDisp()));
+	connect(m_entity, SIGNAL(paramChanged_IconFixDisp()), this, SLOT(onParamChanged_IconFixDisp()));
+	connect(m_entity, SIGNAL(paramChanged_IconPointDisp()), this, SLOT(onParamChanged_IconPointDisp()));
+	connect(m_entity, SIGNAL(paramChanged_IconPointImgL()), this, SLOT(onParamChanged_IconPointImgL()));
 }
 
 MatcherView::~MatcherView()
@@ -157,7 +163,7 @@ void MatcherView::onReleased_SadWinSize()
 	int oldvalue = ui.horizontalSlider_SadWinSiz->value();
 	if(oldvalue%2==0)
 	{
-		ui.horizontalSlider_SadWinSiz->setValue(std::max(oldvalue-1,5));
+		ui.horizontalSlider_SadWinSiz->setValue(max(oldvalue-1,5));
 	}
 }
 
@@ -283,4 +289,94 @@ void MatcherView::onParamChanged_imgDtoShow()
 	ui.graphicsView_D->centerOn(0, 0);
 	ui.graphicsView_D->show();
 	ui.graphicsView_D->update();
+}
+
+void MatcherView::onParamChanged_IconImgL()
+{
+	QImage DQImage = EvisionUtils::cvMat2QImage(m_entity->getIconImgL());
+	QGraphicsScene *sceneD = new QGraphicsScene;
+	sceneD->addPixmap(QPixmap::fromImage(DQImage));
+	ui.graphicsView_ImageL->setScene(sceneD);
+	QRectF bounds = sceneD->itemsBoundingRect();
+	bounds.setWidth(bounds.width());         // to tighten-up margins
+	bounds.setHeight(bounds.height());       // same as above
+	ui.graphicsView_ImageL->fitInView(bounds, Qt::KeepAspectRatio);
+	ui.graphicsView_ImageL->centerOn(0, 0);
+	ui.graphicsView_ImageL->show();
+	ui.graphicsView_ImageL->update();
+}
+
+void MatcherView::onParamChanged_IconImgR()
+{
+	QImage DQImage = EvisionUtils::cvMat2QImage(m_entity->getIconImgR());
+	QGraphicsScene *sceneD = new QGraphicsScene;
+	sceneD->addPixmap(QPixmap::fromImage(DQImage));
+	ui.graphicsView_ImageR->setScene(sceneD);
+	QRectF bounds = sceneD->itemsBoundingRect();
+	bounds.setWidth(bounds.width());         // to tighten-up margins
+	bounds.setHeight(bounds.height());       // same as above
+	ui.graphicsView_ImageR->fitInView(bounds, Qt::KeepAspectRatio);
+	ui.graphicsView_ImageR->centerOn(0, 0);
+	ui.graphicsView_ImageR->show();
+	ui.graphicsView_ImageR->update();
+}
+
+void MatcherView::onParamChanged_IconRawDisp()
+{
+	QImage DQImage = EvisionUtils::cvMat2QImage(m_entity->getIconRawDisp());
+	QGraphicsScene *sceneD = new QGraphicsScene;
+	sceneD->addPixmap(QPixmap::fromImage(DQImage));
+	ui.graphicsView_RawDisp->setScene(sceneD);
+	QRectF bounds = sceneD->itemsBoundingRect();
+	bounds.setWidth(bounds.width());         // to tighten-up margins
+	bounds.setHeight(bounds.height());       // same as above
+	ui.graphicsView_RawDisp->fitInView(bounds, Qt::KeepAspectRatio);
+	ui.graphicsView_RawDisp->centerOn(0, 0);
+	ui.graphicsView_RawDisp->show();
+	ui.graphicsView_RawDisp->update();
+}
+
+void MatcherView::onParamChanged_IconFixDisp()
+{
+	QImage DQImage = EvisionUtils::cvMat2QImage(m_entity->getIconFixDisp());
+	QGraphicsScene *sceneD = new QGraphicsScene;
+	sceneD->addPixmap(QPixmap::fromImage(DQImage));
+	ui.graphicsView_FixDisp->setScene(sceneD);
+	QRectF bounds = sceneD->itemsBoundingRect();
+	bounds.setWidth(bounds.width());         // to tighten-up margins
+	bounds.setHeight(bounds.height());       // same as above
+	ui.graphicsView_FixDisp->fitInView(bounds, Qt::KeepAspectRatio);
+	ui.graphicsView_FixDisp->centerOn(0, 0);
+	ui.graphicsView_FixDisp->show();
+	ui.graphicsView_FixDisp->update();
+}
+
+void MatcherView::onParamChanged_IconPointDisp()
+{
+	QImage DQImage = EvisionUtils::cvMat2QImage(m_entity->getIconPointDisp());
+	QGraphicsScene *sceneD = new QGraphicsScene;
+	sceneD->addPixmap(QPixmap::fromImage(DQImage));
+	ui.graphicsView_PointDisp->setScene(sceneD);
+	QRectF bounds = sceneD->itemsBoundingRect();
+	bounds.setWidth(bounds.width());         // to tighten-up margins
+	bounds.setHeight(bounds.height());       // same as above
+	ui.graphicsView_PointDisp->fitInView(bounds, Qt::KeepAspectRatio);
+	ui.graphicsView_PointDisp->centerOn(0, 0);
+	ui.graphicsView_PointDisp->show();
+	ui.graphicsView_PointDisp->update();
+}
+
+void MatcherView::onParamChanged_IconPointImgL()
+{
+	QImage DQImage = EvisionUtils::cvMat2QImage(m_entity->getIconPointImgL());
+	QGraphicsScene *sceneD = new QGraphicsScene;
+	sceneD->addPixmap(QPixmap::fromImage(DQImage));
+	ui.graphicsView_PointImageL->setScene(sceneD);
+	QRectF bounds = sceneD->itemsBoundingRect();
+	bounds.setWidth(bounds.width());         // to tighten-up margins
+	bounds.setHeight(bounds.height());       // same as above
+	ui.graphicsView_PointImageL->fitInView(bounds, Qt::KeepAspectRatio);
+	ui.graphicsView_PointImageL->centerOn(0, 0);
+	ui.graphicsView_PointImageL->show();
+	ui.graphicsView_PointImageL->update();
 }

@@ -216,3 +216,63 @@ void StereoMatchParamEntity::setQ(cv::Mat value)
 {
 	Q = value;
 }
+
+cv::Mat StereoMatchParamEntity::getIconImgL()
+{
+	return iconImgL;
+}
+void StereoMatchParamEntity::setIconImgL(cv::Mat value)
+{
+	iconImgL = value;
+	emit paramChanged_IconImgL();
+}
+
+cv::Mat StereoMatchParamEntity::getIconImgR()
+{
+	return iconImgR;
+}
+void StereoMatchParamEntity::setIconImgR(cv::Mat value)
+{
+	iconImgR = value;
+	emit paramChanged_IconImgR();
+}
+
+cv::Mat StereoMatchParamEntity::getIconRawDisp()
+{
+	return iconRawDisp;
+}
+void StereoMatchParamEntity::setIconRawDisp(cv::Mat value)
+{
+	iconRawDisp = value;
+	emit paramChanged_IconRawDisp();
+}
+
+cv::Mat StereoMatchParamEntity::getIconFixDisp()
+{
+	return iconFixDisp;
+}
+void StereoMatchParamEntity::setIconFixDisp(cv::Mat value)
+{
+	iconFixDisp = value;
+	emit paramChanged_IconFixDisp();
+}
+
+cv::Mat StereoMatchParamEntity::getIconPointDisp()
+{
+	return iconPointDisp;
+}
+void StereoMatchParamEntity::setIconPointDisp(cv::Mat value)
+{
+	iconPointDisp = value;
+	emit paramChanged_IconPointDisp();
+}
+
+cv::Mat StereoMatchParamEntity::getIconPointImgL()
+{
+	return iconPointImgL;
+}
+void StereoMatchParamEntity::setIconPointImgL(cv::Mat value)
+{
+	iconPointImgL = value;
+	emit paramChanged_IconPointImgL();
+}

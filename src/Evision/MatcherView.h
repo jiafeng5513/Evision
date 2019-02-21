@@ -70,4 +70,11 @@ public slots:
 	void onParamChanged_MODE_3WAY();
 
 	void onParamChanged_imgDtoShow();
+
+	void onParamChanged_IconImgL();
+	void onParamChanged_IconImgR();
+	void onParamChanged_IconRawDisp();
+	void onParamChanged_IconFixDisp();
+	void onParamChanged_IconPointDisp();
+	void onParamChanged_IconPointImgL();
 };

@@ -31,7 +31,8 @@ private:
 	bool MODE_SGBM = false;
 	bool MODE_3WAY = false;
 
-	cv::Mat imgDtoShow;
+	cv::Mat imgDtoShow;//在中心显示的大图
+	cv::Mat iconImgL, iconImgR, iconRawDisp, iconFixDisp, iconPointDisp, iconPointImgL;//缩略图
 
 
 	cv::Mat disparity;
@@ -56,6 +57,13 @@ signals:
 	void paramChanged_MODE_SGBM();
 	void paramChanged_MODE_3WAY();
 	void paramChanged_ImageDtoShow();
+
+	void paramChanged_IconImgL();
+	void paramChanged_IconImgR();
+	void paramChanged_IconRawDisp();
+	void paramChanged_IconFixDisp();
+	void paramChanged_IconPointDisp();
+	void paramChanged_IconPointImgL();
 
 #pragma endregion
 
@@ -114,5 +122,23 @@ public:
 
 	cv::Mat getQ();
 	void setQ(cv::Mat value);
+
+	cv::Mat getIconImgL();
+	void setIconImgL(cv::Mat value);
+
+	cv::Mat getIconImgR();
+	void setIconImgR(cv::Mat value);
+
+	cv::Mat getIconRawDisp();
+	void setIconRawDisp(cv::Mat value);
+
+	cv::Mat getIconFixDisp();
+	void setIconFixDisp(cv::Mat value);
+
+	cv::Mat getIconPointDisp();
+	void setIconPointDisp(cv::Mat value);
+
+	cv::Mat getIconPointImgL();
+	void setIconPointImgL(cv::Mat value);
 #pragma endregion
 };
