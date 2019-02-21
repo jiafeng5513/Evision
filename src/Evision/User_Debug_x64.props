@@ -18,7 +18,70 @@
     </ClCompile>
     <PreBuildEvent>
       <Command>echo copy dlls from the opencv version :
-$(SolutionDir)..\package\opencv\build\x64\vc15\bin\opencv_version.exe
+$(SolutionDir)..\package\opencv3.4.5\x64\vc15\bin\opencv_version.exe
+
+if not exist $(OutDir)opencv_calib3d345d.dll (
+    copy $(SolutionDir)..\package\opencv3.4.5\x64\vc15\bin\opencv_calib3d345d.dll $(OutDir)opencv_calib3d345d.dll
+    echo copy opencv_calib3d345d.dll done
+) else (
+    echo opencv_calib3d345d.dll is already exist!
+)
+
+if not exist $(OutDir)opencv_core345d.dll (
+    copy $(SolutionDir)..\package\opencv3.4.5\x64\vc15\bin\opencv_core345d.dll $(OutDir)opencv_core345d.dll
+    echo copy opencv_core345d.dll done
+) else (
+    echo opencv_core345d.dll is already exist!
+)
+
+if not exist $(OutDir)opencv_features2d345d.dll (
+    copy $(SolutionDir)..\package\opencv3.4.5\x64\vc15\bin\opencv_features2d345d.dll $(OutDir)opencv_features2d345d.dll
+    echo copy opencv_features2d345d.dll done
+) else (
+    echo opencv_features2d345d.dll is already exist!
+)
+
+if not exist $(OutDir)opencv_flann345d.dll (
+    copy $(SolutionDir)..\package\opencv3.4.5\x64\vc15\bin\opencv_flann345d.dll $(OutDir)opencv_flann345d.dll
+    echo copy opencv_flann345d.dll done
+) else (
+    echo opencv_flann345d.dll is already exist!
+)
+
+if not exist $(OutDir)opencv_highgui345d.dll (
+    copy $(SolutionDir)..\package\opencv3.4.5\x64\vc15\bin\opencv_highgui345d.dll $(OutDir)opencv_highgui345d.dll
+    echo copy opencv_highgui345d.dll done
+) else (
+    echo opencv_highgui345d.dll is already exist!
+)
+
+if not exist $(OutDir)opencv_imgcodecs345d.dll (
+    copy $(SolutionDir)..\package\opencv3.4.5\x64\vc15\bin\opencv_imgcodecs345d.dll $(OutDir)opencv_imgcodecs345d.dll
+    echo copy opencv_imgcodecs345d.dll done
+) else (
+    echo opencv_imgcodecs345d.dll is already exist!
+)
+
+if not exist $(OutDir)opencv_imgproc345d.dll (
+    copy $(SolutionDir)..\package\opencv3.4.5\x64\vc15\bin\opencv_imgproc345d.dll $(OutDir)opencv_imgproc345d.dll
+    echo copy opencv_imgproc345d.dll done
+) else (
+    echo opencv_imgproc345d.dll is already exist!
+)
+
+if not exist $(OutDir)opencv_videoio345d.dll (
+    copy $(SolutionDir)..\package\opencv3.4.5\x64\vc15\bin\opencv_videoio345d.dll $(OutDir)opencv_videoio345d.dll
+    echo copy opencv_videoio345d.dll done
+) else (
+    echo opencv_videoio345d.dll is already exist!
+)
+
+if not exist $(OutDir)opencv_xfeatures2d345d.dll (
+    copy $(SolutionDir)..\package\opencv3.4.5\x64\vc15\bin\opencv_xfeatures2d345d.dll $(OutDir)opencv_xfeatures2d345d.dll
+    echo copy opencv_xfeatures2d345d.dll done
+) else (
+    echo opencv_xfeatures2d345d.dll is already exist!
+)
 
 if not exist $(OutDir)Qt5Cored.dll (
     copy $(QTDIR)\bin\Qt5Cored.dll $(OutDir)Qt5Cored.dll
