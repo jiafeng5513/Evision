@@ -21,7 +21,8 @@ public:
 	bool init();
 	void run();
 	enum { STEREO_BM = 0, STEREO_SGBM = 1, STEREO_HH = 2, STEREO_VAR = 3, STEREO_3WAY = 4 };
-	void saveXYZ(const char* filename, const cv::Mat& mat);
+	void saveXYZ(const std::string& fileName, const cv::Mat& image3D);
+	void customReproject(const cv::Mat& disparity, const cv::Mat& Q, cv::Mat& out3D);
 private:
 	StereoMatchParamEntity * m_entity;
 	//即将读取的文件

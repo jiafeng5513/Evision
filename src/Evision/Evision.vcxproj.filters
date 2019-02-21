@@ -33,16 +33,6 @@
     <Filter Include="main">
       <UniqueIdentifier>{15b6209d-5425-4ba7-b6f3-d0c1863374dd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-      <ParseFiles>true</ParseFiles>
-    </Filter>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-      <ParseFiles>true</ParseFiles>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EvisionController.cpp">
@@ -114,6 +104,9 @@
     <ClCompile Include="StdoutRedirector.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="StereoMatcherView.cpp">
+      <Filter>View</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="EvisionController.h">
@@ -176,6 +169,9 @@
     <QtMoc Include="StdoutRedirector.h">
       <Filter>Utils</Filter>
     </QtMoc>
+    <QtMoc Include="StereoMatcherView.h">
+      <Filter>View</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="Evision.ui">
@@ -203,6 +199,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="LogView.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="StereoMatcherView.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

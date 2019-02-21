@@ -42,6 +42,7 @@ public:
     QAction *action_3dReconstruct_View;
     QAction *action_CalibrateView;
     QAction *action_ObjectDetection;
+    QAction *action_NewStereoMatchView;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QMdiArea *mdiArea;
@@ -129,6 +130,8 @@ public:
         QIcon icon10;
         icon10.addFile(QString::fromUtf8(":/Evision/resource/face_detection_128px_1218199_easyicon.net.ico"), QSize(), QIcon::Normal, QIcon::Off);
         action_ObjectDetection->setIcon(icon10);
+        action_NewStereoMatchView = new QAction(EvisionClass);
+        action_NewStereoMatchView->setObjectName(QString::fromUtf8("action_NewStereoMatchView"));
         centralWidget = new QWidget(EvisionClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -229,6 +232,7 @@ public:
         action_3dReconstruct_View->setText(QApplication::translate("EvisionClass", "\344\270\211\347\273\264\351\207\215\345\273\272", nullptr));
         action_CalibrateView->setText(QApplication::translate("EvisionClass", "\347\233\270\346\234\272\346\240\207\345\256\232", nullptr));
         action_ObjectDetection->setText(QApplication::translate("EvisionClass", "\347\233\256\346\240\207\346\243\200\346\265\213", nullptr));
+        action_NewStereoMatchView->setText(QApplication::translate("EvisionClass", "\346\226\260\347\253\213\344\275\223\345\214\271\351\205\215", nullptr));
         menu->setTitle(QApplication::translate("EvisionClass", "\345\267\245\345\205\267", nullptr));
         menu_2->setTitle(QApplication::translate("EvisionClass", "\345\270\256\345\212\251", nullptr));
         menu_3->setTitle(QApplication::translate("EvisionClass", "\345\217\214\347\233\256\350\247\206\350\247\211", nullptr));

@@ -255,6 +255,11 @@
     <string>目标检测</string>
    </property>
   </action>
+  <action name="action_NewStereoMatchView">
+   <property name="text">
+    <string>新立体匹配</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>

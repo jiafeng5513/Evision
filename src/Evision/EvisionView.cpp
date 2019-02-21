@@ -13,6 +13,7 @@
 #include "WatchImageView.h"
 #include "ObjectDetectionView.h"
 #include "../Evision3dViz/Evision3dViz.h"
+#include "StereoMatcherView.h"
 // 浮点数判等
 // ulp: units in the last place.
 template <typename T>
@@ -109,12 +110,15 @@ void EvisionView::on_action_ObjectDetection_view()
 //调试方法
 void EvisionView::onTestAlltheParam()
 {
-	printf("From printf ... ");
-	fflush(stdout);
-	fprintf(stderr, "From fprintf...");
-	std::cout << "From std::cout..." << std::endl;
-	std::cerr << "From std::cerr..." << std::endl;
-	//qDebug() << "From qDebug ..." << QDateTime::currentDateTime().toString();
+	//printf("From printf ... ");
+	//fflush(stdout);
+	//fprintf(stderr, "From fprintf...");
+	//std::cout << "From std::cout..." << std::endl;
+	//std::cerr << "From std::cerr..." << std::endl;
+	//qDebug() << "From qDebug ..." << QDateTime::currentDateTime().toString();	   
+	StereoMatcherView * _StereoMatcherView = new StereoMatcherView();
+	ui.mdiArea->addSubWindow(_StereoMatcherView);
+	_StereoMatcherView->show();
 }
 //状态栏更新
 void EvisionView::onParamChanged_StatusBarText()

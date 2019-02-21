@@ -74,8 +74,8 @@ bool StereoMatch::init()
 		remap(img1, img1r, mapx1, mapy1, cv::INTER_LINEAR);
 		remap(img2, img2r, mapx2, mapy2, cv::INTER_LINEAR);
 
-		img1 = img1r;
-		img2 = img2r;
+		//img1 = img1r;
+		//img2 = img2r;
 	}
 	catch (...)
 	{
@@ -166,7 +166,11 @@ void StereoMatch::run()
 	std::cout << "正在输出点云文件..." << std::endl;
 
 	cv::Mat xyz;
-	reprojectImageTo3D(disp, xyz, Q, true);
+	reprojectImageTo3D(disp, xyz, Q, false,-1);
+	//disp.convertTo(disp, CV_32F, 1.0 / 16.0);
+	//Q.convertTo(Q, CV_32F);
+	//customReproject(disp, Q, xyz);
+
 
 	if (EvisionUtils::write_PointCloud(point_cloud_filename,xyz))
 	{
@@ -194,24 +198,77 @@ void StereoMatch::run()
 	return ;
 }
 
-void StereoMatch::saveXYZ(const char* filename, const cv::Mat& mat)
+void StereoMatch::saveXYZ(const std::string& fileName, const cv::Mat& image3D)
 {
-	const double max_z = 1.0e4;
-	FILE* fp = fopen(filename, "wt");
-	for (int y = 0; y < mat.rows; y++)
+	CV_Assert(image3D.type() == CV_32FC3 && !image3D.empty());
+	CV_Assert(!fileName.empty());
+
+	std::ofstream outFile(fileName);
+
+	if (!outFile.is_open())
 	{
-		for (int x = 0; x < mat.cols; x++)
+		std::cerr << "ERROR: Could not open " << fileName << std::endl;
+		return;
+	}
+
+	for (int i = 0; i < image3D.rows; i++)
+	{
+		const cv::Vec3f* image3D_ptr = image3D.ptr<cv::Vec3f>(i);
+
+		for (int j = 0; j < image3D.cols; j++)
 		{
-			cv::Vec3f point = mat.at<cv::Vec3f>(y, x);
-			if (fabs(point[2] - max_z) < FLT_EPSILON || fabs(point[2]) > max_z) {
-				continue;
-			}
-			if (point[2] > 10000)
+			if(image3D_ptr[j][2]>=-10000&& image3D_ptr[j][2]<=10000)
 			{
-				continue;
+				outFile << image3D_ptr[j][0] << " " << image3D_ptr[j][1] << " " << image3D_ptr[j][2] << std::endl;
 			}
-			fprintf(fp, "%f %f %f \n", point[0], point[1], point[2]);
 		}
 	}
-	fclose(fp);
+
+	outFile.close();
 }
+
+void StereoMatch::customReproject(const cv::Mat& disparity, const cv::Mat& Q, cv::Mat& out3D)
+{
+	CV_Assert(disparity.type() == CV_32F);
+	CV_Assert(!disparity.empty());
+	CV_Assert(Q.type() == CV_32F);
+	CV_Assert(Q.cols == 4);
+	CV_Assert(Q.rows == 4);
+	// 3-channel matrix for containing the reprojected 3D world coordinates
+	out3D = cv::Mat::zeros(disparity.size(), CV_32FC3);
+
+	// Getting the interesting parameters from Q, everything else is zero or one
+	float Q03 = Q.at<float>(0, 3);
+	float Q13 = Q.at<float>(1, 3);
+	float Q23 = Q.at<float>(2, 3);
+	float Q32 = Q.at<float>(3, 2);
+	float Q33 = Q.at<float>(3, 3);
+
+	// Transforming a single-channel disparity map to a 3-channel image representing a 3D surface
+	for (int i = 0; i < disparity.rows; i++)
+	{
+		const float* disp_ptr = disparity.ptr<float>(i);
+		cv::Vec3f* out3D_ptr = out3D.ptr<cv::Vec3f>(i);
+
+		for (int j = 0; j < disparity.cols; j++)
+		{
+			const float pw = 1.0f / (disp_ptr[j] * Q32 + Q33);
+
+			cv::Vec3f& point = out3D_ptr[j];
+			point[0] = (static_cast<float>(j) + Q03) * pw;
+			point[1] = (static_cast<float>(i) + Q13) * pw;
+			point[2] = Q23 * pw;
+		}
+	}
+}
+
+/*
+ * OpenCV(3.4.1) Error: 
+ * Assertion failed (disparity.type() == 5 && !disparity.empty()) in StereoMatch::custo
+mReproject, file e:\visualstudio\evision\src\evision\stereomatch.cpp, line 223
+
+OpenCV(3.4.1) Error:
+Assertion failed (((((sizeof(size_t)<<28)|0x8442211) >> ((traits::Depth<_Tp>::value) & ((1 << 3) - 1))*4) & 15) == elemSize1()) 
+
+in cv::Mat::at, file e:\visualstudio\evision\package\opencv\build\include\opencv2\core\mat.inl.hpp, line 1119
+ */

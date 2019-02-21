@@ -146,6 +146,7 @@
     <ClCompile Include="StereoCameraView.cpp" />
     <ClCompile Include="StereoMatch.cpp" />
     <ClCompile Include="StereoMatchController.cpp" />
+    <ClCompile Include="StereoMatcherView.cpp" />
     <ClCompile Include="StereoMatchParamEntity.cpp" />
     <ClCompile Include="WatchImageView.cpp" />
   </ItemGroup>
@@ -164,6 +165,7 @@
     <QtUic Include="ObjectDetectionView.ui" />
     <QtUic Include="RulerView.ui" />
     <QtUic Include="StereoCameraView.ui" />
+    <QtUic Include="StereoMatcherView.ui" />
     <QtUic Include="WatchImageView.ui" />
   </ItemGroup>
   <ItemGroup>
@@ -190,6 +192,10 @@
     <QtMoc Include="StdoutRedirector.h">
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtMultimediaWidgets</IncludePath>
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtMultimediaWidgets</IncludePath>
+    </QtMoc>
+    <QtMoc Include="StereoMatcherView.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtMultimediaWidgets;$(QTDIR)\include\QtCore\5.12.0;$(QTDIR)\include\QtCore\5.12.0\QtCore;$(QTDIR)\include\QtCore\5.12.0\QtCore\private</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtMultimediaWidgets;$(QTDIR)\include\QtCore\5.12.0;$(QTDIR)\include\QtCore\5.12.0\QtCore;$(QTDIR)\include\QtCore\5.12.0\QtCore\private</IncludePath>
     </QtMoc>
     <ClInclude Include="yolo_v2_class.h" />
     <QtMoc Include="WatchImageView.h">
