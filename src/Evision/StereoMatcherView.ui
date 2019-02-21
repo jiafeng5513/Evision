@@ -45,5 +45,25 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton_3</sender>
+   <signal>clicked()</signal>
+   <receiver>StereoMatcherView</receiver>
+   <slot>onPush_LinkStart()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>684</x>
+     <y>409</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>706</x>
+     <y>367</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>onPush_LinkStart()</slot>
+ </slots>
 </ui>

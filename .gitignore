@@ -7,8 +7,7 @@
 *.sln.docstates
 
 # Build results
-!opencv/*
-!opencv/build/x86/vc14/bin/*
+!opencv3.4.5/*
 [Dd]ebug/
 [Rr]elease/
 # build/

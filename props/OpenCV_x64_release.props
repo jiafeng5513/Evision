@@ -3,12 +3,12 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <IncludePath>$(SolutionDir)..\package\opencv\build\include;$(SolutionDir)..\package\opencv\build\include\opencv;$(SolutionDir)..\package\opencv\build\include\opencv2;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)..\package\opencv\build\x64\vc15\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)..\package\opencv3.4.5\include;$(SolutionDir)..\package\opencv3.4.5\include\opencv;$(SolutionDir)..\package\opencv3.4.5\include\opencv2;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)..\package\opencv3.4.5\x64\vc15\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
-      <AdditionalDependencies>opencv_world341.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opencv_aruco345.lib;opencv_bgsegm345.lib;opencv_bioinspired345.lib;opencv_calib3d345.lib;opencv_ccalib345.lib;opencv_core345.lib;opencv_datasets345.lib;opencv_dnn345.lib;opencv_dnn_objdetect345.lib;opencv_dpm345.lib;opencv_face345.lib;opencv_features2d345.lib;opencv_flann345.lib;opencv_fuzzy345.lib;opencv_hfs345.lib;opencv_highgui345.lib;opencv_imgcodecs345.lib;opencv_imgproc345.lib;opencv_img_hash345.lib;opencv_line_descriptor345.lib;opencv_ml345.lib;opencv_objdetect345.lib;opencv_optflow345.lib;opencv_phase_unwrapping345.lib;opencv_photo345.lib;opencv_plot345.lib;opencv_reg345.lib;opencv_rgbd345.lib;opencv_saliency345.lib;opencv_shape345.lib;opencv_stereo345.lib;opencv_stitching345.lib;opencv_structured_light345.lib;opencv_superres345.lib;opencv_surface_matching345.lib;opencv_text345.lib;opencv_tracking345.lib;opencv_video345.lib;opencv_videoio345.lib;opencv_videostab345.lib;opencv_viz345.lib;opencv_xfeatures2d345.lib;opencv_ximgproc345.lib;opencv_xobjdetect345.lib;opencv_xphoto345.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup />

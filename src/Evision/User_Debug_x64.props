@@ -19,19 +19,6 @@
     <PreBuildEvent>
       <Command>echo copy dlls from the opencv version :
 $(SolutionDir)..\package\opencv\build\x64\vc15\bin\opencv_version.exe
-if not exist $(OutDir)opencv_world341d.dll (
-    copy $(SolutionDir)..\package\opencv\build\x64\vc15\bin\opencv_world341d.dll $(OutDir)opencv_world341d.dll
-    echo copy opencv_world341d.dll done
-) else (
-    echo opencv_world341d.dll is already exist!
-)
-
-if not exist $(OutDir)opencv_ffmpeg341_64.dll (
-    copy $(SolutionDir)..\package\opencv\build\x64\vc15\bin\opencv_ffmpeg341_64.dll $(OutDir)opencv_ffmpeg341_64.dll
-    echo copy opencv_ffmpeg341_64.dll done
-) else (
-    echo opencv_ffmpeg341_64.dll is already exist!
-)
 
 if not exist $(OutDir)Qt5Cored.dll (
     copy $(QTDIR)\bin\Qt5Cored.dll $(OutDir)Qt5Cored.dll
