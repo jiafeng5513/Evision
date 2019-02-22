@@ -95,11 +95,6 @@ private:
 
 	void CalcDisparity(cv::Mat &imgL, cv::Mat &imgR, cv::Mat_<float> &disp, int nod);
 
-	bool isGoodTri(cv::Vec3i &v, std::vector<cv::Vec3i> & tri);
-
-	void ChooseKeyPointsBM(cv::Mat_<float> &disp, int nod, int noe, int nof,
-		std::vector<cv::Point2f> & ptsL, std::vector<cv::Point2f> & ptsR);
-
 	void FixDisparity(cv::Mat_<float> & disp, int numberOfDisparities);
 signals:
 	void openMessageBox(QString, QString);

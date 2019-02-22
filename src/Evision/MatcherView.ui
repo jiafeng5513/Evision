@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1000</width>
-    <height>588</height>
+    <height>585</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,18 +19,18 @@
   <property name="minimumSize">
    <size>
     <width>1000</width>
-    <height>588</height>
+    <height>585</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>匹配</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_2">
-   <item row="0" column="2">
-    <widget class="QFrame" name="frame">
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="1" column="2">
+    <widget class="QFrame" name="frame_3">
      <property name="maximumSize">
       <size>
-       <width>200</width>
+       <width>240</width>
        <height>16777215</height>
       </size>
      </property>
@@ -41,71 +41,541 @@
       <enum>QFrame::Raised</enum>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
-      <property name="leftMargin">
-       <number>2</number>
-      </property>
-      <property name="topMargin">
-       <number>2</number>
-      </property>
-      <property name="rightMargin">
-       <number>2</number>
-      </property>
-      <property name="bottomMargin">
-       <number>2</number>
-      </property>
       <item>
-       <widget class="QGraphicsView" name="graphicsView_FixDisp"/>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="radioButton_FixDisp">
-        <property name="text">
-         <string>修复视差图</string>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="toolTip">
+         <string>视差唯一性百分比</string>
         </property>
-        <property name="autoExclusive">
-         <bool>false</bool>
+        <property name="title">
+         <string>uniquenessRatio</string>
         </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QLineEdit" name="lineEdit_uniradio">
+           <property name="minimumSize">
+            <size>
+             <width>35</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>30</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+           <property name="placeholderText">
+            <string>0</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSlider" name="horizontalSlider_uniradio">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
       <item>
-       <widget class="QGraphicsView" name="graphicsView_PointDisp"/>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="radioButton_PointDisp">
-        <property name="text">
-         <string>标点视差图</string>
+       <widget class="QGroupBox" name="groupBox_2">
+        <property name="toolTip">
+         <string>前置滤波器截断值</string>
         </property>
-        <property name="autoExclusive">
-         <bool>false</bool>
+        <property name="title">
+         <string>preFilterCap</string>
         </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QLineEdit" name="lineEdit_prefilcap">
+           <property name="minimumSize">
+            <size>
+             <width>35</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>30</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+           <property name="placeholderText">
+            <string>1</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSlider" name="horizontalSlider_prefilcap">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>100</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
       <item>
-       <widget class="QGraphicsView" name="graphicsView_PointImageL"/>
+       <widget class="QGroupBox" name="groupBox_3">
+        <property name="toolTip">
+         <string>SAD窗口大小</string>
+        </property>
+        <property name="title">
+         <string>SADWindowSize</string>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <item>
+          <widget class="QLineEdit" name="lineEdit_SadWinSiz">
+           <property name="minimumSize">
+            <size>
+             <width>35</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>30</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+           <property name="placeholderText">
+            <string>5</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSlider" name="horizontalSlider_SadWinSiz">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="minimum">
+            <number>5</number>
+           </property>
+           <property name="maximum">
+            <number>51</number>
+           </property>
+           <property name="singleStep">
+            <number>2</number>
+           </property>
+           <property name="pageStep">
+            <number>2</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
       </item>
       <item>
-       <widget class="QRadioButton" name="radioButton_PointImageL">
-        <property name="text">
-         <string>标点左视图</string>
+       <widget class="QGroupBox" name="groupBox_4">
+        <property name="toolTip">
+         <string>视差连通区域变化度的窗口大小</string>
         </property>
-        <property name="autoExclusive">
-         <bool>false</bool>
+        <property name="title">
+         <string>SpeckleWindowSize</string>
         </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_6">
+         <item>
+          <widget class="QLineEdit" name="lineEdit_specwinsz">
+           <property name="minimumSize">
+            <size>
+             <width>35</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>30</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+           <property name="placeholderText">
+            <string>0</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSlider" name="horizontalSlider_specwinsz">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximum">
+            <number>200</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox_5">
+        <property name="toolTip">
+         <string>最小视差值</string>
+        </property>
+        <property name="title">
+         <string>minDisparity</string>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_7">
+         <item>
+          <widget class="QLineEdit" name="lineEdit_MinDisp">
+           <property name="minimumSize">
+            <size>
+             <width>35</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>30</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+           <property name="placeholderText">
+            <string>0</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSlider" name="horizontalSlider_MinDisp">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="minimum">
+            <number>-64</number>
+           </property>
+           <property name="maximum">
+            <number>16</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox_6">
+        <property name="toolTip">
+         <string>视差窗口大小</string>
+        </property>
+        <property name="title">
+         <string>numDisparities</string>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_8">
+         <item>
+          <widget class="QLineEdit" name="lineEdit_NumDisparities">
+           <property name="minimumSize">
+            <size>
+             <width>35</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>30</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+           <property name="placeholderText">
+            <string>16</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSlider" name="horizontalSlider_NumDisparities">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="minimum">
+            <number>16</number>
+           </property>
+           <property name="maximum">
+            <number>256</number>
+           </property>
+           <property name="singleStep">
+            <number>16</number>
+           </property>
+           <property name="pageStep">
+            <number>16</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox_7">
+        <property name="toolTip">
+         <string>连通区域内的最大视差变化</string>
+        </property>
+        <property name="title">
+         <string>speckleRange</string>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_9">
+         <item>
+          <widget class="QLineEdit" name="lineEdit_specrange">
+           <property name="minimumSize">
+            <size>
+             <width>35</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>30</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+           <property name="placeholderText">
+            <string>0</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSlider" name="horizontalSlider_specrange">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximum">
+            <number>64</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox_10">
+        <property name="toolTip">
+         <string>左右视差图的最大容许差异</string>
+        </property>
+        <property name="title">
+         <string>disp12MaxDiff</string>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_10">
+         <item>
+          <widget class="QLineEdit" name="lineEdit_maxdifdisp12">
+           <property name="minimumSize">
+            <size>
+             <width>35</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>30</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+           <property name="placeholderText">
+            <string>0</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSlider" name="horizontalSlider_maxdifdisp12">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="minimum">
+            <number>-1</number>
+           </property>
+           <property name="maximum">
+            <number>5</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox_11">
+        <property name="toolTip">
+         <string>低纹理区域的判断阈值</string>
+        </property>
+        <property name="title">
+         <string>TextureThreshold</string>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_11">
+         <item>
+          <widget class="QLineEdit" name="lineEdit_textThread">
+           <property name="minimumSize">
+            <size>
+             <width>35</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>30</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+           <property name="placeholderText">
+            <string>0</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSlider" name="horizontalSlider_textThread">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
      </layout>
     </widget>
    </item>
-   <item row="0" column="1">
-    <widget class="QGraphicsView" name="graphicsView_D">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>0</height>
-      </size>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="0">
+   <item row="1" column="0">
     <widget class="QFrame" name="frame_2">
      <property name="minimumSize">
       <size>
@@ -115,7 +585,7 @@
      </property>
      <property name="maximumSize">
       <size>
-       <width>200</width>
+       <width>141</width>
        <height>16777215</height>
       </size>
      </property>
@@ -139,7 +609,14 @@
        <number>2</number>
       </property>
       <item>
-       <widget class="QGraphicsView" name="graphicsView_ImageL"/>
+       <widget class="QGraphicsView" name="graphicsView_ImageL">
+        <property name="maximumSize">
+         <size>
+          <width>133</width>
+          <height>100</height>
+         </size>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QRadioButton" name="radioButton_ImageL">
@@ -152,7 +629,14 @@
        </widget>
       </item>
       <item>
-       <widget class="QGraphicsView" name="graphicsView_ImageR"/>
+       <widget class="QGraphicsView" name="graphicsView_ImageR">
+        <property name="maximumSize">
+         <size>
+          <width>133</width>
+          <height>100</height>
+         </size>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QRadioButton" name="radioButton_ImageR">
@@ -165,7 +649,14 @@
        </widget>
       </item>
       <item>
-       <widget class="QGraphicsView" name="graphicsView_RawDisp"/>
+       <widget class="QGraphicsView" name="graphicsView_RawDisp">
+        <property name="maximumSize">
+         <size>
+          <width>133</width>
+          <height>100</height>
+         </size>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QRadioButton" name="radioButton_RawDisp">
@@ -177,585 +668,79 @@
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="QGraphicsView" name="graphicsView_FixDisp">
+        <property name="maximumSize">
+         <size>
+          <width>133</width>
+          <height>100</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioButton_FixDisp">
+        <property name="text">
+         <string>修复视差图</string>
+        </property>
+        <property name="autoExclusive">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
      </layout>
     </widget>
    </item>
-   <item row="1" column="0" colspan="3">
-    <widget class="QFrame" name="frame_3">
+   <item row="1" column="1">
+    <widget class="QGraphicsView" name="graphicsView_D">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="3">
+    <widget class="QFrame" name="frame">
      <property name="frameShape">
       <enum>QFrame::Box</enum>
      </property>
      <property name="frameShadow">
       <enum>QFrame::Raised</enum>
      </property>
-     <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="3" colspan="2">
-       <widget class="QLabel" name="label_36">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="toolTip">
-         <string>视差连通区域变化度的窗口大小</string>
-        </property>
-        <property name="text">
-         <string>SpeckleWindowSize</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="7" colspan="2">
-       <widget class="QLabel" name="label_42">
-        <property name="toolTip">
-         <string>连通区域内的最大视差变化</string>
-        </property>
-        <property name="text">
-         <string>speckleRange</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="4">
-       <widget class="QSlider" name="horizontalSlider_MinDisp">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="minimum">
-         <number>-64</number>
-        </property>
-        <property name="maximum">
-         <number>16</number>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLineEdit" name="lineEdit_prefilcap">
-        <property name="minimumSize">
-         <size>
-          <width>35</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>30</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-        <property name="placeholderText">
-         <string>1</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="3">
-       <widget class="QLineEdit" name="lineEdit_specwinsz">
-        <property name="minimumSize">
-         <size>
-          <width>35</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>30</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-        <property name="placeholderText">
-         <string>0</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="8">
-       <widget class="QSlider" name="horizontalSlider_textThread">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="maximum">
-         <number>50</number>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QSlider" name="horizontalSlider_prefilcap">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="minimum">
-         <number>1</number>
-        </property>
-        <property name="maximum">
-         <number>100</number>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="7" colspan="2">
-       <widget class="QLabel" name="label_43">
-        <property name="toolTip">
-         <string>左右视差图的最大容许差异</string>
-        </property>
-        <property name="text">
-         <string>disp12MaxDiff</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="4">
-       <widget class="QSlider" name="horizontalSlider_NumDisparities">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="minimum">
-         <number>16</number>
-        </property>
-        <property name="maximum">
-         <number>256</number>
-        </property>
-        <property name="singleStep">
-         <number>16</number>
-        </property>
-        <property name="pageStep">
-         <number>16</number>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="5" rowspan="6">
-       <widget class="Line" name="line_2">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0" colspan="2">
-       <widget class="QLabel" name="label_39">
-        <property name="toolTip">
-         <string>前置滤波器截断值</string>
-        </property>
-        <property name="text">
-         <string>preFilterCap</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="4">
-       <widget class="QSlider" name="horizontalSlider_specwinsz">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="maximum">
-         <number>200</number>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="3" colspan="2">
-       <widget class="QLabel" name="label_41">
-        <property name="toolTip">
-         <string>最小视差值</string>
-        </property>
-        <property name="text">
-         <string>minDisparity</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="10">
-       <widget class="QPushButton" name="pushButton_MatchDefault">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>默认参数</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="7">
-       <widget class="QLineEdit" name="lineEdit_textThread">
-        <property name="minimumSize">
-         <size>
-          <width>35</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>30</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-        <property name="placeholderText">
-         <string>0</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="9" rowspan="6">
-       <widget class="Line" name="line_3">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="7">
-       <widget class="QLineEdit" name="lineEdit_specrange">
-        <property name="minimumSize">
-         <size>
-          <width>35</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>30</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-        <property name="placeholderText">
-         <string>0</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0" colspan="2">
-       <widget class="QLabel" name="label_40">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="toolTip">
-         <string>视差唯一性百分比</string>
-        </property>
-        <property name="text">
-         <string>uniquenessRatio</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="3">
-       <widget class="QLineEdit" name="lineEdit_MinDisp">
-        <property name="minimumSize">
-         <size>
-          <width>35</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>30</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-        <property name="placeholderText">
-         <string>0</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="3">
-       <widget class="QLineEdit" name="lineEdit_NumDisparities">
-        <property name="minimumSize">
-         <size>
-          <width>35</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>30</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-        <property name="placeholderText">
-         <string>16</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="8">
-       <widget class="QSlider" name="horizontalSlider_maxdifdisp12">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="minimum">
-         <number>-1</number>
-        </property>
-        <property name="maximum">
-         <number>5</number>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="1">
-       <widget class="QSlider" name="horizontalSlider_SadWinSiz">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="minimum">
-         <number>5</number>
-        </property>
-        <property name="maximum">
-         <number>51</number>
-        </property>
-        <property name="singleStep">
-         <number>2</number>
-        </property>
-        <property name="pageStep">
-         <number>2</number>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QSlider" name="horizontalSlider_uniradio">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="maximum">
-         <number>50</number>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="7">
-       <widget class="QLineEdit" name="lineEdit_maxdifdisp12">
-        <property name="minimumSize">
-         <size>
-          <width>35</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>30</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-        <property name="placeholderText">
-         <string>0</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLineEdit" name="lineEdit_uniradio">
-        <property name="minimumSize">
-         <size>
-          <width>35</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>30</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-        <property name="placeholderText">
-         <string>0</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="3" colspan="2">
-       <widget class="QLabel" name="label_44">
-        <property name="toolTip">
-         <string>视差窗口大小</string>
-        </property>
-        <property name="text">
-         <string>numDisparities</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="8">
-       <widget class="QSlider" name="horizontalSlider_specrange">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="maximum">
-         <number>64</number>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="7" colspan="2">
-       <widget class="QLabel" name="label_35">
-        <property name="toolTip">
-         <string>低纹理区域的判断阈值</string>
-        </property>
-        <property name="text">
-         <string>TextureThreshold</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="0">
-       <widget class="QLineEdit" name="lineEdit_SadWinSiz">
-        <property name="minimumSize">
-         <size>
-          <width>35</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>30</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-        <property name="placeholderText">
-         <string>5</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="10" rowspan="2" colspan="2">
-       <widget class="QGroupBox" name="groupBox_9">
-        <property name="title">
-         <string>Function</string>
-        </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
-         <item>
-          <widget class="QRadioButton" name="radioButton_SGBM">
-           <property name="text">
-            <string>SGBM</string>
-           </property>
-          </widget>
-         </item>
+     <layout class="QHBoxLayout" name="horizontalLayout_12">
+      <item>
+       <widget class="QFrame" name="frame_8">
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <property name="spacing">
+          <number>2</number>
+         </property>
+         <property name="leftMargin">
+          <number>2</number>
+         </property>
+         <property name="topMargin">
+          <number>2</number>
+         </property>
+         <property name="rightMargin">
+          <number>2</number>
+         </property>
+         <property name="bottomMargin">
+          <number>2</number>
+         </property>
          <item>
           <widget class="QRadioButton" name="radioButton_BM">
            <property name="text">
@@ -763,22 +748,47 @@
            </property>
           </widget>
          </item>
-        </layout>
-       </widget>
-      </item>
-      <item row="2" column="10" rowspan="2" colspan="2">
-       <widget class="QGroupBox" name="groupBox_8">
-        <property name="title">
-         <string>MODE</string>
-        </property>
-        <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
-          <widget class="QRadioButton" name="radioButton_MODE_HH">
+          <widget class="QRadioButton" name="radioButton_SGBM">
            <property name="text">
-            <string>HH</string>
+            <string>SGBM</string>
            </property>
           </widget>
          </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="Line" name="line">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QFrame" name="frame_4">
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <property name="spacing">
+          <number>2</number>
+         </property>
+         <property name="leftMargin">
+          <number>2</number>
+         </property>
+         <property name="topMargin">
+          <number>2</number>
+         </property>
+         <property name="rightMargin">
+          <number>2</number>
+         </property>
+         <property name="bottomMargin">
+          <number>2</number>
+         </property>
          <item>
           <widget class="QRadioButton" name="radioButton_MODE_3WAY">
            <property name="text">
@@ -793,46 +803,51 @@
            </property>
           </widget>
          </item>
+         <item>
+          <widget class="QRadioButton" name="radioButton_MODE_HH">
+           <property name="text">
+            <string>HH</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </widget>
       </item>
-      <item row="4" column="0" colspan="2">
-       <widget class="QLabel" name="label_37">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="toolTip">
-         <string>SAD窗口大小</string>
-        </property>
-        <property name="text">
-         <string>SADWindowSize</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2" rowspan="6">
-       <widget class="Line" name="line">
+      <item>
+       <widget class="Line" name="line_2">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
         </property>
        </widget>
       </item>
-      <item row="4" column="11">
-       <widget class="QPushButton" name="pushButton_RefreshStereoMatch">
+      <item>
+       <widget class="QCheckBox" name="checkBox_DoRectify">
         <property name="text">
-         <string>刷新</string>
+         <string>进行校正</string>
         </property>
        </widget>
       </item>
-      <item row="5" column="10">
+      <item>
+       <widget class="Line" name="line_3">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_MatchDefault">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>默认参数</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="pushButton_MatchChooseFiles">
         <property name="minimumSize">
          <size>
@@ -845,12 +860,25 @@
         </property>
        </widget>
       </item>
-      <item row="5" column="11">
-       <widget class="QCheckBox" name="checkBox_DoRectify">
+      <item>
+       <widget class="QPushButton" name="pushButton_RefreshStereoMatch">
         <property name="text">
-         <string>进行校正</string>
+         <string>刷新</string>
         </property>
        </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
       </item>
      </layout>
     </widget>
@@ -867,12 +895,12 @@
    <slot>setDefaultMatchParam()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>776</x>
-     <y>554</y>
+     <x>437</x>
+     <y>42</y>
     </hint>
     <hint type="destinationlabel">
      <x>663</x>
-     <y>607</y>
+     <y>584</y>
     </hint>
    </hints>
   </connection>
@@ -883,12 +911,12 @@
    <slot>doMatch()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>878</x>
-     <y>554</y>
+     <x>518</x>
+     <y>42</y>
     </hint>
     <hint type="destinationlabel">
      <x>755</x>
-     <y>608</y>
+     <y>584</y>
     </hint>
    </hints>
   </connection>
@@ -899,44 +927,12 @@
    <slot>RefreshStereoMatch()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>980</x>
-     <y>554</y>
+     <x>599</x>
+     <y>42</y>
     </hint>
     <hint type="destinationlabel">
      <x>858</x>
-     <y>608</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButton_SGBM</sender>
-   <signal>clicked(bool)</signal>
-   <receiver>MatcherView</receiver>
-   <slot>onClicked_SGBM(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>756</x>
-     <y>515</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>656</x>
-     <y>526</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButton_BM</sender>
-   <signal>clicked(bool)</signal>
-   <receiver>MatcherView</receiver>
-   <slot>onClicked_BM(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>817</x>
-     <y>515</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>655</x>
-     <y>516</y>
+     <y>584</y>
     </hint>
    </hints>
   </connection>
@@ -947,8 +943,8 @@
    <slot>onClicked_MODE_HH(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>878</x>
-     <y>515</y>
+     <x>258</x>
+     <y>38</y>
     </hint>
     <hint type="destinationlabel">
      <x>971</x>
@@ -963,8 +959,8 @@
    <slot>onClicked_MODE_3WAY(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>924</x>
-     <y>515</y>
+     <x>172</x>
+     <y>38</y>
     </hint>
     <hint type="destinationlabel">
      <x>972</x>
@@ -979,8 +975,8 @@
    <slot>onClicked_MODE_SGBM(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>970</x>
-     <y>515</y>
+     <x>221</x>
+     <y>38</y>
     </hint>
     <hint type="destinationlabel">
      <x>971</x>
@@ -995,8 +991,8 @@
    <slot>valueChanged_uniradio(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>980</x>
-     <y>87</y>
+     <x>969</x>
+     <y>112</y>
     </hint>
     <hint type="destinationlabel">
      <x>656</x>
@@ -1011,8 +1007,8 @@
    <slot>valueChanged_Prefilcap(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>980</x>
-     <y>131</y>
+     <x>969</x>
+     <y>168</y>
     </hint>
     <hint type="destinationlabel">
      <x>655</x>
@@ -1027,8 +1023,8 @@
    <slot>valueChanged_specwinsz(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>980</x>
-     <y>192</y>
+     <x>969</x>
+     <y>279</y>
     </hint>
     <hint type="destinationlabel">
      <x>655</x>
@@ -1043,8 +1039,8 @@
    <slot>valueChanged_SadWinSize(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>980</x>
-     <y>253</y>
+     <x>969</x>
+     <y>224</y>
     </hint>
     <hint type="destinationlabel">
      <x>654</x>
@@ -1059,8 +1055,8 @@
    <slot>valueChanged_MinDisp(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>980</x>
-     <y>297</y>
+     <x>969</x>
+     <y>335</y>
     </hint>
     <hint type="destinationlabel">
      <x>656</x>
@@ -1075,8 +1071,8 @@
    <slot>valueChanged_NumDisparities(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>980</x>
-     <y>341</y>
+     <x>969</x>
+     <y>390</y>
     </hint>
     <hint type="destinationlabel">
      <x>654</x>
@@ -1091,8 +1087,8 @@
    <slot>valueChanged_Specrange(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>980</x>
-     <y>385</y>
+     <x>969</x>
+     <y>446</y>
     </hint>
     <hint type="destinationlabel">
      <x>655</x>
@@ -1107,8 +1103,8 @@
    <slot>valueChanged_MaxDifdisp2(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>980</x>
-     <y>429</y>
+     <x>969</x>
+     <y>501</y>
     </hint>
     <hint type="destinationlabel">
      <x>656</x>
@@ -1123,8 +1119,8 @@
    <slot>valueChanged_TextThread(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>980</x>
-     <y>473</y>
+     <x>969</x>
+     <y>557</y>
     </hint>
     <hint type="destinationlabel">
      <x>655</x>
@@ -1139,8 +1135,8 @@
    <slot>onReleased_NumDisparities()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>844</x>
-     <y>327</y>
+     <x>969</x>
+     <y>390</y>
     </hint>
     <hint type="destinationlabel">
      <x>996</x>
@@ -1155,8 +1151,8 @@
    <slot>onReleased_NumDisparities()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>926</x>
-     <y>337</y>
+     <x>969</x>
+     <y>390</y>
     </hint>
     <hint type="destinationlabel">
      <x>996</x>
@@ -1171,8 +1167,8 @@
    <slot>onReleased_SadWinSize()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>925</x>
-     <y>235</y>
+     <x>969</x>
+     <y>224</y>
     </hint>
     <hint type="destinationlabel">
      <x>994</x>
@@ -1187,12 +1183,108 @@
    <slot>onReleased_SadWinSize()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>890</x>
-     <y>243</y>
+     <x>969</x>
+     <y>224</y>
     </hint>
     <hint type="destinationlabel">
      <x>996</x>
      <y>262</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_ImageL</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>onClicked_IconImgL(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>46</x>
+     <y>163</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>153</x>
+     <y>109</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_ImageR</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>onClicked_IconImgR(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>48</x>
+     <y>285</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>153</x>
+     <y>218</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_RawDisp</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>onClicked_IconRawDisp(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>52</x>
+     <y>405</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>153</x>
+     <y>342</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_FixDisp</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>onClicked_IconFixDisp(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>49</x>
+     <y>526</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>152</x>
+     <y>462</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_BM</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>onClicked_BM(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>49</x>
+     <y>32</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>66</x>
+     <y>2</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_SGBM</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>onClicked_SGBM(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>90</x>
+     <y>32</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>4</y>
     </hint>
    </hints>
   </connection>
@@ -1217,5 +1309,9 @@
   <slot>valueChanged_MaxDifdisp2(int)</slot>
   <slot>onReleased_NumDisparities()</slot>
   <slot>onReleased_SadWinSize()</slot>
+  <slot>onClicked_IconImgL(bool)</slot>
+  <slot>onClicked_IconImgR(bool)</slot>
+  <slot>onClicked_IconRawDisp(bool)</slot>
+  <slot>onClicked_IconFixDisp(bool)</slot>
  </slots>
 </ui>

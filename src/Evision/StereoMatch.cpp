@@ -44,14 +44,34 @@ bool StereoMatch::init()
 		//1.打开图片
 		
 		std::cout << "加载图片..." << std::endl;
-		int color_mode = (m_entity->getBM()==true ? cv::IMREAD_GRAYSCALE : cv::IMREAD_COLOR);
-		img1 = cv::imread(img1_filename, color_mode);
-		img2 = cv::imread(img2_filename, color_mode);
+		if(m_entity->getBM() == true)//使用BM算法
+		{
+			
+			img1 = cv::imread(img1_filename, cv::IMREAD_GRAYSCALE);
+			img2 = cv::imread(img2_filename, cv::IMREAD_GRAYSCALE);
+		}else//使用SGBM算法
+		{
+			img1 = cv::imread(img1_filename);
+			img2 = cv::imread(img2_filename);
+			cv::Mat img1proc, img2proc;
+			cv::cvtColor(img1, img1proc, CV_BGR2GRAY);
+			cv::cvtColor(img2, img2proc, CV_BGR2GRAY);
+			img1 = img1proc;
+			img2 = img2proc;
+		}
+		//int color_mode = (m_entity->getBM()==true ? cv::IMREAD_GRAYSCALE : -1);
+		//img1 = cv::imread(img1_filename,0);
+		//img2 = cv::imread(img2_filename,0);
 		if (img1.empty() || img2.empty())
 		{
 			emit openMessageBox(QStringLiteral("错误"), QStringLiteral("输入图像为空!"));
 			return false;
 		}
+		//cv::Mat img1proc, img2proc;
+		//cv::cvtColor(img1, img1proc, CV_BGR2GRAY);
+		//cv::cvtColor(img2, img2proc, CV_BGR2GRAY);
+		//img1 = img1proc;
+		//img2 = img2proc;
 		img_size = img1.size();
 		//2.打开参数文件,读取参数
 		
@@ -67,16 +87,17 @@ bool StereoMatch::init()
 		
 		std::cout << "矫正图片..." << std::endl;
 
+		//先分别计算出x方向和y方向的两个镜头的校正矩阵
 		cv::Mat mapx1, mapy1, mapx2, mapy2;
 		initUndistortRectifyMap(cameraMatrix1, distCoeffs1, R1, P1, img_size, CV_16SC2, mapx1, mapy1);
 		initUndistortRectifyMap(cameraMatrix2, distCoeffs2, R2, P2, img_size, CV_16SC2, mapx2, mapy2);
-
+		//进行校正计算
 		cv::Mat img1r, img2r;
 		remap(img1, img1r, mapx1, mapy1, cv::INTER_LINEAR);
 		remap(img2, img2r, mapx2, mapy2, cv::INTER_LINEAR);
 
-		//img1 = img1r;
-		//img2 = img2r;
+		img1 = img1r;
+		img2 = img2r;
 	}
 	catch (...)
 	{
@@ -93,7 +114,7 @@ bool StereoMatch::init()
  */
 void StereoMatch::run()
 {
-	
+	//run_new();
 	std::cout << "开始计算..." << std::endl;
 
 	cv::Ptr<cv::StereoBM> bm = cv::StereoBM::create(16, 9);
@@ -132,21 +153,25 @@ void StereoMatch::run()
 	else if (m_entity->getMODE_3WAY())
 		sgbm->setMode(cv::StereoSGBM::MODE_SGBM_3WAY);
 
-	cv::Mat disp, disp8;
-	//Mat img1p, img2p, dispp;
-	//copyMakeBorder(img1, img1p, 0, 0, numberOfDisparities, 0, IPL_BORDER_REPLICATE);
-	//copyMakeBorder(img2, img2p, 0, 0, numberOfDisparities, 0, IPL_BORDER_REPLICATE);
+	// 对左右视图的左边进行边界延拓，以获取与原始视图相同大小的有效视差区域
+	cv::Mat img1p, img2p;
+	copyMakeBorder(img1, img1p, 0, 0, m_entity->getNumDisparities(), 0, IPL_BORDER_REPLICATE);
+	copyMakeBorder(img2, img2p, 0, 0, m_entity->getNumDisparities(), 0, IPL_BORDER_REPLICATE);
 
+	cv::Mat disp, dispWithBorder,disp8;
 	int64 t = cv::getTickCount();
 	if (m_entity->getBM())
 	{
-		bm->compute(img1, img2, disp);
+		bm->compute(img1, img2, dispWithBorder);
 	}	
 	else if (m_entity->getSGBM())
 	{
-		sgbm->compute(img1, img2, disp);
+		sgbm->compute(img1, img2, dispWithBorder);
 	}
-		
+
+	// 截取与原始画面对应的视差区域（舍去加宽的部分）
+	disp = dispWithBorder.colRange(m_entity->getNumDisparities(), img1.cols);
+
 	t = cv::getTickCount() - t;
 
 	std::cout << "Time elapsed: "<< t * 1000 / cv::getTickFrequency() <<"ms\n,StereoMatch计算完毕,正在输出..." << std::endl;
@@ -169,7 +194,7 @@ void StereoMatch::run()
 	std::cout << "正在输出点云文件..." << std::endl;
 
 	cv::Mat xyz;
-	reprojectImageTo3D(disp, xyz, Q, false,-1);
+	reprojectImageTo3D(disp, xyz, Q, true);
 	//disp.convertTo(disp, CV_32F, 1.0 / 16.0);
 	//Q.convertTo(Q, CV_32F);
 	//customReproject(disp, Q, xyz);
@@ -461,8 +486,9 @@ void StereoMatch::StereoTo3D(std::vector<cv::Point2f> ptsL, std::vector<cv::Poin
 
 	}
 
-	imshow("back project", imgShow);
-	cv::waitKey();
+	//imshow("back project", imgShow);
+	//m_entity->setIconPointImgL(imgShow);
+	//cv::waitKey();
 
 	center3D.x = (minX + maxX) / 2;
 	center3D.y = (minY + maxY) / 2;
@@ -553,7 +579,7 @@ void StereoMatch::GetPairBM(cv::Mat& imgL, cv::Mat& imgR, std::vector<cv::Point2
 	std::vector<cv::Point2f>& ptsR)
 {
 	cv::Mat_<float> disp;
-	imshow("left image", imgL);
+	//imshow("left image", imgL);
 
 	int numOfDisp = 80; // number of disparity, must be divisible by 16// algorithm parameters that can be modified
 	CalcDisparity(imgL, imgR, disp, numOfDisp);
@@ -562,9 +588,9 @@ void StereoMatch::GetPairBM(cv::Mat& imgL, cv::Mat& imgR, std::vector<cv::Point2
 	dispSave.convertTo(dispSave, CV_8U, 255);
 	imwrite("disp.jpg", dispSave);
 
-	int numOfEgdePt = 80, numOfFlatPt = 50;	// algorithm parameters that can be modified
-	ChooseKeyPointsBM(disp, numOfDisp, numOfEgdePt, numOfFlatPt, ptsL, ptsR);
-	cv::waitKey();
+	//int numOfEgdePt = 80, numOfFlatPt = 50;	// algorithm parameters that can be modified
+	//ChooseKeyPointsBM(disp, numOfDisp, numOfEgdePt, numOfFlatPt, ptsL, ptsR);
+	//cv::waitKey();
 }
 
 void StereoMatch::CalcDisparity(cv::Mat& imgL, cv::Mat& imgR, cv::Mat_<float>& disp, int nod)
@@ -591,186 +617,16 @@ void StereoMatch::CalcDisparity(cv::Mat& imgL, cv::Mat& imgR, cv::Mat_<float>& d
 	sgbm->compute(imgL, imgR, dispTemp);
 	dispTemp.convertTo(disp, CV_32FC1, 1.0 / 16);
 	disp.convertTo(disp8, CV_8U, 255.0 / nod);
-	imshow("origin disparity", disp8);
+	//imshow("origin disparity", disp8);
+	m_entity->setIconRawDisp(disp8);
 	//waitKey();
 
 	FixDisparity(disp, nod);
 	disp.convertTo(disp8, CV_8U, 255.0 / nod);
-	imshow("fixed disparity", disp8);
-}
-// used for doing delaunay trianglation with opencv function
-bool StereoMatch::isGoodTri(cv::Vec3i& v, std::vector<cv::Vec3i>& tri)
-{
-	int a = v[0], b = v[1], c = v[2];
-	v[0] = min(a, min(b, c));
-	v[2] = max(a, max(b, c));
-	v[1] = a + b + c - v[0] - v[2];
-	if (v[0] == -1) return false;
-
-	std::vector<cv::Vec3i>::iterator iter = tri.begin();
-	for (; iter != tri.end(); iter++)
-	{
-		cv::Vec3i &check = *iter;
-		if (check[0] == v[0] &&
-			check[1] == v[1] &&
-			check[2] == v[2])
-		{
-			break;
-		}
-	}
-	if (iter == tri.end())
-	{
-		tri.push_back(v);
-		return true;
-	}
-	return false;
+	//imshow("fixed disparity", disp8);
+	m_entity->setIconFixDisp(disp8);
 }
 
-void StereoMatch::ChooseKeyPointsBM(cv::Mat_<float>& disp, int nod, int noe, int nof,
-	std::vector<cv::Point2f>& ptsL, std::vector<cv::Point2f>& ptsR)
-{
-	cv::Mat_<float>  dCopy, dx, dy, dEdge;
-	dCopy = disp.colRange(cv::Range(nod, disp.cols)).clone();
-	normalize(dCopy, dCopy, 0, 1, cv::NORM_MINMAX);
-
-	imshow("disparity", dCopy);
-	cv::Mat dShow(dCopy.size(), CV_32FC3);
-
-	if (dCopy.channels() == 1)
-		cvtColor(dCopy, dShow, CV_GRAY2RGB);//这个数据有问题 dshow
-
-		//imshow("disparity", dShow);
-
-	int sobelWinSz = 7;// algorithm parameters that can be modified
-	Sobel(dCopy, dx, -1, 1, 0, sobelWinSz);
-	Sobel(dCopy, dy, -1, 0, 1, sobelWinSz);
-	magnitude(dx, dy, dEdge);
-	normalize(dEdge, dEdge, 0, 10, cv::NORM_MINMAX);
-	//imshow("edge of disparity", dEdge);
-	//waitKey();
-
-	int filterSz[] = { 50,30 };	// algorithm parameters that can be modified
-	float slope[] = { 4,8 };	// algorithm parameters that can be modified
-	int keepBorder = 5;	// algorithm parameters that can be modified
-	int cnt = 0;
-	double value;
-	float minValue = .003;	// algorithm parameters that can be modified
-	cv::Point2f selPt1, selPt2;
-	cv::Mat_<float> dEdgeCopy1 = dEdge.clone();
-
-	// find the strongest edges, assign 1 or 2 key points near it
-	while (cnt < noe)
-	{
-		cv::Point loc;
-		minMaxLoc(dEdgeCopy1, NULL, &value, NULL, &loc);
-		if (value < minValue) break;
-
-		float dx1 = dx(loc), dy1 = dy(loc);
-		if (abs(dx1) >= abs(dy1))
-		{
-			selPt1.y = selPt2.y = loc.y;
-			selPt1.x = loc.x - (dx1 > 0 ? slope[1] : slope[0]) + nod;
-			selPt2.x = loc.x + (dx1 > 0 ? slope[0] : slope[1]) + nod;
-			if (selPt1.x > keepBorder + nod)
-			{
-				ptsL.push_back(selPt1);
-				ptsR.push_back(selPt1 - cv::Point2f(disp(selPt1), 0));
-				circle(dShow, selPt1 - cv::Point2f(nod, 0), 2, CV_RGB(255, 0, 0), 2);
-				cnt++;
-			}
-			if (selPt2.x < disp.cols - keepBorder)
-			{
-				ptsL.push_back(selPt2);
-				ptsR.push_back(selPt2 - cv::Point2f(disp(selPt2), 0));
-				circle(dShow, selPt2 - cv::Point2f(nod, 0), 2, CV_RGB(0, 255, 0), 2);
-				cnt++;
-			}
-
-			imshow("disparity", dShow);
-			//waitKey();
-
-			int left = min(filterSz[1], loc.x),
-				top = min(filterSz[0], loc.y),
-				right = min(filterSz[1], dCopy.cols - loc.x - 1),
-				bot = min(filterSz[0], dCopy.rows - loc.y - 1);
-			cv::Mat sub = dEdgeCopy1(cv::Range(loc.y - top, loc.y + bot + 1), cv::Range(loc.x - left, loc.x + right + 1));
-			sub.setTo(cv::Scalar(0));
-			//imshow("processing disparity edge", dEdgeCopy1);
-			//waitKey();
-		}
-		else
-		{
-			selPt1.x = selPt2.x = loc.x + nod;
-			selPt1.y = loc.y - (dy1 > 0 ? slope[1] : slope[0]);
-			selPt2.y = loc.y + (dy1 > 0 ? slope[0] : slope[1]);
-			if (selPt1.y > keepBorder)
-			{
-				ptsL.push_back(selPt1);
-				ptsR.push_back(selPt1 - cv::Point2f(disp(selPt1), 0));
-				circle(dShow, selPt1 - cv::Point2f(nod, 0), 2, CV_RGB(255, 255, 0), 2);
-				cnt++;
-			}
-			if (selPt2.y < disp.rows - keepBorder)
-			{
-				ptsL.push_back(selPt2);
-				ptsR.push_back(selPt2 - cv::Point2f(disp(selPt2), 0));
-				circle(dShow, selPt2 - cv::Point2f(nod, 0), 2, CV_RGB(0, 255, 255), 2);
-				cnt++;
-			}
-
-			imshow("disparity", dShow);
-			//waitKey();
-
-			int left = min(filterSz[0], loc.x),
-				top = min(filterSz[1], loc.y),
-				right = min(filterSz[0], dCopy.cols - loc.x - 1),
-				bot = min(filterSz[1], dCopy.rows - loc.y - 1);
-			cv::Mat sub = dEdgeCopy1(cv::Range(loc.y - top, loc.y + bot + 1), cv::Range(loc.x - left, loc.x + right + 1));
-			sub.setTo(cv::Scalar(0));
-			//imshow("processing disparity edge", dEdgeCopy1);
-			//waitKey();
-		}
-
-	}
-
-	int filterSz0 = 6;// algorithm parameters that can be modified
-	keepBorder = 3;// algorithm parameters that can be modified
-	cnt = 0;
-	cv::Mat_<float> dEdgeCopy2;// = dEdge.clone();
-	GaussianBlur(dEdge, dEdgeCopy2, cv::Size(0, 0), 5);
-	char str[10];
-
-	// find the flat areas, assign 1 key point near it
-	while (cnt < nof)
-	{
-		cv::Point loc;
-		minMaxLoc(dEdgeCopy2, &value, NULL, &loc, NULL);
-		if (value == 10) break;
-
-		loc.x += nod;
-		if (loc.x > keepBorder + nod && loc.y > keepBorder &&
-			loc.x < disp.cols && loc.y < disp.rows)
-		{
-			ptsL.push_back(loc);
-			ptsR.push_back(cv::Point2f(loc) - cv::Point2f(disp(loc), 0));
-			circle(dShow, cv::Point2f(loc) - cv::Point2f(nod, 0), 2, CV_RGB(255, 0, 255), 2);
-			cnt++;
-			sprintf_s(str, 10, "%.1f", disp(loc));
-			putText(dShow, str, cv::Point(loc.x - nod + 3, loc.y), cv::FONT_HERSHEY_SIMPLEX, .3, CV_RGB(255, 0, 255));
-			imshow("disparity", dShow);
-		}
-
-		loc.x -= nod;
-		int filterSz1 = (10 - value * 3)*filterSz0;
-		int left = min(filterSz1, loc.x),
-			top = min(filterSz1, loc.y),
-			right = min(filterSz1, dCopy.cols - loc.x - 1),
-			bot = min(filterSz1, dCopy.rows - loc.y - 1);
-		cv::Mat sub = dEdgeCopy2(cv::Range(loc.y - top, loc.y + bot + 1), cv::Range(loc.x - left, loc.x + right + 1));
-		sub.setTo(cv::Scalar(10));
-		//imshow("processing disparity flat area", dEdgeCopy2);
-	}
-}
 // roughly smooth the glitches on the disparity map
 void StereoMatch::FixDisparity(cv::Mat_<float>& disp, int numberOfDisparities)
 {

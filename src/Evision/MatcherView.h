@@ -75,6 +75,9 @@ public slots:
 	void onParamChanged_IconImgR();
 	void onParamChanged_IconRawDisp();
 	void onParamChanged_IconFixDisp();
-	void onParamChanged_IconPointDisp();
-	void onParamChanged_IconPointImgL();
+
+	void onClicked_IconImgL(bool value);
+	void onClicked_IconImgR(bool value);
+	void onClicked_IconRawDisp(bool value);
+	void onClicked_IconFixDisp(bool value);
 };

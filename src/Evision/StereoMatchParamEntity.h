@@ -62,8 +62,6 @@ signals:
 	void paramChanged_IconImgR();
 	void paramChanged_IconRawDisp();
 	void paramChanged_IconFixDisp();
-	void paramChanged_IconPointDisp();
-	void paramChanged_IconPointImgL();
 
 #pragma endregion
 
@@ -134,11 +132,5 @@ public:
 
 	cv::Mat getIconFixDisp();
 	void setIconFixDisp(cv::Mat value);
-
-	cv::Mat getIconPointDisp();
-	void setIconPointDisp(cv::Mat value);
-
-	cv::Mat getIconPointImgL();
-	void setIconPointImgL(cv::Mat value);
 #pragma endregion
 };

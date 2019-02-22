@@ -1,6 +1,7 @@
 #include "MatcherView.h"
 #include "EvisionUtils.h"
 #include "math.h"
+#include<qDebug>
 MatcherView::MatcherView(QWidget *parent)
 	: QWidget(parent)
 {
@@ -20,12 +21,10 @@ MatcherView::MatcherView(QWidget *parent)
 	connect(m_entity, SIGNAL(paramChanged_SGBM()), this, SLOT(onParamChanged_SGBM()));
 	connect(m_entity, SIGNAL(paramChanged_MODE_HH()), this, SLOT(onParamChanged_MODE_HH()));
 	connect(m_entity, SIGNAL(paramChanged_ImageDtoShow()), this, SLOT(onParamChanged_imgDtoShow())/*, Qt::QueuedConnection*/);
-	connect(m_entity, SIGNAL(paramChanged_IconImgL()), this, SLOT(onParamChanged_IconImgL()()));
+	connect(m_entity, SIGNAL(paramChanged_IconImgL()), this, SLOT(onParamChanged_IconImgL()));
 	connect(m_entity, SIGNAL(paramChanged_IconImgR()), this, SLOT(onParamChanged_IconImgR()));
 	connect(m_entity, SIGNAL(paramChanged_IconRawDisp()), this, SLOT(onParamChanged_IconRawDisp()));
 	connect(m_entity, SIGNAL(paramChanged_IconFixDisp()), this, SLOT(onParamChanged_IconFixDisp()));
-	connect(m_entity, SIGNAL(paramChanged_IconPointDisp()), this, SLOT(onParamChanged_IconPointDisp()));
-	connect(m_entity, SIGNAL(paramChanged_IconPointImgL()), this, SLOT(onParamChanged_IconPointImgL()));
 }
 
 MatcherView::~MatcherView()
@@ -351,32 +350,55 @@ void MatcherView::onParamChanged_IconFixDisp()
 	ui.graphicsView_FixDisp->update();
 }
 
-void MatcherView::onParamChanged_IconPointDisp()
+void MatcherView::onClicked_IconImgL(bool value)
 {
-	QImage DQImage = EvisionUtils::cvMat2QImage(m_entity->getIconPointDisp());
-	QGraphicsScene *sceneD = new QGraphicsScene;
-	sceneD->addPixmap(QPixmap::fromImage(DQImage));
-	ui.graphicsView_PointDisp->setScene(sceneD);
-	QRectF bounds = sceneD->itemsBoundingRect();
-	bounds.setWidth(bounds.width());         // to tighten-up margins
-	bounds.setHeight(bounds.height());       // same as above
-	ui.graphicsView_PointDisp->fitInView(bounds, Qt::KeepAspectRatio);
-	ui.graphicsView_PointDisp->centerOn(0, 0);
-	ui.graphicsView_PointDisp->show();
-	ui.graphicsView_PointDisp->update();
+	//qDebug() << "IconImgL clicked--" << value;
+	if(value==true)
+	{
+		/*
+		 * 首先排斥其他三个缩略图
+		 * 然后在中心大图上显示本图
+		 */
+		ui.radioButton_ImageR->setChecked(false);
+		ui.radioButton_FixDisp->setChecked(false);
+		ui.radioButton_RawDisp->setChecked(false);
+
+		m_entity->setImageDtoShow(m_entity->getIconImgL());
+	}
 }
 
-void MatcherView::onParamChanged_IconPointImgL()
+void MatcherView::onClicked_IconImgR(bool value)
 {
-	QImage DQImage = EvisionUtils::cvMat2QImage(m_entity->getIconPointImgL());
-	QGraphicsScene *sceneD = new QGraphicsScene;
-	sceneD->addPixmap(QPixmap::fromImage(DQImage));
-	ui.graphicsView_PointImageL->setScene(sceneD);
-	QRectF bounds = sceneD->itemsBoundingRect();
-	bounds.setWidth(bounds.width());         // to tighten-up margins
-	bounds.setHeight(bounds.height());       // same as above
-	ui.graphicsView_PointImageL->fitInView(bounds, Qt::KeepAspectRatio);
-	ui.graphicsView_PointImageL->centerOn(0, 0);
-	ui.graphicsView_PointImageL->show();
-	ui.graphicsView_PointImageL->update();
+	if(value==true)
+	{
+		ui.radioButton_ImageL->setChecked(false);
+		ui.radioButton_FixDisp->setChecked(false);
+		ui.radioButton_RawDisp->setChecked(false);
+
+		m_entity->setImageDtoShow(m_entity->getIconImgR());
+	}
+}
+
+void MatcherView::onClicked_IconRawDisp(bool value)
+{
+	if (value == true)
+	{
+		ui.radioButton_ImageR->setChecked(false);
+		ui.radioButton_ImageL->setChecked(false);
+		ui.radioButton_FixDisp->setChecked(false);
+
+		m_entity->setImageDtoShow(m_entity->getIconRawDisp());
+	}
+}
+
+void MatcherView::onClicked_IconFixDisp(bool value)
+{
+	if (value == true)
+	{
+		ui.radioButton_ImageR->setChecked(false);
+		ui.radioButton_ImageL->setChecked(false);
+		ui.radioButton_RawDisp->setChecked(false);
+
+		m_entity->setImageDtoShow(m_entity->getIconFixDisp());
+	}
 }

@@ -13,7 +13,7 @@
 #include "WatchImageView.h"
 #include "ObjectDetectionView.h"
 #include "../Evision3dViz/Evision3dViz.h"
-#include "StereoMatcherView.h"
+
 // ธกตใสýละตศ
 // ulp: units in the last place.
 template <typename T>

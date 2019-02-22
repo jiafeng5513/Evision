@@ -256,23 +256,3 @@ void StereoMatchParamEntity::setIconFixDisp(cv::Mat value)
 	iconFixDisp = value;
 	emit paramChanged_IconFixDisp();
 }
-
-cv::Mat StereoMatchParamEntity::getIconPointDisp()
-{
-	return iconPointDisp;
-}
-void StereoMatchParamEntity::setIconPointDisp(cv::Mat value)
-{
-	iconPointDisp = value;
-	emit paramChanged_IconPointDisp();
-}
-
-cv::Mat StereoMatchParamEntity::getIconPointImgL()
-{
-	return iconPointImgL;
-}
-void StereoMatchParamEntity::setIconPointImgL(cv::Mat value)
-{
-	iconPointImgL = value;
-	emit paramChanged_IconPointImgL();
-}
