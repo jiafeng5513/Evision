@@ -81,6 +81,7 @@ private:
 
 	bool no_display=false;
 private:
+	void getColorDisparityImage(cv::Mat& disparity, cv::Mat& disparityImage, bool isColor);
 	bool LoadPtsPairs(std::vector<cv::Point2f> &ptsL, std::vector<cv::Point2f> &ptsR, std::string &filename);
 
 	void SavePtsPairs(std::vector<cv::Point2f> &ptsL, std::vector<cv::Point2f> &ptsR, std::string &filename);

@@ -2,7 +2,7 @@
 #include <QFileDialog>
 #include "EvisionUtils.h"
 #include <direct.h>
-
+#include <qDebug>
 
 StereoMatch::StereoMatch(std::string img1_filename, std::string img2_filename, std::string cameraParams_filename)
 {
@@ -46,19 +46,21 @@ bool StereoMatch::init()
 		std::cout << "加载图片..." << std::endl;
 		if(m_entity->getBM() == true)//使用BM算法
 		{
-			
-			img1 = cv::imread(img1_filename, cv::IMREAD_GRAYSCALE);
-			img2 = cv::imread(img2_filename, cv::IMREAD_GRAYSCALE);
+			cv::Mat img1proc, img2proc;
+
+			img1proc = cv::imread(img1_filename);
+			img2proc = cv::imread(img2_filename);
+			cv::cvtColor(img1proc, img1, CV_BGR2GRAY);
+			cv::cvtColor(img2proc, img2, CV_BGR2GRAY);
+
 		}else//使用SGBM算法
 		{
 			img1 = cv::imread(img1_filename);
 			img2 = cv::imread(img2_filename);
-			cv::Mat img1proc, img2proc;
-			cv::cvtColor(img1, img1proc, CV_BGR2GRAY);
-			cv::cvtColor(img2, img2proc, CV_BGR2GRAY);
-			img1 = img1proc;
-			img2 = img2proc;
 		}
+		qDebug() << "channels="<<img1.channels()<<"   depth=" << img1.depth();
+		cv::imshow("img1", img1);
+		cv::imshow("img2", img2);
 		//int color_mode = (m_entity->getBM()==true ? cv::IMREAD_GRAYSCALE : -1);
 		//img1 = cv::imread(img1_filename,0);
 		//img2 = cv::imread(img2_filename,0);
@@ -96,8 +98,8 @@ bool StereoMatch::init()
 		remap(img1, img1r, mapx1, mapy1, cv::INTER_LINEAR);
 		remap(img2, img2r, mapx2, mapy2, cv::INTER_LINEAR);
 
-		img1 = img1r;
-		img2 = img2r;
+		//img1 = img1r;
+		//img2 = img2r;
 	}
 	catch (...)
 	{
@@ -138,8 +140,8 @@ void StereoMatch::run()
 	sgbm->setPreFilterCap(m_entity->getPrefilcap());
 	sgbm->setBlockSize(m_entity->getSadWinsz());
 	int cn = img1.channels();
-	sgbm->setP1(8 * cn*m_entity->getSadWinsz()*m_entity->getSadWinsz());
-	sgbm->setP2(32 * cn*m_entity->getSadWinsz()*m_entity->getSadWinsz());
+	sgbm->setP1(48 * cn*m_entity->getSadWinsz()*m_entity->getSadWinsz());
+	sgbm->setP2(48 * cn*m_entity->getSadWinsz()*m_entity->getSadWinsz());
 	sgbm->setMinDisparity(m_entity->getMinDisp());
 	sgbm->setNumDisparities(m_entity->getNumDisparities());
 	sgbm->setUniquenessRatio(m_entity->getUniradio());
@@ -158,43 +160,50 @@ void StereoMatch::run()
 	copyMakeBorder(img1, img1p, 0, 0, m_entity->getNumDisparities(), 0, IPL_BORDER_REPLICATE);
 	copyMakeBorder(img2, img2p, 0, 0, m_entity->getNumDisparities(), 0, IPL_BORDER_REPLICATE);
 
-	cv::Mat disp, dispWithBorder,disp8;
+	cv::Mat disp, disparity,dispWithBorder,disp8;
 	int64 t = cv::getTickCount();
 	if (m_entity->getBM())
 	{
-		bm->compute(img1, img2, dispWithBorder);
+		bm->compute(img1p, img2p, dispWithBorder);
 	}	
 	else if (m_entity->getSGBM())
 	{
-		sgbm->compute(img1, img2, dispWithBorder);
+		sgbm->compute(img1p, img2p, dispWithBorder);
 	}
-
+	cv::imshow("dispWithBorder", dispWithBorder);
 	// 截取与原始画面对应的视差区域（舍去加宽的部分）
-	disp = dispWithBorder.colRange(m_entity->getNumDisparities(), img1.cols);
-
+	disp = dispWithBorder.colRange(m_entity->getNumDisparities(), img1p.cols);
+	cv::imshow("disp", disp);
+	cv::Mat m_Calib_Mat_Mask_Roi = cv::Mat::zeros(img_size.height, img_size.width, CV_8UC1);
+	cv::rectangle(m_Calib_Mat_Mask_Roi, roi1, cv::Scalar(255), -1);
+	disp.copyTo(disparity, m_Calib_Mat_Mask_Roi);
+	cv::Mat colordisp;
+	getColorDisparityImage(disparity, colordisp, true);
+	cv::imshow("origin disp", disparity);
+	cv::imshow("color disp", colordisp);
 	t = cv::getTickCount() - t;
 
 	std::cout << "Time elapsed: "<< t * 1000 / cv::getTickFrequency() <<"ms\n,StereoMatch计算完毕,正在输出..." << std::endl;
 
 	//disp = dispp.colRange(numberOfDisparities, img1p.cols);
 	
-	disp.convertTo(disp8, CV_8U, 255 / (m_entity->getNumDisparities()*16.));
+	//disp.convertTo(disp8, CV_8U, 255 / (m_entity->getNumDisparities()*16.));
 	
 	//m_entity->setImageLtoShow(img1);
 	//m_entity->setImageRtoShow(img2);
-	m_entity->setImageDtoShow(disp8);
+	m_entity->setImageDtoShow(colordisp);
 	//d
 
 	if (!disparity_filename.empty())
 	{
-		imwrite(disparity_filename, disp);
+		imwrite(disparity_filename, disparity);
 		std::cout << "视差图已经保存到:" << disparity_filename << std::endl;
 	}
 		
 	std::cout << "正在输出点云文件..." << std::endl;
 
 	cv::Mat xyz;
-	reprojectImageTo3D(disp, xyz, Q, true);
+	reprojectImageTo3D(disparity, xyz, Q, true);
 	//disp.convertTo(disp, CV_32F, 1.0 / 16.0);
 	//Q.convertTo(Q, CV_32F);
 	//customReproject(disp, Q, xyz);
@@ -397,6 +406,55 @@ void StereoMatch::customReproject(const cv::Mat& disparity, const cv::Mat& Q, cv
 			point[2] = Q23 * pw;
 		}
 	}
+}
+//获取伪彩色视差图
+void StereoMatch::getColorDisparityImage(cv::Mat& disparity, cv::Mat& disparityImage, bool isColor)
+{
+	//将原始视差数据的位深转换为 8 位
+		cv::Mat disp8u;
+	if (disparity.depth() != CV_8U)
+	{
+		disparity.convertTo(disp8u, CV_8U, 255 / (m_entity->getNumDisparities()*16.));
+	}
+	else
+	{
+		disp8u = disparity;
+	}
+
+	// 转换为伪彩色图像 或 灰度图像
+	if (isColor)
+	{
+		if (disparityImage.empty() || disparityImage.type() != CV_8UC3)
+		{
+			disparityImage = cv::Mat::zeros(disparity.rows, disparity.cols, CV_8UC3);
+		}
+
+		for (int y = 0; y < disparity.rows; y++)
+		{
+			for (int x = 0; x < disparity.cols; x++)
+			{
+				uchar val = disp8u.at<uchar>(y, x);
+				uchar r, g, b;
+
+				if (val == 0)
+					r = g = b = 0;
+				else
+				{
+					r = 255 - val;
+					g = val < 128 ? val * 2 : (uchar)((255 - val) * 2);
+					b = val;
+				}
+
+				disparityImage.at<cv::Vec3b>(y, x) = cv::Vec3b(r, g, b);
+			}
+		}
+	}
+	else
+	{
+		disp8u.copyTo(disparityImage);
+	}
+
+	return;
 }
 
 bool StereoMatch::LoadPtsPairs(std::vector<cv::Point2f>& ptsL, std::vector<cv::Point2f>& ptsR,

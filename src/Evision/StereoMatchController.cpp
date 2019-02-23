@@ -55,7 +55,7 @@ void StereoMatchController::MatchCommand()
 {
 	QFileDialog * fileDialog = new QFileDialog();
 	fileDialog->setWindowTitle(QStringLiteral("ÇëÑ¡Ôñ×óÉãÏñÍ·ÅÄÉãµÄÍ¼Æ¬"));
-	fileDialog->setNameFilter(QStringLiteral("Í¼Æ¬ÎÄ¼þ(*.jpg *.png *.jpeg)"));
+	fileDialog->setNameFilter(QStringLiteral("Í¼Æ¬ÎÄ¼þ(*.jpg *.png *.jpeg *.bmp)"));
 	fileDialog->setFileMode(QFileDialog::ExistingFile);
 	if (fileDialog->exec() == QDialog::Accepted)
 	{
