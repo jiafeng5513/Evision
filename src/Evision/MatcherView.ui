@@ -575,135 +575,6 @@
      </layout>
     </widget>
    </item>
-   <item row="1" column="0">
-    <widget class="QFrame" name="frame_2">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>141</width>
-       <height>16777215</height>
-      </size>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::Box</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_3">
-      <property name="leftMargin">
-       <number>2</number>
-      </property>
-      <property name="topMargin">
-       <number>2</number>
-      </property>
-      <property name="rightMargin">
-       <number>2</number>
-      </property>
-      <property name="bottomMargin">
-       <number>2</number>
-      </property>
-      <item>
-       <widget class="QGraphicsView" name="graphicsView_ImageL">
-        <property name="maximumSize">
-         <size>
-          <width>133</width>
-          <height>100</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="radioButton_ImageL">
-        <property name="text">
-         <string>左视图</string>
-        </property>
-        <property name="autoExclusive">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QGraphicsView" name="graphicsView_ImageR">
-        <property name="maximumSize">
-         <size>
-          <width>133</width>
-          <height>100</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="radioButton_ImageR">
-        <property name="text">
-         <string>右视图</string>
-        </property>
-        <property name="autoExclusive">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QGraphicsView" name="graphicsView_RawDisp">
-        <property name="maximumSize">
-         <size>
-          <width>133</width>
-          <height>100</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="radioButton_RawDisp">
-        <property name="text">
-         <string>原始视差图</string>
-        </property>
-        <property name="autoExclusive">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QGraphicsView" name="graphicsView_FixDisp">
-        <property name="maximumSize">
-         <size>
-          <width>133</width>
-          <height>100</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="radioButton_FixDisp">
-        <property name="text">
-         <string>修复视差图</string>
-        </property>
-        <property name="autoExclusive">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="verticalSpacer">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-     </layout>
-    </widget>
-   </item>
    <item row="1" column="1">
     <widget class="QGraphicsView" name="graphicsView_D">
      <property name="minimumSize">
@@ -714,7 +585,7 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="0" colspan="3">
+   <item row="0" column="1" colspan="2">
     <widget class="QFrame" name="frame">
      <property name="frameShape">
       <enum>QFrame::Box</enum>
@@ -823,7 +694,14 @@
       <item>
        <widget class="QCheckBox" name="checkBox_DoRectify">
         <property name="text">
-         <string>进行校正</string>
+         <string>使用相机参数</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="checkBox_useExpeModule">
+        <property name="text">
+         <string>使用实验性匹配模块</string>
         </property>
        </widget>
       </item>
@@ -883,6 +761,155 @@
      </layout>
     </widget>
    </item>
+   <item row="0" column="0" rowspan="2">
+    <widget class="QFrame" name="frame_2">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>141</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Box</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <property name="leftMargin">
+       <number>2</number>
+      </property>
+      <property name="topMargin">
+       <number>2</number>
+      </property>
+      <property name="rightMargin">
+       <number>2</number>
+      </property>
+      <property name="bottomMargin">
+       <number>2</number>
+      </property>
+      <item>
+       <widget class="QGraphicsView" name="graphicsView_ImageL">
+        <property name="maximumSize">
+         <size>
+          <width>133</width>
+          <height>100</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioButton_ImageL">
+        <property name="text">
+         <string>左视图</string>
+        </property>
+        <property name="autoExclusive">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGraphicsView" name="graphicsView_ImageR">
+        <property name="maximumSize">
+         <size>
+          <width>133</width>
+          <height>100</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioButton_ImageR">
+        <property name="text">
+         <string>右视图</string>
+        </property>
+        <property name="autoExclusive">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGraphicsView" name="graphicsView_RawDisp">
+        <property name="maximumSize">
+         <size>
+          <width>133</width>
+          <height>100</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioButton_RawDisp">
+        <property name="text">
+         <string>原始视差图</string>
+        </property>
+        <property name="autoExclusive">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGraphicsView" name="graphicsView_FixDisp">
+        <property name="maximumSize">
+         <size>
+          <width>133</width>
+          <height>100</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioButton_FixDisp">
+        <property name="text">
+         <string>修复视差图</string>
+        </property>
+        <property name="autoExclusive">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGraphicsView" name="graphicsView_PcolorDisp">
+        <property name="maximumSize">
+         <size>
+          <width>133</width>
+          <height>100</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioButton_PcolorDisp">
+        <property name="text">
+         <string>伪彩视差图</string>
+        </property>
+        <property name="autoExclusive">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
@@ -895,7 +922,7 @@
    <slot>setDefaultMatchParam()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>437</x>
+     <x>745</x>
      <y>42</y>
     </hint>
     <hint type="destinationlabel">
@@ -911,7 +938,7 @@
    <slot>doMatch()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>518</x>
+     <x>826</x>
      <y>42</y>
     </hint>
     <hint type="destinationlabel">
@@ -927,7 +954,7 @@
    <slot>RefreshStereoMatch()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>599</x>
+     <x>907</x>
      <y>42</y>
     </hint>
     <hint type="destinationlabel">
@@ -943,7 +970,7 @@
    <slot>onClicked_MODE_HH(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>258</x>
+     <x>405</x>
      <y>38</y>
     </hint>
     <hint type="destinationlabel">
@@ -959,7 +986,7 @@
    <slot>onClicked_MODE_3WAY(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>172</x>
+     <x>319</x>
      <y>38</y>
     </hint>
     <hint type="destinationlabel">
@@ -975,7 +1002,7 @@
    <slot>onClicked_MODE_SGBM(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>221</x>
+     <x>368</x>
      <y>38</y>
     </hint>
     <hint type="destinationlabel">
@@ -1200,7 +1227,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>46</x>
-     <y>163</y>
+     <y>101</y>
     </hint>
     <hint type="destinationlabel">
      <x>153</x>
@@ -1216,7 +1243,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>48</x>
-     <y>285</y>
+     <y>212</y>
     </hint>
     <hint type="destinationlabel">
      <x>153</x>
@@ -1232,7 +1259,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>52</x>
-     <y>405</y>
+     <y>320</y>
     </hint>
     <hint type="destinationlabel">
      <x>153</x>
@@ -1248,7 +1275,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>49</x>
-     <y>526</y>
+     <y>429</y>
     </hint>
     <hint type="destinationlabel">
      <x>152</x>
@@ -1263,7 +1290,7 @@
    <slot>onClicked_BM(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>49</x>
+     <x>196</x>
      <y>32</y>
     </hint>
     <hint type="destinationlabel">
@@ -1279,12 +1306,60 @@
    <slot>onClicked_SGBM(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>90</x>
+     <x>237</x>
      <y>32</y>
     </hint>
     <hint type="destinationlabel">
      <x>199</x>
      <y>4</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_DoRectify</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>onClicked_DoRectify(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>468</x>
+     <y>26</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>349</x>
+     <y>4</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_useExpeModule</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>onClicked_UseExpeModule(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>582</x>
+     <y>30</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>524</x>
+     <y>4</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_PcolorDisp</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>onClicked_IconPcolorDisp(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>54</x>
+     <y>541</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>153</x>
+     <y>536</y>
     </hint>
    </hints>
   </connection>
@@ -1313,5 +1388,8 @@
   <slot>onClicked_IconImgR(bool)</slot>
   <slot>onClicked_IconRawDisp(bool)</slot>
   <slot>onClicked_IconFixDisp(bool)</slot>
+  <slot>onClicked_DoRectify(bool)</slot>
+  <slot>onClicked_UseExpeModule(bool)</slot>
+  <slot>onClicked_IconPcolorDisp(bool)</slot>
  </slots>
 </ui>

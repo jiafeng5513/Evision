@@ -10,6 +10,7 @@ class StereoMatchParamEntity : public QObject
 public:
 	static StereoMatchParamEntity* getInstance();
 	~StereoMatchParamEntity();
+	enum IMGID { NONE,IMG_L, IMG_R, RAW_DISP, FIX_DISP, PCOLOR_DISP };
 private:
 	StereoMatchParamEntity(QObject *parent = 0);
 private:
@@ -31,9 +32,12 @@ private:
 	bool MODE_SGBM = false;
 	bool MODE_3WAY = false;
 
-	cv::Mat imgDtoShow;//在中心显示的大图
-	cv::Mat iconImgL, iconImgR, iconRawDisp, iconFixDisp, iconPointDisp, iconPointImgL;//缩略图
+	bool DoRectify = false;
+	bool UseExpeModule = false;
 
+	cv::Mat imgDtoShow;//在中心显示的大图
+	cv::Mat iconImgL, iconImgR, iconRawDisp, iconFixDisp,iconPcolorDisp;//缩略图
+	IMGID ImageToShow = NONE;//默认情况下,中心大图什么也不显示
 
 	cv::Mat disparity;
 	cv::Mat xyz;
@@ -57,11 +61,15 @@ signals:
 	void paramChanged_MODE_SGBM();
 	void paramChanged_MODE_3WAY();
 	void paramChanged_ImageDtoShow();
-
+	void paramChanged_UseExpeModule();
+	void paramChanged_DoRectify();
 	void paramChanged_IconImgL();
 	void paramChanged_IconImgR();
 	void paramChanged_IconRawDisp();
 	void paramChanged_IconFixDisp();
+	void paramChanged_IconPcolorDisp();
+	void paramChanged_ImageToShow();
+
 
 #pragma endregion
 
@@ -109,6 +117,12 @@ public:
 	bool getMODE_3WAY();
 	void setMODE_3WAY(bool value);
 
+	bool getDoRectify();
+	void setDoRectify(bool value);
+
+	bool getUseExpeModule();
+	void setUseExpeModule(bool value);
+
 	cv::Mat getImageDtoShow();
 	void setImageDtoShow(cv::Mat value);
 
@@ -132,5 +146,11 @@ public:
 
 	cv::Mat getIconFixDisp();
 	void setIconFixDisp(cv::Mat value);
+
+	cv::Mat getIconPcolorDisp();
+	void setIconPcolorDisp(cv::Mat value);
+
+	IMGID getImageToShow();
+	void setImageToShow(IMGID value);
 #pragma endregion
 };

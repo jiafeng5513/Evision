@@ -455,7 +455,7 @@ void StereoCalibrate::run()
 		cv::CALIB_USE_INTRINSIC_GUESS +
 		cv::CALIB_SAME_FOCAL_LENGTH +
 		cv::CALIB_RATIONAL_MODEL +
-		cv::CALIB_FIX_K3 + cv::CALIB_FIX_K4 + cv::CALIB_FIX_K5,
+		cv::CALIB_FIX_K3 + cv::CALIB_FIX_K4 + cv::CALIB_FIX_K5 + cv::CALIB_FIX_K6+ cv::CALIB_FIX_S1_S2_S3_S4+cv::CALIB_FIX_TAUX_TAUY,
 		cv::TermCriteria(cv::TermCriteria::COUNT + cv::TermCriteria::EPS, 100, 1e-5));
 ;
 	std::cout << "RMS error = " << rms << std::endl;

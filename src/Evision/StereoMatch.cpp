@@ -36,7 +36,7 @@ StereoMatch::~StereoMatch()
 /*
  * 初始化
  */
-bool StereoMatch::init()
+bool StereoMatch::init(bool needCameraParamFile)
 {
 	std::cout<<"初始化..." <<std::endl;
 	try
@@ -58,48 +58,44 @@ bool StereoMatch::init()
 			img1 = cv::imread(img1_filename);
 			img2 = cv::imread(img2_filename);
 		}
+		img1.convertTo(img1, CV_8UC1);
+		img2.convertTo(img2, CV_8UC1);
 		qDebug() << "channels="<<img1.channels()<<"   depth=" << img1.depth();
-		cv::imshow("img1", img1);
-		cv::imshow("img2", img2);
-		//int color_mode = (m_entity->getBM()==true ? cv::IMREAD_GRAYSCALE : -1);
-		//img1 = cv::imread(img1_filename,0);
-		//img2 = cv::imread(img2_filename,0);
 		if (img1.empty() || img2.empty())
 		{
 			emit openMessageBox(QStringLiteral("错误"), QStringLiteral("输入图像为空!"));
 			return false;
 		}
-		//cv::Mat img1proc, img2proc;
-		//cv::cvtColor(img1, img1proc, CV_BGR2GRAY);
-		//cv::cvtColor(img2, img2proc, CV_BGR2GRAY);
-		//img1 = img1proc;
-		//img2 = img2proc;
 		img_size = img1.size();
-		//2.打开参数文件,读取参数
-		
-		std::cout << "加载参数..." << std::endl;
-
-		bool flag = EvisionUtils::read_ParamsForStereoMatch(cameraParams_filename,
-			&cameraMatrix1, &distCoeffs1, &cameraMatrix2, &distCoeffs2, &R1, &P1, &R2, &P2, &Q,&roi1,&roi2);
-		if (flag == false)
+		if (needCameraParamFile==true)//需要使用参数文件
 		{
-			return false;
+			//2.打开参数文件,读取参数
+
+			std::cout << "加载参数..." << std::endl;
+
+			bool flag = EvisionUtils::read_ParamsForStereoMatch(cameraParams_filename,
+				&cameraMatrix1, &distCoeffs1, &cameraMatrix2, &distCoeffs2, &R1, &P1, &R2, &P2, &Q, &roi1, &roi2);
+			if (flag == false)
+			{
+				return false;
+			}
+			//3.矫正左右视图
+
+			std::cout << "矫正图片..." << std::endl;
+
+			//先分别计算出x方向和y方向的两个镜头的校正矩阵
+			cv::Mat mapx1, mapy1, mapx2, mapy2;
+			initUndistortRectifyMap(cameraMatrix1, distCoeffs1, R1, P1, img_size, CV_16SC2, mapx1, mapy1);
+			initUndistortRectifyMap(cameraMatrix2, distCoeffs2, R2, P2, img_size, CV_16SC2, mapx2, mapy2);
+			//进行校正计算
+			cv::Mat img1r, img2r;
+			remap(img1, img1r, mapx1, mapy1, cv::INTER_LINEAR);
+			remap(img2, img2r, mapx2, mapy2, cv::INTER_LINEAR);
+
+			img1 = img1r;
+			img2 = img2r;
 		}
-		//3.矫正左右视图
 		
-		std::cout << "矫正图片..." << std::endl;
-
-		//先分别计算出x方向和y方向的两个镜头的校正矩阵
-		cv::Mat mapx1, mapy1, mapx2, mapy2;
-		initUndistortRectifyMap(cameraMatrix1, distCoeffs1, R1, P1, img_size, CV_16SC2, mapx1, mapy1);
-		initUndistortRectifyMap(cameraMatrix2, distCoeffs2, R2, P2, img_size, CV_16SC2, mapx2, mapy2);
-		//进行校正计算
-		cv::Mat img1r, img2r;
-		remap(img1, img1r, mapx1, mapy1, cv::INTER_LINEAR);
-		remap(img2, img2r, mapx2, mapy2, cv::INTER_LINEAR);
-
-		//img1 = img1r;
-		//img2 = img2r;
 	}
 	catch (...)
 	{
@@ -116,15 +112,104 @@ bool StereoMatch::init()
  */
 void StereoMatch::run()
 {
-	//run_new();
-	std::cout << "开始计算..." << std::endl;
+	if (m_entity->getUseExpeModule()==true)
+	{
+		NewMatchFunc();
+	}
+	else
+	{
+		MatchFunc();
+	}
+}
+//实验性匹配方法
+void StereoMatch::NewMatchFunc()
+{
+	/************************************************************************/
+	/* load and resize images                                               */
+	/************************************************************************/
 
+	char* buffer;
+
+	// Get the current working directory:   
+	if ((buffer = _getcwd(NULL, 0)) == NULL)
+		perror("_getcwd error");
+	else
+	{
+		printf("%s \nLength: %d\n", buffer, strnlen(buffer, 1024));
+		free(buffer);
+	}
+
+
+	std::string str = "view1s.jpg";
+
+
+	cv::Mat imgL = cv::imread(img1_filename);
+	cv::Mat imgR = cv::imread(img2_filename);
+
+
+	if (!(imgL.data) || !(imgR.data))
+	{
+		std::cerr << "can't load image!" << std::endl;
+		return;
+	}
+	m_entity->setIconImgL(imgL);
+	m_entity->setIconImgR(imgR);
+
+	float stdWidth = 800, resizeScale = 1;//stdWidth can change
+	if (imgL.cols > stdWidth * 1.2)
+	{
+		resizeScale = stdWidth / imgL.cols;
+		cv::Mat imgL1, imgR1;
+		cv::resize(imgL, imgL1, cv::Size(), resizeScale, resizeScale);
+		cv::resize(imgR, imgR1, cv::Size(), resizeScale, resizeScale);
+		imgL = imgL1.clone();
+		imgR = imgR1.clone();
+	}
+
+	/************************************************************************/
+	/* decide which points in the left image should be chosen               */
+	/* and calculate their corresponding points in the right image          */
+	/************************************************************************/
+	std::cout << "calculating feature points..." << std::endl;
+	std::vector<cv::Point2f> ptsL, ptsR;
+	std::vector<int> ptNum;
+	if (g_algo == FEATURE_PT)
+	{
+		//if ( ! LoadPtsPairs(ptsL, ptsR, groupname+".pairs"))	{
+		GetPair(imgL, imgR, ptsL, ptsR);
+		//SavePtsPairs(ptsL, ptsR, groupname+".pairs");	}
+	}
+	else if (g_algo == DENSE)
+		GetPairBM(imgL, imgR, ptsL, ptsR);
+
+	/************************************************************************/
+	/* calculate 3D coordinates                                             */
+	/************************************************************************/
+	std::vector<cv::Point3f> pts3D;
+	float focalLenInPixel = 3740 * resizeScale,
+		baselineInMM = 160;
+	cv::Point3f center3D;
+	cv::Vec3f size3D;
+	float scale = .2; // scale the z coordinate so that it won't be too large spreaded
+	//float imgHinMM = 400, // approximate real height of the scene in picture, useless
+	//float MMperPixel = imgHinMM / imgL.rows;
+	//float focalLenInMM = focalLenInPixel * MMperPixel;
+	focalLenInPixel *= scale;
+
+	std::cout << "calculating 3D coordinates..." << std::endl;
+	StereoTo3D(ptsL, ptsR, pts3D, focalLenInPixel, baselineInMM, imgL, center3D, size3D);
+
+}
+//稳定版匹配方法
+void StereoMatch::MatchFunc()
+{
+	std::cout << "开始计算..." << std::endl;
+	m_entity->setIconImgL(img1);
+	m_entity->setIconImgR(img2);
 	cv::Ptr<cv::StereoBM> bm = cv::StereoBM::create(16, 9);
 	cv::Ptr<cv::StereoSGBM> sgbm = cv::StereoSGBM::create(0, 16, 3);
 
-
 	//numberOfDisparities = numberOfDisparities > 0 ? numberOfDisparities : ((img_size.width / 8) + 15) & -16;
-
 	bm->setROI1(roi1);
 	bm->setROI2(roi2);
 	bm->setPreFilterCap(m_entity->getPrefilcap());
@@ -173,14 +258,16 @@ void StereoMatch::run()
 	cv::imshow("dispWithBorder", dispWithBorder);
 	// 截取与原始画面对应的视差区域（舍去加宽的部分）
 	disp = dispWithBorder.colRange(m_entity->getNumDisparities(), img1p.cols);
-	cv::imshow("disp", disp);
+	//cv::imshow("disp", disp);
+	m_entity->setIconRawDisp(dispWithBorder);
 	cv::Mat m_Calib_Mat_Mask_Roi = cv::Mat::zeros(img_size.height, img_size.width, CV_8UC1);
 	cv::rectangle(m_Calib_Mat_Mask_Roi, roi1, cv::Scalar(255), -1);
 	disp.copyTo(disparity, m_Calib_Mat_Mask_Roi);
 	cv::Mat colordisp;
 	getColorDisparityImage(disparity, colordisp, true);
-	cv::imshow("origin disp", disparity);
-	cv::imshow("color disp", colordisp);
+	//cv::imshow("origin disp", disparity);
+	//cv::imshow("color disp", colordisp);
+	m_entity->setIconPcolorDisp(colordisp);
 	t = cv::getTickCount() - t;
 
 	std::cout << "Time elapsed: "<< t * 1000 / cv::getTickFrequency() <<"ms\n,StereoMatch计算完毕,正在输出..." << std::endl;
@@ -199,149 +286,47 @@ void StereoMatch::run()
 		imwrite(disparity_filename, disparity);
 		std::cout << "视差图已经保存到:" << disparity_filename << std::endl;
 	}
-		
-	std::cout << "正在输出点云文件..." << std::endl;
-
-	cv::Mat xyz;
-	reprojectImageTo3D(disparity, xyz, Q, true);
-	//disp.convertTo(disp, CV_32F, 1.0 / 16.0);
-	//Q.convertTo(Q, CV_32F);
-	//customReproject(disp, Q, xyz);
-
-
-	if (EvisionUtils::write_PointCloud(point_cloud_filename,xyz))
+	if (m_entity->getDoRectify()==true)//给出相机参数
 	{
-		m_entity->setXYZ(xyz);
-		std::cout << "点云文件已经保存到:"<< point_cloud_filename << std::endl;
+		std::cout << "正在输出点云文件..." << std::endl;
+
+		cv::Mat xyz;
+		reprojectImageTo3D(disparity, xyz, Q, true);
+		//disp.convertTo(disp, CV_32F, 1.0 / 16.0);
+		//Q.convertTo(Q, CV_32F);
+		//customReproject(disp, Q, xyz);
+
+
+		if (EvisionUtils::write_PointCloud(point_cloud_filename, xyz))
+		{
+			m_entity->setXYZ(xyz);
+			std::cout << "点云文件已经保存到:" << point_cloud_filename << std::endl;
+		}
+		else
+		{
+			std::cout << "点云保存失败..." << std::endl;
+		}
+		//保存PCL点云文件,PCL点云使用左视图和视差图构建
+		/*相机参数取自左摄像头
+		 * 视差图:disp
+		 * 左视图:img1
+		 * u0,v0 焦距
+		   fx,fy 主点
+		   Tx 基线长度
+		   doffs cx1-cx2,主点的横坐标差
+		前四个来自相机矩阵,极限长度来自...Tx来自...
+		 */
+
+		std::cout << "计算完毕" << std::endl;
+		saveXYZ("F:\\xyz.txt", xyz);
+		std::cout << "F:\\xyz.txt保存完毕" << std::endl;
 	}
 	else
 	{
-		std::cout << "点云保存失败..." << std::endl;
+		std::cout << "不使用相机参数则无法计算坐标!" << std::endl;
 	}
-	//保存PCL点云文件,PCL点云使用左视图和视差图构建
-	/*相机参数取自左摄像头
-	 * 视差图:disp
-	 * 左视图:img1
-	 * u0,v0 焦距
-	   fx,fy 主点
-	   Tx 基线长度
-	   doffs cx1-cx2,主点的横坐标差
-	前四个来自相机矩阵,极限长度来自...Tx来自...
-	 */
 	
-	std::cout << "计算完毕" << std::endl;
-	saveXYZ("F:\\xyz.txt", xyz);
-	std::cout << "F:\\xyz.txt保存完毕" << std::endl;
 	return ;
-}
-
-/*
- * 新的现成方法
- */
-void StereoMatch::run_new()
-{
-	/************************************************************************/
-	/* load and resize images                                               */
-	/************************************************************************/
-
-	char* buffer;
-
-	// Get the current working directory:   
-	if ((buffer = _getcwd(NULL, 0)) == NULL)
-		perror("_getcwd error");
-	else
-	{
-		printf("%s \nLength: %d\n", buffer, strnlen(buffer, 1024));
-		free(buffer);
-	}
-
-	//cout<<folder + groupname + filenameL<<endl;
-
-	std::string str = "view1s.jpg";
-
-	//FILE* fp;
-
-	//fp = fopen(str.c_str(), "rb");//这块调试，似乎没东西。。。
-	//if (!fp)
-	//{
-	//	return NULL;
-	//}
-
-	//Mat imgL = imread("D:\\Libraries\\OpenCV\\3.4.5\\source\\samples\\data\\aloeL.jpg"); 
-	//Mat	imgR = imread("D:\\Libraries\\OpenCV\\3.4.5\\source\\samples\\data\\aloeR.jpg");
-
-	cv::Mat imgL = cv::imread("F:\\im0.png");
-	cv::Mat	imgR = cv::imread("F:\\im1.png");
-	//imshow("l", imgL);
-
-
-	//waitKey(0);
-
-	if (!(imgL.data) || !(imgR.data))
-	{
-		std::cerr << "can't load image!" << std::endl;
-		exit(1);
-	}
-	m_entity->setIconImgL(imgL);
-	m_entity->setIconImgR(imgR);
-	/************************************************************************/
-	/*                                                                      */
-	/************************************************************************/
-	float stdWidth = 800, resizeScale = 1;//stdWidth can change
-	if (imgL.cols > stdWidth * 1.2)
-	{
-		resizeScale = stdWidth / imgL.cols;
-		cv::Mat imgL1, imgR1;
-		cv::resize(imgL, imgL1, cv::Size(), resizeScale, resizeScale);
-		cv::resize(imgR, imgR1, cv::Size(), resizeScale, resizeScale);
-		imgL = imgL1.clone();
-		imgR = imgR1.clone();
-	}
-
-	/************************************************************************/
-	/* decide which points in the left image should be chosen               */
-	/* and calculate their corresponding points in the right image          */
-	/************************************************************************/
-	std::cout << "calculating feature points..." << std::endl;
-	std::vector<cv::Point2f> ptsL, ptsR;
-	std::vector<int> ptNum;
-	if (g_algo == FEATURE_PT)
-	{
-		//if ( ! LoadPtsPairs(ptsL, ptsR, groupname+".pairs"))	{
-		GetPair(imgL, imgR, ptsL, ptsR);
-		//SavePtsPairs(ptsL, ptsR, groupname+".pairs");	}
-	}
-	else if (g_algo == DENSE)
-		GetPairBM(imgL, imgR, ptsL, ptsR);
-
-	/************************************************************************/
-	/* calculate 3D coordinates                                             */
-	/************************************************************************/
-	std::vector<cv::Point3f> pts3D;
-	float focalLenInPixel = 3740 * resizeScale,
-		baselineInMM = 160;
-	cv::Point3f center3D;
-	cv::Vec3f size3D;
-	float scale = .2; // scale the z coordinate so that it won't be too large spreaded
-	//float imgHinMM = 400, // approximate real height of the scene in picture, useless
-	//float MMperPixel = imgHinMM / imgL.rows;
-	//float focalLenInMM = focalLenInPixel * MMperPixel;
-	focalLenInPixel *= scale;
-
-	std::cout << "calculating 3D coordinates..." << std::endl;
-	StereoTo3D(ptsL, ptsR, pts3D,
-		focalLenInPixel, baselineInMM,
-		imgL, center3D, size3D);
-
-	/************************************************************************/
-	/* Delaunay triangulation                                               */
-	/************************************************************************/
-	std::cout << "doing triangulation..." << std::endl;
-	int pairNum = ptsL.size();
-	std::vector<cv::Vec3i> tri;
-
-
-	return;
 }
 
 void StereoMatch::saveXYZ(const std::string& fileName, const cv::Mat& image3D)

@@ -25,6 +25,12 @@ MatcherView::MatcherView(QWidget *parent)
 	connect(m_entity, SIGNAL(paramChanged_IconImgR()), this, SLOT(onParamChanged_IconImgR()));
 	connect(m_entity, SIGNAL(paramChanged_IconRawDisp()), this, SLOT(onParamChanged_IconRawDisp()));
 	connect(m_entity, SIGNAL(paramChanged_IconFixDisp()), this, SLOT(onParamChanged_IconFixDisp()));
+	connect(m_entity, SIGNAL(paramChanged_IconPcolorDisp()), this, SLOT(onParamChanged_IconPcolorDisp()));
+	connect(m_entity, SIGNAL(paramChanged_ImageToShow()), this, SLOT(onParamChanged_ImageToShow()));
+	connect(m_entity, SIGNAL(paramChanged_UseExpeModule()), this, SLOT(onParamChanged_UseExpeModule()));
+	connect(m_entity, SIGNAL(paramChanged_DoRectify()), this, SLOT(onParamChanged_DoRectify()));
+
+	m_entity->setImageToShow(StereoMatchParamEntity::RAW_DISP);
 }
 
 MatcherView::~MatcherView()
@@ -240,6 +246,33 @@ void MatcherView::onClicked_MODE_HH(bool value)
 		m_entity->setMODE_HH(value);
 	}
 }
+//复选框:进行校正
+void MatcherView::onClicked_DoRectify(bool value)
+{
+	if(m_entity->getDoRectify()!= value)
+	{
+		m_entity->setDoRectify(value);
+	}
+}
+//
+void MatcherView::onParamChanged_DoRectify()
+{
+	ui.checkBox_DoRectify->setChecked(m_entity->getDoRectify());
+}
+
+//复选框:使用实验性匹配模块
+void MatcherView::onClicked_UseExpeModule(bool value)
+{
+	if(m_entity->getUseExpeModule()!=value)
+	{
+		m_entity->setUseExpeModule(value);
+	}
+}
+
+void MatcherView::onParamChanged_UseExpeModule()
+{
+	ui.checkBox_useExpeModule->setChecked(m_entity->getUseExpeModule());
+}
 
 void MatcherView::onParamChanged_MODE_HH()
 {
@@ -303,6 +336,10 @@ void MatcherView::onParamChanged_IconImgL()
 	ui.graphicsView_ImageL->centerOn(0, 0);
 	ui.graphicsView_ImageL->show();
 	ui.graphicsView_ImageL->update();
+	if (m_entity->getImageToShow() == StereoMatchParamEntity::IMG_L)
+	{
+		m_entity->setImageDtoShow(m_entity->getIconImgL());
+	}
 }
 
 void MatcherView::onParamChanged_IconImgR()
@@ -318,6 +355,10 @@ void MatcherView::onParamChanged_IconImgR()
 	ui.graphicsView_ImageR->centerOn(0, 0);
 	ui.graphicsView_ImageR->show();
 	ui.graphicsView_ImageR->update();
+	if (m_entity->getImageToShow() == StereoMatchParamEntity::IMG_R)
+	{
+		m_entity->setImageDtoShow(m_entity->getIconImgR());
+	}
 }
 
 void MatcherView::onParamChanged_IconRawDisp()
@@ -333,6 +374,10 @@ void MatcherView::onParamChanged_IconRawDisp()
 	ui.graphicsView_RawDisp->centerOn(0, 0);
 	ui.graphicsView_RawDisp->show();
 	ui.graphicsView_RawDisp->update();
+	if (m_entity->getImageToShow() == StereoMatchParamEntity::RAW_DISP)
+	{
+		m_entity->setImageDtoShow(m_entity->getIconRawDisp());
+	}
 }
 
 void MatcherView::onParamChanged_IconFixDisp()
@@ -348,57 +393,102 @@ void MatcherView::onParamChanged_IconFixDisp()
 	ui.graphicsView_FixDisp->centerOn(0, 0);
 	ui.graphicsView_FixDisp->show();
 	ui.graphicsView_FixDisp->update();
+	if (m_entity->getImageToShow() == StereoMatchParamEntity::FIX_DISP)
+	{
+		m_entity->setImageDtoShow(m_entity->getIconFixDisp());
+	}
+}
+
+void MatcherView::onParamChanged_IconPcolorDisp()
+{
+	QImage DQImage = EvisionUtils::cvMat2QImage(m_entity->getIconPcolorDisp());
+	QGraphicsScene *sceneD = new QGraphicsScene;
+	sceneD->addPixmap(QPixmap::fromImage(DQImage));
+	ui.graphicsView_PcolorDisp->setScene(sceneD);
+	QRectF bounds = sceneD->itemsBoundingRect();
+	bounds.setWidth(bounds.width());         // to tighten-up margins
+	bounds.setHeight(bounds.height());       // same as above
+	ui.graphicsView_PcolorDisp->fitInView(bounds, Qt::KeepAspectRatio);
+	ui.graphicsView_PcolorDisp->centerOn(0, 0);
+	ui.graphicsView_PcolorDisp->show();
+	ui.graphicsView_PcolorDisp->update();
+	if (m_entity->getImageToShow() == StereoMatchParamEntity::PCOLOR_DISP)
+	{
+		m_entity->setImageDtoShow(m_entity->getIconPcolorDisp());
+	}
+}
+//要在中间放大显示的图片发生变更
+void MatcherView::onParamChanged_ImageToShow()
+{
+	//根据枚举值调整单选框的状态
+	ui.radioButton_ImageL->setChecked(false);
+	ui.radioButton_ImageR->setChecked(false);
+	ui.radioButton_FixDisp->setChecked(false);
+	ui.radioButton_RawDisp->setChecked(false);
+	ui.radioButton_PcolorDisp->setChecked(false);
+	switch (m_entity->getImageToShow())
+	{
+	case StereoMatchParamEntity::IMG_L:
+		ui.radioButton_ImageL->setChecked(true);
+		m_entity->setImageDtoShow(m_entity->getIconImgL());
+		break;
+	case StereoMatchParamEntity::IMG_R:
+		ui.radioButton_ImageR->setChecked(true);
+		m_entity->setImageDtoShow(m_entity->getIconImgR());
+		break;
+	case StereoMatchParamEntity::RAW_DISP:
+		ui.radioButton_RawDisp->setChecked(true);
+		m_entity->setImageDtoShow(m_entity->getIconRawDisp());
+		break;
+	case StereoMatchParamEntity::FIX_DISP:
+		ui.radioButton_FixDisp->setChecked(true);
+		m_entity->setImageDtoShow(m_entity->getIconFixDisp());
+		break;
+	case StereoMatchParamEntity::PCOLOR_DISP:
+		ui.radioButton_PcolorDisp->setChecked(true);
+		m_entity->setImageDtoShow(m_entity->getIconPcolorDisp());
+		break;
+	default:
+		break;
+	}
 }
 
 void MatcherView::onClicked_IconImgL(bool value)
 {
-	//qDebug() << "IconImgL clicked--" << value;
-	if(value==true)
+	if(m_entity->getImageToShow()!=StereoMatchParamEntity::IMG_L)
 	{
-		/*
-		 * 首先排斥其他三个缩略图
-		 * 然后在中心大图上显示本图
-		 */
-		ui.radioButton_ImageR->setChecked(false);
-		ui.radioButton_FixDisp->setChecked(false);
-		ui.radioButton_RawDisp->setChecked(false);
-
-		m_entity->setImageDtoShow(m_entity->getIconImgL());
+		m_entity->setImageToShow(StereoMatchParamEntity::IMG_L);
 	}
 }
 
 void MatcherView::onClicked_IconImgR(bool value)
 {
-	if(value==true)
+	if (m_entity->getImageToShow() != StereoMatchParamEntity::IMG_R)
 	{
-		ui.radioButton_ImageL->setChecked(false);
-		ui.radioButton_FixDisp->setChecked(false);
-		ui.radioButton_RawDisp->setChecked(false);
-
-		m_entity->setImageDtoShow(m_entity->getIconImgR());
+		m_entity->setImageToShow(StereoMatchParamEntity::IMG_R);
 	}
 }
 
 void MatcherView::onClicked_IconRawDisp(bool value)
 {
-	if (value == true)
+	if (m_entity->getImageToShow() != StereoMatchParamEntity::RAW_DISP)
 	{
-		ui.radioButton_ImageR->setChecked(false);
-		ui.radioButton_ImageL->setChecked(false);
-		ui.radioButton_FixDisp->setChecked(false);
-
-		m_entity->setImageDtoShow(m_entity->getIconRawDisp());
+		m_entity->setImageToShow(StereoMatchParamEntity::RAW_DISP);
 	}
 }
 
 void MatcherView::onClicked_IconFixDisp(bool value)
 {
-	if (value == true)
+	if (m_entity->getImageToShow() != StereoMatchParamEntity::FIX_DISP)
 	{
-		ui.radioButton_ImageR->setChecked(false);
-		ui.radioButton_ImageL->setChecked(false);
-		ui.radioButton_RawDisp->setChecked(false);
+		m_entity->setImageToShow(StereoMatchParamEntity::FIX_DISP);
+	}
+}
 
-		m_entity->setImageDtoShow(m_entity->getIconFixDisp());
+void MatcherView::onClicked_IconPcolorDisp(bool value)
+{
+	if (m_entity->getImageToShow() != StereoMatchParamEntity::PCOLOR_DISP)
+	{
+		m_entity->setImageToShow(StereoMatchParamEntity::PCOLOR_DISP);
 	}
 }

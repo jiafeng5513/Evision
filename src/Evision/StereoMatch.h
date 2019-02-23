@@ -46,9 +46,10 @@ class StereoMatch :public QThread
 public:
 	StereoMatch(std::string img1_filename, std::string img2_filename, std::string cameraParams_filename);
 	~StereoMatch();
-	bool init();
+	bool init(bool needCameraParamFile=true);
 	void run() override;
-	void run_new();
+	void NewMatchFunc();
+	void MatchFunc();
 	enum { STEREO_BM = 0, STEREO_SGBM = 1, STEREO_HH = 2, STEREO_VAR = 3, STEREO_3WAY = 4 };
 	void saveXYZ(const std::string& fileName, const cv::Mat& image3D);
 	void customReproject(const cv::Mat& disparity, const cv::Mat& Q, cv::Mat& out3D);

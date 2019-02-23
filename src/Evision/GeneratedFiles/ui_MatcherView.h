@@ -69,17 +69,6 @@ public:
     QHBoxLayout *horizontalLayout_11;
     QLineEdit *lineEdit_textThread;
     QSlider *horizontalSlider_textThread;
-    QFrame *frame_2;
-    QVBoxLayout *verticalLayout_3;
-    QGraphicsView *graphicsView_ImageL;
-    QRadioButton *radioButton_ImageL;
-    QGraphicsView *graphicsView_ImageR;
-    QRadioButton *radioButton_ImageR;
-    QGraphicsView *graphicsView_RawDisp;
-    QRadioButton *radioButton_RawDisp;
-    QGraphicsView *graphicsView_FixDisp;
-    QRadioButton *radioButton_FixDisp;
-    QSpacerItem *verticalSpacer;
     QGraphicsView *graphicsView_D;
     QFrame *frame;
     QHBoxLayout *horizontalLayout_12;
@@ -95,11 +84,25 @@ public:
     QRadioButton *radioButton_MODE_HH;
     QFrame *line_2;
     QCheckBox *checkBox_DoRectify;
+    QCheckBox *checkBox_useExpeModule;
     QFrame *line_3;
     QPushButton *pushButton_MatchDefault;
     QPushButton *pushButton_MatchChooseFiles;
     QPushButton *pushButton_RefreshStereoMatch;
     QSpacerItem *horizontalSpacer;
+    QFrame *frame_2;
+    QVBoxLayout *verticalLayout_3;
+    QGraphicsView *graphicsView_ImageL;
+    QRadioButton *radioButton_ImageL;
+    QGraphicsView *graphicsView_ImageR;
+    QRadioButton *radioButton_ImageR;
+    QGraphicsView *graphicsView_RawDisp;
+    QRadioButton *radioButton_RawDisp;
+    QGraphicsView *graphicsView_FixDisp;
+    QRadioButton *radioButton_FixDisp;
+    QGraphicsView *graphicsView_PcolorDisp;
+    QRadioButton *radioButton_PcolorDisp;
+    QSpacerItem *verticalSpacer;
 
     void setupUi(QWidget *MatcherView)
     {
@@ -371,72 +374,6 @@ public:
 
         gridLayout->addWidget(frame_3, 1, 2, 1, 1);
 
-        frame_2 = new QFrame(MatcherView);
-        frame_2->setObjectName(QString::fromUtf8("frame_2"));
-        frame_2->setMinimumSize(QSize(0, 0));
-        frame_2->setMaximumSize(QSize(141, 16777215));
-        frame_2->setFrameShape(QFrame::Box);
-        frame_2->setFrameShadow(QFrame::Raised);
-        verticalLayout_3 = new QVBoxLayout(frame_2);
-        verticalLayout_3->setSpacing(6);
-        verticalLayout_3->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
-        verticalLayout_3->setContentsMargins(2, 2, 2, 2);
-        graphicsView_ImageL = new QGraphicsView(frame_2);
-        graphicsView_ImageL->setObjectName(QString::fromUtf8("graphicsView_ImageL"));
-        graphicsView_ImageL->setMaximumSize(QSize(133, 100));
-
-        verticalLayout_3->addWidget(graphicsView_ImageL);
-
-        radioButton_ImageL = new QRadioButton(frame_2);
-        radioButton_ImageL->setObjectName(QString::fromUtf8("radioButton_ImageL"));
-        radioButton_ImageL->setAutoExclusive(false);
-
-        verticalLayout_3->addWidget(radioButton_ImageL);
-
-        graphicsView_ImageR = new QGraphicsView(frame_2);
-        graphicsView_ImageR->setObjectName(QString::fromUtf8("graphicsView_ImageR"));
-        graphicsView_ImageR->setMaximumSize(QSize(133, 100));
-
-        verticalLayout_3->addWidget(graphicsView_ImageR);
-
-        radioButton_ImageR = new QRadioButton(frame_2);
-        radioButton_ImageR->setObjectName(QString::fromUtf8("radioButton_ImageR"));
-        radioButton_ImageR->setAutoExclusive(false);
-
-        verticalLayout_3->addWidget(radioButton_ImageR);
-
-        graphicsView_RawDisp = new QGraphicsView(frame_2);
-        graphicsView_RawDisp->setObjectName(QString::fromUtf8("graphicsView_RawDisp"));
-        graphicsView_RawDisp->setMaximumSize(QSize(133, 100));
-
-        verticalLayout_3->addWidget(graphicsView_RawDisp);
-
-        radioButton_RawDisp = new QRadioButton(frame_2);
-        radioButton_RawDisp->setObjectName(QString::fromUtf8("radioButton_RawDisp"));
-        radioButton_RawDisp->setAutoExclusive(false);
-
-        verticalLayout_3->addWidget(radioButton_RawDisp);
-
-        graphicsView_FixDisp = new QGraphicsView(frame_2);
-        graphicsView_FixDisp->setObjectName(QString::fromUtf8("graphicsView_FixDisp"));
-        graphicsView_FixDisp->setMaximumSize(QSize(133, 100));
-
-        verticalLayout_3->addWidget(graphicsView_FixDisp);
-
-        radioButton_FixDisp = new QRadioButton(frame_2);
-        radioButton_FixDisp->setObjectName(QString::fromUtf8("radioButton_FixDisp"));
-        radioButton_FixDisp->setAutoExclusive(false);
-
-        verticalLayout_3->addWidget(radioButton_FixDisp);
-
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        verticalLayout_3->addItem(verticalSpacer);
-
-
-        gridLayout->addWidget(frame_2, 1, 0, 1, 1);
-
         graphicsView_D = new QGraphicsView(MatcherView);
         graphicsView_D->setObjectName(QString::fromUtf8("graphicsView_D"));
         graphicsView_D->setMinimumSize(QSize(0, 0));
@@ -517,6 +454,11 @@ public:
 
         horizontalLayout_12->addWidget(checkBox_DoRectify);
 
+        checkBox_useExpeModule = new QCheckBox(frame);
+        checkBox_useExpeModule->setObjectName(QString::fromUtf8("checkBox_useExpeModule"));
+
+        horizontalLayout_12->addWidget(checkBox_useExpeModule);
+
         line_3 = new QFrame(frame);
         line_3->setObjectName(QString::fromUtf8("line_3"));
         line_3->setFrameShape(QFrame::VLine);
@@ -546,7 +488,85 @@ public:
         horizontalLayout_12->addItem(horizontalSpacer);
 
 
-        gridLayout->addWidget(frame, 0, 0, 1, 3);
+        gridLayout->addWidget(frame, 0, 1, 1, 2);
+
+        frame_2 = new QFrame(MatcherView);
+        frame_2->setObjectName(QString::fromUtf8("frame_2"));
+        frame_2->setMinimumSize(QSize(0, 0));
+        frame_2->setMaximumSize(QSize(141, 16777215));
+        frame_2->setFrameShape(QFrame::Box);
+        frame_2->setFrameShadow(QFrame::Raised);
+        verticalLayout_3 = new QVBoxLayout(frame_2);
+        verticalLayout_3->setSpacing(6);
+        verticalLayout_3->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
+        verticalLayout_3->setContentsMargins(2, 2, 2, 2);
+        graphicsView_ImageL = new QGraphicsView(frame_2);
+        graphicsView_ImageL->setObjectName(QString::fromUtf8("graphicsView_ImageL"));
+        graphicsView_ImageL->setMaximumSize(QSize(133, 100));
+
+        verticalLayout_3->addWidget(graphicsView_ImageL);
+
+        radioButton_ImageL = new QRadioButton(frame_2);
+        radioButton_ImageL->setObjectName(QString::fromUtf8("radioButton_ImageL"));
+        radioButton_ImageL->setAutoExclusive(true);
+
+        verticalLayout_3->addWidget(radioButton_ImageL);
+
+        graphicsView_ImageR = new QGraphicsView(frame_2);
+        graphicsView_ImageR->setObjectName(QString::fromUtf8("graphicsView_ImageR"));
+        graphicsView_ImageR->setMaximumSize(QSize(133, 100));
+
+        verticalLayout_3->addWidget(graphicsView_ImageR);
+
+        radioButton_ImageR = new QRadioButton(frame_2);
+        radioButton_ImageR->setObjectName(QString::fromUtf8("radioButton_ImageR"));
+        radioButton_ImageR->setAutoExclusive(true);
+
+        verticalLayout_3->addWidget(radioButton_ImageR);
+
+        graphicsView_RawDisp = new QGraphicsView(frame_2);
+        graphicsView_RawDisp->setObjectName(QString::fromUtf8("graphicsView_RawDisp"));
+        graphicsView_RawDisp->setMaximumSize(QSize(133, 100));
+
+        verticalLayout_3->addWidget(graphicsView_RawDisp);
+
+        radioButton_RawDisp = new QRadioButton(frame_2);
+        radioButton_RawDisp->setObjectName(QString::fromUtf8("radioButton_RawDisp"));
+        radioButton_RawDisp->setAutoExclusive(true);
+
+        verticalLayout_3->addWidget(radioButton_RawDisp);
+
+        graphicsView_FixDisp = new QGraphicsView(frame_2);
+        graphicsView_FixDisp->setObjectName(QString::fromUtf8("graphicsView_FixDisp"));
+        graphicsView_FixDisp->setMaximumSize(QSize(133, 100));
+
+        verticalLayout_3->addWidget(graphicsView_FixDisp);
+
+        radioButton_FixDisp = new QRadioButton(frame_2);
+        radioButton_FixDisp->setObjectName(QString::fromUtf8("radioButton_FixDisp"));
+        radioButton_FixDisp->setAutoExclusive(true);
+
+        verticalLayout_3->addWidget(radioButton_FixDisp);
+
+        graphicsView_PcolorDisp = new QGraphicsView(frame_2);
+        graphicsView_PcolorDisp->setObjectName(QString::fromUtf8("graphicsView_PcolorDisp"));
+        graphicsView_PcolorDisp->setMaximumSize(QSize(133, 100));
+
+        verticalLayout_3->addWidget(graphicsView_PcolorDisp);
+
+        radioButton_PcolorDisp = new QRadioButton(frame_2);
+        radioButton_PcolorDisp->setObjectName(QString::fromUtf8("radioButton_PcolorDisp"));
+        radioButton_PcolorDisp->setAutoExclusive(true);
+
+        verticalLayout_3->addWidget(radioButton_PcolorDisp);
+
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_3->addItem(verticalSpacer);
+
+
+        gridLayout->addWidget(frame_2, 0, 0, 2, 1);
 
 
         retranslateUi(MatcherView);
@@ -575,6 +595,9 @@ public:
         QObject::connect(radioButton_FixDisp, SIGNAL(clicked(bool)), MatcherView, SLOT(onClicked_IconFixDisp(bool)));
         QObject::connect(radioButton_BM, SIGNAL(clicked(bool)), MatcherView, SLOT(onClicked_BM(bool)));
         QObject::connect(radioButton_SGBM, SIGNAL(clicked(bool)), MatcherView, SLOT(onClicked_SGBM(bool)));
+        QObject::connect(checkBox_DoRectify, SIGNAL(clicked(bool)), MatcherView, SLOT(onClicked_DoRectify(bool)));
+        QObject::connect(checkBox_useExpeModule, SIGNAL(clicked(bool)), MatcherView, SLOT(onClicked_UseExpeModule(bool)));
+        QObject::connect(radioButton_PcolorDisp, SIGNAL(clicked(bool)), MatcherView, SLOT(onClicked_IconPcolorDisp(bool)));
 
         QMetaObject::connectSlotsByName(MatcherView);
     } // setupUi
@@ -627,19 +650,21 @@ public:
 #endif // QT_NO_TOOLTIP
         groupBox_11->setTitle(QApplication::translate("MatcherView", "TextureThreshold", nullptr));
         lineEdit_textThread->setPlaceholderText(QApplication::translate("MatcherView", "0", nullptr));
-        radioButton_ImageL->setText(QApplication::translate("MatcherView", "\345\267\246\350\247\206\345\233\276", nullptr));
-        radioButton_ImageR->setText(QApplication::translate("MatcherView", "\345\217\263\350\247\206\345\233\276", nullptr));
-        radioButton_RawDisp->setText(QApplication::translate("MatcherView", "\345\216\237\345\247\213\350\247\206\345\267\256\345\233\276", nullptr));
-        radioButton_FixDisp->setText(QApplication::translate("MatcherView", "\344\277\256\345\244\215\350\247\206\345\267\256\345\233\276", nullptr));
         radioButton_BM->setText(QApplication::translate("MatcherView", "BM", nullptr));
         radioButton_SGBM->setText(QApplication::translate("MatcherView", "SGBM", nullptr));
         radioButton_MODE_3WAY->setText(QApplication::translate("MatcherView", "3WAY", nullptr));
         radioButton_MODE_SGBM->setText(QApplication::translate("MatcherView", "SGBM", nullptr));
         radioButton_MODE_HH->setText(QApplication::translate("MatcherView", "HH", nullptr));
-        checkBox_DoRectify->setText(QApplication::translate("MatcherView", "\350\277\233\350\241\214\346\240\241\346\255\243", nullptr));
+        checkBox_DoRectify->setText(QApplication::translate("MatcherView", "\344\275\277\347\224\250\347\233\270\346\234\272\345\217\202\346\225\260", nullptr));
+        checkBox_useExpeModule->setText(QApplication::translate("MatcherView", "\344\275\277\347\224\250\345\256\236\351\252\214\346\200\247\345\214\271\351\205\215\346\250\241\345\235\227", nullptr));
         pushButton_MatchDefault->setText(QApplication::translate("MatcherView", "\351\273\230\350\256\244\345\217\202\346\225\260", nullptr));
         pushButton_MatchChooseFiles->setText(QApplication::translate("MatcherView", "\345\217\214\347\233\256\345\214\271\351\205\215", nullptr));
         pushButton_RefreshStereoMatch->setText(QApplication::translate("MatcherView", "\345\210\267\346\226\260", nullptr));
+        radioButton_ImageL->setText(QApplication::translate("MatcherView", "\345\267\246\350\247\206\345\233\276", nullptr));
+        radioButton_ImageR->setText(QApplication::translate("MatcherView", "\345\217\263\350\247\206\345\233\276", nullptr));
+        radioButton_RawDisp->setText(QApplication::translate("MatcherView", "\345\216\237\345\247\213\350\247\206\345\267\256\345\233\276", nullptr));
+        radioButton_FixDisp->setText(QApplication::translate("MatcherView", "\344\277\256\345\244\215\350\247\206\345\267\256\345\233\276", nullptr));
+        radioButton_PcolorDisp->setText(QApplication::translate("MatcherView", "\344\274\252\345\275\251\350\247\206\345\267\256\345\233\276", nullptr));
     } // retranslateUi
 
 };

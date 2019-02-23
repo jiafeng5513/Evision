@@ -180,6 +180,28 @@ void StereoMatchParamEntity::setMODE_3WAY(bool value)
 	emit paramChanged_MODE_3WAY();
 }
 
+bool StereoMatchParamEntity::getDoRectify()
+{
+	return DoRectify;
+}
+
+void StereoMatchParamEntity::setDoRectify(bool value)
+{
+	DoRectify = value;
+	emit paramChanged_DoRectify();
+}
+
+bool StereoMatchParamEntity::getUseExpeModule()
+{
+	return UseExpeModule;
+}
+
+void StereoMatchParamEntity::setUseExpeModule(bool value)
+{
+	UseExpeModule = value;
+	emit paramChanged_UseExpeModule();
+}
+
 cv::Mat StereoMatchParamEntity::getImageDtoShow()
 {
 	return imgDtoShow;
@@ -255,4 +277,26 @@ void StereoMatchParamEntity::setIconFixDisp(cv::Mat value)
 {
 	iconFixDisp = value;
 	emit paramChanged_IconFixDisp();
+}
+
+cv::Mat StereoMatchParamEntity::getIconPcolorDisp()
+{
+	return iconPcolorDisp;
+}
+
+void StereoMatchParamEntity::setIconPcolorDisp(cv::Mat value)
+{
+	iconPcolorDisp = value;
+	emit paramChanged_IconPcolorDisp();
+}
+
+StereoMatchParamEntity::IMGID StereoMatchParamEntity::getImageToShow()
+{
+	return ImageToShow;
+}
+
+void StereoMatchParamEntity::setImageToShow(StereoMatchParamEntity::IMGID value)
+{
+	ImageToShow = value;
+	emit paramChanged_ImageToShow();
 }
