@@ -43,6 +43,7 @@ public:
     QAction *action_CalibrateView;
     QAction *action_ObjectDetection;
     QAction *action_NewStereoMatchView;
+    QAction *action_LogView;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QMdiArea *mdiArea;
@@ -132,6 +133,11 @@ public:
         action_ObjectDetection->setIcon(icon10);
         action_NewStereoMatchView = new QAction(EvisionClass);
         action_NewStereoMatchView->setObjectName(QString::fromUtf8("action_NewStereoMatchView"));
+        action_LogView = new QAction(EvisionClass);
+        action_LogView->setObjectName(QString::fromUtf8("action_LogView"));
+        QIcon icon11;
+        icon11.addFile(QString::fromUtf8(":/Evision/resource/log_128px_1160546_easyicon.net.ico"), QSize(), QIcon::Normal, QIcon::Off);
+        action_LogView->setIcon(icon11);
         centralWidget = new QWidget(EvisionClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -180,6 +186,7 @@ public:
         menu->addAction(actionDebug);
         menu_2->addAction(action_Help);
         menu_2->addAction(action_About);
+        menu_2->addAction(action_LogView);
         menu_3->addAction(action_CalibrateView);
         menu_3->addAction(action_StereoMatchView);
         menu_3->addAction(action_DepthMap_View);
@@ -200,6 +207,8 @@ public:
         mainToolBar->addAction(action_Measure_View);
         mainToolBar->addSeparator();
         mainToolBar->addAction(action_ObjectDetection);
+        mainToolBar->addSeparator();
+        mainToolBar->addAction(action_LogView);
 
         retranslateUi(EvisionClass);
         QObject::connect(actionDebug, SIGNAL(triggered()), EvisionClass, SLOT(onTestAlltheParam()));
@@ -210,6 +219,7 @@ public:
         QObject::connect(action_StereoMatchView, SIGNAL(triggered()), EvisionClass, SLOT(on_action_stereoMatch_view()));
         QObject::connect(action_Measure_View, SIGNAL(triggered()), EvisionClass, SLOT(on_action_Measure_view()));
         QObject::connect(action_ObjectDetection, SIGNAL(triggered()), EvisionClass, SLOT(on_action_ObjectDetection_view()));
+        QObject::connect(action_LogView, SIGNAL(triggered()), EvisionClass, SLOT(on_action_LogViewSwitch()));
 
         QMetaObject::connectSlotsByName(EvisionClass);
     } // setupUi
@@ -233,6 +243,10 @@ public:
         action_CalibrateView->setText(QApplication::translate("EvisionClass", "\347\233\270\346\234\272\346\240\207\345\256\232", nullptr));
         action_ObjectDetection->setText(QApplication::translate("EvisionClass", "\347\233\256\346\240\207\346\243\200\346\265\213", nullptr));
         action_NewStereoMatchView->setText(QApplication::translate("EvisionClass", "\346\226\260\347\253\213\344\275\223\345\214\271\351\205\215", nullptr));
+        action_LogView->setText(QApplication::translate("EvisionClass", "LogView", nullptr));
+#ifndef QT_NO_TOOLTIP
+        action_LogView->setToolTip(QApplication::translate("EvisionClass", "\345\210\207\346\215\242LogView\347\232\204\346\230\276\347\244\272\347\212\266\346\200\201", nullptr));
+#endif // QT_NO_TOOLTIP
         menu->setTitle(QApplication::translate("EvisionClass", "\345\267\245\345\205\267", nullptr));
         menu_2->setTitle(QApplication::translate("EvisionClass", "\345\270\256\345\212\251", nullptr));
         menu_3->setTitle(QApplication::translate("EvisionClass", "\345\217\214\347\233\256\350\247\206\350\247\211", nullptr));

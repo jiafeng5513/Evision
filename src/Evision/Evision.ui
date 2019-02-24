@@ -86,6 +86,7 @@
     </property>
     <addaction name="action_Help"/>
     <addaction name="action_About"/>
+    <addaction name="action_LogView"/>
    </widget>
    <widget class="QMenu" name="menu_3">
     <property name="title">
@@ -138,6 +139,8 @@
    <addaction name="action_Measure_View"/>
    <addaction name="separator"/>
    <addaction name="action_ObjectDetection"/>
+   <addaction name="separator"/>
+   <addaction name="action_LogView"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="action_StereoCamera">
@@ -258,6 +261,18 @@
   <action name="action_NewStereoMatchView">
    <property name="text">
     <string>新立体匹配</string>
+   </property>
+  </action>
+  <action name="action_LogView">
+   <property name="icon">
+    <iconset resource="Evision.qrc">
+     <normaloff>:/Evision/resource/log_128px_1160546_easyicon.net.ico</normaloff>:/Evision/resource/log_128px_1160546_easyicon.net.ico</iconset>
+   </property>
+   <property name="text">
+    <string>LogView</string>
+   </property>
+   <property name="toolTip">
+    <string>切换LogView的显示状态</string>
    </property>
   </action>
  </widget>
@@ -394,6 +409,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>action_LogView</sender>
+   <signal>triggered()</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>on_action_LogViewSwitch()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>511</x>
+     <y>354</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>onTestAlltheParam()</slot>
@@ -404,5 +435,6 @@
   <slot>on_action_stereoMatch_view()</slot>
   <slot>on_action_Measure_view()</slot>
   <slot>on_action_ObjectDetection_view()</slot>
+  <slot>on_action_LogViewSwitch()</slot>
  </slots>
 </ui>

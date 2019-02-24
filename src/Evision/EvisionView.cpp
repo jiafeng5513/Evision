@@ -47,12 +47,7 @@ EvisionView::EvisionView(QWidget *parent)
 	connect(m_entity, SIGNAL(paramChanged_StatusBar()), this, SLOT(onParamChanged_StatusBarText()), Qt::QueuedConnection);
 
 
-	logView =LogView::getInstance();
-	logView->show();
-
-	old_pos = this->pos();
-	old_size = this->size();
-	logView->move(*new QPoint(old_pos.x() + 10 + this->frameGeometry().width(), old_pos.y()));
+	on_action_LogViewSwitch();//Logview的准备
 }
 
 
@@ -105,6 +100,16 @@ void EvisionView::on_action_ObjectDetection_view()
 	ObjectDetectionView* _ObjectDetectionView = new ObjectDetectionView();
 	ui.mdiArea->addSubWindow(_ObjectDetectionView);
 	_ObjectDetectionView->show();
+}
+
+void EvisionView::on_action_LogViewSwitch()
+{
+	logView = LogView::getInstance();
+	logView->show();
+
+	old_pos = this->pos();
+	old_size = this->size();
+	logView->move(*new QPoint(old_pos.x() + 10 + this->frameGeometry().width(), old_pos.y()));
 }
 
 //调试方法

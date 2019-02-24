@@ -33,6 +33,11 @@
     <Filter Include="main">
       <UniqueIdentifier>{15b6209d-5425-4ba7-b6f3-d0c1863374dd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+      <ParseFiles>true</ParseFiles>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EvisionController.cpp">
@@ -202,9 +207,6 @@
     </QtRcc>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Evision.rc" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="EvisionUtils.h">
       <Filter>Utils</Filter>
     </ClInclude>
@@ -214,5 +216,14 @@
     <ClInclude Include="yolo_v2_class.h">
       <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="resource1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Evision.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Evision.ico" />
   </ItemGroup>
 </Project>
