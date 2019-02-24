@@ -245,7 +245,7 @@ void StereoMatch::MatchFunc()
 	copyMakeBorder(img1, img1p, 0, 0, m_entity->getNumDisparities(), 0, IPL_BORDER_REPLICATE);
 	copyMakeBorder(img2, img2p, 0, 0, m_entity->getNumDisparities(), 0, IPL_BORDER_REPLICATE);
 
-	cv::Mat disp, disparity,dispWithBorder,disp8;
+	cv::Mat dispWithBorder;
 	int64 t = cv::getTickCount();
 	if (m_entity->getBM())
 	{
@@ -255,35 +255,28 @@ void StereoMatch::MatchFunc()
 	{
 		sgbm->compute(img1p, img2p, dispWithBorder);
 	}
-	cv::imshow("dispWithBorder", dispWithBorder);
+
 	// 截取与原始画面对应的视差区域（舍去加宽的部分）
-	disp = dispWithBorder.colRange(m_entity->getNumDisparities(), img1p.cols);
-	//cv::imshow("disp", disp);
-	m_entity->setIconRawDisp(dispWithBorder);
+	cv::Mat dispWithoutBorder;
 	cv::Mat m_Calib_Mat_Mask_Roi = cv::Mat::zeros(img_size.height, img_size.width, CV_8UC1);
 	cv::rectangle(m_Calib_Mat_Mask_Roi, roi1, cv::Scalar(255), -1);
-	disp.copyTo(disparity, m_Calib_Mat_Mask_Roi);
+	dispWithBorder.colRange(m_entity->getNumDisparities(), img1p.cols).copyTo(dispWithoutBorder, m_Calib_Mat_Mask_Roi);
+	//获取用于显示的原始视差图,显示效果和保存的视差图一致
+	cv::Mat disp8;
+	dispWithoutBorder.convertTo(disp8, CV_8U, 255 / (m_entity->getNumDisparities()*16.));
+	m_entity->setIconRawDisp(disp8);
+	//获取并显示伪彩色视差图
 	cv::Mat colordisp;
-	getColorDisparityImage(disparity, colordisp, true);
-	//cv::imshow("origin disp", disparity);
-	//cv::imshow("color disp", colordisp);
+	getColorDisparityImage(dispWithoutBorder, colordisp, true);
 	m_entity->setIconPcolorDisp(colordisp);
+
 	t = cv::getTickCount() - t;
 
-	std::cout << "Time elapsed: "<< t * 1000 / cv::getTickFrequency() <<"ms\n,StereoMatch计算完毕,正在输出..." << std::endl;
-
-	//disp = dispp.colRange(numberOfDisparities, img1p.cols);
-	
-	//disp.convertTo(disp8, CV_8U, 255 / (m_entity->getNumDisparities()*16.));
-	
-	//m_entity->setImageLtoShow(img1);
-	//m_entity->setImageRtoShow(img2);
-	m_entity->setImageDtoShow(colordisp);
-	//d
+	std::cout << "Time elapsed: "<< t * 1000 / cv::getTickFrequency() <<"ms\nStereoMatch计算完毕,正在输出..." << std::endl;
 
 	if (!disparity_filename.empty())
 	{
-		imwrite(disparity_filename, disparity);
+		imwrite(disparity_filename, dispWithoutBorder);
 		std::cout << "视差图已经保存到:" << disparity_filename << std::endl;
 	}
 	if (m_entity->getDoRectify()==true)//给出相机参数
@@ -291,7 +284,7 @@ void StereoMatch::MatchFunc()
 		std::cout << "正在输出点云文件..." << std::endl;
 
 		cv::Mat xyz;
-		reprojectImageTo3D(disparity, xyz, Q, true);
+		reprojectImageTo3D(dispWithoutBorder, xyz, Q, true);
 		//disp.convertTo(disp, CV_32F, 1.0 / 16.0);
 		//Q.convertTo(Q, CV_32F);
 		//customReproject(disp, Q, xyz);
