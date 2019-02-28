@@ -19,8 +19,6 @@ void CalibrateController::setDefaultCalibParamCommand()
 	m_calib_entity->setBoardWidth(9);
 	m_calib_entity->setBoardHeight(6);
 	m_calib_entity->setSquareSize(25);
-	m_calib_entity->setshowRectified(false);
-	m_calib_entity->setBouguet(true);
 }
 //ÃüÁî:±ê¶¨
 void CalibrateController::CalibrateCommand()
@@ -68,10 +66,7 @@ void CalibrateController::CalibrateCommand()
 					imagelistR->push_back(ImageListR.at(i).toStdString());
 
 				}
-				cv::Size * _size = new cv::Size();
-				_size->width = m_calib_entity->getBoardWidth();
-				_size->height = m_calib_entity->getBoardHeight();
-				StereoCalibrate * _stereoCalib = new StereoCalibrate(imagelistL, imagelistR, *_size, m_calib_entity->getSquareSize(), m_calib_entity->getBouguet(), m_calib_entity->getshowRectified());
+				StereoCalibrate * _stereoCalib = new StereoCalibrate(imagelistL, imagelistR);
 				connect(_stereoCalib, SIGNAL(openMessageBox(QString, QString)), this, SLOT(onOpenMessageBox(QString, QString)));
 				_stereoCalib->start();
 			}

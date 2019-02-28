@@ -11,11 +11,23 @@ CalibraterView::CalibraterView(QWidget *parent)
 	connect(m_calib_entity, SIGNAL(paramChanged_BoardWidth()), this, SLOT(onParamChanged_BoardWidth()));
 	connect(m_calib_entity, SIGNAL(paramChanged_BoardHeight()), this, SLOT(onParamChanged_BoardHeight()));
 	connect(m_calib_entity, SIGNAL(paramChanged_SquareSize()), this, SLOT(onParamChanged_SquareSize()));
-	connect(m_calib_entity, SIGNAL(paramChanged_showRectified()), this, SLOT(onParamChanged_showRectified()));
-	connect(m_calib_entity, SIGNAL(paramChanged_Bouguet()), this, SLOT(onParamChanged_Bouguet()));
-	connect(m_calib_entity, SIGNAL(paramChanged_Hartley()), this, SLOT(onParamChanged_Hartley()));
 	connect(m_calib_entity, SIGNAL(paramChanged_ImageLtoShow()), this, SLOT(onParamChanged_imgLtoShow())/*, Qt::QueuedConnection*/);
-	connect(m_calib_entity, SIGNAL(paramChanged_ImageRtoShow()), this, SLOT(onParamChanged_imgRtoShow())/*, Qt::QueuedConnection*/);
+	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_FIX_PRINCIPAL_POINT()), this, SLOT(onParamChanged_FIX_PRINCIPAL_POINT()));
+	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_FIX_ASPECT_RATIO()), this, SLOT(onParamChanged_FIX_ASPECT_RATIO()));
+	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_ZERO_TANGENT_DIST()), this, SLOT(onParamChanged_ZERO_TANGENT_DIST()));
+	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_SAME_FOCAL_LENGTH()), this, SLOT(onParamChanged_SAME_FOCAL_LENGTH()));
+	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_FIX_K1()), this, SLOT(onParamChanged_FIX_K1()));
+	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_FIX_K2()), this, SLOT(onParamChanged_FIX_K2()));
+	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_FIX_K3()), this, SLOT(onParamChanged_FIX_K3()));
+	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_FIX_K4()), this, SLOT(onParamChanged_FIX_K4()));
+	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_FIX_K5()), this, SLOT(onParamChanged_FIX_K5()));
+	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_FIX_K6()), this, SLOT(onParamChanged_FIX_K6()));
+	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_RATIONAL_MODEL()), this, SLOT(onParamChanged_RATIONAL_MODEL()));
+	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_THIN_PRISM_MODEL()), this, SLOT(onParamChanged_THIN_PRISM_MODEL()));
+	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_FIX_S1_S2_S3_S4()), this, SLOT(onParamChanged_FIX_S1_S2_S3_S4()));
+	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_TILTED_MODEL()), this, SLOT(onParamChanged_TILTED_MODEL()));
+	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_FIX_TAUX_TAUY()), this, SLOT(onParamChanged_FIX_TAUX_TAUY()));
+	connect(m_calib_entity, SIGNAL(paramChanged_InsertToItemMap()), this, SLOT(onParamChanged_NewToItemMap()));
 
 }
 
@@ -73,33 +85,198 @@ void CalibraterView::onParamChanged_SquareSize()
 	}
 }
 
-void CalibraterView::onClicked_showRectified(bool value)
+void CalibraterView::onValueChanged_FIX_PRINCIPAL_POINT(bool value)
 {
-	m_calib_entity->setshowRectified(value);
-
-}
-void CalibraterView::onParamChanged_showRectified()
-{
-	ui.checkBox_showRectified->setChecked(m_calib_entity->getshowRectified());
-
+	m_calib_entity->setCALIB_FIX_PRINCIPAL_POINT(value);
 }
 
-void CalibraterView::onClicked_Bouguet(bool value)
+void CalibraterView::onParamChanged_FIX_PRINCIPAL_POINT()
 {
-	m_calib_entity->setBouguet(value);
-}
-void CalibraterView::onParamChanged_Bouguet()
-{
-	ui.radioButton_Bouguet->setChecked(m_calib_entity->getBouguet());
+	if(ui.checkBox_CALIB_FIX_PRINCIPAL_POINT->isChecked()!=m_calib_entity->getCALIB_FIX_PRINCIPAL_POINT())
+	{
+		ui.checkBox_CALIB_FIX_PRINCIPAL_POINT->setChecked(m_calib_entity->getCALIB_FIX_PRINCIPAL_POINT());
+	}
 }
 
-void CalibraterView::onClicked_Hartley(bool value)
+void CalibraterView::onValueChanged_FIX_ASPECT_RATIO(bool value)
 {
-	m_calib_entity->setHartley(value);
+	m_calib_entity->setCALIB_FIX_ASPECT_RATIO(value);
 }
-void CalibraterView::onParamChanged_Hartley()
+
+void CalibraterView::onParamChanged_FIX_ASPECT_RATIO()
 {
-	ui.radioButton_Hartley->setChecked(m_calib_entity->getHartley());
+	if(ui.checkBox_CALIB_FIX_ASPECT_RATIO->isChecked()!=m_calib_entity->getCALIB_FIX_ASPECT_RATIO())
+	{
+		ui.checkBox_CALIB_FIX_ASPECT_RATIO->setChecked(m_calib_entity->getCALIB_FIX_ASPECT_RATIO());
+	}
+}
+
+void CalibraterView::onValueChanged_ZERO_TANGENT_DIST(bool value)
+{
+	m_calib_entity->setCALIB_ZERO_TANGENT_DIST(value);
+}
+
+void CalibraterView::onParamChanged_ZERO_TANGENT_DIST()
+{
+	if(ui.checkBox_CALIB_ZERO_TANGENT_DIST->isChecked()!=m_calib_entity->getCALIB_ZERO_TANGENT_DIST())
+	{
+		ui.checkBox_CALIB_ZERO_TANGENT_DIST->setChecked(m_calib_entity->getCALIB_ZERO_TANGENT_DIST());
+	}
+}
+
+void CalibraterView::onValueChanged_SAME_FOCAL_LENGTH(bool value)
+{
+	m_calib_entity->setCALIB_SAME_FOCAL_LENGTH(value);
+}
+
+void CalibraterView::onParamChanged_SAME_FOCAL_LENGTH()
+{
+	if(ui.checkBox_CALIB_SAME_FOCAL_LENGTH->isChecked()!=m_calib_entity->getCALIB_SAME_FOCAL_LENGTH())
+	{
+		ui.checkBox_CALIB_SAME_FOCAL_LENGTH->setChecked(m_calib_entity->getCALIB_SAME_FOCAL_LENGTH());
+	}
+}
+
+void CalibraterView::onValueChanged_FIX_K1(bool value)
+{
+	m_calib_entity->setCALIB_FIX_K1(value);
+}
+
+void CalibraterView::onParamChanged_FIX_K1()
+{
+	if(ui.checkBox_CALIB_FIX_K1->isChecked()!=m_calib_entity->getCALIB_FIX_K1())
+	{
+		ui.checkBox_CALIB_FIX_K1->setChecked(m_calib_entity->getCALIB_FIX_K1());
+	}
+}
+
+void CalibraterView::onValueChanged_FIX_K2(bool value)
+{
+	m_calib_entity->setCALIB_FIX_K2(value);
+}
+
+void CalibraterView::onParamChanged_FIX_K2()
+{
+	if(ui.checkBox_CALIB_FIX_K2->isChecked()!=m_calib_entity->getCALIB_FIX_K2())
+	{
+		ui.checkBox_CALIB_FIX_K2->setChecked(m_calib_entity->getCALIB_FIX_K2());
+	}
+}
+
+void CalibraterView::onValueChanged_FIX_K3(bool value)
+{
+	m_calib_entity->setCALIB_FIX_K3(value);
+}
+
+void CalibraterView::onParamChanged_FIX_K3()
+{
+	if(ui.checkBox_CALIB_FIX_K3->isChecked()!=m_calib_entity->getCALIB_FIX_K3())
+	{
+		ui.checkBox_CALIB_FIX_K3->setChecked(m_calib_entity->getCALIB_FIX_K3());
+	}
+}
+
+void CalibraterView::onValueChanged_FIX_K4(bool value)
+{
+	m_calib_entity->setCALIB_FIX_K4(value);
+}
+
+void CalibraterView::onParamChanged_FIX_K4()
+{
+	if(ui.checkBox_CALIB_FIX_K4->isChecked()!=m_calib_entity->getCALIB_FIX_K4())
+	{
+		ui.checkBox_CALIB_FIX_K4->setChecked(m_calib_entity->getCALIB_FIX_K4());
+	}
+}
+
+void CalibraterView::onValueChanged_FIX_K5(bool value)
+{
+	m_calib_entity->setCALIB_FIX_K5(value);
+}
+
+void CalibraterView::onParamChanged_FIX_K5()
+{
+	if(ui.checkBox_CALIB_FIX_K5->isChecked()!=m_calib_entity->getCALIB_FIX_K5())
+	{
+		ui.checkBox_CALIB_FIX_K5->setChecked(m_calib_entity->getCALIB_FIX_K5());
+	}
+}
+void CalibraterView::onValueChanged_FIX_K6(bool value)
+{
+	m_calib_entity->setCALIB_FIX_K6(value);
+}
+
+void CalibraterView::onParamChanged_FIX_K6()
+{
+	if(ui.checkBox_CALIB_FIX_K6->isChecked()!=m_calib_entity->getCALIB_FIX_K6())
+	{
+		ui.checkBox_CALIB_FIX_K6->setChecked(m_calib_entity->getCALIB_FIX_K6());
+	}
+}
+
+void CalibraterView::onValueChanged_RATIONAL_MODEL(bool value)
+{
+	m_calib_entity->setCALIB_RATIONAL_MODEL(value);
+}
+
+void CalibraterView::onParamChanged_RATIONAL_MODEL()
+{
+	if(ui.checkBox_CALIB_RATIONAL_MODEL->isChecked()!=m_calib_entity->getCALIB_RATIONAL_MODEL())
+	{
+		ui.checkBox_CALIB_RATIONAL_MODEL->setChecked(m_calib_entity->getCALIB_RATIONAL_MODEL());
+	}
+}
+
+void CalibraterView::onValueChanged_THIN_PRISM_MODEL(bool value)
+{
+	m_calib_entity->setCALIB_THIN_PRISM_MODEL(value);
+}
+
+void CalibraterView::onParamChanged_THIN_PRISM_MODEL()
+{
+	if(ui.checkBox_CALIB_THIN_PRISM_MODEL->isChecked()!=m_calib_entity->getCALIB_THIN_PRISM_MODEL())
+	{
+		ui.checkBox_CALIB_THIN_PRISM_MODEL->setChecked(m_calib_entity->getCALIB_THIN_PRISM_MODEL());
+	}
+}
+
+void CalibraterView::onValueChanged_FIX_S1_S2_S3_S4(bool value)
+{
+	m_calib_entity->setCALIB_FIX_S1_S2_S3_S4(value);
+}
+
+void CalibraterView::onParamChanged_FIX_S1_S2_S3_S4()
+{
+	if(ui.checkBox_CALIB_FIX_S1_S2_S3_S4->isChecked()!=m_calib_entity->getCALIB_FIX_S1_S2_S3_S4())
+	{
+		ui.checkBox_CALIB_FIX_S1_S2_S3_S4->setChecked(m_calib_entity->getCALIB_FIX_S1_S2_S3_S4());
+	}
+}
+
+void CalibraterView::onValueChanged_TILTED_MODEL(bool value)
+{
+	m_calib_entity->setCALIB_TILTED_MODEL(value);
+}
+
+void CalibraterView::onParamChanged_TILTED_MODEL()
+{
+	if(ui.checkBox_CALIB_TILTED_MODEL->isChecked()!=m_calib_entity->getCALIB_TILTED_MODEL())
+	{
+		ui.checkBox_CALIB_TILTED_MODEL->setChecked(m_calib_entity->getCALIB_TILTED_MODEL());
+	}
+}
+
+void CalibraterView::onValueChanged_FIX_TAUX_TAUY(bool value)
+{
+	m_calib_entity->setCALIB_FIX_TAUX_TAUY(value);
+}
+
+void CalibraterView::onParamChanged_FIX_TAUX_TAUY()
+{
+	if(ui.checkBox_CALIB_FIX_TAUX_TAUY->isChecked()!=m_calib_entity->getCALIB_FIX_TAUX_TAUY())
+	{
+		ui.checkBox_CALIB_FIX_TAUX_TAUY->setChecked(m_calib_entity->getCALIB_FIX_TAUX_TAUY());
+	}
 }
 
 void CalibraterView::onParamChanged_imgLtoShow()
@@ -107,28 +284,35 @@ void CalibraterView::onParamChanged_imgLtoShow()
 	QImage LQImage = EvisionUtils::cvMat2QImage(m_calib_entity->getImageLtoShow());
 	QGraphicsScene *sceneL = new QGraphicsScene;
 	sceneL->addPixmap(QPixmap::fromImage(LQImage));
-	ui.graphicsView_L->setScene(sceneL);
+	ui.graphicsView->setScene(sceneL);
 	QRectF bounds = sceneL->itemsBoundingRect();
 	bounds.setWidth(bounds.width());         // to tighten-up margins
 	bounds.setHeight(bounds.height());       // same as above
-	ui.graphicsView_L->fitInView(bounds, Qt::KeepAspectRatio);
-	ui.graphicsView_L->centerOn(0, 0);
-	ui.graphicsView_L->show();
-	ui.graphicsView_L->update();
+	ui.graphicsView->fitInView(bounds, Qt::KeepAspectRatio);
+	ui.graphicsView->centerOn(0, 0);
+	ui.graphicsView->show();
+	ui.graphicsView->update();
 }
 
-void CalibraterView::onParamChanged_imgRtoShow()
+void CalibraterView::onParamChanged_NewToItemMap()
 {
-	QImage RQImage = EvisionUtils::cvMat2QImage(m_calib_entity->getImageRtoShow());
-	QGraphicsScene *sceneR = new QGraphicsScene;
-	sceneR->addPixmap(QPixmap::fromImage(RQImage));
-	ui.graphicsView_R->setScene(sceneR);
-	QRectF bounds = sceneR->itemsBoundingRect();
-	bounds.setWidth(bounds.width());         // to tighten-up margins
-	bounds.setHeight(bounds.height());       // same as above
-	ui.graphicsView_R->fitInView(bounds, Qt::KeepAspectRatio);
-	ui.graphicsView_R->centerOn(0, 0);
-	ui.graphicsView_R->show();
-	ui.graphicsView_R->update();
+	QListWidgetItem * item = new QListWidgetItem;
+	item->setIcon(
+		QIcon(
+			QPixmap::fromImage(
+				EvisionUtils::cvMat2QImage(
+					m_calib_entity->getItemMap().at(
+						QString::fromStdString(
+							std::to_string(
+								m_calib_entity->getIndex()
+							)
+						)
+					)
+				)
+			)
+		)
+	);//这个无敌了这个
+	item->setText(QString::fromStdString(std::to_string(m_calib_entity->getIndex())));
+	ui.listWidget->addItem(item);
 }
 

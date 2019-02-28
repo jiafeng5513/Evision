@@ -6,66 +6,198 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>823</width>
-    <height>499</height>
+    <width>906</width>
+    <height>606</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>标定</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_3">
-   <item row="1" column="0">
-    <widget class="QFrame" name="frame">
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="0" rowspan="2">
+    <widget class="QListWidget" name="listWidget">
      <property name="maximumSize">
       <size>
-       <width>16777215</width>
-       <height>180</height>
+       <width>240</width>
+       <height>16777215</height>
       </size>
      </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(129, 129, 129);</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QGraphicsView" name="graphicsView">
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(181, 181, 181);</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QFrame" name="frame">
      <property name="frameShape">
       <enum>QFrame::Box</enum>
      </property>
      <property name="frameShadow">
       <enum>QFrame::Raised</enum>
      </property>
-     <layout class="QGridLayout" name="gridLayout_2">
-      <item row="0" column="0" rowspan="3">
-       <widget class="QGroupBox" name="groupBox">
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0" colspan="2">
+       <widget class="QGroupBox" name="groupBox_3">
         <property name="title">
-         <string>标定参数</string>
+         <string>标定设置</string>
         </property>
-        <layout class="QGridLayout" name="gridLayout">
-         <item row="1" column="2">
-          <widget class="QLineEdit" name="lineEdit_BoardHeight">
-           <property name="minimumSize">
-            <size>
-             <width>50</width>
-             <height>20</height>
-            </size>
+        <layout class="QGridLayout" name="gridLayout_3">
+         <item row="0" column="0">
+          <widget class="QCheckBox" name="checkBox_CALIB_FIX_PRINCIPAL_POINT">
+           <property name="text">
+            <string>不优化主点位置</string>
            </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>16777215</height>
-            </size>
+          </widget>
+         </item>
+         <item row="0" column="1" rowspan="5">
+          <widget class="Line" name="line">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QCheckBox" name="checkBox_CALIB_RATIONAL_MODEL">
+           <property name="text">
+            <string>使用理想模型(8参数)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="3" rowspan="5">
+          <widget class="Line" name="line_2">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="4">
+          <widget class="QCheckBox" name="checkBox_CALIB_TILTED_MODEL">
+           <property name="text">
+            <string>使用倾斜传感器模型(14参数)</string>
            </property>
           </widget>
          </item>
          <item row="1" column="0">
-          <widget class="QLabel" name="label_6">
+          <widget class="QCheckBox" name="checkBox_CALIB_FIX_ASPECT_RATIO">
            <property name="text">
-            <string>Height:</string>
+            <string>固定宽高比</string>
            </property>
           </widget>
          </item>
-         <item row="0" column="0">
+         <item row="1" column="2">
+          <widget class="QCheckBox" name="checkBox_CALIB_THIN_PRISM_MODEL">
+           <property name="text">
+            <string>使用薄棱镜模型(12参数)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="4">
+          <widget class="QCheckBox" name="checkBox_CALIB_FIX_TAUX_TAUY">
+           <property name="text">
+            <string>忽略倾斜传感器参数TauX和TauY</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QCheckBox" name="checkBox_CALIB_ZERO_TANGENT_DIST">
+           <property name="text">
+            <string>忽略切向畸变系数(P1,P2)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="2">
+          <widget class="QCheckBox" name="checkBox_CALIB_FIX_S1_S2_S3_S4">
+           <property name="text">
+            <string>忽略薄棱镜参数S1-S4</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="4">
+          <widget class="QCheckBox" name="checkBox_CALIB_SAME_FOCAL_LENGTH">
+           <property name="text">
+            <string>强制两侧相机焦距相等</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QCheckBox" name="checkBox_CALIB_FIX_K1">
+           <property name="text">
+            <string>忽略径向畸变系数K1</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="2">
+          <widget class="QCheckBox" name="checkBox_CALIB_FIX_K3">
+           <property name="text">
+            <string>忽略径向畸变系数K3</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="4">
+          <widget class="QCheckBox" name="checkBox_CALIB_FIX_K5">
+           <property name="text">
+            <string>忽略径向畸变系数K5</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QCheckBox" name="checkBox_CALIB_FIX_K2">
+           <property name="text">
+            <string>忽略径向畸变系数K2</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="2">
+          <widget class="QCheckBox" name="checkBox_CALIB_FIX_K4">
+           <property name="text">
+            <string>忽略径向畸变系数K4</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="4">
+          <widget class="QCheckBox" name="checkBox_CALIB_FIX_K6">
+           <property name="text">
+            <string>忽略径向畸变系数K6</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QGroupBox" name="groupBox">
+        <property name="title">
+         <string>标定参数</string>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
           <widget class="QLabel" name="label_5">
            <property name="text">
             <string>Width:</string>
            </property>
           </widget>
          </item>
-         <item row="0" column="2">
+         <item>
           <widget class="QLineEdit" name="lineEdit_BoardWidth">
            <property name="minimumSize">
             <size>
@@ -75,13 +207,43 @@
            </property>
            <property name="maximumSize">
             <size>
-             <width>16777215</width>
+             <width>20</width>
              <height>16777215</height>
             </size>
            </property>
           </widget>
          </item>
-         <item row="2" column="2">
+         <item>
+          <widget class="QLabel" name="label_6">
+           <property name="text">
+            <string>Height:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEdit_BoardHeight">
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>20</width>
+             <height>16777215</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_8">
+           <property name="text">
+            <string>Size:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QLineEdit" name="lineEdit_SquareSize">
            <property name="minimumSize">
             <size>
@@ -91,53 +253,16 @@
            </property>
            <property name="maximumSize">
             <size>
-             <width>16777215</width>
+             <width>20</width>
              <height>16777215</height>
             </size>
            </property>
           </widget>
          </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="label_8">
-           <property name="text">
-            <string>Size:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="2">
-          <widget class="QCheckBox" name="checkBox_showRectified">
-           <property name="text">
-            <string>显示矫正结果(By OpenCV NamedWindow)</string>
-           </property>
-          </widget>
-         </item>
         </layout>
        </widget>
       </item>
-      <item row="1" column="2">
-       <widget class="QGroupBox" name="groupBox_3">
-        <property name="title">
-         <string>单/双目</string>
-        </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
-         <item>
-          <widget class="QRadioButton" name="radioButton">
-           <property name="text">
-            <string>单目标定</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="radioButton_2">
-           <property name="text">
-            <string>双目标定</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </item>
-      <item row="2" column="2">
+      <item row="1" column="1">
        <widget class="QGroupBox" name="groupBox_4">
         <property name="title">
          <string>标定</string>
@@ -172,26 +297,10 @@
            </property>
           </widget>
          </item>
-        </layout>
-       </widget>
-      </item>
-      <item row="0" column="2">
-       <widget class="QGroupBox" name="groupBox_2">
-        <property name="title">
-         <string>Function</string>
-        </property>
-        <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
-          <widget class="QRadioButton" name="radioButton_Bouguet">
+          <widget class="QPushButton" name="pushButton_2">
            <property name="text">
-            <string>Bouguet</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="radioButton_Hartley">
-           <property name="text">
-            <string>Hartley</string>
+            <string>保存参数</string>
            </property>
           </widget>
          </item>
@@ -199,53 +308,6 @@
        </widget>
       </item>
      </layout>
-    </widget>
-   </item>
-   <item row="0" column="0">
-    <widget class="QSplitter" name="splitter">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <widget class="QGraphicsView" name="graphicsView_L">
-      <property name="minimumSize">
-       <size>
-        <width>400</width>
-        <height>300</height>
-       </size>
-      </property>
-      <property name="contextMenuPolicy">
-       <enum>Qt::ActionsContextMenu</enum>
-      </property>
-      <property name="autoFillBackground">
-       <bool>false</bool>
-      </property>
-      <property name="verticalScrollBarPolicy">
-       <enum>Qt::ScrollBarAsNeeded</enum>
-      </property>
-      <property name="horizontalScrollBarPolicy">
-       <enum>Qt::ScrollBarAsNeeded</enum>
-      </property>
-      <property name="sizeAdjustPolicy">
-       <enum>QAbstractScrollArea::AdjustToContents</enum>
-      </property>
-      <property name="backgroundBrush">
-       <brush brushstyle="SolidPattern">
-        <color alpha="255">
-         <red>0</red>
-         <green>0</green>
-         <blue>0</blue>
-        </color>
-       </brush>
-      </property>
-     </widget>
-     <widget class="QGraphicsView" name="graphicsView_R">
-      <property name="minimumSize">
-       <size>
-        <width>400</width>
-        <height>300</height>
-       </size>
-      </property>
-     </widget>
     </widget>
    </item>
   </layout>
@@ -298,54 +360,6 @@
     <hint type="destinationlabel">
      <x>174</x>
      <y>283</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>checkBox_showRectified</sender>
-   <signal>clicked(bool)</signal>
-   <receiver>CalibraterView</receiver>
-   <slot>onClicked_showRectified(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>110</x>
-     <y>432</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>105</x>
-     <y>472</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButton_Bouguet</sender>
-   <signal>clicked(bool)</signal>
-   <receiver>CalibraterView</receiver>
-   <slot>onClicked_Bouguet(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>435</x>
-     <y>326</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>411</x>
-     <y>5</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButton_Hartley</sender>
-   <signal>clicked(bool)</signal>
-   <receiver>CalibraterView</receiver>
-   <slot>onClicked_Hartley(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>572</x>
-     <y>331</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>514</x>
-     <y>5</y>
     </hint>
    </hints>
   </connection>

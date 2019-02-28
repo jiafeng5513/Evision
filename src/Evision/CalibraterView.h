@@ -31,17 +31,52 @@ public slots:
 
 	void onValueChanged_SquareSize(QString value);
 	void onParamChanged_SquareSize();
-	//标定标志位值更改事件
-	void onClicked_showRectified(bool value);
-	void onParamChanged_showRectified();
 
-	//标定算法
-	void onClicked_Bouguet(bool value);
-	void onParamChanged_Bouguet();
+	void onValueChanged_FIX_PRINCIPAL_POINT(bool value);
+	void onParamChanged_FIX_PRINCIPAL_POINT();
 
-	void onClicked_Hartley(bool value);
-	void onParamChanged_Hartley();
+	void onValueChanged_FIX_ASPECT_RATIO(bool value);
+	void onParamChanged_FIX_ASPECT_RATIO();
 
-	void onParamChanged_imgLtoShow();//更新左视图
-	void onParamChanged_imgRtoShow();//更新右视图
+	void onValueChanged_ZERO_TANGENT_DIST(bool value);
+	void onParamChanged_ZERO_TANGENT_DIST();
+
+	void onValueChanged_SAME_FOCAL_LENGTH(bool value);
+	void onParamChanged_SAME_FOCAL_LENGTH();
+
+	void onValueChanged_FIX_K1(bool value);
+	void onParamChanged_FIX_K1();
+
+	void onValueChanged_FIX_K2(bool value);
+	void onParamChanged_FIX_K2();
+
+	void onValueChanged_FIX_K3(bool value);
+	void onParamChanged_FIX_K3();
+
+	void onValueChanged_FIX_K4(bool value);
+	void onParamChanged_FIX_K4();
+
+	void onValueChanged_FIX_K5(bool value);
+	void onParamChanged_FIX_K5();
+
+	void onValueChanged_FIX_K6(bool value);
+	void onParamChanged_FIX_K6();
+
+	void onValueChanged_RATIONAL_MODEL(bool value);
+	void onParamChanged_RATIONAL_MODEL();
+
+	void onValueChanged_THIN_PRISM_MODEL(bool value);
+	void onParamChanged_THIN_PRISM_MODEL();
+
+	void onValueChanged_FIX_S1_S2_S3_S4(bool value);
+	void onParamChanged_FIX_S1_S2_S3_S4();
+
+	void onValueChanged_TILTED_MODEL(bool value);
+	void onParamChanged_TILTED_MODEL();
+
+	void onValueChanged_FIX_TAUX_TAUY(bool value);
+	void onParamChanged_FIX_TAUX_TAUY();
+
+	void onParamChanged_imgLtoShow();//更新大视图
+	void onParamChanged_NewToItemMap();//有人插入了缩略图Map,界面上要响应一下
 };

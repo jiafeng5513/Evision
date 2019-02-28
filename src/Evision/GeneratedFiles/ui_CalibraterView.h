@@ -19,9 +19,9 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
+#include <QtWidgets/QListWidget>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QRadioButton>
-#include <QtWidgets/QSplitter>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -29,120 +29,221 @@ QT_BEGIN_NAMESPACE
 class Ui_CalibraterView
 {
 public:
-    QGridLayout *gridLayout_3;
-    QFrame *frame;
     QGridLayout *gridLayout_2;
-    QGroupBox *groupBox;
+    QListWidget *listWidget;
+    QGraphicsView *graphicsView;
+    QFrame *frame;
     QGridLayout *gridLayout;
-    QLineEdit *lineEdit_BoardHeight;
-    QLabel *label_6;
+    QGroupBox *groupBox_3;
+    QGridLayout *gridLayout_3;
+    QCheckBox *checkBox_CALIB_FIX_PRINCIPAL_POINT;
+    QFrame *line;
+    QCheckBox *checkBox_CALIB_RATIONAL_MODEL;
+    QFrame *line_2;
+    QCheckBox *checkBox_CALIB_TILTED_MODEL;
+    QCheckBox *checkBox_CALIB_FIX_ASPECT_RATIO;
+    QCheckBox *checkBox_CALIB_THIN_PRISM_MODEL;
+    QCheckBox *checkBox_CALIB_FIX_TAUX_TAUY;
+    QCheckBox *checkBox_CALIB_ZERO_TANGENT_DIST;
+    QCheckBox *checkBox_CALIB_FIX_S1_S2_S3_S4;
+    QCheckBox *checkBox_CALIB_SAME_FOCAL_LENGTH;
+    QCheckBox *checkBox_CALIB_FIX_K1;
+    QCheckBox *checkBox_CALIB_FIX_K3;
+    QCheckBox *checkBox_CALIB_FIX_K5;
+    QCheckBox *checkBox_CALIB_FIX_K2;
+    QCheckBox *checkBox_CALIB_FIX_K4;
+    QCheckBox *checkBox_CALIB_FIX_K6;
+    QGroupBox *groupBox;
+    QHBoxLayout *horizontalLayout_2;
+    QSpacerItem *horizontalSpacer;
     QLabel *label_5;
     QLineEdit *lineEdit_BoardWidth;
-    QLineEdit *lineEdit_SquareSize;
+    QLabel *label_6;
+    QLineEdit *lineEdit_BoardHeight;
     QLabel *label_8;
-    QCheckBox *checkBox_showRectified;
-    QGroupBox *groupBox_3;
-    QHBoxLayout *horizontalLayout_2;
-    QRadioButton *radioButton;
-    QRadioButton *radioButton_2;
+    QLineEdit *lineEdit_SquareSize;
     QGroupBox *groupBox_4;
     QHBoxLayout *horizontalLayout_3;
     QPushButton *pushButton_CalibDefault;
     QPushButton *pushButton;
-    QGroupBox *groupBox_2;
-    QHBoxLayout *horizontalLayout;
-    QRadioButton *radioButton_Bouguet;
-    QRadioButton *radioButton_Hartley;
-    QSplitter *splitter;
-    QGraphicsView *graphicsView_L;
-    QGraphicsView *graphicsView_R;
+    QPushButton *pushButton_2;
 
     void setupUi(QWidget *CalibraterView)
     {
         if (CalibraterView->objectName().isEmpty())
             CalibraterView->setObjectName(QString::fromUtf8("CalibraterView"));
-        CalibraterView->resize(823, 499);
-        gridLayout_3 = new QGridLayout(CalibraterView);
-        gridLayout_3->setSpacing(6);
-        gridLayout_3->setContentsMargins(11, 11, 11, 11);
-        gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
-        frame = new QFrame(CalibraterView);
-        frame->setObjectName(QString::fromUtf8("frame"));
-        frame->setMaximumSize(QSize(16777215, 180));
-        frame->setFrameShape(QFrame::Box);
-        frame->setFrameShadow(QFrame::Raised);
-        gridLayout_2 = new QGridLayout(frame);
+        CalibraterView->resize(906, 606);
+        gridLayout_2 = new QGridLayout(CalibraterView);
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-        groupBox = new QGroupBox(frame);
-        groupBox->setObjectName(QString::fromUtf8("groupBox"));
-        gridLayout = new QGridLayout(groupBox);
+        listWidget = new QListWidget(CalibraterView);
+        listWidget->setObjectName(QString::fromUtf8("listWidget"));
+        listWidget->setMaximumSize(QSize(240, 16777215));
+        listWidget->setStyleSheet(QString::fromUtf8("background-color: rgb(129, 129, 129);"));
+
+        gridLayout_2->addWidget(listWidget, 0, 0, 2, 1);
+
+        graphicsView = new QGraphicsView(CalibraterView);
+        graphicsView->setObjectName(QString::fromUtf8("graphicsView"));
+        graphicsView->setStyleSheet(QString::fromUtf8("background-color: rgb(181, 181, 181);"));
+
+        gridLayout_2->addWidget(graphicsView, 0, 1, 1, 1);
+
+        frame = new QFrame(CalibraterView);
+        frame->setObjectName(QString::fromUtf8("frame"));
+        frame->setFrameShape(QFrame::Box);
+        frame->setFrameShadow(QFrame::Raised);
+        gridLayout = new QGridLayout(frame);
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        lineEdit_BoardHeight = new QLineEdit(groupBox);
-        lineEdit_BoardHeight->setObjectName(QString::fromUtf8("lineEdit_BoardHeight"));
-        lineEdit_BoardHeight->setMinimumSize(QSize(50, 20));
-        lineEdit_BoardHeight->setMaximumSize(QSize(16777215, 16777215));
+        groupBox_3 = new QGroupBox(frame);
+        groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
+        gridLayout_3 = new QGridLayout(groupBox_3);
+        gridLayout_3->setSpacing(6);
+        gridLayout_3->setContentsMargins(11, 11, 11, 11);
+        gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
+        checkBox_CALIB_FIX_PRINCIPAL_POINT = new QCheckBox(groupBox_3);
+        checkBox_CALIB_FIX_PRINCIPAL_POINT->setObjectName(QString::fromUtf8("checkBox_CALIB_FIX_PRINCIPAL_POINT"));
 
-        gridLayout->addWidget(lineEdit_BoardHeight, 1, 2, 1, 1);
+        gridLayout_3->addWidget(checkBox_CALIB_FIX_PRINCIPAL_POINT, 0, 0, 1, 1);
 
-        label_6 = new QLabel(groupBox);
-        label_6->setObjectName(QString::fromUtf8("label_6"));
+        line = new QFrame(groupBox_3);
+        line->setObjectName(QString::fromUtf8("line"));
+        line->setFrameShape(QFrame::VLine);
+        line->setFrameShadow(QFrame::Sunken);
 
-        gridLayout->addWidget(label_6, 1, 0, 1, 1);
+        gridLayout_3->addWidget(line, 0, 1, 5, 1);
+
+        checkBox_CALIB_RATIONAL_MODEL = new QCheckBox(groupBox_3);
+        checkBox_CALIB_RATIONAL_MODEL->setObjectName(QString::fromUtf8("checkBox_CALIB_RATIONAL_MODEL"));
+
+        gridLayout_3->addWidget(checkBox_CALIB_RATIONAL_MODEL, 0, 2, 1, 1);
+
+        line_2 = new QFrame(groupBox_3);
+        line_2->setObjectName(QString::fromUtf8("line_2"));
+        line_2->setFrameShape(QFrame::VLine);
+        line_2->setFrameShadow(QFrame::Sunken);
+
+        gridLayout_3->addWidget(line_2, 0, 3, 5, 1);
+
+        checkBox_CALIB_TILTED_MODEL = new QCheckBox(groupBox_3);
+        checkBox_CALIB_TILTED_MODEL->setObjectName(QString::fromUtf8("checkBox_CALIB_TILTED_MODEL"));
+
+        gridLayout_3->addWidget(checkBox_CALIB_TILTED_MODEL, 0, 4, 1, 1);
+
+        checkBox_CALIB_FIX_ASPECT_RATIO = new QCheckBox(groupBox_3);
+        checkBox_CALIB_FIX_ASPECT_RATIO->setObjectName(QString::fromUtf8("checkBox_CALIB_FIX_ASPECT_RATIO"));
+
+        gridLayout_3->addWidget(checkBox_CALIB_FIX_ASPECT_RATIO, 1, 0, 1, 1);
+
+        checkBox_CALIB_THIN_PRISM_MODEL = new QCheckBox(groupBox_3);
+        checkBox_CALIB_THIN_PRISM_MODEL->setObjectName(QString::fromUtf8("checkBox_CALIB_THIN_PRISM_MODEL"));
+
+        gridLayout_3->addWidget(checkBox_CALIB_THIN_PRISM_MODEL, 1, 2, 1, 1);
+
+        checkBox_CALIB_FIX_TAUX_TAUY = new QCheckBox(groupBox_3);
+        checkBox_CALIB_FIX_TAUX_TAUY->setObjectName(QString::fromUtf8("checkBox_CALIB_FIX_TAUX_TAUY"));
+
+        gridLayout_3->addWidget(checkBox_CALIB_FIX_TAUX_TAUY, 1, 4, 1, 1);
+
+        checkBox_CALIB_ZERO_TANGENT_DIST = new QCheckBox(groupBox_3);
+        checkBox_CALIB_ZERO_TANGENT_DIST->setObjectName(QString::fromUtf8("checkBox_CALIB_ZERO_TANGENT_DIST"));
+
+        gridLayout_3->addWidget(checkBox_CALIB_ZERO_TANGENT_DIST, 2, 0, 1, 1);
+
+        checkBox_CALIB_FIX_S1_S2_S3_S4 = new QCheckBox(groupBox_3);
+        checkBox_CALIB_FIX_S1_S2_S3_S4->setObjectName(QString::fromUtf8("checkBox_CALIB_FIX_S1_S2_S3_S4"));
+
+        gridLayout_3->addWidget(checkBox_CALIB_FIX_S1_S2_S3_S4, 2, 2, 1, 1);
+
+        checkBox_CALIB_SAME_FOCAL_LENGTH = new QCheckBox(groupBox_3);
+        checkBox_CALIB_SAME_FOCAL_LENGTH->setObjectName(QString::fromUtf8("checkBox_CALIB_SAME_FOCAL_LENGTH"));
+
+        gridLayout_3->addWidget(checkBox_CALIB_SAME_FOCAL_LENGTH, 2, 4, 1, 1);
+
+        checkBox_CALIB_FIX_K1 = new QCheckBox(groupBox_3);
+        checkBox_CALIB_FIX_K1->setObjectName(QString::fromUtf8("checkBox_CALIB_FIX_K1"));
+
+        gridLayout_3->addWidget(checkBox_CALIB_FIX_K1, 3, 0, 1, 1);
+
+        checkBox_CALIB_FIX_K3 = new QCheckBox(groupBox_3);
+        checkBox_CALIB_FIX_K3->setObjectName(QString::fromUtf8("checkBox_CALIB_FIX_K3"));
+
+        gridLayout_3->addWidget(checkBox_CALIB_FIX_K3, 3, 2, 1, 1);
+
+        checkBox_CALIB_FIX_K5 = new QCheckBox(groupBox_3);
+        checkBox_CALIB_FIX_K5->setObjectName(QString::fromUtf8("checkBox_CALIB_FIX_K5"));
+
+        gridLayout_3->addWidget(checkBox_CALIB_FIX_K5, 3, 4, 1, 1);
+
+        checkBox_CALIB_FIX_K2 = new QCheckBox(groupBox_3);
+        checkBox_CALIB_FIX_K2->setObjectName(QString::fromUtf8("checkBox_CALIB_FIX_K2"));
+
+        gridLayout_3->addWidget(checkBox_CALIB_FIX_K2, 4, 0, 1, 1);
+
+        checkBox_CALIB_FIX_K4 = new QCheckBox(groupBox_3);
+        checkBox_CALIB_FIX_K4->setObjectName(QString::fromUtf8("checkBox_CALIB_FIX_K4"));
+
+        gridLayout_3->addWidget(checkBox_CALIB_FIX_K4, 4, 2, 1, 1);
+
+        checkBox_CALIB_FIX_K6 = new QCheckBox(groupBox_3);
+        checkBox_CALIB_FIX_K6->setObjectName(QString::fromUtf8("checkBox_CALIB_FIX_K6"));
+
+        gridLayout_3->addWidget(checkBox_CALIB_FIX_K6, 4, 4, 1, 1);
+
+
+        gridLayout->addWidget(groupBox_3, 0, 0, 1, 2);
+
+        groupBox = new QGroupBox(frame);
+        groupBox->setObjectName(QString::fromUtf8("groupBox"));
+        horizontalLayout_2 = new QHBoxLayout(groupBox);
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_2->addItem(horizontalSpacer);
 
         label_5 = new QLabel(groupBox);
         label_5->setObjectName(QString::fromUtf8("label_5"));
 
-        gridLayout->addWidget(label_5, 0, 0, 1, 1);
+        horizontalLayout_2->addWidget(label_5);
 
         lineEdit_BoardWidth = new QLineEdit(groupBox);
         lineEdit_BoardWidth->setObjectName(QString::fromUtf8("lineEdit_BoardWidth"));
         lineEdit_BoardWidth->setMinimumSize(QSize(50, 20));
-        lineEdit_BoardWidth->setMaximumSize(QSize(16777215, 16777215));
+        lineEdit_BoardWidth->setMaximumSize(QSize(20, 16777215));
 
-        gridLayout->addWidget(lineEdit_BoardWidth, 0, 2, 1, 1);
+        horizontalLayout_2->addWidget(lineEdit_BoardWidth);
 
-        lineEdit_SquareSize = new QLineEdit(groupBox);
-        lineEdit_SquareSize->setObjectName(QString::fromUtf8("lineEdit_SquareSize"));
-        lineEdit_SquareSize->setMinimumSize(QSize(50, 20));
-        lineEdit_SquareSize->setMaximumSize(QSize(16777215, 16777215));
+        label_6 = new QLabel(groupBox);
+        label_6->setObjectName(QString::fromUtf8("label_6"));
 
-        gridLayout->addWidget(lineEdit_SquareSize, 2, 2, 1, 1);
+        horizontalLayout_2->addWidget(label_6);
+
+        lineEdit_BoardHeight = new QLineEdit(groupBox);
+        lineEdit_BoardHeight->setObjectName(QString::fromUtf8("lineEdit_BoardHeight"));
+        lineEdit_BoardHeight->setMinimumSize(QSize(50, 20));
+        lineEdit_BoardHeight->setMaximumSize(QSize(20, 16777215));
+
+        horizontalLayout_2->addWidget(lineEdit_BoardHeight);
 
         label_8 = new QLabel(groupBox);
         label_8->setObjectName(QString::fromUtf8("label_8"));
 
-        gridLayout->addWidget(label_8, 2, 0, 1, 1);
+        horizontalLayout_2->addWidget(label_8);
 
-        checkBox_showRectified = new QCheckBox(groupBox);
-        checkBox_showRectified->setObjectName(QString::fromUtf8("checkBox_showRectified"));
+        lineEdit_SquareSize = new QLineEdit(groupBox);
+        lineEdit_SquareSize->setObjectName(QString::fromUtf8("lineEdit_SquareSize"));
+        lineEdit_SquareSize->setMinimumSize(QSize(50, 20));
+        lineEdit_SquareSize->setMaximumSize(QSize(20, 16777215));
 
-        gridLayout->addWidget(checkBox_showRectified, 3, 2, 1, 1);
-
-
-        gridLayout_2->addWidget(groupBox, 0, 0, 3, 1);
-
-        groupBox_3 = new QGroupBox(frame);
-        groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
-        horizontalLayout_2 = new QHBoxLayout(groupBox_3);
-        horizontalLayout_2->setSpacing(6);
-        horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        radioButton = new QRadioButton(groupBox_3);
-        radioButton->setObjectName(QString::fromUtf8("radioButton"));
-
-        horizontalLayout_2->addWidget(radioButton);
-
-        radioButton_2 = new QRadioButton(groupBox_3);
-        radioButton_2->setObjectName(QString::fromUtf8("radioButton_2"));
-
-        horizontalLayout_2->addWidget(radioButton_2);
+        horizontalLayout_2->addWidget(lineEdit_SquareSize);
 
 
-        gridLayout_2->addWidget(groupBox_3, 1, 2, 1, 1);
+        gridLayout->addWidget(groupBox, 1, 0, 1, 1);
 
         groupBox_4 = new QGroupBox(frame);
         groupBox_4->setObjectName(QString::fromUtf8("groupBox_4"));
@@ -161,61 +262,22 @@ public:
 
         horizontalLayout_3->addWidget(pushButton);
 
+        pushButton_2 = new QPushButton(groupBox_4);
+        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
 
-        gridLayout_2->addWidget(groupBox_4, 2, 2, 1, 1);
-
-        groupBox_2 = new QGroupBox(frame);
-        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
-        horizontalLayout = new QHBoxLayout(groupBox_2);
-        horizontalLayout->setSpacing(6);
-        horizontalLayout->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        radioButton_Bouguet = new QRadioButton(groupBox_2);
-        radioButton_Bouguet->setObjectName(QString::fromUtf8("radioButton_Bouguet"));
-
-        horizontalLayout->addWidget(radioButton_Bouguet);
-
-        radioButton_Hartley = new QRadioButton(groupBox_2);
-        radioButton_Hartley->setObjectName(QString::fromUtf8("radioButton_Hartley"));
-
-        horizontalLayout->addWidget(radioButton_Hartley);
+        horizontalLayout_3->addWidget(pushButton_2);
 
 
-        gridLayout_2->addWidget(groupBox_2, 0, 2, 1, 1);
+        gridLayout->addWidget(groupBox_4, 1, 1, 1, 1);
 
 
-        gridLayout_3->addWidget(frame, 1, 0, 1, 1);
-
-        splitter = new QSplitter(CalibraterView);
-        splitter->setObjectName(QString::fromUtf8("splitter"));
-        splitter->setOrientation(Qt::Horizontal);
-        graphicsView_L = new QGraphicsView(splitter);
-        graphicsView_L->setObjectName(QString::fromUtf8("graphicsView_L"));
-        graphicsView_L->setMinimumSize(QSize(400, 300));
-        graphicsView_L->setContextMenuPolicy(Qt::ActionsContextMenu);
-        graphicsView_L->setAutoFillBackground(false);
-        graphicsView_L->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-        graphicsView_L->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-        graphicsView_L->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
-        QBrush brush(QColor(0, 0, 0, 255));
-        brush.setStyle(Qt::SolidPattern);
-        graphicsView_L->setBackgroundBrush(brush);
-        splitter->addWidget(graphicsView_L);
-        graphicsView_R = new QGraphicsView(splitter);
-        graphicsView_R->setObjectName(QString::fromUtf8("graphicsView_R"));
-        graphicsView_R->setMinimumSize(QSize(400, 300));
-        splitter->addWidget(graphicsView_R);
-
-        gridLayout_3->addWidget(splitter, 0, 0, 1, 1);
+        gridLayout_2->addWidget(frame, 1, 1, 1, 1);
 
 
         retranslateUi(CalibraterView);
         QObject::connect(lineEdit_BoardWidth, SIGNAL(textChanged(QString)), CalibraterView, SLOT(onValueChanged_BoardWidth(QString)));
         QObject::connect(lineEdit_BoardHeight, SIGNAL(textChanged(QString)), CalibraterView, SLOT(onValueChanged_BoardHeight(QString)));
         QObject::connect(lineEdit_SquareSize, SIGNAL(textChanged(QString)), CalibraterView, SLOT(onValueChanged_SquareSize(QString)));
-        QObject::connect(checkBox_showRectified, SIGNAL(clicked(bool)), CalibraterView, SLOT(onClicked_showRectified(bool)));
-        QObject::connect(radioButton_Bouguet, SIGNAL(clicked(bool)), CalibraterView, SLOT(onClicked_Bouguet(bool)));
-        QObject::connect(radioButton_Hartley, SIGNAL(clicked(bool)), CalibraterView, SLOT(onClicked_Hartley(bool)));
         QObject::connect(pushButton_CalibDefault, SIGNAL(clicked()), CalibraterView, SLOT(setDefaultCalibParam()));
         QObject::connect(pushButton, SIGNAL(clicked()), CalibraterView, SLOT(doCalib()));
 
@@ -225,20 +287,30 @@ public:
     void retranslateUi(QWidget *CalibraterView)
     {
         CalibraterView->setWindowTitle(QApplication::translate("CalibraterView", "\346\240\207\345\256\232", nullptr));
+        groupBox_3->setTitle(QApplication::translate("CalibraterView", "\346\240\207\345\256\232\350\256\276\347\275\256", nullptr));
+        checkBox_CALIB_FIX_PRINCIPAL_POINT->setText(QApplication::translate("CalibraterView", "\344\270\215\344\274\230\345\214\226\344\270\273\347\202\271\344\275\215\347\275\256", nullptr));
+        checkBox_CALIB_RATIONAL_MODEL->setText(QApplication::translate("CalibraterView", "\344\275\277\347\224\250\347\220\206\346\203\263\346\250\241\345\236\213(8\345\217\202\346\225\260)", nullptr));
+        checkBox_CALIB_TILTED_MODEL->setText(QApplication::translate("CalibraterView", "\344\275\277\347\224\250\345\200\276\346\226\234\344\274\240\346\204\237\345\231\250\346\250\241\345\236\213(14\345\217\202\346\225\260)", nullptr));
+        checkBox_CALIB_FIX_ASPECT_RATIO->setText(QApplication::translate("CalibraterView", "\345\233\272\345\256\232\345\256\275\351\253\230\346\257\224", nullptr));
+        checkBox_CALIB_THIN_PRISM_MODEL->setText(QApplication::translate("CalibraterView", "\344\275\277\347\224\250\350\226\204\346\243\261\351\225\234\346\250\241\345\236\213(12\345\217\202\346\225\260)", nullptr));
+        checkBox_CALIB_FIX_TAUX_TAUY->setText(QApplication::translate("CalibraterView", "\345\277\275\347\225\245\345\200\276\346\226\234\344\274\240\346\204\237\345\231\250\345\217\202\346\225\260TauX\345\222\214TauY", nullptr));
+        checkBox_CALIB_ZERO_TANGENT_DIST->setText(QApplication::translate("CalibraterView", "\345\277\275\347\225\245\345\210\207\345\220\221\347\225\270\345\217\230\347\263\273\346\225\260(P1,P2)", nullptr));
+        checkBox_CALIB_FIX_S1_S2_S3_S4->setText(QApplication::translate("CalibraterView", "\345\277\275\347\225\245\350\226\204\346\243\261\351\225\234\345\217\202\346\225\260S1-S4", nullptr));
+        checkBox_CALIB_SAME_FOCAL_LENGTH->setText(QApplication::translate("CalibraterView", "\345\274\272\345\210\266\344\270\244\344\276\247\347\233\270\346\234\272\347\204\246\350\267\235\347\233\270\347\255\211", nullptr));
+        checkBox_CALIB_FIX_K1->setText(QApplication::translate("CalibraterView", "\345\277\275\347\225\245\345\276\204\345\220\221\347\225\270\345\217\230\347\263\273\346\225\260K1", nullptr));
+        checkBox_CALIB_FIX_K3->setText(QApplication::translate("CalibraterView", "\345\277\275\347\225\245\345\276\204\345\220\221\347\225\270\345\217\230\347\263\273\346\225\260K3", nullptr));
+        checkBox_CALIB_FIX_K5->setText(QApplication::translate("CalibraterView", "\345\277\275\347\225\245\345\276\204\345\220\221\347\225\270\345\217\230\347\263\273\346\225\260K5", nullptr));
+        checkBox_CALIB_FIX_K2->setText(QApplication::translate("CalibraterView", "\345\277\275\347\225\245\345\276\204\345\220\221\347\225\270\345\217\230\347\263\273\346\225\260K2", nullptr));
+        checkBox_CALIB_FIX_K4->setText(QApplication::translate("CalibraterView", "\345\277\275\347\225\245\345\276\204\345\220\221\347\225\270\345\217\230\347\263\273\346\225\260K4", nullptr));
+        checkBox_CALIB_FIX_K6->setText(QApplication::translate("CalibraterView", "\345\277\275\347\225\245\345\276\204\345\220\221\347\225\270\345\217\230\347\263\273\346\225\260K6", nullptr));
         groupBox->setTitle(QApplication::translate("CalibraterView", "\346\240\207\345\256\232\345\217\202\346\225\260", nullptr));
-        label_6->setText(QApplication::translate("CalibraterView", "Height:", nullptr));
         label_5->setText(QApplication::translate("CalibraterView", "Width:", nullptr));
+        label_6->setText(QApplication::translate("CalibraterView", "Height:", nullptr));
         label_8->setText(QApplication::translate("CalibraterView", "Size:", nullptr));
-        checkBox_showRectified->setText(QApplication::translate("CalibraterView", "\346\230\276\347\244\272\347\237\253\346\255\243\347\273\223\346\236\234(By OpenCV NamedWindow)", nullptr));
-        groupBox_3->setTitle(QApplication::translate("CalibraterView", "\345\215\225/\345\217\214\347\233\256", nullptr));
-        radioButton->setText(QApplication::translate("CalibraterView", "\345\215\225\347\233\256\346\240\207\345\256\232", nullptr));
-        radioButton_2->setText(QApplication::translate("CalibraterView", "\345\217\214\347\233\256\346\240\207\345\256\232", nullptr));
         groupBox_4->setTitle(QApplication::translate("CalibraterView", "\346\240\207\345\256\232", nullptr));
         pushButton_CalibDefault->setText(QApplication::translate("CalibraterView", "\351\273\230\350\256\244\345\217\202\346\225\260", nullptr));
         pushButton->setText(QApplication::translate("CalibraterView", "\346\240\207\345\256\232", nullptr));
-        groupBox_2->setTitle(QApplication::translate("CalibraterView", "Function", nullptr));
-        radioButton_Bouguet->setText(QApplication::translate("CalibraterView", "Bouguet", nullptr));
-        radioButton_Hartley->setText(QApplication::translate("CalibraterView", "Hartley", nullptr));
+        pushButton_2->setText(QApplication::translate("CalibraterView", "\344\277\235\345\255\230\345\217\202\346\225\260", nullptr));
     } // retranslateUi
 
 };
