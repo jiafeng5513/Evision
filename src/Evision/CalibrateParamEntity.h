@@ -64,6 +64,7 @@ signals:
 	void paramChanged_CALIB_TILTED_MODEL();
 	void paramChanged_CALIB_FIX_TAUX_TAUY();
 	void paramChanged_InsertToItemMap();
+	void paramChanged_ClearItemMap();
 #pragma endregion 
 
 #pragma region getter And setter
@@ -130,6 +131,7 @@ public:
 
 	std::map<QString, cv::Mat> & getItemMap();//访问缩略图Map
 	void insertItem(cv::Mat value);//向缩略图Map中插入一条
+	void clearItemMap();//清空Map
 	int getIndex();//获取最新的缩略图index,该值是只读的
 #pragma endregion 
 };

@@ -19,6 +19,7 @@ private:
 	Ui::CalibraterView ui;
 	CalibrateParamEntity * m_calib_entity;
 	CalibrateController * m_calib_controller;
+	QGraphicsScene *m_MainScene;
 public slots:
 	void setDefaultCalibParam();
 	void doCalib();
@@ -79,4 +80,6 @@ public slots:
 
 	void onParamChanged_imgLtoShow();//更新大视图
 	void onParamChanged_NewToItemMap();//有人插入了缩略图Map,界面上要响应一下
+	void onParamChanged_ClearItemMap();//有人清空了缩略图的Map,界面上响应一下
+	void onItemClicked(QListWidgetItem*item);//响应点击缩略图
 };

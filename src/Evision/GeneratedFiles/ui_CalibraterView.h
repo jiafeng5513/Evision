@@ -72,15 +72,20 @@ public:
     {
         if (CalibraterView->objectName().isEmpty())
             CalibraterView->setObjectName(QString::fromUtf8("CalibraterView"));
-        CalibraterView->resize(906, 606);
+        CalibraterView->resize(1004, 589);
         gridLayout_2 = new QGridLayout(CalibraterView);
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
         listWidget = new QListWidget(CalibraterView);
         listWidget->setObjectName(QString::fromUtf8("listWidget"));
-        listWidget->setMaximumSize(QSize(240, 16777215));
+        listWidget->setMaximumSize(QSize(220, 16777215));
         listWidget->setStyleSheet(QString::fromUtf8("background-color: rgb(129, 129, 129);"));
+        listWidget->setDragDropMode(QAbstractItemView::NoDragDrop);
+        listWidget->setIconSize(QSize(60, 60));
+        listWidget->setFlow(QListView::LeftToRight);
+        listWidget->setViewMode(QListView::IconMode);
+        listWidget->setModelColumn(0);
 
         gridLayout_2->addWidget(listWidget, 0, 0, 2, 1);
 
@@ -92,6 +97,7 @@ public:
 
         frame = new QFrame(CalibraterView);
         frame->setObjectName(QString::fromUtf8("frame"));
+        frame->setMaximumSize(QSize(16777215, 210));
         frame->setFrameShape(QFrame::Box);
         frame->setFrameShadow(QFrame::Raised);
         gridLayout = new QGridLayout(frame);
@@ -280,6 +286,10 @@ public:
         QObject::connect(lineEdit_SquareSize, SIGNAL(textChanged(QString)), CalibraterView, SLOT(onValueChanged_SquareSize(QString)));
         QObject::connect(pushButton_CalibDefault, SIGNAL(clicked()), CalibraterView, SLOT(setDefaultCalibParam()));
         QObject::connect(pushButton, SIGNAL(clicked()), CalibraterView, SLOT(doCalib()));
+        QObject::connect(listWidget, SIGNAL(itemClicked(QListWidgetItem*)), CalibraterView, SLOT(onItemClicked(QListWidgetItem*)));
+
+        listWidget->setCurrentRow(-1);
+
 
         QMetaObject::connectSlotsByName(CalibraterView);
     } // setupUi

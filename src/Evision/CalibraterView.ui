@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>906</width>
-    <height>606</height>
+    <width>1004</width>
+    <height>589</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,12 +18,33 @@
     <widget class="QListWidget" name="listWidget">
      <property name="maximumSize">
       <size>
-       <width>240</width>
+       <width>220</width>
        <height>16777215</height>
       </size>
      </property>
      <property name="styleSheet">
       <string notr="true">background-color: rgb(129, 129, 129);</string>
+     </property>
+     <property name="dragDropMode">
+      <enum>QAbstractItemView::DragDrop</enum>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>60</width>
+       <height>60</height>
+      </size>
+     </property>
+     <property name="flow">
+      <enum>QListView::LeftToRight</enum>
+     </property>
+     <property name="viewMode">
+      <enum>QListView::IconMode</enum>
+     </property>
+     <property name="modelColumn">
+      <number>0</number>
+     </property>
+     <property name="currentRow">
+      <number>-1</number>
      </property>
     </widget>
    </item>
@@ -36,6 +57,12 @@
    </item>
    <item row="1" column="1">
     <widget class="QFrame" name="frame">
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>210</height>
+      </size>
+     </property>
      <property name="frameShape">
       <enum>QFrame::Box</enum>
      </property>
@@ -43,6 +70,21 @@
       <enum>QFrame::Raised</enum>
      </property>
      <layout class="QGridLayout" name="gridLayout">
+      <property name="leftMargin">
+       <number>4</number>
+      </property>
+      <property name="topMargin">
+       <number>4</number>
+      </property>
+      <property name="rightMargin">
+       <number>4</number>
+      </property>
+      <property name="bottomMargin">
+       <number>4</number>
+      </property>
+      <property name="spacing">
+       <number>4</number>
+      </property>
       <item row="0" column="0" colspan="2">
        <widget class="QGroupBox" name="groupBox_3">
         <property name="title">
@@ -322,8 +364,8 @@
    <slot>onValueChanged_BoardWidth(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>225</x>
-     <y>329</y>
+     <x>528</x>
+     <y>558</y>
     </hint>
     <hint type="destinationlabel">
      <x>246</x>
@@ -338,8 +380,8 @@
    <slot>onValueChanged_BoardHeight(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>141</x>
-     <y>365</y>
+     <x>632</x>
+     <y>558</y>
     </hint>
     <hint type="destinationlabel">
      <x>131</x>
@@ -354,8 +396,8 @@
    <slot>onValueChanged_SquareSize(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>280</x>
-     <y>396</y>
+     <x>724</x>
+     <y>558</y>
     </hint>
     <hint type="destinationlabel">
      <x>174</x>
@@ -370,8 +412,8 @@
    <slot>setDefaultCalibParam()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>455</x>
-     <y>438</y>
+     <x>820</x>
+     <y>559</y>
     </hint>
     <hint type="destinationlabel">
      <x>426</x>
@@ -386,12 +428,28 @@
    <slot>doCalib()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>542</x>
-     <y>435</y>
+     <x>899</x>
+     <y>559</y>
     </hint>
     <hint type="destinationlabel">
      <x>569</x>
      <y>469</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>listWidget</sender>
+   <signal>itemClicked(QListWidgetItem*)</signal>
+   <receiver>CalibraterView</receiver>
+   <slot>onItemClicked(QListWidgetItem*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>154</x>
+     <y>152</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>259</x>
+     <y>6</y>
     </hint>
    </hints>
   </connection>
@@ -405,5 +463,6 @@
   <slot>onClicked_Hartley(bool)</slot>
   <slot>setDefaultCalibParam()</slot>
   <slot>doCalib()</slot>
+  <slot>onItemClicked(QListWidgetItem*)</slot>
  </slots>
 </ui>

@@ -7,7 +7,7 @@ CalibraterView::CalibraterView(QWidget *parent)
 	ui.setupUi(this);
 	m_calib_entity = CalibrateParamEntity::getInstance();
 	m_calib_controller = new CalibrateController();
-
+	m_MainScene = new QGraphicsScene();
 	connect(m_calib_entity, SIGNAL(paramChanged_BoardWidth()), this, SLOT(onParamChanged_BoardWidth()));
 	connect(m_calib_entity, SIGNAL(paramChanged_BoardHeight()), this, SLOT(onParamChanged_BoardHeight()));
 	connect(m_calib_entity, SIGNAL(paramChanged_SquareSize()), this, SLOT(onParamChanged_SquareSize()));
@@ -28,7 +28,7 @@ CalibraterView::CalibraterView(QWidget *parent)
 	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_TILTED_MODEL()), this, SLOT(onParamChanged_TILTED_MODEL()));
 	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_FIX_TAUX_TAUY()), this, SLOT(onParamChanged_FIX_TAUX_TAUY()));
 	connect(m_calib_entity, SIGNAL(paramChanged_InsertToItemMap()), this, SLOT(onParamChanged_NewToItemMap()));
-
+	connect(m_calib_entity, SIGNAL(paramChanged_ClearItemMap()), this, SLOT(onParamChanged_ClearItemMap()));
 }
 
 CalibraterView::~CalibraterView()
@@ -314,5 +314,24 @@ void CalibraterView::onParamChanged_NewToItemMap()
 	);//这个无敌了这个
 	item->setText(QString::fromStdString(std::to_string(m_calib_entity->getIndex())));
 	ui.listWidget->addItem(item);
+}
+
+void CalibraterView::onParamChanged_ClearItemMap()
+{
+	ui.listWidget->clear();
+}
+
+void CalibraterView::onItemClicked(QListWidgetItem* item)
+{
+	m_MainScene->clear();
+	m_MainScene->addPixmap(QPixmap::fromImage(EvisionUtils::cvMat2QImage(m_calib_entity->getItemMap().at(item->text()))));
+	ui.graphicsView->setScene(m_MainScene);
+	//QRectF bounds = m_MainScene->itemsBoundingRect();
+	//bounds.setWidth(bounds.width());         // to tighten-up margins
+	//bounds.setHeight(bounds.height());       // same as above
+	ui.graphicsView->fitInView(m_MainScene->itemsBoundingRect(), Qt::KeepAspectRatio);
+	ui.graphicsView->centerOn(0, 0);
+	ui.graphicsView->show();
+	ui.graphicsView->update();
 }
 

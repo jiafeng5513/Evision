@@ -246,8 +246,19 @@ std::map<QString, cv::Mat>& CalibrateParamEntity::getItemMap()
 void CalibrateParamEntity::insertItem(cv::Mat value)
 {
 	index++;
-	itemMap.insert(std::pair<QString,cv::Mat >(QString::fromStdString(std::to_string(index)),value));
+	itemMap.insert(std::pair<QString,cv::Mat >(QString::fromStdString(std::to_string(index)),value.clone()));
 	emit paramChanged_InsertToItemMap();
+}
+
+void CalibrateParamEntity::clearItemMap()
+{
+	itemMap.clear();
+	emit paramChanged_ClearItemMap();
+}
+
+int CalibrateParamEntity::getIndex()
+{
+	return index;
 }
 
 
