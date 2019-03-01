@@ -19,6 +19,11 @@ void CalibrateController::setDefaultCalibParamCommand()
 	m_calib_entity->setBoardWidth(9);
 	m_calib_entity->setBoardHeight(6);
 	m_calib_entity->setSquareSize(25);
+	m_calib_entity->setCALIB_SAME_FOCAL_LENGTH(true);
+	m_calib_entity->setCALIB_RATIONAL_MODEL(true);
+	m_calib_entity->setCALIB_FIX_K3(true);
+	m_calib_entity->setCALIB_FIX_K4(true);
+	m_calib_entity->setCALIB_FIX_K5(true);
 }
 //命令:标定
 void CalibrateController::CalibrateCommand()
@@ -55,18 +60,15 @@ void CalibrateController::CalibrateCommand()
 				/*
 				 *3.一切正常,可以进行从图片标定
 				 */
-				std::vector<std::string>* imagelist = new std::vector<std::string>();
 				std::vector<std::string>* imagelistL = new std::vector<std::string>();
 				std::vector<std::string>* imagelistR = new std::vector<std::string>();
 				for (int i = 0; i < std::min(ImageListL.size(), ImageListR.size()); ++i)
 				{
-					imagelist->push_back(ImageListL.at(i).toStdString());
-					imagelist->push_back(ImageListR.at(i).toStdString());
 					imagelistL->push_back(ImageListL.at(i).toStdString());
 					imagelistR->push_back(ImageListR.at(i).toStdString());
-
 				}
-				StereoCalibrate * _stereoCalib = new StereoCalibrate(imagelistL, imagelistR);
+				m_calib_entity->clearItemMap();
+				_stereoCalib = new StereoCalibrate(imagelistL, imagelistR);
 				connect(_stereoCalib, SIGNAL(openMessageBox(QString, QString)), this, SLOT(onOpenMessageBox(QString, QString)));
 				_stereoCalib->start();
 			}
@@ -83,6 +85,15 @@ void CalibrateController::CalibrateCommand()
 		return;
 	}
 }
+//命令:把参数保存到文件中
+void CalibrateController::SaveParamsToFileCommand()
+{
+	if (_stereoCalib!=NULL)
+	{
+		_stereoCalib->SaveCameraParamsToFile();
+	}
+}
+
 //消息响应:弹出对话框
 void CalibrateController::onOpenMessageBox(QString title, QString msg)
 {

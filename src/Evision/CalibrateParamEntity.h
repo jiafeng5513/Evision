@@ -19,7 +19,6 @@ private:
 	int BoardWidth = 0;
 	int BoardHeight = 0;
 	int SquareSize = 0;
-	cv::Mat imgLtoShow, imgRtoShow;
 
 	bool CALIB_FIX_PRINCIPAL_POINT = false;	//不优化主点位置
 	bool CALIB_FIX_ASPECT_RATIO = false;	//固定宽高比
@@ -46,8 +45,6 @@ signals:
 	void paramChanged_BoardWidth();
 	void paramChanged_BoardHeight();
 	void paramChanged_SquareSize();
-	void paramChanged_ImageLtoShow();
-	void paramChanged_ImageRtoShow();
 	void paramChanged_CALIB_FIX_PRINCIPAL_POINT();
 	void paramChanged_CALIB_FIX_ASPECT_RATIO();
 	void paramChanged_CALIB_ZERO_TANGENT_DIST();
@@ -122,12 +119,6 @@ public:
 
 	bool getCALIB_FIX_TAUX_TAUY();
 	void setCALIB_FIX_TAUX_TAUY(bool value);
-
-	cv::Mat getImageLtoShow();
-	void setImageLtoShow(cv::Mat value);
-
-	cv::Mat getImageRtoShow();
-	void setImageRtoShow(cv::Mat value);
 
 	std::map<QString, cv::Mat> & getItemMap();//访问缩略图Map
 	void insertItem(cv::Mat value);//向缩略图Map中插入一条

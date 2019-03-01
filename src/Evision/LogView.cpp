@@ -10,8 +10,8 @@ LogView::LogView(QWidget *parent)
 {
 	ui.setupUi(this);
 	this->setWindowFlags(this->windowFlags() &~Qt::WindowMinMaxButtonsHint);//禁止最大和最小化
-	//this->setWindowFlags(this->windowFlags() | Qt::WindowStaysOnTopHint);//保持在界面的最前面
-
+	this->setWindowFlags(this->windowFlags() | Qt::WindowStaysOnTopHint);//保持在界面的最前面
+	ui.checkBox_StayOnTop->setChecked(true);
 	redirector = new StdoutRedirector(this, StdoutRedirector::StandardOutput | StdoutRedirector::StandardError);
 	connect(redirector, SIGNAL(readyRead()), this, SLOT(readData()));
 

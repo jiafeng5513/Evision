@@ -453,6 +453,262 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>CalibraterView</receiver>
+   <slot>onPush_saveParamsToFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>954</x>
+     <y>555</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>999</x>
+     <y>485</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_CALIB_FIX_PRINCIPAL_POINT</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>CalibraterView</receiver>
+   <slot>onValueChanged_FIX_PRINCIPAL_POINT(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>312</x>
+     <y>411</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>233</x>
+     <y>333</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_CALIB_RATIONAL_MODEL</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>CalibraterView</receiver>
+   <slot>onValueChanged_RATIONAL_MODEL(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>587</x>
+     <y>409</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>233</x>
+     <y>40</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_CALIB_TILTED_MODEL</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>CalibraterView</receiver>
+   <slot>onValueChanged_TILTED_MODEL(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>791</x>
+     <y>409</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>705</x>
+     <y>4</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_CALIB_FIX_ASPECT_RATIO</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>CalibraterView</receiver>
+   <slot>onValueChanged_FIX_ASPECT_RATIO(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>342</x>
+     <y>430</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>332</x>
+     <y>374</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_CALIB_ZERO_TANGENT_DIST</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>CalibraterView</receiver>
+   <slot>onValueChanged_ZERO_TANGENT_DIST(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>393</x>
+     <y>456</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>466</x>
+     <y>5</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_CALIB_FIX_K1</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>CalibraterView</receiver>
+   <slot>onValueChanged_FIX_K1(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>281</x>
+     <y>471</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>231</x>
+     <y>142</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_CALIB_FIX_K2</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>CalibraterView</receiver>
+   <slot>onValueChanged_FIX_K2(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>305</x>
+     <y>495</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>232</x>
+     <y>231</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_CALIB_THIN_PRISM_MODEL</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>CalibraterView</receiver>
+   <slot>onValueChanged_THIN_PRISM_MODEL(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>558</x>
+     <y>427</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>730</x>
+     <y>8</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_CALIB_FIX_S1_S2_S3_S4</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>CalibraterView</receiver>
+   <slot>onValueChanged_FIX_S1_S2_S3_S4(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>530</x>
+     <y>448</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>966</x>
+     <y>3</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_CALIB_FIX_K3</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>CalibraterView</receiver>
+   <slot>onValueChanged_FIX_K3(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>602</x>
+     <y>481</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>998</x>
+     <y>37</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_CALIB_FIX_K4</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>CalibraterView</receiver>
+   <slot>onValueChanged_FIX_K4(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>644</x>
+     <y>504</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1001</x>
+     <y>73</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_CALIB_FIX_TAUX_TAUY</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>CalibraterView</receiver>
+   <slot>onValueChanged_FIX_TAUX_TAUY(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>836</x>
+     <y>432</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1001</x>
+     <y>113</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_CALIB_SAME_FOCAL_LENGTH</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>CalibraterView</receiver>
+   <slot>onValueChanged_SAME_FOCAL_LENGTH(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>857</x>
+     <y>457</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1002</x>
+     <y>155</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_CALIB_FIX_K5</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>CalibraterView</receiver>
+   <slot>onValueChanged_FIX_K5(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>812</x>
+     <y>478</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1001</x>
+     <y>194</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_CALIB_FIX_K6</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>CalibraterView</receiver>
+   <slot>onValueChanged_FIX_K6(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>787</x>
+     <y>499</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1004</x>
+     <y>243</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>onValueChanged_BoardWidth(QString)</slot>
@@ -464,5 +720,21 @@
   <slot>setDefaultCalibParam()</slot>
   <slot>doCalib()</slot>
   <slot>onItemClicked(QListWidgetItem*)</slot>
+  <slot>onPush_saveParamsToFile()</slot>
+  <slot>onValueChanged_FIX_PRINCIPAL_POINT(bool)</slot>
+  <slot>onValueChanged_FIX_ASPECT_RATIO(bool)</slot>
+  <slot>onValueChanged_ZERO_TANGENT_DIST(bool)</slot>
+  <slot>onValueChanged_SAME_FOCAL_LENGTH(bool)</slot>
+  <slot>onValueChanged_FIX_K1(bool)</slot>
+  <slot>onValueChanged_FIX_K2(bool)</slot>
+  <slot>onValueChanged_FIX_K3(bool)</slot>
+  <slot>onValueChanged_FIX_K4(bool)</slot>
+  <slot>onValueChanged_FIX_K5(bool)</slot>
+  <slot>onValueChanged_FIX_K6(bool)</slot>
+  <slot>onValueChanged_RATIONAL_MODEL(bool)</slot>
+  <slot>onValueChanged_THIN_PRISM_MODEL(bool)</slot>
+  <slot>onValueChanged_FIX_S1_S2_S3_S4(bool)</slot>
+  <slot>onValueChanged_TILTED_MODEL(bool)</slot>
+  <slot>onValueChanged_FIX_TAUX_TAUY(bool)</slot>
  </slots>
 </ui>

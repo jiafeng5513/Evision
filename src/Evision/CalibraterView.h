@@ -78,8 +78,10 @@ public slots:
 	void onValueChanged_FIX_TAUX_TAUY(bool value);
 	void onParamChanged_FIX_TAUX_TAUY();
 
-	void onParamChanged_imgLtoShow();//更新大视图
+
 	void onParamChanged_NewToItemMap();//有人插入了缩略图Map,界面上要响应一下
 	void onParamChanged_ClearItemMap();//有人清空了缩略图的Map,界面上响应一下
 	void onItemClicked(QListWidgetItem*item);//响应点击缩略图
+
+	void onPush_saveParamsToFile();
 };

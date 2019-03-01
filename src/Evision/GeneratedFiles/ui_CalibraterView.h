@@ -81,7 +81,7 @@ public:
         listWidget->setObjectName(QString::fromUtf8("listWidget"));
         listWidget->setMaximumSize(QSize(220, 16777215));
         listWidget->setStyleSheet(QString::fromUtf8("background-color: rgb(129, 129, 129);"));
-        listWidget->setDragDropMode(QAbstractItemView::NoDragDrop);
+        listWidget->setDragDropMode(QAbstractItemView::DragDrop);
         listWidget->setIconSize(QSize(60, 60));
         listWidget->setFlow(QListView::LeftToRight);
         listWidget->setViewMode(QListView::IconMode);
@@ -101,9 +101,10 @@ public:
         frame->setFrameShape(QFrame::Box);
         frame->setFrameShadow(QFrame::Raised);
         gridLayout = new QGridLayout(frame);
-        gridLayout->setSpacing(6);
+        gridLayout->setSpacing(4);
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        gridLayout->setContentsMargins(4, 4, 4, 4);
         groupBox_3 = new QGroupBox(frame);
         groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
         gridLayout_3 = new QGridLayout(groupBox_3);
@@ -287,6 +288,22 @@ public:
         QObject::connect(pushButton_CalibDefault, SIGNAL(clicked()), CalibraterView, SLOT(setDefaultCalibParam()));
         QObject::connect(pushButton, SIGNAL(clicked()), CalibraterView, SLOT(doCalib()));
         QObject::connect(listWidget, SIGNAL(itemClicked(QListWidgetItem*)), CalibraterView, SLOT(onItemClicked(QListWidgetItem*)));
+        QObject::connect(pushButton_2, SIGNAL(clicked()), CalibraterView, SLOT(onPush_saveParamsToFile()));
+        QObject::connect(checkBox_CALIB_FIX_PRINCIPAL_POINT, SIGNAL(clicked(bool)), CalibraterView, SLOT(onValueChanged_FIX_PRINCIPAL_POINT(bool)));
+        QObject::connect(checkBox_CALIB_RATIONAL_MODEL, SIGNAL(clicked(bool)), CalibraterView, SLOT(onValueChanged_RATIONAL_MODEL(bool)));
+        QObject::connect(checkBox_CALIB_TILTED_MODEL, SIGNAL(clicked(bool)), CalibraterView, SLOT(onValueChanged_TILTED_MODEL(bool)));
+        QObject::connect(checkBox_CALIB_FIX_ASPECT_RATIO, SIGNAL(clicked(bool)), CalibraterView, SLOT(onValueChanged_FIX_ASPECT_RATIO(bool)));
+        QObject::connect(checkBox_CALIB_ZERO_TANGENT_DIST, SIGNAL(clicked(bool)), CalibraterView, SLOT(onValueChanged_ZERO_TANGENT_DIST(bool)));
+        QObject::connect(checkBox_CALIB_FIX_K1, SIGNAL(clicked(bool)), CalibraterView, SLOT(onValueChanged_FIX_K1(bool)));
+        QObject::connect(checkBox_CALIB_FIX_K2, SIGNAL(clicked(bool)), CalibraterView, SLOT(onValueChanged_FIX_K2(bool)));
+        QObject::connect(checkBox_CALIB_THIN_PRISM_MODEL, SIGNAL(clicked(bool)), CalibraterView, SLOT(onValueChanged_THIN_PRISM_MODEL(bool)));
+        QObject::connect(checkBox_CALIB_FIX_S1_S2_S3_S4, SIGNAL(clicked(bool)), CalibraterView, SLOT(onValueChanged_FIX_S1_S2_S3_S4(bool)));
+        QObject::connect(checkBox_CALIB_FIX_K3, SIGNAL(clicked(bool)), CalibraterView, SLOT(onValueChanged_FIX_K3(bool)));
+        QObject::connect(checkBox_CALIB_FIX_K4, SIGNAL(clicked(bool)), CalibraterView, SLOT(onValueChanged_FIX_K4(bool)));
+        QObject::connect(checkBox_CALIB_FIX_TAUX_TAUY, SIGNAL(clicked(bool)), CalibraterView, SLOT(onValueChanged_FIX_TAUX_TAUY(bool)));
+        QObject::connect(checkBox_CALIB_SAME_FOCAL_LENGTH, SIGNAL(clicked(bool)), CalibraterView, SLOT(onValueChanged_SAME_FOCAL_LENGTH(bool)));
+        QObject::connect(checkBox_CALIB_FIX_K5, SIGNAL(clicked(bool)), CalibraterView, SLOT(onValueChanged_FIX_K5(bool)));
+        QObject::connect(checkBox_CALIB_FIX_K6, SIGNAL(clicked(bool)), CalibraterView, SLOT(onValueChanged_FIX_K6(bool)));
 
         listWidget->setCurrentRow(-1);
 

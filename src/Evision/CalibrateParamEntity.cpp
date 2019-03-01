@@ -216,28 +216,6 @@ void CalibrateParamEntity::setCALIB_FIX_TAUX_TAUY(bool value)
 	emit paramChanged_CALIB_FIX_TAUX_TAUY();
 }
 
-cv::Mat CalibrateParamEntity::getImageLtoShow()
-{
-	return imgLtoShow;
-}
-
-void CalibrateParamEntity::setImageLtoShow(cv::Mat value)
-{
-	imgLtoShow = value;
-	emit paramChanged_ImageLtoShow();
-}
-
-cv::Mat CalibrateParamEntity::getImageRtoShow()
-{
-	return imgRtoShow;
-}
-
-void CalibrateParamEntity::setImageRtoShow(cv::Mat value)
-{
-	imgRtoShow = value;
-	emit paramChanged_ImageRtoShow();
-}
-
 std::map<QString, cv::Mat>& CalibrateParamEntity::getItemMap()
 {
 	return itemMap;
@@ -253,6 +231,7 @@ void CalibrateParamEntity::insertItem(cv::Mat value)
 void CalibrateParamEntity::clearItemMap()
 {
 	itemMap.clear();
+	index = 0;
 	emit paramChanged_ClearItemMap();
 }
 

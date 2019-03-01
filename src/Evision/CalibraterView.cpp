@@ -11,7 +11,6 @@ CalibraterView::CalibraterView(QWidget *parent)
 	connect(m_calib_entity, SIGNAL(paramChanged_BoardWidth()), this, SLOT(onParamChanged_BoardWidth()));
 	connect(m_calib_entity, SIGNAL(paramChanged_BoardHeight()), this, SLOT(onParamChanged_BoardHeight()));
 	connect(m_calib_entity, SIGNAL(paramChanged_SquareSize()), this, SLOT(onParamChanged_SquareSize()));
-	connect(m_calib_entity, SIGNAL(paramChanged_ImageLtoShow()), this, SLOT(onParamChanged_imgLtoShow())/*, Qt::QueuedConnection*/);
 	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_FIX_PRINCIPAL_POINT()), this, SLOT(onParamChanged_FIX_PRINCIPAL_POINT()));
 	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_FIX_ASPECT_RATIO()), this, SLOT(onParamChanged_FIX_ASPECT_RATIO()));
 	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_ZERO_TANGENT_DIST()), this, SLOT(onParamChanged_ZERO_TANGENT_DIST()));
@@ -278,42 +277,30 @@ void CalibraterView::onParamChanged_FIX_TAUX_TAUY()
 		ui.checkBox_CALIB_FIX_TAUX_TAUY->setChecked(m_calib_entity->getCALIB_FIX_TAUX_TAUY());
 	}
 }
-
-void CalibraterView::onParamChanged_imgLtoShow()
-{
-	QImage LQImage = EvisionUtils::cvMat2QImage(m_calib_entity->getImageLtoShow());
-	QGraphicsScene *sceneL = new QGraphicsScene;
-	sceneL->addPixmap(QPixmap::fromImage(LQImage));
-	ui.graphicsView->setScene(sceneL);
-	QRectF bounds = sceneL->itemsBoundingRect();
-	bounds.setWidth(bounds.width());         // to tighten-up margins
-	bounds.setHeight(bounds.height());       // same as above
-	ui.graphicsView->fitInView(bounds, Qt::KeepAspectRatio);
-	ui.graphicsView->centerOn(0, 0);
-	ui.graphicsView->show();
-	ui.graphicsView->update();
-}
-
+/*
+ * 新图加入ListView
+ */
 void CalibraterView::onParamChanged_NewToItemMap()
 {
 	QListWidgetItem * item = new QListWidgetItem;
-	item->setIcon(
-		QIcon(
-			QPixmap::fromImage(
-				EvisionUtils::cvMat2QImage(
-					m_calib_entity->getItemMap().at(
-						QString::fromStdString(
-							std::to_string(
-								m_calib_entity->getIndex()
-							)
-						)
-					)
-				)
-			)
-		)
-	);//这个无敌了这个
+	cv::Mat img = m_calib_entity->getItemMap().at(QString::fromStdString(std::to_string(m_calib_entity->getIndex())));
+	QPixmap pixmap = QPixmap::fromImage(EvisionUtils::cvMat2QImage(img));
+
+
+	item->setIcon(QIcon(pixmap));
 	item->setText(QString::fromStdString(std::to_string(m_calib_entity->getIndex())));
 	ui.listWidget->addItem(item);
+	ui.listWidget->scrollToBottom();
+
+	m_MainScene->clear();
+	m_MainScene->addPixmap(pixmap);
+	ui.graphicsView->setScene(m_MainScene);
+	ui.graphicsView->fitInView(m_MainScene->itemsBoundingRect(), Qt::KeepAspectRatio);
+	ui.graphicsView->centerOn(0, 0);
+	ui.graphicsView->show();
+	ui.graphicsView->update();
+
+	img.release();
 }
 
 void CalibraterView::onParamChanged_ClearItemMap()
@@ -326,12 +313,16 @@ void CalibraterView::onItemClicked(QListWidgetItem* item)
 	m_MainScene->clear();
 	m_MainScene->addPixmap(QPixmap::fromImage(EvisionUtils::cvMat2QImage(m_calib_entity->getItemMap().at(item->text()))));
 	ui.graphicsView->setScene(m_MainScene);
-	//QRectF bounds = m_MainScene->itemsBoundingRect();
-	//bounds.setWidth(bounds.width());         // to tighten-up margins
-	//bounds.setHeight(bounds.height());       // same as above
 	ui.graphicsView->fitInView(m_MainScene->itemsBoundingRect(), Qt::KeepAspectRatio);
 	ui.graphicsView->centerOn(0, 0);
 	ui.graphicsView->show();
 	ui.graphicsView->update();
+}
+/*
+ * 保存参数文件
+ */
+void CalibraterView::onPush_saveParamsToFile()
+{
+	m_calib_controller->SaveParamsToFileCommand();
 }
 

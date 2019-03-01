@@ -31,81 +31,74 @@ StereoCalibrate::~StereoCalibrate()
  */
 void StereoCalibrate::run()
 {
+	ready_to_save = false;
 	if (imagelistL->size()!= imagelistR->size())//图片不成对
 	{
 		emit openMessageBox(QStringLiteral("错误"), QStringLiteral("图片不成对!"));
 		return;
 	}
 
-	bool showRectified = true;
-	cv::Size boardSize;
-	boardSize.width = 9;
-	boardSize.height = 6;
-	float squareSize = 25;
-	float  aspectRatio = 1;
-
-	
-
-	std::vector<std::string> imagelist_double;
-	for (int i = 0; i < 20; ++i)
+	try
 	{
-		//img_L_files[i] img_R_files[i]
-		imagelist_double.push_back(imagelistL->at(i));
-		imagelist_double.push_back(imagelistR->at(i));
+		cv::Size boardSize(m_entity->getBoardWidth(), m_entity->getBoardHeight());
+		float squareSize = m_entity->getSquareSize();
+		int flags_1D = getCalibrate1D_flags();
+		int flags_2D = getCalibrate2D_flags();
+
+
+		bool showRectified = true;
+		float  aspectRatio = 1;
+		Pattern pattern = CHESSBOARD;
+		bool showUndistorted = true;
+
+
+		std::vector<std::string> imagelist_double;
+		for (int i = 0; i < imagelistL->size(); ++i)
+		{
+			imagelist_double.push_back(imagelistL->at(i));
+			imagelist_double.push_back(imagelistR->at(i));
+		}
+
+		std::cout << "标定左相机" << std::endl;
+		Calib1D(boardSize, squareSize, *imagelistL, cameraMatrix_L, distCoeffs_L, aspectRatio, pattern, flags_1D, showUndistorted);
+		std::cout << "标定右相机" << std::endl;
+		Calib1D(boardSize, squareSize, *imagelistR, cameraMatrix_R, distCoeffs_R, aspectRatio, pattern, flags_1D, showUndistorted);
+		std::cout << "标定双目系统" << std::endl;
+		StereoCalib(imagelist_double, boardSize, squareSize, cameraMatrix_L, distCoeffs_L, cameraMatrix_R, distCoeffs_R,
+			R, T, E, F, R1, P1, R2, P2, Q, roi1, roi2, flags_2D, false, true, showRectified);
+		ready_to_save = true;
 	}
+	catch (...)
+	{
+		std::cout << "标定出现严重错误!" << std::endl;
 
-	Pattern pattern = CHESSBOARD;
-	bool showUndistorted = true;
-	int flags_1D = 0 | cv::CALIB_FIX_K4 | cv::CALIB_FIX_K5;// cv::CALIB_FIX_K3  CALIB_FIX_ASPECT_RATIO CALIB_ZERO_TANGENT_DIST CALIB_FIX_PRINCIPAL_POINT
-	/*
-	 *CALIB_FIX_ASPECT_RATIO
-	 *CALIB_ZERO_TANGENT_DIST
-	 *CALIB_USE_INTRINSIC_GUESS
-	 *CALIB_SAME_FOCAL_LENGTH
-	 *CALIB_RATIONAL_MODEL
-	 *CALIB_FIX_INTRINSIC
-	 *CALIB_FIX_K3
-	 *CALIB_FIX_K4
-	 *CALIB_FIX_K5
-	 */
-	int flags_2D = 0 | cv::CALIB_SAME_FOCAL_LENGTH | cv::CALIB_RATIONAL_MODEL | cv::CALIB_FIX_INTRINSIC | cv::CALIB_FIX_K3 | cv::CALIB_FIX_K4 | cv::CALIB_FIX_K5;
-	cv::Mat cameraMatrix_L, distCoeffs_L, cameraMatrix_R, distCoeffs_R;//这里面存储计算好的参数
-	std::cout << "标定左相机" << std::endl;
-	Calib1D(boardSize, squareSize, *imagelistL, cameraMatrix_L, distCoeffs_L, aspectRatio, pattern, flags_1D, showUndistorted);
-	std::cout << "标定右相机" << std::endl;
-	Calib1D(boardSize, squareSize, *imagelistR, cameraMatrix_R, distCoeffs_R, aspectRatio, pattern, flags_1D, showUndistorted);
-	std::cout << "标定双目系统" << std::endl;
-	cv::Mat R, T, E, F, R1, P1, R2, P2, Q;
-	cv::Rect roi1, roi2;
-
-	StereoCalib(imagelist_double, boardSize, squareSize, cameraMatrix_L, distCoeffs_L, cameraMatrix_R, distCoeffs_R, 
-		R, T, E, F, R1, P1, R2, P2, Q, roi1, roi2,flags_2D, false, true, showRectified);
-
-
-	//cv::Mat R1, P1, R2, P2, Q;//stereoRectify的输出
-	//cv::Rect roi1, roi2;	  //stereoRectify的输出
-	//stereoRectify(cameraMatrix[0], distCoeffs[0],cameraMatrix[1], distCoeffs[1], imageSize, R, T, 
-	//				R1, R2, P1, P2, Q, cv::CALIB_ZERO_DISPARITY, -1, imageSize, &roi1, &roi2);
-	//std::cout << "映射(R1,P1,R2,P2,Q)计算完毕" << std::endl;
-	////计算矫正矩阵
-
-	//cv::Mat map1x, map1y, map2x, map2y;//矫正矩阵
-	//initUndistortRectifyMap(cameraMatrix[0], distCoeffs[0], R1, P1, imageSize, CV_16SC2, map1x, map1y);
-	//initUndistortRectifyMap(cameraMatrix[1], distCoeffs[1], R2, P2, imageSize, CV_16SC2, map2x, map2y);
-	//std::cout << "矫正矩阵(map1x, map1y, map2x, map2y)计算完毕" << std::endl;
-	////至此所有的相机参数和衍生参数都计算完了
-
-	//// 保存参数
-	//bool flag = EvisionUtils::write_AllCameraParams(cameraParamsFilename, cameraMatrix[0], distCoeffs[0],
-	//											cameraMatrix[1], distCoeffs[1], R, T, E, F,
-	//											imageSize,R1,P1,R2,P2,Q,roi1,roi2);
-	//std::cout << "参数已经保存到:" << cameraParamsFilename << std::endl;
-	//if (!flag)
-	//{
-	//	emit openMessageBox(QStringLiteral("文件访问错误"), QStringLiteral("无法写入:cameraParams.yml"));
-
-	//}
+	}
 }
+/*
+ * 把标定产生的参数保存到文件
+ */
+bool StereoCalibrate::SaveCameraParamsToFile()
+{
+	if (ready_to_save==false)
+	{
+		std::cout << "没有准备好保存参数!" << std::endl;
+		return false;
+	}
+	else
+	{
+		// 保存参数
+		bool flag = EvisionUtils::write_AllCameraParams(cameraParamsFilename, cameraMatrix_L, distCoeffs_L,
+			cameraMatrix_R, distCoeffs_R, R, T, E, F,imageSize, R1, P1, R2, P2, Q, roi1, roi2);
+		std::cout << "参数已经保存到:" << cameraParamsFilename << std::endl;
+		if (!flag)
+		{
+			emit openMessageBox(QStringLiteral("文件访问错误"), QStringLiteral("无法写入:cameraParams.yml"));
+			return false;
+		}
+	}
+	return true;
+}
+
 /*
  * 计算重投影误差
  */
@@ -216,7 +209,7 @@ bool StereoCalibrate::calibrate_1D_core(const std::vector<std::vector<cv::Point2
 void StereoCalibrate::Calib1D(cv::Size boardSize, float squareSize, std::vector<std::string> imageList,
 	cv::Mat& cameraMatrix, cv::Mat& distCoeffs, float aspectRatio, Pattern pattern, int flags, bool showUndistorted)
 {
-	cv::Size imageSize;
+	//cv::Size imageSize;//改成成员变量
 	std::vector<std::vector<cv::Point2f> > imagePoints;
 	int nframes = (int)imageList.size();
 	//cv::namedWindow("Image View", 1);
@@ -484,15 +477,15 @@ void StereoCalibrate::StereoCalib(
 	std::cout << "average epipolar err = " << err / npoints << std::endl;
 
 	// save intrinsic parameters
-	cv::FileStorage fs("intrinsics.yml", cv::FileStorage::WRITE);
-	if (fs.isOpened())
-	{
-		fs << "M1" << cameraMatrix_L << "D1" << distCoeffs_L <<
-			"M2" << cameraMatrix_R << "D2" << distCoeffs_R;
-		fs.release();
-	}
-	else
-		std::cout << "Error: can not save the intrinsic parameters\n";
+	//cv::FileStorage fs("intrinsics.yml", cv::FileStorage::WRITE);
+	//if (fs.isOpened())
+	//{
+	//	fs << "M1" << cameraMatrix_L << "D1" << distCoeffs_L <<
+	//		"M2" << cameraMatrix_R << "D2" << distCoeffs_R;
+	//	fs.release();
+	//}
+	//else
+	//	std::cout << "Error: can not save the intrinsic parameters\n";
 
 	cv::Rect validRoi[2];
 
@@ -501,14 +494,14 @@ void StereoCalibrate::StereoCalib(
 		imageSize, R, T, R1, R2, P1, P2, Q,
 		cv::CALIB_ZERO_DISPARITY, 1, imageSize, &validRoi[0], &validRoi[1]);
 
-	fs.open("extrinsics.yml", cv::FileStorage::WRITE);
-	if (fs.isOpened())
-	{
-		fs << "R" << R << "T" << T << "R1" << R1 << "R2" << R2 << "P1" << P1 << "P2" << P2 << "Q" << Q;
-		fs.release();
-	}
-	else
-		std::cout << "Error: can not save the extrinsic parameters\n";
+	//fs.open("extrinsics.yml", cv::FileStorage::WRITE);
+	//if (fs.isOpened())
+	//{
+	//	fs << "R" << R << "T" << T << "R1" << R1 << "R2" << R2 << "P1" << P1 << "P2" << P2 << "Q" << Q;
+	//	fs.release();
+	//}
+	//else
+	//	std::cout << "Error: can not save the extrinsic parameters\n";
 
 	// OpenCV can handle left-right
 	// or up-down camera arrangements
@@ -599,4 +592,125 @@ void StereoCalibrate::StereoCalib(
 	}
 	roi1 = validRoi[0];
 	roi2 = validRoi[1];
+}
+/*
+ * 获取单目标定的flags
+ */
+int StereoCalibrate::getCalibrate1D_flags()
+{
+	int flag = 0;
+	if (m_entity->getCALIB_FIX_PRINCIPAL_POINT())
+	{
+		flag |= cv::CALIB_FIX_PRINCIPAL_POINT;
+	}
+	if (m_entity->getCALIB_FIX_ASPECT_RATIO())
+	{
+		flag |= cv::CALIB_FIX_ASPECT_RATIO;
+	}
+	if (m_entity->getCALIB_ZERO_TANGENT_DIST())
+	{
+		flag |= cv::CALIB_ZERO_TANGENT_DIST;
+	}
+
+	if (m_entity->getCALIB_FIX_K1())
+	{
+		flag |= cv::CALIB_FIX_K1;
+	}
+	if (m_entity->getCALIB_FIX_K2())
+	{
+		flag |= cv::CALIB_FIX_K2;
+	}
+	if (m_entity->getCALIB_FIX_K3())
+	{
+		flag |= cv::CALIB_FIX_K3;
+	}
+	if (m_entity->getCALIB_FIX_K4())
+	{
+		flag |= cv::CALIB_FIX_K4;
+	}
+	if (m_entity->getCALIB_FIX_K5())
+	{
+		flag |= cv::CALIB_FIX_K5;
+	}
+	if (m_entity->getCALIB_FIX_K6())
+	{
+		flag |= cv::CALIB_FIX_K6;
+	}
+	if(m_entity->getCALIB_RATIONAL_MODEL())
+	{
+		flag |= cv::CALIB_RATIONAL_MODEL;
+	}
+	if (m_entity->getCALIB_THIN_PRISM_MODEL())
+	{
+		flag |= cv::CALIB_THIN_PRISM_MODEL;
+	}
+	if (m_entity->getCALIB_FIX_S1_S2_S3_S4())
+	{
+		flag |= cv::CALIB_FIX_S1_S2_S3_S4;
+	}
+	if (m_entity->getCALIB_TILTED_MODEL())
+	{
+		flag |= cv::CALIB_TILTED_MODEL;
+	}
+	if (m_entity->getCALIB_FIX_TAUX_TAUY())
+	{
+		flag |= cv::CALIB_FIX_TAUX_TAUY;
+	}
+	return flag;
+}
+/*
+ * 获取立体标定的flags
+ */
+int StereoCalibrate::getCalibrate2D_flags()
+{
+	int flag = 0|cv::CALIB_FIX_INTRINSIC;
+	if (m_entity->getCALIB_SAME_FOCAL_LENGTH())
+	{
+		flag |= cv::CALIB_SAME_FOCAL_LENGTH;
+	}
+	if (m_entity->getCALIB_FIX_K1())
+	{
+		flag |= cv::CALIB_FIX_K1;
+	}
+	if (m_entity->getCALIB_FIX_K2())
+	{
+		flag |= cv::CALIB_FIX_K2;
+	}
+	if (m_entity->getCALIB_FIX_K3())
+	{
+		flag |= cv::CALIB_FIX_K3;
+	}
+	if (m_entity->getCALIB_FIX_K4())
+	{
+		flag |= cv::CALIB_FIX_K4;
+	}
+	if (m_entity->getCALIB_FIX_K5())
+	{
+		flag |= cv::CALIB_FIX_K5;
+	}
+	if (m_entity->getCALIB_FIX_K6())
+	{
+		flag |= cv::CALIB_FIX_K6;
+	}
+	if (m_entity->getCALIB_RATIONAL_MODEL())
+	{
+		flag |= cv::CALIB_RATIONAL_MODEL;
+	}
+	if (m_entity->getCALIB_THIN_PRISM_MODEL())
+	{
+		flag |= cv::CALIB_THIN_PRISM_MODEL;
+	}
+	if (m_entity->getCALIB_FIX_S1_S2_S3_S4())
+	{
+		flag |= cv::CALIB_FIX_S1_S2_S3_S4;
+	}
+	if (m_entity->getCALIB_TILTED_MODEL())
+	{
+		flag |= cv::CALIB_TILTED_MODEL;
+	}
+	if (m_entity->getCALIB_FIX_TAUX_TAUY())
+	{
+		flag |= cv::CALIB_FIX_TAUX_TAUY;
+	}
+	return flag;
 }

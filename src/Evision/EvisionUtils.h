@@ -4,6 +4,9 @@
 #include "cv.h"
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/highgui/highgui.hpp"
+#include <QGraphicsView>
+#include <QGraphicsScene>
+
 /*
  * 实用工具方法
  */
@@ -22,6 +25,10 @@ public:
 	 */
 	static cv::Mat QImage2cvMat(QImage image);
 
+	/*
+	 * 把img显示在view上
+	 */
+	static void ShowImageOnUi(cv::Mat& img, QGraphicsScene*sense, QGraphicsView* view);
 	/*
 	 * 把双目标定得到的所有参数写入文件
 	 * 1.文件名							std::string filename

@@ -17,12 +17,17 @@ private:
 
 	enum { DETECTION = 0, CAPTURING = 1, CALIBRATED = 2 };
 	enum Pattern { CHESSBOARD, CIRCLES_GRID, ASYMMETRIC_CIRCLES_GRID };
-
+	cv::Mat cameraMatrix_L, distCoeffs_L, cameraMatrix_R, distCoeffs_R;
+	cv::Mat R, T, E, F, R1, P1, R2, P2, Q;
+	cv::Rect roi1, roi2;
+	cv::Size imageSize;
+	bool ready_to_save = false;
 public:
 	StereoCalibrate(std::vector<std::string>* imagelistL,
 					std::vector<std::string>* imagelistR,QObject *parent = 0);
 	~StereoCalibrate();
 	void run()override;
+	bool SaveCameraParamsToFile();
 private:
 	double computeReprojectionErrors(
 		const std::vector<std::vector<cv::Point3f> >& objectPoints,
@@ -55,6 +60,8 @@ private:
 		bool displayCorners = false,
 		bool useCalibrated = true,
 		bool showRectified = true);
+	int getCalibrate1D_flags();
+	int getCalibrate2D_flags();
 signals:
 	void openMessageBox(QString, QString);
 };

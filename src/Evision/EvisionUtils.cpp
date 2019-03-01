@@ -86,6 +86,17 @@ cv::Mat EvisionUtils::QImage2cvMat(QImage image)
 	return mat;
 }
 
+void EvisionUtils::ShowImageOnUi(cv::Mat& img, QGraphicsScene* sense, QGraphicsView* view)
+{
+	sense->clear();
+	sense->addPixmap(QPixmap::fromImage(cvMat2QImage(img)));
+	view->setScene(sense);
+	view->fitInView(sense->itemsBoundingRect(), Qt::KeepAspectRatio);
+	view->centerOn(0, 0);
+	view->show();
+	view->update();
+}
+
 /*
  * 把双目标定得到的所有参数写入文件
  * 1.文件名							std::string filename
