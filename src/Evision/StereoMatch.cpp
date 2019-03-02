@@ -128,20 +128,6 @@ void StereoMatch::NewMatchFunc()
 	/* load and resize images                                               */
 	/************************************************************************/
 
-	char* buffer;
-
-	// Get the current working directory:   
-	if ((buffer = _getcwd(NULL, 0)) == NULL)
-		perror("_getcwd error");
-	else
-	{
-		printf("%s \nLength: %d\n", buffer, strnlen(buffer, 1024));
-		free(buffer);
-	}
-
-
-	std::string str = "view1s.jpg";
-
 
 	cv::Mat imgL = cv::imread(img1_filename);
 	cv::Mat imgR = cv::imread(img2_filename);
@@ -350,7 +336,12 @@ void StereoMatch::saveXYZ(const std::string& fileName, const cv::Mat& image3D)
 
 	outFile.close();
 }
-
+/*
+ * 自定义三维重投影
+ * cv::Mat&		[in]	disparity	视差图
+ * cv::Mat&		[in]	Q			Q矩阵
+ * cv::Mat&		[out]	out3D		含有三维坐标的三通道图片
+ */
 void StereoMatch::customReproject(const cv::Mat& disparity, const cv::Mat& Q, cv::Mat& out3D)
 {
 	CV_Assert(disparity.type() == CV_32F);
@@ -385,7 +376,12 @@ void StereoMatch::customReproject(const cv::Mat& disparity, const cv::Mat& Q, cv
 		}
 	}
 }
-//获取伪彩色视差图
+/*
+ * 获取用于显示的视差图
+ * cv::Mat&		[in]	disparity			视差图
+ * cv::Mat&		[out]	disparityImage		转换结果
+ * bool			[in]	isclolr				是否添加伪彩效果
+ */
 void StereoMatch::getColorDisparityImage(cv::Mat& disparity, cv::Mat& disparityImage, bool isColor)
 {
 	//将原始视差数据的位深转换为 8 位
@@ -435,47 +431,6 @@ void StereoMatch::getColorDisparityImage(cv::Mat& disparity, cv::Mat& disparityI
 	return;
 }
 
-bool StereoMatch::LoadPtsPairs(std::vector<cv::Point2f>& ptsL, std::vector<cv::Point2f>& ptsR,
-	std::string& filename)
-{
-	std::ifstream is(filename.c_str());
-	if (!is)
-	{
-		std::cerr << filename << " unable to read" << std::endl;
-		return false;
-	}
-
-	cv::Point2f buf;
-	int cnt;
-	is >> cnt;
-	for (int i = 0; i < cnt; i++)
-	{
-		is >> buf.x >> buf.y;
-		ptsL.push_back(buf);
-		is >> buf.x >> buf.y;
-		ptsR.push_back(buf);
-	}
-	is.close();
-	return true;
-
-}
-
-void StereoMatch::SavePtsPairs(std::vector<cv::Point2f>& ptsL, std::vector<cv::Point2f>& ptsR,
-	std::string& filename)
-{
-	std::ofstream os(filename.c_str());
-	std::vector<cv::Point2f>::iterator iterL = ptsL.begin(),
-		iterR = ptsR.begin();
-	os << ptsL.size() << std::endl;
-
-	for (; iterL != ptsL.end(); iterL++, iterR++)
-	{
-		os << iterL->x << '\t' << iterL->y << "\t\t"
-			<< iterR->x << '\t' << iterR->y << std::endl;
-	}
-	os.close();
-}
-
 void StereoMatch::StereoTo3D(std::vector<cv::Point2f> ptsL, std::vector<cv::Point2f> ptsR,
 	std::vector<cv::Point3f>& pts3D, float focalLenInPixel, float baselineInMM, cv::Mat img, cv::Point3f& center3D,
 	cv::Vec3f& size3D)
@@ -519,10 +474,10 @@ void StereoMatch::StereoTo3D(std::vector<cv::Point2f> ptsL, std::vector<cv::Poin
 			putText(imgShow, str, cv::Point(xl - 13, ylr - 3), cv::FONT_HERSHEY_SIMPLEX, .3, color);
 			circle(imgShow, *iterL, 2, color, 3);
 		}
-
+		//cv::imshow("test", imgShow);
 	}
 
-	//imshow("back project", imgShow);
+	imshow("back project", imgShow);
 	//m_entity->setIconPointImgL(imgShow);
 	//cv::waitKey();
 
