@@ -3,6 +3,7 @@
 #include "EvisionUtils.h"
 #include <direct.h>
 #include <qDebug>
+#include "../EvisionElas/EvisionElas.h"
 
 StereoMatch::StereoMatch(std::string img1_filename, std::string img2_filename, std::string cameraParams_filename)
 {
@@ -66,7 +67,7 @@ bool StereoMatch::init(bool needCameraParamFile)
 			emit openMessageBox(QStringLiteral("错误"), QStringLiteral("输入图像为空!"));
 			return false;
 		}
-		img_size = img1.size();
+		//img_size = img1.size();
 		if (needCameraParamFile==true)//需要使用参数文件
 		{
 			//2.打开参数文件,读取参数
@@ -75,11 +76,17 @@ bool StereoMatch::init(bool needCameraParamFile)
 
 			bool flag = EvisionUtils::read_ParamsForStereoMatch(cameraParams_filename,
 				&cameraMatrix1, &distCoeffs1, &cameraMatrix2, &distCoeffs2, &R1, &P1, &R2, &P2, &Q, &roi1, &roi2);
+
+			EvisionUtils::read_AllCameraParams(cameraParams_filename,
+				&cameraMatrix1, &distCoeffs1, &cameraMatrix2, &distCoeffs2, &R, &T, &E, &F, &img_size, &R1, &P1, &R2, &P2, &Q, &roi1, &roi2);
 			if (flag == false)
 			{
 				return false;
 			}
 			//3.矫正左右视图
+
+			stereoRectify(cameraMatrix1, distCoeffs1, cameraMatrix2, distCoeffs2, img_size, R, T, R1, R2, P1, P2, Q, 
+				cv::CALIB_ZERO_DISPARITY, 1, img_size, &roi1, &roi2);
 
 			std::cout << "矫正图片..." << std::endl;
 
@@ -92,8 +99,15 @@ bool StereoMatch::init(bool needCameraParamFile)
 			remap(img1, img1r, mapx1, mapy1, cv::INTER_LINEAR);
 			remap(img2, img2r, mapx2, mapy2, cv::INTER_LINEAR);
 
+			//cv::copyMakeBorder(img1r, img1, 0, 0, m_entity->getNumDisparities(), 0, IPL_BORDER_REPLICATE);
+			//cv::copyMakeBorder(img2r, img2, 0, 0, m_entity->getNumDisparities(), 0, IPL_BORDER_REPLICATE);
+
 			img1 = img1r;
 			img2 = img2r;
+
+			cv::imshow("L", img1);
+			cv::imshow("R", img2);
+			cv::waitKey(0);
 		}
 		
 	}
@@ -114,10 +128,12 @@ void StereoMatch::run()
 {
 	if (m_entity->getUseExpeModule()==true)
 	{
-		NewMatchFunc();
+		//NewMatchFunc();
+		ElasMatch(img1, img2);
 	}
 	else
 	{
+		//ElasMatch(img1, img2);
 		MatchFunc();
 	}
 }
@@ -159,31 +175,31 @@ void StereoMatch::NewMatchFunc()
 	std::cout << "calculating feature points..." << std::endl;
 	std::vector<cv::Point2f> ptsL, ptsR;
 	std::vector<int> ptNum;
-	if (g_algo == FEATURE_PT)
-	{
-		//if ( ! LoadPtsPairs(ptsL, ptsR, groupname+".pairs"))	{
-		GetPair(imgL, imgR, ptsL, ptsR);
-		//SavePtsPairs(ptsL, ptsR, groupname+".pairs");	}
-	}
-	else if (g_algo == DENSE)
-		GetPairBM(imgL, imgR, ptsL, ptsR);
+	//if (g_algo == FEATURE_PT)
+	//{
+	//	//if ( ! LoadPtsPairs(ptsL, ptsR, groupname+".pairs"))	{
+	//	GetPair(imgL, imgR, ptsL, ptsR);
+	//	//SavePtsPairs(ptsL, ptsR, groupname+".pairs");	}
+	//}
+	//else if (g_algo == DENSE)
+	GetPairBM(imgL, imgR, ptsL, ptsR);
 
 	/************************************************************************/
 	/* calculate 3D coordinates                                             */
 	/************************************************************************/
-	std::vector<cv::Point3f> pts3D;
-	float focalLenInPixel = 3740 * resizeScale,
-		baselineInMM = 160;
-	cv::Point3f center3D;
-	cv::Vec3f size3D;
-	float scale = .2; // scale the z coordinate so that it won't be too large spreaded
-	//float imgHinMM = 400, // approximate real height of the scene in picture, useless
-	//float MMperPixel = imgHinMM / imgL.rows;
-	//float focalLenInMM = focalLenInPixel * MMperPixel;
-	focalLenInPixel *= scale;
+	//std::vector<cv::Point3f> pts3D;
+	//float focalLenInPixel = 3740 * resizeScale,
+	//	baselineInMM = 160;
+	//cv::Point3f center3D;
+	//cv::Vec3f size3D;
+	//float scale = .2; // scale the z coordinate so that it won't be too large spreaded
+	////float imgHinMM = 400, // approximate real height of the scene in picture, useless
+	////float MMperPixel = imgHinMM / imgL.rows;
+	////float focalLenInMM = focalLenInPixel * MMperPixel;
+	//focalLenInPixel *= scale;
 
-	std::cout << "calculating 3D coordinates..." << std::endl;
-	StereoTo3D(ptsL, ptsR, pts3D, focalLenInPixel, baselineInMM, imgL, center3D, size3D);
+	//std::cout << "calculating 3D coordinates..." << std::endl;
+	////StereoTo3D(ptsL, ptsR, pts3D, focalLenInPixel, baselineInMM, imgL, center3D, size3D);
 
 }
 //稳定版匹配方法
@@ -192,10 +208,10 @@ void StereoMatch::MatchFunc()
 	std::cout << "开始计算..." << std::endl;
 	m_entity->setIconImgL(img1);
 	m_entity->setIconImgR(img2);
-	cv::Ptr<cv::StereoBM> bm = cv::StereoBM::create(16, 9);
+	cv::Ptr<cv::StereoBM> bm = cv::StereoBM::create();
 	cv::Ptr<cv::StereoSGBM> sgbm = cv::StereoSGBM::create(0, 16, 3);
 
-	//numberOfDisparities = numberOfDisparities > 0 ? numberOfDisparities : ((img_size.width / 8) + 15) & -16;
+	//int numberOfDisparities = m_entity->getNumDisparities() > 0 ? m_entity->getNumDisparities() : ((img_size.width / 8) + 15) & -16;
 	bm->setROI1(roi1);
 	bm->setROI2(roi2);
 	bm->setPreFilterCap(m_entity->getPrefilcap());
@@ -207,6 +223,7 @@ void StereoMatch::MatchFunc()
 	bm->setSpeckleWindowSize(m_entity->getSpecwinsz());
 	bm->setSpeckleRange(m_entity->getSpecrange());
 	bm->setDisp12MaxDiff(m_entity->getMaxdifdisp12());
+
 
 	sgbm->setPreFilterCap(m_entity->getPrefilcap());
 	sgbm->setBlockSize(m_entity->getSadWinsz());
@@ -429,64 +446,6 @@ void StereoMatch::getColorDisparityImage(cv::Mat& disparity, cv::Mat& disparityI
 	}
 
 	return;
-}
-
-void StereoMatch::StereoTo3D(std::vector<cv::Point2f> ptsL, std::vector<cv::Point2f> ptsR,
-	std::vector<cv::Point3f>& pts3D, float focalLenInPixel, float baselineInMM, cv::Mat img, cv::Point3f& center3D,
-	cv::Vec3f& size3D)
-{
-	std::vector<cv::Point2f>::iterator iterL = ptsL.begin(),
-		iterR = ptsR.begin();
-
-	float xl, xr, ylr;
-	float imgH = float(img.rows), imgW = float(img.cols);
-	cv::Point3f pt3D;
-	float minX = 1e9, maxX = -1e9;
-	float minY = 1e9, maxY = -1e9;
-	float minZ = 1e9, maxZ = -1e9;
-
-	cv::Mat imgShow = img.clone();
-	char str[100];
-	int ptCnt = ptsL.size(), showPtNum = 30, cnt = 0;
-	int showIntv = max(ptCnt / showPtNum, 1);
-	for (; iterL != ptsL.end(); iterL++, iterR++)
-	{
-		xl = iterL->x;
-		xr = iterR->x; // need not add baseline
-		ylr = (iterL->y + iterR->y) / 2;
-
-		//if (yl-yr>5 || yr-yl>5) // may be wrong correspondence, discard. But vector can't be changed during iteration
-		//{}
-
-		pt3D.z = -focalLenInPixel * baselineInMM / (xl - xr); // xl should be larger than xr, if xl is shot by the left camera
-		pt3D.y = -(-ylr + imgH / 2) * pt3D.z / focalLenInPixel;
-		pt3D.x = (imgW / 2 - xl) * pt3D.z / focalLenInPixel;
-
-		minX = min(minX, pt3D.x); maxX = max(maxX, pt3D.x);
-		minY = min(minY, pt3D.y); maxY = max(maxY, pt3D.y);
-		minZ = min(minZ, pt3D.z); maxZ = max(maxZ, pt3D.z);
-		pts3D.push_back(pt3D);
-
-		if ((cnt++) % showIntv == 0)
-		{
-			cv::Scalar color = CV_RGB(rand() & 64, rand() & 64, rand() & 64);
-			sprintf_s(str, 100, "%.0f,%.0f,%.0f", pt3D.x, pt3D.y, pt3D.z);
-			putText(imgShow, str, cv::Point(xl - 13, ylr - 3), cv::FONT_HERSHEY_SIMPLEX, .3, color);
-			circle(imgShow, *iterL, 2, color, 3);
-		}
-		//cv::imshow("test", imgShow);
-	}
-
-	imshow("back project", imgShow);
-	//m_entity->setIconPointImgL(imgShow);
-	//cv::waitKey();
-
-	center3D.x = (minX + maxX) / 2;
-	center3D.y = (minY + maxY) / 2;
-	center3D.z = (minZ + maxZ) / 2;
-	size3D[0] = maxX - minX;
-	size3D[1] = maxY - minY;
-	size3D[2] = maxZ - minZ;
 }
 
 void StereoMatch::GetPair(cv::Mat& imgL, cv::Mat& imgR, std::vector<cv::Point2f>& ptsL,

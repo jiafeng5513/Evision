@@ -75,7 +75,7 @@
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;Qt5Multimediad.lib;Qt5MultimediaWidgetsd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;Qt5Multimediad.lib;Qt5MultimediaWidgetsd.lib;EvisionElas.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <QtMoc>
       <OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
@@ -129,6 +129,7 @@
     <ClCompile Include="CalibrateParamEntity.cpp" />
     <ClCompile Include="CalibraterView.cpp" />
     <ClCompile Include="CameraView.cpp" />
+    <ClCompile Include="EvisionRectifyView.cpp" />
     <ClCompile Include="EvisionView.cpp" />
     <ClCompile Include="EvisionController.cpp" />
     <ClCompile Include="LogView.cpp" />
@@ -140,6 +141,7 @@
     <ClCompile Include="ObjectDetectionEntity.cpp" />
     <ClCompile Include="ObjectDetectionView.cpp" />
     <ClCompile Include="PointCloudUtils.cpp" />
+    <ClCompile Include="rectify.cpp" />
     <ClCompile Include="RulerView.cpp" />
     <ClCompile Include="StdoutRedirector.cpp" />
     <ClCompile Include="StereoCalibrate.cpp" />
@@ -159,6 +161,7 @@
     <QtUic Include="CalibraterView.ui" />
     <QtUic Include="CameraView.ui" />
     <QtUic Include="Evision.ui" />
+    <QtUic Include="EvisionRectify.ui" />
     <QtUic Include="LogView.ui" />
     <QtUic Include="MatcherView.ui" />
     <QtUic Include="ObjectDetectionView.ui" />
@@ -188,6 +191,11 @@
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtMultimediaWidgets</IncludePath>
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtMultimediaWidgets</IncludePath>
     </QtMoc>
+    <QtMoc Include="EvisionRectifyView.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtMultimediaWidgets;$(QTDIR)\include\QtCore\5.12.0;$(QTDIR)\include\QtCore\5.12.0\QtCore;$(QTDIR)\include\QtCore\5.12.0\QtCore\private</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtMultimediaWidgets;$(QTDIR)\include\QtCore\5.12.0;$(QTDIR)\include\QtCore\5.12.0\QtCore;$(QTDIR)\include\QtCore\5.12.0\QtCore\private</IncludePath>
+    </QtMoc>
+    <ClInclude Include="rectify.h" />
     <ClInclude Include="resource1.h" />
     <ClInclude Include="yolo_v2_class.h" />
     <QtMoc Include="WatchImageView.h">

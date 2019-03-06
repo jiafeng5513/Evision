@@ -223,56 +223,19 @@ CALIB_FIX_TAUX_TAUY
 
 
 
-void onValueChanged_FIX_PRINCIPAL_POINT(bool value);
-void onParamChanged_FIX_PRINCIPAL_POINT();
+onValueChanged_FIX_PRINCIPAL_POINT(bool)
+onValueChanged_FIX_ASPECT_RATIO(bool)
+onValueChanged_ZERO_TANGENT_DIST(bool)
+onValueChanged_SAME_FOCAL_LENGTH(bool)
+onValueChanged_FIX_K1(bool)
+onValueChanged_FIX_K2(bool)
+onValueChanged_FIX_K3(bool)
+onValueChanged_FIX_K4(bool)
+onValueChanged_FIX_K5(bool)
+onValueChanged_FIX_K6(bool)
+onValueChanged_RATIONAL_MODEL(bool)
+onValueChanged_THIN_PRISM_MODEL(bool)
+onValueChanged_FIX_S1_S2_S3_S4(bool)
+onValueChanged_TILTED_MODEL(bool)
+onValueChanged_FIX_TAUX_TAUY(bool)
 
-void onValueChanged_FIX_ASPECT_RATIO(bool value);
-void onParamChanged_FIX_ASPECT_RATIO();
-
-void onValueChanged_ZERO_TANGENT_DIST(bool value);
-void onParamChanged_ZERO_TANGENT_DIST();
-
-void onValueChanged_SAME_FOCAL_LENGTH(bool value);
-void onParamChanged_SAME_FOCAL_LENGTH();
-
-void onValueChanged_FIX_K1(bool value);
-void onParamChanged_FIX_K1();
-
-void onValueChanged_FIX_K2(bool value);
-void onParamChanged_FIX_K2();
-
-void onValueChanged_FIX_K3(bool value);
-void onParamChanged_FIX_K3();
-
-void onValueChanged_FIX_K4(bool value);
-void onParamChanged_FIX_K4();
-
-void onValueChanged_FIX_K5(bool value);
-void onParamChanged_FIX_K5();
-
-void onValueChanged_FIX_K6(bool value);
-void onParamChanged_FIX_K6();
-
-void onValueChanged_RATIONAL_MODEL(bool value);
-void onParamChanged_RATIONAL_MODEL();
-
-void onValueChanged_THIN_PRISM_MODEL(bool value);
-void onParamChanged_THIN_PRISM_MODEL();
-
-void onValueChanged_FIX_S1_S2_S3_S4(bool value);
-void onParamChanged_FIX_S1_S2_S3_S4();
-
-void onValueChanged_TILTED_MODEL(bool value);
-void onParamChanged_TILTED_MODEL();
-
-void onValueChanged_FIX_TAUX_TAUY(bool value);
-void onParamChanged_FIX_TAUX_TAUY();
-
-
-StereoCalib Engine 的主体还没放进去
-Engine中引用entity,向其中插入Mat,
-标志位的聚合应该做一个函数
-
-标志位的读取
-保存参数
-格式转换函数和显示到GraphicsView的代码的内存泄漏

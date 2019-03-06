@@ -13,6 +13,7 @@
 #include "WatchImageView.h"
 #include "ObjectDetectionView.h"
 #include "../Evision3dViz/Evision3dViz.h"
+#include "EvisionRectifyView.h"
 
 // 浮点数判等
 // ulp: units in the last place.
@@ -79,6 +80,13 @@ void EvisionView::on_action_calibrate_view()
 	CalibraterView * m_calibrate = new CalibraterView();
 	ui.mdiArea->addSubWindow(m_calibrate);
 	m_calibrate->show();
+}
+//显示矫正视图
+void EvisionView::on_action_rectify()
+{
+	EvisionRectifyView * m_Rectify = new EvisionRectifyView();
+	ui.mdiArea->addSubWindow(m_Rectify);
+	m_Rectify->show();
 }
 //显示立体匹配视图
 void EvisionView::on_action_stereoMatch_view()

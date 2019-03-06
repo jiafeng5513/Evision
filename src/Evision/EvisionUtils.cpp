@@ -266,6 +266,44 @@ bool EvisionUtils::read_ParamsForStereoMatch(std::string& filename, cv::Mat* cam
 		return false;
 	}
 }
+
+bool EvisionUtils::read_ParamsForStereoRectify(std::string& filename, cv::Mat* cameraMatrix1, cv::Mat* distCoeffs1,
+	cv::Mat* cameraMatrix2, cv::Mat* distCoeffs2, cv::Mat* R1, cv::Mat* P1, cv::Mat* R2, cv::Mat* P2, cv::Rect* roi1,
+	cv::Rect* roi2)
+{
+	if (filename.empty() == true)
+	{
+		return false;
+	}
+	try
+	{
+		cv::FileStorage fs(filename, cv::FileStorage::READ);
+		if (fs.isOpened())
+		{
+			fs["cameraMatrix1"] >> *cameraMatrix1;
+			fs["distCoeffs1"] >> *distCoeffs1;
+			fs["cameraMatrix2"] >> *cameraMatrix2;
+			fs["distCoeffs2"] >> *distCoeffs2;
+			fs["R1"] >> *R1;
+			fs["P1"] >> *P1;
+			fs["R2"] >> *R2;
+			fs["P2"] >> *P2;
+			fs["roi1"] >> *roi1;
+			fs["roi2"] >> *roi2;
+			fs.release();
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	catch (...)
+	{
+		return false;
+	}
+}
+
 /*
  * 把点云保存在文件中
  */

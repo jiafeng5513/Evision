@@ -124,7 +124,20 @@ public:
 		cv::Mat* Q, 
 		cv::Rect* roi1,
 		cv::Rect* roi2);
-
+	/*
+	 * 读取校正所需的参数
+	 */
+	static bool read_ParamsForStereoRectify(std::string& filename,
+		cv::Mat* cameraMatrix1,
+		cv::Mat* distCoeffs1,
+		cv::Mat* cameraMatrix2,
+		cv::Mat* distCoeffs2,
+		cv::Mat* R1,
+		cv::Mat* P1,
+		cv::Mat* R2,
+		cv::Mat* P2,
+		cv::Rect* roi1,
+		cv::Rect* roi2);
 	/*
 	 * 把点云保存在文件中
 	 */

@@ -76,6 +76,7 @@ private:
 	cv::Mat cameraMatrix2;//右相机内参
 	cv::Mat distCoeffs2;//右相机畸变系数
 	cv::Mat R1, P1, R2, P2,Q;//映射计算结果
+	cv::Mat R, T, E, F;
 	cv::Rect roi1;
 	cv::Rect roi2;
 
@@ -83,10 +84,6 @@ private:
 	bool no_display=false;
 private:
 	void getColorDisparityImage(cv::Mat& disparity, cv::Mat& disparityImage, bool isColor);
-
-	void StereoTo3D(std::vector<cv::Point2f> ptsL, std::vector<cv::Point2f> ptsR, std::vector<cv::Point3f> &pts3D,
-		float focalLenInPixel, float baselineInMM,
-		cv::Mat img, cv::Point3f &center3D, cv::Vec3f &size3D);
 
 	void GetPair(cv::Mat &imgL, cv::Mat &imgR, std::vector<cv::Point2f> &ptsL, std::vector<cv::Point2f> &ptsR);
 

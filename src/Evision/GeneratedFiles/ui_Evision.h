@@ -44,6 +44,7 @@ public:
     QAction *action_ObjectDetection;
     QAction *action_NewStereoMatchView;
     QAction *action_LogView;
+    QAction *actio_Rectify;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QMdiArea *mdiArea;
@@ -138,6 +139,11 @@ public:
         QIcon icon11;
         icon11.addFile(QString::fromUtf8(":/Evision/resource/log_128px_1160546_easyicon.net.ico"), QSize(), QIcon::Normal, QIcon::Off);
         action_LogView->setIcon(icon11);
+        actio_Rectify = new QAction(EvisionClass);
+        actio_Rectify->setObjectName(QString::fromUtf8("actio_Rectify"));
+        QIcon icon12;
+        icon12.addFile(QString::fromUtf8(":/Evision/resource/focusing_128px_1162023_easyicon.net.ico"), QSize(), QIcon::Normal, QIcon::Off);
+        actio_Rectify->setIcon(icon12);
         centralWidget = new QWidget(EvisionClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -188,6 +194,7 @@ public:
         menu_2->addAction(action_About);
         menu_2->addAction(action_LogView);
         menu_3->addAction(action_CalibrateView);
+        menu_3->addAction(actio_Rectify);
         menu_3->addAction(action_StereoMatchView);
         menu_3->addAction(action_DepthMap_View);
         menu_3->addAction(action_PointCloud_View);
@@ -201,6 +208,7 @@ public:
         mainToolBar->addAction(action_CameraParam);
         mainToolBar->addSeparator();
         mainToolBar->addAction(action_CalibrateView);
+        mainToolBar->addAction(actio_Rectify);
         mainToolBar->addAction(action_StereoMatchView);
         mainToolBar->addAction(action_DepthMap_View);
         mainToolBar->addAction(action_PointCloud_View);
@@ -220,6 +228,7 @@ public:
         QObject::connect(action_Measure_View, SIGNAL(triggered()), EvisionClass, SLOT(on_action_Measure_view()));
         QObject::connect(action_ObjectDetection, SIGNAL(triggered()), EvisionClass, SLOT(on_action_ObjectDetection_view()));
         QObject::connect(action_LogView, SIGNAL(triggered()), EvisionClass, SLOT(on_action_LogViewSwitch()));
+        QObject::connect(actio_Rectify, SIGNAL(triggered()), EvisionClass, SLOT(on_action_rectify()));
 
         QMetaObject::connectSlotsByName(EvisionClass);
     } // setupUi
@@ -247,6 +256,7 @@ public:
 #ifndef QT_NO_TOOLTIP
         action_LogView->setToolTip(QApplication::translate("EvisionClass", "\345\210\207\346\215\242LogView\347\232\204\346\230\276\347\244\272\347\212\266\346\200\201", nullptr));
 #endif // QT_NO_TOOLTIP
+        actio_Rectify->setText(QApplication::translate("EvisionClass", "\347\253\213\344\275\223\346\240\241\346\255\243", nullptr));
         menu->setTitle(QApplication::translate("EvisionClass", "\345\267\245\345\205\267", nullptr));
         menu_2->setTitle(QApplication::translate("EvisionClass", "\345\270\256\345\212\251", nullptr));
         menu_3->setTitle(QApplication::translate("EvisionClass", "\345\217\214\347\233\256\350\247\206\350\247\211", nullptr));
