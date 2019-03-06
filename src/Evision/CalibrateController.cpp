@@ -38,7 +38,7 @@ void CalibrateController::CalibrateCommand()
 	//2.选择文件
 	QFileDialog * fileDialog = new QFileDialog();
 	fileDialog->setWindowTitle(QStringLiteral("请选择左摄像头拍摄的图片文件序列"));
-	fileDialog->setNameFilter("图片文件(*.jpg *.png *.jpeg)");
+	fileDialog->setNameFilter("图片文件(*.jpg *.png *.jpeg *.bmp)");
 	fileDialog->setFileMode(QFileDialog::ExistingFiles);
 	if (fileDialog->exec() == QDialog::Accepted)
 	{

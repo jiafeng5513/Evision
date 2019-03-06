@@ -1,10 +1,22 @@
+#define NOMINMAX
 #include "StereoMatch.h"
 #include <QFileDialog>
 #include "EvisionUtils.h"
-#include <direct.h>
+//#include <direct.h>
 #include <qDebug>
 #include "../EvisionElas/EvisionElas.h"
+//#include <boost/filesystem/path.hpp>
+//#include <boost/filesystem/operations.hpp>
+//#include <pcl/common/common_headers.h>
+//#include <pcl/io/pcd_io.h>
+#include "../EvisionADCensus/imageprocessor.h"
+#include "../EvisionADCensus/stereoprocessor.h"
+//#include <boost/date_time/posix_time/ptime.hpp>
+//#include <boost/thread/lock_algorithms.hpp>
 
+#include <QTime>
+#include "rectify.h"
+#include <algorithm>
 StereoMatch::StereoMatch(std::string img1_filename, std::string img2_filename, std::string cameraParams_filename)
 {
 	m_entity = StereoMatchParamEntity::getInstance();
@@ -24,11 +36,11 @@ StereoMatch::StereoMatch(std::string img1_filename, std::string img2_filename, s
 	std::string midname = _fileInfo1->baseName().toStdString();
 	midname.append("_");
 	midname.append(_fileInfo2->baseName().toStdString());
+	this->root = _fileInfo1->absolutePath().toStdString().append("/");
+	this->disparity_filename = _fileInfo1->absolutePath().toStdString().append("/disp-"+ midname+".png");
+	this->disparity_raw_filename= _fileInfo1->absolutePath().toStdString().append("/disp-raw-" + midname + ".xml");
+	this->point_cloud_filename = _fileInfo1->absolutePath().toStdString().append("/pointcloud-"+ midname +".pcd");
 
-	this->disparity_filename = _fileInfo1->absolutePath().toStdString().append("/disp-"+ midname+".jpg");
-	this->point_cloud_filename = _fileInfo1->absolutePath().toStdString().append("/pointcloud-"+ midname +".xml");
-
-	//
 }
 
 StereoMatch::~StereoMatch()
@@ -42,82 +54,82 @@ bool StereoMatch::init(bool needCameraParamFile)
 	std::cout<<"初始化..." <<std::endl;
 	try
 	{
-		//1.打开图片
-		
+		//1.打开图片,按照原图格式打开,如果所选的算法对于图片的格式有要求,自行转换
 		std::cout << "加载图片..." << std::endl;
-		if(m_entity->getBM() == true)//使用BM算法
-		{
-			cv::Mat img1proc, img2proc;
-
-			img1proc = cv::imread(img1_filename);
-			img2proc = cv::imread(img2_filename);
-			cv::cvtColor(img1proc, img1, CV_BGR2GRAY);
-			cv::cvtColor(img2proc, img2, CV_BGR2GRAY);
-
-		}else//使用SGBM算法
-		{
-			img1 = cv::imread(img1_filename);
-			img2 = cv::imread(img2_filename);
-		}
-		img1.convertTo(img1, CV_8UC1);
-		img2.convertTo(img2, CV_8UC1);
-		qDebug() << "channels="<<img1.channels()<<"   depth=" << img1.depth();
+		img1 = cv::imread(img1_filename);
+		img2 = cv::imread(img2_filename);
 		if (img1.empty() || img2.empty())
 		{
 			emit openMessageBox(QStringLiteral("错误"), QStringLiteral("输入图像为空!"));
 			return false;
 		}
-		//img_size = img1.size();
-		if (needCameraParamFile==true)//需要使用参数文件
+		//2.读取相机参数
+		std::cout << "读取相机参数..." << std::endl;
+		bool flag = EvisionUtils::read_AllCameraParams(cameraParams_filename,
+			&cameraMatrix1, &distCoeffs1, &cameraMatrix2, &distCoeffs2, &R, &T, &E, &F, &img_size, &R1, &P1, &R2, &P2, &Q, &roi1, &roi2);
+		if(flag==false)
 		{
-			//2.打开参数文件,读取参数
-
-			std::cout << "加载参数..." << std::endl;
-
-			bool flag = EvisionUtils::read_ParamsForStereoMatch(cameraParams_filename,
-				&cameraMatrix1, &distCoeffs1, &cameraMatrix2, &distCoeffs2, &R1, &P1, &R2, &P2, &Q, &roi1, &roi2);
-
-			EvisionUtils::read_AllCameraParams(cameraParams_filename,
-				&cameraMatrix1, &distCoeffs1, &cameraMatrix2, &distCoeffs2, &R, &T, &E, &F, &img_size, &R1, &P1, &R2, &P2, &Q, &roi1, &roi2);
-			if (flag == false)
+			std::cout << "相机参数读取失败!" << std::endl;
+			return false;
+		}
+		//3.如果输入的是未校正的图片,则在此处进行校正
+		if (!m_entity->getRectifiedInput())
+		{
+			std::cout << "输入的是未校正的图片,进行校正..." << std::endl;
+			try
 			{
+				std::vector<cv::Mat>images, undistortedImages;
+				images.push_back(img1);
+				images.push_back(img2);
+
+				cv::Size imageSize;
+				imageSize.height = ((cv::Mat)images.at(0)).rows;
+				imageSize.width = ((cv::Mat)images.at(0)).cols;
+
+				//先把两侧的图片利用畸变矩阵分别消除畸变
+				intrinsicExtrinsic::undistortStereoImages(images, undistortedImages, cameraMatrix1, cameraMatrix2, distCoeffs1, distCoeffs2);
+				//这一步计算极线矫正矩阵,畸变已经消除了所以畸变参数设置为了0
+				cv::Mat rmap[2][2];
+				cv::Mat noDist = cv::Mat::zeros(5, 1, CV_32F);
+				initUndistortRectifyMap(cameraMatrix1, noDist, R1, P1, imageSize, CV_16SC2, rmap[0][0], rmap[0][1]);
+				initUndistortRectifyMap(cameraMatrix2, noDist, R2, P2, imageSize, CV_16SC2, rmap[1][0], rmap[1][1]);
+				int imgCount = undistortedImages.size() / 2;
+				//计算ROI
+				/*
+				 *(std::max)for disable the macro max in winnt.h
+				 *see: http://www.voidcn.com/article/p-okycmabx-bms.html
+				 */
+				cv::Point2i rectCorner1((std::max)(roi1.x, roi2.x), (std::max)(roi1.y, roi2.y));
+				cv::Point2i rectCorner2((std::min)(roi1.x + roi1.width, roi2.x + roi2.width),
+					(std::min)(roi1.y + roi1.height, roi2.y + roi2.height));
+				cv::Rect validRoi = cv::Rect(rectCorner1.x, rectCorner1.y, rectCorner2.x - rectCorner1.x, rectCorner2.y - rectCorner1.y);
+				cv::Mat  remapImg1, rectImg1, remapImg2, rectImg2;
+				remap(undistortedImages[0], remapImg1, rmap[0][0], rmap[0][1], CV_INTER_LINEAR);
+				rectImg1 = remapImg1(validRoi);//校正结果
+				remap(undistortedImages[1], remapImg2, rmap[1][0], rmap[1][1], CV_INTER_LINEAR);
+				rectImg2 = remapImg2(validRoi);//校正结果
+
+				img1 = rectImg1;
+				img2 = rectImg2;
+				std::cout << "校正完毕" << std::endl;
+
+			}catch(...)
+			{
+				std::cout << "校正过程中发生了严重错误" << std::endl;
 				return false;
 			}
-			//3.矫正左右视图
-
-			stereoRectify(cameraMatrix1, distCoeffs1, cameraMatrix2, distCoeffs2, img_size, R, T, R1, R2, P1, P2, Q, 
-				cv::CALIB_ZERO_DISPARITY, 1, img_size, &roi1, &roi2);
-
-			std::cout << "矫正图片..." << std::endl;
-
-			//先分别计算出x方向和y方向的两个镜头的校正矩阵
-			cv::Mat mapx1, mapy1, mapx2, mapy2;
-			initUndistortRectifyMap(cameraMatrix1, distCoeffs1, R1, P1, img_size, CV_16SC2, mapx1, mapy1);
-			initUndistortRectifyMap(cameraMatrix2, distCoeffs2, R2, P2, img_size, CV_16SC2, mapx2, mapy2);
-			//进行校正计算
-			cv::Mat img1r, img2r;
-			remap(img1, img1r, mapx1, mapy1, cv::INTER_LINEAR);
-			remap(img2, img2r, mapx2, mapy2, cv::INTER_LINEAR);
-
-			//cv::copyMakeBorder(img1r, img1, 0, 0, m_entity->getNumDisparities(), 0, IPL_BORDER_REPLICATE);
-			//cv::copyMakeBorder(img2r, img2, 0, 0, m_entity->getNumDisparities(), 0, IPL_BORDER_REPLICATE);
-
-			img1 = img1r;
-			img2 = img2r;
-
-			cv::imshow("L", img1);
-			cv::imshow("R", img2);
-			cv::waitKey(0);
 		}
-		
+		else
+		{
+			std::cout << "输入的是校正过的图片,跳过校正..." << std::endl;
+		}		
 	}
 	catch (...)
 	{
+		std::cout << "匹配模块的初始化过程发生严重错误!" << std::endl;
 		return false;
 	}
-	
 	std::cout << "初始化完毕..." << std::endl;
-
 	return true;
 }
 
@@ -126,94 +138,172 @@ bool StereoMatch::init(bool needCameraParamFile)
  */
 void StereoMatch::run()
 {
-	if (m_entity->getUseExpeModule()==true)
+	try
 	{
-		//NewMatchFunc();
-		ElasMatch(img1, img2);
+		if (m_entity->getBM() == true)
+		{
+			OpenCVBM();
+		}
+		else if (m_entity->getSGBM() == true)
+		{
+			OpenCVSGBM();
+		}
+		else if (m_entity->getElas() == true)
+		{
+			Elas();
+		}
+		else if (m_entity->getADCensus() == true)
+		{
+			ADCensusDriver();
+		}
+	}
+	catch(...)
+	{
+		std::cout << "算法执行过程中出现严重错误,地点在:[StereoMatch 线程方法]" << std::endl;
+	}
+}
+/*
+ * 保存原始视差数据,视差示意图,PCD点云
+ */
+void StereoMatch::Save()
+{
+	cv::FileStorage fs(disparity_raw_filename, cv::FileStorage::WRITE);
+	fs << "disp" << Raw_Disp_Data;
+	fs.release();
+	/*
+	 * 用于显示的视差图并不是准确数据,为了获得良好的显示效果而对数据进行了一些裁剪和压缩
+	 * 例如归一化到0~255会改变原始的视差数据,因此,测量时必须使用原始视差数据
+	 */
+	 //获取灰度视差图并保存
+	cv::imwrite(disparity_filename, Gray_Disp_Data);
+	//保存pcd点云
+#ifdef WITH_PCL
+	EvisionUtils::createAndSavePointCloud(Raw_Disp_Data, img2, Q, point_cloud_filename);
+#endif
+}
+
+/*
+ * ADCensus
+ */
+void StereoMatch::ADCensusDriver()
+{
+
+#pragma region 参数
+	// Minimum and maximum disparity
+	uint dMin = 0;
+	uint dMax = 60;
+
+	// Parameters for the cost-initialization for the ADCensus
+	cv::Size censusWin;
+	censusWin.height = 9;
+	censusWin.width = 7;
+	float defaultBorderCost = 0.999;
+	float lambdaAD = 10.0; // TODO Namen anpassen
+	float lambdaCensus = 30.0;
+
+
+	// Parameters for the cross-based cost aggregation
+	uint aggregatingIterations = 4;
+	uint colorThreshold1 = 20;
+	uint colorThreshold2 = 6;
+	uint maxLength1 = 34;
+	uint maxLength2 = 17;
+
+	// Parameters for the optimization of image cells
+	uint colorDifference = 15;
+	float pi1 = 0.1;
+	float pi2 = 0.3;
+
+	// Parameters for outlier detection
+	uint dispTolerance = 0;
+	// Parameters for the iterative range rating
+	uint votingThreshold = 20;
+	float votingRatioThreshold = 4;
+
+	// Parameters for the proper interpolation
+	uint maxSearchDepth = 20;
+
+	// Parameters for the approximation of depths discontinuities 
+	uint cannyThreshold1 = 20;
+	uint cannyThreshold2 = 60;
+	uint cannyKernelSize = 3;
+
+	// Parameters for the sub-pixel enhancement
+	uint blurKernelSize = 3;
+#pragma endregion 
+	m_entity->setIconImgL(img1);
+	m_entity->setIconImgR(img2);
+	//加载Q矩阵
+	cv::Mat Q(4, 4, CV_64F);
+	Q=this->Q;
+	//加载images
+	std::vector<cv::Mat> images;
+	images.push_back(img1);
+	images.push_back(img2);
+	if (images.size() % 2 == 0)
+	{
+		bool error = false;
+		for (int i = 0; i < (images.size() / 2) && !error; ++i)
+		{
+			QTime time;
+			time.start();//计时开始
+
+			ImageProcessor iP(0.1);
+			cv::Mat eLeft, eRight;
+			eLeft = iP.unsharpMasking(images[i * 2], "gauss", 3, 1.9, -1);
+			eRight = iP.unsharpMasking(images[i * 2 + 1], "gauss", 3, 1.9, -1);
+
+			StereoProcessor sP(dMin, dMax, images[i * 2], images[i * 2 + 1], 
+				censusWin, defaultBorderCost, lambdaAD, lambdaCensus, root,
+				aggregatingIterations, colorThreshold1, colorThreshold2, maxLength1, maxLength2,
+				colorDifference, pi1, pi2, dispTolerance, votingThreshold, votingRatioThreshold,
+				maxSearchDepth, blurKernelSize, cannyThreshold1, cannyThreshold2, cannyKernelSize);
+			string errorMsg;
+			error = !sP.init(errorMsg);
+
+			if (!error && sP.compute())
+			{
+				//保存视差数据
+				Raw_Disp_Data = sP.getDisparity();
+				/*
+				 * 用于显示的视差图并不是准确数据,为了获得良好的显示效果而对数据进行了一些裁剪和压缩
+				 * 例如归一化到0~255会改变原始的视差数据,因此,测量时必须使用原始视差数据
+				 */
+
+				Gray_Disp_Data = sP.getGrayDisparity();
+				//界面显示灰度视差图
+				m_entity->setIconRawDisp(Gray_Disp_Data);
+				cv::Mat colordisp;
+				getColorDisparityImage(Gray_Disp_Data, colordisp, true);
+				m_entity->setIconPcolorDisp(colordisp);
+			}
+			else
+			{
+				std::cout << "[ADCensusCV] " << errorMsg << endl;
+			}
+			std::cout << "Finished computation after " << time.elapsed() / 1000.0 << "s" << std::endl;
+		}
 	}
 	else
 	{
-		//ElasMatch(img1, img2);
-		MatchFunc();
+		std::cout << "[ADCensusCV] Not an even image number!" << std::endl;
 	}
 }
-//实验性匹配方法
-void StereoMatch::NewMatchFunc()
+/*
+ * OpenCV-BM
+ */
+void StereoMatch::OpenCVBM()
 {
-	/************************************************************************/
-	/* load and resize images                                               */
-	/************************************************************************/
+	std::cout << "BM开始计算..." << std::endl;
+	cv::Mat img1G,img2G;
+	cv::cvtColor(img1, img1G, CV_RGB2GRAY);//把图片转化为灰度图
+	cv::cvtColor(img2, img2G, CV_RGB2GRAY);//把图片转化为灰度图
 
-
-	cv::Mat imgL = cv::imread(img1_filename);
-	cv::Mat imgR = cv::imread(img2_filename);
-
-
-	if (!(imgL.data) || !(imgR.data))
-	{
-		std::cerr << "can't load image!" << std::endl;
-		return;
-	}
-	m_entity->setIconImgL(imgL);
-	m_entity->setIconImgR(imgR);
-
-	float stdWidth = 800, resizeScale = 1;//stdWidth can change
-	if (imgL.cols > stdWidth * 1.2)
-	{
-		resizeScale = stdWidth / imgL.cols;
-		cv::Mat imgL1, imgR1;
-		cv::resize(imgL, imgL1, cv::Size(), resizeScale, resizeScale);
-		cv::resize(imgR, imgR1, cv::Size(), resizeScale, resizeScale);
-		imgL = imgL1.clone();
-		imgR = imgR1.clone();
-	}
-
-	/************************************************************************/
-	/* decide which points in the left image should be chosen               */
-	/* and calculate their corresponding points in the right image          */
-	/************************************************************************/
-	std::cout << "calculating feature points..." << std::endl;
-	std::vector<cv::Point2f> ptsL, ptsR;
-	std::vector<int> ptNum;
-	//if (g_algo == FEATURE_PT)
-	//{
-	//	//if ( ! LoadPtsPairs(ptsL, ptsR, groupname+".pairs"))	{
-	//	GetPair(imgL, imgR, ptsL, ptsR);
-	//	//SavePtsPairs(ptsL, ptsR, groupname+".pairs");	}
-	//}
-	//else if (g_algo == DENSE)
-	GetPairBM(imgL, imgR, ptsL, ptsR);
-
-	/************************************************************************/
-	/* calculate 3D coordinates                                             */
-	/************************************************************************/
-	//std::vector<cv::Point3f> pts3D;
-	//float focalLenInPixel = 3740 * resizeScale,
-	//	baselineInMM = 160;
-	//cv::Point3f center3D;
-	//cv::Vec3f size3D;
-	//float scale = .2; // scale the z coordinate so that it won't be too large spreaded
-	////float imgHinMM = 400, // approximate real height of the scene in picture, useless
-	////float MMperPixel = imgHinMM / imgL.rows;
-	////float focalLenInMM = focalLenInPixel * MMperPixel;
-	//focalLenInPixel *= scale;
-
-	//std::cout << "calculating 3D coordinates..." << std::endl;
-	////StereoTo3D(ptsL, ptsR, pts3D, focalLenInPixel, baselineInMM, imgL, center3D, size3D);
-
-}
-//稳定版匹配方法
-void StereoMatch::MatchFunc()
-{
-	std::cout << "开始计算..." << std::endl;
-	m_entity->setIconImgL(img1);
-	m_entity->setIconImgR(img2);
+	m_entity->setIconImgL(img1G);
+	m_entity->setIconImgR(img2G);
 	cv::Ptr<cv::StereoBM> bm = cv::StereoBM::create();
-	cv::Ptr<cv::StereoSGBM> sgbm = cv::StereoSGBM::create(0, 16, 3);
-
-	//int numberOfDisparities = m_entity->getNumDisparities() > 0 ? m_entity->getNumDisparities() : ((img_size.width / 8) + 15) & -16;
-	bm->setROI1(roi1);
-	bm->setROI2(roi2);
+	//bm->setROI1(roi1);
+	//bm->setROI2(roi2);
 	bm->setPreFilterCap(m_entity->getPrefilcap());
 	bm->setBlockSize(m_entity->getSadWinsz());
 	bm->setMinDisparity(m_entity->getMinDisp());
@@ -223,7 +313,30 @@ void StereoMatch::MatchFunc()
 	bm->setSpeckleWindowSize(m_entity->getSpecwinsz());
 	bm->setSpeckleRange(m_entity->getSpecrange());
 	bm->setDisp12MaxDiff(m_entity->getMaxdifdisp12());
+	int64 t = cv::getTickCount();
+	bm->compute(img1G, img2G, Raw_Disp_Data);
 
+	//获取用于显示的视差示意图
+	getGrayDisparity<float>(Raw_Disp_Data, Gray_Disp_Data);
+	m_entity->setIconRawDisp(Gray_Disp_Data);
+	//获取并显示伪彩色视差图
+	cv::Mat colordisp;
+	getColorDisparityImage(Gray_Disp_Data, colordisp, true);
+	m_entity->setIconPcolorDisp(colordisp);
+
+	t = cv::getTickCount() - t;
+
+	std::cout << "Time elapsed: " << t * 1000 / cv::getTickFrequency() << "ms\n BM计算完毕" << std::endl;
+}
+/*
+ * OpenCV-SGBM
+ */
+void StereoMatch::OpenCVSGBM()
+{
+	std::cout << "SGBM 开始计算..." << std::endl;
+	m_entity->setIconImgL(img1);
+	m_entity->setIconImgR(img2);
+	cv::Ptr<cv::StereoSGBM> sgbm = cv::StereoSGBM::create(0, 16, 3);
 
 	sgbm->setPreFilterCap(m_entity->getPrefilcap());
 	sgbm->setBlockSize(m_entity->getSadWinsz());
@@ -243,166 +356,39 @@ void StereoMatch::MatchFunc()
 	else if (m_entity->getMODE_3WAY())
 		sgbm->setMode(cv::StereoSGBM::MODE_SGBM_3WAY);
 
-	// 对左右视图的左边进行边界延拓，以获取与原始视图相同大小的有效视差区域
-	cv::Mat img1p, img2p;
-	copyMakeBorder(img1, img1p, 0, 0, m_entity->getNumDisparities(), 0, IPL_BORDER_REPLICATE);
-	copyMakeBorder(img2, img2p, 0, 0, m_entity->getNumDisparities(), 0, IPL_BORDER_REPLICATE);
-
-	cv::Mat dispWithBorder;
 	int64 t = cv::getTickCount();
-	if (m_entity->getBM())
-	{
-		bm->compute(img1p, img2p, dispWithBorder);
-	}	
-	else if (m_entity->getSGBM())
-	{
-		sgbm->compute(img1p, img2p, dispWithBorder);
-	}
+	sgbm->compute(img1, img2, Raw_Disp_Data);
+	
 
-	// 截取与原始画面对应的视差区域（舍去加宽的部分）
-	cv::Mat dispWithoutBorder;
-	cv::Mat m_Calib_Mat_Mask_Roi = cv::Mat::zeros(img_size.height, img_size.width, CV_8UC1);
-	cv::rectangle(m_Calib_Mat_Mask_Roi, roi1, cv::Scalar(255), -1);
-	dispWithBorder.colRange(m_entity->getNumDisparities(), img1p.cols).copyTo(dispWithoutBorder, m_Calib_Mat_Mask_Roi);
-	//获取用于显示的原始视差图,显示效果和保存的视差图一致
-	cv::Mat disp8;
-	dispWithoutBorder.convertTo(disp8, CV_8U, 255 / (m_entity->getNumDisparities()*16.));
-	m_entity->setIconRawDisp(disp8);
+	//获取用于显示的视差示意图
+	getGrayDisparity<float>(Raw_Disp_Data, Gray_Disp_Data);
+	m_entity->setIconRawDisp(Gray_Disp_Data);
 	//获取并显示伪彩色视差图
 	cv::Mat colordisp;
-	getColorDisparityImage(dispWithoutBorder, colordisp, true);
+	getColorDisparityImage(Gray_Disp_Data, colordisp, true);
 	m_entity->setIconPcolorDisp(colordisp);
 
 	t = cv::getTickCount() - t;
-
-	std::cout << "Time elapsed: "<< t * 1000 / cv::getTickFrequency() <<"ms\nStereoMatch计算完毕,正在输出..." << std::endl;
-
-	if (!disparity_filename.empty())
-	{
-		imwrite(disparity_filename, dispWithoutBorder);
-		std::cout << "视差图已经保存到:" << disparity_filename << std::endl;
-	}
-	if (m_entity->getDoRectify()==true)//给出相机参数
-	{
-		std::cout << "正在输出点云文件..." << std::endl;
-
-		cv::Mat xyz;
-		reprojectImageTo3D(dispWithoutBorder, xyz, Q, true);
-		//disp.convertTo(disp, CV_32F, 1.0 / 16.0);
-		//Q.convertTo(Q, CV_32F);
-		//customReproject(disp, Q, xyz);
-
-
-		if (EvisionUtils::write_PointCloud(point_cloud_filename, xyz))
-		{
-			m_entity->setXYZ(xyz);
-			std::cout << "点云文件已经保存到:" << point_cloud_filename << std::endl;
-		}
-		else
-		{
-			std::cout << "点云保存失败..." << std::endl;
-		}
-		//保存PCL点云文件,PCL点云使用左视图和视差图构建
-		/*相机参数取自左摄像头
-		 * 视差图:disp
-		 * 左视图:img1
-		 * u0,v0 焦距
-		   fx,fy 主点
-		   Tx 基线长度
-		   doffs cx1-cx2,主点的横坐标差
-		前四个来自相机矩阵,极限长度来自...Tx来自...
-		 */
-
-		std::cout << "计算完毕" << std::endl;
-		saveXYZ("F:\\xyz.txt", xyz);
-		std::cout << "F:\\xyz.txt保存完毕" << std::endl;
-	}
-	else
-	{
-		std::cout << "不使用相机参数则无法计算坐标!" << std::endl;
-	}
-	
-	return ;
-}
-
-void StereoMatch::saveXYZ(const std::string& fileName, const cv::Mat& image3D)
-{
-	CV_Assert(image3D.type() == CV_32FC3 && !image3D.empty());
-	CV_Assert(!fileName.empty());
-
-	std::ofstream outFile(fileName);
-
-	if (!outFile.is_open())
-	{
-		std::cerr << "ERROR: Could not open " << fileName << std::endl;
-		return;
-	}
-
-	for (int i = 0; i < image3D.rows; i++)
-	{
-		const cv::Vec3f* image3D_ptr = image3D.ptr<cv::Vec3f>(i);
-
-		for (int j = 0; j < image3D.cols; j++)
-		{
-			if(image3D_ptr[j][2]>=-10000&& image3D_ptr[j][2]<=10000)
-			{
-				outFile << image3D_ptr[j][0] << " " << image3D_ptr[j][1] << " " << image3D_ptr[j][2] << std::endl;
-			}
-		}
-	}
-
-	outFile.close();
+	std::cout << "Time elapsed: " << t * 1000 / cv::getTickFrequency() << "ms\n SGBM计算完毕" << std::endl;
 }
 /*
- * 自定义三维重投影
- * cv::Mat&		[in]	disparity	视差图
- * cv::Mat&		[in]	Q			Q矩阵
- * cv::Mat&		[out]	out3D		含有三维坐标的三通道图片
+ * Elas
  */
-void StereoMatch::customReproject(const cv::Mat& disparity, const cv::Mat& Q, cv::Mat& out3D)
+void StereoMatch::Elas()
 {
-	CV_Assert(disparity.type() == CV_32F);
-	CV_Assert(!disparity.empty());
-	CV_Assert(Q.type() == CV_32F);
-	CV_Assert(Q.cols == 4);
-	CV_Assert(Q.rows == 4);
-	// 3-channel matrix for containing the reprojected 3D world coordinates
-	out3D = cv::Mat::zeros(disparity.size(), CV_32FC3);
-
-	// Getting the interesting parameters from Q, everything else is zero or one
-	float Q03 = Q.at<float>(0, 3);
-	float Q13 = Q.at<float>(1, 3);
-	float Q23 = Q.at<float>(2, 3);
-	float Q32 = Q.at<float>(3, 2);
-	float Q33 = Q.at<float>(3, 3);
-
-	// Transforming a single-channel disparity map to a 3-channel image representing a 3D surface
-	for (int i = 0; i < disparity.rows; i++)
-	{
-		const float* disp_ptr = disparity.ptr<float>(i);
-		cv::Vec3f* out3D_ptr = out3D.ptr<cv::Vec3f>(i);
-
-		for (int j = 0; j < disparity.cols; j++)
-		{
-			const float pw = 1.0f / (disp_ptr[j] * Q32 + Q33);
-
-			cv::Vec3f& point = out3D_ptr[j];
-			point[0] = (static_cast<float>(j) + Q03) * pw;
-			point[1] = (static_cast<float>(i) + Q13) * pw;
-			point[2] = Q23 * pw;
-		}
-	}
+	ElasMatch(img1, img2);
 }
+
 /*
- * 获取用于显示的视差图
+ * 获取用于显示的伪彩色视差图
  * cv::Mat&		[in]	disparity			视差图
- * cv::Mat&		[out]	disparityImage		转换结果
- * bool			[in]	isclolr				是否添加伪彩效果
+ * cv::Mat&		[out]	colordisparity		转换结果
+ * bool			[in]	isclolr				是否添加伪彩效果,默认true
  */
-void StereoMatch::getColorDisparityImage(cv::Mat& disparity, cv::Mat& disparityImage, bool isColor)
+void StereoMatch::getColorDisparityImage(cv::Mat& disparity, cv::Mat& colordisparity, bool isColor)
 {
 	//将原始视差数据的位深转换为 8 位
-		cv::Mat disp8u;
+	cv::Mat disp8u;
 	if (disparity.depth() != CV_8U)
 	{
 		disparity.convertTo(disp8u, CV_8U, 255 / (m_entity->getNumDisparities()*16.));
@@ -415,9 +401,9 @@ void StereoMatch::getColorDisparityImage(cv::Mat& disparity, cv::Mat& disparityI
 	// 转换为伪彩色图像 或 灰度图像
 	if (isColor)
 	{
-		if (disparityImage.empty() || disparityImage.type() != CV_8UC3)
+		if (colordisparity.empty() || colordisparity.type() != CV_8UC3)
 		{
-			disparityImage = cv::Mat::zeros(disparity.rows, disparity.cols, CV_8UC3);
+			colordisparity = cv::Mat::zeros(disparity.rows, disparity.cols, CV_8UC3);
 		}
 
 		for (int y = 0; y < disparity.rows; y++)
@@ -436,165 +422,73 @@ void StereoMatch::getColorDisparityImage(cv::Mat& disparity, cv::Mat& disparityI
 					b = val;
 				}
 
-				disparityImage.at<cv::Vec3b>(y, x) = cv::Vec3b(r, g, b);
+				colordisparity.at<cv::Vec3b>(y, x) = cv::Vec3b(r, g, b);
 			}
 		}
 	}
 	else
 	{
-		disp8u.copyTo(disparityImage);
+		disp8u.copyTo(colordisparity);
 	}
 
 	return;
 }
-
-void StereoMatch::GetPair(cv::Mat& imgL, cv::Mat& imgR, std::vector<cv::Point2f>& ptsL,
-	std::vector<cv::Point2f>& ptsR)
+/*
+ * 将原始视差数据转换为用于可视化的灰度视差图
+ * 
+ */
+template <typename T>
+void StereoMatch::getGrayDisparity(const cv::Mat& disp, cv::Mat& grayDisp, bool stretch)
 {
-	cv::Mat descriptorsL, descriptorsR;
-	double tt = (double)cv::getTickCount();
+	cv::Size imgSize = disp.size();
+	cv::Mat output(imgSize, CV_8UC3);
+	T min, max;
 
-	cv::Ptr<cv::Feature2D> detector = cv::xfeatures2d::SIFT::create();
-	std::vector<cv::KeyPoint> keypointsL, keypointsR;
-	detector->detect(imgL, keypointsL);
-	detector->detect(imgR, keypointsR);
-
-	//Ptr<DescriptorExtractor> de = DescriptorExtractor::create(DESCRIPTOR_TYPE);
-	//SurfDescriptorExtractor de(4,2,true);
-	detector->compute(imgL, keypointsL, descriptorsL);
-	detector->compute(imgR, keypointsR, descriptorsR);
-
-	tt = ((double)cv::getTickCount() - tt) / cv::getTickFrequency(); // 620*555 pic, about 2s for SURF, 120s for SIFT
-
-	cv::Ptr<cv::DescriptorMatcher> matcher = cv::DescriptorMatcher::create(MATCHER_TYPE);
-	std::vector<std::vector<cv::DMatch>> matches;
-	matcher->knnMatch(descriptorsL, descriptorsR, matches, 2); // L:query, R:train
-
-	std::vector<cv::DMatch> passedMatches; // save for drawing
-	cv::DMatch m1, m2;
-	std::vector<cv::Point2f> ptsRtemp, ptsLtemp;
-	for (int i = 0; i < matches.size(); i++)
+	if (stretch)
 	{
-		m1 = matches[i][0];
-		m2 = matches[i][1];
-		if (m1.distance < MAXM_FILTER_TH * m2.distance)
+		min = (std::numeric_limits<T>::max());
+		max = 0;
+		for (size_t h = 0; h < imgSize.height; h++)
 		{
-			ptsRtemp.push_back(keypointsR[m1.trainIdx].pt);
-			ptsLtemp.push_back(keypointsL[i].pt);
-			passedMatches.push_back(m1);
-		}
-	}
-
-	cv::Mat HLR;
-	HLR = findHomography(cv::Mat(ptsLtemp), cv::Mat(ptsRtemp), CV_RANSAC, 3);
-	std::cout << "Homography:" << std::endl << HLR << std::endl;
-	cv::Mat ptsLt;
-	perspectiveTransform(cv::Mat(ptsLtemp), ptsLt, HLR);
-
-	std::vector<char> matchesMask(passedMatches.size(), 0);
-	int cnt = 0;
-	for (int i1 = 0; i1 < ptsLtemp.size(); i1++)
-	{
-		cv::Point2f prjPtR = ptsLt.at<cv::Point2f>((int)i1, 0); // prjx = ptsLt.at<float>((int)i1,0), prjy = ptsLt.at<float>((int)i1,1);
-		 // inlier
-		if (abs(ptsRtemp[i1].x - prjPtR.x) < HOMO_FILTER_TH &&
-			abs(ptsRtemp[i1].y - prjPtR.y) < 2) // restriction on y is more strict
-		{
-			std::vector<cv::Point2f>::iterator iter = ptsL.begin();
-			for (; iter != ptsL.end(); iter++)
+			for (size_t w = 0; w < imgSize.width; w++)
 			{
-				cv::Point2f diff = *iter - ptsLtemp[i1];
-				float dist = abs(diff.x) + abs(diff.y);
-				if (dist < NEAR_FILTER_TH) break;
+				T disparity = disp.at<T>(h, w);
+
+				if (disparity < min && disparity >= 0)
+					min = disparity;
+				else if (disparity > max)
+					max = disparity;
 			}
-			if (iter != ptsL.end()) continue;
-
-			ptsL.push_back(ptsLtemp[i1]);
-			ptsR.push_back(ptsRtemp[i1]);
-			cnt++;
-			if (cnt % 1 == 0) matchesMask[i1] = 1; // don't want to draw to many matches
 		}
 	}
 
-	cv::Mat outImg;
-	drawMatches(imgL, keypointsL, imgR, keypointsR, passedMatches, outImg,
-		cv::Scalar::all(-1), cv::Scalar::all(-1), matchesMask, cv::DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS);
-	char title[50];
-	sprintf_s(title, 50, "%.3f s, %d matches, %d passed", tt, matches.size(), cnt);
-	imshow(title, outImg);
-	cv::waitKey();
-}
-
-void StereoMatch::GetPairBM(cv::Mat& imgL, cv::Mat& imgR, std::vector<cv::Point2f>& ptsL,
-	std::vector<cv::Point2f>& ptsR)
-{
-	cv::Mat_<float> disp;
-	//imshow("left image", imgL);
-
-	int numOfDisp = 80; // number of disparity, must be divisible by 16// algorithm parameters that can be modified
-	CalcDisparity(imgL, imgR, disp, numOfDisp);
-	cv::Mat dispSave, dispS;
-	normalize(disp, dispSave, 0, 1, cv::NORM_MINMAX);
-	dispSave.convertTo(dispSave, CV_8U, 255);
-	imwrite("disp.jpg", dispSave);
-
-	//int numOfEgdePt = 80, numOfFlatPt = 50;	// algorithm parameters that can be modified
-	//ChooseKeyPointsBM(disp, numOfDisp, numOfEgdePt, numOfFlatPt, ptsL, ptsR);
-	//cv::waitKey();
-}
-
-void StereoMatch::CalcDisparity(cv::Mat& imgL, cv::Mat& imgR, cv::Mat_<float>& disp, int nod)
-{
-	enum { STEREO_BM = 0, STEREO_SGBM = 1, STEREO_HH = 2 };
-	int alg = STEREO_SGBM;
-
-	cv::Ptr<cv::StereoSGBM> sgbm = cv::StereoSGBM::create();
-	int cn = imgR.channels();
-
-	sgbm->setBlockSize(3);
-	sgbm->setNumDisparities(nod);
-	sgbm->setPreFilterCap(63);
-	sgbm->setP1(8 * cn*sgbm->getBlockSize()*sgbm->getBlockSize());
-	sgbm->setP2(32 * cn*sgbm->getBlockSize()*sgbm->getBlockSize());
-	sgbm->setMinDisparity(0);
-	sgbm->setUniquenessRatio(10);
-	sgbm->setSpeckleWindowSize(100);
-	sgbm->setSpeckleRange(32);
-	sgbm->setDisp12MaxDiff(1);
-	sgbm->setMode(cv::StereoSGBM::MODE_HH);
-
-	cv::Mat dispTemp, disp8;
-	sgbm->compute(imgL, imgR, dispTemp);
-	dispTemp.convertTo(disp, CV_32FC1, 1.0 / 16);
-	disp.convertTo(disp8, CV_8U, 255.0 / nod);
-	//imshow("origin disparity", disp8);
-	m_entity->setIconRawDisp(disp8);
-	//waitKey();
-
-	FixDisparity(disp, nod);
-	disp.convertTo(disp8, CV_8U, 255.0 / nod);
-	//imshow("fixed disparity", disp8);
-	m_entity->setIconFixDisp(disp8);
-}
-
-// roughly smooth the glitches on the disparity map
-void StereoMatch::FixDisparity(cv::Mat_<float>& disp, int numberOfDisparities)
-{
-	cv::Mat_<float> disp1;
-	float lastPixel = 10;
-	float minDisparity = 23;// algorithm parameters that can be modified
-	for (int i = 0; i < disp.rows; i++)
+	for (size_t h = 0; h < imgSize.height; h++)
 	{
-		for (int j = numberOfDisparities; j < disp.cols; j++)
+		for (size_t w = 0; w < imgSize.width; w++)
 		{
-			if (disp(i, j) <= minDisparity) disp(i, j) = lastPixel;
-			else lastPixel = disp(i, j);
+			cv::Vec3b color;
+			T disparity = disp.at<T>(h, w);
+
+			if (disparity >= 0)
+			{
+				if (stretch)
+					disparity = (255 / (max - min)) * (disparity - min);
+
+				color[0] = (uchar)disparity;
+				color[1] = (uchar)disparity;
+				color[2] = (uchar)disparity;
+
+			}
+			else
+			{
+				color[0] = 0;
+				color[1] = 0;
+				color[2] = 0;
+			}
+
+			output.at<cv::Vec3b>(h, w) = color;
 		}
 	}
-	int an = 4;	// algorithm parameters that can be modified
-	copyMakeBorder(disp, disp1, an, an, an, an, cv::BORDER_REPLICATE);
-	cv::Mat element = getStructuringElement(cv::MORPH_ELLIPSE, cv::Size(an * 2 + 1, an * 2 + 1));
-	morphologyEx(disp1, disp1, CV_MOP_OPEN, element);
-	morphologyEx(disp1, disp1, CV_MOP_CLOSE, element);
-	disp = disp1(cv::Range(an, disp.rows - an), cv::Range(an, disp.cols - an)).clone();
+
+	grayDisp = output.clone();
 }

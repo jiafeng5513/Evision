@@ -12,9 +12,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{D8FB0A1E-98A3-4017-B6D4-A7421987314F}</ProjectGuid>
+    <ProjectGuid>{1A38C54A-D846-4329-8EE8-9C1AFDC58FFD}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>EvisionElas</RootNamespace>
+    <RootNamespace>EvisionADCensus</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -39,10 +39,12 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\props\OpenCV_x64_debug.props" />
+    <Import Project="..\..\props\PCL_x64_debug.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\props\OpenCV_x64_release.props" />
+    <Import Project="..\..\props\PCL_x64_release.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -60,8 +62,11 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;EVISIONELAS_EXPORTS;_WINDOWS;_USRDLL;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;EVISIONADCENSUS_EXPORTS;_WINDOWS;_USRDLL;_SILENCE_FPOS_SEEKPOS_DEPRECATION_WARNING;_CRT_SECURE_NO_WARNINGS;_WIN64;__STDC_LIMIT_MACROS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -75,7 +80,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;EVISIONELAS_EXPORTS;_WINDOWS;_USRDLL;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;EVISIONADCENSUS_EXPORTS;_WINDOWS;_USRDLL;_SILENCE_FPOS_SEEKPOS_DEPRECATION_WARNING;_CRT_SECURE_NO_WARNINGS;_WIN64;__STDC_LIMIT_MACROS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -86,22 +91,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="descriptor.h" />
-    <ClInclude Include="elas.h" />
-    <ClInclude Include="EvisionElas.h" />
-    <ClInclude Include="filter.h" />
-    <ClInclude Include="image.h" />
-    <ClInclude Include="matrix.h" />
-    <ClInclude Include="timer.h" />
-    <ClInclude Include="triangle.h" />
+    <ClInclude Include="adcensuscv.h" />
+    <ClInclude Include="aggregation.h" />
+    <ClInclude Include="common.h" />
+    <ClInclude Include="disparityrefinement.h" />
+    <ClInclude Include="imageprocessor.h" />
+    <ClInclude Include="scanlineoptimization.h" />
+    <ClInclude Include="stereoprocessor.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="descriptor.cpp" />
-    <ClCompile Include="elas.cpp" />
-    <ClCompile Include="filter.cpp" />
-    <ClCompile Include="EvisionElas.cpp" />
-    <ClCompile Include="matrix.cpp" />
-    <ClCompile Include="triangle.cpp" />
+    <ClCompile Include="adcensuscv.cpp" />
+    <ClCompile Include="aggregation.cpp" />
+    <ClCompile Include="disparityrefinement.cpp" />
+    <ClCompile Include="imageprocessor.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="scanlineoptimization.cpp" />
+    <ClCompile Include="stereoprocessor.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

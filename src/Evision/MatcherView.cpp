@@ -19,6 +19,11 @@ MatcherView::MatcherView(QWidget *parent)
 	connect(m_entity, SIGNAL(paramChanged_Maxdifdisp12()), this, SLOT(onParamChanged_MaxDifdisp2()));
 	connect(m_entity, SIGNAL(paramChanged_BM()), this, SLOT(onParamChanged_BM()));
 	connect(m_entity, SIGNAL(paramChanged_SGBM()), this, SLOT(onParamChanged_SGBM()));
+	connect(m_entity, SIGNAL(paramChanged_ELAS()), this, SLOT(onParamChanged_ELAS()));
+	connect(m_entity, SIGNAL(paramChanged_ADCensus()), this, SLOT(onParamChanged_ADCensus()));
+	connect(m_entity, SIGNAL(paramChanged_RectifiedInput()), this, SLOT(onParamChanged_RectifiedInput()));
+	connect(m_entity, SIGNAL(paramChanged_MODE_3WAY()), this, SLOT(onParamChanged_MODE_3WAY()));
+	connect(m_entity, SIGNAL(paramChanged_MODE_SGBM()), this, SLOT(onParamChanged_MODE_SGBM()));
 	connect(m_entity, SIGNAL(paramChanged_MODE_HH()), this, SLOT(onParamChanged_MODE_HH()));
 	connect(m_entity, SIGNAL(paramChanged_ImageDtoShow()), this, SLOT(onParamChanged_imgDtoShow())/*, Qt::QueuedConnection*/);
 	connect(m_entity, SIGNAL(paramChanged_IconImgL()), this, SLOT(onParamChanged_IconImgL()));
@@ -27,8 +32,30 @@ MatcherView::MatcherView(QWidget *parent)
 	connect(m_entity, SIGNAL(paramChanged_IconFixDisp()), this, SLOT(onParamChanged_IconFixDisp()));
 	connect(m_entity, SIGNAL(paramChanged_IconPcolorDisp()), this, SLOT(onParamChanged_IconPcolorDisp()));
 	connect(m_entity, SIGNAL(paramChanged_ImageToShow()), this, SLOT(onParamChanged_ImageToShow()));
-	connect(m_entity, SIGNAL(paramChanged_UseExpeModule()), this, SLOT(onParamChanged_UseExpeModule()));
-	connect(m_entity, SIGNAL(paramChanged_DoRectify()), this, SLOT(onParamChanged_DoRectify()));
+	connect(m_entity, SIGNAL(paramChanged_dMin()), this, SLOT(onParamChanged_DMin()));
+	connect(m_entity, SIGNAL(paramChanged_dMax()), this, SLOT(onParamChanged_DMax()));
+	connect(m_entity, SIGNAL(paramChanged_censusWinH()), this, SLOT(onParamChanged_CensusWinH()));
+	connect(m_entity, SIGNAL(paramChanged_censusWinW()), this, SLOT(onParamChanged_CensusWinW()));
+	connect(m_entity, SIGNAL(paramChanged_defaultBorderCost()), this, SLOT(onParamChanged_DefaultBorderCost()));
+	connect(m_entity, SIGNAL(paramChanged_lambdaAD()), this, SLOT(onParamChanged_LambdaAD()));
+	connect(m_entity, SIGNAL(paramChanged_lambdaCensus()), this, SLOT(onParamChanged_LambdaCensus()));
+	connect(m_entity, SIGNAL(paramChanged_aggregatingIterations()), this, SLOT(onParamChanged_AggregatingIterations()));
+	connect(m_entity, SIGNAL(paramChanged_colorThreshold1()), this, SLOT(onParamChanged_ColorThreshold1()));
+	connect(m_entity, SIGNAL(paramChanged_colorThreshold2()), this, SLOT(onParamChanged_ColorThreshold2()));
+	connect(m_entity, SIGNAL(paramChanged_maxLength1()), this, SLOT(onParamChanged_MaxLength1()));
+	connect(m_entity, SIGNAL(paramChanged_maxLength2()), this, SLOT(onParamChanged_MaxLength2()));
+	connect(m_entity, SIGNAL(paramChanged_colorDifference()), this, SLOT(onParamChanged_ColorDifference()));
+	connect(m_entity, SIGNAL(paramChanged_pi1()), this, SLOT(onParamChanged_Pi1()));
+	connect(m_entity, SIGNAL(paramChanged_pi2()), this, SLOT(onParamChanged_Pi2()));
+	connect(m_entity, SIGNAL(paramChanged_dispTolerance()), this, SLOT(onParamChanged_DispTolerance()));
+	connect(m_entity, SIGNAL(paramChanged_votingThreshold()), this, SLOT(onParamChanged_VotingThreshold()));
+	connect(m_entity, SIGNAL(paramChanged_votingRatioThreshold()), this, SLOT(onParamChanged_VotingRatioThreshold()));
+	connect(m_entity, SIGNAL(paramChanged_maxSearchDepth()), this, SLOT(onParamChanged_MaxSearchDepth()));
+	connect(m_entity, SIGNAL(paramChanged_cannyThreshold1()), this, SLOT(onParamChanged_CannyThreshold1()));
+	connect(m_entity, SIGNAL(paramChanged_cannyThreshold2()), this, SLOT(onParamChanged_CannyThreshold2()));
+	connect(m_entity, SIGNAL(paramChanged_cannyKernelSize()), this, SLOT(onParamChanged_CannyKernelSize()));
+	connect(m_entity, SIGNAL(paramChanged_blurKernelSize()), this, SLOT(onParamChanged_BlurKernelSize()));
+
 
 	m_entity->setImageToShow(StereoMatchParamEntity::RAW_DISP);
 }
@@ -50,6 +77,14 @@ void MatcherView::doMatch()
 void MatcherView::RefreshStereoMatch()
 {
 	m_controller->RefreshStereoMatchCommand();
+}
+//保存
+void MatcherView::SaveDisparities()
+{
+}
+//显示帮助信息
+void MatcherView::Help()
+{
 }
 
 void MatcherView::valueChanged_MinDisp(int value)
@@ -202,12 +237,199 @@ void MatcherView::onParamChanged_MaxDifdisp2()
 
 }
 
+
+//1.int
+void MatcherView::valueChanged_DMin(int value) {
+	if (m_entity->getDMin() != value)
+		m_entity->setDMin(value);
+}
+void MatcherView::onParamChanged_DMin() {
+	ui.spinBox_dMin->setValue(m_entity->getDMin());
+}
+//2.int
+void MatcherView::valueChanged_DMax(int value) {
+	if (m_entity->getDMax() != value)
+		m_entity->setDMax(value);
+}
+void MatcherView::onParamChanged_DMax() {
+	ui.spinBox_dMax->setValue(m_entity->getDMax());
+}
+//3.int
+void MatcherView::valueChanged_CensusWinH(int value) {
+	if (m_entity->getCensusWinH() != value)
+		m_entity->setCensusWinH(value);
+}
+void MatcherView::onParamChanged_CensusWinH() {
+	ui.spinBox_censusWinW->setValue(m_entity->getCensusWinH());
+}
+//4.int
+void MatcherView::valueChanged_CensusWinW(int value) {
+	if (m_entity->getCensusWinW() != value)
+		m_entity->setCensusWinW(value);
+}
+void MatcherView::onParamChanged_CensusWinW() {
+	ui.spinBox_censusWinH->setValue(m_entity->getCensusWinW());
+}
+//5.float
+void MatcherView::valueChanged_DefaultBorderCost(double value) {
+	if (m_entity->getDefaultBorderCost() != value)
+		m_entity->setDefaultBorderCost(value);
+}
+void MatcherView::onParamChanged_DefaultBorderCost() {
+	ui.doubleSpinBox_defaultBorderCost->setValue(m_entity->getDefaultBorderCost());
+}
+//6.float
+void MatcherView::valueChanged_LambdaAD(double value) {
+	if (m_entity->getLambdaAD() != value)
+		m_entity->setLambdaAD(value);
+}
+void MatcherView::onParamChanged_LambdaAD() {
+	ui.doubleSpinBox_lambdaAD->setValue(m_entity->getLambdaAD());
+}
+//7.float
+void MatcherView::valueChanged_LambdaCensus(double value) {
+	if (m_entity->getLambdaCensus() != value)
+		m_entity->setLambdaCensus(value);
+}
+void MatcherView::onParamChanged_LambdaCensus() {
+	ui.doubleSpinBox_lambdaCensus->setValue(m_entity->getLambdaCensus());
+}
+//8.int
+void MatcherView::valueChanged_AggregatingIterations(int value) {
+	if (m_entity->getAggregatingIterations() != value)
+		m_entity->setAggregatingIterations(value);
+}
+void MatcherView::onParamChanged_AggregatingIterations() {
+	ui.spinBox_aggregatingIterations->setValue(m_entity->getAggregatingIterations());
+}
+//9.int
+void MatcherView::valueChanged_ColorThreshold1(int value) {
+	if (m_entity->getColorThreshold1() != value)
+		m_entity->setColorThreshold1(value);
+}
+void MatcherView::onParamChanged_ColorThreshold1() {
+	ui.spinBox_colorThreshold1->setValue(m_entity->getColorThreshold1());
+}
+//10.int
+void MatcherView::valueChanged_ColorThreshold2(int value) {
+	if (m_entity->getColorThreshold2() != value)
+		m_entity->setColorThreshold2(value);
+}
+void MatcherView::onParamChanged_ColorThreshold2() {
+	ui.spinBox_colorThreshold2->setValue(m_entity->getColorThreshold2());
+}
+//11.int
+void MatcherView::valueChanged_MaxLength1(int value) {
+	if (m_entity->getMaxLength1() != value)
+		m_entity->setMaxLength1(value);
+}
+void MatcherView::onParamChanged_MaxLength1() {
+	ui.spinBox_maxLength1->setValue(m_entity->getMaxLength1());
+}
+//12.int
+void MatcherView::valueChanged_MaxLength2(int value) {
+	if (m_entity->getMaxLength2() != value)
+		m_entity->setMaxLength2(value);
+}
+void MatcherView::onParamChanged_MaxLength2() {
+	ui.spinBox_maxLength2->setValue(m_entity->getMaxLength2());
+}
+//13.int
+void MatcherView::valueChanged_ColorDifference(int value) {
+	if (m_entity->getColorDifference() != value)
+		m_entity->setColorDifference(value);
+}
+void MatcherView::onParamChanged_ColorDifference() {
+	ui.spinBox_colorDifference->setValue(m_entity->getColorDifference());
+}
+//14.float
+void MatcherView::valueChanged_Pi1(double value) {
+	if (m_entity->getPi1() != value)
+		m_entity->setPi1(value);
+}
+void MatcherView::onParamChanged_Pi1() {
+	ui.doubleSpinBox_pi1->setValue(m_entity->getPi1());
+}
+//15.float
+void MatcherView::valueChanged_Pi2(double value) {
+	if (m_entity->getPi2() != value)
+		m_entity->setPi2(value);
+}
+void MatcherView::onParamChanged_Pi2() {
+	ui.doubleSpinBox_pi2->setValue(m_entity->getPi2());
+}
+//16.int
+void MatcherView::valueChanged_DispTolerance(int value) {
+	if (m_entity->getDispTolerance() != value)
+		m_entity->setDispTolerance(value);
+}
+void MatcherView::onParamChanged_DispTolerance() {
+	ui.spinBox_dispTolerance->setValue(m_entity->getDispTolerance());
+}
+//17.int
+void MatcherView::valueChanged_VotingThreshold(int value) {
+	if (m_entity->getVotingThreshold() != value)
+		m_entity->setVotingThreshold(value);
+}
+void MatcherView::onParamChanged_VotingThreshold() {
+	ui.spinBox_votingThreshold->setValue(m_entity->getVotingThreshold());
+}
+//18.float
+void MatcherView::valueChanged_VotingRatioThreshold(double value) {
+	if (m_entity->getVotingRatioThreshold() != value)
+		m_entity->setVotingRatioThreshold(value);
+}
+void MatcherView::onParamChanged_VotingRatioThreshold() {
+	ui.doubleSpinBox_votingRatioThreshold->setValue(m_entity->getVotingRatioThreshold());
+}
+//19.int
+void MatcherView::valueChanged_MaxSearchDepth(int value) {
+	if (m_entity->getMaxSearchDepth() != value)
+		m_entity->setMaxSearchDepth(value);
+}
+void MatcherView::onParamChanged_MaxSearchDepth() {
+	ui.spinBox_maxSearchDepth->setValue(m_entity->getMaxSearchDepth());
+}
+//20.int
+void MatcherView::valueChanged_CannyThreshold1(int value) {
+	if (m_entity->getCannyThreshold1() != value)
+		m_entity->setCannyThreshold1(value);
+}
+void MatcherView::onParamChanged_CannyThreshold1() {
+	ui.spinBox_cannyThreshold1->setValue(m_entity->getCannyThreshold1());
+}
+//21.int
+void MatcherView::valueChanged_CannyThreshold2(int value) {
+	if (m_entity->getCannyThreshold2() != value)
+		m_entity->setCannyThreshold2(value);
+}
+void MatcherView::onParamChanged_CannyThreshold2() {
+	ui.spinBox_cannyThreshold2->setValue(m_entity->getCannyThreshold2());
+}
+//22.int
+void MatcherView::valueChanged_CannyKernelSize(int value) {
+	if (m_entity->getCannyKernelSize() != value)
+		m_entity->setCannyKernelSize(value);
+}
+void MatcherView::onParamChanged_CannyKernelSize() {
+	ui.spinBox_cannyKernelSize->setValue(m_entity->getCannyKernelSize());
+}
+//23.int
+void MatcherView::valueChanged_BlurKernelSize(int value) {
+	if (m_entity->getBlurKernelSize() != value)
+		m_entity->setBlurKernelSize(value);
+}
+void MatcherView::onParamChanged_BlurKernelSize() {
+	ui.spinBox_blurKernelSize->setValue(m_entity->getBlurKernelSize());
+}
+
 void MatcherView::onClicked_BM(bool value)
 {
 	if (m_entity->getBM() != value)
 	{
 		m_entity->setBM(value);
 	}
+	ui.stackedWidget->setCurrentIndex(0);
 	ui.horizontalSlider_textThread->setEnabled(true);
 	ui.radioButton_MODE_HH->setEnabled(false);
 	ui.radioButton_MODE_SGBM->setEnabled(false);
@@ -226,7 +448,7 @@ void MatcherView::onClicked_SGBM(bool value)
 	{
 		m_entity->setSGBM(value);
 	}
-
+	ui.stackedWidget->setCurrentIndex(0);
 	ui.horizontalSlider_textThread->setEnabled(false);
 	ui.radioButton_MODE_HH->setEnabled(true);
 	ui.radioButton_MODE_SGBM->setEnabled(true);
@@ -239,39 +461,53 @@ void MatcherView::onParamChanged_SGBM()
 
 }
 
+void MatcherView::onClicked_ELAS(bool value)
+{
+	if (m_entity->getElas() != value)
+	{
+		m_entity->setElas(value);
+	}
+	ui.stackedWidget->setCurrentIndex(1);
+}
+
+void MatcherView::onParamChanged_ELAS()
+{
+	ui.radioButton_ELAS->setChecked(m_entity->getElas());
+}
+
+void MatcherView::onClicked_ADCensus(bool value)
+{
+	if(m_entity->getADCensus()!=value)
+	{
+		m_entity->setADCensus(value);
+	}
+	ui.stackedWidget->setCurrentIndex(2);
+}
+
+void MatcherView::onParamChanged_ADCensus()
+{
+	ui.radioButton_ADC->setChecked(m_entity->getADCensus());
+}
+
+void MatcherView::onClicked_RectifiedInput(bool value)
+{
+	if(m_entity->getRectifiedInput()!=value)
+	{
+		m_entity->setRectifiedInput(value);
+	}
+}
+
+void MatcherView::onParamChanged_RectifiedInput()
+{
+	ui.checkBox_RectifiedInput->setChecked(m_entity->getRectifiedInput());
+}
+
 void MatcherView::onClicked_MODE_HH(bool value)
 {
 	if (m_entity->getMODE_HH() != value)
 	{
 		m_entity->setMODE_HH(value);
 	}
-}
-//复选框:进行校正
-void MatcherView::onClicked_DoRectify(bool value)
-{
-	if(m_entity->getDoRectify()!= value)
-	{
-		m_entity->setDoRectify(value);
-	}
-}
-//
-void MatcherView::onParamChanged_DoRectify()
-{
-	ui.checkBox_DoRectify->setChecked(m_entity->getDoRectify());
-}
-
-//复选框:使用实验性匹配模块
-void MatcherView::onClicked_UseExpeModule(bool value)
-{
-	if(m_entity->getUseExpeModule()!=value)
-	{
-		m_entity->setUseExpeModule(value);
-	}
-}
-
-void MatcherView::onParamChanged_UseExpeModule()
-{
-	ui.checkBox_useExpeModule->setChecked(m_entity->getUseExpeModule());
 }
 
 void MatcherView::onParamChanged_MODE_HH()

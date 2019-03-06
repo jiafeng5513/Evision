@@ -15,8 +15,6 @@ StereoMatchController::~StereoMatchController()
 //命令:匹配默认参数
 void StereoMatchController::setDefaultMatchParamCommand()
 {
-	m_entity->setDoRectify(true);
-	m_entity->setUseExpeModule(false);
 	if (m_entity->getBM())
 	{
 		m_entity->setUniradio(5);
@@ -42,10 +40,35 @@ void StereoMatchController::setDefaultMatchParamCommand()
 		m_entity->setMaxdifdisp12(1);
 		m_entity->setMODE_HH(true);
 	}
-	else if (m_entity->getMODE_HH())
+	else if (m_entity->getElas())
 	{
-		m_entity->setMinDisp(-64);
-		m_entity->setNumDisparities(64);
+		
+	}
+	else if(m_entity->getADCensus())
+	{
+		m_entity->setDMin(0);
+		m_entity->setDMax(60);
+		m_entity->setCensusWinH(9);
+		m_entity->setCensusWinW(7);
+		m_entity->setDefaultBorderCost(0.999);
+		m_entity->setLambdaAD(10.0);
+		m_entity->setLambdaCensus(30.0);
+		m_entity->setAggregatingIterations(4);
+		m_entity->setColorThreshold1(20);
+		m_entity->setColorThreshold2(6);
+		m_entity->setMaxLength1(34);
+		m_entity->setMaxLength2(17);
+		m_entity->setColorDifference(15);
+		m_entity->setPi1(0.1);
+		m_entity->setPi2(0.3);
+		m_entity->setDispTolerance(0);
+		m_entity->setVotingThreshold(20);
+		m_entity->setVotingRatioThreshold(4);
+		m_entity->setMaxSearchDepth(20);
+		m_entity->setCannyThreshold1(20);
+		m_entity->setCannyThreshold2(60);
+		m_entity->setCannyKernelSize(3);
+		m_entity->setBlurKernelSize(3);
 	}
 	else
 	{
@@ -68,59 +91,41 @@ void StereoMatchController::MatchCommand()
 			ImageR = fileDialog->selectedFiles().at(0);
 			if (!ImageL.isEmpty() && !ImageR.isEmpty())
 			{
-				//如果不进行校正或者选择使用实验性模块,则不必选择相机参数文件,而直接启动线程
 				//两侧图片文件正常
-				if(m_entity->getDoRectify()==false||m_entity->getUseExpeModule()==true)
+
+				QFileDialog * fileDialog2 = new QFileDialog();
+				fileDialog2->setWindowTitle(QStringLiteral("请选择相机参数文件"));
+				fileDialog2->setNameFilter(QStringLiteral("YML/XML文件(*.yml *.yaml *.xml)"));
+				fileDialog2->setFileMode(QFileDialog::ExistingFile);
+				if (fileDialog2->exec() == QDialog::Accepted)
 				{
-					StereoMatch *_stereoMatch = new StereoMatch(ImageL.toStdString(),
-						ImageR.toStdString(),"");
-					if (_stereoMatch->init(false))
+					paramsFile = fileDialog2->selectedFiles().at(0);
+					if (!paramsFile.isEmpty())
 					{
-						connect(_stereoMatch, SIGNAL(openMessageBox(QString, QString)), this, SLOT(onOpenMessageBox(QString, QString)));
-						_stereoMatch->start();
+						//参数文件正常
+						StereoMatch *_stereoMatch = new StereoMatch(ImageL.toStdString(),
+							ImageR.toStdString(), paramsFile.toStdString());
+						if (_stereoMatch->init())
+						{
+							connect(_stereoMatch, SIGNAL(openMessageBox(QString, QString)), this, SLOT(onOpenMessageBox(QString, QString)));
+							_stereoMatch->start();
+						}
+						else
+						{
+							QMessageBox::information(NULL, QStringLiteral("错误"), QStringLiteral("匹配初始化失败!"));
+							return;
+						}
+
 					}
 					else
 					{
-						QMessageBox::information(NULL, QStringLiteral("错误"), QStringLiteral("匹配初始化失败!"));
+						QMessageBox::information(NULL, QStringLiteral("错误"), QStringLiteral("请选择有效的相机参数文件!"));
 						return;
 					}
 				}
 				else
 				{
-					QFileDialog * fileDialog2 = new QFileDialog();
-					fileDialog2->setWindowTitle(QStringLiteral("请选择相机参数文件"));
-					fileDialog2->setNameFilter(QStringLiteral("YML/XML文件(*.yml *.yaml *.xml)"));
-					fileDialog2->setFileMode(QFileDialog::ExistingFile);
-					if (fileDialog2->exec() == QDialog::Accepted)
-					{
-						paramsFile = fileDialog2->selectedFiles().at(0);
-						if (!paramsFile.isEmpty())
-						{
-							//参数文件正常
-							StereoMatch *_stereoMatch = new StereoMatch(ImageL.toStdString(),
-								ImageR.toStdString(), paramsFile.toStdString());
-							if (_stereoMatch->init())
-							{
-								connect(_stereoMatch, SIGNAL(openMessageBox(QString, QString)), this, SLOT(onOpenMessageBox(QString, QString)));
-								_stereoMatch->start();
-							}
-							else
-							{
-								QMessageBox::information(NULL, QStringLiteral("错误"), QStringLiteral("匹配初始化失败!"));
-								return;
-							}
-
-						}
-						else
-						{
-							QMessageBox::information(NULL, QStringLiteral("错误"), QStringLiteral("请选择有效的相机参数文件!"));
-							return;
-						}
-					}
-					else
-					{
-						return;
-					}
+					return;
 				}
 			}
 			else

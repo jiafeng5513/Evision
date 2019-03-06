@@ -146,5 +146,11 @@ public:
 	 * 从文件中读取点云
 	 */
 	static bool read_PointCloud(std::string&filename, cv::Mat*PointCloudMatrix);
+#ifdef WITH_PCL
+	/*
+	 * 保存PCD点云
+	 */
+	static void createAndSavePointCloud(cv::Mat &disparity, cv::Mat &leftImage, cv::Mat &Q, std::string filename);
+#endif
 };
 

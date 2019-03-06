@@ -117,6 +117,8 @@ void StereoMatchParamEntity::setBM(bool value)
 	if (value)
 	{
 		SGBM = false;
+		ELAS = false;
+		ADCensus = false;
 	}
 	emit paramChanged_BM();
 }
@@ -131,8 +133,42 @@ void StereoMatchParamEntity::setSGBM(bool value)
 	if (value)
 	{
 		BM = false;
+		ELAS = false;
+		ADCensus = false;
 	}
 	emit paramChanged_SGBM();
+}
+
+bool StereoMatchParamEntity::getElas()
+{
+	return ELAS;
+}
+void StereoMatchParamEntity::setElas(bool value)
+{
+	ELAS = value;
+	if(value)
+	{
+		BM = false;
+		SGBM = false;
+		ADCensus = false;
+	}
+	emit paramChanged_ELAS();
+}
+
+bool StereoMatchParamEntity::getADCensus()
+{
+	return ADCensus;
+}
+void StereoMatchParamEntity::setADCensus(bool value)
+{
+	ADCensus = value;
+	if(value)
+	{
+		BM = false;
+		SGBM = false;
+		ELAS = false;
+	}
+	emit paramChanged_ADCensus();
 }
 
 bool StereoMatchParamEntity::getMODE_HH()
@@ -180,26 +216,199 @@ void StereoMatchParamEntity::setMODE_3WAY(bool value)
 	emit paramChanged_MODE_3WAY();
 }
 
-bool StereoMatchParamEntity::getDoRectify()
+bool StereoMatchParamEntity::getRectifiedInput()
 {
-	return DoRectify;
+	return RectifiedInput;
 }
 
-void StereoMatchParamEntity::setDoRectify(bool value)
+void StereoMatchParamEntity::setRectifiedInput(bool value)
 {
-	DoRectify = value;
-	emit paramChanged_DoRectify();
+	RectifiedInput = value;
+	emit paramChanged_RectifiedInput();
 }
 
-bool StereoMatchParamEntity::getUseExpeModule()
-{
-	return UseExpeModule;
+int StereoMatchParamEntity::getDMin() {
+	return dMin;
+}
+void StereoMatchParamEntity::setDMin(int value) {
+	dMin = value;
+	emit paramChanged_dMin();
 }
 
-void StereoMatchParamEntity::setUseExpeModule(bool value)
-{
-	UseExpeModule = value;
-	emit paramChanged_UseExpeModule();
+int StereoMatchParamEntity::getDMax() {
+	return dMax;
+}
+void StereoMatchParamEntity::setDMax(int value) {
+	dMax = value;
+	emit paramChanged_dMax();
+}
+
+int StereoMatchParamEntity::getCensusWinH() {
+	return censusWinH;
+}
+void StereoMatchParamEntity::setCensusWinH(int value) {
+	censusWinH = value;
+	emit paramChanged_censusWinH();
+}
+
+int StereoMatchParamEntity::getCensusWinW() {
+	return censusWinW;
+}
+void StereoMatchParamEntity::setCensusWinW(int value) {
+	censusWinW = value;
+	emit paramChanged_censusWinW();
+}
+
+double StereoMatchParamEntity::getDefaultBorderCost() {
+	return defaultBorderCost;
+}
+void StereoMatchParamEntity::setDefaultBorderCost(double value) {
+	defaultBorderCost = value;
+	emit paramChanged_defaultBorderCost();
+}
+
+double StereoMatchParamEntity::getLambdaAD() {
+	return lambdaAD;
+}
+void StereoMatchParamEntity::setLambdaAD(double value) {
+	lambdaAD = value;
+	emit paramChanged_lambdaAD();
+}
+
+double StereoMatchParamEntity::getLambdaCensus() {
+	return lambdaCensus;
+}
+void StereoMatchParamEntity::setLambdaCensus(double value) {
+	lambdaCensus = value;
+	emit paramChanged_lambdaCensus();
+}
+
+int StereoMatchParamEntity::getAggregatingIterations() {
+	return aggregatingIterations;
+}
+void StereoMatchParamEntity::setAggregatingIterations(int value) {
+	aggregatingIterations = value;
+	emit paramChanged_aggregatingIterations();
+}
+
+int StereoMatchParamEntity::getColorThreshold1() {
+	return colorThreshold1;
+}
+void StereoMatchParamEntity::setColorThreshold1(int value) {
+	colorThreshold1 = value;
+	emit paramChanged_colorThreshold1();
+}
+
+int StereoMatchParamEntity::getColorThreshold2() {
+	return colorThreshold2;
+}
+void StereoMatchParamEntity::setColorThreshold2(int value) {
+	colorThreshold2 = value;
+	emit paramChanged_colorThreshold2();
+}
+
+int StereoMatchParamEntity::getMaxLength1() {
+	return maxLength1;
+}
+void StereoMatchParamEntity::setMaxLength1(int value) {
+	maxLength1 = value;
+	emit paramChanged_maxLength1();
+}
+
+int StereoMatchParamEntity::getMaxLength2() {
+	return maxLength2;
+}
+void StereoMatchParamEntity::setMaxLength2(int value) {
+	maxLength2 = value;
+	emit paramChanged_maxLength2();
+}
+
+int StereoMatchParamEntity::getColorDifference() {
+	return colorDifference;
+}
+void StereoMatchParamEntity::setColorDifference(int value) {
+	colorDifference = value;
+	emit paramChanged_colorDifference();
+}
+
+double StereoMatchParamEntity::getPi1() {
+	return pi1;
+}
+void StereoMatchParamEntity::setPi1(double value) {
+	pi1 = value;
+	emit paramChanged_pi1();
+}
+
+double StereoMatchParamEntity::getPi2() {
+	return pi2;
+}
+void StereoMatchParamEntity::setPi2(double value) {
+	pi2 = value;
+	emit paramChanged_pi2();
+}
+
+int StereoMatchParamEntity::getDispTolerance() {
+	return dispTolerance;
+}
+void StereoMatchParamEntity::setDispTolerance(int value) {
+	dispTolerance = value;
+	emit paramChanged_dispTolerance();
+}
+
+int StereoMatchParamEntity::getVotingThreshold() {
+	return votingThreshold;
+}
+void StereoMatchParamEntity::setVotingThreshold(int value) {
+	votingThreshold = value;
+	emit paramChanged_votingThreshold();
+}
+
+double StereoMatchParamEntity::getVotingRatioThreshold() {
+	return votingRatioThreshold;
+}
+void StereoMatchParamEntity::setVotingRatioThreshold(double value) {
+	votingRatioThreshold = value;
+	emit paramChanged_votingRatioThreshold();
+}
+
+int StereoMatchParamEntity::getMaxSearchDepth() {
+	return maxSearchDepth;
+}
+void StereoMatchParamEntity::setMaxSearchDepth(int value) {
+	maxSearchDepth = value;
+	emit paramChanged_maxSearchDepth();
+}
+
+int StereoMatchParamEntity::getCannyThreshold1() {
+	return cannyThreshold1;
+}
+void StereoMatchParamEntity::setCannyThreshold1(int value) {
+	cannyThreshold1 = value;
+	emit paramChanged_cannyThreshold1();
+}
+
+int StereoMatchParamEntity::getCannyThreshold2() {
+	return cannyThreshold2;
+}
+void StereoMatchParamEntity::setCannyThreshold2(int value) {
+	cannyThreshold2 = value;
+	emit paramChanged_cannyThreshold2();
+}
+
+int StereoMatchParamEntity::getCannyKernelSize() {
+	return cannyKernelSize;
+}
+void StereoMatchParamEntity::setCannyKernelSize(int value) {
+	cannyKernelSize = value;
+	emit paramChanged_cannyKernelSize();
+}
+
+int StereoMatchParamEntity::getBlurKernelSize() {
+	return blurKernelSize;
+}
+void StereoMatchParamEntity::setBlurKernelSize(int value) {
+	blurKernelSize = value;
+	emit paramChanged_blurKernelSize();
 }
 
 cv::Mat StereoMatchParamEntity::getImageDtoShow()
