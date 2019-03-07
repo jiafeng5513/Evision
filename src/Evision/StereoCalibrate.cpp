@@ -52,11 +52,11 @@ void StereoCalibrate::run()
 		bool showUndistorted = true;
 
 
-		std::vector<std::string> imagelist_double;
+		std::vector<std::string> *imagelist_double=new std::vector<std::string>();
 		for (int i = 0; i < imagelistL->size(); ++i)
 		{
-			imagelist_double.push_back(imagelistL->at(i));
-			imagelist_double.push_back(imagelistR->at(i));
+			imagelist_double->push_back(imagelistL->at(i));
+			imagelist_double->push_back(imagelistR->at(i));
 		}
 
 		std::cout << "标定左相机" << std::endl;
@@ -64,13 +64,13 @@ void StereoCalibrate::run()
 		std::cout << "标定右相机" << std::endl;
 		Calib1D(boardSize, squareSize, *imagelistR, cameraMatrix_R, distCoeffs_R, aspectRatio, pattern, flags_1D, showUndistorted);
 		std::cout << "标定双目系统" << std::endl;
-		StereoCalib(imagelist_double, boardSize, squareSize, cameraMatrix_L, distCoeffs_L, cameraMatrix_R, distCoeffs_R,
+		StereoCalib(*imagelist_double, boardSize, squareSize, cameraMatrix_L, distCoeffs_L, cameraMatrix_R, distCoeffs_R,
 			R, T, E, F, R1, P1, R2, P2, Q, roi1, roi2, flags_2D, false, true, showRectified);
 		ready_to_save = true;
 	}
-	catch (...)
+	catch (std::exception e)
 	{
-		std::cout << "标定出现严重错误!" << std::endl;
+		std::cout << "标定出现严重错误!" <<e.what() << std::endl;
 
 	}
 }
@@ -209,389 +209,398 @@ bool StereoCalibrate::calibrate_1D_core(const std::vector<std::vector<cv::Point2
 void StereoCalibrate::Calib1D(cv::Size boardSize, float squareSize, std::vector<std::string> imageList,
 	cv::Mat& cameraMatrix, cv::Mat& distCoeffs, float aspectRatio, Pattern pattern, int flags, bool showUndistorted)
 {
-	//cv::Size imageSize;//改成成员变量
-	std::vector<std::vector<cv::Point2f> > imagePoints;
-	int nframes = (int)imageList.size();
-	//cv::namedWindow("Image View", 1);
-
-	for (int i = 0;; i++)
+	try
 	{
-		cv::Mat view, viewGray;
-		if (i < (int)imageList.size())
-			view = cv::imread(imageList[i], 1);
+		//cv::Size imageSize;//改成成员变量
+		std::vector<std::vector<cv::Point2f> > imagePoints;
+		int nframes = (int)imageList.size();
+		//cv::namedWindow("Image View", 1);
 
-		if (view.empty())//数据读完了,开始标定
+
+
+		for (int i = 0;; i++)
 		{
-			if (imagePoints.size() > 0)
-				calibrate_1D_core(imagePoints, imageSize, boardSize, squareSize, aspectRatio, flags, cameraMatrix, distCoeffs);
-			break;
+			cv::Mat view, viewGray;
+			if (i < (int)imageList.size())
+				view = cv::imread(imageList[i], 1);
+
+			if (view.empty())//数据读完了,开始标定
+			{
+				if (imagePoints.size() > 0)
+					std::cout << "数据读完了,开始标定" << std::endl;
+					calibrate_1D_core(imagePoints, imageSize, boardSize, squareSize, aspectRatio, flags, cameraMatrix, distCoeffs);
+				break;
+			}
+
+			imageSize = view.size();
+
+			std::vector<cv::Point2f> pointbuf;
+			cvtColor(view, viewGray, cv::COLOR_BGR2GRAY);
+
+			bool found;
+			switch (pattern)
+			{
+			case CHESSBOARD:
+				found = findChessboardCorners(view, boardSize, pointbuf,
+					cv::CALIB_CB_ADAPTIVE_THRESH | cv::CALIB_CB_FAST_CHECK | cv::CALIB_CB_NORMALIZE_IMAGE);
+				break;
+			case CIRCLES_GRID:
+				found = findCirclesGrid(view, boardSize, pointbuf);
+				break;
+			case ASYMMETRIC_CIRCLES_GRID:
+				found = findCirclesGrid(view, boardSize, pointbuf, cv::CALIB_CB_ASYMMETRIC_GRID);
+				break;
+			default:
+				return;
+			}
+
+			// improve the found corners' coordinate accuracy
+			if (pattern == CHESSBOARD && found)
+				cv::cornerSubPix(viewGray, pointbuf, cv::Size(11, 11), cv::Size(-1, -1),
+					cv::TermCriteria(cv::TermCriteria::EPS + cv::TermCriteria::COUNT, 30, 0.1));
+
+			if (found)
+			{
+				imagePoints.push_back(pointbuf);
+			}
+
+			if (found)
+				drawChessboardCorners(view, boardSize, cv::Mat(pointbuf), found);
+
+			std::string msg = "100/100";
+			int baseLine = 0;
+			cv::Size textSize = cv::getTextSize(msg, 1, 1, 1, &baseLine);
+			cv::Point textOrigin(view.cols - 2 * textSize.width - 10, view.rows - 2 * baseLine - 10);
+
+
+			msg = cv::format("%d/%d", (int)imagePoints.size(), nframes);
+
+			putText(view, msg, textOrigin, 1, 1, cv::Scalar(0, 0, 255));
+
+			m_entity->insertItem(view);
 		}
 
-		imageSize = view.size();
-
-		std::vector<cv::Point2f> pointbuf;
-		cvtColor(view, viewGray, cv::COLOR_BGR2GRAY);
-
-		bool found;
-		switch (pattern)
+		if (showUndistorted)
 		{
-		case CHESSBOARD:
-			found = findChessboardCorners(view, boardSize, pointbuf,
-				cv::CALIB_CB_ADAPTIVE_THRESH | cv::CALIB_CB_FAST_CHECK | cv::CALIB_CB_NORMALIZE_IMAGE);
-			break;
-		case CIRCLES_GRID:
-			found = findCirclesGrid(view, boardSize, pointbuf);
-			break;
-		case ASYMMETRIC_CIRCLES_GRID:
-			found = findCirclesGrid(view, boardSize, pointbuf, cv::CALIB_CB_ASYMMETRIC_GRID);
-			break;
-		default:
-			return;
+			cv::Mat view, rview, map1, map2;
+			cv::initUndistortRectifyMap(cameraMatrix, distCoeffs, cv::Mat(),
+				getOptimalNewCameraMatrix(cameraMatrix, distCoeffs, imageSize, 1, imageSize, 0),
+				imageSize, CV_16SC2, map1, map2);
+
+			for (int i = 0; i < (int)imageList.size(); i++)
+			{
+				view = cv::imread(imageList[i], 1);
+				if (view.empty())
+					continue;
+				remap(view, rview, map1, map2, cv::INTER_LINEAR);
+				m_entity->insertItem(rview);
+			}
+			std::cout << "第一次矫正成功完成" << std::endl;
 		}
-
-		// improve the found corners' coordinate accuracy
-		if (pattern == CHESSBOARD && found)
-			cv::cornerSubPix(viewGray, pointbuf, cv::Size(11, 11), cv::Size(-1, -1),
-				cv::TermCriteria(cv::TermCriteria::EPS + cv::TermCriteria::COUNT, 30, 0.1));
-
-		if (found)
-		{
-			imagePoints.push_back(pointbuf);
-		}
-
-		if (found)
-			drawChessboardCorners(view, boardSize, cv::Mat(pointbuf), found);
-
-		std::string msg = "100/100";
-		int baseLine = 0;
-		cv::Size textSize = cv::getTextSize(msg, 1, 1, 1, &baseLine);
-		cv::Point textOrigin(view.cols - 2 * textSize.width - 10, view.rows - 2 * baseLine - 10);
-
-
-		msg = cv::format("%d/%d", (int)imagePoints.size(), nframes);
-
-		putText(view, msg, textOrigin, 1, 1, cv::Scalar(0, 0, 255));
-
-		//cv::imshow("Image View", view);
-		m_entity->insertItem(view);
-		//char key = (char)cv::waitKey(50);
-
-		//if (key == 27)
-			//break;
-
 	}
-
-	if (showUndistorted)
+	catch (std::exception e)
 	{
-		cv::Mat view, rview, map1, map2;
-		cv::initUndistortRectifyMap(cameraMatrix, distCoeffs, cv::Mat(),
-			getOptimalNewCameraMatrix(cameraMatrix, distCoeffs, imageSize, 1, imageSize, 0),
-			imageSize, CV_16SC2, map1, map2);
-
-		for (int i = 0; i < (int)imageList.size(); i++)
-		{
-			view = cv::imread(imageList[i], 1);
-			if (view.empty())
-				continue;
-			//undistort( view, rview, cameraMatrix, distCoeffs, cameraMatrix );
-			remap(view, rview, map1, map2, cv::INTER_LINEAR);
-			//cv::imshow("Image View", rview);
-			m_entity->insertItem(rview);
-			//char c = (char)cv::waitKey();
-			//if (c == 27 || c == 'q' || c == 'Q')
-				//break;
-		}
+		std::cout << "Calib1D出现严重错误" << e.what() << std::endl;
 	}
 }
 /*
  * 双目标定
  */
 void StereoCalibrate::StereoCalib(
-	const std::vector<std::string>& imagelist, 
+	const std::vector<std::string>& imagelist,
 	cv::Size boardSize,
 	float squareSize,
-	cv::Mat& cameraMatrix_L, cv::Mat& distCoeffs_L, 
+	cv::Mat& cameraMatrix_L, cv::Mat& distCoeffs_L,
 	cv::Mat& cameraMatrix_R, cv::Mat& distCoeffs_R,
 	cv::Mat& R, cv::Mat& T, cv::Mat& E, cv::Mat&F, cv::Mat& R1, cv::Mat& P1, cv::Mat&R2, cv::Mat&P2, cv::Mat&Q,
 	cv::Rect &roi1, cv::Rect &roi2,
 	int flags,
 	bool displayCorners, bool useCalibrated, bool showRectified)
 {
-	if (imagelist.size() % 2 != 0)
+	try
 	{
-		std::cout << "Error: the image list contains odd (non-even) number of elements\n";
-		return;
-	}
 
-	const int maxScale = 2;
-	// ARRAY AND VECTOR STORAGE:
 
-	std::vector<std::vector<cv::Point2f> > imagePoints[2];
-	std::vector<std::vector<cv::Point3f> > objectPoints;
-	cv::Size imageSize;
-
-	int i, j, k, nimages = (int)imagelist.size() / 2;
-
-	imagePoints[0].resize(nimages);
-	imagePoints[1].resize(nimages);
-	std::vector<std::string> goodImageList;
-
-	for (i = j = 0; i < nimages; i++)
-	{
-		for (k = 0; k < 2; k++)
+		if (imagelist.size() % 2 != 0)
 		{
-			const std::string& filename = imagelist[i * 2 + k];
-			cv::Mat img = cv::imread(filename, 0);
-			if (img.empty())
-				break;
-			if (imageSize == cv::Size())
-				imageSize = img.size();
-			else if (img.size() != imageSize)
+			std::cout << "Error: the image list contains odd (non-even) number of elements\n";
+			return;
+		}
+
+		const int maxScale = 2;
+		// ARRAY AND VECTOR STORAGE:
+
+		std::vector<std::vector<cv::Point2f> > imagePoints[2];
+		std::vector<std::vector<cv::Point3f> > objectPoints;
+		cv::Size imageSize;
+
+		int i, j, k, nimages = (int)imagelist.size() / 2;
+
+		imagePoints[0].resize(nimages);
+		imagePoints[1].resize(nimages);
+		std::vector<std::string> goodImageList;
+
+		for (i = j = 0; i < nimages; i++)
+		{
+			for (k = 0; k < 2; k++)
 			{
-				std::cout << "The image " << filename << " has the size different from the first image size. Skipping the pair\n";
-				break;
-			}
-			bool found = false;
-			std::vector<cv::Point2f>& corners = imagePoints[k][j];
-			for (int scale = 1; scale <= maxScale; scale++)
-			{
-				cv::Mat timg;
-				if (scale == 1)
-					timg = img;
-				else
-					resize(img, timg, cv::Size(), scale, scale, cv::INTER_LINEAR_EXACT);
-				found = findChessboardCorners(timg, boardSize, corners, cv::CALIB_CB_ADAPTIVE_THRESH | cv::CALIB_CB_NORMALIZE_IMAGE);
-				if (found)
+				const std::string& filename = imagelist[i * 2 + k];
+				cv::Mat img = cv::imread(filename, 0);
+				if (img.empty())
+					break;
+				if (imageSize == cv::Size())
+					imageSize = img.size();
+				else if (img.size() != imageSize)
 				{
-					if (scale > 1)
-					{
-						cv::Mat cornersMat(corners);
-						cornersMat *= 1. / scale;
-					}
+					std::cout << "The image " << filename << " has the size different from the first image size. Skipping the pair\n";
 					break;
 				}
+				bool found = false;
+				std::vector<cv::Point2f>& corners = imagePoints[k][j];
+				for (int scale = 1; scale <= maxScale; scale++)
+				{
+					cv::Mat timg;
+					if (scale == 1)
+						timg = img;
+					else
+						resize(img, timg, cv::Size(), scale, scale, cv::INTER_LINEAR_EXACT);
+					found = findChessboardCorners(timg, boardSize, corners, cv::CALIB_CB_ADAPTIVE_THRESH | cv::CALIB_CB_NORMALIZE_IMAGE);
+					if (found)
+					{
+						if (scale > 1)
+						{
+							cv::Mat cornersMat(corners);
+							cornersMat *= 1. / scale;
+						}
+						break;
+					}
+				}
+				if (displayCorners)
+				{
+					std::cout << filename << std::endl;
+					cv::Mat cimg, cimg1;
+					cvtColor(img, cimg, cv::COLOR_GRAY2BGR);
+					drawChessboardCorners(cimg, boardSize, corners, found);
+					double sf = 640. / MAX(img.rows, img.cols);
+					resize(cimg, cimg1, cv::Size(), sf, sf, cv::INTER_LINEAR_EXACT);
+					cv::imshow("corners", cimg1);
+					char c = (char)cv::waitKey(500);
+					if (c == 27 || c == 'q' || c == 'Q') //Allow ESC to quit
+						exit(-1);
+				}
+				else
+					putchar('.');
+				if (!found)
+					break;
+				cv::cornerSubPix(img, corners, cv::Size(11, 11), cv::Size(-1, -1),
+					cv::TermCriteria(cv::TermCriteria::COUNT + cv::TermCriteria::EPS,
+						30, 0.01));
 			}
-			if (displayCorners)
+			if (k == 2)
 			{
-				std::cout << filename << std::endl;
-				cv::Mat cimg, cimg1;
-				cvtColor(img, cimg, cv::COLOR_GRAY2BGR);
-				drawChessboardCorners(cimg, boardSize, corners, found);
-				double sf = 640. / MAX(img.rows, img.cols);
-				resize(cimg, cimg1, cv::Size(), sf, sf, cv::INTER_LINEAR_EXACT);
-				cv::imshow("corners", cimg1);
-				char c = (char)cv::waitKey(500);
-				if (c == 27 || c == 'q' || c == 'Q') //Allow ESC to quit
-					exit(-1);
+				goodImageList.push_back(imagelist[i * 2]);
+				goodImageList.push_back(imagelist[i * 2 + 1]);
+				j++;
 			}
-			else
-				putchar('.');
-			if (!found)
-				break;
-			cv::cornerSubPix(img, corners, cv::Size(11, 11), cv::Size(-1, -1),
-				cv::TermCriteria(cv::TermCriteria::COUNT + cv::TermCriteria::EPS,
-					30, 0.01));
 		}
-		if (k == 2)
+		std::cout << j << " pairs have been successfully detected.\n";
+		nimages = j;
+		if (nimages < 2)
 		{
-			goodImageList.push_back(imagelist[i * 2]);
-			goodImageList.push_back(imagelist[i * 2 + 1]);
-			j++;
+			std::cout << "Error: too little pairs to run the calibration\n";
+			return;
 		}
-	}
-	std::cout << j << " pairs have been successfully detected.\n";
-	nimages = j;
-	if (nimages < 2)
-	{
-		std::cout << "Error: too little pairs to run the calibration\n";
-		return;
-	}
 
-	imagePoints[0].resize(nimages);
-	imagePoints[1].resize(nimages);
-	objectPoints.resize(nimages);
+		imagePoints[0].resize(nimages);
+		imagePoints[1].resize(nimages);
+		objectPoints.resize(nimages);
 
-	for (i = 0; i < nimages; i++)
-	{
-		for (j = 0; j < boardSize.height; j++)
-			for (k = 0; k < boardSize.width; k++)
-				objectPoints[i].push_back(cv::Point3f(k*squareSize, j*squareSize, 0));
-	}
-
-	std::cout << "Running stereo calibration ...\n";
-
-	//Mat cameraMatrix[2], distCoeffs[2];
-	//cameraMatrix[0] = initCameraMatrix2D(objectPoints, imagePoints[0], imageSize, 0);
-	//cameraMatrix[1] = initCameraMatrix2D(objectPoints, imagePoints[1], imageSize, 0);
-
-	/*
-	 *CALIB_FIX_ASPECT_RATIO
-	 *CALIB_ZERO_TANGENT_DIST
-	 *CALIB_USE_INTRINSIC_GUESS
-	 *CALIB_SAME_FOCAL_LENGTH
-	 *CALIB_RATIONAL_MODEL
-	 *CALIB_FIX_INTRINSIC
-	 *CALIB_FIX_K3
-	 *CALIB_FIX_K4
-	 *CALIB_FIX_K5
-	 */
-	double rms = stereoCalibrate(objectPoints, imagePoints[0], imagePoints[1],
-		cameraMatrix_L, distCoeffs_L,
-		cameraMatrix_R, distCoeffs_R,
-		imageSize, R, T, E, F,
-		flags,
-		cv::TermCriteria(cv::TermCriteria::COUNT + cv::TermCriteria::EPS, 100, 1e-5));
-	std::cout << "done with RMS error=" << rms << std::endl;
-
-	// CALIBRATION QUALITY CHECK
-	// because the output fundamental matrix implicitly
-	// includes all the output information,
-	// we can check the quality of calibration using the
-	// epipolar geometry constraint: m2^t*F*m1=0
-	double err = 0;
-	int npoints = 0;
-	std::vector<cv::Vec3f> lines[2];
-	for (i = 0; i < nimages; i++)
-	{
-		int npt = (int)imagePoints[0][i].size();
-		cv::Mat imgpt[2];
-
-		imgpt[0] = cv::Mat(imagePoints[0][i]);
-		undistortPoints(imgpt[0], imgpt[0], cameraMatrix_L, distCoeffs_L, cv::Mat(), cameraMatrix_L);
-		computeCorrespondEpilines(imgpt[0], 0 + 1, F, lines[0]);
-
-		imgpt[1] = cv::Mat(imagePoints[1][i]);
-		undistortPoints(imgpt[1], imgpt[1], cameraMatrix_R, distCoeffs_R, cv::Mat(), cameraMatrix_R);
-		computeCorrespondEpilines(imgpt[1], 1 + 1, F, lines[1]);
-
-		for (j = 0; j < npt; j++)
+		for (i = 0; i < nimages; i++)
 		{
-			double errij = fabs(imagePoints[0][i][j].x*lines[1][j][0] +
-				imagePoints[0][i][j].y*lines[1][j][1] + lines[1][j][2]) +
-				fabs(imagePoints[1][i][j].x*lines[0][j][0] +
-					imagePoints[1][i][j].y*lines[0][j][1] + lines[0][j][2]);
-			err += errij;
+			for (j = 0; j < boardSize.height; j++)
+				for (k = 0; k < boardSize.width; k++)
+					objectPoints[i].push_back(cv::Point3f(k*squareSize, j*squareSize, 0));
 		}
-		npoints += npt;
-	}
-	std::cout << "average epipolar err = " << err / npoints << std::endl;
 
-	// save intrinsic parameters
-	//cv::FileStorage fs("intrinsics.yml", cv::FileStorage::WRITE);
-	//if (fs.isOpened())
-	//{
-	//	fs << "M1" << cameraMatrix_L << "D1" << distCoeffs_L <<
-	//		"M2" << cameraMatrix_R << "D2" << distCoeffs_R;
-	//	fs.release();
-	//}
-	//else
-	//	std::cout << "Error: can not save the intrinsic parameters\n";
+		std::cout << "Running stereo calibration ...\n";
 
-	cv::Rect validRoi[2];
+		//Mat cameraMatrix[2], distCoeffs[2];
+		//cameraMatrix[0] = initCameraMatrix2D(objectPoints, imagePoints[0], imageSize, 0);
+		//cameraMatrix[1] = initCameraMatrix2D(objectPoints, imagePoints[1], imageSize, 0);
 
-	cv::stereoRectify(cameraMatrix_L, distCoeffs_L,
-		cameraMatrix_R, distCoeffs_R,
-		imageSize, R, T, R1, R2, P1, P2, Q,
-		cv::CALIB_ZERO_DISPARITY, 1, imageSize, &validRoi[0], &validRoi[1]);
+		/*
+		 *CALIB_FIX_ASPECT_RATIO
+		 *CALIB_ZERO_TANGENT_DIST
+		 *CALIB_USE_INTRINSIC_GUESS
+		 *CALIB_SAME_FOCAL_LENGTH
+		 *CALIB_RATIONAL_MODEL
+		 *CALIB_FIX_INTRINSIC
+		 *CALIB_FIX_K3
+		 *CALIB_FIX_K4
+		 *CALIB_FIX_K5
+		 */
+		double rms = stereoCalibrate(objectPoints, imagePoints[0], imagePoints[1],
+			cameraMatrix_L, distCoeffs_L,
+			cameraMatrix_R, distCoeffs_R,
+			imageSize, R, T, E, F,
+			flags,
+			cv::TermCriteria(cv::TermCriteria::COUNT + cv::TermCriteria::EPS, 100, 1e-5));
+		std::cout << "done with RMS error=" << rms << std::endl;
 
-	//fs.open("extrinsics.yml", cv::FileStorage::WRITE);
-	//if (fs.isOpened())
-	//{
-	//	fs << "R" << R << "T" << T << "R1" << R1 << "R2" << R2 << "P1" << P1 << "P2" << P2 << "Q" << Q;
-	//	fs.release();
-	//}
-	//else
-	//	std::cout << "Error: can not save the extrinsic parameters\n";
-
-	// OpenCV can handle left-right
-	// or up-down camera arrangements
-	bool isVerticalStereo = fabs(P2.at<double>(1, 3)) > fabs(P2.at<double>(0, 3));
-
-	// COMPUTE AND DISPLAY RECTIFICATION
-	if (!showRectified)
-		return;
-
-	cv::Mat rmap[2][2];
-	// IF BY CALIBRATED (BOUGUET'S METHOD)
-	if (useCalibrated)
-	{
-		// we already computed everything
-	}
-	// OR ELSE HARTLEY'S METHOD
-	else
-		// use intrinsic parameters of each camera, but
-		// compute the rectification transformation directly
-		// from the fundamental matrix
-	{
-		std::vector<cv::Point2f> allimgpt[2];
-		for (k = 0; k < 2; k++)
+		// CALIBRATION QUALITY CHECK
+		// because the output fundamental matrix implicitly
+		// includes all the output information,
+		// we can check the quality of calibration using the
+		// epipolar geometry constraint: m2^t*F*m1=0
+		double err = 0;
+		int npoints = 0;
+		std::vector<cv::Vec3f> lines[2];
+		for (i = 0; i < nimages; i++)
 		{
-			for (i = 0; i < nimages; i++)
-				std::copy(imagePoints[k][i].begin(), imagePoints[k][i].end(), back_inserter(allimgpt[k]));
-		}
-		F = findFundamentalMat(cv::Mat(allimgpt[0]), cv::Mat(allimgpt[1]), cv::FM_8POINT, 0, 0);
-		cv::Mat H1, H2;
-		stereoRectifyUncalibrated(cv::Mat(allimgpt[0]), cv::Mat(allimgpt[1]), F, imageSize, H1, H2, 3);
+			int npt = (int)imagePoints[0][i].size();
+			cv::Mat imgpt[2];
 
-		R1 = cameraMatrix_L.inv()*H1*cameraMatrix_L;
-		R2 = cameraMatrix_R.inv()*H2*cameraMatrix_R;
-		P1 = cameraMatrix_L;
-		P2 = cameraMatrix_R;
-	}
+			imgpt[0] = cv::Mat(imagePoints[0][i]);
+			undistortPoints(imgpt[0], imgpt[0], cameraMatrix_L, distCoeffs_L, cv::Mat(), cameraMatrix_L);
+			computeCorrespondEpilines(imgpt[0], 0 + 1, F, lines[0]);
 
-	//Precompute maps for cv::remap()
-	cv::initUndistortRectifyMap(cameraMatrix_L, distCoeffs_L, R1, P1, imageSize, CV_16SC2, rmap[0][0], rmap[0][1]);
-	cv::initUndistortRectifyMap(cameraMatrix_R, distCoeffs_R, R2, P2, imageSize, CV_16SC2, rmap[1][0], rmap[1][1]);
+			imgpt[1] = cv::Mat(imagePoints[1][i]);
+			undistortPoints(imgpt[1], imgpt[1], cameraMatrix_R, distCoeffs_R, cv::Mat(), cameraMatrix_R);
+			computeCorrespondEpilines(imgpt[1], 1 + 1, F, lines[1]);
 
-	cv::Mat canvas;
-	double sf;
-	int w, h;
-	if (!isVerticalStereo)
-	{
-		sf = 600. / MAX(imageSize.width, imageSize.height);
-		w = cvRound(imageSize.width*sf);
-		h = cvRound(imageSize.height*sf);
-		canvas.create(h, w * 2, CV_8UC3);
-	}
-	else
-	{
-		sf = 300. / MAX(imageSize.width, imageSize.height);
-		w = cvRound(imageSize.width*sf);
-		h = cvRound(imageSize.height*sf);
-		canvas.create(h * 2, w, CV_8UC3);
-	}
-
-	for (i = 0; i < nimages; i++)
-	{
-		for (k = 0; k < 2; k++)
-		{
-			cv::Mat img = cv::imread(goodImageList[i * 2 + k], 0), rimg, cimg;
-			remap(img, rimg, rmap[k][0], rmap[k][1], cv::INTER_LINEAR);
-			cvtColor(rimg, cimg, cv::COLOR_GRAY2BGR);
-			cv::Mat canvasPart = !isVerticalStereo ? canvas(cv::Rect(w*k, 0, w, h)) : canvas(cv::Rect(0, h*k, w, h));
-			resize(cimg, canvasPart, canvasPart.size(), 0, 0, cv::INTER_AREA);
-			if (useCalibrated)
+			for (j = 0; j < npt; j++)
 			{
-				cv::Rect vroi(cvRound(validRoi[k].x*sf), cvRound(validRoi[k].y*sf),
-					cvRound(validRoi[k].width*sf), cvRound(validRoi[k].height*sf));
-				rectangle(canvasPart, vroi, cv::Scalar(0, 0, 255), 3, 8);
+				double errij = fabs(imagePoints[0][i][j].x*lines[1][j][0] +
+					imagePoints[0][i][j].y*lines[1][j][1] + lines[1][j][2]) +
+					fabs(imagePoints[1][i][j].x*lines[0][j][0] +
+						imagePoints[1][i][j].y*lines[0][j][1] + lines[0][j][2]);
+				err += errij;
 			}
+			npoints += npt;
 		}
+		std::cout << "average epipolar err = " << err / npoints << std::endl;
 
-		if (!isVerticalStereo)
-			for (j = 0; j < canvas.rows; j += 16)
-				line(canvas, cv::Point(0, j), cv::Point(canvas.cols, j), cv::Scalar(0, 255, 0), 1, 8);
+		// save intrinsic parameters
+		//cv::FileStorage fs("intrinsics.yml", cv::FileStorage::WRITE);
+		//if (fs.isOpened())
+		//{
+		//	fs << "M1" << cameraMatrix_L << "D1" << distCoeffs_L <<
+		//		"M2" << cameraMatrix_R << "D2" << distCoeffs_R;
+		//	fs.release();
+		//}
+		//else
+		//	std::cout << "Error: can not save the intrinsic parameters\n";
+
+		cv::Rect validRoi[2];
+
+		cv::stereoRectify(cameraMatrix_L, distCoeffs_L,
+			cameraMatrix_R, distCoeffs_R,
+			imageSize, R, T, R1, R2, P1, P2, Q,
+			cv::CALIB_ZERO_DISPARITY, 1, imageSize, &validRoi[0], &validRoi[1]);
+
+		//fs.open("extrinsics.yml", cv::FileStorage::WRITE);
+		//if (fs.isOpened())
+		//{
+		//	fs << "R" << R << "T" << T << "R1" << R1 << "R2" << R2 << "P1" << P1 << "P2" << P2 << "Q" << Q;
+		//	fs.release();
+		//}
+		//else
+		//	std::cout << "Error: can not save the extrinsic parameters\n";
+
+		// OpenCV can handle left-right
+		// or up-down camera arrangements
+		bool isVerticalStereo = fabs(P2.at<double>(1, 3)) > fabs(P2.at<double>(0, 3));
+
+		// COMPUTE AND DISPLAY RECTIFICATION
+		if (!showRectified)
+			return;
+
+		cv::Mat rmap[2][2];
+		// IF BY CALIBRATED (BOUGUET'S METHOD)
+		if (useCalibrated)
+		{
+			// we already computed everything
+		}
+		// OR ELSE HARTLEY'S METHOD
 		else
-			for (j = 0; j < canvas.cols; j += 16)
-				line(canvas, cv::Point(j, 0), cv::Point(j, canvas.rows), cv::Scalar(0, 255, 0), 1, 8);
-		//cv::imshow("rectified", canvas);
-		m_entity->insertItem(canvas);
-		//char c = (char)cv::waitKey();
-		//if (c == 27 || c == 'q' || c == 'Q')
-			//break;
+			// use intrinsic parameters of each camera, but
+			// compute the rectification transformation directly
+			// from the fundamental matrix
+		{
+			std::vector<cv::Point2f> allimgpt[2];
+			for (k = 0; k < 2; k++)
+			{
+				for (i = 0; i < nimages; i++)
+					std::copy(imagePoints[k][i].begin(), imagePoints[k][i].end(), back_inserter(allimgpt[k]));
+			}
+			F = findFundamentalMat(cv::Mat(allimgpt[0]), cv::Mat(allimgpt[1]), cv::FM_8POINT, 0, 0);
+			cv::Mat H1, H2;
+			stereoRectifyUncalibrated(cv::Mat(allimgpt[0]), cv::Mat(allimgpt[1]), F, imageSize, H1, H2, 3);
+
+			R1 = cameraMatrix_L.inv()*H1*cameraMatrix_L;
+			R2 = cameraMatrix_R.inv()*H2*cameraMatrix_R;
+			P1 = cameraMatrix_L;
+			P2 = cameraMatrix_R;
+		}
+
+		//Precompute maps for cv::remap()
+		cv::initUndistortRectifyMap(cameraMatrix_L, distCoeffs_L, R1, P1, imageSize, CV_16SC2, rmap[0][0], rmap[0][1]);
+		cv::initUndistortRectifyMap(cameraMatrix_R, distCoeffs_R, R2, P2, imageSize, CV_16SC2, rmap[1][0], rmap[1][1]);
+
+		cv::Mat canvas;
+		double sf;
+		int w, h;
+		if (!isVerticalStereo)
+		{
+			sf = 600. / MAX(imageSize.width, imageSize.height);
+			w = cvRound(imageSize.width*sf);
+			h = cvRound(imageSize.height*sf);
+			canvas.create(h, w * 2, CV_8UC3);
+		}
+		else
+		{
+			sf = 300. / MAX(imageSize.width, imageSize.height);
+			w = cvRound(imageSize.width*sf);
+			h = cvRound(imageSize.height*sf);
+			canvas.create(h * 2, w, CV_8UC3);
+		}
+
+		for (i = 0; i < nimages; i++)
+		{
+			for (k = 0; k < 2; k++)
+			{
+				cv::Mat img = cv::imread(goodImageList[i * 2 + k], 0), rimg, cimg;
+				remap(img, rimg, rmap[k][0], rmap[k][1], cv::INTER_LINEAR);
+				cvtColor(rimg, cimg, cv::COLOR_GRAY2BGR);
+				cv::Mat canvasPart = !isVerticalStereo ? canvas(cv::Rect(w*k, 0, w, h)) : canvas(cv::Rect(0, h*k, w, h));
+				resize(cimg, canvasPart, canvasPart.size(), 0, 0, cv::INTER_AREA);
+				if (useCalibrated)
+				{
+					cv::Rect vroi(cvRound(validRoi[k].x*sf), cvRound(validRoi[k].y*sf),
+						cvRound(validRoi[k].width*sf), cvRound(validRoi[k].height*sf));
+					rectangle(canvasPart, vroi, cv::Scalar(0, 0, 255), 3, 8);
+				}
+			}
+
+			if (!isVerticalStereo)
+				for (j = 0; j < canvas.rows; j += 16)
+					line(canvas, cv::Point(0, j), cv::Point(canvas.cols, j), cv::Scalar(0, 255, 0), 1, 8);
+			else
+				for (j = 0; j < canvas.cols; j += 16)
+					line(canvas, cv::Point(j, 0), cv::Point(j, canvas.rows), cv::Scalar(0, 255, 0), 1, 8);
+			//cv::imshow("rectified", canvas);
+			m_entity->insertItem(canvas);
+			//char c = (char)cv::waitKey();
+			//if (c == 27 || c == 'q' || c == 'Q')
+				//break;
+		}
+		roi1 = validRoi[0];
+		roi2 = validRoi[1];
 	}
-	roi1 = validRoi[0];
-	roi2 = validRoi[1];
+	catch (std::exception e)
+	{
+		std::cout << "StereoCalib出现严重错误" << e.what() << std::endl;
+	}
 }
 /*
  * 获取单目标定的flags

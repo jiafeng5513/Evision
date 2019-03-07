@@ -95,6 +95,7 @@ public:
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
+        gridLayout_2->setContentsMargins(-1, 2, -1, 2);
         pushButton_selectOrigin = new QPushButton(groupBox_2);
         pushButton_selectOrigin->setObjectName(QString::fromUtf8("pushButton_selectOrigin"));
 
@@ -108,6 +109,7 @@ public:
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setContentsMargins(-1, 2, -1, 2);
         checkBox_RawDispOK = new QCheckBox(frame);
         checkBox_RawDispOK->setObjectName(QString::fromUtf8("checkBox_RawDispOK"));
         checkBox_RawDispOK->setCheckable(true);
@@ -153,6 +155,7 @@ public:
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setContentsMargins(-1, 2, -1, 2);
         label_5 = new QLabel(groupBox_3);
         label_5->setObjectName(QString::fromUtf8("label_5"));
 
@@ -182,6 +185,7 @@ public:
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        gridLayout->setContentsMargins(-1, 2, -1, 2);
         label_2 = new QLabel(groupBox);
         label_2->setObjectName(QString::fromUtf8("label_2"));
 
@@ -226,6 +230,7 @@ public:
         verticalLayout_2->setSpacing(6);
         verticalLayout_2->setContentsMargins(11, 11, 11, 11);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalLayout_2->setContentsMargins(-1, 2, -1, 2);
         label_6 = new QLabel(groupBox_4);
         label_6->setObjectName(QString::fromUtf8("label_6"));
 
@@ -249,7 +254,7 @@ public:
 
         verticalLayout_3->addWidget(groupBox_4);
 
-        verticalSpacer = new QSpacerItem(20, 1, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        verticalSpacer = new QSpacerItem(20, 33, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout_3->addItem(verticalSpacer);
 
@@ -269,7 +274,7 @@ public:
         gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
         customGraphicsView_O = new CustomGraphicsView(scrollAreaWidgetContents);
         customGraphicsView_O->setObjectName(QString::fromUtf8("customGraphicsView_O"));
-        customGraphicsView_O->setMinimumSize(QSize(320, 240));
+        customGraphicsView_O->setMinimumSize(QSize(0, 0));
         customGraphicsView_O->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         customGraphicsView_O->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         customGraphicsView_O->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);

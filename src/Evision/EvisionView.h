@@ -35,7 +35,6 @@ public slots:
 	void on_action_Measure_view();			//启动测量界面
 	void on_action_ObjectDetection_view();	//启动目标检测视图
 	void on_action_LogViewSwitch();			//LOGVIEW
-	void onTestAlltheParam();
 	//状态栏
 	void onParamChanged_StatusBarText();
 private:

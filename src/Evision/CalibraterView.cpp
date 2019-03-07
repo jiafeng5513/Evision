@@ -26,7 +26,7 @@ CalibraterView::CalibraterView(QWidget *parent)
 	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_FIX_S1_S2_S3_S4()), this, SLOT(onParamChanged_FIX_S1_S2_S3_S4()));
 	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_TILTED_MODEL()), this, SLOT(onParamChanged_TILTED_MODEL()));
 	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_FIX_TAUX_TAUY()), this, SLOT(onParamChanged_FIX_TAUX_TAUY()));
-	connect(m_calib_entity, SIGNAL(paramChanged_InsertToItemMap()), this, SLOT(onParamChanged_NewToItemMap()));
+	connect(m_calib_entity, SIGNAL(paramChanged_InsertToItemMap()), this, SLOT(onParamChanged_NewToItemMap()),Qt::BlockingQueuedConnection);
 	connect(m_calib_entity, SIGNAL(paramChanged_ClearItemMap()), this, SLOT(onParamChanged_ClearItemMap()));
 }
 

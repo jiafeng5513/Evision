@@ -21,6 +21,7 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QScrollArea>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QWidget>
 
@@ -30,8 +31,6 @@ class Ui_CalibraterView
 {
 public:
     QGridLayout *gridLayout_2;
-    QListWidget *listWidget;
-    QGraphicsView *graphicsView;
     QFrame *frame;
     QGridLayout *gridLayout;
     QGroupBox *groupBox_3;
@@ -67,6 +66,11 @@ public:
     QPushButton *pushButton_CalibDefault;
     QPushButton *pushButton;
     QPushButton *pushButton_2;
+    QListWidget *listWidget;
+    QScrollArea *scrollArea;
+    QWidget *scrollAreaWidgetContents;
+    QGridLayout *gridLayout_4;
+    QGraphicsView *graphicsView;
 
     void setupUi(QWidget *CalibraterView)
     {
@@ -77,24 +81,6 @@ public:
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-        listWidget = new QListWidget(CalibraterView);
-        listWidget->setObjectName(QString::fromUtf8("listWidget"));
-        listWidget->setMaximumSize(QSize(220, 16777215));
-        listWidget->setStyleSheet(QString::fromUtf8("background-color: rgb(129, 129, 129);"));
-        listWidget->setDragDropMode(QAbstractItemView::DragDrop);
-        listWidget->setIconSize(QSize(60, 60));
-        listWidget->setFlow(QListView::LeftToRight);
-        listWidget->setViewMode(QListView::IconMode);
-        listWidget->setModelColumn(0);
-
-        gridLayout_2->addWidget(listWidget, 0, 0, 2, 1);
-
-        graphicsView = new QGraphicsView(CalibraterView);
-        graphicsView->setObjectName(QString::fromUtf8("graphicsView"));
-        graphicsView->setStyleSheet(QString::fromUtf8("background-color: rgb(181, 181, 181);"));
-
-        gridLayout_2->addWidget(graphicsView, 0, 1, 1, 1);
-
         frame = new QFrame(CalibraterView);
         frame->setObjectName(QString::fromUtf8("frame"));
         frame->setMaximumSize(QSize(16777215, 210));
@@ -279,6 +265,38 @@ public:
 
 
         gridLayout_2->addWidget(frame, 1, 1, 1, 1);
+
+        listWidget = new QListWidget(CalibraterView);
+        listWidget->setObjectName(QString::fromUtf8("listWidget"));
+        listWidget->setMaximumSize(QSize(220, 16777215));
+        listWidget->setStyleSheet(QString::fromUtf8("background-color: rgb(129, 129, 129);"));
+        listWidget->setDragDropMode(QAbstractItemView::DragDrop);
+        listWidget->setIconSize(QSize(60, 60));
+        listWidget->setFlow(QListView::LeftToRight);
+        listWidget->setViewMode(QListView::IconMode);
+        listWidget->setModelColumn(0);
+
+        gridLayout_2->addWidget(listWidget, 0, 0, 2, 1);
+
+        scrollArea = new QScrollArea(CalibraterView);
+        scrollArea->setObjectName(QString::fromUtf8("scrollArea"));
+        scrollArea->setWidgetResizable(true);
+        scrollAreaWidgetContents = new QWidget();
+        scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 758, 359));
+        gridLayout_4 = new QGridLayout(scrollAreaWidgetContents);
+        gridLayout_4->setSpacing(6);
+        gridLayout_4->setContentsMargins(11, 11, 11, 11);
+        gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
+        graphicsView = new QGraphicsView(scrollAreaWidgetContents);
+        graphicsView->setObjectName(QString::fromUtf8("graphicsView"));
+        graphicsView->setStyleSheet(QString::fromUtf8("background-color: rgb(181, 181, 181);"));
+
+        gridLayout_4->addWidget(graphicsView, 0, 0, 1, 1);
+
+        scrollArea->setWidget(scrollAreaWidgetContents);
+
+        gridLayout_2->addWidget(scrollArea, 0, 1, 1, 2);
 
 
         retranslateUi(CalibraterView);

@@ -35,6 +35,12 @@
          <string>输入</string>
         </property>
         <layout class="QGridLayout" name="gridLayout_2">
+         <property name="topMargin">
+          <number>2</number>
+         </property>
+         <property name="bottomMargin">
+          <number>2</number>
+         </property>
          <item row="1" column="2">
           <widget class="QPushButton" name="pushButton_selectOrigin">
            <property name="text">
@@ -51,6 +57,12 @@
             <enum>QFrame::Raised</enum>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout">
+            <property name="topMargin">
+             <number>2</number>
+            </property>
+            <property name="bottomMargin">
+             <number>2</number>
+            </property>
             <item>
              <widget class="QCheckBox" name="checkBox_RawDispOK">
               <property name="text">
@@ -114,6 +126,12 @@
          <string>显示</string>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout">
+         <property name="topMargin">
+          <number>2</number>
+         </property>
+         <property name="bottomMargin">
+          <number>2</number>
+         </property>
          <item>
           <widget class="QLabel" name="label_5">
            <property name="text">
@@ -162,6 +180,12 @@
          <string>结果</string>
         </property>
         <layout class="QGridLayout" name="gridLayout">
+         <property name="topMargin">
+          <number>2</number>
+         </property>
+         <property name="bottomMargin">
+          <number>2</number>
+         </property>
          <item row="1" column="1">
           <widget class="QLabel" name="label_2">
            <property name="text">
@@ -208,6 +232,12 @@
          <string>说明</string>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_2">
+         <property name="topMargin">
+          <number>2</number>
+         </property>
+         <property name="bottomMargin">
+          <number>2</number>
+         </property>
          <item>
           <widget class="QLabel" name="label_6">
            <property name="text">
@@ -248,7 +278,7 @@
         <property name="sizeHint" stdset="0">
          <size>
           <width>20</width>
-          <height>1</height>
+          <height>33</height>
          </size>
         </property>
        </spacer>
@@ -278,8 +308,8 @@
         <widget class="CustomGraphicsView" name="customGraphicsView_O">
          <property name="minimumSize">
           <size>
-           <width>320</width>
-           <height>240</height>
+           <width>0</width>
+           <height>0</height>
           </size>
          </property>
          <property name="verticalScrollBarPolicy">

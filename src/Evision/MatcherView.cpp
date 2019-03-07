@@ -27,7 +27,7 @@ MatcherView::MatcherView(QWidget *parent)
 	connect(m_entity, SIGNAL(paramChanged_MODE_3WAY()), this, SLOT(onParamChanged_MODE_3WAY()));
 	connect(m_entity, SIGNAL(paramChanged_MODE_SGBM()), this, SLOT(onParamChanged_MODE_SGBM()));
 	connect(m_entity, SIGNAL(paramChanged_MODE_HH()), this, SLOT(onParamChanged_MODE_HH()));
-	connect(m_entity, SIGNAL(paramChanged_ImageDtoShow()), this, SLOT(onParamChanged_imgDtoShow())/*, Qt::QueuedConnection*/);
+	connect(m_entity, SIGNAL(paramChanged_ImageDtoShow()), this, SLOT(onParamChanged_imgDtoShow()));
 	connect(m_entity, SIGNAL(paramChanged_IconImgL()), this, SLOT(onParamChanged_IconImgL()));
 	connect(m_entity, SIGNAL(paramChanged_IconImgR()), this, SLOT(onParamChanged_IconImgR()));
 	connect(m_entity, SIGNAL(paramChanged_IconRawDisp()), this, SLOT(onParamChanged_IconRawDisp()));

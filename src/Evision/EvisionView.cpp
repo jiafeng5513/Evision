@@ -119,20 +119,6 @@ void EvisionView::on_action_LogViewSwitch()
 	old_size = this->size();
 	logView->move(*new QPoint(old_pos.x() + 10 + this->frameGeometry().width(), old_pos.y()));
 }
-
-//调试方法
-void EvisionView::onTestAlltheParam()
-{
-	//printf("From printf ... ");
-	//fflush(stdout);
-	//fprintf(stderr, "From fprintf...");
-	//std::cout << "From std::cout..." << std::endl;
-	//std::cerr << "From std::cerr..." << std::endl;
-	//qDebug() << "From qDebug ..." << QDateTime::currentDateTime().toString();	   
-	//StereoMatcherView * _StereoMatcherView = new StereoMatcherView();
-	//ui.mdiArea->addSubWindow(_StereoMatcherView);
-	//_StereoMatcherView->show();
-}
 //状态栏更新
 void EvisionView::onParamChanged_StatusBarText()
 {
