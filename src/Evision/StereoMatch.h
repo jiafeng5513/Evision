@@ -84,9 +84,6 @@ private:
 
 	bool no_display=false;
 private:	
-	template <typename T>
-	void getGrayDisparity(const cv::Mat& disp, cv::Mat& grayDisp, bool stretch=true);
-	void getColorDisparityImage(cv::Mat& disparity, cv::Mat& disparityImage, bool isColor=true);
 	void ADCensusDriver();
 	void OpenCVBM();
 	void OpenCVSGBM();

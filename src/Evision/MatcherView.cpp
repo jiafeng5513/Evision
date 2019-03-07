@@ -2,6 +2,8 @@
 #include "EvisionUtils.h"
 #include "math.h"
 #include<qDebug>
+#include <QMessageBox>
+
 MatcherView::MatcherView(QWidget *parent)
 	: QWidget(parent)
 {
@@ -29,8 +31,6 @@ MatcherView::MatcherView(QWidget *parent)
 	connect(m_entity, SIGNAL(paramChanged_IconImgL()), this, SLOT(onParamChanged_IconImgL()));
 	connect(m_entity, SIGNAL(paramChanged_IconImgR()), this, SLOT(onParamChanged_IconImgR()));
 	connect(m_entity, SIGNAL(paramChanged_IconRawDisp()), this, SLOT(onParamChanged_IconRawDisp()));
-	connect(m_entity, SIGNAL(paramChanged_IconFixDisp()), this, SLOT(onParamChanged_IconFixDisp()));
-	connect(m_entity, SIGNAL(paramChanged_IconPcolorDisp()), this, SLOT(onParamChanged_IconPcolorDisp()));
 	connect(m_entity, SIGNAL(paramChanged_ImageToShow()), this, SLOT(onParamChanged_ImageToShow()));
 	connect(m_entity, SIGNAL(paramChanged_dMin()), this, SLOT(onParamChanged_DMin()));
 	connect(m_entity, SIGNAL(paramChanged_dMax()), this, SLOT(onParamChanged_DMax()));
@@ -81,10 +81,20 @@ void MatcherView::RefreshStereoMatch()
 //保存
 void MatcherView::SaveDisparities()
 {
+	m_controller->SaveCommand();
 }
 //显示帮助信息
 void MatcherView::Help()
 {
+	QString helpMsg = QStringLiteral("\
+算法选择指南\n\n\
+速度:OpenCV BM>OpenCV SGBM>ELAS>ADCensus\n\
+效果:ADCensus>ELAS>SGBM>BM\n\
+BM和SGBM的效果和速度类似\n\
+BM会只能处理灰度图,其他的能处理彩色图,ADCensus在输入彩色图时能获得额外的效果\n\
+界面上显示的视差图只是示意图,为了能显示在屏幕上,进行了一些处理(例如归一化到[0,255])\n\
+真实的视差数据保存在xml中,测距和三维重建是以原始视差数据为基础的.\n");
+	QMessageBox::information(this, QStringLiteral("帮助"), helpMsg);
 }
 
 void MatcherView::valueChanged_MinDisp(int value)
@@ -616,52 +626,14 @@ void MatcherView::onParamChanged_IconRawDisp()
 	}
 }
 
-void MatcherView::onParamChanged_IconFixDisp()
-{
-	QImage DQImage = EvisionUtils::cvMat2QImage(m_entity->getIconFixDisp());
-	QGraphicsScene *sceneD = new QGraphicsScene;
-	sceneD->addPixmap(QPixmap::fromImage(DQImage));
-	ui.graphicsView_FixDisp->setScene(sceneD);
-	QRectF bounds = sceneD->itemsBoundingRect();
-	bounds.setWidth(bounds.width());         // to tighten-up margins
-	bounds.setHeight(bounds.height());       // same as above
-	ui.graphicsView_FixDisp->fitInView(bounds, Qt::KeepAspectRatio);
-	ui.graphicsView_FixDisp->centerOn(0, 0);
-	ui.graphicsView_FixDisp->show();
-	ui.graphicsView_FixDisp->update();
-	if (m_entity->getImageToShow() == StereoMatchParamEntity::FIX_DISP)
-	{
-		m_entity->setImageDtoShow(m_entity->getIconFixDisp());
-	}
-}
 
-void MatcherView::onParamChanged_IconPcolorDisp()
-{
-	QImage DQImage = EvisionUtils::cvMat2QImage(m_entity->getIconPcolorDisp());
-	QGraphicsScene *sceneD = new QGraphicsScene;
-	sceneD->addPixmap(QPixmap::fromImage(DQImage));
-	ui.graphicsView_PcolorDisp->setScene(sceneD);
-	QRectF bounds = sceneD->itemsBoundingRect();
-	bounds.setWidth(bounds.width());         // to tighten-up margins
-	bounds.setHeight(bounds.height());       // same as above
-	ui.graphicsView_PcolorDisp->fitInView(bounds, Qt::KeepAspectRatio);
-	ui.graphicsView_PcolorDisp->centerOn(0, 0);
-	ui.graphicsView_PcolorDisp->show();
-	ui.graphicsView_PcolorDisp->update();
-	if (m_entity->getImageToShow() == StereoMatchParamEntity::PCOLOR_DISP)
-	{
-		m_entity->setImageDtoShow(m_entity->getIconPcolorDisp());
-	}
-}
 //要在中间放大显示的图片发生变更
 void MatcherView::onParamChanged_ImageToShow()
 {
 	//根据枚举值调整单选框的状态
 	ui.radioButton_ImageL->setChecked(false);
 	ui.radioButton_ImageR->setChecked(false);
-	ui.radioButton_FixDisp->setChecked(false);
 	ui.radioButton_RawDisp->setChecked(false);
-	ui.radioButton_PcolorDisp->setChecked(false);
 	switch (m_entity->getImageToShow())
 	{
 	case StereoMatchParamEntity::IMG_L:
@@ -675,14 +647,6 @@ void MatcherView::onParamChanged_ImageToShow()
 	case StereoMatchParamEntity::RAW_DISP:
 		ui.radioButton_RawDisp->setChecked(true);
 		m_entity->setImageDtoShow(m_entity->getIconRawDisp());
-		break;
-	case StereoMatchParamEntity::FIX_DISP:
-		ui.radioButton_FixDisp->setChecked(true);
-		m_entity->setImageDtoShow(m_entity->getIconFixDisp());
-		break;
-	case StereoMatchParamEntity::PCOLOR_DISP:
-		ui.radioButton_PcolorDisp->setChecked(true);
-		m_entity->setImageDtoShow(m_entity->getIconPcolorDisp());
 		break;
 	default:
 		break;
@@ -710,21 +674,5 @@ void MatcherView::onClicked_IconRawDisp(bool value)
 	if (m_entity->getImageToShow() != StereoMatchParamEntity::RAW_DISP)
 	{
 		m_entity->setImageToShow(StereoMatchParamEntity::RAW_DISP);
-	}
-}
-
-void MatcherView::onClicked_IconFixDisp(bool value)
-{
-	if (m_entity->getImageToShow() != StereoMatchParamEntity::FIX_DISP)
-	{
-		m_entity->setImageToShow(StereoMatchParamEntity::FIX_DISP);
-	}
-}
-
-void MatcherView::onClicked_IconPcolorDisp(bool value)
-{
-	if (m_entity->getImageToShow() != StereoMatchParamEntity::PCOLOR_DISP)
-	{
-		m_entity->setImageToShow(StereoMatchParamEntity::PCOLOR_DISP);
 	}
 }

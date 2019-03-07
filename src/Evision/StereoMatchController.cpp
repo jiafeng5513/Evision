@@ -103,7 +103,7 @@ void StereoMatchController::MatchCommand()
 					if (!paramsFile.isEmpty())
 					{
 						//参数文件正常
-						StereoMatch *_stereoMatch = new StereoMatch(ImageL.toStdString(),
+						_stereoMatch = new StereoMatch(ImageL.toStdString(),
 							ImageR.toStdString(), paramsFile.toStdString());
 						if (_stereoMatch->init())
 						{
@@ -160,6 +160,15 @@ void StereoMatchController::RefreshStereoMatchCommand()
 		QMessageBox::information(NULL, QStringLiteral("错误"), QStringLiteral("匹配初始化失败!"));
 	}
 }
+//命令:保存
+void StereoMatchController::SaveCommand()
+{
+	if (_stereoMatch != NULL)
+	{
+		_stereoMatch->Save();
+	}
+}
+
 //消息响应:弹出对话框
 void StereoMatchController::onOpenMessageBox(QString title, QString msg)
 {

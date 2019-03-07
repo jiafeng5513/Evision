@@ -478,27 +478,6 @@ void StereoMatchParamEntity::setIconRawDisp(cv::Mat value)
 	emit paramChanged_IconRawDisp();
 }
 
-cv::Mat StereoMatchParamEntity::getIconFixDisp()
-{
-	return iconFixDisp;
-}
-void StereoMatchParamEntity::setIconFixDisp(cv::Mat value)
-{
-	iconFixDisp = value;
-	emit paramChanged_IconFixDisp();
-}
-
-cv::Mat StereoMatchParamEntity::getIconPcolorDisp()
-{
-	return iconPcolorDisp;
-}
-
-void StereoMatchParamEntity::setIconPcolorDisp(cv::Mat value)
-{
-	iconPcolorDisp = value;
-	emit paramChanged_IconPcolorDisp();
-}
-
 StereoMatchParamEntity::IMGID StereoMatchParamEntity::getImageToShow()
 {
 	return ImageToShow;

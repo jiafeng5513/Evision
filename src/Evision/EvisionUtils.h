@@ -152,5 +152,66 @@ public:
 	 */
 	static void createAndSavePointCloud(cv::Mat &disparity, cv::Mat &leftImage, cv::Mat &Q, std::string filename);
 #endif
+	/*
+	 *将原始视差数据转换为适合显示和存储为图片的灰度视差图
+	 */
+	template <typename T>
+	static void getGrayDisparity(const cv::Mat& disp, cv::Mat& grayDisp, bool stretch = true);
 };
+
+template <typename T>
+void EvisionUtils::getGrayDisparity(const cv::Mat& disp, cv::Mat& grayDisp, bool stretch)
+{
+	cv::Size imgSize = disp.size();
+	cv::Mat output(imgSize, CV_8UC3);
+	T min, max;
+
+	if (stretch)
+	{
+		min = (std::numeric_limits<T>::max());
+		max = 0;
+		for (size_t h = 0; h < imgSize.height; h++)
+		{
+			for (size_t w = 0; w < imgSize.width; w++)
+			{
+				T disparity = disp.at<T>(h, w);
+
+				if (disparity < min && disparity >= 0)
+					min = disparity;
+				else if (disparity > max)
+					max = disparity;
+			}
+		}
+	}
+
+	for (size_t h = 0; h < imgSize.height; h++)
+	{
+		for (size_t w = 0; w < imgSize.width; w++)
+		{
+			cv::Vec3b color;
+			T disparity = disp.at<T>(h, w);
+
+			if (disparity >= 0)
+			{
+				if (stretch)
+					disparity = (255 / (max - min)) * (disparity - min);
+
+				color[0] = (uchar)disparity;
+				color[1] = (uchar)disparity;
+				color[2] = (uchar)disparity;
+
+			}
+			else
+			{
+				color[0] = 0;
+				color[1] = 0;
+				color[2] = 0;
+			}
+
+			output.at<cv::Vec3b>(h, w) = color;
+		}
+	}
+
+	grayDisp = output.clone();
+}
 

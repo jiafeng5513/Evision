@@ -167,19 +167,34 @@ void StereoMatch::run()
  */
 void StereoMatch::Save()
 {
-	cv::FileStorage fs(disparity_raw_filename, cv::FileStorage::WRITE);
-	fs << "disp" << Raw_Disp_Data;
-	fs.release();
-	/*
-	 * 用于显示的视差图并不是准确数据,为了获得良好的显示效果而对数据进行了一些裁剪和压缩
-	 * 例如归一化到0~255会改变原始的视差数据,因此,测量时必须使用原始视差数据
-	 */
-	 //获取灰度视差图并保存
-	cv::imwrite(disparity_filename, Gray_Disp_Data);
-	//保存pcd点云
+	if (!Raw_Disp_Data.empty() && !Gray_Disp_Data.empty())
+	{
+		try
+		{
+			cv::FileStorage fs(disparity_raw_filename, cv::FileStorage::WRITE);
+			fs << "disp" << Raw_Disp_Data;
+			fs.release();
+			std::cout << "已经保存原始视差数据:" << disparity_raw_filename << std::endl;
+			/*
+			 * 用于显示的视差图并不是准确数据,为了获得良好的显示效果而对数据进行了一些裁剪和压缩
+			 * 例如归一化到0~255会改变原始的视差数据,因此,测量时必须使用原始视差数据
+			 */
+			 //获取灰度视差图并保存
+			cv::imwrite(disparity_filename, Gray_Disp_Data);
+			std::cout << "已经保存视差示意图:" << disparity_filename << std::endl;
+
+			//保存pcd点云
 #ifdef WITH_PCL
-	EvisionUtils::createAndSavePointCloud(Raw_Disp_Data, img2, Q, point_cloud_filename);
+			EvisionUtils::createAndSavePointCloud(Raw_Disp_Data, img2, Q, point_cloud_filename);
+			std::cout << "已经保存PCD点云:" << point_cloud_filename << std::endl;
 #endif
+		}
+		catch (...)
+		{
+			std::cout << "保存过程中出现严重错误!\n" << "地点在:StereoMatch.cpp, void StereoMatch::Save()" << std::endl;
+		}
+
+	}
 }
 
 /*
@@ -273,9 +288,6 @@ void StereoMatch::ADCensusDriver()
 				Gray_Disp_Data = sP.getGrayDisparity();
 				//界面显示灰度视差图
 				m_entity->setIconRawDisp(Gray_Disp_Data);
-				cv::Mat colordisp;
-				getColorDisparityImage(Gray_Disp_Data, colordisp, true);
-				m_entity->setIconPcolorDisp(colordisp);
 			}
 			else
 			{
@@ -317,12 +329,8 @@ void StereoMatch::OpenCVBM()
 	bm->compute(img1G, img2G, Raw_Disp_Data);
 
 	//获取用于显示的视差示意图
-	getGrayDisparity<float>(Raw_Disp_Data, Gray_Disp_Data);
+	EvisionUtils::getGrayDisparity<float>(Raw_Disp_Data, Gray_Disp_Data);
 	m_entity->setIconRawDisp(Gray_Disp_Data);
-	//获取并显示伪彩色视差图
-	cv::Mat colordisp;
-	getColorDisparityImage(Gray_Disp_Data, colordisp, true);
-	m_entity->setIconPcolorDisp(colordisp);
 
 	t = cv::getTickCount() - t;
 
@@ -361,12 +369,8 @@ void StereoMatch::OpenCVSGBM()
 	
 
 	//获取用于显示的视差示意图
-	getGrayDisparity<float>(Raw_Disp_Data, Gray_Disp_Data);
+	EvisionUtils::getGrayDisparity<float>(Raw_Disp_Data, Gray_Disp_Data);
 	m_entity->setIconRawDisp(Gray_Disp_Data);
-	//获取并显示伪彩色视差图
-	cv::Mat colordisp;
-	getColorDisparityImage(Gray_Disp_Data, colordisp, true);
-	m_entity->setIconPcolorDisp(colordisp);
 
 	t = cv::getTickCount() - t;
 	std::cout << "Time elapsed: " << t * 1000 / cv::getTickFrequency() << "ms\n SGBM计算完毕" << std::endl;
@@ -377,118 +381,4 @@ void StereoMatch::OpenCVSGBM()
 void StereoMatch::Elas()
 {
 	ElasMatch(img1, img2);
-}
-
-/*
- * 获取用于显示的伪彩色视差图
- * cv::Mat&		[in]	disparity			视差图
- * cv::Mat&		[out]	colordisparity		转换结果
- * bool			[in]	isclolr				是否添加伪彩效果,默认true
- */
-void StereoMatch::getColorDisparityImage(cv::Mat& disparity, cv::Mat& colordisparity, bool isColor)
-{
-	//将原始视差数据的位深转换为 8 位
-	cv::Mat disp8u;
-	if (disparity.depth() != CV_8U)
-	{
-		disparity.convertTo(disp8u, CV_8U, 255 / (m_entity->getNumDisparities()*16.));
-	}
-	else
-	{
-		disp8u = disparity;
-	}
-
-	// 转换为伪彩色图像 或 灰度图像
-	if (isColor)
-	{
-		if (colordisparity.empty() || colordisparity.type() != CV_8UC3)
-		{
-			colordisparity = cv::Mat::zeros(disparity.rows, disparity.cols, CV_8UC3);
-		}
-
-		for (int y = 0; y < disparity.rows; y++)
-		{
-			for (int x = 0; x < disparity.cols; x++)
-			{
-				uchar val = disp8u.at<uchar>(y, x);
-				uchar r, g, b;
-
-				if (val == 0)
-					r = g = b = 0;
-				else
-				{
-					r = 255 - val;
-					g = val < 128 ? val * 2 : (uchar)((255 - val) * 2);
-					b = val;
-				}
-
-				colordisparity.at<cv::Vec3b>(y, x) = cv::Vec3b(r, g, b);
-			}
-		}
-	}
-	else
-	{
-		disp8u.copyTo(colordisparity);
-	}
-
-	return;
-}
-/*
- * 将原始视差数据转换为用于可视化的灰度视差图
- * 
- */
-template <typename T>
-void StereoMatch::getGrayDisparity(const cv::Mat& disp, cv::Mat& grayDisp, bool stretch)
-{
-	cv::Size imgSize = disp.size();
-	cv::Mat output(imgSize, CV_8UC3);
-	T min, max;
-
-	if (stretch)
-	{
-		min = (std::numeric_limits<T>::max());
-		max = 0;
-		for (size_t h = 0; h < imgSize.height; h++)
-		{
-			for (size_t w = 0; w < imgSize.width; w++)
-			{
-				T disparity = disp.at<T>(h, w);
-
-				if (disparity < min && disparity >= 0)
-					min = disparity;
-				else if (disparity > max)
-					max = disparity;
-			}
-		}
-	}
-
-	for (size_t h = 0; h < imgSize.height; h++)
-	{
-		for (size_t w = 0; w < imgSize.width; w++)
-		{
-			cv::Vec3b color;
-			T disparity = disp.at<T>(h, w);
-
-			if (disparity >= 0)
-			{
-				if (stretch)
-					disparity = (255 / (max - min)) * (disparity - min);
-
-				color[0] = (uchar)disparity;
-				color[1] = (uchar)disparity;
-				color[2] = (uchar)disparity;
-
-			}
-			else
-			{
-				color[0] = 0;
-				color[1] = 0;
-				color[2] = 0;
-			}
-
-			output.at<cv::Vec3b>(h, w) = color;
-		}
-	}
-
-	grayDisp = output.clone();
 }

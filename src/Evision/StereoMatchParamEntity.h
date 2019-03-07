@@ -73,7 +73,7 @@ private:
 	bool RectifiedInput = false;//输入图像是否已经进行了校准
 
 	cv::Mat imgDtoShow;//在中心显示的大图
-	cv::Mat iconImgL, iconImgR, iconRawDisp, iconFixDisp,iconPcolorDisp;//缩略图
+	cv::Mat iconImgL, iconImgR, iconRawDisp;//缩略图
 	IMGID ImageToShow = NONE;//默认情况下,中心大图什么也不显示
 
 	cv::Mat disparity;
@@ -277,12 +277,6 @@ public:
 
 	cv::Mat getIconRawDisp();
 	void setIconRawDisp(cv::Mat value);
-
-	cv::Mat getIconFixDisp();
-	void setIconFixDisp(cv::Mat value);
-
-	cv::Mat getIconPcolorDisp();
-	void setIconPcolorDisp(cv::Mat value);
 
 	IMGID getImageToShow();
 	void setImageToShow(IMGID value);

@@ -26,16 +26,6 @@
    <string>匹配</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
-   <item row="1" column="1">
-    <widget class="QGraphicsView" name="graphicsView_D">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>0</height>
-      </size>
-     </property>
-    </widget>
-   </item>
    <item row="0" column="0" rowspan="2">
     <widget class="QFrame" name="frame_2">
      <property name="minimumSize">
@@ -122,47 +112,7 @@
       <item>
        <widget class="QRadioButton" name="radioButton_RawDisp">
         <property name="text">
-         <string>原始视差图</string>
-        </property>
-        <property name="autoExclusive">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QGraphicsView" name="graphicsView_FixDisp">
-        <property name="maximumSize">
-         <size>
-          <width>133</width>
-          <height>100</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="radioButton_FixDisp">
-        <property name="text">
-         <string>修复视差图</string>
-        </property>
-        <property name="autoExclusive">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QGraphicsView" name="graphicsView_PcolorDisp">
-        <property name="maximumSize">
-         <size>
-          <width>133</width>
-          <height>100</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="radioButton_PcolorDisp">
-        <property name="text">
-         <string>伪彩视差图</string>
+         <string>视差图</string>
         </property>
         <property name="autoExclusive">
          <bool>true</bool>
@@ -183,6 +133,16 @@
        </spacer>
       </item>
      </layout>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QGraphicsView" name="graphicsView_D">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
     </widget>
    </item>
    <item row="0" column="1" colspan="2">
@@ -1340,7 +1300,7 @@
    <slot>setDefaultMatchParam()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>584</x>
+     <x>566</x>
      <y>42</y>
     </hint>
     <hint type="destinationlabel">
@@ -1356,7 +1316,7 @@
    <slot>doMatch()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>665</x>
+     <x>647</x>
      <y>42</y>
     </hint>
     <hint type="destinationlabel">
@@ -1372,7 +1332,7 @@
    <slot>RefreshStereoMatch()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>746</x>
+     <x>728</x>
      <y>42</y>
     </hint>
     <hint type="destinationlabel">
@@ -1388,8 +1348,8 @@
    <slot>onClicked_MODE_HH(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>994</x>
-     <y>88</y>
+     <x>778</x>
+     <y>71</y>
     </hint>
     <hint type="destinationlabel">
      <x>971</x>
@@ -1404,8 +1364,8 @@
    <slot>onClicked_MODE_3WAY(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>816</x>
-     <y>88</y>
+     <x>726</x>
+     <y>71</y>
     </hint>
     <hint type="destinationlabel">
      <x>972</x>
@@ -1420,8 +1380,8 @@
    <slot>onClicked_MODE_SGBM(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>915</x>
-     <y>88</y>
+     <x>752</x>
+     <y>71</y>
     </hint>
     <hint type="destinationlabel">
      <x>971</x>
@@ -1436,8 +1396,8 @@
    <slot>valueChanged_uniradio(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>987</x>
-     <y>139</y>
+     <x>771</x>
+     <y>113</y>
     </hint>
     <hint type="destinationlabel">
      <x>656</x>
@@ -1452,8 +1412,8 @@
    <slot>valueChanged_Prefilcap(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>987</x>
-     <y>195</y>
+     <x>771</x>
+     <y>115</y>
     </hint>
     <hint type="destinationlabel">
      <x>655</x>
@@ -1468,8 +1428,8 @@
    <slot>valueChanged_specwinsz(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>987</x>
-     <y>308</y>
+     <x>771</x>
+     <y>119</y>
     </hint>
     <hint type="destinationlabel">
      <x>655</x>
@@ -1484,8 +1444,8 @@
    <slot>valueChanged_SadWinSize(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>987</x>
-     <y>251</y>
+     <x>771</x>
+     <y>117</y>
     </hint>
     <hint type="destinationlabel">
      <x>654</x>
@@ -1500,8 +1460,8 @@
    <slot>valueChanged_MinDisp(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>987</x>
-     <y>364</y>
+     <x>771</x>
+     <y>121</y>
     </hint>
     <hint type="destinationlabel">
      <x>656</x>
@@ -1516,8 +1476,8 @@
    <slot>valueChanged_NumDisparities(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>987</x>
-     <y>420</y>
+     <x>771</x>
+     <y>124</y>
     </hint>
     <hint type="destinationlabel">
      <x>654</x>
@@ -1532,8 +1492,8 @@
    <slot>valueChanged_Specrange(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>987</x>
-     <y>477</y>
+     <x>771</x>
+     <y>126</y>
     </hint>
     <hint type="destinationlabel">
      <x>655</x>
@@ -1548,8 +1508,8 @@
    <slot>valueChanged_MaxDifdisp2(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>987</x>
-     <y>533</y>
+     <x>771</x>
+     <y>128</y>
     </hint>
     <hint type="destinationlabel">
      <x>656</x>
@@ -1564,8 +1524,8 @@
    <slot>valueChanged_TextThread(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>987</x>
-     <y>589</y>
+     <x>771</x>
+     <y>130</y>
     </hint>
     <hint type="destinationlabel">
      <x>655</x>
@@ -1580,8 +1540,8 @@
    <slot>onReleased_NumDisparities()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>987</x>
-     <y>420</y>
+     <x>771</x>
+     <y>124</y>
     </hint>
     <hint type="destinationlabel">
      <x>996</x>
@@ -1596,8 +1556,8 @@
    <slot>onReleased_NumDisparities()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>987</x>
-     <y>420</y>
+     <x>771</x>
+     <y>124</y>
     </hint>
     <hint type="destinationlabel">
      <x>996</x>
@@ -1612,8 +1572,8 @@
    <slot>onReleased_SadWinSize()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>987</x>
-     <y>251</y>
+     <x>771</x>
+     <y>117</y>
     </hint>
     <hint type="destinationlabel">
      <x>994</x>
@@ -1628,8 +1588,8 @@
    <slot>onReleased_SadWinSize()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>987</x>
-     <y>251</y>
+     <x>771</x>
+     <y>117</y>
     </hint>
     <hint type="destinationlabel">
      <x>996</x>
@@ -1644,8 +1604,8 @@
    <slot>onClicked_IconImgL(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>59</x>
-     <y>121</y>
+     <x>72</x>
+     <y>134</y>
     </hint>
     <hint type="destinationlabel">
      <x>153</x>
@@ -1660,8 +1620,8 @@
    <slot>onClicked_IconImgR(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>61</x>
-     <y>236</y>
+     <x>74</x>
+     <y>262</y>
     </hint>
     <hint type="destinationlabel">
      <x>153</x>
@@ -1676,28 +1636,12 @@
    <slot>onClicked_IconRawDisp(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>65</x>
-     <y>351</y>
+     <x>78</x>
+     <y>390</y>
     </hint>
     <hint type="destinationlabel">
      <x>153</x>
      <y>342</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButton_FixDisp</sender>
-   <signal>clicked(bool)</signal>
-   <receiver>MatcherView</receiver>
-   <slot>onClicked_IconFixDisp(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>62</x>
-     <y>465</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>152</x>
-     <y>462</y>
     </hint>
    </hints>
   </connection>
@@ -1708,8 +1652,8 @@
    <slot>onClicked_BM(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>180</x>
-     <y>32</y>
+     <x>169</x>
+     <y>38</y>
     </hint>
     <hint type="destinationlabel">
      <x>66</x>
@@ -1724,28 +1668,12 @@
    <slot>onClicked_SGBM(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>221</x>
-     <y>32</y>
+     <x>218</x>
+     <y>38</y>
     </hint>
     <hint type="destinationlabel">
      <x>199</x>
      <y>4</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButton_PcolorDisp</sender>
-   <signal>clicked(bool)</signal>
-   <receiver>MatcherView</receiver>
-   <slot>onClicked_IconPcolorDisp(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>67</x>
-     <y>580</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>153</x>
-     <y>536</y>
     </hint>
    </hints>
   </connection>
@@ -1756,8 +1684,8 @@
    <slot>onClicked_ELAS(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>273</x>
-     <y>28</y>
+     <x>267</x>
+     <y>38</y>
     </hint>
     <hint type="destinationlabel">
      <x>271</x>
@@ -1852,8 +1780,8 @@
    <slot>valueChanged_DMax(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>989</x>
-     <y>99</y>
+     <x>970</x>
+     <y>107</y>
     </hint>
     <hint type="destinationlabel">
      <x>1032</x>
@@ -1868,8 +1796,8 @@
    <slot>valueChanged_CensusWinW(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>843</x>
-     <y>159</y>
+     <x>837</x>
+     <y>156</y>
     </hint>
     <hint type="destinationlabel">
      <x>723</x>
@@ -1900,8 +1828,8 @@
    <slot>valueChanged_LambdaCensus(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>980</x>
-     <y>159</y>
+     <x>970</x>
+     <y>156</y>
     </hint>
     <hint type="destinationlabel">
      <x>1033</x>
@@ -1948,8 +1876,8 @@
    <slot>valueChanged_MaxLength1(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>845</x>
-     <y>259</y>
+     <x>840</x>
+     <y>254</y>
     </hint>
     <hint type="destinationlabel">
      <x>724</x>
@@ -1964,8 +1892,8 @@
    <slot>valueChanged_MaxLength2(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>850</x>
-     <y>278</y>
+     <x>840</x>
+     <y>280</y>
     </hint>
     <hint type="destinationlabel">
      <x>723</x>
@@ -1980,8 +1908,8 @@
    <slot>valueChanged_AggregatingIterations(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>856</x>
-     <y>301</y>
+     <x>840</x>
+     <y>306</y>
     </hint>
     <hint type="destinationlabel">
      <x>723</x>
@@ -1996,7 +1924,7 @@
    <slot>valueChanged_ColorThreshold1(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>998</x>
+     <x>970</x>
      <y>254</y>
     </hint>
     <hint type="destinationlabel">
@@ -2012,8 +1940,8 @@
    <slot>valueChanged_ColorThreshold2(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>980</x>
-     <y>282</y>
+     <x>970</x>
+     <y>280</y>
     </hint>
     <hint type="destinationlabel">
      <x>1032</x>
@@ -2028,7 +1956,7 @@
    <slot>valueChanged_ColorDifference(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>791</x>
+     <x>781</x>
      <y>354</y>
     </hint>
     <hint type="destinationlabel">
@@ -2060,8 +1988,8 @@
    <slot>valueChanged_Pi2(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>974</x>
-     <y>357</y>
+     <x>970</x>
+     <y>354</y>
     </hint>
     <hint type="destinationlabel">
      <x>1031</x>
@@ -2076,8 +2004,8 @@
    <slot>valueChanged_DispTolerance(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>844</x>
-     <y>414</y>
+     <x>834</x>
+     <y>405</y>
     </hint>
     <hint type="destinationlabel">
      <x>723</x>
@@ -2092,8 +2020,8 @@
    <slot>valueChanged_MaxSearchDepth(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>962</x>
-     <y>412</y>
+     <x>970</x>
+     <y>405</y>
     </hint>
     <hint type="destinationlabel">
      <x>1033</x>
@@ -2108,8 +2036,8 @@
    <slot>valueChanged_VotingThreshold(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>834</x>
-     <y>476</y>
+     <x>837</x>
+     <y>456</y>
     </hint>
     <hint type="destinationlabel">
      <x>724</x>
@@ -2124,8 +2052,8 @@
    <slot>valueChanged_VotingRatioThreshold(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>976</x>
-     <y>472</y>
+     <x>970</x>
+     <y>456</y>
     </hint>
     <hint type="destinationlabel">
      <x>1034</x>
@@ -2140,8 +2068,8 @@
    <slot>valueChanged_CannyKernelSize(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>813</x>
-     <y>531</y>
+     <x>798</x>
+     <y>507</y>
     </hint>
     <hint type="destinationlabel">
      <x>723</x>
@@ -2156,8 +2084,8 @@
    <slot>valueChanged_CannyThreshold1(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>907</x>
-     <y>533</y>
+     <x>884</x>
+     <y>507</y>
     </hint>
     <hint type="destinationlabel">
      <x>1034</x>
@@ -2172,8 +2100,8 @@
    <slot>valueChanged_CannyThreshold2(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>991</x>
-     <y>531</y>
+     <x>970</x>
+     <y>507</y>
     </hint>
     <hint type="destinationlabel">
      <x>1033</x>
@@ -2188,8 +2116,8 @@
    <slot>valueChanged_BlurKernelSize(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>958</x>
-     <y>595</y>
+     <x>970</x>
+     <y>558</y>
     </hint>
     <hint type="destinationlabel">
      <x>1035</x>
@@ -2221,8 +2149,6 @@
   <slot>onClicked_IconImgL(bool)</slot>
   <slot>onClicked_IconImgR(bool)</slot>
   <slot>onClicked_IconRawDisp(bool)</slot>
-  <slot>onClicked_IconFixDisp(bool)</slot>
-  <slot>onClicked_IconPcolorDisp(bool)</slot>
   <slot>onClicked_ELAS(bool)</slot>
   <slot>onClicked_ADCensus(bool)</slot>
   <slot>onClicked_RectifiedInput(bool)</slot>

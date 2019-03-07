@@ -13,27 +13,31 @@ class RulerView : public QWidget
 
 public:
 	RulerView(QWidget *parent = Q_NULLPTR);
-	RulerView(cv::Mat img, cv::Mat disp, cv::Mat xyz, QWidget  *parent = 0);
 	~RulerView();
 
 private:
 	Ui::RulerView ui;
-	cv::Mat img;//左视图
-	cv::Mat disp;//视差图
-	cv::Mat xyz;//点云
-	cv::Mat depth;
-	double m_ObjectDistance;
+
+	cv::Mat img;		   //原图
+	cv::Mat RawDisp;	   //原始视差图
+	cv::Mat Q;			   //Q矩阵
+	cv::Mat image3D;	   //
+	float scaleFactor=1.0;     //缩放因子
+	cv::Mat disparityGary; //灰度视差图
+	bool DispIsShowing = true;
+	QGraphicsScene *sceneL;
 	bool started = false;
 private:
 	void printImgToO(cv::Mat value);
-	void printImgToD(cv::Mat value);
 	void checkEnable();
 public slots:
 	void onMouseMove(int x, int y);
 	void onMouseLButtonDown(int x, int y);
 	void onMouseRButtonDown(int x, int y);
-	void onSelectDisparityMap();
-	void onSelectleftMap();
-	void onSelectPointcloudFile();
+
+	void onSelectRawDispFile();
+	void onSelectOriginImg();
+	void onSelectCameraParamFile();
 	void onStart();
+	void onSwitchImageToShow();
 };
