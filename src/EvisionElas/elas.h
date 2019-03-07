@@ -24,7 +24,6 @@ Street, Fifth Floor, Boston, MA 02110-1301, USA
 #ifndef __ELAS_H__
 #define __ELAS_H__
 
-#include <iostream>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>

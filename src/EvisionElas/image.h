@@ -28,6 +28,7 @@ Street, Fifth Floor, Boston, MA 02110-1301, USA
 #include <climits>
 #include <cstring>
 #include <fstream>
+#include <iostream>
 
 // use imRef to access image data.
 #define imRef(im, x, y) (im->access[y][x])
@@ -45,7 +46,7 @@ inline bool operator==(const rgb &a, const rgb &b) {
 }
 
 // image class
-template <class T> class image {
+template <class T> class __declspec(dllexport) image {
 public:
 
   // create image

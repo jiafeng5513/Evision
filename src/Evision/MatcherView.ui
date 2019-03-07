@@ -669,10 +669,18 @@
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="QSpinBox" name="spinBox_disp_max"/>
+            <widget class="QSpinBox" name="spinBox_disp_max">
+             <property name="maximum">
+              <number>255</number>
+             </property>
+            </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QSpinBox" name="spinBox_disp_min"/>
+            <widget class="QSpinBox" name="spinBox_disp_min">
+             <property name="maximum">
+              <number>255</number>
+             </property>
+            </widget>
            </item>
            <item row="2" column="0">
             <widget class="QLabel" name="label_48">
@@ -682,7 +690,14 @@
             </widget>
            </item>
            <item row="2" column="1">
-            <widget class="QDoubleSpinBox" name="doubleSpinBox_support_threshold"/>
+            <widget class="QDoubleSpinBox" name="doubleSpinBox_support_threshold">
+             <property name="maximum">
+              <double>10.000000000000000</double>
+             </property>
+             <property name="singleStep">
+              <double>0.010000000000000</double>
+             </property>
+            </widget>
            </item>
            <item row="3" column="1">
             <widget class="QSpinBox" name="spinBox_support_texture"/>
@@ -752,7 +767,14 @@
             </widget>
            </item>
            <item row="16" column="1">
-            <widget class="QDoubleSpinBox" name="doubleSpinBox_beta"/>
+            <widget class="QDoubleSpinBox" name="doubleSpinBox_beta">
+             <property name="maximum">
+              <double>10.000000000000000</double>
+             </property>
+             <property name="singleStep">
+              <double>0.010000000000000</double>
+             </property>
+            </widget>
            </item>
            <item row="17" column="0">
             <widget class="QLabel" name="label_56">
@@ -772,7 +794,11 @@
             </widget>
            </item>
            <item row="18" column="1">
-            <widget class="QDoubleSpinBox" name="doubleSpinBox_sigma"/>
+            <widget class="QDoubleSpinBox" name="doubleSpinBox_sigma">
+             <property name="maximum">
+              <double>10.000000000000000</double>
+             </property>
+            </widget>
            </item>
            <item row="19" column="0">
             <widget class="QLabel" name="label_58">
@@ -782,7 +808,11 @@
             </widget>
            </item>
            <item row="19" column="1">
-            <widget class="QDoubleSpinBox" name="doubleSpinBox_sradius"/>
+            <widget class="QDoubleSpinBox" name="doubleSpinBox_sradius">
+             <property name="maximum">
+              <double>10.000000000000000</double>
+             </property>
+            </widget>
            </item>
            <item row="20" column="0">
             <widget class="QLabel" name="label_59">
@@ -815,10 +845,18 @@
             <widget class="QDoubleSpinBox" name="doubleSpinBox_speckle_sim_threshold"/>
            </item>
            <item row="32" column="1">
-            <widget class="QSpinBox" name="spinBox_speckle_size"/>
+            <widget class="QSpinBox" name="spinBox_speckle_size">
+             <property name="maximum">
+              <number>1000</number>
+             </property>
+            </widget>
            </item>
            <item row="33" column="1">
-            <widget class="QSpinBox" name="spinBox_ipol_gap_width"/>
+            <widget class="QSpinBox" name="spinBox_ipol_gap_width">
+             <property name="maximum">
+              <number>10000</number>
+             </property>
+            </widget>
            </item>
            <item row="34" column="0">
             <widget class="QCheckBox" name="checkBox_add_corners">

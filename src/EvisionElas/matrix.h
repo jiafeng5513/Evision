@@ -46,7 +46,7 @@ Street, Fifth Floor, Boston, MA 02110-1301, USA
 typedef double FLOAT;      // double precision
 //typedef float  FLOAT;    // single precision
 
-class Matrix {
+class __declspec(dllexport)Matrix {
 
 public:
 

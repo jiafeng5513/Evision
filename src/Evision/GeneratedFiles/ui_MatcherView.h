@@ -224,7 +224,7 @@ public:
     {
         if (MatcherView->objectName().isEmpty())
             MatcherView->setObjectName(QString::fromUtf8("MatcherView"));
-        MatcherView->resize(1074, 852);
+        MatcherView->resize(1000, 585);
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -527,7 +527,7 @@ public:
         scrollArea_2->setWidgetResizable(true);
         scrollAreaWidgetContents_2 = new QWidget();
         scrollAreaWidgetContents_2->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_2"));
-        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 278, 761));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 261, 590));
         gridLayout_7 = new QGridLayout(scrollAreaWidgetContents_2);
         gridLayout_7->setSpacing(6);
         gridLayout_7->setContentsMargins(11, 11, 11, 11);
@@ -554,11 +554,13 @@ public:
 
         spinBox_disp_max = new QSpinBox(scrollAreaWidgetContents_2);
         spinBox_disp_max->setObjectName(QString::fromUtf8("spinBox_disp_max"));
+        spinBox_disp_max->setMaximum(255);
 
         gridLayout_7->addWidget(spinBox_disp_max, 1, 1, 1, 1);
 
         spinBox_disp_min = new QSpinBox(scrollAreaWidgetContents_2);
         spinBox_disp_min->setObjectName(QString::fromUtf8("spinBox_disp_min"));
+        spinBox_disp_min->setMaximum(255);
 
         gridLayout_7->addWidget(spinBox_disp_min, 0, 1, 1, 1);
 
@@ -569,6 +571,8 @@ public:
 
         doubleSpinBox_support_threshold = new QDoubleSpinBox(scrollAreaWidgetContents_2);
         doubleSpinBox_support_threshold->setObjectName(QString::fromUtf8("doubleSpinBox_support_threshold"));
+        doubleSpinBox_support_threshold->setMaximum(10.000000000000000);
+        doubleSpinBox_support_threshold->setSingleStep(0.010000000000000);
 
         gridLayout_7->addWidget(doubleSpinBox_support_threshold, 2, 1, 1, 1);
 
@@ -639,6 +643,8 @@ public:
 
         doubleSpinBox_beta = new QDoubleSpinBox(scrollAreaWidgetContents_2);
         doubleSpinBox_beta->setObjectName(QString::fromUtf8("doubleSpinBox_beta"));
+        doubleSpinBox_beta->setMaximum(10.000000000000000);
+        doubleSpinBox_beta->setSingleStep(0.010000000000000);
 
         gridLayout_7->addWidget(doubleSpinBox_beta, 16, 1, 1, 1);
 
@@ -659,6 +665,7 @@ public:
 
         doubleSpinBox_sigma = new QDoubleSpinBox(scrollAreaWidgetContents_2);
         doubleSpinBox_sigma->setObjectName(QString::fromUtf8("doubleSpinBox_sigma"));
+        doubleSpinBox_sigma->setMaximum(10.000000000000000);
 
         gridLayout_7->addWidget(doubleSpinBox_sigma, 18, 1, 1, 1);
 
@@ -669,6 +676,7 @@ public:
 
         doubleSpinBox_sradius = new QDoubleSpinBox(scrollAreaWidgetContents_2);
         doubleSpinBox_sradius->setObjectName(QString::fromUtf8("doubleSpinBox_sradius"));
+        doubleSpinBox_sradius->setMaximum(10.000000000000000);
 
         gridLayout_7->addWidget(doubleSpinBox_sradius, 19, 1, 1, 1);
 
@@ -704,11 +712,13 @@ public:
 
         spinBox_speckle_size = new QSpinBox(scrollAreaWidgetContents_2);
         spinBox_speckle_size->setObjectName(QString::fromUtf8("spinBox_speckle_size"));
+        spinBox_speckle_size->setMaximum(1000);
 
         gridLayout_7->addWidget(spinBox_speckle_size, 32, 1, 1, 1);
 
         spinBox_ipol_gap_width = new QSpinBox(scrollAreaWidgetContents_2);
         spinBox_ipol_gap_width->setObjectName(QString::fromUtf8("spinBox_ipol_gap_width"));
+        spinBox_ipol_gap_width->setMaximum(10000);
 
         gridLayout_7->addWidget(spinBox_ipol_gap_width, 33, 1, 1, 1);
 

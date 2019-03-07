@@ -45,8 +45,8 @@
 #define COMMON_H
 
 #ifdef _WIN32
-    typedef unsigned int uint;
-    typedef unsigned char uchar;
+	typedef unsigned int uint;
+	typedef unsigned char uchar;
 #endif
 
 #define COST_TYPE_NOT_FLOAT 1

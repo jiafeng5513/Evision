@@ -42,7 +42,29 @@ void StereoMatchController::setDefaultMatchParamCommand()
 	}
 	else if (m_entity->getElas())
 	{
-		
+		m_entity->setDispMin(0);
+		m_entity->setDispMax(255);
+		m_entity->setSupportThreshold(0.95);
+		m_entity->setSupportTexture(10);
+		m_entity->setCandidateStepsize(5);
+		m_entity->setInconWindowSize(5);
+		m_entity->setInconThreshold(5);
+		m_entity->setInconMinSupport(5);
+		m_entity->setAddCorners(true);
+		m_entity->setGridSize(20);
+		m_entity->setBeta(0.02);
+		m_entity->setGamma(5);
+		m_entity->setSigma(1);
+		m_entity->setSradius(3);
+		m_entity->setMatchTexture(0);
+		m_entity->setLrThreshold(2);
+		m_entity->setSpeckleSimThreshold(1);
+		m_entity->setSpeckleSize(200);
+		m_entity->setIpolGapWidth(5000);
+		m_entity->setFilterMedian(true);
+		m_entity->setFilterAdaptiveMean(false);
+		m_entity->setPostprocessOnlyLeft(false);
+		m_entity->setSubSampling(false);
 	}
 	else if(m_entity->getADCensus())
 	{

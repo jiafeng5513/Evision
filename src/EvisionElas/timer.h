@@ -47,7 +47,7 @@ Street, Fifth Floor, Boston, MA 02110-1301, USA
   typedef unsigned __int64  uint64_t;
 #endif
 
-class Timer {
+class __declspec(dllexport)Timer {
   
 public:
   

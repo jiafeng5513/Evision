@@ -280,6 +280,6 @@ struct triangulateio {
   int numberofedges;                                             /* Out only */
 };
 
-void triangulate(char *,triangulateio *,triangulateio *,triangulateio *);
-void trifree(int *memptr);
+void __declspec(dllexport)triangulate(char *,triangulateio *,triangulateio *,triangulateio *);
+void __declspec(dllexport)trifree(int *memptr);
 

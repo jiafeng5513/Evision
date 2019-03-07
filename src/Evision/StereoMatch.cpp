@@ -8,6 +8,7 @@
 #include "../EvisionADCensus/stereoprocessor.h"
 #include "rectify.h"
 #include <algorithm>
+#include "../EvisionElas/elas.h"
 
 StereoMatch::StereoMatch(std::string img1_filename, std::string img2_filename, std::string cameraParams_filename)
 {
@@ -333,5 +334,41 @@ void StereoMatch::OpenCVSGBM()
  */
 void StereoMatch::Elas()
 {
-	ElasMatch(img1, img2);
+
+	std::cout << "Elas ¿ªÊ¼¼ÆËã..." << std::endl;
+	m_entity->setIconImgL(img1);
+	m_entity->setIconImgR(img2);
+	Elas::parameters param;
+	param.disp_min = m_entity->getDispMin();
+	param.disp_max = m_entity->getDispMax();
+	param.support_threshold = m_entity->getSupportThreshold();
+	param.support_texture = m_entity->getSupportTexture();
+	param.candidate_stepsize = m_entity->getCandidateStepsize();
+	param.incon_window_size = m_entity->getInconWindowSize();
+	param.incon_threshold = m_entity->getInconThreshold();
+	param.incon_min_support = m_entity->getInconMinSupport();
+	param.add_corners = m_entity->getAddCorners();
+	param.grid_size = m_entity->getGridSize();
+	param.beta = m_entity->getBeta();
+	param.gamma = m_entity->getGamma();
+	param.sigma = m_entity->getSigma();
+	param.sradius = m_entity->getSradius();
+	param.match_texture = m_entity->getMatchTexture();
+	param.lr_threshold = m_entity->getLrThreshold();
+	param.speckle_sim_threshold = m_entity->getSpeckleSimThreshold();
+	param.speckle_size = m_entity->getSpeckleSize();
+	param.ipol_gap_width = m_entity->getIpolGapWidth();
+	param.filter_median = m_entity->getFilterMedian();
+	param.filter_adaptive_mean = m_entity->getFilterAdaptiveMean();
+	param.postprocess_only_left = m_entity->getPostprocessOnlyLeft();
+	param.subsampling = m_entity->getSubSampling();
+
+	cv::Mat *rawlr, *rawrl, *seelr, *seerl;
+	ElasMatch(img1, img2, param, rawlr, rawrl, seelr, seerl);
+
+	rawlr->copyTo(Raw_Disp_Data);
+
+	seelr->copyTo(Gray_Disp_Data);
+	m_entity->setIconRawDisp(Gray_Disp_Data);
+
 }
