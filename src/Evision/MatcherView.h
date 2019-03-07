@@ -124,6 +124,74 @@ public slots:
 	void valueChanged_BlurKernelSize(int value);
 	void onParamChanged_BlurKernelSize();
 
+	void valueChanged_DispMin(int value);
+	void onParamChanged_DispMin();
+
+	void valueChanged_DispMax(int value);
+	void onParamChanged_DispMax();
+
+	void valueChanged_SupportThreshold(double value);
+	void onParamChanged_SupportThreshold();
+
+	void valueChanged_SupportTexture(int value);
+	void onParamChanged_SupportTexture();
+
+	void valueChanged_CandidateStepsize(int value);
+	void onParamChanged_CandidateStepsize();
+
+	void valueChanged_InconWindowSize(int value);
+	void onParamChanged_InconWindowSize();
+
+	void valueChanged_InconThreshold(int value);
+	void onParamChanged_InconThreshold();
+
+	void valueChanged_InconMinSupport(int value);
+	void onParamChanged_InconMinSupport();
+
+	void valueChanged_AddCorners(bool value);
+	void onParamChanged_AddCorners();
+
+	void valueChanged_GridSize(int value);
+	void onParamChanged_GridSize();
+
+	void valueChanged_Beta(double value);
+	void onParamChanged_Beta();
+
+	void valueChanged_Gamma(double value);
+	void onParamChanged_Gamma();
+
+	void valueChanged_Sigma(double value);
+	void onParamChanged_Sigma();
+
+	void valueChanged_Sradius(double value);
+	void onParamChanged_Sradius();
+
+	void valueChanged_MatchTexture(int value);
+	void onParamChanged_MatchTexture();
+
+	void valueChanged_LrThreshold(int value);
+	void onParamChanged_LrThreshold();
+
+	void valueChanged_SpeckleSimThreshold(double value);
+	void onParamChanged_SpeckleSimThreshold();
+
+	void valueChanged_SpeckleSize(int value);
+	void onParamChanged_SpeckleSize();
+
+	void valueChanged_IpolGapWidth(int value);
+	void onParamChanged_IpolGapWidth();
+
+	void valueChanged_FilterMedian(bool value);
+	void onParamChanged_FilterMedian();
+
+	void valueChanged_FilterAdaptiveMean(bool value);
+	void onParamChanged_FilterAdaptiveMean();
+
+	void valueChanged_PostprocessOnlyLeft(bool value);
+	void onParamChanged_PostprocessOnlyLeft();
+
+	void valueChanged_SubSampling(bool value);
+	void onParamChanged_SubSampling();
 	//∆•≈‰À„∑®
 	void onClicked_BM(bool value);
 	void onParamChanged_BM();

@@ -26,268 +26,7 @@
    <string>匹配</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
-   <item row="0" column="0" rowspan="2">
-    <widget class="QFrame" name="frame_2">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>141</width>
-       <height>16777215</height>
-      </size>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::Box</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_3">
-      <property name="leftMargin">
-       <number>2</number>
-      </property>
-      <property name="topMargin">
-       <number>2</number>
-      </property>
-      <property name="rightMargin">
-       <number>2</number>
-      </property>
-      <property name="bottomMargin">
-       <number>2</number>
-      </property>
-      <item>
-       <widget class="QGraphicsView" name="graphicsView_ImageL">
-        <property name="maximumSize">
-         <size>
-          <width>133</width>
-          <height>100</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="radioButton_ImageL">
-        <property name="text">
-         <string>左视图</string>
-        </property>
-        <property name="autoExclusive">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QGraphicsView" name="graphicsView_ImageR">
-        <property name="maximumSize">
-         <size>
-          <width>133</width>
-          <height>100</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="radioButton_ImageR">
-        <property name="text">
-         <string>右视图</string>
-        </property>
-        <property name="autoExclusive">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QGraphicsView" name="graphicsView_RawDisp">
-        <property name="maximumSize">
-         <size>
-          <width>133</width>
-          <height>100</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="radioButton_RawDisp">
-        <property name="text">
-         <string>视差图</string>
-        </property>
-        <property name="autoExclusive">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="verticalSpacer">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="1" column="1">
-    <widget class="QGraphicsView" name="graphicsView_D">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>0</height>
-      </size>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="1" colspan="2">
-    <widget class="QFrame" name="frame">
-     <property name="frameShape">
-      <enum>QFrame::Box</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_12">
-      <item>
-       <widget class="QFrame" name="frame_8">
-        <layout class="QHBoxLayout" name="horizontalLayout">
-         <property name="spacing">
-          <number>2</number>
-         </property>
-         <property name="leftMargin">
-          <number>2</number>
-         </property>
-         <property name="topMargin">
-          <number>2</number>
-         </property>
-         <property name="rightMargin">
-          <number>2</number>
-         </property>
-         <property name="bottomMargin">
-          <number>2</number>
-         </property>
-         <item>
-          <widget class="QRadioButton" name="radioButton_BM">
-           <property name="text">
-            <string>BM</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="radioButton_SGBM">
-           <property name="text">
-            <string>SGBM</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="radioButton_ELAS">
-           <property name="text">
-            <string>ELAS</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="radioButton_ADC">
-           <property name="text">
-            <string>ADCensus</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </item>
-      <item>
-       <widget class="Line" name="line">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="checkBox_RectifiedInput">
-        <property name="text">
-         <string>输入校正好的图片</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="Line" name="line_3">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_MatchDefault">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>默认参数</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_MatchChooseFiles">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>视差计算</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_RefreshStereoMatch">
-        <property name="text">
-         <string>刷新</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_Save">
-        <property name="text">
-         <string>保存视差数据和视差示意图</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_Help">
-        <property name="text">
-         <string>帮助信息</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="1" column="2">
+   <item row="2" column="2">
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="maximumSize">
       <size>
@@ -299,10 +38,66 @@
       <enum>QFrame::Box</enum>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="page_opencv">
       <layout class="QGridLayout" name="gridLayout">
+       <item row="7" column="0">
+        <widget class="QGroupBox" name="groupBox_7">
+         <property name="toolTip">
+          <string>连通区域内的最大视差变化</string>
+         </property>
+         <property name="title">
+          <string>speckleRange</string>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_9">
+          <item>
+           <widget class="QLineEdit" name="lineEdit_specrange">
+            <property name="minimumSize">
+             <size>
+              <width>35</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>30</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+            <property name="placeholderText">
+             <string>0</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSlider" name="horizontalSlider_specrange">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="maximum">
+             <number>64</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
        <item row="1" column="0">
         <widget class="QGroupBox" name="groupBox">
          <property name="toolTip">
@@ -359,59 +154,48 @@
          </layout>
         </widget>
        </item>
-       <item row="2" column="0">
-        <widget class="QGroupBox" name="groupBox_2">
-         <property name="toolTip">
-          <string>前置滤波器截断值</string>
+       <item row="0" column="0">
+        <widget class="QFrame" name="frame_4">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
          </property>
-         <property name="title">
-          <string>preFilterCap</string>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <property name="spacing">
+           <number>2</number>
+          </property>
+          <property name="leftMargin">
+           <number>2</number>
+          </property>
+          <property name="topMargin">
+           <number>2</number>
+          </property>
+          <property name="rightMargin">
+           <number>2</number>
+          </property>
+          <property name="bottomMargin">
+           <number>2</number>
+          </property>
           <item>
-           <widget class="QLineEdit" name="lineEdit_prefilcap">
-            <property name="minimumSize">
-             <size>
-              <width>35</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>30</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-            <property name="placeholderText">
-             <string>1</string>
+           <widget class="QRadioButton" name="radioButton_MODE_3WAY">
+            <property name="text">
+             <string>3WAY</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QSlider" name="horizontalSlider_prefilcap">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
+           <widget class="QRadioButton" name="radioButton_MODE_SGBM">
+            <property name="text">
+             <string>SGBM</string>
             </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="minimum">
-             <number>1</number>
-            </property>
-            <property name="maximum">
-             <number>100</number>
-            </property>
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="radioButton_MODE_HH">
+            <property name="text">
+             <string>HH</string>
             </property>
            </widget>
           </item>
@@ -468,186 +252,6 @@
             </property>
             <property name="maximum">
              <number>5</number>
-            </property>
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="QGroupBox" name="groupBox_3">
-         <property name="toolTip">
-          <string>SAD窗口大小</string>
-         </property>
-         <property name="title">
-          <string>SADWindowSize</string>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_5">
-          <item>
-           <widget class="QLineEdit" name="lineEdit_SadWinSiz">
-            <property name="minimumSize">
-             <size>
-              <width>35</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>30</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-            <property name="placeholderText">
-             <string>5</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QSlider" name="horizontalSlider_SadWinSiz">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="minimum">
-             <number>5</number>
-            </property>
-            <property name="maximum">
-             <number>51</number>
-            </property>
-            <property name="singleStep">
-             <number>2</number>
-            </property>
-            <property name="pageStep">
-             <number>2</number>
-            </property>
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <widget class="QGroupBox" name="groupBox_4">
-         <property name="toolTip">
-          <string>视差连通区域变化度的窗口大小</string>
-         </property>
-         <property name="title">
-          <string>SpeckleWindowSize</string>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_6">
-          <item>
-           <widget class="QLineEdit" name="lineEdit_specwinsz">
-            <property name="minimumSize">
-             <size>
-              <width>35</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>30</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-            <property name="placeholderText">
-             <string>0</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QSlider" name="horizontalSlider_specwinsz">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="maximum">
-             <number>200</number>
-            </property>
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item row="5" column="0">
-        <widget class="QGroupBox" name="groupBox_5">
-         <property name="toolTip">
-          <string>最小视差值</string>
-         </property>
-         <property name="title">
-          <string>minDisparity</string>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_7">
-          <item>
-           <widget class="QLineEdit" name="lineEdit_MinDisp">
-            <property name="minimumSize">
-             <size>
-              <width>35</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>30</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-            <property name="placeholderText">
-             <string>0</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QSlider" name="horizontalSlider_MinDisp">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="minimum">
-             <number>-64</number>
-            </property>
-            <property name="maximum">
-             <number>16</number>
             </property>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -778,17 +382,141 @@
          </layout>
         </widget>
        </item>
-       <item row="7" column="0">
-        <widget class="QGroupBox" name="groupBox_7">
+       <item row="2" column="0">
+        <widget class="QGroupBox" name="groupBox_2">
          <property name="toolTip">
-          <string>连通区域内的最大视差变化</string>
+          <string>前置滤波器截断值</string>
          </property>
          <property name="title">
-          <string>speckleRange</string>
+          <string>preFilterCap</string>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_9">
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
           <item>
-           <widget class="QLineEdit" name="lineEdit_specrange">
+           <widget class="QLineEdit" name="lineEdit_prefilcap">
+            <property name="minimumSize">
+             <size>
+              <width>35</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>30</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+            <property name="placeholderText">
+             <string>1</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSlider" name="horizontalSlider_prefilcap">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <number>100</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QGroupBox" name="groupBox_3">
+         <property name="toolTip">
+          <string>SAD窗口大小</string>
+         </property>
+         <property name="title">
+          <string>SADWindowSize</string>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <widget class="QLineEdit" name="lineEdit_SadWinSiz">
+            <property name="minimumSize">
+             <size>
+              <width>35</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>30</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+            <property name="placeholderText">
+             <string>5</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSlider" name="horizontalSlider_SadWinSiz">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="minimum">
+             <number>5</number>
+            </property>
+            <property name="maximum">
+             <number>51</number>
+            </property>
+            <property name="singleStep">
+             <number>2</number>
+            </property>
+            <property name="pageStep">
+             <number>2</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QGroupBox" name="groupBox_5">
+         <property name="toolTip">
+          <string>最小视差值</string>
+         </property>
+         <property name="title">
+          <string>minDisparity</string>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <item>
+           <widget class="QLineEdit" name="lineEdit_MinDisp">
             <property name="minimumSize">
              <size>
               <width>35</width>
@@ -810,7 +538,66 @@
            </widget>
           </item>
           <item>
-           <widget class="QSlider" name="horizontalSlider_specrange">
+           <widget class="QSlider" name="horizontalSlider_MinDisp">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="minimum">
+             <number>-64</number>
+            </property>
+            <property name="maximum">
+             <number>16</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QGroupBox" name="groupBox_4">
+         <property name="toolTip">
+          <string>视差连通区域变化度的窗口大小</string>
+         </property>
+         <property name="title">
+          <string>SpeckleWindowSize</string>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <item>
+           <widget class="QLineEdit" name="lineEdit_specwinsz">
+            <property name="minimumSize">
+             <size>
+              <width>35</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>30</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+            <property name="placeholderText">
+             <string>0</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSlider" name="horizontalSlider_specwinsz">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -824,7 +611,7 @@
              </size>
             </property>
             <property name="maximum">
-             <number>64</number>
+             <number>200</number>
             </property>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -834,70 +621,245 @@
          </layout>
         </widget>
        </item>
-       <item row="0" column="0">
-        <widget class="QFrame" name="frame_4">
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
-          <property name="spacing">
-           <number>2</number>
-          </property>
-          <property name="leftMargin">
-           <number>2</number>
-          </property>
-          <property name="topMargin">
-           <number>2</number>
-          </property>
-          <property name="rightMargin">
-           <number>2</number>
-          </property>
-          <property name="bottomMargin">
-           <number>2</number>
-          </property>
-          <item>
-           <widget class="QRadioButton" name="radioButton_MODE_3WAY">
-            <property name="text">
-             <string>3WAY</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="radioButton_MODE_SGBM">
-            <property name="text">
-             <string>SGBM</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="radioButton_MODE_HH">
-            <property name="text">
-             <string>HH</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="page_ELAS">
-      <widget class="QLabel" name="label_24">
-       <property name="geometry">
-        <rect>
-         <x>120</x>
-         <y>0</y>
-         <width>48</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>敬请期待</string>
-       </property>
-      </widget>
+      <layout class="QGridLayout" name="gridLayout_6">
+       <item row="0" column="0">
+        <widget class="QScrollArea" name="scrollArea_2">
+         <property name="widgetResizable">
+          <bool>true</bool>
+         </property>
+         <widget class="QWidget" name="scrollAreaWidgetContents_2">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>261</width>
+            <height>590</height>
+           </rect>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_7">
+           <item row="32" column="0">
+            <widget class="QLabel" name="label_62">
+             <property name="text">
+              <string>speckle_size</string>
+             </property>
+            </widget>
+           </item>
+           <item row="33" column="0">
+            <widget class="QLabel" name="label_63">
+             <property name="text">
+              <string>ipol_gap_width</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_32">
+             <property name="text">
+              <string>disp_min</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_47">
+             <property name="text">
+              <string>disp_max</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QSpinBox" name="spinBox_disp_max"/>
+           </item>
+           <item row="0" column="1">
+            <widget class="QSpinBox" name="spinBox_disp_min"/>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_48">
+             <property name="text">
+              <string>support_threshold</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QDoubleSpinBox" name="doubleSpinBox_support_threshold"/>
+           </item>
+           <item row="3" column="1">
+            <widget class="QSpinBox" name="spinBox_support_texture"/>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="label_49">
+             <property name="text">
+              <string>support_texture</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="0">
+            <widget class="QLabel" name="label_50">
+             <property name="text">
+              <string>candidate_stepsize</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="1">
+            <widget class="QSpinBox" name="spinBox_candidate_stepsize"/>
+           </item>
+           <item row="9" column="0">
+            <widget class="QLabel" name="label_51">
+             <property name="text">
+              <string>incon_window_size</string>
+             </property>
+            </widget>
+           </item>
+           <item row="9" column="1">
+            <widget class="QSpinBox" name="spinBox_incon_window_size"/>
+           </item>
+           <item row="11" column="0">
+            <widget class="QLabel" name="label_52">
+             <property name="text">
+              <string>incon_threshold</string>
+             </property>
+            </widget>
+           </item>
+           <item row="11" column="1">
+            <widget class="QSpinBox" name="spinBox_incon_threshold"/>
+           </item>
+           <item row="13" column="0">
+            <widget class="QLabel" name="label_53">
+             <property name="text">
+              <string>incon_min_support</string>
+             </property>
+            </widget>
+           </item>
+           <item row="13" column="1">
+            <widget class="QSpinBox" name="spinBox_incon_min_support"/>
+           </item>
+           <item row="15" column="0">
+            <widget class="QLabel" name="label_54">
+             <property name="text">
+              <string>grid_size</string>
+             </property>
+            </widget>
+           </item>
+           <item row="15" column="1">
+            <widget class="QSpinBox" name="spinBox_grid_size"/>
+           </item>
+           <item row="16" column="0">
+            <widget class="QLabel" name="label_55">
+             <property name="text">
+              <string>beta</string>
+             </property>
+            </widget>
+           </item>
+           <item row="16" column="1">
+            <widget class="QDoubleSpinBox" name="doubleSpinBox_beta"/>
+           </item>
+           <item row="17" column="0">
+            <widget class="QLabel" name="label_56">
+             <property name="text">
+              <string>gamma</string>
+             </property>
+            </widget>
+           </item>
+           <item row="17" column="1">
+            <widget class="QDoubleSpinBox" name="doubleSpinBox_gamma"/>
+           </item>
+           <item row="18" column="0">
+            <widget class="QLabel" name="label_57">
+             <property name="text">
+              <string>sigma</string>
+             </property>
+            </widget>
+           </item>
+           <item row="18" column="1">
+            <widget class="QDoubleSpinBox" name="doubleSpinBox_sigma"/>
+           </item>
+           <item row="19" column="0">
+            <widget class="QLabel" name="label_58">
+             <property name="text">
+              <string>sradius</string>
+             </property>
+            </widget>
+           </item>
+           <item row="19" column="1">
+            <widget class="QDoubleSpinBox" name="doubleSpinBox_sradius"/>
+           </item>
+           <item row="20" column="0">
+            <widget class="QLabel" name="label_59">
+             <property name="text">
+              <string>match_texture</string>
+             </property>
+            </widget>
+           </item>
+           <item row="20" column="1">
+            <widget class="QSpinBox" name="spinBox_match_texture"/>
+           </item>
+           <item row="21" column="1">
+            <widget class="QSpinBox" name="spinBox_lr_threshold"/>
+           </item>
+           <item row="21" column="0">
+            <widget class="QLabel" name="label_60">
+             <property name="text">
+              <string>lr_threshold</string>
+             </property>
+            </widget>
+           </item>
+           <item row="28" column="0">
+            <widget class="QLabel" name="label_61">
+             <property name="text">
+              <string>speckle_sim_threshold</string>
+             </property>
+            </widget>
+           </item>
+           <item row="28" column="1">
+            <widget class="QDoubleSpinBox" name="doubleSpinBox_speckle_sim_threshold"/>
+           </item>
+           <item row="32" column="1">
+            <widget class="QSpinBox" name="spinBox_speckle_size"/>
+           </item>
+           <item row="33" column="1">
+            <widget class="QSpinBox" name="spinBox_ipol_gap_width"/>
+           </item>
+           <item row="34" column="0">
+            <widget class="QCheckBox" name="checkBox_add_corners">
+             <property name="text">
+              <string>add_corners</string>
+             </property>
+            </widget>
+           </item>
+           <item row="35" column="0">
+            <widget class="QCheckBox" name="checkBox_subsampling">
+             <property name="text">
+              <string>subsampling</string>
+             </property>
+            </widget>
+           </item>
+           <item row="36" column="0">
+            <widget class="QCheckBox" name="checkBox_postprocess_only_left">
+             <property name="text">
+              <string>postprocess_only_left</string>
+             </property>
+            </widget>
+           </item>
+           <item row="37" column="0">
+            <widget class="QCheckBox" name="checkBox_filter_adaptive_mean">
+             <property name="text">
+              <string>filter_adaptive_mean</string>
+             </property>
+            </widget>
+           </item>
+           <item row="38" column="0">
+            <widget class="QCheckBox" name="checkBox_filter_median">
+             <property name="text">
+              <string>filter_median</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
      </widget>
      <widget class="QWidget" name="page_ADCensus">
       <layout class="QGridLayout" name="gridLayout_5">
@@ -1288,6 +1250,267 @@
      </widget>
     </widget>
    </item>
+   <item row="2" column="1">
+    <widget class="QGraphicsView" name="graphicsView_D">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1" colspan="2">
+    <widget class="QFrame" name="frame">
+     <property name="frameShape">
+      <enum>QFrame::Box</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_12">
+      <item>
+       <widget class="QFrame" name="frame_8">
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <property name="spacing">
+          <number>2</number>
+         </property>
+         <property name="leftMargin">
+          <number>2</number>
+         </property>
+         <property name="topMargin">
+          <number>2</number>
+         </property>
+         <property name="rightMargin">
+          <number>2</number>
+         </property>
+         <property name="bottomMargin">
+          <number>2</number>
+         </property>
+         <item>
+          <widget class="QRadioButton" name="radioButton_BM">
+           <property name="text">
+            <string>BM</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="radioButton_SGBM">
+           <property name="text">
+            <string>SGBM</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="radioButton_ELAS">
+           <property name="text">
+            <string>ELAS</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="radioButton_ADC">
+           <property name="text">
+            <string>ADCensus</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="Line" name="line">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="checkBox_RectifiedInput">
+        <property name="text">
+         <string>输入校正好的图片</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="Line" name="line_3">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_MatchDefault">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>默认参数</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_MatchChooseFiles">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>视差计算</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_RefreshStereoMatch">
+        <property name="text">
+         <string>刷新</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_Save">
+        <property name="text">
+         <string>保存视差数据和视差示意图</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_Help">
+        <property name="text">
+         <string>帮助信息</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="0" rowspan="3">
+    <widget class="QFrame" name="frame_2">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>141</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Box</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <property name="leftMargin">
+       <number>2</number>
+      </property>
+      <property name="topMargin">
+       <number>2</number>
+      </property>
+      <property name="rightMargin">
+       <number>2</number>
+      </property>
+      <property name="bottomMargin">
+       <number>2</number>
+      </property>
+      <item>
+       <widget class="QGraphicsView" name="graphicsView_ImageL">
+        <property name="maximumSize">
+         <size>
+          <width>133</width>
+          <height>100</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioButton_ImageL">
+        <property name="text">
+         <string>左视图</string>
+        </property>
+        <property name="autoExclusive">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGraphicsView" name="graphicsView_ImageR">
+        <property name="maximumSize">
+         <size>
+          <width>133</width>
+          <height>100</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioButton_ImageR">
+        <property name="text">
+         <string>右视图</string>
+        </property>
+        <property name="autoExclusive">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGraphicsView" name="graphicsView_RawDisp">
+        <property name="maximumSize">
+         <size>
+          <width>133</width>
+          <height>100</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioButton_RawDisp">
+        <property name="text">
+         <string>视差图</string>
+        </property>
+        <property name="autoExclusive">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
@@ -1348,8 +1571,8 @@
    <slot>onClicked_MODE_HH(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>778</x>
-     <y>71</y>
+     <x>1051</x>
+     <y>88</y>
     </hint>
     <hint type="destinationlabel">
      <x>971</x>
@@ -1364,8 +1587,8 @@
    <slot>onClicked_MODE_3WAY(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>726</x>
-     <y>71</y>
+     <x>867</x>
+     <y>88</y>
     </hint>
     <hint type="destinationlabel">
      <x>972</x>
@@ -1380,8 +1603,8 @@
    <slot>onClicked_MODE_SGBM(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>752</x>
-     <y>71</y>
+     <x>959</x>
+     <y>88</y>
     </hint>
     <hint type="destinationlabel">
      <x>971</x>
@@ -1396,8 +1619,8 @@
    <slot>valueChanged_uniradio(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>771</x>
-     <y>113</y>
+     <x>1044</x>
+     <y>139</y>
     </hint>
     <hint type="destinationlabel">
      <x>656</x>
@@ -1412,8 +1635,8 @@
    <slot>valueChanged_Prefilcap(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>771</x>
-     <y>115</y>
+     <x>1044</x>
+     <y>192</y>
     </hint>
     <hint type="destinationlabel">
      <x>655</x>
@@ -1428,8 +1651,8 @@
    <slot>valueChanged_specwinsz(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>771</x>
-     <y>119</y>
+     <x>1044</x>
+     <y>297</y>
     </hint>
     <hint type="destinationlabel">
      <x>655</x>
@@ -1444,8 +1667,8 @@
    <slot>valueChanged_SadWinSize(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>771</x>
-     <y>117</y>
+     <x>1044</x>
+     <y>244</y>
     </hint>
     <hint type="destinationlabel">
      <x>654</x>
@@ -1460,8 +1683,8 @@
    <slot>valueChanged_MinDisp(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>771</x>
-     <y>121</y>
+     <x>1044</x>
+     <y>350</y>
     </hint>
     <hint type="destinationlabel">
      <x>656</x>
@@ -1476,8 +1699,8 @@
    <slot>valueChanged_NumDisparities(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>771</x>
-     <y>124</y>
+     <x>1044</x>
+     <y>402</y>
     </hint>
     <hint type="destinationlabel">
      <x>654</x>
@@ -1492,8 +1715,8 @@
    <slot>valueChanged_Specrange(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>771</x>
-     <y>126</y>
+     <x>1044</x>
+     <y>455</y>
     </hint>
     <hint type="destinationlabel">
      <x>655</x>
@@ -1508,8 +1731,8 @@
    <slot>valueChanged_MaxDifdisp2(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>771</x>
-     <y>128</y>
+     <x>1044</x>
+     <y>508</y>
     </hint>
     <hint type="destinationlabel">
      <x>656</x>
@@ -1524,8 +1747,8 @@
    <slot>valueChanged_TextThread(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>771</x>
-     <y>130</y>
+     <x>1044</x>
+     <y>560</y>
     </hint>
     <hint type="destinationlabel">
      <x>655</x>
@@ -1540,8 +1763,8 @@
    <slot>onReleased_NumDisparities()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>771</x>
-     <y>124</y>
+     <x>1044</x>
+     <y>402</y>
     </hint>
     <hint type="destinationlabel">
      <x>996</x>
@@ -1556,8 +1779,8 @@
    <slot>onReleased_NumDisparities()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>771</x>
-     <y>124</y>
+     <x>1044</x>
+     <y>402</y>
     </hint>
     <hint type="destinationlabel">
      <x>996</x>
@@ -1572,8 +1795,8 @@
    <slot>onReleased_SadWinSize()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>771</x>
-     <y>117</y>
+     <x>1044</x>
+     <y>244</y>
     </hint>
     <hint type="destinationlabel">
      <x>994</x>
@@ -1588,8 +1811,8 @@
    <slot>onReleased_SadWinSize()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>771</x>
-     <y>117</y>
+     <x>1044</x>
+     <y>244</y>
     </hint>
     <hint type="destinationlabel">
      <x>996</x>
@@ -1764,8 +1987,8 @@
    <slot>valueChanged_DMin(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>822</x>
-     <y>100</y>
+     <x>911</x>
+     <y>107</y>
     </hint>
     <hint type="destinationlabel">
      <x>724</x>
@@ -1780,7 +2003,7 @@
    <slot>valueChanged_DMax(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>970</x>
+     <x>1044</x>
      <y>107</y>
     </hint>
     <hint type="destinationlabel">
@@ -1796,7 +2019,7 @@
    <slot>valueChanged_CensusWinW(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>837</x>
+     <x>911</x>
      <y>156</y>
     </hint>
     <hint type="destinationlabel">
@@ -1812,8 +2035,8 @@
    <slot>valueChanged_CensusWinH(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>831</x>
-     <y>181</y>
+     <x>911</x>
+     <y>182</y>
     </hint>
     <hint type="destinationlabel">
      <x>724</x>
@@ -1828,7 +2051,7 @@
    <slot>valueChanged_LambdaCensus(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>970</x>
+     <x>1044</x>
      <y>156</y>
     </hint>
     <hint type="destinationlabel">
@@ -1844,8 +2067,8 @@
    <slot>valueChanged_LambdaAD(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>962</x>
-     <y>178</y>
+     <x>1044</x>
+     <y>182</y>
     </hint>
     <hint type="destinationlabel">
      <x>1032</x>
@@ -1860,8 +2083,8 @@
    <slot>valueChanged_DefaultBorderCost(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>909</x>
-     <y>203</y>
+     <x>1044</x>
+     <y>208</y>
     </hint>
     <hint type="destinationlabel">
      <x>1032</x>
@@ -1876,7 +2099,7 @@
    <slot>valueChanged_MaxLength1(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>840</x>
+     <x>914</x>
      <y>254</y>
     </hint>
     <hint type="destinationlabel">
@@ -1892,7 +2115,7 @@
    <slot>valueChanged_MaxLength2(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>840</x>
+     <x>914</x>
      <y>280</y>
     </hint>
     <hint type="destinationlabel">
@@ -1908,7 +2131,7 @@
    <slot>valueChanged_AggregatingIterations(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>840</x>
+     <x>914</x>
      <y>306</y>
     </hint>
     <hint type="destinationlabel">
@@ -1924,7 +2147,7 @@
    <slot>valueChanged_ColorThreshold1(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>970</x>
+     <x>1044</x>
      <y>254</y>
     </hint>
     <hint type="destinationlabel">
@@ -1940,7 +2163,7 @@
    <slot>valueChanged_ColorThreshold2(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>970</x>
+     <x>1044</x>
      <y>280</y>
     </hint>
     <hint type="destinationlabel">
@@ -1956,7 +2179,7 @@
    <slot>valueChanged_ColorDifference(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>781</x>
+     <x>855</x>
      <y>354</y>
     </hint>
     <hint type="destinationlabel">
@@ -1972,7 +2195,7 @@
    <slot>valueChanged_Pi1(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>874</x>
+     <x>949</x>
      <y>354</y>
     </hint>
     <hint type="destinationlabel">
@@ -1988,7 +2211,7 @@
    <slot>valueChanged_Pi2(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>970</x>
+     <x>1044</x>
      <y>354</y>
     </hint>
     <hint type="destinationlabel">
@@ -2004,7 +2227,7 @@
    <slot>valueChanged_DispTolerance(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>834</x>
+     <x>908</x>
      <y>405</y>
     </hint>
     <hint type="destinationlabel">
@@ -2020,7 +2243,7 @@
    <slot>valueChanged_MaxSearchDepth(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>970</x>
+     <x>1044</x>
      <y>405</y>
     </hint>
     <hint type="destinationlabel">
@@ -2036,7 +2259,7 @@
    <slot>valueChanged_VotingThreshold(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>837</x>
+     <x>911</x>
      <y>456</y>
     </hint>
     <hint type="destinationlabel">
@@ -2052,7 +2275,7 @@
    <slot>valueChanged_VotingRatioThreshold(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>970</x>
+     <x>1044</x>
      <y>456</y>
     </hint>
     <hint type="destinationlabel">
@@ -2068,7 +2291,7 @@
    <slot>valueChanged_CannyKernelSize(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>798</x>
+     <x>872</x>
      <y>507</y>
     </hint>
     <hint type="destinationlabel">
@@ -2084,7 +2307,7 @@
    <slot>valueChanged_CannyThreshold1(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>884</x>
+     <x>958</x>
      <y>507</y>
     </hint>
     <hint type="destinationlabel">
@@ -2100,7 +2323,7 @@
    <slot>valueChanged_CannyThreshold2(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>970</x>
+     <x>1044</x>
      <y>507</y>
     </hint>
     <hint type="destinationlabel">
@@ -2122,6 +2345,374 @@
     <hint type="destinationlabel">
      <x>1035</x>
      <y>594</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_disp_min</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_DMin(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1005</x>
+     <y>94</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>761</x>
+     <y>78</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_disp_max</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_DMax(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>976</x>
+     <y>129</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>762</x>
+     <y>112</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_support_threshold</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_SupportThreshold(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>948</x>
+     <y>160</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>763</x>
+     <y>150</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_support_texture</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_SupportTexture(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1024</x>
+     <y>196</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>761</x>
+     <y>192</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_candidate_stepsize</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_CandidateStepsize(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1004</x>
+     <y>233</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>762</x>
+     <y>228</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_incon_window_size</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_InconWindowSize(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>973</x>
+     <y>265</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>761</x>
+     <y>270</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_incon_threshold</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_InconThreshold(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>948</x>
+     <y>296</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>761</x>
+     <y>316</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_incon_min_support</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_InconMinSupport(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>952</x>
+     <y>326</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>763</x>
+     <y>354</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_grid_size</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_GridSize(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>982</x>
+     <y>361</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>762</x>
+     <y>392</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_beta</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_Beta(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>989</x>
+     <y>392</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>763</x>
+     <y>428</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_gamma</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_Gamma(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>991</x>
+     <y>434</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>762</x>
+     <y>464</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_sigma</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_Sigma(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>999</x>
+     <y>466</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>761</x>
+     <y>493</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_sradius</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_Sradius(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1012</x>
+     <y>494</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>763</x>
+     <y>532</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_match_texture</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_MatchTexture(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>991</x>
+     <y>526</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>761</x>
+     <y>569</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_lr_threshold</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_LrThreshold(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1000</x>
+     <y>558</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>762</x>
+     <y>619</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_speckle_sim_threshold</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_SpeckleSimThreshold(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1010</x>
+     <y>593</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>761</x>
+     <y>656</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_speckle_size</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_SpeckleSize(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>978</x>
+     <y>631</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>762</x>
+     <y>695</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_ipol_gap_width</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_IpolGapWidth(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1013</x>
+     <y>664</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>762</x>
+     <y>733</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_add_corners</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_AddCorners(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>830</x>
+     <y>690</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1071</x>
+     <y>671</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_subsampling</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_SubSampling(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>873</x>
+     <y>722</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1072</x>
+     <y>706</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_postprocess_only_left</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_PostprocessOnlyLeft(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>896</x>
+     <y>745</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1073</x>
+     <y>743</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_filter_adaptive_mean</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_FilterAdaptiveMean(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>899</x>
+     <y>774</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1071</x>
+     <y>780</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_filter_median</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_FilterMedian(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>863</x>
+     <y>807</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1069</x>
+     <y>820</y>
     </hint>
    </hints>
   </connection>
@@ -2177,5 +2768,28 @@
   <slot>valueChanged_CannyThreshold2(int)</slot>
   <slot>valueChanged_CannyKernelSize(int)</slot>
   <slot>valueChanged_BlurKernelSize(int)</slot>
+  <slot>valueChanged_DispMin(int)</slot>
+  <slot>valueChanged_DispMax(int)</slot>
+  <slot>valueChanged_SupportThreshold(double)</slot>
+  <slot>valueChanged_SupportTexture(int)</slot>
+  <slot>valueChanged_InconWindowSize(int)</slot>
+  <slot>valueChanged_InconThreshold(int)</slot>
+  <slot>valueChanged_InconMinSupport(int)</slot>
+  <slot>valueChanged_AddCorners(bool)</slot>
+  <slot>valueChanged_GridSize(int)</slot>
+  <slot>valueChanged_Beta(double)</slot>
+  <slot>valueChanged_Gamma(double)</slot>
+  <slot>valueChanged_Sigma(double)</slot>
+  <slot>valueChanged_Sradius(double)</slot>
+  <slot>valueChanged_MatchTexture(int)</slot>
+  <slot>valueChanged_LrThreshold(int)</slot>
+  <slot>valueChanged_SpeckleSimThreshold(double)</slot>
+  <slot>valueChanged_SpeckleSize(int)</slot>
+  <slot>valueChanged_IpolGapWidth(int)</slot>
+  <slot>valueChanged_FilterMedian(bool)</slot>
+  <slot>valueChanged_FilterAdaptiveMean(bool)</slot>
+  <slot>valueChanged_PostprocessOnlyLeft(bool)</slot>
+  <slot>valueChanged_SubSampling(bool)</slot>
+  <slot>valueChanged_CandidateStepsize(int)</slot>
  </slots>
 </ui>

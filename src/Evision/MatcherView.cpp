@@ -55,7 +55,29 @@ MatcherView::MatcherView(QWidget *parent)
 	connect(m_entity, SIGNAL(paramChanged_cannyThreshold2()), this, SLOT(onParamChanged_CannyThreshold2()));
 	connect(m_entity, SIGNAL(paramChanged_cannyKernelSize()), this, SLOT(onParamChanged_CannyKernelSize()));
 	connect(m_entity, SIGNAL(paramChanged_blurKernelSize()), this, SLOT(onParamChanged_BlurKernelSize()));
-
+	connect(m_entity, SIGNAL(paramChanged_disp_min()), this, SLOT(onParamChanged_DispMin()));
+	connect(m_entity, SIGNAL(paramChanged_disp_max()), this, SLOT(onParamChanged_DispMax()));
+	connect(m_entity, SIGNAL(paramChanged_support_threshold()), this, SLOT(onParamChanged_SupportThreshold()));
+	connect(m_entity, SIGNAL(paramChanged_support_texture()), this, SLOT(onParamChanged_SupportTexture()));
+	connect(m_entity, SIGNAL(paramChanged_candidate_stepsize()), this, SLOT(onParamChanged_CandidateStepsize()));
+	connect(m_entity, SIGNAL(paramChanged_incon_window_size()), this, SLOT(onParamChanged_InconWindowSize()));
+	connect(m_entity, SIGNAL(paramChanged_incon_threshold()), this, SLOT(onParamChanged_InconThreshold()));
+	connect(m_entity, SIGNAL(paramChanged_incon_min_support()), this, SLOT(onParamChanged_InconMinSupport()));
+	connect(m_entity, SIGNAL(paramChanged_add_corners()), this, SLOT(onParamChanged_AddCorners()));
+	connect(m_entity, SIGNAL(paramChanged_grid_size()), this, SLOT(onParamChanged_GridSize()));
+	connect(m_entity, SIGNAL(paramChanged_beta()), this, SLOT(onParamChanged_Beta()));
+	connect(m_entity, SIGNAL(paramChanged_gamma()), this, SLOT(onParamChanged_Gamma()));
+	connect(m_entity, SIGNAL(paramChanged_sigma()), this, SLOT(onParamChanged_Sigma()));
+	connect(m_entity, SIGNAL(paramChanged_sradius()), this, SLOT(onParamChanged_Sradius()));
+	connect(m_entity, SIGNAL(paramChanged_match_texture()), this, SLOT(onParamChanged_MatchTexture()));
+	connect(m_entity, SIGNAL(paramChanged_lr_threshold()), this, SLOT(onParamChanged_LrThreshold()));
+	connect(m_entity, SIGNAL(paramChanged_speckle_sim_threshold()), this, SLOT(onParamChanged_SpeckleSimThreshold()));
+	connect(m_entity, SIGNAL(paramChanged_speckle_size()), this, SLOT(onParamChanged_SpeckleSize()));
+	connect(m_entity, SIGNAL(paramChanged_ipol_gap_width()), this, SLOT(onParamChanged_IpolGapWidth()));
+	connect(m_entity, SIGNAL(paramChanged_filter_median()), this, SLOT(onParamChanged_FilterMedian()));
+	connect(m_entity, SIGNAL(paramChanged_filter_adaptive_mean()), this, SLOT(onParamChanged_FilterAdaptiveMean()));
+	connect(m_entity, SIGNAL(paramChanged_postprocess_only_left()), this, SLOT(onParamChanged_PostprocessOnlyLeft()));
+	connect(m_entity, SIGNAL(paramChanged_subsampling()), this, SLOT(onParamChanged_SubSampling()));
 
 	m_entity->setImageToShow(StereoMatchParamEntity::RAW_DISP);
 }
@@ -432,6 +454,215 @@ void MatcherView::valueChanged_BlurKernelSize(int value) {
 void MatcherView::onParamChanged_BlurKernelSize() {
 	ui.spinBox_blurKernelSize->setValue(m_entity->getBlurKernelSize());
 }
+
+void MatcherView::valueChanged_DispMin(int value) {
+	if (m_entity->getDispMin() != value)
+	{
+		m_entity->setDispMin(value);
+	}
+}
+void MatcherView::onParamChanged_DispMin() {
+	ui.spinBox_disp_min->setValue(m_entity->getDispMin());
+}
+void MatcherView::valueChanged_DispMax(int value) {
+	if (m_entity->getDispMax() != value)
+	{
+		m_entity->setDispMax(value);
+	}
+}
+void MatcherView::onParamChanged_DispMax() {
+	ui.spinBox_disp_max->setValue(m_entity->getDispMax());
+}
+void MatcherView::valueChanged_SupportThreshold(double value) {
+	if (m_entity->getSupportThreshold() != value)
+	{
+		m_entity->setSupportThreshold(value);
+	}
+}
+void MatcherView::onParamChanged_SupportThreshold() {
+	ui.doubleSpinBox_support_threshold->setValue(m_entity->getSupportThreshold());
+}
+void MatcherView::valueChanged_SupportTexture(int value) {
+	if (m_entity->getSupportTexture() != value)
+	{
+		m_entity->setSupportTexture(value);
+	}
+}
+void MatcherView::onParamChanged_SupportTexture() {
+	ui.spinBox_support_texture->setValue(m_entity->getSupportTexture());
+}
+void MatcherView::valueChanged_CandidateStepsize(int value) {
+	if (m_entity->getCandidateStepsize() != value)
+	{
+		m_entity->setCandidateStepsize(value);
+	}
+}
+void MatcherView::onParamChanged_CandidateStepsize() {
+	ui.spinBox_candidate_stepsize->setValue(m_entity->getCandidateStepsize());
+}
+void MatcherView::valueChanged_InconWindowSize(int value) {
+	if (m_entity->getInconWindowSize() != value)
+	{
+		m_entity->setInconWindowSize(value);
+	}
+}
+void MatcherView::onParamChanged_InconWindowSize() {
+	ui.spinBox_incon_window_size->setValue(m_entity->getInconWindowSize());
+}
+void MatcherView::valueChanged_InconThreshold(int value) {
+	if (m_entity->getInconThreshold() != value)
+	{
+		m_entity->setInconThreshold(value);
+	}
+}
+void MatcherView::onParamChanged_InconThreshold() {
+	ui.spinBox_incon_threshold->setValue(m_entity->getInconThreshold());
+}
+void MatcherView::valueChanged_InconMinSupport(int value) {
+	if (m_entity->getInconMinSupport() != value)
+	{
+		m_entity->setInconMinSupport(value);
+	}
+}
+void MatcherView::onParamChanged_InconMinSupport() {
+	ui.spinBox_incon_min_support->setValue(m_entity->getInconMinSupport());
+}
+void MatcherView::valueChanged_AddCorners(bool value) {
+	if (m_entity->getAddCorners() != value)
+	{
+		m_entity->setAddCorners(value);
+	}
+}
+void MatcherView::onParamChanged_AddCorners() {
+	ui.checkBox_add_corners->setChecked(m_entity->getAddCorners());
+}
+void MatcherView::valueChanged_GridSize(int value) {
+	if (m_entity->getGridSize() != value)
+	{
+		m_entity->setGridSize(value);
+	}
+}
+void MatcherView::onParamChanged_GridSize() {
+	ui.spinBox_grid_size->setValue(m_entity->getGridSize());
+}
+void MatcherView::valueChanged_Beta(double value) {
+	if (m_entity->getBeta() != value)
+	{
+		m_entity->setBeta(value);
+	}
+}
+void MatcherView::onParamChanged_Beta() {
+	ui.doubleSpinBox_beta->setValue(m_entity->getBeta());
+}
+void MatcherView::valueChanged_Gamma(double value) {
+	if (m_entity->getGamma() != value)
+	{
+		m_entity->setGamma(value);
+	}
+}
+void MatcherView::onParamChanged_Gamma() {
+	ui.doubleSpinBox_gamma->setValue(m_entity->getGamma());
+}
+void MatcherView::valueChanged_Sigma(double value) {
+	if (m_entity->getSigma() != value)
+	{
+		m_entity->setSigma(value);
+	}
+}
+void MatcherView::onParamChanged_Sigma() {
+	ui.doubleSpinBox_sigma->setValue(m_entity->getSigma());
+}
+void MatcherView::valueChanged_Sradius(double value) {
+	if (m_entity->getSradius() != value)
+	{
+		m_entity->setSradius(value);
+	}
+}
+void MatcherView::onParamChanged_Sradius() {
+	ui.doubleSpinBox_sradius->setValue(m_entity->getSradius());
+}
+void MatcherView::valueChanged_MatchTexture(int value) {
+	if (m_entity->getMatchTexture() != value)
+	{
+		m_entity->setMatchTexture(value);
+	}
+}
+void MatcherView::onParamChanged_MatchTexture() {
+	ui.spinBox_match_texture->setValue(m_entity->getMatchTexture());
+}
+void MatcherView::valueChanged_LrThreshold(int value) {
+	if (m_entity->getLrThreshold() != value)
+	{
+		m_entity->setLrThreshold(value);
+	}
+}
+void MatcherView::onParamChanged_LrThreshold() {
+	ui.spinBox_lr_threshold->setValue(m_entity->getLrThreshold());
+}
+void MatcherView::valueChanged_SpeckleSimThreshold(double value) {
+	if (m_entity->getSpeckleSimThreshold() != value)
+	{
+		m_entity->setSpeckleSimThreshold(value);
+	}
+}
+void MatcherView::onParamChanged_SpeckleSimThreshold() {
+	ui.doubleSpinBox_speckle_sim_threshold->setValue(m_entity->getSpeckleSimThreshold());
+}
+void MatcherView::valueChanged_SpeckleSize(int value) {
+	if (m_entity->getSpeckleSize() != value)
+	{
+		m_entity->setSpeckleSize(value);
+	}
+}
+void MatcherView::onParamChanged_SpeckleSize() {
+	ui.spinBox_speckle_size->setValue(m_entity->getSpeckleSize());
+}
+void MatcherView::valueChanged_IpolGapWidth(int value) {
+	if (m_entity->getIpolGapWidth() != value)
+	{
+		m_entity->setIpolGapWidth(value);
+	}
+}
+void MatcherView::onParamChanged_IpolGapWidth() {
+	ui.spinBox_ipol_gap_width->setValue(m_entity->getIpolGapWidth());
+}
+void MatcherView::valueChanged_FilterMedian(bool value) {
+	if (m_entity->getFilterMedian() != value)
+	{
+		m_entity->setFilterMedian(value);
+	}
+}
+void MatcherView::onParamChanged_FilterMedian() {
+	ui.checkBox_filter_median->setChecked(m_entity->getFilterMedian());
+}
+void MatcherView::valueChanged_FilterAdaptiveMean(bool value) {
+	if (m_entity->getFilterAdaptiveMean() != value)
+	{
+		m_entity->setFilterAdaptiveMean(value);
+	}
+}
+void MatcherView::onParamChanged_FilterAdaptiveMean() {
+	ui.checkBox_filter_adaptive_mean->setChecked(m_entity->getFilterAdaptiveMean());
+}
+void MatcherView::valueChanged_PostprocessOnlyLeft(bool value) {
+	if (m_entity->getPostprocessOnlyLeft() != value)
+	{
+		m_entity->setPostprocessOnlyLeft(value);
+	}
+}
+void MatcherView::onParamChanged_PostprocessOnlyLeft() {
+	ui.checkBox_postprocess_only_left->setChecked(m_entity->getPostprocessOnlyLeft());
+}
+void MatcherView::valueChanged_SubSampling(bool value) {
+	if (m_entity->getSubSampling() != value)
+	{
+		m_entity->setSubSampling(value);
+	}
+}
+void MatcherView::onParamChanged_SubSampling() {
+	ui.checkBox_subsampling->setChecked(m_entity->getSubSampling());
+}
+
 
 void MatcherView::onClicked_BM(bool value)
 {

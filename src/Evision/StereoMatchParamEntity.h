@@ -58,7 +58,31 @@ private:
 	uint cannyKernelSize = 0;
 	// Parameters for the sub-pixel enhancement
 	uint blurKernelSize = 0;
-
+	/*======================ELAS的参数==========================*/
+	int disp_min;                  // min disparity
+	int disp_max;                  // max disparity
+	double support_threshold;      // max. uniqueness ratio (best vs. second best support match)
+	int support_texture;		   // min texture for support points
+	int candidate_stepsize;		   // step size of regular grid on which support points are matched
+	int incon_window_size;		   // window size of inconsistent support point check
+	int incon_threshold;		   // disparity similarity threshold for support point to be considered consistent
+	int incon_min_support;		   // minimum number of consistent support points
+	bool add_corners;              // add support points at image corners with nearest neighbor disparities
+	int grid_size;                 // size of neighborhood for additional support point extrapolation
+	double beta;                   // 图像似然参数
+	double gamma;                  // prior constant
+	double sigma;                  // prior sigma
+	double sradius;                // prior sigma radius
+	int match_texture;			   // min texture for dense matching
+	int lr_threshold;			   // disparity threshold for left/right consistency check
+	double speckle_sim_threshold;  // similarity threshold for speckle segmentation
+	int speckle_size;			   // maximal size of a speckle (small speckles get removed)
+	int ipol_gap_width;			   // interpolate small gaps (left<->right, top<->bottom)
+	bool filter_median;			   // optional median filter (approximated)
+	bool filter_adaptive_mean;	   // optional adaptive mean filter (approximated)
+	bool postprocess_only_left;	   // saves time by not postprocessing the right image
+	bool subsampling;			   // saves time by only computing disparities for each 2nd pixel
+	// note: for this option D1 and D2 must be passed with size width/2 x height/2 (rounded towards zero)
 	//SGBM的三种模式
 	bool MODE_HH = false;
 	bool MODE_SGBM = false;
@@ -130,7 +154,29 @@ signals:
 	void paramChanged_cannyThreshold2();
 	void paramChanged_cannyKernelSize();
 	void paramChanged_blurKernelSize();
-
+	void paramChanged_disp_min();
+	void paramChanged_disp_max();
+	void paramChanged_support_threshold();
+	void paramChanged_support_texture();
+	void paramChanged_candidate_stepsize();
+	void paramChanged_incon_window_size();
+	void paramChanged_incon_threshold();
+	void paramChanged_incon_min_support();
+	void paramChanged_add_corners();
+	void paramChanged_grid_size();
+	void paramChanged_beta();
+	void paramChanged_gamma();
+	void paramChanged_sigma();
+	void paramChanged_sradius();
+	void paramChanged_match_texture();
+	void paramChanged_lr_threshold();
+	void paramChanged_speckle_sim_threshold();
+	void paramChanged_speckle_size();
+	void paramChanged_ipol_gap_width();
+	void paramChanged_filter_median();
+	void paramChanged_filter_adaptive_mean();
+	void paramChanged_postprocess_only_left();
+	void paramChanged_subsampling();
 
 #pragma endregion
 
@@ -256,6 +302,75 @@ public:
 	//23.int
 	void setBlurKernelSize(int value);
 	int getBlurKernelSize();
+
+	void setDispMin(int value);
+	int getDispMin();
+
+	void setDispMax(int value);
+	int getDispMax();
+
+	void setSupportThreshold(double value);
+	double getSupportThreshold();
+
+	void setSupportTexture(int value);
+	int getSupportTexture();
+
+	void setCandidateStepsize(int value);
+	int getCandidateStepsize();
+
+	void setInconWindowSize(int value);
+	int getInconWindowSize();
+
+	void setInconThreshold(int value);
+	int getInconThreshold();
+
+	void setInconMinSupport(int value);
+	int getInconMinSupport();
+
+	void setAddCorners(bool value);
+	bool getAddCorners();
+
+	void setGridSize(int value);
+	int getGridSize();
+
+	void setBeta(double value);
+	double getBeta();
+
+	void setGamma(double value);
+	double getGamma();
+
+	void setSigma(double value);
+	double getSigma();
+
+	void setSradius(double value);
+	double getSradius();
+
+	void setMatchTexture(int value);
+	int getMatchTexture();
+
+	void setLrThreshold(int value);
+	int getLrThreshold();
+
+	void setSpeckleSimThreshold(double value);
+	double getSpeckleSimThreshold();
+
+	void setSpeckleSize(int value);
+	int getSpeckleSize();
+
+	void setIpolGapWidth(int value);
+	int getIpolGapWidth();
+
+	void setFilterMedian(bool value);
+	bool getFilterMedian();
+
+	void setFilterAdaptiveMean(bool value);
+	bool getFilterAdaptiveMean();
+
+	void setPostprocessOnlyLeft(bool value);
+	bool getPostprocessOnlyLeft();
+
+	void setSubSampling(bool value);
+	bool getSubSampling();
 
 	cv::Mat getImageDtoShow();
 	void setImageDtoShow(cv::Mat value);

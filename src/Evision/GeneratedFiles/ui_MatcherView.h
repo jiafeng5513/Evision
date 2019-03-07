@@ -22,6 +22,7 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
+#include <QtWidgets/QScrollArea>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QSpinBox>
@@ -35,60 +36,26 @@ class Ui_MatcherView
 {
 public:
     QGridLayout *gridLayout_2;
-    QFrame *frame_2;
-    QVBoxLayout *verticalLayout_3;
-    QGraphicsView *graphicsView_ImageL;
-    QRadioButton *radioButton_ImageL;
-    QGraphicsView *graphicsView_ImageR;
-    QRadioButton *radioButton_ImageR;
-    QGraphicsView *graphicsView_RawDisp;
-    QRadioButton *radioButton_RawDisp;
-    QSpacerItem *verticalSpacer;
-    QGraphicsView *graphicsView_D;
-    QFrame *frame;
-    QHBoxLayout *horizontalLayout_12;
-    QFrame *frame_8;
-    QHBoxLayout *horizontalLayout;
-    QRadioButton *radioButton_BM;
-    QRadioButton *radioButton_SGBM;
-    QRadioButton *radioButton_ELAS;
-    QRadioButton *radioButton_ADC;
-    QFrame *line;
-    QCheckBox *checkBox_RectifiedInput;
-    QFrame *line_3;
-    QPushButton *pushButton_MatchDefault;
-    QPushButton *pushButton_MatchChooseFiles;
-    QPushButton *pushButton_RefreshStereoMatch;
-    QPushButton *pushButton_Save;
-    QPushButton *pushButton_Help;
-    QSpacerItem *horizontalSpacer;
     QStackedWidget *stackedWidget;
     QWidget *page_opencv;
     QGridLayout *gridLayout;
+    QGroupBox *groupBox_7;
+    QHBoxLayout *horizontalLayout_9;
+    QLineEdit *lineEdit_specrange;
+    QSlider *horizontalSlider_specrange;
     QGroupBox *groupBox;
     QHBoxLayout *horizontalLayout_3;
     QLineEdit *lineEdit_uniradio;
     QSlider *horizontalSlider_uniradio;
-    QGroupBox *groupBox_2;
-    QHBoxLayout *horizontalLayout_4;
-    QLineEdit *lineEdit_prefilcap;
-    QSlider *horizontalSlider_prefilcap;
+    QFrame *frame_4;
+    QHBoxLayout *horizontalLayout_2;
+    QRadioButton *radioButton_MODE_3WAY;
+    QRadioButton *radioButton_MODE_SGBM;
+    QRadioButton *radioButton_MODE_HH;
     QGroupBox *groupBox_10;
     QHBoxLayout *horizontalLayout_10;
     QLineEdit *lineEdit_maxdifdisp12;
     QSlider *horizontalSlider_maxdifdisp12;
-    QGroupBox *groupBox_3;
-    QHBoxLayout *horizontalLayout_5;
-    QLineEdit *lineEdit_SadWinSiz;
-    QSlider *horizontalSlider_SadWinSiz;
-    QGroupBox *groupBox_4;
-    QHBoxLayout *horizontalLayout_6;
-    QLineEdit *lineEdit_specwinsz;
-    QSlider *horizontalSlider_specwinsz;
-    QGroupBox *groupBox_5;
-    QHBoxLayout *horizontalLayout_7;
-    QLineEdit *lineEdit_MinDisp;
-    QSlider *horizontalSlider_MinDisp;
     QGroupBox *groupBox_11;
     QHBoxLayout *horizontalLayout_11;
     QLineEdit *lineEdit_textThread;
@@ -97,17 +64,68 @@ public:
     QHBoxLayout *horizontalLayout_8;
     QLineEdit *lineEdit_NumDisparities;
     QSlider *horizontalSlider_NumDisparities;
-    QGroupBox *groupBox_7;
-    QHBoxLayout *horizontalLayout_9;
-    QLineEdit *lineEdit_specrange;
-    QSlider *horizontalSlider_specrange;
-    QFrame *frame_4;
-    QHBoxLayout *horizontalLayout_2;
-    QRadioButton *radioButton_MODE_3WAY;
-    QRadioButton *radioButton_MODE_SGBM;
-    QRadioButton *radioButton_MODE_HH;
+    QGroupBox *groupBox_2;
+    QHBoxLayout *horizontalLayout_4;
+    QLineEdit *lineEdit_prefilcap;
+    QSlider *horizontalSlider_prefilcap;
+    QGroupBox *groupBox_3;
+    QHBoxLayout *horizontalLayout_5;
+    QLineEdit *lineEdit_SadWinSiz;
+    QSlider *horizontalSlider_SadWinSiz;
+    QGroupBox *groupBox_5;
+    QHBoxLayout *horizontalLayout_7;
+    QLineEdit *lineEdit_MinDisp;
+    QSlider *horizontalSlider_MinDisp;
+    QGroupBox *groupBox_4;
+    QHBoxLayout *horizontalLayout_6;
+    QLineEdit *lineEdit_specwinsz;
+    QSlider *horizontalSlider_specwinsz;
     QWidget *page_ELAS;
-    QLabel *label_24;
+    QGridLayout *gridLayout_6;
+    QScrollArea *scrollArea_2;
+    QWidget *scrollAreaWidgetContents_2;
+    QGridLayout *gridLayout_7;
+    QLabel *label_62;
+    QLabel *label_63;
+    QLabel *label_32;
+    QLabel *label_47;
+    QSpinBox *spinBox_disp_max;
+    QSpinBox *spinBox_disp_min;
+    QLabel *label_48;
+    QDoubleSpinBox *doubleSpinBox_support_threshold;
+    QSpinBox *spinBox_support_texture;
+    QLabel *label_49;
+    QLabel *label_50;
+    QSpinBox *spinBox_candidate_stepsize;
+    QLabel *label_51;
+    QSpinBox *spinBox_incon_window_size;
+    QLabel *label_52;
+    QSpinBox *spinBox_incon_threshold;
+    QLabel *label_53;
+    QSpinBox *spinBox_incon_min_support;
+    QLabel *label_54;
+    QSpinBox *spinBox_grid_size;
+    QLabel *label_55;
+    QDoubleSpinBox *doubleSpinBox_beta;
+    QLabel *label_56;
+    QDoubleSpinBox *doubleSpinBox_gamma;
+    QLabel *label_57;
+    QDoubleSpinBox *doubleSpinBox_sigma;
+    QLabel *label_58;
+    QDoubleSpinBox *doubleSpinBox_sradius;
+    QLabel *label_59;
+    QSpinBox *spinBox_match_texture;
+    QSpinBox *spinBox_lr_threshold;
+    QLabel *label_60;
+    QLabel *label_61;
+    QDoubleSpinBox *doubleSpinBox_speckle_sim_threshold;
+    QSpinBox *spinBox_speckle_size;
+    QSpinBox *spinBox_ipol_gap_width;
+    QCheckBox *checkBox_add_corners;
+    QCheckBox *checkBox_subsampling;
+    QCheckBox *checkBox_postprocess_only_left;
+    QCheckBox *checkBox_filter_adaptive_mean;
+    QCheckBox *checkBox_filter_median;
     QWidget *page_ADCensus;
     QGridLayout *gridLayout_5;
     QGroupBox *groupBox_18;
@@ -174,12 +192,39 @@ public:
     QHBoxLayout *horizontalLayout_18;
     QLabel *label_23;
     QSpinBox *spinBox_blurKernelSize;
+    QGraphicsView *graphicsView_D;
+    QFrame *frame;
+    QHBoxLayout *horizontalLayout_12;
+    QFrame *frame_8;
+    QHBoxLayout *horizontalLayout;
+    QRadioButton *radioButton_BM;
+    QRadioButton *radioButton_SGBM;
+    QRadioButton *radioButton_ELAS;
+    QRadioButton *radioButton_ADC;
+    QFrame *line;
+    QCheckBox *checkBox_RectifiedInput;
+    QFrame *line_3;
+    QPushButton *pushButton_MatchDefault;
+    QPushButton *pushButton_MatchChooseFiles;
+    QPushButton *pushButton_RefreshStereoMatch;
+    QPushButton *pushButton_Save;
+    QPushButton *pushButton_Help;
+    QSpacerItem *horizontalSpacer;
+    QFrame *frame_2;
+    QVBoxLayout *verticalLayout_3;
+    QGraphicsView *graphicsView_ImageL;
+    QRadioButton *radioButton_ImageL;
+    QGraphicsView *graphicsView_ImageR;
+    QRadioButton *radioButton_ImageR;
+    QGraphicsView *graphicsView_RawDisp;
+    QRadioButton *radioButton_RawDisp;
+    QSpacerItem *verticalSpacer;
 
     void setupUi(QWidget *MatcherView)
     {
         if (MatcherView->objectName().isEmpty())
             MatcherView->setObjectName(QString::fromUtf8("MatcherView"));
-        MatcherView->resize(1000, 585);
+        MatcherView->resize(1074, 852);
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -190,157 +235,6 @@ public:
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-        frame_2 = new QFrame(MatcherView);
-        frame_2->setObjectName(QString::fromUtf8("frame_2"));
-        frame_2->setMinimumSize(QSize(0, 0));
-        frame_2->setMaximumSize(QSize(141, 16777215));
-        frame_2->setFrameShape(QFrame::Box);
-        frame_2->setFrameShadow(QFrame::Raised);
-        verticalLayout_3 = new QVBoxLayout(frame_2);
-        verticalLayout_3->setSpacing(6);
-        verticalLayout_3->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
-        verticalLayout_3->setContentsMargins(2, 2, 2, 2);
-        graphicsView_ImageL = new QGraphicsView(frame_2);
-        graphicsView_ImageL->setObjectName(QString::fromUtf8("graphicsView_ImageL"));
-        graphicsView_ImageL->setMaximumSize(QSize(133, 100));
-
-        verticalLayout_3->addWidget(graphicsView_ImageL);
-
-        radioButton_ImageL = new QRadioButton(frame_2);
-        radioButton_ImageL->setObjectName(QString::fromUtf8("radioButton_ImageL"));
-        radioButton_ImageL->setAutoExclusive(true);
-
-        verticalLayout_3->addWidget(radioButton_ImageL);
-
-        graphicsView_ImageR = new QGraphicsView(frame_2);
-        graphicsView_ImageR->setObjectName(QString::fromUtf8("graphicsView_ImageR"));
-        graphicsView_ImageR->setMaximumSize(QSize(133, 100));
-
-        verticalLayout_3->addWidget(graphicsView_ImageR);
-
-        radioButton_ImageR = new QRadioButton(frame_2);
-        radioButton_ImageR->setObjectName(QString::fromUtf8("radioButton_ImageR"));
-        radioButton_ImageR->setAutoExclusive(true);
-
-        verticalLayout_3->addWidget(radioButton_ImageR);
-
-        graphicsView_RawDisp = new QGraphicsView(frame_2);
-        graphicsView_RawDisp->setObjectName(QString::fromUtf8("graphicsView_RawDisp"));
-        graphicsView_RawDisp->setMaximumSize(QSize(133, 100));
-
-        verticalLayout_3->addWidget(graphicsView_RawDisp);
-
-        radioButton_RawDisp = new QRadioButton(frame_2);
-        radioButton_RawDisp->setObjectName(QString::fromUtf8("radioButton_RawDisp"));
-        radioButton_RawDisp->setAutoExclusive(true);
-
-        verticalLayout_3->addWidget(radioButton_RawDisp);
-
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        verticalLayout_3->addItem(verticalSpacer);
-
-
-        gridLayout_2->addWidget(frame_2, 0, 0, 2, 1);
-
-        graphicsView_D = new QGraphicsView(MatcherView);
-        graphicsView_D->setObjectName(QString::fromUtf8("graphicsView_D"));
-        graphicsView_D->setMinimumSize(QSize(0, 0));
-
-        gridLayout_2->addWidget(graphicsView_D, 1, 1, 1, 1);
-
-        frame = new QFrame(MatcherView);
-        frame->setObjectName(QString::fromUtf8("frame"));
-        frame->setFrameShape(QFrame::Box);
-        frame->setFrameShadow(QFrame::Raised);
-        horizontalLayout_12 = new QHBoxLayout(frame);
-        horizontalLayout_12->setSpacing(6);
-        horizontalLayout_12->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout_12->setObjectName(QString::fromUtf8("horizontalLayout_12"));
-        frame_8 = new QFrame(frame);
-        frame_8->setObjectName(QString::fromUtf8("frame_8"));
-        horizontalLayout = new QHBoxLayout(frame_8);
-        horizontalLayout->setSpacing(2);
-        horizontalLayout->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        horizontalLayout->setContentsMargins(2, 2, 2, 2);
-        radioButton_BM = new QRadioButton(frame_8);
-        radioButton_BM->setObjectName(QString::fromUtf8("radioButton_BM"));
-
-        horizontalLayout->addWidget(radioButton_BM);
-
-        radioButton_SGBM = new QRadioButton(frame_8);
-        radioButton_SGBM->setObjectName(QString::fromUtf8("radioButton_SGBM"));
-
-        horizontalLayout->addWidget(radioButton_SGBM);
-
-        radioButton_ELAS = new QRadioButton(frame_8);
-        radioButton_ELAS->setObjectName(QString::fromUtf8("radioButton_ELAS"));
-
-        horizontalLayout->addWidget(radioButton_ELAS);
-
-        radioButton_ADC = new QRadioButton(frame_8);
-        radioButton_ADC->setObjectName(QString::fromUtf8("radioButton_ADC"));
-
-        horizontalLayout->addWidget(radioButton_ADC);
-
-
-        horizontalLayout_12->addWidget(frame_8);
-
-        line = new QFrame(frame);
-        line->setObjectName(QString::fromUtf8("line"));
-        line->setFrameShape(QFrame::VLine);
-        line->setFrameShadow(QFrame::Sunken);
-
-        horizontalLayout_12->addWidget(line);
-
-        checkBox_RectifiedInput = new QCheckBox(frame);
-        checkBox_RectifiedInput->setObjectName(QString::fromUtf8("checkBox_RectifiedInput"));
-
-        horizontalLayout_12->addWidget(checkBox_RectifiedInput);
-
-        line_3 = new QFrame(frame);
-        line_3->setObjectName(QString::fromUtf8("line_3"));
-        line_3->setFrameShape(QFrame::VLine);
-        line_3->setFrameShadow(QFrame::Sunken);
-
-        horizontalLayout_12->addWidget(line_3);
-
-        pushButton_MatchDefault = new QPushButton(frame);
-        pushButton_MatchDefault->setObjectName(QString::fromUtf8("pushButton_MatchDefault"));
-        pushButton_MatchDefault->setMinimumSize(QSize(0, 20));
-
-        horizontalLayout_12->addWidget(pushButton_MatchDefault);
-
-        pushButton_MatchChooseFiles = new QPushButton(frame);
-        pushButton_MatchChooseFiles->setObjectName(QString::fromUtf8("pushButton_MatchChooseFiles"));
-        pushButton_MatchChooseFiles->setMinimumSize(QSize(0, 20));
-
-        horizontalLayout_12->addWidget(pushButton_MatchChooseFiles);
-
-        pushButton_RefreshStereoMatch = new QPushButton(frame);
-        pushButton_RefreshStereoMatch->setObjectName(QString::fromUtf8("pushButton_RefreshStereoMatch"));
-
-        horizontalLayout_12->addWidget(pushButton_RefreshStereoMatch);
-
-        pushButton_Save = new QPushButton(frame);
-        pushButton_Save->setObjectName(QString::fromUtf8("pushButton_Save"));
-
-        horizontalLayout_12->addWidget(pushButton_Save);
-
-        pushButton_Help = new QPushButton(frame);
-        pushButton_Help->setObjectName(QString::fromUtf8("pushButton_Help"));
-
-        horizontalLayout_12->addWidget(pushButton_Help);
-
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_12->addItem(horizontalSpacer);
-
-
-        gridLayout_2->addWidget(frame, 0, 1, 1, 2);
-
         stackedWidget = new QStackedWidget(MatcherView);
         stackedWidget->setObjectName(QString::fromUtf8("stackedWidget"));
         stackedWidget->setMaximumSize(QSize(300, 16777215));
@@ -351,6 +245,32 @@ public:
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        groupBox_7 = new QGroupBox(page_opencv);
+        groupBox_7->setObjectName(QString::fromUtf8("groupBox_7"));
+        horizontalLayout_9 = new QHBoxLayout(groupBox_7);
+        horizontalLayout_9->setSpacing(6);
+        horizontalLayout_9->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
+        lineEdit_specrange = new QLineEdit(groupBox_7);
+        lineEdit_specrange->setObjectName(QString::fromUtf8("lineEdit_specrange"));
+        lineEdit_specrange->setMinimumSize(QSize(35, 20));
+        lineEdit_specrange->setMaximumSize(QSize(30, 20));
+        lineEdit_specrange->setReadOnly(true);
+
+        horizontalLayout_9->addWidget(lineEdit_specrange);
+
+        horizontalSlider_specrange = new QSlider(groupBox_7);
+        horizontalSlider_specrange->setObjectName(QString::fromUtf8("horizontalSlider_specrange"));
+        horizontalSlider_specrange->setMinimumSize(QSize(0, 20));
+        horizontalSlider_specrange->setMaximumSize(QSize(16777215, 20));
+        horizontalSlider_specrange->setMaximum(64);
+        horizontalSlider_specrange->setOrientation(Qt::Horizontal);
+
+        horizontalLayout_9->addWidget(horizontalSlider_specrange);
+
+
+        gridLayout->addWidget(groupBox_7, 7, 0, 1, 1);
+
         groupBox = new QGroupBox(page_opencv);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
         horizontalLayout_3 = new QHBoxLayout(groupBox);
@@ -377,32 +297,32 @@ public:
 
         gridLayout->addWidget(groupBox, 1, 0, 1, 1);
 
-        groupBox_2 = new QGroupBox(page_opencv);
-        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
-        horizontalLayout_4 = new QHBoxLayout(groupBox_2);
-        horizontalLayout_4->setSpacing(6);
-        horizontalLayout_4->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
-        lineEdit_prefilcap = new QLineEdit(groupBox_2);
-        lineEdit_prefilcap->setObjectName(QString::fromUtf8("lineEdit_prefilcap"));
-        lineEdit_prefilcap->setMinimumSize(QSize(35, 20));
-        lineEdit_prefilcap->setMaximumSize(QSize(30, 20));
-        lineEdit_prefilcap->setReadOnly(true);
+        frame_4 = new QFrame(page_opencv);
+        frame_4->setObjectName(QString::fromUtf8("frame_4"));
+        frame_4->setFrameShape(QFrame::StyledPanel);
+        frame_4->setFrameShadow(QFrame::Raised);
+        horizontalLayout_2 = new QHBoxLayout(frame_4);
+        horizontalLayout_2->setSpacing(2);
+        horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setContentsMargins(2, 2, 2, 2);
+        radioButton_MODE_3WAY = new QRadioButton(frame_4);
+        radioButton_MODE_3WAY->setObjectName(QString::fromUtf8("radioButton_MODE_3WAY"));
 
-        horizontalLayout_4->addWidget(lineEdit_prefilcap);
+        horizontalLayout_2->addWidget(radioButton_MODE_3WAY);
 
-        horizontalSlider_prefilcap = new QSlider(groupBox_2);
-        horizontalSlider_prefilcap->setObjectName(QString::fromUtf8("horizontalSlider_prefilcap"));
-        horizontalSlider_prefilcap->setMinimumSize(QSize(0, 20));
-        horizontalSlider_prefilcap->setMaximumSize(QSize(16777215, 20));
-        horizontalSlider_prefilcap->setMinimum(1);
-        horizontalSlider_prefilcap->setMaximum(100);
-        horizontalSlider_prefilcap->setOrientation(Qt::Horizontal);
+        radioButton_MODE_SGBM = new QRadioButton(frame_4);
+        radioButton_MODE_SGBM->setObjectName(QString::fromUtf8("radioButton_MODE_SGBM"));
 
-        horizontalLayout_4->addWidget(horizontalSlider_prefilcap);
+        horizontalLayout_2->addWidget(radioButton_MODE_SGBM);
+
+        radioButton_MODE_HH = new QRadioButton(frame_4);
+        radioButton_MODE_HH->setObjectName(QString::fromUtf8("radioButton_MODE_HH"));
+
+        horizontalLayout_2->addWidget(radioButton_MODE_HH);
 
 
-        gridLayout->addWidget(groupBox_2, 2, 0, 1, 1);
+        gridLayout->addWidget(frame_4, 0, 0, 1, 1);
 
         groupBox_10 = new QGroupBox(page_opencv);
         groupBox_10->setObjectName(QString::fromUtf8("groupBox_10"));
@@ -430,88 +350,6 @@ public:
 
 
         gridLayout->addWidget(groupBox_10, 8, 0, 1, 1);
-
-        groupBox_3 = new QGroupBox(page_opencv);
-        groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
-        horizontalLayout_5 = new QHBoxLayout(groupBox_3);
-        horizontalLayout_5->setSpacing(6);
-        horizontalLayout_5->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
-        lineEdit_SadWinSiz = new QLineEdit(groupBox_3);
-        lineEdit_SadWinSiz->setObjectName(QString::fromUtf8("lineEdit_SadWinSiz"));
-        lineEdit_SadWinSiz->setMinimumSize(QSize(35, 20));
-        lineEdit_SadWinSiz->setMaximumSize(QSize(30, 20));
-        lineEdit_SadWinSiz->setReadOnly(true);
-
-        horizontalLayout_5->addWidget(lineEdit_SadWinSiz);
-
-        horizontalSlider_SadWinSiz = new QSlider(groupBox_3);
-        horizontalSlider_SadWinSiz->setObjectName(QString::fromUtf8("horizontalSlider_SadWinSiz"));
-        horizontalSlider_SadWinSiz->setMinimumSize(QSize(0, 20));
-        horizontalSlider_SadWinSiz->setMaximumSize(QSize(16777215, 20));
-        horizontalSlider_SadWinSiz->setMinimum(5);
-        horizontalSlider_SadWinSiz->setMaximum(51);
-        horizontalSlider_SadWinSiz->setSingleStep(2);
-        horizontalSlider_SadWinSiz->setPageStep(2);
-        horizontalSlider_SadWinSiz->setOrientation(Qt::Horizontal);
-
-        horizontalLayout_5->addWidget(horizontalSlider_SadWinSiz);
-
-
-        gridLayout->addWidget(groupBox_3, 3, 0, 1, 1);
-
-        groupBox_4 = new QGroupBox(page_opencv);
-        groupBox_4->setObjectName(QString::fromUtf8("groupBox_4"));
-        horizontalLayout_6 = new QHBoxLayout(groupBox_4);
-        horizontalLayout_6->setSpacing(6);
-        horizontalLayout_6->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
-        lineEdit_specwinsz = new QLineEdit(groupBox_4);
-        lineEdit_specwinsz->setObjectName(QString::fromUtf8("lineEdit_specwinsz"));
-        lineEdit_specwinsz->setMinimumSize(QSize(35, 20));
-        lineEdit_specwinsz->setMaximumSize(QSize(30, 20));
-        lineEdit_specwinsz->setReadOnly(true);
-
-        horizontalLayout_6->addWidget(lineEdit_specwinsz);
-
-        horizontalSlider_specwinsz = new QSlider(groupBox_4);
-        horizontalSlider_specwinsz->setObjectName(QString::fromUtf8("horizontalSlider_specwinsz"));
-        horizontalSlider_specwinsz->setMinimumSize(QSize(0, 20));
-        horizontalSlider_specwinsz->setMaximumSize(QSize(16777215, 20));
-        horizontalSlider_specwinsz->setMaximum(200);
-        horizontalSlider_specwinsz->setOrientation(Qt::Horizontal);
-
-        horizontalLayout_6->addWidget(horizontalSlider_specwinsz);
-
-
-        gridLayout->addWidget(groupBox_4, 4, 0, 1, 1);
-
-        groupBox_5 = new QGroupBox(page_opencv);
-        groupBox_5->setObjectName(QString::fromUtf8("groupBox_5"));
-        horizontalLayout_7 = new QHBoxLayout(groupBox_5);
-        horizontalLayout_7->setSpacing(6);
-        horizontalLayout_7->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
-        lineEdit_MinDisp = new QLineEdit(groupBox_5);
-        lineEdit_MinDisp->setObjectName(QString::fromUtf8("lineEdit_MinDisp"));
-        lineEdit_MinDisp->setMinimumSize(QSize(35, 20));
-        lineEdit_MinDisp->setMaximumSize(QSize(30, 20));
-        lineEdit_MinDisp->setReadOnly(true);
-
-        horizontalLayout_7->addWidget(lineEdit_MinDisp);
-
-        horizontalSlider_MinDisp = new QSlider(groupBox_5);
-        horizontalSlider_MinDisp->setObjectName(QString::fromUtf8("horizontalSlider_MinDisp"));
-        horizontalSlider_MinDisp->setMinimumSize(QSize(0, 20));
-        horizontalSlider_MinDisp->setMaximumSize(QSize(16777215, 20));
-        horizontalSlider_MinDisp->setMinimum(-64);
-        horizontalSlider_MinDisp->setMaximum(16);
-        horizontalSlider_MinDisp->setOrientation(Qt::Horizontal);
-
-        horizontalLayout_7->addWidget(horizontalSlider_MinDisp);
-
-
-        gridLayout->addWidget(groupBox_5, 5, 0, 1, 1);
 
         groupBox_11 = new QGroupBox(page_opencv);
         groupBox_11->setObjectName(QString::fromUtf8("groupBox_11"));
@@ -568,65 +406,341 @@ public:
 
         gridLayout->addWidget(groupBox_6, 6, 0, 1, 1);
 
-        groupBox_7 = new QGroupBox(page_opencv);
-        groupBox_7->setObjectName(QString::fromUtf8("groupBox_7"));
-        horizontalLayout_9 = new QHBoxLayout(groupBox_7);
-        horizontalLayout_9->setSpacing(6);
-        horizontalLayout_9->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
-        lineEdit_specrange = new QLineEdit(groupBox_7);
-        lineEdit_specrange->setObjectName(QString::fromUtf8("lineEdit_specrange"));
-        lineEdit_specrange->setMinimumSize(QSize(35, 20));
-        lineEdit_specrange->setMaximumSize(QSize(30, 20));
-        lineEdit_specrange->setReadOnly(true);
+        groupBox_2 = new QGroupBox(page_opencv);
+        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
+        horizontalLayout_4 = new QHBoxLayout(groupBox_2);
+        horizontalLayout_4->setSpacing(6);
+        horizontalLayout_4->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        lineEdit_prefilcap = new QLineEdit(groupBox_2);
+        lineEdit_prefilcap->setObjectName(QString::fromUtf8("lineEdit_prefilcap"));
+        lineEdit_prefilcap->setMinimumSize(QSize(35, 20));
+        lineEdit_prefilcap->setMaximumSize(QSize(30, 20));
+        lineEdit_prefilcap->setReadOnly(true);
 
-        horizontalLayout_9->addWidget(lineEdit_specrange);
+        horizontalLayout_4->addWidget(lineEdit_prefilcap);
 
-        horizontalSlider_specrange = new QSlider(groupBox_7);
-        horizontalSlider_specrange->setObjectName(QString::fromUtf8("horizontalSlider_specrange"));
-        horizontalSlider_specrange->setMinimumSize(QSize(0, 20));
-        horizontalSlider_specrange->setMaximumSize(QSize(16777215, 20));
-        horizontalSlider_specrange->setMaximum(64);
-        horizontalSlider_specrange->setOrientation(Qt::Horizontal);
+        horizontalSlider_prefilcap = new QSlider(groupBox_2);
+        horizontalSlider_prefilcap->setObjectName(QString::fromUtf8("horizontalSlider_prefilcap"));
+        horizontalSlider_prefilcap->setMinimumSize(QSize(0, 20));
+        horizontalSlider_prefilcap->setMaximumSize(QSize(16777215, 20));
+        horizontalSlider_prefilcap->setMinimum(1);
+        horizontalSlider_prefilcap->setMaximum(100);
+        horizontalSlider_prefilcap->setOrientation(Qt::Horizontal);
 
-        horizontalLayout_9->addWidget(horizontalSlider_specrange);
-
-
-        gridLayout->addWidget(groupBox_7, 7, 0, 1, 1);
-
-        frame_4 = new QFrame(page_opencv);
-        frame_4->setObjectName(QString::fromUtf8("frame_4"));
-        frame_4->setFrameShape(QFrame::StyledPanel);
-        frame_4->setFrameShadow(QFrame::Raised);
-        horizontalLayout_2 = new QHBoxLayout(frame_4);
-        horizontalLayout_2->setSpacing(2);
-        horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        horizontalLayout_2->setContentsMargins(2, 2, 2, 2);
-        radioButton_MODE_3WAY = new QRadioButton(frame_4);
-        radioButton_MODE_3WAY->setObjectName(QString::fromUtf8("radioButton_MODE_3WAY"));
-
-        horizontalLayout_2->addWidget(radioButton_MODE_3WAY);
-
-        radioButton_MODE_SGBM = new QRadioButton(frame_4);
-        radioButton_MODE_SGBM->setObjectName(QString::fromUtf8("radioButton_MODE_SGBM"));
-
-        horizontalLayout_2->addWidget(radioButton_MODE_SGBM);
-
-        radioButton_MODE_HH = new QRadioButton(frame_4);
-        radioButton_MODE_HH->setObjectName(QString::fromUtf8("radioButton_MODE_HH"));
-
-        horizontalLayout_2->addWidget(radioButton_MODE_HH);
+        horizontalLayout_4->addWidget(horizontalSlider_prefilcap);
 
 
-        gridLayout->addWidget(frame_4, 0, 0, 1, 1);
+        gridLayout->addWidget(groupBox_2, 2, 0, 1, 1);
+
+        groupBox_3 = new QGroupBox(page_opencv);
+        groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
+        horizontalLayout_5 = new QHBoxLayout(groupBox_3);
+        horizontalLayout_5->setSpacing(6);
+        horizontalLayout_5->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
+        lineEdit_SadWinSiz = new QLineEdit(groupBox_3);
+        lineEdit_SadWinSiz->setObjectName(QString::fromUtf8("lineEdit_SadWinSiz"));
+        lineEdit_SadWinSiz->setMinimumSize(QSize(35, 20));
+        lineEdit_SadWinSiz->setMaximumSize(QSize(30, 20));
+        lineEdit_SadWinSiz->setReadOnly(true);
+
+        horizontalLayout_5->addWidget(lineEdit_SadWinSiz);
+
+        horizontalSlider_SadWinSiz = new QSlider(groupBox_3);
+        horizontalSlider_SadWinSiz->setObjectName(QString::fromUtf8("horizontalSlider_SadWinSiz"));
+        horizontalSlider_SadWinSiz->setMinimumSize(QSize(0, 20));
+        horizontalSlider_SadWinSiz->setMaximumSize(QSize(16777215, 20));
+        horizontalSlider_SadWinSiz->setMinimum(5);
+        horizontalSlider_SadWinSiz->setMaximum(51);
+        horizontalSlider_SadWinSiz->setSingleStep(2);
+        horizontalSlider_SadWinSiz->setPageStep(2);
+        horizontalSlider_SadWinSiz->setOrientation(Qt::Horizontal);
+
+        horizontalLayout_5->addWidget(horizontalSlider_SadWinSiz);
+
+
+        gridLayout->addWidget(groupBox_3, 3, 0, 1, 1);
+
+        groupBox_5 = new QGroupBox(page_opencv);
+        groupBox_5->setObjectName(QString::fromUtf8("groupBox_5"));
+        horizontalLayout_7 = new QHBoxLayout(groupBox_5);
+        horizontalLayout_7->setSpacing(6);
+        horizontalLayout_7->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
+        lineEdit_MinDisp = new QLineEdit(groupBox_5);
+        lineEdit_MinDisp->setObjectName(QString::fromUtf8("lineEdit_MinDisp"));
+        lineEdit_MinDisp->setMinimumSize(QSize(35, 20));
+        lineEdit_MinDisp->setMaximumSize(QSize(30, 20));
+        lineEdit_MinDisp->setReadOnly(true);
+
+        horizontalLayout_7->addWidget(lineEdit_MinDisp);
+
+        horizontalSlider_MinDisp = new QSlider(groupBox_5);
+        horizontalSlider_MinDisp->setObjectName(QString::fromUtf8("horizontalSlider_MinDisp"));
+        horizontalSlider_MinDisp->setMinimumSize(QSize(0, 20));
+        horizontalSlider_MinDisp->setMaximumSize(QSize(16777215, 20));
+        horizontalSlider_MinDisp->setMinimum(-64);
+        horizontalSlider_MinDisp->setMaximum(16);
+        horizontalSlider_MinDisp->setOrientation(Qt::Horizontal);
+
+        horizontalLayout_7->addWidget(horizontalSlider_MinDisp);
+
+
+        gridLayout->addWidget(groupBox_5, 5, 0, 1, 1);
+
+        groupBox_4 = new QGroupBox(page_opencv);
+        groupBox_4->setObjectName(QString::fromUtf8("groupBox_4"));
+        horizontalLayout_6 = new QHBoxLayout(groupBox_4);
+        horizontalLayout_6->setSpacing(6);
+        horizontalLayout_6->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
+        lineEdit_specwinsz = new QLineEdit(groupBox_4);
+        lineEdit_specwinsz->setObjectName(QString::fromUtf8("lineEdit_specwinsz"));
+        lineEdit_specwinsz->setMinimumSize(QSize(35, 20));
+        lineEdit_specwinsz->setMaximumSize(QSize(30, 20));
+        lineEdit_specwinsz->setReadOnly(true);
+
+        horizontalLayout_6->addWidget(lineEdit_specwinsz);
+
+        horizontalSlider_specwinsz = new QSlider(groupBox_4);
+        horizontalSlider_specwinsz->setObjectName(QString::fromUtf8("horizontalSlider_specwinsz"));
+        horizontalSlider_specwinsz->setMinimumSize(QSize(0, 20));
+        horizontalSlider_specwinsz->setMaximumSize(QSize(16777215, 20));
+        horizontalSlider_specwinsz->setMaximum(200);
+        horizontalSlider_specwinsz->setOrientation(Qt::Horizontal);
+
+        horizontalLayout_6->addWidget(horizontalSlider_specwinsz);
+
+
+        gridLayout->addWidget(groupBox_4, 4, 0, 1, 1);
 
         stackedWidget->addWidget(page_opencv);
         page_ELAS = new QWidget();
         page_ELAS->setObjectName(QString::fromUtf8("page_ELAS"));
-        label_24 = new QLabel(page_ELAS);
-        label_24->setObjectName(QString::fromUtf8("label_24"));
-        label_24->setGeometry(QRect(120, 0, 48, 16));
+        gridLayout_6 = new QGridLayout(page_ELAS);
+        gridLayout_6->setSpacing(6);
+        gridLayout_6->setContentsMargins(11, 11, 11, 11);
+        gridLayout_6->setObjectName(QString::fromUtf8("gridLayout_6"));
+        scrollArea_2 = new QScrollArea(page_ELAS);
+        scrollArea_2->setObjectName(QString::fromUtf8("scrollArea_2"));
+        scrollArea_2->setWidgetResizable(true);
+        scrollAreaWidgetContents_2 = new QWidget();
+        scrollAreaWidgetContents_2->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_2"));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 278, 761));
+        gridLayout_7 = new QGridLayout(scrollAreaWidgetContents_2);
+        gridLayout_7->setSpacing(6);
+        gridLayout_7->setContentsMargins(11, 11, 11, 11);
+        gridLayout_7->setObjectName(QString::fromUtf8("gridLayout_7"));
+        label_62 = new QLabel(scrollAreaWidgetContents_2);
+        label_62->setObjectName(QString::fromUtf8("label_62"));
+
+        gridLayout_7->addWidget(label_62, 32, 0, 1, 1);
+
+        label_63 = new QLabel(scrollAreaWidgetContents_2);
+        label_63->setObjectName(QString::fromUtf8("label_63"));
+
+        gridLayout_7->addWidget(label_63, 33, 0, 1, 1);
+
+        label_32 = new QLabel(scrollAreaWidgetContents_2);
+        label_32->setObjectName(QString::fromUtf8("label_32"));
+
+        gridLayout_7->addWidget(label_32, 0, 0, 1, 1);
+
+        label_47 = new QLabel(scrollAreaWidgetContents_2);
+        label_47->setObjectName(QString::fromUtf8("label_47"));
+
+        gridLayout_7->addWidget(label_47, 1, 0, 1, 1);
+
+        spinBox_disp_max = new QSpinBox(scrollAreaWidgetContents_2);
+        spinBox_disp_max->setObjectName(QString::fromUtf8("spinBox_disp_max"));
+
+        gridLayout_7->addWidget(spinBox_disp_max, 1, 1, 1, 1);
+
+        spinBox_disp_min = new QSpinBox(scrollAreaWidgetContents_2);
+        spinBox_disp_min->setObjectName(QString::fromUtf8("spinBox_disp_min"));
+
+        gridLayout_7->addWidget(spinBox_disp_min, 0, 1, 1, 1);
+
+        label_48 = new QLabel(scrollAreaWidgetContents_2);
+        label_48->setObjectName(QString::fromUtf8("label_48"));
+
+        gridLayout_7->addWidget(label_48, 2, 0, 1, 1);
+
+        doubleSpinBox_support_threshold = new QDoubleSpinBox(scrollAreaWidgetContents_2);
+        doubleSpinBox_support_threshold->setObjectName(QString::fromUtf8("doubleSpinBox_support_threshold"));
+
+        gridLayout_7->addWidget(doubleSpinBox_support_threshold, 2, 1, 1, 1);
+
+        spinBox_support_texture = new QSpinBox(scrollAreaWidgetContents_2);
+        spinBox_support_texture->setObjectName(QString::fromUtf8("spinBox_support_texture"));
+
+        gridLayout_7->addWidget(spinBox_support_texture, 3, 1, 1, 1);
+
+        label_49 = new QLabel(scrollAreaWidgetContents_2);
+        label_49->setObjectName(QString::fromUtf8("label_49"));
+
+        gridLayout_7->addWidget(label_49, 3, 0, 1, 1);
+
+        label_50 = new QLabel(scrollAreaWidgetContents_2);
+        label_50->setObjectName(QString::fromUtf8("label_50"));
+
+        gridLayout_7->addWidget(label_50, 7, 0, 1, 1);
+
+        spinBox_candidate_stepsize = new QSpinBox(scrollAreaWidgetContents_2);
+        spinBox_candidate_stepsize->setObjectName(QString::fromUtf8("spinBox_candidate_stepsize"));
+
+        gridLayout_7->addWidget(spinBox_candidate_stepsize, 7, 1, 1, 1);
+
+        label_51 = new QLabel(scrollAreaWidgetContents_2);
+        label_51->setObjectName(QString::fromUtf8("label_51"));
+
+        gridLayout_7->addWidget(label_51, 9, 0, 1, 1);
+
+        spinBox_incon_window_size = new QSpinBox(scrollAreaWidgetContents_2);
+        spinBox_incon_window_size->setObjectName(QString::fromUtf8("spinBox_incon_window_size"));
+
+        gridLayout_7->addWidget(spinBox_incon_window_size, 9, 1, 1, 1);
+
+        label_52 = new QLabel(scrollAreaWidgetContents_2);
+        label_52->setObjectName(QString::fromUtf8("label_52"));
+
+        gridLayout_7->addWidget(label_52, 11, 0, 1, 1);
+
+        spinBox_incon_threshold = new QSpinBox(scrollAreaWidgetContents_2);
+        spinBox_incon_threshold->setObjectName(QString::fromUtf8("spinBox_incon_threshold"));
+
+        gridLayout_7->addWidget(spinBox_incon_threshold, 11, 1, 1, 1);
+
+        label_53 = new QLabel(scrollAreaWidgetContents_2);
+        label_53->setObjectName(QString::fromUtf8("label_53"));
+
+        gridLayout_7->addWidget(label_53, 13, 0, 1, 1);
+
+        spinBox_incon_min_support = new QSpinBox(scrollAreaWidgetContents_2);
+        spinBox_incon_min_support->setObjectName(QString::fromUtf8("spinBox_incon_min_support"));
+
+        gridLayout_7->addWidget(spinBox_incon_min_support, 13, 1, 1, 1);
+
+        label_54 = new QLabel(scrollAreaWidgetContents_2);
+        label_54->setObjectName(QString::fromUtf8("label_54"));
+
+        gridLayout_7->addWidget(label_54, 15, 0, 1, 1);
+
+        spinBox_grid_size = new QSpinBox(scrollAreaWidgetContents_2);
+        spinBox_grid_size->setObjectName(QString::fromUtf8("spinBox_grid_size"));
+
+        gridLayout_7->addWidget(spinBox_grid_size, 15, 1, 1, 1);
+
+        label_55 = new QLabel(scrollAreaWidgetContents_2);
+        label_55->setObjectName(QString::fromUtf8("label_55"));
+
+        gridLayout_7->addWidget(label_55, 16, 0, 1, 1);
+
+        doubleSpinBox_beta = new QDoubleSpinBox(scrollAreaWidgetContents_2);
+        doubleSpinBox_beta->setObjectName(QString::fromUtf8("doubleSpinBox_beta"));
+
+        gridLayout_7->addWidget(doubleSpinBox_beta, 16, 1, 1, 1);
+
+        label_56 = new QLabel(scrollAreaWidgetContents_2);
+        label_56->setObjectName(QString::fromUtf8("label_56"));
+
+        gridLayout_7->addWidget(label_56, 17, 0, 1, 1);
+
+        doubleSpinBox_gamma = new QDoubleSpinBox(scrollAreaWidgetContents_2);
+        doubleSpinBox_gamma->setObjectName(QString::fromUtf8("doubleSpinBox_gamma"));
+
+        gridLayout_7->addWidget(doubleSpinBox_gamma, 17, 1, 1, 1);
+
+        label_57 = new QLabel(scrollAreaWidgetContents_2);
+        label_57->setObjectName(QString::fromUtf8("label_57"));
+
+        gridLayout_7->addWidget(label_57, 18, 0, 1, 1);
+
+        doubleSpinBox_sigma = new QDoubleSpinBox(scrollAreaWidgetContents_2);
+        doubleSpinBox_sigma->setObjectName(QString::fromUtf8("doubleSpinBox_sigma"));
+
+        gridLayout_7->addWidget(doubleSpinBox_sigma, 18, 1, 1, 1);
+
+        label_58 = new QLabel(scrollAreaWidgetContents_2);
+        label_58->setObjectName(QString::fromUtf8("label_58"));
+
+        gridLayout_7->addWidget(label_58, 19, 0, 1, 1);
+
+        doubleSpinBox_sradius = new QDoubleSpinBox(scrollAreaWidgetContents_2);
+        doubleSpinBox_sradius->setObjectName(QString::fromUtf8("doubleSpinBox_sradius"));
+
+        gridLayout_7->addWidget(doubleSpinBox_sradius, 19, 1, 1, 1);
+
+        label_59 = new QLabel(scrollAreaWidgetContents_2);
+        label_59->setObjectName(QString::fromUtf8("label_59"));
+
+        gridLayout_7->addWidget(label_59, 20, 0, 1, 1);
+
+        spinBox_match_texture = new QSpinBox(scrollAreaWidgetContents_2);
+        spinBox_match_texture->setObjectName(QString::fromUtf8("spinBox_match_texture"));
+
+        gridLayout_7->addWidget(spinBox_match_texture, 20, 1, 1, 1);
+
+        spinBox_lr_threshold = new QSpinBox(scrollAreaWidgetContents_2);
+        spinBox_lr_threshold->setObjectName(QString::fromUtf8("spinBox_lr_threshold"));
+
+        gridLayout_7->addWidget(spinBox_lr_threshold, 21, 1, 1, 1);
+
+        label_60 = new QLabel(scrollAreaWidgetContents_2);
+        label_60->setObjectName(QString::fromUtf8("label_60"));
+
+        gridLayout_7->addWidget(label_60, 21, 0, 1, 1);
+
+        label_61 = new QLabel(scrollAreaWidgetContents_2);
+        label_61->setObjectName(QString::fromUtf8("label_61"));
+
+        gridLayout_7->addWidget(label_61, 28, 0, 1, 1);
+
+        doubleSpinBox_speckle_sim_threshold = new QDoubleSpinBox(scrollAreaWidgetContents_2);
+        doubleSpinBox_speckle_sim_threshold->setObjectName(QString::fromUtf8("doubleSpinBox_speckle_sim_threshold"));
+
+        gridLayout_7->addWidget(doubleSpinBox_speckle_sim_threshold, 28, 1, 1, 1);
+
+        spinBox_speckle_size = new QSpinBox(scrollAreaWidgetContents_2);
+        spinBox_speckle_size->setObjectName(QString::fromUtf8("spinBox_speckle_size"));
+
+        gridLayout_7->addWidget(spinBox_speckle_size, 32, 1, 1, 1);
+
+        spinBox_ipol_gap_width = new QSpinBox(scrollAreaWidgetContents_2);
+        spinBox_ipol_gap_width->setObjectName(QString::fromUtf8("spinBox_ipol_gap_width"));
+
+        gridLayout_7->addWidget(spinBox_ipol_gap_width, 33, 1, 1, 1);
+
+        checkBox_add_corners = new QCheckBox(scrollAreaWidgetContents_2);
+        checkBox_add_corners->setObjectName(QString::fromUtf8("checkBox_add_corners"));
+
+        gridLayout_7->addWidget(checkBox_add_corners, 34, 0, 1, 1);
+
+        checkBox_subsampling = new QCheckBox(scrollAreaWidgetContents_2);
+        checkBox_subsampling->setObjectName(QString::fromUtf8("checkBox_subsampling"));
+
+        gridLayout_7->addWidget(checkBox_subsampling, 35, 0, 1, 1);
+
+        checkBox_postprocess_only_left = new QCheckBox(scrollAreaWidgetContents_2);
+        checkBox_postprocess_only_left->setObjectName(QString::fromUtf8("checkBox_postprocess_only_left"));
+
+        gridLayout_7->addWidget(checkBox_postprocess_only_left, 36, 0, 1, 1);
+
+        checkBox_filter_adaptive_mean = new QCheckBox(scrollAreaWidgetContents_2);
+        checkBox_filter_adaptive_mean->setObjectName(QString::fromUtf8("checkBox_filter_adaptive_mean"));
+
+        gridLayout_7->addWidget(checkBox_filter_adaptive_mean, 37, 0, 1, 1);
+
+        checkBox_filter_median = new QCheckBox(scrollAreaWidgetContents_2);
+        checkBox_filter_median->setObjectName(QString::fromUtf8("checkBox_filter_median"));
+
+        gridLayout_7->addWidget(checkBox_filter_median, 38, 0, 1, 1);
+
+        scrollArea_2->setWidget(scrollAreaWidgetContents_2);
+
+        gridLayout_6->addWidget(scrollArea_2, 0, 0, 1, 1);
+
         stackedWidget->addWidget(page_ELAS);
         page_ADCensus = new QWidget();
         page_ADCensus->setObjectName(QString::fromUtf8("page_ADCensus"));
@@ -961,7 +1075,158 @@ public:
 
         stackedWidget->addWidget(page_ADCensus);
 
-        gridLayout_2->addWidget(stackedWidget, 1, 2, 1, 1);
+        gridLayout_2->addWidget(stackedWidget, 2, 2, 1, 1);
+
+        graphicsView_D = new QGraphicsView(MatcherView);
+        graphicsView_D->setObjectName(QString::fromUtf8("graphicsView_D"));
+        graphicsView_D->setMinimumSize(QSize(0, 0));
+
+        gridLayout_2->addWidget(graphicsView_D, 2, 1, 1, 1);
+
+        frame = new QFrame(MatcherView);
+        frame->setObjectName(QString::fromUtf8("frame"));
+        frame->setFrameShape(QFrame::Box);
+        frame->setFrameShadow(QFrame::Raised);
+        horizontalLayout_12 = new QHBoxLayout(frame);
+        horizontalLayout_12->setSpacing(6);
+        horizontalLayout_12->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_12->setObjectName(QString::fromUtf8("horizontalLayout_12"));
+        frame_8 = new QFrame(frame);
+        frame_8->setObjectName(QString::fromUtf8("frame_8"));
+        horizontalLayout = new QHBoxLayout(frame_8);
+        horizontalLayout->setSpacing(2);
+        horizontalLayout->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setContentsMargins(2, 2, 2, 2);
+        radioButton_BM = new QRadioButton(frame_8);
+        radioButton_BM->setObjectName(QString::fromUtf8("radioButton_BM"));
+
+        horizontalLayout->addWidget(radioButton_BM);
+
+        radioButton_SGBM = new QRadioButton(frame_8);
+        radioButton_SGBM->setObjectName(QString::fromUtf8("radioButton_SGBM"));
+
+        horizontalLayout->addWidget(radioButton_SGBM);
+
+        radioButton_ELAS = new QRadioButton(frame_8);
+        radioButton_ELAS->setObjectName(QString::fromUtf8("radioButton_ELAS"));
+
+        horizontalLayout->addWidget(radioButton_ELAS);
+
+        radioButton_ADC = new QRadioButton(frame_8);
+        radioButton_ADC->setObjectName(QString::fromUtf8("radioButton_ADC"));
+
+        horizontalLayout->addWidget(radioButton_ADC);
+
+
+        horizontalLayout_12->addWidget(frame_8);
+
+        line = new QFrame(frame);
+        line->setObjectName(QString::fromUtf8("line"));
+        line->setFrameShape(QFrame::VLine);
+        line->setFrameShadow(QFrame::Sunken);
+
+        horizontalLayout_12->addWidget(line);
+
+        checkBox_RectifiedInput = new QCheckBox(frame);
+        checkBox_RectifiedInput->setObjectName(QString::fromUtf8("checkBox_RectifiedInput"));
+
+        horizontalLayout_12->addWidget(checkBox_RectifiedInput);
+
+        line_3 = new QFrame(frame);
+        line_3->setObjectName(QString::fromUtf8("line_3"));
+        line_3->setFrameShape(QFrame::VLine);
+        line_3->setFrameShadow(QFrame::Sunken);
+
+        horizontalLayout_12->addWidget(line_3);
+
+        pushButton_MatchDefault = new QPushButton(frame);
+        pushButton_MatchDefault->setObjectName(QString::fromUtf8("pushButton_MatchDefault"));
+        pushButton_MatchDefault->setMinimumSize(QSize(0, 20));
+
+        horizontalLayout_12->addWidget(pushButton_MatchDefault);
+
+        pushButton_MatchChooseFiles = new QPushButton(frame);
+        pushButton_MatchChooseFiles->setObjectName(QString::fromUtf8("pushButton_MatchChooseFiles"));
+        pushButton_MatchChooseFiles->setMinimumSize(QSize(0, 20));
+
+        horizontalLayout_12->addWidget(pushButton_MatchChooseFiles);
+
+        pushButton_RefreshStereoMatch = new QPushButton(frame);
+        pushButton_RefreshStereoMatch->setObjectName(QString::fromUtf8("pushButton_RefreshStereoMatch"));
+
+        horizontalLayout_12->addWidget(pushButton_RefreshStereoMatch);
+
+        pushButton_Save = new QPushButton(frame);
+        pushButton_Save->setObjectName(QString::fromUtf8("pushButton_Save"));
+
+        horizontalLayout_12->addWidget(pushButton_Save);
+
+        pushButton_Help = new QPushButton(frame);
+        pushButton_Help->setObjectName(QString::fromUtf8("pushButton_Help"));
+
+        horizontalLayout_12->addWidget(pushButton_Help);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_12->addItem(horizontalSpacer);
+
+
+        gridLayout_2->addWidget(frame, 0, 1, 1, 2);
+
+        frame_2 = new QFrame(MatcherView);
+        frame_2->setObjectName(QString::fromUtf8("frame_2"));
+        frame_2->setMinimumSize(QSize(0, 0));
+        frame_2->setMaximumSize(QSize(141, 16777215));
+        frame_2->setFrameShape(QFrame::Box);
+        frame_2->setFrameShadow(QFrame::Raised);
+        verticalLayout_3 = new QVBoxLayout(frame_2);
+        verticalLayout_3->setSpacing(6);
+        verticalLayout_3->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
+        verticalLayout_3->setContentsMargins(2, 2, 2, 2);
+        graphicsView_ImageL = new QGraphicsView(frame_2);
+        graphicsView_ImageL->setObjectName(QString::fromUtf8("graphicsView_ImageL"));
+        graphicsView_ImageL->setMaximumSize(QSize(133, 100));
+
+        verticalLayout_3->addWidget(graphicsView_ImageL);
+
+        radioButton_ImageL = new QRadioButton(frame_2);
+        radioButton_ImageL->setObjectName(QString::fromUtf8("radioButton_ImageL"));
+        radioButton_ImageL->setAutoExclusive(true);
+
+        verticalLayout_3->addWidget(radioButton_ImageL);
+
+        graphicsView_ImageR = new QGraphicsView(frame_2);
+        graphicsView_ImageR->setObjectName(QString::fromUtf8("graphicsView_ImageR"));
+        graphicsView_ImageR->setMaximumSize(QSize(133, 100));
+
+        verticalLayout_3->addWidget(graphicsView_ImageR);
+
+        radioButton_ImageR = new QRadioButton(frame_2);
+        radioButton_ImageR->setObjectName(QString::fromUtf8("radioButton_ImageR"));
+        radioButton_ImageR->setAutoExclusive(true);
+
+        verticalLayout_3->addWidget(radioButton_ImageR);
+
+        graphicsView_RawDisp = new QGraphicsView(frame_2);
+        graphicsView_RawDisp->setObjectName(QString::fromUtf8("graphicsView_RawDisp"));
+        graphicsView_RawDisp->setMaximumSize(QSize(133, 100));
+
+        verticalLayout_3->addWidget(graphicsView_RawDisp);
+
+        radioButton_RawDisp = new QRadioButton(frame_2);
+        radioButton_RawDisp->setObjectName(QString::fromUtf8("radioButton_RawDisp"));
+        radioButton_RawDisp->setAutoExclusive(true);
+
+        verticalLayout_3->addWidget(radioButton_RawDisp);
+
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_3->addItem(verticalSpacer);
+
+
+        gridLayout_2->addWidget(frame_2, 0, 0, 3, 1);
 
 
         retranslateUi(MatcherView);
@@ -1017,8 +1282,31 @@ public:
         QObject::connect(spinBox_cannyThreshold1, SIGNAL(valueChanged(int)), MatcherView, SLOT(valueChanged_CannyThreshold1(int)));
         QObject::connect(spinBox_cannyThreshold2, SIGNAL(valueChanged(int)), MatcherView, SLOT(valueChanged_CannyThreshold2(int)));
         QObject::connect(spinBox_blurKernelSize, SIGNAL(valueChanged(int)), MatcherView, SLOT(valueChanged_BlurKernelSize(int)));
+        QObject::connect(spinBox_disp_min, SIGNAL(valueChanged(int)), MatcherView, SLOT(valueChanged_DMin(int)));
+        QObject::connect(spinBox_disp_max, SIGNAL(valueChanged(int)), MatcherView, SLOT(valueChanged_DMax(int)));
+        QObject::connect(doubleSpinBox_support_threshold, SIGNAL(valueChanged(double)), MatcherView, SLOT(valueChanged_SupportThreshold(double)));
+        QObject::connect(spinBox_support_texture, SIGNAL(valueChanged(int)), MatcherView, SLOT(valueChanged_SupportTexture(int)));
+        QObject::connect(spinBox_candidate_stepsize, SIGNAL(valueChanged(int)), MatcherView, SLOT(valueChanged_CandidateStepsize(int)));
+        QObject::connect(spinBox_incon_window_size, SIGNAL(valueChanged(int)), MatcherView, SLOT(valueChanged_InconWindowSize(int)));
+        QObject::connect(spinBox_incon_threshold, SIGNAL(valueChanged(int)), MatcherView, SLOT(valueChanged_InconThreshold(int)));
+        QObject::connect(spinBox_incon_min_support, SIGNAL(valueChanged(int)), MatcherView, SLOT(valueChanged_InconMinSupport(int)));
+        QObject::connect(spinBox_grid_size, SIGNAL(valueChanged(int)), MatcherView, SLOT(valueChanged_GridSize(int)));
+        QObject::connect(doubleSpinBox_beta, SIGNAL(valueChanged(double)), MatcherView, SLOT(valueChanged_Beta(double)));
+        QObject::connect(doubleSpinBox_gamma, SIGNAL(valueChanged(double)), MatcherView, SLOT(valueChanged_Gamma(double)));
+        QObject::connect(doubleSpinBox_sigma, SIGNAL(valueChanged(double)), MatcherView, SLOT(valueChanged_Sigma(double)));
+        QObject::connect(doubleSpinBox_sradius, SIGNAL(valueChanged(double)), MatcherView, SLOT(valueChanged_Sradius(double)));
+        QObject::connect(spinBox_match_texture, SIGNAL(valueChanged(int)), MatcherView, SLOT(valueChanged_MatchTexture(int)));
+        QObject::connect(spinBox_lr_threshold, SIGNAL(valueChanged(int)), MatcherView, SLOT(valueChanged_LrThreshold(int)));
+        QObject::connect(doubleSpinBox_speckle_sim_threshold, SIGNAL(valueChanged(double)), MatcherView, SLOT(valueChanged_SpeckleSimThreshold(double)));
+        QObject::connect(spinBox_speckle_size, SIGNAL(valueChanged(int)), MatcherView, SLOT(valueChanged_SpeckleSize(int)));
+        QObject::connect(spinBox_ipol_gap_width, SIGNAL(valueChanged(int)), MatcherView, SLOT(valueChanged_IpolGapWidth(int)));
+        QObject::connect(checkBox_add_corners, SIGNAL(clicked(bool)), MatcherView, SLOT(valueChanged_AddCorners(bool)));
+        QObject::connect(checkBox_subsampling, SIGNAL(clicked(bool)), MatcherView, SLOT(valueChanged_SubSampling(bool)));
+        QObject::connect(checkBox_postprocess_only_left, SIGNAL(clicked(bool)), MatcherView, SLOT(valueChanged_PostprocessOnlyLeft(bool)));
+        QObject::connect(checkBox_filter_adaptive_mean, SIGNAL(clicked(bool)), MatcherView, SLOT(valueChanged_FilterAdaptiveMean(bool)));
+        QObject::connect(checkBox_filter_median, SIGNAL(clicked(bool)), MatcherView, SLOT(valueChanged_FilterMedian(bool)));
 
-        stackedWidget->setCurrentIndex(2);
+        stackedWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MatcherView);
@@ -1027,49 +1315,24 @@ public:
     void retranslateUi(QWidget *MatcherView)
     {
         MatcherView->setWindowTitle(QApplication::translate("MatcherView", "\345\214\271\351\205\215", nullptr));
-        radioButton_ImageL->setText(QApplication::translate("MatcherView", "\345\267\246\350\247\206\345\233\276", nullptr));
-        radioButton_ImageR->setText(QApplication::translate("MatcherView", "\345\217\263\350\247\206\345\233\276", nullptr));
-        radioButton_RawDisp->setText(QApplication::translate("MatcherView", "\350\247\206\345\267\256\345\233\276", nullptr));
-        radioButton_BM->setText(QApplication::translate("MatcherView", "BM", nullptr));
-        radioButton_SGBM->setText(QApplication::translate("MatcherView", "SGBM", nullptr));
-        radioButton_ELAS->setText(QApplication::translate("MatcherView", "ELAS", nullptr));
-        radioButton_ADC->setText(QApplication::translate("MatcherView", "ADCensus", nullptr));
-        checkBox_RectifiedInput->setText(QApplication::translate("MatcherView", "\350\276\223\345\205\245\346\240\241\346\255\243\345\245\275\347\232\204\345\233\276\347\211\207", nullptr));
-        pushButton_MatchDefault->setText(QApplication::translate("MatcherView", "\351\273\230\350\256\244\345\217\202\346\225\260", nullptr));
-        pushButton_MatchChooseFiles->setText(QApplication::translate("MatcherView", "\350\247\206\345\267\256\350\256\241\347\256\227", nullptr));
-        pushButton_RefreshStereoMatch->setText(QApplication::translate("MatcherView", "\345\210\267\346\226\260", nullptr));
-        pushButton_Save->setText(QApplication::translate("MatcherView", "\344\277\235\345\255\230\350\247\206\345\267\256\346\225\260\346\215\256\345\222\214\350\247\206\345\267\256\347\244\272\346\204\217\345\233\276", nullptr));
-        pushButton_Help->setText(QApplication::translate("MatcherView", "\345\270\256\345\212\251\344\277\241\346\201\257", nullptr));
+#ifndef QT_NO_TOOLTIP
+        groupBox_7->setToolTip(QApplication::translate("MatcherView", "\350\277\236\351\200\232\345\214\272\345\237\237\345\206\205\347\232\204\346\234\200\345\244\247\350\247\206\345\267\256\345\217\230\345\214\226", nullptr));
+#endif // QT_NO_TOOLTIP
+        groupBox_7->setTitle(QApplication::translate("MatcherView", "speckleRange", nullptr));
+        lineEdit_specrange->setPlaceholderText(QApplication::translate("MatcherView", "0", nullptr));
 #ifndef QT_NO_TOOLTIP
         groupBox->setToolTip(QApplication::translate("MatcherView", "\350\247\206\345\267\256\345\224\257\344\270\200\346\200\247\347\231\276\345\210\206\346\257\224", nullptr));
 #endif // QT_NO_TOOLTIP
         groupBox->setTitle(QApplication::translate("MatcherView", "uniquenessRatio", nullptr));
         lineEdit_uniradio->setPlaceholderText(QApplication::translate("MatcherView", "0", nullptr));
-#ifndef QT_NO_TOOLTIP
-        groupBox_2->setToolTip(QApplication::translate("MatcherView", "\345\211\215\347\275\256\346\273\244\346\263\242\345\231\250\346\210\252\346\226\255\345\200\274", nullptr));
-#endif // QT_NO_TOOLTIP
-        groupBox_2->setTitle(QApplication::translate("MatcherView", "preFilterCap", nullptr));
-        lineEdit_prefilcap->setPlaceholderText(QApplication::translate("MatcherView", "1", nullptr));
+        radioButton_MODE_3WAY->setText(QApplication::translate("MatcherView", "3WAY", nullptr));
+        radioButton_MODE_SGBM->setText(QApplication::translate("MatcherView", "SGBM", nullptr));
+        radioButton_MODE_HH->setText(QApplication::translate("MatcherView", "HH", nullptr));
 #ifndef QT_NO_TOOLTIP
         groupBox_10->setToolTip(QApplication::translate("MatcherView", "\345\267\246\345\217\263\350\247\206\345\267\256\345\233\276\347\232\204\346\234\200\345\244\247\345\256\271\350\256\270\345\267\256\345\274\202", nullptr));
 #endif // QT_NO_TOOLTIP
         groupBox_10->setTitle(QApplication::translate("MatcherView", "disp12MaxDiff", nullptr));
         lineEdit_maxdifdisp12->setPlaceholderText(QApplication::translate("MatcherView", "0", nullptr));
-#ifndef QT_NO_TOOLTIP
-        groupBox_3->setToolTip(QApplication::translate("MatcherView", "SAD\347\252\227\345\217\243\345\244\247\345\260\217", nullptr));
-#endif // QT_NO_TOOLTIP
-        groupBox_3->setTitle(QApplication::translate("MatcherView", "SADWindowSize", nullptr));
-        lineEdit_SadWinSiz->setPlaceholderText(QApplication::translate("MatcherView", "5", nullptr));
-#ifndef QT_NO_TOOLTIP
-        groupBox_4->setToolTip(QApplication::translate("MatcherView", "\350\247\206\345\267\256\350\277\236\351\200\232\345\214\272\345\237\237\345\217\230\345\214\226\345\272\246\347\232\204\347\252\227\345\217\243\345\244\247\345\260\217", nullptr));
-#endif // QT_NO_TOOLTIP
-        groupBox_4->setTitle(QApplication::translate("MatcherView", "SpeckleWindowSize", nullptr));
-        lineEdit_specwinsz->setPlaceholderText(QApplication::translate("MatcherView", "0", nullptr));
-#ifndef QT_NO_TOOLTIP
-        groupBox_5->setToolTip(QApplication::translate("MatcherView", "\346\234\200\345\260\217\350\247\206\345\267\256\345\200\274", nullptr));
-#endif // QT_NO_TOOLTIP
-        groupBox_5->setTitle(QApplication::translate("MatcherView", "minDisparity", nullptr));
-        lineEdit_MinDisp->setPlaceholderText(QApplication::translate("MatcherView", "0", nullptr));
 #ifndef QT_NO_TOOLTIP
         groupBox_11->setToolTip(QApplication::translate("MatcherView", "\344\275\216\347\272\271\347\220\206\345\214\272\345\237\237\347\232\204\345\210\244\346\226\255\351\230\210\345\200\274", nullptr));
 #endif // QT_NO_TOOLTIP
@@ -1081,14 +1344,48 @@ public:
         groupBox_6->setTitle(QApplication::translate("MatcherView", "numDisparities", nullptr));
         lineEdit_NumDisparities->setPlaceholderText(QApplication::translate("MatcherView", "16", nullptr));
 #ifndef QT_NO_TOOLTIP
-        groupBox_7->setToolTip(QApplication::translate("MatcherView", "\350\277\236\351\200\232\345\214\272\345\237\237\345\206\205\347\232\204\346\234\200\345\244\247\350\247\206\345\267\256\345\217\230\345\214\226", nullptr));
+        groupBox_2->setToolTip(QApplication::translate("MatcherView", "\345\211\215\347\275\256\346\273\244\346\263\242\345\231\250\346\210\252\346\226\255\345\200\274", nullptr));
 #endif // QT_NO_TOOLTIP
-        groupBox_7->setTitle(QApplication::translate("MatcherView", "speckleRange", nullptr));
-        lineEdit_specrange->setPlaceholderText(QApplication::translate("MatcherView", "0", nullptr));
-        radioButton_MODE_3WAY->setText(QApplication::translate("MatcherView", "3WAY", nullptr));
-        radioButton_MODE_SGBM->setText(QApplication::translate("MatcherView", "SGBM", nullptr));
-        radioButton_MODE_HH->setText(QApplication::translate("MatcherView", "HH", nullptr));
-        label_24->setText(QApplication::translate("MatcherView", "\346\225\254\350\257\267\346\234\237\345\276\205", nullptr));
+        groupBox_2->setTitle(QApplication::translate("MatcherView", "preFilterCap", nullptr));
+        lineEdit_prefilcap->setPlaceholderText(QApplication::translate("MatcherView", "1", nullptr));
+#ifndef QT_NO_TOOLTIP
+        groupBox_3->setToolTip(QApplication::translate("MatcherView", "SAD\347\252\227\345\217\243\345\244\247\345\260\217", nullptr));
+#endif // QT_NO_TOOLTIP
+        groupBox_3->setTitle(QApplication::translate("MatcherView", "SADWindowSize", nullptr));
+        lineEdit_SadWinSiz->setPlaceholderText(QApplication::translate("MatcherView", "5", nullptr));
+#ifndef QT_NO_TOOLTIP
+        groupBox_5->setToolTip(QApplication::translate("MatcherView", "\346\234\200\345\260\217\350\247\206\345\267\256\345\200\274", nullptr));
+#endif // QT_NO_TOOLTIP
+        groupBox_5->setTitle(QApplication::translate("MatcherView", "minDisparity", nullptr));
+        lineEdit_MinDisp->setPlaceholderText(QApplication::translate("MatcherView", "0", nullptr));
+#ifndef QT_NO_TOOLTIP
+        groupBox_4->setToolTip(QApplication::translate("MatcherView", "\350\247\206\345\267\256\350\277\236\351\200\232\345\214\272\345\237\237\345\217\230\345\214\226\345\272\246\347\232\204\347\252\227\345\217\243\345\244\247\345\260\217", nullptr));
+#endif // QT_NO_TOOLTIP
+        groupBox_4->setTitle(QApplication::translate("MatcherView", "SpeckleWindowSize", nullptr));
+        lineEdit_specwinsz->setPlaceholderText(QApplication::translate("MatcherView", "0", nullptr));
+        label_62->setText(QApplication::translate("MatcherView", "speckle_size", nullptr));
+        label_63->setText(QApplication::translate("MatcherView", "ipol_gap_width", nullptr));
+        label_32->setText(QApplication::translate("MatcherView", "disp_min", nullptr));
+        label_47->setText(QApplication::translate("MatcherView", "disp_max", nullptr));
+        label_48->setText(QApplication::translate("MatcherView", "support_threshold", nullptr));
+        label_49->setText(QApplication::translate("MatcherView", "support_texture", nullptr));
+        label_50->setText(QApplication::translate("MatcherView", "candidate_stepsize", nullptr));
+        label_51->setText(QApplication::translate("MatcherView", "incon_window_size", nullptr));
+        label_52->setText(QApplication::translate("MatcherView", "incon_threshold", nullptr));
+        label_53->setText(QApplication::translate("MatcherView", "incon_min_support", nullptr));
+        label_54->setText(QApplication::translate("MatcherView", "grid_size", nullptr));
+        label_55->setText(QApplication::translate("MatcherView", "beta", nullptr));
+        label_56->setText(QApplication::translate("MatcherView", "gamma", nullptr));
+        label_57->setText(QApplication::translate("MatcherView", "sigma", nullptr));
+        label_58->setText(QApplication::translate("MatcherView", "sradius", nullptr));
+        label_59->setText(QApplication::translate("MatcherView", "match_texture", nullptr));
+        label_60->setText(QApplication::translate("MatcherView", "lr_threshold", nullptr));
+        label_61->setText(QApplication::translate("MatcherView", "speckle_sim_threshold", nullptr));
+        checkBox_add_corners->setText(QApplication::translate("MatcherView", "add_corners", nullptr));
+        checkBox_subsampling->setText(QApplication::translate("MatcherView", "subsampling", nullptr));
+        checkBox_postprocess_only_left->setText(QApplication::translate("MatcherView", "postprocess_only_left", nullptr));
+        checkBox_filter_adaptive_mean->setText(QApplication::translate("MatcherView", "filter_adaptive_mean", nullptr));
+        checkBox_filter_median->setText(QApplication::translate("MatcherView", "filter_median", nullptr));
         groupBox_18->setTitle(QApplication::translate("MatcherView", "\350\247\206\345\267\256", nullptr));
         label->setText(QApplication::translate("MatcherView", "\346\234\200\345\260\217\350\247\206\345\267\256", nullptr));
         label_2->setText(QApplication::translate("MatcherView", "\346\234\200\345\244\247\350\247\206\345\267\256", nullptr));
@@ -1121,6 +1418,19 @@ public:
         label_4->setText(QApplication::translate("MatcherView", "census\347\252\227\351\253\230", nullptr));
         groupBox_17->setTitle(QApplication::translate("MatcherView", "\344\272\232\345\203\217\347\264\240\345\242\236\345\274\272", nullptr));
         label_23->setText(QApplication::translate("MatcherView", "blurKernelSize", nullptr));
+        radioButton_BM->setText(QApplication::translate("MatcherView", "BM", nullptr));
+        radioButton_SGBM->setText(QApplication::translate("MatcherView", "SGBM", nullptr));
+        radioButton_ELAS->setText(QApplication::translate("MatcherView", "ELAS", nullptr));
+        radioButton_ADC->setText(QApplication::translate("MatcherView", "ADCensus", nullptr));
+        checkBox_RectifiedInput->setText(QApplication::translate("MatcherView", "\350\276\223\345\205\245\346\240\241\346\255\243\345\245\275\347\232\204\345\233\276\347\211\207", nullptr));
+        pushButton_MatchDefault->setText(QApplication::translate("MatcherView", "\351\273\230\350\256\244\345\217\202\346\225\260", nullptr));
+        pushButton_MatchChooseFiles->setText(QApplication::translate("MatcherView", "\350\247\206\345\267\256\350\256\241\347\256\227", nullptr));
+        pushButton_RefreshStereoMatch->setText(QApplication::translate("MatcherView", "\345\210\267\346\226\260", nullptr));
+        pushButton_Save->setText(QApplication::translate("MatcherView", "\344\277\235\345\255\230\350\247\206\345\267\256\346\225\260\346\215\256\345\222\214\350\247\206\345\267\256\347\244\272\346\204\217\345\233\276", nullptr));
+        pushButton_Help->setText(QApplication::translate("MatcherView", "\345\270\256\345\212\251\344\277\241\346\201\257", nullptr));
+        radioButton_ImageL->setText(QApplication::translate("MatcherView", "\345\267\246\350\247\206\345\233\276", nullptr));
+        radioButton_ImageR->setText(QApplication::translate("MatcherView", "\345\217\263\350\247\206\345\233\276", nullptr));
+        radioButton_RawDisp->setText(QApplication::translate("MatcherView", "\350\247\206\345\267\256\345\233\276", nullptr));
     } // retranslateUi
 
 };

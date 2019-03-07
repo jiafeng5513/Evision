@@ -1,22 +1,14 @@
 #define NOMINMAX
 #include "StereoMatch.h"
 #include <QFileDialog>
+#include <QTime>
 #include "EvisionUtils.h"
-//#include <direct.h>
-#include <qDebug>
 #include "../EvisionElas/EvisionElas.h"
-//#include <boost/filesystem/path.hpp>
-//#include <boost/filesystem/operations.hpp>
-//#include <pcl/common/common_headers.h>
-//#include <pcl/io/pcd_io.h>
 #include "../EvisionADCensus/imageprocessor.h"
 #include "../EvisionADCensus/stereoprocessor.h"
-//#include <boost/date_time/posix_time/ptime.hpp>
-//#include <boost/thread/lock_algorithms.hpp>
-
-#include <QTime>
 #include "rectify.h"
 #include <algorithm>
+
 StereoMatch::StereoMatch(std::string img1_filename, std::string img2_filename, std::string cameraParams_filename)
 {
 	m_entity = StereoMatchParamEntity::getInstance();
@@ -202,50 +194,9 @@ void StereoMatch::Save()
  */
 void StereoMatch::ADCensusDriver()
 {
-
-#pragma region ²ÎÊý
-	// Minimum and maximum disparity
-	uint dMin = 0;
-	uint dMax = 60;
-
-	// Parameters for the cost-initialization for the ADCensus
 	cv::Size censusWin;
-	censusWin.height = 9;
-	censusWin.width = 7;
-	float defaultBorderCost = 0.999;
-	float lambdaAD = 10.0; // TODO Namen anpassen
-	float lambdaCensus = 30.0;
-
-
-	// Parameters for the cross-based cost aggregation
-	uint aggregatingIterations = 4;
-	uint colorThreshold1 = 20;
-	uint colorThreshold2 = 6;
-	uint maxLength1 = 34;
-	uint maxLength2 = 17;
-
-	// Parameters for the optimization of image cells
-	uint colorDifference = 15;
-	float pi1 = 0.1;
-	float pi2 = 0.3;
-
-	// Parameters for outlier detection
-	uint dispTolerance = 0;
-	// Parameters for the iterative range rating
-	uint votingThreshold = 20;
-	float votingRatioThreshold = 4;
-
-	// Parameters for the proper interpolation
-	uint maxSearchDepth = 20;
-
-	// Parameters for the approximation of depths discontinuities 
-	uint cannyThreshold1 = 20;
-	uint cannyThreshold2 = 60;
-	uint cannyKernelSize = 3;
-
-	// Parameters for the sub-pixel enhancement
-	uint blurKernelSize = 3;
-#pragma endregion 
+	censusWin.height = m_entity->getCensusWinH();
+	censusWin.width = m_entity->getCensusWinW();
 	m_entity->setIconImgL(img1);
 	m_entity->setIconImgR(img2);
 	//¼ÓÔØQ¾ØÕó
@@ -268,11 +219,13 @@ void StereoMatch::ADCensusDriver()
 			eLeft = iP.unsharpMasking(images[i * 2], "gauss", 3, 1.9, -1);
 			eRight = iP.unsharpMasking(images[i * 2 + 1], "gauss", 3, 1.9, -1);
 
-			StereoProcessor sP(dMin, dMax, images[i * 2], images[i * 2 + 1], 
-				censusWin, defaultBorderCost, lambdaAD, lambdaCensus, root,
-				aggregatingIterations, colorThreshold1, colorThreshold2, maxLength1, maxLength2,
-				colorDifference, pi1, pi2, dispTolerance, votingThreshold, votingRatioThreshold,
-				maxSearchDepth, blurKernelSize, cannyThreshold1, cannyThreshold2, cannyKernelSize);
+			StereoProcessor sP(m_entity->getDMin(), m_entity->getDMax(), images[i * 2], images[i * 2 + 1],
+				censusWin, m_entity->getDefaultBorderCost(), m_entity->getLambdaAD(), m_entity->getLambdaCensus(), root,
+				m_entity->getAggregatingIterations(), m_entity->getColorThreshold1(), m_entity->getColorThreshold2(), 
+				m_entity->getMaxLength1(), m_entity->getMaxLength2(),m_entity->getColorDifference(), m_entity->getPi1(), 
+				m_entity->getPi2(), m_entity->getDispTolerance(), m_entity->getVotingThreshold(), m_entity->getVotingRatioThreshold(),
+				m_entity->getMaxSearchDepth(), m_entity->getBlurKernelSize(), 
+				m_entity->getCannyThreshold1(), m_entity->getCannyThreshold2(), m_entity->getCannyKernelSize());
 			string errorMsg;
 			error = !sP.init(errorMsg);
 

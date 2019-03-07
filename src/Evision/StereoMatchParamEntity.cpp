@@ -411,6 +411,169 @@ void StereoMatchParamEntity::setBlurKernelSize(int value) {
 	emit paramChanged_blurKernelSize();
 }
 
+void StereoMatchParamEntity::setDispMin(int value) {
+	disp_min = value;
+	emit paramChanged_disp_min();
+}
+int StereoMatchParamEntity::getDispMin() {
+	return disp_min;
+}
+void StereoMatchParamEntity::setDispMax(int value) {
+	disp_max = value;
+	emit paramChanged_disp_max();
+}
+int StereoMatchParamEntity::getDispMax() {
+	return disp_max;
+}
+void StereoMatchParamEntity::setSupportThreshold(double value) {
+	support_threshold = value;
+	emit paramChanged_support_threshold();
+}
+double StereoMatchParamEntity::getSupportThreshold() {
+	return support_threshold;
+}
+void StereoMatchParamEntity::setSupportTexture(int value) {
+	support_texture = value;
+	emit paramChanged_support_texture();
+}
+int StereoMatchParamEntity::getSupportTexture() {
+	return support_texture;
+}
+void StereoMatchParamEntity::setCandidateStepsize(int value) {
+	candidate_stepsize = value;
+	emit paramChanged_candidate_stepsize();
+}
+int StereoMatchParamEntity::getCandidateStepsize() {
+	return candidate_stepsize;
+}
+void StereoMatchParamEntity::setInconWindowSize(int value) {
+	incon_window_size = value;
+	emit paramChanged_incon_window_size();
+}
+int StereoMatchParamEntity::getInconWindowSize() {
+	return incon_window_size;
+}
+void StereoMatchParamEntity::setInconThreshold(int value) {
+	incon_threshold = value;
+	emit paramChanged_incon_threshold();
+}
+int StereoMatchParamEntity::getInconThreshold() {
+	return incon_threshold;
+}
+void StereoMatchParamEntity::setInconMinSupport(int value) {
+	incon_min_support = value;
+	emit paramChanged_incon_min_support();
+}
+int StereoMatchParamEntity::getInconMinSupport() {
+	return incon_min_support;
+}
+void StereoMatchParamEntity::setAddCorners(bool value) {
+	add_corners = value;
+	emit paramChanged_add_corners();
+}
+bool StereoMatchParamEntity::getAddCorners() {
+	return add_corners;
+}
+void StereoMatchParamEntity::setGridSize(int value) {
+	grid_size = value;
+	emit paramChanged_grid_size();
+}
+int StereoMatchParamEntity::getGridSize() {
+	return grid_size;
+}
+void StereoMatchParamEntity::setBeta(double value) {
+	beta = value;
+	emit paramChanged_beta();
+}
+double StereoMatchParamEntity::getBeta() {
+	return beta;
+}
+void StereoMatchParamEntity::setGamma(double value) {
+	gamma = value;
+	emit paramChanged_gamma();
+}
+double StereoMatchParamEntity::getGamma() {
+	return gamma;
+}
+void StereoMatchParamEntity::setSigma(double value) {
+	sigma = value;
+	emit paramChanged_sigma();
+}
+double StereoMatchParamEntity::getSigma() {
+	return sigma;
+}
+void StereoMatchParamEntity::setSradius(double value) {
+	sradius = value;
+	emit paramChanged_sradius();
+}
+double StereoMatchParamEntity::getSradius() {
+	return sradius;
+}
+void StereoMatchParamEntity::setMatchTexture(int value) {
+	match_texture = value;
+	emit paramChanged_match_texture();
+}
+int StereoMatchParamEntity::getMatchTexture() {
+	return match_texture;
+}
+void StereoMatchParamEntity::setLrThreshold(int value) {
+	lr_threshold = value;
+	emit paramChanged_lr_threshold();
+}
+int StereoMatchParamEntity::getLrThreshold() {
+	return lr_threshold;
+}
+void StereoMatchParamEntity::setSpeckleSimThreshold(double value) {
+	speckle_sim_threshold = value;
+	emit paramChanged_speckle_sim_threshold();
+}
+double StereoMatchParamEntity::getSpeckleSimThreshold() {
+	return speckle_sim_threshold;
+}
+void StereoMatchParamEntity::setSpeckleSize(int value) {
+	speckle_size = value;
+	emit paramChanged_speckle_size();
+}
+int StereoMatchParamEntity::getSpeckleSize() {
+	return speckle_size;
+}
+void StereoMatchParamEntity::setIpolGapWidth(int value) {
+	ipol_gap_width = value;
+	emit paramChanged_ipol_gap_width();
+}
+int StereoMatchParamEntity::getIpolGapWidth() {
+	return ipol_gap_width;
+}
+void StereoMatchParamEntity::setFilterMedian(bool value) {
+	filter_median = value;
+	emit paramChanged_filter_median();
+}
+bool StereoMatchParamEntity::getFilterMedian() {
+	return filter_median;
+}
+void StereoMatchParamEntity::setFilterAdaptiveMean(bool value) {
+	filter_adaptive_mean = value;
+	emit paramChanged_filter_adaptive_mean();
+}
+bool StereoMatchParamEntity::getFilterAdaptiveMean() {
+	return filter_adaptive_mean;
+}
+void StereoMatchParamEntity::setPostprocessOnlyLeft(bool value) {
+	postprocess_only_left = value;
+	emit paramChanged_postprocess_only_left();
+}
+bool StereoMatchParamEntity::getPostprocessOnlyLeft() {
+	return postprocess_only_left;
+}
+void StereoMatchParamEntity::setSubSampling(bool value) {
+	subsampling = value;
+	emit paramChanged_subsampling();
+}
+bool StereoMatchParamEntity::getSubSampling() {
+	return subsampling;
+}
+
+
 cv::Mat StereoMatchParamEntity::getImageDtoShow()
 {
 	return imgDtoShow;
