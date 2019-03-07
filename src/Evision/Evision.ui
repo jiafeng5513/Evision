@@ -77,8 +77,6 @@
     <addaction name="action_StereoCamera"/>
     <addaction name="action_Camera"/>
     <addaction name="action_ShowPointCloud"/>
-    <addaction name="action_CameraParam"/>
-    <addaction name="actionDebug"/>
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">
@@ -86,15 +84,15 @@
     </property>
     <addaction name="action_Help"/>
     <addaction name="action_About"/>
+    <addaction name="action_LogView"/>
    </widget>
    <widget class="QMenu" name="menu_3">
     <property name="title">
      <string>双目视觉</string>
     </property>
     <addaction name="action_CalibrateView"/>
+    <addaction name="actio_Rectify"/>
     <addaction name="action_StereoMatchView"/>
-    <addaction name="action_DepthMap_View"/>
-    <addaction name="action_PointCloud_View"/>
     <addaction name="action_Measure_View"/>
    </widget>
    <widget class="QMenu" name="menu_4">
@@ -129,15 +127,15 @@
    <addaction name="action_Camera"/>
    <addaction name="action_StereoCamera"/>
    <addaction name="action_ShowPointCloud"/>
-   <addaction name="action_CameraParam"/>
    <addaction name="separator"/>
    <addaction name="action_CalibrateView"/>
+   <addaction name="actio_Rectify"/>
    <addaction name="action_StereoMatchView"/>
-   <addaction name="action_DepthMap_View"/>
-   <addaction name="action_PointCloud_View"/>
    <addaction name="action_Measure_View"/>
    <addaction name="separator"/>
    <addaction name="action_ObjectDetection"/>
+   <addaction name="separator"/>
+   <addaction name="action_LogView"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="action_StereoCamera">
@@ -177,20 +175,6 @@
     <string>关于</string>
    </property>
   </action>
-  <action name="actionDebug">
-   <property name="text">
-    <string>Debug</string>
-   </property>
-  </action>
-  <action name="action_CameraParam">
-   <property name="icon">
-    <iconset resource="Evision.qrc">
-     <normaloff>:/Evision/resource/params_128px_1101042_easyicon.net.ico</normaloff>:/Evision/resource/params_128px_1101042_easyicon.net.ico</iconset>
-   </property>
-   <property name="text">
-    <string>相机可视化</string>
-   </property>
-  </action>
   <action name="action_StereoMatchView">
    <property name="icon">
     <iconset resource="Evision.qrc">
@@ -198,24 +182,6 @@
    </property>
    <property name="text">
     <string>立体匹配</string>
-   </property>
-  </action>
-  <action name="action_DepthMap_View">
-   <property name="icon">
-    <iconset resource="Evision.qrc">
-     <normaloff>:/Evision/resource/z_lowercase_128px_1168343_easyicon.net.ico</normaloff>:/Evision/resource/z_lowercase_128px_1168343_easyicon.net.ico</iconset>
-   </property>
-   <property name="text">
-    <string>生成深度图</string>
-   </property>
-  </action>
-  <action name="action_PointCloud_View">
-   <property name="icon">
-    <iconset resource="Evision.qrc">
-     <normaloff>:/Evision/resource/cloud_128px_1156707_easyicon.net.ico</normaloff>:/Evision/resource/cloud_128px_1156707_easyicon.net.ico</iconset>
-   </property>
-   <property name="text">
-    <string>生成点云</string>
    </property>
   </action>
   <action name="action_Measure_View">
@@ -260,28 +226,33 @@
     <string>新立体匹配</string>
    </property>
   </action>
+  <action name="action_LogView">
+   <property name="icon">
+    <iconset resource="Evision.qrc">
+     <normaloff>:/Evision/resource/log_128px_1160546_easyicon.net.ico</normaloff>:/Evision/resource/log_128px_1160546_easyicon.net.ico</iconset>
+   </property>
+   <property name="text">
+    <string>LogView</string>
+   </property>
+   <property name="toolTip">
+    <string>切换LogView的显示状态</string>
+   </property>
+  </action>
+  <action name="actio_Rectify">
+   <property name="icon">
+    <iconset resource="Evision.qrc">
+     <normaloff>:/Evision/resource/focusing_128px_1162023_easyicon.net.ico</normaloff>:/Evision/resource/focusing_128px_1162023_easyicon.net.ico</iconset>
+   </property>
+   <property name="text">
+    <string>立体校正</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
   <include location="Evision.qrc"/>
  </resources>
  <connections>
-  <connection>
-   <sender>actionDebug</sender>
-   <signal>triggered()</signal>
-   <receiver>EvisionClass</receiver>
-   <slot>onTestAlltheParam()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>499</x>
-     <y>294</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>action_ShowPointCloud</sender>
    <signal>triggered()</signal>
@@ -394,9 +365,40 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>action_LogView</sender>
+   <signal>triggered()</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>on_action_LogViewSwitch()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>511</x>
+     <y>354</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actio_Rectify</sender>
+   <signal>triggered()</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>on_action_rectify()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>511</x>
+     <y>354</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
-  <slot>onTestAlltheParam()</slot>
   <slot>onShowPointCloud()</slot>
   <slot>onCamera()</slot>
   <slot>onStereoCamera()</slot>
@@ -404,5 +406,7 @@
   <slot>on_action_stereoMatch_view()</slot>
   <slot>on_action_Measure_view()</slot>
   <slot>on_action_ObjectDetection_view()</slot>
+  <slot>on_action_LogViewSwitch()</slot>
+  <slot>on_action_rectify()</slot>
  </slots>
 </ui>

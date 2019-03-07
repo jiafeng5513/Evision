@@ -13,7 +13,8 @@
 #include "WatchImageView.h"
 #include "ObjectDetectionView.h"
 #include "../Evision3dViz/Evision3dViz.h"
-#include "StereoMatcherView.h"
+#include "EvisionRectifyView.h"
+
 // 浮点数判等
 // ulp: units in the last place.
 template <typename T>
@@ -47,12 +48,7 @@ EvisionView::EvisionView(QWidget *parent)
 	connect(m_entity, SIGNAL(paramChanged_StatusBar()), this, SLOT(onParamChanged_StatusBarText()), Qt::QueuedConnection);
 
 
-	logView =LogView::getInstance();
-	logView->show();
-
-	old_pos = this->pos();
-	old_size = this->size();
-	logView->move(*new QPoint(old_pos.x() + 10 + this->frameGeometry().width(), old_pos.y()));
+	on_action_LogViewSwitch();//Logview的准备
 }
 
 
@@ -85,6 +81,13 @@ void EvisionView::on_action_calibrate_view()
 	ui.mdiArea->addSubWindow(m_calibrate);
 	m_calibrate->show();
 }
+//显示矫正视图
+void EvisionView::on_action_rectify()
+{
+	EvisionRectifyView * m_Rectify = new EvisionRectifyView();
+	ui.mdiArea->addSubWindow(m_Rectify);
+	m_Rectify->show();
+}
 //显示立体匹配视图
 void EvisionView::on_action_stereoMatch_view()
 {
@@ -107,18 +110,14 @@ void EvisionView::on_action_ObjectDetection_view()
 	_ObjectDetectionView->show();
 }
 
-//调试方法
-void EvisionView::onTestAlltheParam()
+void EvisionView::on_action_LogViewSwitch()
 {
-	//printf("From printf ... ");
-	//fflush(stdout);
-	//fprintf(stderr, "From fprintf...");
-	//std::cout << "From std::cout..." << std::endl;
-	//std::cerr << "From std::cerr..." << std::endl;
-	//qDebug() << "From qDebug ..." << QDateTime::currentDateTime().toString();	   
-	//StereoMatcherView * _StereoMatcherView = new StereoMatcherView();
-	//ui.mdiArea->addSubWindow(_StereoMatcherView);
-	//_StereoMatcherView->show();
+	logView = LogView::getInstance();
+	logView->show();
+
+	old_pos = this->pos();
+	old_size = this->size();
+	logView->move(*new QPoint(old_pos.x() + 10 + this->frameGeometry().width(), old_pos.y()));
 }
 //状态栏更新
 void EvisionView::onParamChanged_StatusBarText()

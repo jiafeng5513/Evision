@@ -12,5 +12,7 @@
         <file>resource/cloud_128px_1156740_easyicon.net.ico</file>
         <file>resource/measure_centimeter_76px_1116359_easyicon.net.ico</file>
         <file>resource/face_detection_128px_1218199_easyicon.net.ico</file>
+        <file>resource/log_128px_1160546_easyicon.net.ico</file>
+        <file>resource/focusing_128px_1162023_easyicon.net.ico</file>
     </qresource>
 </RCC>

@@ -2,6 +2,7 @@
 
 #include <QObject>
 #include "StereoMatchParamEntity.h"
+#include "StereoMatch.h"
 
 class StereoMatchController : public QObject
 {
@@ -9,6 +10,7 @@ class StereoMatchController : public QObject
 
 private:
 	StereoMatchParamEntity * m_entity;
+	StereoMatch *_stereoMatch;
 	QString ImageL, ImageR, paramsFile;
 public:
 	StereoMatchController(QObject *parent=0);
@@ -17,6 +19,7 @@ public:
 	void setDefaultMatchParamCommand();
 	void MatchCommand();
 	void RefreshStereoMatchCommand();
+	void SaveCommand();
 public slots:
 	void onOpenMessageBox(QString title, QString msg);
 };

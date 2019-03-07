@@ -6,26 +6,10 @@
       <Extensions>qrc;*</Extensions>
       <ParseFiles>false</ParseFiles>
     </Filter>
-    <Filter Include="Form Files">
-      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
-      <Extensions>ui</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
       <Extensions>qrc;*</Extensions>
       <ParseFiles>false</ParseFiles>
-    </Filter>
-    <Filter Include="View">
-      <UniqueIdentifier>{e9afc5d5-fc64-4c7f-ad7a-d1113cd335d3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine">
-      <UniqueIdentifier>{affe819a-e427-4069-ad49-c18915976a3c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Controller">
-      <UniqueIdentifier>{186620d0-9af5-409f-800d-d887a2447d07}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Entity">
-      <UniqueIdentifier>{1586942d-eae7-4787-8822-aeb3d2a7f05e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Utils">
       <UniqueIdentifier>{55e13187-222f-48ce-9542-bda30c87c4a7}</UniqueIdentifier>
@@ -33,176 +17,203 @@
     <Filter Include="main">
       <UniqueIdentifier>{15b6209d-5425-4ba7-b6f3-d0c1863374dd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="StereoMatch">
+      <UniqueIdentifier>{6b724b78-1b56-4a9f-834d-6365d710f3f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{1a7c5d4d-426b-4589-b62e-9ae149f27fbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ObjectDetection">
+      <UniqueIdentifier>{ee4555fd-325f-47ee-bb96-5c1b4f8e8851}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Log">
+      <UniqueIdentifier>{2f5611e5-9ab0-448f-a46b-6c352d934de7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WatchImage">
+      <UniqueIdentifier>{8fcfdbb4-10e8-49a0-9719-19644c243474}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DepthPrediction">
+      <UniqueIdentifier>{5455ab24-0700-4f3e-a8b4-0b6105d9822a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StereoRectify">
+      <UniqueIdentifier>{42265815-5c50-40ae-8f78-7bc274612a50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StereoCalibrate">
+      <UniqueIdentifier>{44f15907-d66b-4212-8085-a7f1ae95eed7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="EvisionController.cpp">
-      <Filter>Controller</Filter>
-    </ClCompile>
-    <ClCompile Include="EvisionParamEntity.cpp">
-      <Filter>Entity</Filter>
-    </ClCompile>
     <ClCompile Include="EvisionUtils.cpp">
       <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="EvisionView.cpp">
-      <Filter>View</Filter>
-    </ClCompile>
-    <ClCompile Include="PointCloudUtils.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="StereoCalibrate.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="StereoMatch.cpp">
-      <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>main</Filter>
     </ClCompile>
-    <ClCompile Include="CalibrateParamEntity.cpp">
-      <Filter>Entity</Filter>
+    <ClCompile Include="EvisionRectifyView.cpp">
+      <Filter>StereoRectify</Filter>
+    </ClCompile>
+    <ClCompile Include="StereoCalibrate.cpp">
+      <Filter>StereoCalibrate</Filter>
     </ClCompile>
     <ClCompile Include="CalibrateController.cpp">
-      <Filter>Controller</Filter>
+      <Filter>StereoCalibrate</Filter>
     </ClCompile>
-    <ClCompile Include="StereoMatchParamEntity.cpp">
-      <Filter>Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="StereoMatchController.cpp">
-      <Filter>Controller</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectDetectionView.cpp">
-      <Filter>View</Filter>
+    <ClCompile Include="CalibrateParamEntity.cpp">
+      <Filter>StereoCalibrate</Filter>
     </ClCompile>
     <ClCompile Include="CalibraterView.cpp">
-      <Filter>View</Filter>
+      <Filter>StereoCalibrate</Filter>
     </ClCompile>
-    <ClCompile Include="CameraView.cpp">
-      <Filter>View</Filter>
+    <ClCompile Include="EvisionParamEntity.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="EvisionView.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="EvisionController.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="StereoMatchController.cpp">
+      <Filter>StereoMatch</Filter>
+    </ClCompile>
+    <ClCompile Include="StereoMatch.cpp">
+      <Filter>StereoMatch</Filter>
     </ClCompile>
     <ClCompile Include="MatcherView.cpp">
-      <Filter>View</Filter>
+      <Filter>StereoMatch</Filter>
     </ClCompile>
-    <ClCompile Include="RulerView.cpp">
-      <Filter>View</Filter>
+    <ClCompile Include="StereoMatchParamEntity.cpp">
+      <Filter>StereoMatch</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraView.cpp">
+      <Filter>Camera</Filter>
     </ClCompile>
     <ClCompile Include="StereoCameraView.cpp">
-      <Filter>View</Filter>
-    </ClCompile>
-    <ClCompile Include="WatchImageView.cpp">
-      <Filter>View</Filter>
+      <Filter>Camera</Filter>
     </ClCompile>
     <ClCompile Include="ObjectDetectionEngine.cpp">
-      <Filter>Engine</Filter>
+      <Filter>ObjectDetection</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectDetectionView.cpp">
+      <Filter>ObjectDetection</Filter>
     </ClCompile>
     <ClCompile Include="ObjectDetectionEntity.cpp">
-      <Filter>Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="LogView.cpp">
-      <Filter>View</Filter>
+      <Filter>ObjectDetection</Filter>
     </ClCompile>
     <ClCompile Include="StdoutRedirector.cpp">
-      <Filter>Utils</Filter>
+      <Filter>Log</Filter>
     </ClCompile>
-    <ClCompile Include="StereoMatcherView.cpp">
-      <Filter>View</Filter>
+    <ClCompile Include="LogView.cpp">
+      <Filter>Log</Filter>
+    </ClCompile>
+    <ClCompile Include="WatchImageView.cpp">
+      <Filter>WatchImage</Filter>
+    </ClCompile>
+    <ClCompile Include="RulerView.cpp">
+      <Filter>DepthPrediction</Filter>
+    </ClCompile>
+    <ClCompile Include="PointCloudUtils.cpp">
+      <Filter>DepthPrediction</Filter>
+    </ClCompile>
+    <ClCompile Include="rectify.cpp">
+      <Filter>StereoRectify</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="EvisionController.h">
-      <Filter>Controller</Filter>
-    </QtMoc>
-    <QtMoc Include="EvisionParamEntity.h">
-      <Filter>Entity</Filter>
-    </QtMoc>
-    <QtMoc Include="EvisionView.h">
-      <Filter>View</Filter>
+    <QtMoc Include="EvisionRectifyView.h">
+      <Filter>StereoRectify</Filter>
     </QtMoc>
     <QtMoc Include="StereoCalibrate.h">
-      <Filter>Engine</Filter>
-    </QtMoc>
-    <QtMoc Include="StereoMatch.h">
-      <Filter>Engine</Filter>
-    </QtMoc>
-    <QtMoc Include="CalibrateParamEntity.h">
-      <Filter>Entity</Filter>
+      <Filter>StereoCalibrate</Filter>
     </QtMoc>
     <QtMoc Include="CalibrateController.h">
-      <Filter>Controller</Filter>
+      <Filter>StereoCalibrate</Filter>
     </QtMoc>
-    <QtMoc Include="StereoMatchParamEntity.h">
-      <Filter>Entity</Filter>
-    </QtMoc>
-    <QtMoc Include="StereoMatchController.h">
-      <Filter>Controller</Filter>
-    </QtMoc>
-    <QtMoc Include="ObjectDetectionView.h">
-      <Filter>View</Filter>
+    <QtMoc Include="CalibrateParamEntity.h">
+      <Filter>StereoCalibrate</Filter>
     </QtMoc>
     <QtMoc Include="CalibraterView.h">
-      <Filter>View</Filter>
+      <Filter>StereoCalibrate</Filter>
     </QtMoc>
-    <QtMoc Include="CameraView.h">
-      <Filter>View</Filter>
+    <QtMoc Include="EvisionParamEntity.h">
+      <Filter>main</Filter>
+    </QtMoc>
+    <QtMoc Include="EvisionView.h">
+      <Filter>main</Filter>
+    </QtMoc>
+    <QtMoc Include="EvisionController.h">
+      <Filter>main</Filter>
+    </QtMoc>
+    <QtMoc Include="StereoMatchController.h">
+      <Filter>StereoMatch</Filter>
+    </QtMoc>
+    <QtMoc Include="StereoMatch.h">
+      <Filter>StereoMatch</Filter>
     </QtMoc>
     <QtMoc Include="MatcherView.h">
-      <Filter>View</Filter>
+      <Filter>StereoMatch</Filter>
     </QtMoc>
-    <QtMoc Include="RulerView.h">
-      <Filter>View</Filter>
+    <QtMoc Include="StereoMatchParamEntity.h">
+      <Filter>StereoMatch</Filter>
+    </QtMoc>
+    <QtMoc Include="CameraView.h">
+      <Filter>Camera</Filter>
     </QtMoc>
     <QtMoc Include="StereoCameraView.h">
-      <Filter>View</Filter>
-    </QtMoc>
-    <QtMoc Include="WatchImageView.h">
-      <Filter>View</Filter>
+      <Filter>Camera</Filter>
     </QtMoc>
     <QtMoc Include="ObjectDetectionEngine.h">
-      <Filter>Engine</Filter>
+      <Filter>ObjectDetection</Filter>
+    </QtMoc>
+    <QtMoc Include="ObjectDetectionView.h">
+      <Filter>ObjectDetection</Filter>
     </QtMoc>
     <QtMoc Include="ObjectDetectionEntity.h">
-      <Filter>Entity</Filter>
-    </QtMoc>
-    <QtMoc Include="LogView.h">
-      <Filter>View</Filter>
+      <Filter>ObjectDetection</Filter>
     </QtMoc>
     <QtMoc Include="StdoutRedirector.h">
-      <Filter>Utils</Filter>
+      <Filter>Log</Filter>
     </QtMoc>
-    <QtMoc Include="StereoMatcherView.h">
-      <Filter>View</Filter>
+    <QtMoc Include="LogView.h">
+      <Filter>Log</Filter>
+    </QtMoc>
+    <QtMoc Include="WatchImageView.h">
+      <Filter>WatchImage</Filter>
+    </QtMoc>
+    <QtMoc Include="RulerView.h">
+      <Filter>DepthPrediction</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
-    <QtUic Include="Evision.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
-    <QtUic Include="ObjectDetectionView.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
     <QtUic Include="CalibraterView.ui">
-      <Filter>Form Files</Filter>
+      <Filter>StereoCalibrate</Filter>
     </QtUic>
     <QtUic Include="CameraView.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
-    <QtUic Include="MatcherView.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
-    <QtUic Include="RulerView.ui">
-      <Filter>Form Files</Filter>
+      <Filter>Camera</Filter>
     </QtUic>
     <QtUic Include="StereoCameraView.ui">
-      <Filter>Form Files</Filter>
+      <Filter>Camera</Filter>
     </QtUic>
-    <QtUic Include="WatchImageView.ui">
-      <Filter>Form Files</Filter>
+    <QtUic Include="Evision.ui">
+      <Filter>main</Filter>
+    </QtUic>
+    <QtUic Include="EvisionRectify.ui">
+      <Filter>StereoRectify</Filter>
     </QtUic>
     <QtUic Include="LogView.ui">
-      <Filter>Form Files</Filter>
+      <Filter>Log</Filter>
     </QtUic>
-    <QtUic Include="StereoMatcherView.ui">
-      <Filter>Form Files</Filter>
+    <QtUic Include="MatcherView.ui">
+      <Filter>StereoMatch</Filter>
+    </QtUic>
+    <QtUic Include="ObjectDetectionView.ui">
+      <Filter>ObjectDetection</Filter>
+    </QtUic>
+    <QtUic Include="RulerView.ui">
+      <Filter>DepthPrediction</Filter>
+    </QtUic>
+    <QtUic Include="WatchImageView.ui">
+      <Filter>WatchImage</Filter>
     </QtUic>
   </ItemGroup>
   <ItemGroup>
@@ -211,17 +222,30 @@
     </QtRcc>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Evision.rc" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="EvisionUtils.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="PointCloudUtils.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
     <ClInclude Include="yolo_v2_class.h">
-      <Filter>Engine</Filter>
+      <Filter>ObjectDetection</Filter>
     </ClInclude>
+    <ClInclude Include="PointCloudUtils.h">
+      <Filter>DepthPrediction</Filter>
+    </ClInclude>
+    <ClInclude Include="resource1.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rectify.h">
+      <Filter>StereoRectify</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Evision.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Evision.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

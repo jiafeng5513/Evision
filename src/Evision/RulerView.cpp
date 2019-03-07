@@ -5,41 +5,17 @@
 #include <QFileDialog>
 #include "StereoMatch.h"
 #include <QMessageBox>
-
+#include <iostream>
 //直接启动视图,后设置参数
 RulerView::RulerView(QWidget *parent)
 	: QWidget(parent)
 {
 	ui.setupUi(this);
-	ui.checkBox_leftOK->setEnabled(false);
-	ui.checkBox_dispOK->setEnabled(false);
-	ui.checkBox_pointcloudOK->setEnabled(false);
+	ui.checkBox_RawDispOK->setEnabled(false);
+	ui.checkBox_OriginOK->setEnabled(false);
+	ui.checkBox_CameraParamOK->setEnabled(false);
 	ui.pushButton_start->setEnabled(false);
-}
-
-//外部设置参数,再启动视图
-RulerView::RulerView(cv::Mat img, cv::Mat disp, cv::Mat xyz, QWidget* parent) : QWidget(parent)
-{
-	ui.setupUi(this);
-	this->img  = img;
-	this->disp = disp;
-	this->xyz  = xyz;
-
-	std::vector<cv::Mat> xyzSet;
-	split(xyz, xyzSet);
-	xyzSet[2].copyTo(depth);
-
-	std::vector<PointCloudUtils::ObjectInfo> objectInfos;
-	PointCloudUtils pointCloudAnalyzer;
-	if (pointCloudAnalyzer.detectNearObject(disp, xyz, objectInfos) == 0)
-	{
-		//失败处理
-		return;
-	}
-	pointCloudAnalyzer.showObjectInfo(objectInfos, img);//在左视图上面叠加轮廓识别的框
-
-	printImgToD(disp);
-	printImgToO(img);
+	sceneL = new QGraphicsScene();
 }
 
 RulerView::~RulerView()
@@ -48,8 +24,8 @@ RulerView::~RulerView()
 //向O窗口画图
 void RulerView::printImgToO(cv::Mat value)
 {
+	sceneL->clear();
 	QImage QImage = EvisionUtils::cvMat2QImage(value);
-	QGraphicsScene *sceneL = new QGraphicsScene;
 	sceneL->addPixmap(QPixmap::fromImage(QImage));
 	ui.customGraphicsView_O->setScene(sceneL);
 	ui.customGraphicsView_O->setMinimumSize(QImage.width(), QImage.height());
@@ -57,22 +33,10 @@ void RulerView::printImgToO(cv::Mat value)
 	ui.customGraphicsView_O->show();
 	ui.customGraphicsView_O->update();
 }
-//向D窗口画图
-void RulerView::printImgToD(cv::Mat value)
-{
-	QImage QImage = EvisionUtils::cvMat2QImage(value);
-	QGraphicsScene *sceneL = new QGraphicsScene;
-	sceneL->addPixmap(QPixmap::fromImage(QImage));
-	ui.customGraphicsView_D->setScene(sceneL);
-	ui.customGraphicsView_D->setMinimumSize(QImage.width(), QImage.height());
-	ui.customGraphicsView_D->setMaximumSize(QImage.width(), QImage.height());
-	ui.customGraphicsView_D->show();
-	ui.customGraphicsView_D->update();
-}
 
 void RulerView::checkEnable()
 {
-	if(ui.checkBox_leftOK->isChecked()&&ui.checkBox_dispOK->isChecked()&&ui.checkBox_pointcloudOK->isChecked())
+	if(ui.checkBox_RawDispOK->isChecked()&&ui.checkBox_OriginOK->isChecked()&&ui.checkBox_CameraParamOK->isChecked())
 	{
 		ui.pushButton_start->setEnabled(true);
 	}
@@ -90,8 +54,24 @@ void RulerView::onMouseLButtonDown(int x, int y)
 {
 	if (started)
 	{
-		m_ObjectDistance = 16 * depth.at<float>(y, x);
-		ui.lineEdit_Res->setText(QString::fromStdString(std::to_string(m_ObjectDistance)));
+		float disp;
+
+		if (RawDisp.type() == CV_32F)
+			disp = RawDisp.at<float>(y, x);
+		else
+			disp = RawDisp.at<uchar>(y, x);
+
+		float vec3DAbs;
+		if (disp > 0)
+		{
+			cv::Point3f vec3D = image3D.at<cv::Point3f>(y, x);
+			vec3DAbs = sqrt(pow(vec3D.x, 2) + pow(vec3D.y, 2) + pow(vec3D.z, 2));
+		}
+		else
+		{
+			vec3DAbs = -1;
+		}
+		ui.lineEdit_Res->setText(QString::fromStdString(std::to_string(vec3DAbs)));
 	}
 }
 //响应鼠标右键击键
@@ -99,51 +79,76 @@ void RulerView::onMouseRButtonDown(int x, int y)
 {
 
 }
-
-void RulerView::onSelectDisparityMap()
+/*
+ * 选择原始视差文件
+ */
+void RulerView::onSelectRawDispFile()
 {
 	QFileDialog * fileDialog = new QFileDialog();
-	fileDialog->setWindowTitle(QStringLiteral("请选择视差图"));
-	fileDialog->setNameFilter(QStringLiteral("图片文件(*.jpg *.png *.jpeg)"));
+	fileDialog->setWindowTitle(QStringLiteral("请选择原始视差文件"));
+	fileDialog->setNameFilter(QStringLiteral("序列化(*.xml)"));
 	fileDialog->setFileMode(QFileDialog::ExistingFile);
 	if (fileDialog->exec() == QDialog::Accepted)
 	{
-		this->disp = cv::imread(fileDialog->selectedFiles().at(0).toStdString());
-		ui.checkBox_dispOK->setChecked(true);
-		checkEnable();
-	}
-}
-
-void RulerView::onSelectleftMap()
-{
-	QFileDialog * fileDialog = new QFileDialog();
-	fileDialog->setWindowTitle(QStringLiteral("请选择参与生成所选视差图的左视图"));
-	fileDialog->setNameFilter(QStringLiteral("图片文件(*.jpg *.png *.jpeg)"));
-	fileDialog->setFileMode(QFileDialog::ExistingFile);
-	if (fileDialog->exec() == QDialog::Accepted)
-	{
-		this->img = cv::imread(fileDialog->selectedFiles().at(0).toStdString());
-		ui.checkBox_leftOK->setChecked(true);
-		checkEnable();
-	}
-}
-
-void RulerView::onSelectPointcloudFile()
-{
-	QFileDialog * fileDialog = new QFileDialog();
-	fileDialog->setWindowTitle(QStringLiteral("请选择点云文件"));
-	fileDialog->setNameFilter(QStringLiteral("点云文件(*.xml *.yml *.yaml)"));
-	fileDialog->setFileMode(QFileDialog::ExistingFile);
-	if (fileDialog->exec() == QDialog::Accepted)
-	{
-		if (EvisionUtils::read_PointCloud(fileDialog->selectedFiles().at(0).toStdString(), &xyz))
+		try
 		{
-			ui.checkBox_pointcloudOK->setChecked(true);
+			cv::FileStorage fStorage(fileDialog->selectedFiles().at(0).toStdString(), cv::FileStorage::READ);
+			fStorage["disp"] >> RawDisp;
+			fStorage.release();
+		}
+		catch (cv::Exception e)
+		{
+			std::cout << "原始视差数据读取失败!" << e.err << std::endl;
+		}
+		ui.checkBox_RawDispOK->setChecked(true);
+		checkEnable();
+	}
+}
+/*
+ * 选择原图
+ */
+void RulerView::onSelectOriginImg()
+{
+	QFileDialog * fileDialog = new QFileDialog();
+	fileDialog->setWindowTitle(QStringLiteral("请选择参与生成所选视差图的左视图或右视图"));
+	fileDialog->setNameFilter(QStringLiteral("图片文件(*.jpg *.png *.jpeg *.bmp)"));
+	fileDialog->setFileMode(QFileDialog::ExistingFile);
+	if (fileDialog->exec() == QDialog::Accepted)
+	{
+		try
+		{
+			this->img = cv::imread(fileDialog->selectedFiles().at(0).toStdString());
+		}
+		catch (cv::Exception e)
+		{
+			std::cout << "原图读取失败!" << e.err << std::endl;
+		}
+		ui.checkBox_OriginOK->setChecked(true);
+		checkEnable();
+	}
+}
+/*
+ * 选择相机参数文件
+ */
+void RulerView::onSelectCameraParamFile()
+{
+	QFileDialog * fileDialog = new QFileDialog();
+	fileDialog->setWindowTitle(QStringLiteral("请选择相机参数文件"));
+	fileDialog->setNameFilter(QStringLiteral("序列化文件(*.xml *.yml)"));
+	fileDialog->setFileMode(QFileDialog::ExistingFile);
+	if (fileDialog->exec() == QDialog::Accepted)
+	{
+		try
+		{
+			cv::FileStorage fStorage(fileDialog->selectedFiles().at(0).toStdString(), cv::FileStorage::READ);
+			fStorage["Q"] >> Q;
+			fStorage.release();
+			ui.checkBox_CameraParamOK->setChecked(true);
 			checkEnable();
 		}
-		else
+		catch (cv::Exception e)
 		{
-			QMessageBox::information(NULL, QStringLiteral("错误"), QStringLiteral("点云读取失败!"));
+			std::cout << "相机参数读取失败!" << e.err << std::endl;
 		}
 
 	}
@@ -151,27 +156,36 @@ void RulerView::onSelectPointcloudFile()
 
 void RulerView::onStart()
 {
+	cv::reprojectImageTo3D(RawDisp, image3D, Q);
+	cv::Mat resizedImage, resizedDispMap;
+	cv::resize(img, resizedImage, cv::Size(), scaleFactor, scaleFactor);
+	cv::resize(RawDisp, resizedDispMap, cv::Size(), scaleFactor, scaleFactor);
+	img = resizedImage.clone();
+	RawDisp = resizedDispMap.clone();
+	cv::resize(image3D, image3D, cv::Size(), scaleFactor, scaleFactor);
 
-	std::vector<cv::Mat> xyzSet;
-	split(xyz, xyzSet);
-	xyzSet[2].copyTo(depth);
+	if (RawDisp.type() == CV_32F)
+		EvisionUtils::getGrayDisparity<float>(RawDisp, disparityGary, true);
+	else
+		EvisionUtils::getGrayDisparity<uchar>(RawDisp, disparityGary, true);
 
-	//std::vector<PointCloudUtils::ObjectInfo> objectInfos;
-	//PointCloudUtils pointCloudAnalyzer;
-	//if (pointCloudAnalyzer.detectNearObject(disp, xyz, objectInfos) == 0)
-	//{
-	//	//失败处理
-	//	return;
-	//}
-	//pointCloudAnalyzer.showObjectInfo(objectInfos, img);//在左视图上面叠加轮廓识别的框
-	//cv::imwrite("F:\\disp.jpg", disp);
-	//cv::imwrite("F:\\xyz.jpg", xyz);
-	//cv::imwrite("F:\\depth,jpg", depth);
-
-	printImgToD(disp);
-	printImgToO(img);
-	ui.pushButton_selectDisp->setEnabled(false);
-	ui.pushButton_selectLeft->setEnabled(false);
-	ui.pushButton_selectPointCloud->setEnabled(false);
+	printImgToO(disparityGary);
+	ui.pushButton_selectRawDisp->setEnabled(false);
+	ui.pushButton_selectOrigin->setEnabled(false);
+	ui.pushButton_selectCameraParam->setEnabled(false);
 	started = true;
+}
+
+void RulerView::onSwitchImageToShow()
+{
+	if(DispIsShowing)
+	{
+		printImgToO(img);
+		DispIsShowing = !DispIsShowing;
+	}
+	else
+	{
+		printImgToO(disparityGary);
+		DispIsShowing = !DispIsShowing;
+	}
 }

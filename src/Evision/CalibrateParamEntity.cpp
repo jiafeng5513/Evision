@@ -51,65 +51,193 @@ void CalibrateParamEntity::setSquareSize(int value)
 	emit paramChanged_SquareSize();
 }
 
-bool CalibrateParamEntity::getshowRectified()
+bool CalibrateParamEntity::getCALIB_FIX_PRINCIPAL_POINT()
 {
-	return showRectified;
+	return CALIB_FIX_PRINCIPAL_POINT;
 }
 
-void CalibrateParamEntity::setshowRectified(bool value)
+void CalibrateParamEntity::setCALIB_FIX_PRINCIPAL_POINT(bool value)
 {
-	showRectified = value;
-	emit paramChanged_showRectified();
+	CALIB_FIX_PRINCIPAL_POINT = value;
+	emit paramChanged_CALIB_FIX_PRINCIPAL_POINT();
 }
 
-bool CalibrateParamEntity::getBouguet()
+bool CalibrateParamEntity::getCALIB_FIX_ASPECT_RATIO()
 {
-	return Bouguet;
+	return CALIB_FIX_ASPECT_RATIO;
 }
 
-void CalibrateParamEntity::setBouguet(bool value)
+void CalibrateParamEntity::setCALIB_FIX_ASPECT_RATIO(bool value)
 {
-	Bouguet = value;
-	if (value == true)
-	{
-		Hartley = false;
-	}
-	emit paramChanged_Bouguet();
+	CALIB_FIX_ASPECT_RATIO = value;
+	emit paramChanged_CALIB_FIX_ASPECT_RATIO();
 }
 
-bool CalibrateParamEntity::getHartley()
+bool CalibrateParamEntity::getCALIB_ZERO_TANGENT_DIST()
 {
-	return Hartley;
+	return CALIB_ZERO_TANGENT_DIST;
 }
 
-void CalibrateParamEntity::setHartley(bool value)
+void CalibrateParamEntity::setCALIB_ZERO_TANGENT_DIST(bool value)
 {
-	Hartley = value;
-	if (value)
-	{
-		Bouguet = false;
-	}
-	emit paramChanged_Hartley();
+	CALIB_ZERO_TANGENT_DIST = value;
+	emit paramChanged_CALIB_ZERO_TANGENT_DIST();
 }
 
-cv::Mat CalibrateParamEntity::getImageLtoShow()
+bool CalibrateParamEntity::getCALIB_SAME_FOCAL_LENGTH()
 {
-	return imgLtoShow;
+	return CALIB_SAME_FOCAL_LENGTH;
 }
 
-void CalibrateParamEntity::setImageLtoShow(cv::Mat value)
+void CalibrateParamEntity::setCALIB_SAME_FOCAL_LENGTH(bool value)
 {
-	imgLtoShow = value;
-	emit paramChanged_ImageLtoShow();
+	CALIB_SAME_FOCAL_LENGTH = value;
+	emit paramChanged_CALIB_SAME_FOCAL_LENGTH();
 }
 
-cv::Mat CalibrateParamEntity::getImageRtoShow()
+bool CalibrateParamEntity::getCALIB_FIX_K1()
 {
-	return imgRtoShow;
+	return CALIB_FIX_K1;
 }
 
-void CalibrateParamEntity::setImageRtoShow(cv::Mat value)
+void CalibrateParamEntity::setCALIB_FIX_K1(bool value)
 {
-	imgRtoShow = value;
-	emit paramChanged_ImageRtoShow();
+	CALIB_FIX_K1 = value;
+	emit paramChanged_CALIB_FIX_K1();
 }
+
+bool CalibrateParamEntity::getCALIB_FIX_K2()
+{
+	return CALIB_FIX_K2;
+}
+
+void CalibrateParamEntity::setCALIB_FIX_K2(bool value)
+{
+	CALIB_FIX_K2 = value;
+	emit paramChanged_CALIB_FIX_K2();
+}
+
+bool CalibrateParamEntity::getCALIB_FIX_K3()
+{
+	return CALIB_FIX_K3;
+}
+
+void CalibrateParamEntity::setCALIB_FIX_K3(bool value)
+{
+	CALIB_FIX_K3 = value;
+	emit paramChanged_CALIB_FIX_K3();
+}
+
+bool CalibrateParamEntity::getCALIB_FIX_K4()
+{
+	return CALIB_FIX_K4;
+}
+
+void CalibrateParamEntity::setCALIB_FIX_K4(bool value)
+{
+	CALIB_FIX_K4 = value;
+	emit paramChanged_CALIB_FIX_K4();
+}
+
+bool CalibrateParamEntity::getCALIB_FIX_K5()
+{
+	return CALIB_FIX_K5;
+}
+
+void CalibrateParamEntity::setCALIB_FIX_K5(bool value)
+{
+	CALIB_FIX_K5 = value;
+	emit paramChanged_CALIB_FIX_K5();
+}
+
+bool CalibrateParamEntity::getCALIB_FIX_K6()
+{
+	return CALIB_FIX_K6;
+}
+
+void CalibrateParamEntity::setCALIB_FIX_K6(bool value)
+{
+	CALIB_FIX_K6 = value;
+	emit paramChanged_CALIB_FIX_K6();
+}
+
+bool CalibrateParamEntity::getCALIB_RATIONAL_MODEL()
+{
+	return CALIB_RATIONAL_MODEL;
+}
+
+void CalibrateParamEntity::setCALIB_RATIONAL_MODEL(bool value)
+{
+	CALIB_RATIONAL_MODEL = value;
+	emit paramChanged_CALIB_RATIONAL_MODEL();
+}
+
+bool CalibrateParamEntity::getCALIB_THIN_PRISM_MODEL()
+{
+	return CALIB_THIN_PRISM_MODEL;
+}
+
+void CalibrateParamEntity::setCALIB_THIN_PRISM_MODEL(bool value)
+{
+	CALIB_THIN_PRISM_MODEL = value;
+	emit paramChanged_CALIB_THIN_PRISM_MODEL();
+}
+
+bool CalibrateParamEntity::getCALIB_FIX_S1_S2_S3_S4()
+{
+	return CALIB_FIX_S1_S2_S3_S4 ;
+}
+
+void CalibrateParamEntity::setCALIB_FIX_S1_S2_S3_S4(bool value)
+{
+	CALIB_FIX_S1_S2_S3_S4 = value;
+	emit paramChanged_CALIB_FIX_S1_S2_S3_S4();
+}
+
+bool CalibrateParamEntity::getCALIB_TILTED_MODEL()
+{
+	return CALIB_TILTED_MODEL;
+}
+
+void CalibrateParamEntity::setCALIB_TILTED_MODEL(bool value)
+{
+	CALIB_TILTED_MODEL = value;
+	emit paramChanged_CALIB_TILTED_MODEL();
+}
+
+bool CalibrateParamEntity::getCALIB_FIX_TAUX_TAUY()
+{
+	return CALIB_FIX_TAUX_TAUY;
+}
+
+void CalibrateParamEntity::setCALIB_FIX_TAUX_TAUY(bool value)
+{
+	CALIB_FIX_TAUX_TAUY = value;
+	emit paramChanged_CALIB_FIX_TAUX_TAUY();
+}
+
+std::map<QString, cv::Mat>& CalibrateParamEntity::getItemMap()
+{
+	return itemMap;
+}
+
+void CalibrateParamEntity::insertItem(cv::Mat value)
+{
+	index++;
+	itemMap.insert(std::pair<QString,cv::Mat >(QString::fromStdString(std::to_string(index)),value.clone()));
+	emit paramChanged_InsertToItemMap();
+}
+
+void CalibrateParamEntity::clearItemMap()
+{
+	itemMap.clear();
+	index = 0;
+	emit paramChanged_ClearItemMap();
+}
+
+int CalibrateParamEntity::getIndex()
+{
+	return index;
+}
+
+

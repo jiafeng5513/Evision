@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EvisionRectify</class>
+ <widget class="QWidget" name="EvisionRectify">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>740</width>
+    <height>605</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>EvisionRectify</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="1" column="2">
+    <widget class="QPushButton" name="pushButton_SelectSrc">
+     <property name="text">
+      <string>...</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="7">
+    <widget class="QLineEdit" name="lineEdit_target"/>
+   </item>
+   <item row="1" column="8">
+    <widget class="QPushButton" name="pushButton_SelectTarget">
+     <property name="text">
+      <string>...</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="4">
+    <widget class="QPushButton" name="pushButton_Start">
+     <property name="text">
+      <string>Start</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="minimumSize">
+      <size>
+       <width>60</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>60</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>源文件夹</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="3" colspan="3">
+    <widget class="QPushButton" name="pushButton_SelectCameraParams">
+     <property name="text">
+      <string>加载相机参数文件</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="4">
+    <widget class="QPushButton" name="pushButton_addTotargetList">
+     <property name="text">
+      <string>&gt;&gt;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0" colspan="9">
+    <widget class="QProgressBar" name="progressBar">
+     <property name="value">
+      <number>24</number>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="6">
+    <widget class="QLabel" name="label">
+     <property name="minimumSize">
+      <size>
+       <width>60</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>60</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>保存文件夹</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QLineEdit" name="lineEdit_src"/>
+   </item>
+   <item row="3" column="4">
+    <widget class="QPushButton" name="pushButton_RemoveFromTarget">
+     <property name="text">
+      <string>&lt;&lt;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0" rowspan="4" colspan="4">
+    <widget class="QListWidget" name="listWidget_Src">
+     <property name="selectionRectVisible">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="5" rowspan="4" colspan="4">
+    <widget class="QListWidget" name="listWidget_Target"/>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>pushButton_SelectSrc</sender>
+   <signal>clicked()</signal>
+   <receiver>EvisionRectify</receiver>
+   <slot>onPush_SelectSrcFolder()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>293</x>
+     <y>18</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>206</x>
+     <y>4</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_SelectTarget</sender>
+   <signal>clicked()</signal>
+   <receiver>EvisionRectify</receiver>
+   <slot>onPush_SelectTargetFolder()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>698</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>613</x>
+     <y>4</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_SelectCameraParams</sender>
+   <signal>clicked()</signal>
+   <receiver>EvisionRectify</receiver>
+   <slot>onPush_SelectCameraParamFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>392</x>
+     <y>21</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>308</x>
+     <y>2</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_addTotargetList</sender>
+   <signal>clicked()</signal>
+   <receiver>EvisionRectify</receiver>
+   <slot>onAddToTargetList()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>368</x>
+     <y>51</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>354</x>
+     <y>128</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_RemoveFromTarget</sender>
+   <signal>clicked()</signal>
+   <receiver>EvisionRectify</receiver>
+   <slot>onDeleteFromTargetList()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>380</x>
+     <y>73</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>383</x>
+     <y>242</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_Start</sender>
+   <signal>clicked()</signal>
+   <receiver>EvisionRectify</receiver>
+   <slot>onStart()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>385</x>
+     <y>548</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>364</x>
+     <y>477</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>onPush_SelectSrcFolder()</slot>
+  <slot>onPush_SelectTargetFolder()</slot>
+  <slot>onPush_SelectCameraParamFile()</slot>
+  <slot>onAddToTargetList()</slot>
+  <slot>onDeleteFromTargetList()</slot>
+  <slot>onStart()</slot>
+ </slots>
+</ui>

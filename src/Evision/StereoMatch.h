@@ -23,7 +23,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include<time.h>
+//#include<time.h>
 
 #include "opencv2/features2d.hpp"
 #include "opencv2/xfeatures2d.hpp"
@@ -46,12 +46,10 @@ class StereoMatch :public QThread
 public:
 	StereoMatch(std::string img1_filename, std::string img2_filename, std::string cameraParams_filename);
 	~StereoMatch();
-	bool init();
+	bool init(bool needCameraParamFile=true);
 	void run() override;
-	void run_new();
+	void Save();
 	enum { STEREO_BM = 0, STEREO_SGBM = 1, STEREO_HH = 2, STEREO_VAR = 3, STEREO_3WAY = 4 };
-	void saveXYZ(const std::string& fileName, const cv::Mat& image3D);
-	void customReproject(const cv::Mat& disparity, const cv::Mat& Q, cv::Mat& out3D);
 private:
 	enum Algorithm { FEATURE_PT, DENSE };
 
@@ -64,8 +62,10 @@ private:
 	std::string img2_filename = "";
 	std::string cameraParams_filename = "";
 	//用于保存的文件
-	std::string disparity_filename = "";//视差图
-	std::string point_cloud_filename = "";//点云文件
+	std::string root = "";						//文件保存位置
+	std::string disparity_filename = "";		//视差图文件名
+	std::string disparity_raw_filename = "";	//原始视差数据文件名
+	std::string point_cloud_filename = "";		//PCD点云文件名
 	//
 	cv::Mat img1, img2;
 	cv::Size img_size;
@@ -75,32 +75,20 @@ private:
 	cv::Mat cameraMatrix2;//右相机内参
 	cv::Mat distCoeffs2;//右相机畸变系数
 	cv::Mat R1, P1, R2, P2,Q;//映射计算结果
+	cv::Mat R, T, E, F;
 	cv::Rect roi1;
 	cv::Rect roi2;
 
+	cv::Mat Raw_Disp_Data;	//原始视差数据,用于保存成xml文件,测距时使用
+	cv::Mat Gray_Disp_Data;	//用于显示在界面上和保存为png的视差示意图
 
 	bool no_display=false;
-private:
-	bool LoadPtsPairs(std::vector<cv::Point2f> &ptsL, std::vector<cv::Point2f> &ptsR, std::string &filename);
+private:	
+	void ADCensusDriver();
+	void OpenCVBM();
+	void OpenCVSGBM();
+	void Elas();
 
-	void SavePtsPairs(std::vector<cv::Point2f> &ptsL, std::vector<cv::Point2f> &ptsR, std::string &filename);
-
-	void StereoTo3D(std::vector<cv::Point2f> ptsL, std::vector<cv::Point2f> ptsR, std::vector<cv::Point3f> &pts3D,
-		float focalLenInPixel, float baselineInMM,
-		cv::Mat img, cv::Point3f &center3D, cv::Vec3f &size3D);
-
-	void GetPair(cv::Mat &imgL, cv::Mat &imgR, std::vector<cv::Point2f> &ptsL, std::vector<cv::Point2f> &ptsR);
-
-	void GetPairBM(cv::Mat &imgL, cv::Mat &imgR, std::vector<cv::Point2f> &ptsL, std::vector<cv::Point2f> &ptsR);
-
-	void CalcDisparity(cv::Mat &imgL, cv::Mat &imgR, cv::Mat_<float> &disp, int nod);
-
-	bool isGoodTri(cv::Vec3i &v, std::vector<cv::Vec3i> & tri);
-
-	void ChooseKeyPointsBM(cv::Mat_<float> &disp, int nod, int noe, int nof,
-		std::vector<cv::Point2f> & ptsL, std::vector<cv::Point2f> & ptsR);
-
-	void FixDisparity(cv::Mat_<float> & disp, int numberOfDisparities);
 signals:
 	void openMessageBox(QString, QString);
 };

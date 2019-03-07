@@ -10,8 +10,8 @@ LogView::LogView(QWidget *parent)
 {
 	ui.setupUi(this);
 	this->setWindowFlags(this->windowFlags() &~Qt::WindowMinMaxButtonsHint);//禁止最大和最小化
-	this->setWindowFlags(this->windowFlags() | Qt::WindowStaysOnTopHint);
-
+	this->setWindowFlags(this->windowFlags() | Qt::WindowStaysOnTopHint);//保持在界面的最前面
+	ui.checkBox_StayOnTop->setChecked(true);
 	redirector = new StdoutRedirector(this, StdoutRedirector::StandardOutput | StdoutRedirector::StandardError);
 	connect(redirector, SIGNAL(readyRead()), this, SLOT(readData()));
 
@@ -32,4 +32,22 @@ LogView* LogView::getInstance()
 void LogView::readData()
 {
 	ui.textEdit->append(QString::fromLocal8Bit(redirector->read(1024)));
+}
+//
+void LogView::onChecked_StayOnTop(bool value)
+{
+	if (value==true)
+	{
+		this->setWindowFlags(this->windowFlags() | Qt::WindowStaysOnTopHint);//保持在界面的最前面
+	}
+	else
+	{
+		this->setWindowFlags(this->windowFlags() &~Qt::WindowStaysOnTopHint);
+	}
+	this->show();
+}
+//清空
+void LogView::onPush_Delete()
+{
+	ui.textEdit->clear();
 }
