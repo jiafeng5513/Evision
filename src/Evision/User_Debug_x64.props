@@ -9,8 +9,8 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
-      <AdditionalDependencies>CustomGraphicsView.lib;yolo_gpu.lib;Evision3dViz.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <DelayLoadDLLs>yolo_gpu.dll</DelayLoadDLLs>
+      <AdditionalDependencies>CustomGraphicsView.lib;EvisionObjDetection.lib;Evision3dViz.lib;EvisionElas.lib;EvisionADCensus.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <DelayLoadDLLs>EvisionObjDetection.dll</DelayLoadDLLs>
     </Link>
     <ClCompile>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
