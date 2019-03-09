@@ -1,7 +1,6 @@
 #include "RulerView.h"
 #include "EvisionUtils.h"
 #include "QGraphicsScene"
-#include "PointCloudUtils.h"
 #include <QFileDialog>
 #include "StereoMatch.h"
 #include <QMessageBox>

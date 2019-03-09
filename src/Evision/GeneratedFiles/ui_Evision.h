@@ -34,13 +34,11 @@ public:
     QAction *action_About;
     QAction *action_StereoMatchView;
     QAction *action_Measure_View;
-    QAction *action_SFM_View;
-    QAction *action_3dReconstruct_View;
     QAction *action_CalibrateView;
     QAction *action_ObjectDetection;
-    QAction *action_NewStereoMatchView;
     QAction *action_LogView;
     QAction *actio_Rectify;
+    QAction *action_dispToPCD;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QMdiArea *mdiArea;
@@ -48,7 +46,6 @@ public:
     QMenu *menu;
     QMenu *menu_2;
     QMenu *menu_3;
-    QMenu *menu_4;
     QMenu *menuAi;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -97,10 +94,6 @@ public:
         QIcon icon5;
         icon5.addFile(QString::fromUtf8(":/Evision/resource/measure_centimeter_76px_1116359_easyicon.net.ico"), QSize(), QIcon::Normal, QIcon::Off);
         action_Measure_View->setIcon(icon5);
-        action_SFM_View = new QAction(EvisionClass);
-        action_SFM_View->setObjectName(QString::fromUtf8("action_SFM_View"));
-        action_3dReconstruct_View = new QAction(EvisionClass);
-        action_3dReconstruct_View->setObjectName(QString::fromUtf8("action_3dReconstruct_View"));
         action_CalibrateView = new QAction(EvisionClass);
         action_CalibrateView->setObjectName(QString::fromUtf8("action_CalibrateView"));
         QIcon icon6;
@@ -111,8 +104,6 @@ public:
         QIcon icon7;
         icon7.addFile(QString::fromUtf8(":/Evision/resource/face_detection_128px_1218199_easyicon.net.ico"), QSize(), QIcon::Normal, QIcon::Off);
         action_ObjectDetection->setIcon(icon7);
-        action_NewStereoMatchView = new QAction(EvisionClass);
-        action_NewStereoMatchView->setObjectName(QString::fromUtf8("action_NewStereoMatchView"));
         action_LogView = new QAction(EvisionClass);
         action_LogView->setObjectName(QString::fromUtf8("action_LogView"));
         QIcon icon8;
@@ -123,6 +114,11 @@ public:
         QIcon icon9;
         icon9.addFile(QString::fromUtf8(":/Evision/resource/focusing_128px_1162023_easyicon.net.ico"), QSize(), QIcon::Normal, QIcon::Off);
         actio_Rectify->setIcon(icon9);
+        action_dispToPCD = new QAction(EvisionClass);
+        action_dispToPCD->setObjectName(QString::fromUtf8("action_dispToPCD"));
+        QIcon icon10;
+        icon10.addFile(QString::fromUtf8(":/Evision/resource/cloud_refresh_128px_1182773_easyicon.net.ico"), QSize(), QIcon::Normal, QIcon::Off);
+        action_dispToPCD->setIcon(icon10);
         centralWidget = new QWidget(EvisionClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -146,8 +142,6 @@ public:
         menu_2->setObjectName(QString::fromUtf8("menu_2"));
         menu_3 = new QMenu(menuBar);
         menu_3->setObjectName(QString::fromUtf8("menu_3"));
-        menu_4 = new QMenu(menuBar);
-        menu_4->setObjectName(QString::fromUtf8("menu_4"));
         menuAi = new QMenu(menuBar);
         menuAi->setObjectName(QString::fromUtf8("menuAi"));
         EvisionClass->setMenuBar(menuBar);
@@ -161,9 +155,8 @@ public:
 
         menuBar->addAction(menu->menuAction());
         menuBar->addAction(menu_3->menuAction());
-        menuBar->addAction(menu_4->menuAction());
-        menuBar->addAction(menu_2->menuAction());
         menuBar->addAction(menuAi->menuAction());
+        menuBar->addAction(menu_2->menuAction());
         menu->addAction(action_StereoCamera);
         menu->addAction(action_Camera);
         menu->addAction(action_ShowPointCloud);
@@ -174,8 +167,7 @@ public:
         menu_3->addAction(actio_Rectify);
         menu_3->addAction(action_StereoMatchView);
         menu_3->addAction(action_Measure_View);
-        menu_4->addAction(action_SFM_View);
-        menu_4->addAction(action_3dReconstruct_View);
+        menu_3->addAction(action_dispToPCD);
         menuAi->addAction(action_ObjectDetection);
         mainToolBar->addAction(action_Camera);
         mainToolBar->addAction(action_StereoCamera);
@@ -185,6 +177,7 @@ public:
         mainToolBar->addAction(actio_Rectify);
         mainToolBar->addAction(action_StereoMatchView);
         mainToolBar->addAction(action_Measure_View);
+        mainToolBar->addAction(action_dispToPCD);
         mainToolBar->addSeparator();
         mainToolBar->addAction(action_ObjectDetection);
         mainToolBar->addSeparator();
@@ -200,6 +193,7 @@ public:
         QObject::connect(action_ObjectDetection, SIGNAL(triggered()), EvisionClass, SLOT(on_action_ObjectDetection_view()));
         QObject::connect(action_LogView, SIGNAL(triggered()), EvisionClass, SLOT(on_action_LogViewSwitch()));
         QObject::connect(actio_Rectify, SIGNAL(triggered()), EvisionClass, SLOT(on_action_rectify()));
+        QObject::connect(action_dispToPCD, SIGNAL(triggered()), EvisionClass, SLOT(on_action_disp_to_pcd()));
 
         QMetaObject::connectSlotsByName(EvisionClass);
     } // setupUi
@@ -214,20 +208,17 @@ public:
         action_About->setText(QApplication::translate("EvisionClass", "\345\205\263\344\272\216", nullptr));
         action_StereoMatchView->setText(QApplication::translate("EvisionClass", "\347\253\213\344\275\223\345\214\271\351\205\215", nullptr));
         action_Measure_View->setText(QApplication::translate("EvisionClass", "\345\217\214\347\233\256\346\265\213\350\267\235", nullptr));
-        action_SFM_View->setText(QApplication::translate("EvisionClass", "SFM", nullptr));
-        action_3dReconstruct_View->setText(QApplication::translate("EvisionClass", "\344\270\211\347\273\264\351\207\215\345\273\272", nullptr));
         action_CalibrateView->setText(QApplication::translate("EvisionClass", "\347\233\270\346\234\272\346\240\207\345\256\232", nullptr));
         action_ObjectDetection->setText(QApplication::translate("EvisionClass", "\347\233\256\346\240\207\346\243\200\346\265\213", nullptr));
-        action_NewStereoMatchView->setText(QApplication::translate("EvisionClass", "\346\226\260\347\253\213\344\275\223\345\214\271\351\205\215", nullptr));
         action_LogView->setText(QApplication::translate("EvisionClass", "LogView", nullptr));
 #ifndef QT_NO_TOOLTIP
         action_LogView->setToolTip(QApplication::translate("EvisionClass", "\345\210\207\346\215\242LogView\347\232\204\346\230\276\347\244\272\347\212\266\346\200\201", nullptr));
 #endif // QT_NO_TOOLTIP
         actio_Rectify->setText(QApplication::translate("EvisionClass", "\347\253\213\344\275\223\346\240\241\346\255\243", nullptr));
+        action_dispToPCD->setText(QApplication::translate("EvisionClass", "\350\247\206\345\267\256\350\275\254\347\202\271\344\272\221", nullptr));
         menu->setTitle(QApplication::translate("EvisionClass", "\345\267\245\345\205\267", nullptr));
         menu_2->setTitle(QApplication::translate("EvisionClass", "\345\270\256\345\212\251", nullptr));
         menu_3->setTitle(QApplication::translate("EvisionClass", "\345\217\214\347\233\256\350\247\206\350\247\211", nullptr));
-        menu_4->setTitle(QApplication::translate("EvisionClass", "SLAM", nullptr));
         menuAi->setTitle(QApplication::translate("EvisionClass", "Ai", nullptr));
     } // retranslateUi
 

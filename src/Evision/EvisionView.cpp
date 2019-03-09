@@ -119,6 +119,103 @@ void EvisionView::on_action_LogViewSwitch()
 	old_size = this->size();
 	logView->move(*new QPoint(old_pos.x() + 10 + this->frameGeometry().width(), old_pos.y()));
 }
+//视差转点云
+void EvisionView::on_action_disp_to_pcd()
+{
+#ifdef WITH_PCL
+	//1.选择视差
+	cv::Mat RawDisp,img, Q;
+	bool ok = false;
+	QFileDialog * fileDialog = new QFileDialog();
+	QString dispFilename;
+	fileDialog->setWindowTitle(QStringLiteral("请选择原始视差文件"));
+	fileDialog->setNameFilter(QStringLiteral("序列化(*.xml)"));
+	fileDialog->setFileMode(QFileDialog::ExistingFile);
+	if (fileDialog->exec() == QDialog::Accepted)
+	{
+		try
+		{
+			dispFilename = fileDialog->selectedFiles().at(0);
+			cv::FileStorage fStorage(dispFilename.toStdString(), cv::FileStorage::READ);
+			fStorage["disp"] >> RawDisp;
+			fStorage.release();
+			ok = true;
+		}
+		catch (cv::Exception e)
+		{
+			std::cout << "原始视差数据读取失败!" << e.err << std::endl;
+		}
+	}
+	else
+	{
+		return;
+	}
+	if (ok)
+	{
+		ok = false;
+		fileDialog->setWindowTitle(QStringLiteral("请选择参与生成所选视差图的左视图或右视图"));
+		fileDialog->setNameFilter(QStringLiteral("图片文件(*.jpg *.png *.jpeg *.bmp)"));
+		fileDialog->setFileMode(QFileDialog::ExistingFile);
+		if (fileDialog->exec() == QDialog::Accepted)
+		{
+			try
+			{
+				img = cv::imread(fileDialog->selectedFiles().at(0).toStdString());
+				ok = true;
+			}
+			catch (cv::Exception e)
+			{
+				std::cout << "原图读取失败!" << e.err << std::endl;
+			}
+		}else
+		{
+			return;
+		}
+	}else
+	{
+		return;
+	}
+	if (ok)
+	{
+		ok = false;
+		fileDialog->setWindowTitle(QStringLiteral("请选择相机参数文件"));
+		fileDialog->setNameFilter(QStringLiteral("序列化文件(*.xml *.yml)"));
+		fileDialog->setFileMode(QFileDialog::ExistingFile);
+		if (fileDialog->exec() == QDialog::Accepted)
+		{
+			try
+			{
+				cv::FileStorage fStorage(fileDialog->selectedFiles().at(0).toStdString(), cv::FileStorage::READ);
+				fStorage["Q"] >> Q;
+				fStorage.release();
+				ok = true;
+			}
+			catch (cv::Exception e)
+			{
+				std::cout << "相机参数读取失败!" << e.err << std::endl;
+			}
+		}else
+		{
+			return;
+		}
+	}else
+	{
+		return;
+	}
+	if(ok)
+	{
+		QFileInfo *_fileInfo = new QFileInfo(dispFilename);//path like F:/test/123.xml
+		std::string filename = _fileInfo->absolutePath().toStdString().//F:/test
+		append("/").												   //F:/test/
+		append(_fileInfo->baseName().toStdString()).				   //F:/test/123
+		append(".pcd");												   //F:/test/123.pcd
+		EvisionUtils::createAndSavePointCloud(RawDisp, img, Q, filename);
+	}
+#else
+	QMessageBox::information(this, QStringLiteral("该功能未启用!"), QStringLiteral("请在项目属性/C++/预处理器中添加\"WITH_PCL\"并配置好PCL依赖"));
+#endif
+}
+
 //状态栏更新
 void EvisionView::onParamChanged_StatusBarText()
 {
