@@ -11,8 +11,13 @@
 #include "StereoCameraView.h"
 #include "CameraView.h"
 #include "WatchImageView.h"
+#ifdef WITH_CUDA
 #include "ObjectDetectionView.h"
+#endif
+
+#if (defined WITH_PCL) && (defined WITH_VTK)  
 #include "../Evision3dViz/Evision3dViz.h"
+#endif
 #include "EvisionRectifyView.h"
 
 // 浮点数判等
@@ -70,9 +75,14 @@ void EvisionView::onStereoCamera()
 //显示点云
 void EvisionView::onShowPointCloud()
 {
+#if (defined WITH_PCL) && (defined WITH_VTK)  
 	Evision3dViz  * evision3dViz = new Evision3dViz();
 	ui.mdiArea->addSubWindow(evision3dViz);
 	evision3dViz->show();
+#else
+	QMessageBox::information(this, QStringLiteral("该功能未启用!"), 
+		QStringLiteral("请在项目属性/C++/预处理器中添加\"WITH_PCL\"和\"WITH_VTK\",配置好PCL和VTK依赖,并确认Evision3dViz模块正常工作!"));
+#endif
 }
 //显示标定视图
 void EvisionView::on_action_calibrate_view()
@@ -105,11 +115,16 @@ void EvisionView::on_action_Measure_view()
 //启动目标检测视图
 void EvisionView::on_action_ObjectDetection_view()
 {
+#ifdef WITH_CUDA
 	ObjectDetectionView* _ObjectDetectionView = new ObjectDetectionView();
 	ui.mdiArea->addSubWindow(_ObjectDetectionView);
 	_ObjectDetectionView->show();
+#else
+	QMessageBox::information(this, QStringLiteral("该功能未启用!"),
+		QStringLiteral("请在项目属性/C++/预处理器中添加\"WITH_CUDA\"并确保EvisionObjDetection模块正常工作"));
+#endif
 }
-
+//LogView
 void EvisionView::on_action_LogViewSwitch()
 {
 	logView = LogView::getInstance();
@@ -215,12 +230,12 @@ void EvisionView::on_action_disp_to_pcd()
 	QMessageBox::information(this, QStringLiteral("该功能未启用!"), QStringLiteral("请在项目属性/C++/预处理器中添加\"WITH_PCL\"并配置好PCL依赖"));
 #endif
 }
-
 //状态栏更新
 void EvisionView::onParamChanged_StatusBarText()
 {
 	msgLabel->setText(m_entity->getStatusBarText());
 }
+
 //文件被拖到窗口区域上
 void EvisionView::dragEnterEvent(QDragEnterEvent * event)
 {

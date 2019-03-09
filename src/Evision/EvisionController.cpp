@@ -9,7 +9,6 @@
 #include "StereoCalibrate.h"
 #include "QMessageBox"
 #include "StereoMatch.h"
-#include "PointCloudUtils.h"
 #include "RulerView.h"
 #include "CameraView.h"
 #include "StereoCameraView.h"

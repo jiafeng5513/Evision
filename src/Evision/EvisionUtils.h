@@ -1,9 +1,7 @@
 #pragma once
 #include <qimage.h>
 #include "opencv2\core\core.hpp"
-#include "cv.h"
 #include "opencv2/imgproc/imgproc.hpp"
-#include "opencv2/highgui/highgui.hpp"
 #include <QGraphicsView>
 #include <QGraphicsScene>
 
@@ -52,22 +50,9 @@ public:
 	 *	成功:true,失败和出错:false
 	 */
 	static bool write_AllCameraParams(std::string& filename,
-		cv::Mat& cameraMatrix1,
-		cv::Mat& distCoeffs1,
-		cv::Mat& cameraMatrix2,
-		cv::Mat& distCoeffs2,
-		cv::Mat& R,
-		cv::Mat& T,
-		cv::Mat& E,
-		cv::Mat& F,
-		cv::Size& imageSize,
-		cv::Mat& R1,
-		cv::Mat& P1,
-		cv::Mat& R2,
-		cv::Mat& P2,
-		cv::Mat& Q,
-		cv::Rect& roi1,
-		cv::Rect& roi2);
+		cv::Mat& cameraMatrix1,cv::Mat& distCoeffs1,cv::Mat& cameraMatrix2,cv::Mat& distCoeffs2,
+		cv::Mat& R,cv::Mat& T,cv::Mat& E,cv::Mat& F,cv::Size& imageSize,cv::Mat& R1,cv::Mat& P1,cv::Mat& R2,cv::Mat& P2,
+		cv::Mat& Q,cv::Rect& roi1,cv::Rect& roi2);
 
 	/*
 	 * 从文件中读取双目标定得到的参数
@@ -92,60 +77,22 @@ public:
 	 *	成功:true,失败和出错:false
 	 */
 	static bool read_AllCameraParams(std::string& filename,
-		cv::Mat* cameraMatrix1,
-		cv::Mat* distCoeffs1,
-		cv::Mat* cameraMatrix2,
-		cv::Mat* distCoeffs2,
-		cv::Mat* R,
-		cv::Mat* T,
-		cv::Mat* E,
-		cv::Mat* F,
-		cv::Size* imageSize,
-		cv::Mat* R1,
-		cv::Mat* P1,
-		cv::Mat* R2,
-		cv::Mat* P2,
-		cv::Mat* Q,
-		cv::Rect* roi1,
-		cv::Rect* roi2);
+		cv::Mat* cameraMatrix1,cv::Mat* distCoeffs1,cv::Mat* cameraMatrix2,cv::Mat* distCoeffs2,
+		cv::Mat* R,cv::Mat* T,cv::Mat* E,cv::Mat* F,cv::Size* imageSize,cv::Mat* R1,cv::Mat* P1,cv::Mat* R2,cv::Mat* P2,
+		cv::Mat* Q,cv::Rect* roi1,cv::Rect* roi2);
 
 	/*
 	 * 读取匹配所需的参数
 	 */
 	static bool read_ParamsForStereoMatch(std::string& filename,
-		cv::Mat* cameraMatrix1,
-		cv::Mat* distCoeffs1,
-		cv::Mat* cameraMatrix2,
-		cv::Mat* distCoeffs2, 
-		cv::Mat* R1,
-		cv::Mat* P1,
-		cv::Mat* R2,
-		cv::Mat* P2,
-		cv::Mat* Q, 
-		cv::Rect* roi1,
-		cv::Rect* roi2);
+		cv::Mat* cameraMatrix1,cv::Mat* distCoeffs1,cv::Mat* cameraMatrix2,cv::Mat* distCoeffs2, 
+		cv::Mat* R1,cv::Mat* P1,cv::Mat* R2,cv::Mat* P2,cv::Mat* Q, cv::Rect* roi1,cv::Rect* roi2);
 	/*
 	 * 读取校正所需的参数
 	 */
-	static bool read_ParamsForStereoRectify(std::string& filename,
-		cv::Mat* cameraMatrix1,
-		cv::Mat* distCoeffs1,
-		cv::Mat* cameraMatrix2,
-		cv::Mat* distCoeffs2,
-		cv::Mat* R1,
-		cv::Mat* P1,
-		cv::Mat* R2,
-		cv::Mat* P2,
-		cv::Rect* roi1,
-		cv::Rect* roi2);
-	/*
-	 * 把点云保存在文件中
-	 */
-	static bool write_PointCloud(std::string&filename, cv::Mat&PointCloudMatrix);
-	/*
-	 * 从文件中读取点云
-	 */
-	static bool read_PointCloud(std::string&filename, cv::Mat*PointCloudMatrix);
+	static bool read_ParamsForStereoRectify(std::string& filename,cv::Mat* cameraMatrix1,
+		cv::Mat* distCoeffs1,cv::Mat* cameraMatrix2,cv::Mat* distCoeffs2,
+		cv::Mat* R1,cv::Mat* P1,cv::Mat* R2,cv::Mat* P2,cv::Rect* roi1,cv::Rect* roi2);
 #ifdef WITH_PCL
 	/*
 	 * 保存PCD点云
@@ -158,7 +105,6 @@ public:
 	template <typename T>
 	static void getGrayDisparity(const cv::Mat& disp, cv::Mat& grayDisp, bool stretch = true);
 };
-
 template <typename T>
 void EvisionUtils::getGrayDisparity(const cv::Mat& disp, cv::Mat& grayDisp, bool stretch)
 {
@@ -214,4 +160,3 @@ void EvisionUtils::getGrayDisparity(const cv::Mat& disp, cv::Mat& grayDisp, bool
 
 	grayDisp = output.clone();
 }
-

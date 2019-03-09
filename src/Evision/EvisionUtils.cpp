@@ -1,11 +1,12 @@
-#include "EvisionUtils.h"
-#include "QDebug"
-
 #ifdef WITH_PCL
 #include <pcl/point_cloud.h>
-#include <pcl/impl/point_types.hpp>
+//#include <pcl/impl/point_types.hpp>
 #include <pcl/io/pcd_io.h>
 #endif
+#include "EvisionUtils.h"
+
+
+
 
 EvisionUtils::EvisionUtils()
 {
@@ -86,7 +87,7 @@ QImage EvisionUtils::cvMat2QImage(const cv::Mat& mat)
 cv::Mat EvisionUtils::QImage2cvMat(QImage image)
 {
 	cv::Mat mat;
-	qDebug() << image.format();
+	//qDebug() << image.format();
 	switch (image.format())
 	{
 	case QImage::Format_ARGB32:
@@ -324,68 +325,10 @@ bool EvisionUtils::read_ParamsForStereoRectify(std::string& filename, cv::Mat* c
 }
 
 /*
- * 把点云保存在文件中
- */
-bool EvisionUtils::write_PointCloud(std::string& filename, cv::Mat& PointCloudMatrix)
-{
-	if (filename.empty() == true)
-	{
-		return false;
-	}
-	try
-	{
-		cv::FileStorage fs(filename, cv::FileStorage::WRITE);
-		if (fs.isOpened())
-		{
-			fs<<"PointCloudMatrix"<< PointCloudMatrix;
-			fs.release();
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-	catch (...)
-	{
-		return false;
-	}
-}
-
-/*
- * 从文件中读取点云
- */
-bool EvisionUtils::read_PointCloud(std::string& filename, cv::Mat* PointCloudMatrix)
-{
-	if (filename.empty() == true)
-	{
-		return false;
-	}
-	try
-	{
-		cv::FileStorage fs(filename, cv::FileStorage::READ);
-		if (fs.isOpened())
-		{
-			fs["PointCloudMatrix"] >> *PointCloudMatrix;
-			fs.release();
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-	catch (...)
-	{
-		return false;
-	}
-}
-
-/*
  * 保存PCD点云
  */
 #ifdef WITH_PCL
-void createAndSavePointCloud(cv::Mat &disparity, cv::Mat &leftImage, cv::Mat &Q, std::string filename)
+void  EvisionUtils::createAndSavePointCloud(cv::Mat &disparity, cv::Mat &leftImage, cv::Mat &Q, std::string filename)
 {
 	pcl::PointCloud<pcl::PointXYZRGB> pointCloud;
 
