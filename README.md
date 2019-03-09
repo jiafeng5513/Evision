@@ -63,7 +63,7 @@ Introduction:
 5. EvisionElas是Elas视差算法模块.<br>
 6. EvisionObjDetection是目标检测模块,依赖CUDA.<br>
 * 用VS2017打开`src/CvLib.sln`,你将会看到两个工程:<br>
-![image](./doc/cvlib_sln_proj.png)
+![image](./doc/cvlib_sln.png)
 1. CvLabMain是用WPF框架写的.<br>
 2. CvLabSandbox是用WinFrom写的.<br>
 
@@ -122,4 +122,4 @@ Introduction:
 14. [视差算法](./doc/立体匹配算法.md)
 
 #### 10.部分框图
-<div align=center><img src="./doc/立体视觉.png"/></div>
+<div align=center><img src="./doc/flowchart.png"/></div>
