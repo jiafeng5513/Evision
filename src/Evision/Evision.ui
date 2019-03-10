@@ -77,6 +77,7 @@
     <addaction name="action_StereoCamera"/>
     <addaction name="action_Camera"/>
     <addaction name="action_ShowPointCloud"/>
+    <addaction name="action_CreateParamFile"/>
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">
@@ -120,6 +121,7 @@
    <addaction name="action_Camera"/>
    <addaction name="action_StereoCamera"/>
    <addaction name="action_ShowPointCloud"/>
+   <addaction name="action_CreateParamFile"/>
    <addaction name="separator"/>
    <addaction name="action_CalibrateView"/>
    <addaction name="actio_Rectify"/>
@@ -233,6 +235,15 @@
    </property>
    <property name="text">
     <string>视差转点云</string>
+   </property>
+  </action>
+  <action name="action_CreateParamFile">
+   <property name="icon">
+    <iconset resource="Evision.qrc">
+     <normaloff>:/Evision/resource/params_128px_1101042_easyicon.net.ico</normaloff>:/Evision/resource/params_128px_1101042_easyicon.net.ico</iconset>
+   </property>
+   <property name="text">
+    <string>构造参数文件</string>
    </property>
   </action>
  </widget>

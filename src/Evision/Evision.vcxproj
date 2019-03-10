@@ -129,6 +129,7 @@
     <ClCompile Include="CalibrateParamEntity.cpp" />
     <ClCompile Include="CalibraterView.cpp" />
     <ClCompile Include="CameraView.cpp" />
+    <ClCompile Include="CreateCameraParamFile.cpp" />
     <ClCompile Include="EvisionRectifyView.cpp" />
     <ClCompile Include="EvisionView.cpp" />
     <ClCompile Include="EvisionController.cpp" />
@@ -159,6 +160,7 @@
   <ItemGroup>
     <QtUic Include="CalibraterView.ui" />
     <QtUic Include="CameraView.ui" />
+    <QtUic Include="CreateCameraParamFile.ui" />
     <QtUic Include="Evision.ui" />
     <QtUic Include="EvisionRectify.ui" />
     <QtUic Include="LogView.ui" />
@@ -191,6 +193,10 @@
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtMultimediaWidgets</IncludePath>
     </QtMoc>
     <QtMoc Include="EvisionRectifyView.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtMultimediaWidgets;$(QTDIR)\include\QtCore\5.12.0;$(QTDIR)\include\QtCore\5.12.0\QtCore;$(QTDIR)\include\QtCore\5.12.0\QtCore\private</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtMultimediaWidgets;$(QTDIR)\include\QtCore\5.12.0;$(QTDIR)\include\QtCore\5.12.0\QtCore;$(QTDIR)\include\QtCore\5.12.0\QtCore\private</IncludePath>
+    </QtMoc>
+    <QtMoc Include="CreateCameraParamFile.h">
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtMultimediaWidgets;$(QTDIR)\include\QtCore\5.12.0;$(QTDIR)\include\QtCore\5.12.0\QtCore;$(QTDIR)\include\QtCore\5.12.0\QtCore\private</IncludePath>
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtMultimediaWidgets;$(QTDIR)\include\QtCore\5.12.0;$(QTDIR)\include\QtCore\5.12.0\QtCore;$(QTDIR)\include\QtCore\5.12.0\QtCore\private</IncludePath>
     </QtMoc>

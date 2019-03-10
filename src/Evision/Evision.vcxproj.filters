@@ -44,6 +44,9 @@
     <Filter Include="PointCloud">
       <UniqueIdentifier>{c862b6e3-9851-48cd-94de-93c4d4d9dd35}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CreateCamerParam">
+      <UniqueIdentifier>{f617b240-c32b-44df-8474-08b8cd48f976}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EvisionUtils.cpp">
@@ -118,6 +121,9 @@
     <ClCompile Include="rectify.cpp">
       <Filter>StereoRectify</Filter>
     </ClCompile>
+    <ClCompile Include="CreateCameraParamFile.cpp">
+      <Filter>CreateCamerParam</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="EvisionRectifyView.h">
@@ -183,6 +189,9 @@
     <QtMoc Include="RulerView.h">
       <Filter>DepthPrediction</Filter>
     </QtMoc>
+    <QtMoc Include="CreateCameraParamFile.h">
+      <Filter>CreateCamerParam</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="CalibraterView.ui">
@@ -214,6 +223,9 @@
     </QtUic>
     <QtUic Include="WatchImageView.ui">
       <Filter>WatchImage</Filter>
+    </QtUic>
+    <QtUic Include="CreateCameraParamFile.ui">
+      <Filter>CreateCamerParam</Filter>
     </QtUic>
   </ItemGroup>
   <ItemGroup>
