@@ -88,7 +88,7 @@ bool StereoCalibrate::SaveCameraParamsToFile()
 	{
 		// 保存参数
 		bool flag = EvisionUtils::write_AllCameraParams(cameraParamsFilename, cameraMatrix_L, distCoeffs_L,
-			cameraMatrix_R, distCoeffs_R, R, T, E, F,imageSize, R1, P1, R2, P2, Q, roi1, roi2);
+			cameraMatrix_R, distCoeffs_R, R, T, imageSize, R1, P1, R2, P2, Q, roi1, roi2);
 		std::cout << "参数已经保存到:" << cameraParamsFilename << std::endl;
 		if (!flag)
 		{
@@ -492,11 +492,11 @@ void StereoCalibrate::StereoCalib(
 		//	std::cout << "Error: can not save the intrinsic parameters\n";
 
 		cv::Rect validRoi[2];
-
+		cv::Size tempsize(0, 0);
 		cv::stereoRectify(cameraMatrix_L, distCoeffs_L,
 			cameraMatrix_R, distCoeffs_R,
 			imageSize, R, T, R1, R2, P1, P2, Q,
-			cv::CALIB_ZERO_DISPARITY, 1, imageSize, &validRoi[0], &validRoi[1]);
+			0, 1, tempsize, &validRoi[0], &validRoi[1]);
 
 		//fs.open("extrinsics.yml", cv::FileStorage::WRITE);
 		//if (fs.isOpened())

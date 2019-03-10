@@ -11,10 +11,18 @@ EvisionRectifyView::EvisionRectifyView(QWidget *parent)
 {
 	ui.setupUi(this);
 	ui.progressBar->setValue(0);
+	ui.pushButton_Start->setEnabled(true);
 }
 
 EvisionRectifyView::~EvisionRectifyView()
 {
+}
+/*
+ * 初始化
+ */
+void EvisionRectifyView::init()
+{
+
 }
 
 void EvisionRectifyView::onPush_SelectSrcFolder()
@@ -55,6 +63,7 @@ void EvisionRectifyView::onPush_SelectCameraParamFile()
 {
 	QFileDialog * fileDialog = new QFileDialog();
 	fileDialog->setWindowTitle(QStringLiteral("请选择相机参数文件"));
+	fileDialog->setNameFilter(QStringLiteral("序列化文件(*.yml)"));
 	fileDialog->setFileMode(QFileDialog::ExistingFile);
 	if (fileDialog->exec() == QDialog::Accepted)
 	{
@@ -144,6 +153,7 @@ void EvisionRectifyView::onStart()
 			ui.progressBar->setValue(ui.progressBar->value() + 1);
 		}
 	}
+	ui.pushButton_Start->setEnabled(false);
 }
 
 

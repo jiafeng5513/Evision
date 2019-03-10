@@ -39,6 +39,7 @@ public:
     QAction *action_LogView;
     QAction *actio_Rectify;
     QAction *action_dispToPCD;
+    QAction *action_CreateParamFile;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QMdiArea *mdiArea;
@@ -119,6 +120,11 @@ public:
         QIcon icon10;
         icon10.addFile(QString::fromUtf8(":/Evision/resource/cloud_refresh_128px_1182773_easyicon.net.ico"), QSize(), QIcon::Normal, QIcon::Off);
         action_dispToPCD->setIcon(icon10);
+        action_CreateParamFile = new QAction(EvisionClass);
+        action_CreateParamFile->setObjectName(QString::fromUtf8("action_CreateParamFile"));
+        QIcon icon11;
+        icon11.addFile(QString::fromUtf8(":/Evision/resource/params_128px_1101042_easyicon.net.ico"), QSize(), QIcon::Normal, QIcon::Off);
+        action_CreateParamFile->setIcon(icon11);
         centralWidget = new QWidget(EvisionClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -160,6 +166,7 @@ public:
         menu->addAction(action_StereoCamera);
         menu->addAction(action_Camera);
         menu->addAction(action_ShowPointCloud);
+        menu->addAction(action_CreateParamFile);
         menu_2->addAction(action_Help);
         menu_2->addAction(action_About);
         menu_2->addAction(action_LogView);
@@ -172,6 +179,7 @@ public:
         mainToolBar->addAction(action_Camera);
         mainToolBar->addAction(action_StereoCamera);
         mainToolBar->addAction(action_ShowPointCloud);
+        mainToolBar->addAction(action_CreateParamFile);
         mainToolBar->addSeparator();
         mainToolBar->addAction(action_CalibrateView);
         mainToolBar->addAction(actio_Rectify);
@@ -194,6 +202,7 @@ public:
         QObject::connect(action_LogView, SIGNAL(triggered()), EvisionClass, SLOT(on_action_LogViewSwitch()));
         QObject::connect(actio_Rectify, SIGNAL(triggered()), EvisionClass, SLOT(on_action_rectify()));
         QObject::connect(action_dispToPCD, SIGNAL(triggered()), EvisionClass, SLOT(on_action_disp_to_pcd()));
+        QObject::connect(action_CreateParamFile, SIGNAL(triggered()), EvisionClass, SLOT(on_action_create_param()));
 
         QMetaObject::connectSlotsByName(EvisionClass);
     } // setupUi
@@ -216,6 +225,7 @@ public:
 #endif // QT_NO_TOOLTIP
         actio_Rectify->setText(QApplication::translate("EvisionClass", "\347\253\213\344\275\223\346\240\241\346\255\243", nullptr));
         action_dispToPCD->setText(QApplication::translate("EvisionClass", "\350\247\206\345\267\256\350\275\254\347\202\271\344\272\221", nullptr));
+        action_CreateParamFile->setText(QApplication::translate("EvisionClass", "\346\236\204\351\200\240\345\217\202\346\225\260\346\226\207\344\273\266", nullptr));
         menu->setTitle(QApplication::translate("EvisionClass", "\345\267\245\345\205\267", nullptr));
         menu_2->setTitle(QApplication::translate("EvisionClass", "\345\270\256\345\212\251", nullptr));
         menu_3->setTitle(QApplication::translate("EvisionClass", "\345\217\214\347\233\256\350\247\206\350\247\211", nullptr));

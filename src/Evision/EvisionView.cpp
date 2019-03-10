@@ -19,6 +19,7 @@
 #include "../Evision3dViz/Evision3dViz.h"
 #endif
 #include "EvisionRectifyView.h"
+#include "CreateCameraParamFile.h"
 
 // 浮点数判等
 // ulp: units in the last place.
@@ -230,6 +231,16 @@ void EvisionView::on_action_disp_to_pcd()
 	QMessageBox::information(this, QStringLiteral("该功能未启用!"), QStringLiteral("请在项目属性/C++/预处理器中添加\"WITH_PCL\"并配置好PCL依赖"));
 #endif
 }
+/*
+ * 创建相机参数文件
+ */
+void EvisionView::on_action_create_param()
+{
+	CreateCameraParamFile * _createCameraParamFile = new CreateCameraParamFile();
+	ui.mdiArea->addSubWindow(_createCameraParamFile);
+	_createCameraParamFile->show();
+}
+
 //状态栏更新
 void EvisionView::onParamChanged_StatusBarText()
 {

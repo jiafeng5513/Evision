@@ -140,7 +140,7 @@ void EvisionUtils::ShowImageOnUi(cv::Mat& img, QGraphicsScene* sense, QGraphicsV
  *	成功:true,失败和出错:false
  */
 bool EvisionUtils::write_AllCameraParams(std::string& filename, cv::Mat& cameraMatrix1, cv::Mat& distCoeffs1,
-	cv::Mat& cameraMatrix2, cv::Mat& distCoeffs2, cv::Mat& R, cv::Mat& T, cv::Mat& E, cv::Mat& F, cv::Size& imageSize,
+	cv::Mat& cameraMatrix2, cv::Mat& distCoeffs2, cv::Mat& R, cv::Mat& T, cv::Size& imageSize,
 	cv::Mat& R1, cv::Mat& P1, cv::Mat& R2, cv::Mat& P2, cv::Mat& Q, cv::Rect& roi1, cv::Rect& roi2)
 {
 	if (filename.empty() == true)
@@ -158,8 +158,6 @@ bool EvisionUtils::write_AllCameraParams(std::string& filename, cv::Mat& cameraM
 			fs << "distCoeffs2" << distCoeffs2;
 			fs << "R" << R;
 			fs << "T" << T;
-			fs << "E" << E;
-			fs << "F" << F;
 			fs << "imageSize" << imageSize;
 			fs << "R1" << R1;
 			fs << "P1" << P1;

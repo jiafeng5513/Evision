@@ -24,7 +24,8 @@ private:
 	std::vector<cv::Mat> undistortedImages;
 	cv::Mat cameraMatrix1, cameraMatrix2, distCoeffs1, distCoeffs2,R1,R2,P1,P2;
 	cv::Rect roi1, roi2;
-	
+
+	void init();
 public slots:
 	void onPush_SelectSrcFolder();
 	void onPush_SelectTargetFolder();

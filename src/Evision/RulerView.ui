@@ -263,7 +263,8 @@
           <widget class="QLabel" name="label_9">
            <property name="text">
             <string>例如使用方格边长为25mm的标定板,输入尺寸为25,
-则距离的单位为mm,如果输入2.5,则距离的单位为cm</string>
+则距离的单位为mm,
+如果输入2.5,则距离的单位为cm</string>
            </property>
           </widget>
          </item>

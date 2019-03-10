@@ -51,7 +51,7 @@ public:
 	 */
 	static bool write_AllCameraParams(std::string& filename,
 		cv::Mat& cameraMatrix1,cv::Mat& distCoeffs1,cv::Mat& cameraMatrix2,cv::Mat& distCoeffs2,
-		cv::Mat& R,cv::Mat& T,cv::Mat& E,cv::Mat& F,cv::Size& imageSize,cv::Mat& R1,cv::Mat& P1,cv::Mat& R2,cv::Mat& P2,
+		cv::Mat& R,cv::Mat& T,cv::Size& imageSize,cv::Mat& R1,cv::Mat& P1,cv::Mat& R2,cv::Mat& P2,
 		cv::Mat& Q,cv::Rect& roi1,cv::Rect& roi2);
 
 	/*
