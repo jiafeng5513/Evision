@@ -100,72 +100,76 @@ void StereoMatchController::setDefaultMatchParamCommand()
 //命令:匹配
 void StereoMatchController::MatchCommand()
 {
+	bool ok = false;
 	QFileDialog * fileDialog = new QFileDialog();
+
 	fileDialog->setWindowTitle(QStringLiteral("请选择左摄像头拍摄的图片"));
 	fileDialog->setNameFilter(QStringLiteral("图片文件(*.jpg *.png *.jpeg *.bmp)"));
 	fileDialog->setFileMode(QFileDialog::ExistingFile);
 	if (fileDialog->exec() == QDialog::Accepted)
 	{
 		ImageL = fileDialog->selectedFiles().at(0);
+		ok = true;
+	}
+	else
+	{
+		return;
+	}
+		
+	if (ok)
+	{
+		ok = false;
 		fileDialog->setWindowTitle(QStringLiteral("请选择右摄像头拍摄的图片"));
 		if (fileDialog->exec() == QDialog::Accepted)
 		{
 			ImageR = fileDialog->selectedFiles().at(0);
-			if (!ImageL.isEmpty() && !ImageR.isEmpty())
-			{
-				//两侧图片文件正常
-
-				QFileDialog * fileDialog2 = new QFileDialog();
-				fileDialog2->setWindowTitle(QStringLiteral("请选择相机参数文件"));
-				fileDialog2->setNameFilter(QStringLiteral("YML/XML文件(*.yml *.yaml *.xml)"));
-				fileDialog2->setFileMode(QFileDialog::ExistingFile);
-				if (fileDialog2->exec() == QDialog::Accepted)
-				{
-					paramsFile = fileDialog2->selectedFiles().at(0);
-					if (!paramsFile.isEmpty())
-					{
-						//参数文件正常
-						_stereoMatch = new StereoMatch(ImageL.toStdString(),
-							ImageR.toStdString(), paramsFile.toStdString());
-						if (_stereoMatch->init())
-						{
-							connect(_stereoMatch, SIGNAL(openMessageBox(QString, QString)), this, SLOT(onOpenMessageBox(QString, QString)));
-							_stereoMatch->start();
-						}
-						else
-						{
-							QMessageBox::information(NULL, QStringLiteral("错误"), QStringLiteral("匹配初始化失败!"));
-							return;
-						}
-
-					}
-					else
-					{
-						QMessageBox::information(NULL, QStringLiteral("错误"), QStringLiteral("请选择有效的相机参数文件!"));
-						return;
-					}
-				}
-				else
-				{
-					return;
-				}
-			}
-			else
-			{
-				QMessageBox::information(NULL, QStringLiteral("错误"), QStringLiteral("请选择有效的两侧图片!"));
-				return;
-			}
-
+			ok = true;
 		}
 		else
 		{
 			return;
 		}
 	}
-	else
+	ok = (!ImageL.isEmpty() && !ImageR.isEmpty());
+
+	if (ok)
 	{
-		return;
+		ok = false;
+		if (m_entity->getRectifiedInput()==true)
+		{
+			//使用校准好的输入图片
+			ok = true;
+		}
+		else
+		{
+			//使用没校准的图片
+			QFileDialog * fileDialog2 = new QFileDialog();
+			fileDialog2->setWindowTitle(QStringLiteral("请选择相机参数文件"));
+			fileDialog2->setNameFilter(QStringLiteral("YML/XML文件(*.yml *.yaml *.xml)"));
+			fileDialog2->setFileMode(QFileDialog::ExistingFile);
+			if (fileDialog2->exec() == QDialog::Accepted)
+			{
+				paramsFile = fileDialog2->selectedFiles().at(0);
+				ok = true;
+			}
+		}
 	}
+	if (ok) 
+	{
+		_stereoMatch = new StereoMatch(ImageL.toStdString(),ImageR.toStdString(), paramsFile.toStdString());
+		//注意.此时paramsFile.toStdString()可能是空的(当m_entity->getRectifiedInput()==true时)
+		if (_stereoMatch->init())
+		{
+			connect(_stereoMatch, SIGNAL(openMessageBox(QString, QString)), this, SLOT(onOpenMessageBox(QString, QString)));
+			_stereoMatch->start();
+		}
+		else
+		{
+			QMessageBox::information(NULL, QStringLiteral("错误"), QStringLiteral("匹配初始化失败!"));
+			return;
+		}
+	}
+
 }
 //命令:刷新视差图
 void StereoMatchController::RefreshStereoMatchCommand()

@@ -56,18 +56,19 @@ bool StereoMatch::init(bool needCameraParamFile)
 			emit openMessageBox(QStringLiteral("错误"), QStringLiteral("输入图像为空!"));
 			return false;
 		}
-		//2.读取相机参数
-		std::cout << "读取相机参数..." << std::endl;
-		bool flag = EvisionUtils::read_AllCameraParams(cameraParams_filename,
-			&cameraMatrix1, &distCoeffs1, &cameraMatrix2, &distCoeffs2, &R, &T, &E, &F, &img_size, &R1, &P1, &R2, &P2, &Q, &roi1, &roi2);
-		if(flag==false)
-		{
-			std::cout << "相机参数读取失败!" << std::endl;
-			return false;
-		}
-		//3.如果输入的是未校正的图片,则在此处进行校正
+
+		//2.如果输入的是未校正的图片,则在此处进行校正
 		if (!m_entity->getRectifiedInput())
 		{
+			//3.读取相机参数
+			std::cout << "读取相机参数..." << std::endl;
+			bool flag = EvisionUtils::read_AllCameraParams(cameraParams_filename,
+				&cameraMatrix1, &distCoeffs1, &cameraMatrix2, &distCoeffs2, &R, &T, &E, &F, &img_size, &R1, &P1, &R2, &P2, &Q, &roi1, &roi2);
+			if(flag==false)
+			{
+				std::cout << "相机参数读取失败!" << std::endl;
+				return false;
+			}
 			std::cout << "输入的是未校正的图片,进行校正..." << std::endl;
 			try
 			{
@@ -363,7 +364,7 @@ void StereoMatch::Elas()
 	param.postprocess_only_left = m_entity->getPostprocessOnlyLeft();
 	param.subsampling = m_entity->getSubSampling();
 
-	cv::Mat *rawlr, *rawrl, *seelr, *seerl;
+	cv::Mat *rawlr=new cv::Mat, *rawrl = new cv::Mat, *seelr = new cv::Mat, *seerl = new cv::Mat;
 	ElasMatch(img1, img2, param, rawlr, rawrl, seelr, seerl);
 
 	rawlr->copyTo(Raw_Disp_Data);

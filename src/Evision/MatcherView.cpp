@@ -110,12 +110,14 @@ void MatcherView::Help()
 {
 	QString helpMsg = QStringLiteral("\
 算法选择指南\n\n\
-速度:OpenCV BM>OpenCV SGBM>ELAS>ADCensus\n\
-效果:ADCensus>ELAS>SGBM>BM\n\
-BM和SGBM的效果和速度类似\n\
-BM会只能处理灰度图,其他的能处理彩色图,ADCensus在输入彩色图时能获得额外的效果\n\
-界面上显示的视差图只是示意图,为了能显示在屏幕上,进行了一些处理(例如归一化到[0,255])\n\
-真实的视差数据保存在xml中,测距和三维重建是以原始视差数据为基础的.\n");
+1.速度:OpenCV BM>OpenCV SGBM>ELAS>ADCensus\n\
+2.效果:ADCensus>ELAS>SGBM>BM\n\
+  BM和SGBM的效果和速度类似\n\
+3.BM会只能处理灰度图,其他的能处理彩色图,ADCensus在输入彩色图时能获得额外的效果\n\
+4.界面上显示的视差图只是示意图,为了能显示在屏幕上,进行了一些处理(例如归一化到[0,255])\n\
+  真实的视差数据保存在xml中,测距和三维重建是以原始视差数据为基础的.\n\
+5.ADCensus算法在Debug模式下运行速度会非常慢,这是为了便于调试使用多线程模式的方法导致的,\n\
+  在Release模式下会表现出正常速度.");
 	QMessageBox::information(this, QStringLiteral("帮助"), helpMsg);
 }
 
