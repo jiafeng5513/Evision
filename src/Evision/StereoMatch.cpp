@@ -177,11 +177,11 @@ void StereoMatch::Save()
 			cv::imwrite(disparity_filename, Gray_Disp_Data);
 			std::cout << "已经保存视差示意图:" << disparity_filename << std::endl;
 
-			//保存pcd点云
-#ifdef WITH_PCL
-			EvisionUtils::createAndSavePointCloud(Raw_Disp_Data, img2, Q, point_cloud_filename);
-			std::cout << "已经保存PCD点云:" << point_cloud_filename << std::endl;
-#endif
+//			//保存pcd点云
+//#ifdef WITH_PCL
+//			EvisionUtils::createAndSavePointCloud(Raw_Disp_Data, img2, Q, point_cloud_filename);
+//			std::cout << "已经保存PCD点云:" << point_cloud_filename << std::endl;
+//#endif
 		}
 		catch (...)
 		{
@@ -284,7 +284,8 @@ void StereoMatch::OpenCVBM()
 	bm->compute(img1G, img2G, Raw_Disp_Data);
 
 	//获取用于显示的视差示意图
-	EvisionUtils::getGrayDisparity<float>(Raw_Disp_Data, Gray_Disp_Data);
+	//EvisionUtils::getGrayDisparity<UINT8>(Raw_Disp_Data, Gray_Disp_Data,true);
+	Raw_Disp_Data.convertTo(Gray_Disp_Data, CV_8UC3);
 	m_entity->setIconRawDisp(Gray_Disp_Data);
 
 	t = cv::getTickCount() - t;
@@ -324,7 +325,7 @@ void StereoMatch::OpenCVSGBM()
 	
 
 	//获取用于显示的视差示意图
-	EvisionUtils::getGrayDisparity<float>(Raw_Disp_Data, Gray_Disp_Data);
+	Raw_Disp_Data.convertTo(Gray_Disp_Data, CV_8UC3);
 	m_entity->setIconRawDisp(Gray_Disp_Data);
 
 	t = cv::getTickCount() - t;
