@@ -3,7 +3,6 @@
 #include <QListWidgetItem>
 #include <QMessageBox>
 #include "rectify.h"
-#include <boost/filesystem/operations.hpp>
 #include "EvisionUtils.h"
 
 EvisionRectifyView::EvisionRectifyView(QWidget *parent)

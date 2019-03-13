@@ -27,7 +27,7 @@
 #include <QSocketNotifier>
 
 #ifdef Q_OS_WIN
-#include <QtCore/5.12.0/QtCore/private/qwindowspipereader_p.h>
+#include <qwindowspipereader_p.h>
 #include <io.h>
 #include <fcntl.h>
 #else

@@ -55,6 +55,8 @@ EvisionView::EvisionView(QWidget *parent)
 
 
 	on_action_LogViewSwitch();//LogviewµÄ×¼±¸
+
+	std::cout << QT_VERSION << std::endl<< QT_VERSION_MAJOR<<QT_VERSION_MINOR<<QT_VERSION_PATCH<<std::endl;
 }
 
 

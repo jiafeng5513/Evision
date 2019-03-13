@@ -41,9 +41,6 @@
     <Filter Include="StereoCalibrate">
       <UniqueIdentifier>{44f15907-d66b-4212-8085-a7f1ae95eed7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="PointCloud">
-      <UniqueIdentifier>{c862b6e3-9851-48cd-94de-93c4d4d9dd35}</UniqueIdentifier>
-    </Filter>
     <Filter Include="CreateCamerParam">
       <UniqueIdentifier>{f617b240-c32b-44df-8474-08b8cd48f976}</UniqueIdentifier>
     </Filter>
