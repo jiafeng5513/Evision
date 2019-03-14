@@ -166,7 +166,8 @@ void RulerView::onStart()
 	if (RawDisp.type() == CV_32F)
 		EvisionUtils::getGrayDisparity<float>(RawDisp, disparityGary, true);
 	else
-		EvisionUtils::getGrayDisparity<uchar>(RawDisp, disparityGary, true);
+		//EvisionUtils::getGrayDisparity<uchar>(RawDisp, disparityGary, true);
+		RawDisp.convertTo(disparityGary, CV_8UC3);
 
 	printImgToO(disparityGary);
 	ui.pushButton_selectRawDisp->setEnabled(false);

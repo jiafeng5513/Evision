@@ -174,7 +174,7 @@ void StereoMatchController::MatchCommand()
 //ÃüÁî:Ë¢ĞÂÊÓ²îÍ¼
 void StereoMatchController::RefreshStereoMatchCommand()
 {
-	StereoMatch *_stereoMatch = new StereoMatch(ImageL.toStdString(),
+	_stereoMatch = new StereoMatch(ImageL.toStdString(),
 		ImageR.toStdString(), paramsFile.toStdString());
 	if (_stereoMatch->init())
 	{

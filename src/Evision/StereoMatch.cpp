@@ -305,8 +305,8 @@ void StereoMatch::OpenCVSGBM()
 	sgbm->setPreFilterCap(m_entity->getPrefilcap());
 	sgbm->setBlockSize(m_entity->getSadWinsz());
 	int cn = img1.channels();
-	sgbm->setP1(48 * cn*m_entity->getSadWinsz()*m_entity->getSadWinsz());
-	sgbm->setP2(48 * cn*m_entity->getSadWinsz()*m_entity->getSadWinsz());
+	sgbm->setP1(8 * cn*m_entity->getSadWinsz()*m_entity->getSadWinsz());
+	sgbm->setP2(32 * cn*m_entity->getSadWinsz()*m_entity->getSadWinsz());
 	sgbm->setMinDisparity(m_entity->getMinDisp());
 	sgbm->setNumDisparities(m_entity->getNumDisparities());
 	sgbm->setUniquenessRatio(m_entity->getUniradio());
@@ -325,7 +325,10 @@ void StereoMatch::OpenCVSGBM()
 	
 
 	//获取用于显示的视差示意图
-	Raw_Disp_Data.convertTo(Gray_Disp_Data, CV_8UC3);
+	Raw_Disp_Data.convertTo(Gray_Disp_Data, CV_8U, 1 / 16.);
+	//cvNormalize(&Raw_Disp_Data, &Gray_Disp_Data, 0, 256, CV_MINMAX);
+	//cv::imshow("Raw_Disp_Data", Raw_Disp_Data);
+	//cv::normalize(Raw_Disp_Data, Gray_Disp_Data);
 	m_entity->setIconRawDisp(Gray_Disp_Data);
 
 	t = cv::getTickCount() - t;
