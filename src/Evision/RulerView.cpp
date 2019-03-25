@@ -164,11 +164,15 @@ void RulerView::onStart()
 	cv::resize(image3D, image3D, cv::Size(), scaleFactor, scaleFactor);
 
 	if (RawDisp.type() == CV_32F)
+	{
+		//ELAS和ADCensus的原始视差数据是CV_32F,不能直接显示
 		EvisionUtils::getGrayDisparity<float>(RawDisp, disparityGary, true);
-	else
-		//EvisionUtils::getGrayDisparity<uchar>(RawDisp, disparityGary, true);
-		RawDisp.convertTo(disparityGary, CV_8UC3);
-
+	}
+	else if(RawDisp.type() == CV_8U)
+	{
+		//BM和SGBM的视差数据是CV_8U,可以直接显示
+		disparityGary = RawDisp;
+	}
 	printImgToO(disparityGary);
 	ui.pushButton_selectRawDisp->setEnabled(false);
 	ui.pushButton_selectOrigin->setEnabled(false);

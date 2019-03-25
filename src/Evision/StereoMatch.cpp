@@ -285,7 +285,8 @@ void StereoMatch::OpenCVBM()
 
 	//获取用于显示的视差示意图
 	//EvisionUtils::getGrayDisparity<UINT8>(Raw_Disp_Data, Gray_Disp_Data,true);
-	Raw_Disp_Data.convertTo(Gray_Disp_Data, CV_8UC3);
+	Raw_Disp_Data.convertTo(Gray_Disp_Data, CV_8U, 1 / 16.);
+	Raw_Disp_Data = Gray_Disp_Data;
 	m_entity->setIconRawDisp(Gray_Disp_Data);
 
 	t = cv::getTickCount() - t;
@@ -326,9 +327,7 @@ void StereoMatch::OpenCVSGBM()
 
 	//获取用于显示的视差示意图
 	Raw_Disp_Data.convertTo(Gray_Disp_Data, CV_8U, 1 / 16.);
-	//cvNormalize(&Raw_Disp_Data, &Gray_Disp_Data, 0, 256, CV_MINMAX);
-	//cv::imshow("Raw_Disp_Data", Raw_Disp_Data);
-	//cv::normalize(Raw_Disp_Data, Gray_Disp_Data);
+	Raw_Disp_Data = Gray_Disp_Data;
 	m_entity->setIconRawDisp(Gray_Disp_Data);
 
 	t = cv::getTickCount() - t;
