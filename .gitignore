@@ -167,3 +167,15 @@ MFC_version/.vs/*
 QuantEvision/.vs/*
 *.db
 *.weights
+/src/CustomGraphicsView/GeneratedFiles
+/src/CustomGraphicsView/x64
+/src/Evision/GeneratedFiles
+/src/Evision/x64
+/src/Evision3dViz/GeneratedFiles
+/src/Evision3dViz/x64
+/src/EvisionADCensus/x64
+/src/EvisionElas/x64
+/src/EvisionObjDetection/include
+/src/EvisionObjDetection/x64
+/src/packages
+/src/.vs
