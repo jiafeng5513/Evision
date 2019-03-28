@@ -25,35 +25,6 @@ public slots:
 	void SaveDisparities();
 	void Help();
 	//匹配参数
-	void valueChanged_MinDisp(int value);
-	void onParamChanged_MinDisp();
-
-	void valueChanged_uniradio(int value);
-	void onParamChanged_uniradio();
-
-	void valueChanged_specwinsz(int value);
-	void onParamChanged_specwinsz();
-
-	void valueChanged_NumDisparities(int value);
-	void onParamChanged_NumDisparities();
-	void onReleased_NumDisparities();//约束:被16 整除
-
-	void valueChanged_Specrange(int value);
-	void onParamChanged_Specrange();
-
-	void valueChanged_Prefilcap(int value);
-	void onParamChanged_Prefilcap();
-
-	void valueChanged_SadWinSize(int value);
-	void onParamChanged_SadWinSize();
-	void onReleased_SadWinSize();//约束:奇数
-
-	void valueChanged_TextThread(int value);
-	void onParamChanged_TextThread();
-
-	void valueChanged_MaxDifdisp2(int value);
-	void onParamChanged_MaxDifdisp2();
-
 	//1.int
 	void valueChanged_DMin(int value);
 	void onParamChanged_DMin();
@@ -207,13 +178,85 @@ public slots:
 
 	void onClicked_RectifiedInput(bool value);
 	void onParamChanged_RectifiedInput();
-	//SGBM_MODE
-	void onClicked_MODE_HH(bool value);
-	void onParamChanged_MODE_HH();
-	void onClicked_MODE_SGBM(bool value);
-	void onParamChanged_MODE_SGBM();
-	void onClicked_MODE_3WAY(bool value);
-	void onParamChanged_MODE_3WAY();
+
+	void valueChanged_BM_preFilterType_NORMALIZED(bool value);
+	void onParamChanged_BM_preFilterType_NORMALIZED();
+
+	void valueChanged_BM_preFilterType_XSOBEL(bool value);
+	void onParamChanged_BM_preFilterType_XSOBEL();
+
+	void valueChanged_BM_preFilterSize(int value);
+	void onParamChanged_BM_preFilterSize();
+
+	void valueChanged_BM_preFilterCap(int value);
+	void onParamChanged_BM_preFilterCap();
+
+	void valueChanged_BM_SADWindowSize(int value);
+	void onParamChanged_BM_SADWindowSize();
+
+	void valueChanged_BM_minDisparity(int value);
+	void onParamChanged_BM_minDisparity();
+
+	void valueChanged_BM_numDisparities(int value);
+	void onParamChanged_BM_numDisparities();
+
+	void valueChanged_BM_textureThreshold(int value);
+	void onParamChanged_BM_textureThreshold();
+
+	void valueChanged_BM_uniquenessRatio(int value);
+	void onParamChanged_BM_uniquenessRatio();
+
+	void valueChanged_BM_speckleRange(int value);
+	void onParamChanged_BM_speckleRange();
+
+	void valueChanged_BM_speckleWindowSize(int value);
+	void onParamChanged_BM_speckleWindowSize();
+
+	void valueChanged_BM_disp12MaxDiff(int value);
+	void onParamChanged_BM_disp12MaxDiff();
+
+	void valueChanged_SGBM_minDisparity(int value);
+	void onParamChanged_SGBM_minDisparity();
+
+	void valueChanged_SGBM_numDisparities(int value);
+	void onParamChanged_SGBM_numDisparities();
+
+	void valueChanged_SGBM_blockSize(int value);
+	void onParamChanged_SGBM_blockSize();
+
+	void valueChanged_SGBM_P1(int value);
+	void onParamChanged_SGBM_P1();
+
+	void valueChanged_SGBM_P2(int value);
+	void onParamChanged_SGBM_P2();
+
+	void valueChanged_SGBM_disp12MaxDiff(int value);
+	void onParamChanged_SGBM_disp12MaxDiff();
+
+	void valueChanged_SGBM_preFilterCap(int value);
+	void onParamChanged_SGBM_preFilterCap();
+
+	void valueChanged_SGBM_uniquenessRatio(int value);
+	void onParamChanged_SGBM_uniquenessRatio();
+
+	void valueChanged_SGBM_speckleWindowSize(int value);
+	void onParamChanged_SGBM_speckleWindowSize();
+
+	void valueChanged_SGBM_speckleRange(int value);
+	void onParamChanged_SGBM_speckleRange();
+
+	void valueChanged_SGBM_MODEL_3WAY(bool value);
+	void onParamChanged_SGBM_MODEL_3WAY();
+
+	void valueChanged_SGBM_MODEL_HH4(bool value);
+	void onParamChanged_SGBM_MODEL_HH4();
+
+	void valueChanged_SGBM_MODEL_Default(bool value);
+	void onParamChanged_SGBM_MODEL_Default();
+
+	void valueChanged_SGBM_MODEL_HH(bool value);
+	void onParamChanged_SGBM_MODEL_HH();
+
 	//图片显示
 	void onParamChanged_imgDtoShow();
 	void onParamChanged_IconImgL();

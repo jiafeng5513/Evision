@@ -40,328 +40,119 @@
      <property name="currentIndex">
       <number>1</number>
      </property>
-     <widget class="QWidget" name="page_opencv">
-      <layout class="QGridLayout" name="gridLayout">
-       <item row="7" column="0">
-        <widget class="QGroupBox" name="groupBox_7">
-         <property name="toolTip">
-          <string>连通区域内的最大视差变化</string>
-         </property>
+     <widget class="QWidget" name="page_BM">
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QGroupBox" name="groupBox_19">
          <property name="title">
-          <string>speckleRange</string>
+          <string>前处理</string>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_9">
+         <layout class="QHBoxLayout" name="horizontalLayout_20">
           <item>
-           <widget class="QLineEdit" name="lineEdit_specrange">
-            <property name="minimumSize">
-             <size>
-              <width>35</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>30</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-            <property name="placeholderText">
-             <string>0</string>
+           <widget class="QRadioButton" name="radioButton_BM_Prefilter_Normalzed">
+            <property name="text">
+             <string>归一化</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QSlider" name="horizontalSlider_specrange">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
+           <widget class="QRadioButton" name="radioButton_BM_Prefilter_XSobel">
+            <property name="text">
+             <string>X方向SOBEL</string>
             </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>20</height>
-             </size>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_20">
+         <property name="title">
+          <string>前处理参数</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_9">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_24">
+            <property name="text">
+             <string>归一化窗口大小:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QSpinBox" name="spinBox_BM_preFilterSize">
+            <property name="minimum">
+             <number>5</number>
             </property>
             <property name="maximum">
-             <number>64</number>
+             <number>255</number>
             </property>
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QGroupBox" name="groupBox">
-         <property name="toolTip">
-          <string>视差唯一性百分比</string>
-         </property>
-         <property name="title">
-          <string>uniquenessRatio</string>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_3">
-          <item>
-           <widget class="QLineEdit" name="lineEdit_uniradio">
-            <property name="minimumSize">
-             <size>
-              <width>35</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>30</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-            <property name="placeholderText">
-             <string>0</string>
+            <property name="singleStep">
+             <number>2</number>
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QSlider" name="horizontalSlider_uniradio">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_25">
+            <property name="text">
+             <string>XSOBEL截断值</string>
             </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>20</height>
-             </size>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QSpinBox" name="spinBox_BM_preFilterCap">
+            <property name="minimum">
+             <number>1</number>
             </property>
             <property name="maximum">
-             <number>50</number>
-            </property>
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
+             <number>63</number>
             </property>
            </widget>
           </item>
          </layout>
         </widget>
        </item>
-       <item row="0" column="0">
-        <widget class="QFrame" name="frame_4">
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
-          <property name="spacing">
-           <number>2</number>
-          </property>
-          <property name="leftMargin">
-           <number>2</number>
-          </property>
-          <property name="topMargin">
-           <number>2</number>
-          </property>
-          <property name="rightMargin">
-           <number>2</number>
-          </property>
-          <property name="bottomMargin">
-           <number>2</number>
-          </property>
-          <item>
-           <widget class="QRadioButton" name="radioButton_MODE_3WAY">
-            <property name="text">
-             <string>3WAY</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="radioButton_MODE_SGBM">
-            <property name="text">
-             <string>SGBM</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="radioButton_MODE_HH">
-            <property name="text">
-             <string>HH</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item row="8" column="0">
-        <widget class="QGroupBox" name="groupBox_10">
-         <property name="toolTip">
-          <string>左右视差图的最大容许差异</string>
-         </property>
+       <item>
+        <widget class="QGroupBox" name="groupBox_21">
          <property name="title">
-          <string>disp12MaxDiff</string>
+          <string>BM</string>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_10">
-          <item>
-           <widget class="QLineEdit" name="lineEdit_maxdifdisp12">
-            <property name="minimumSize">
-             <size>
-              <width>35</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>30</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-            <property name="placeholderText">
-             <string>0</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QSlider" name="horizontalSlider_maxdifdisp12">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>20</height>
-             </size>
-            </property>
+         <layout class="QGridLayout" name="gridLayout_10">
+          <item row="1" column="1">
+           <widget class="QSpinBox" name="spinBox_BM_minDisparity">
             <property name="minimum">
              <number>-1</number>
             </property>
             <property name="maximum">
-             <number>5</number>
-            </property>
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
+             <number>128</number>
             </property>
            </widget>
           </item>
-         </layout>
-        </widget>
-       </item>
-       <item row="9" column="0">
-        <widget class="QGroupBox" name="groupBox_11">
-         <property name="toolTip">
-          <string>低纹理区域的判断阈值</string>
-         </property>
-         <property name="title">
-          <string>TextureThreshold</string>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_11">
-          <item>
-           <widget class="QLineEdit" name="lineEdit_textThread">
-            <property name="minimumSize">
-             <size>
-              <width>35</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>30</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-            <property name="placeholderText">
-             <string>0</string>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_26">
+            <property name="text">
+             <string>SAD代价窗口大小</string>
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QSlider" name="horizontalSlider_textThread">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="maximum">
-             <number>50</number>
-            </property>
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_29">
+            <property name="text">
+             <string>低纹理判断阈值</string>
             </property>
            </widget>
           </item>
-         </layout>
-        </widget>
-       </item>
-       <item row="6" column="0">
-        <widget class="QGroupBox" name="groupBox_6">
-         <property name="toolTip">
-          <string>视差窗口大小</string>
-         </property>
-         <property name="title">
-          <string>numDisparities</string>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_8">
-          <item>
-           <widget class="QLineEdit" name="lineEdit_NumDisparities">
-            <property name="minimumSize">
-             <size>
-              <width>35</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>30</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-            <property name="placeholderText">
-             <string>16</string>
+          <item row="3" column="1">
+           <widget class="QSpinBox" name="spinBox_BM_textureThreshold"/>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_28">
+            <property name="text">
+             <string>视差窗口</string>
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QSlider" name="horizontalSlider_NumDisparities">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>20</height>
-             </size>
-            </property>
+          <item row="2" column="1">
+           <widget class="QSpinBox" name="spinBox_BM_numDisparities">
             <property name="minimum">
              <number>16</number>
             </property>
@@ -371,255 +162,298 @@
             <property name="singleStep">
              <number>16</number>
             </property>
-            <property name="pageStep">
-             <number>16</number>
-            </property>
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
            </widget>
           </item>
-         </layout>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QGroupBox" name="groupBox_2">
-         <property name="toolTip">
-          <string>前置滤波器截断值</string>
-         </property>
-         <property name="title">
-          <string>preFilterCap</string>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_4">
-          <item>
-           <widget class="QLineEdit" name="lineEdit_prefilcap">
-            <property name="minimumSize">
-             <size>
-              <width>35</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>30</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-            <property name="placeholderText">
-             <string>1</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QSlider" name="horizontalSlider_prefilcap">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="minimum">
-             <number>1</number>
-            </property>
-            <property name="maximum">
-             <number>100</number>
-            </property>
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="QGroupBox" name="groupBox_3">
-         <property name="toolTip">
-          <string>SAD窗口大小</string>
-         </property>
-         <property name="title">
-          <string>SADWindowSize</string>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_5">
-          <item>
-           <widget class="QLineEdit" name="lineEdit_SadWinSiz">
-            <property name="minimumSize">
-             <size>
-              <width>35</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>30</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-            <property name="placeholderText">
-             <string>5</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QSlider" name="horizontalSlider_SadWinSiz">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>20</height>
-             </size>
-            </property>
+          <item row="0" column="1">
+           <widget class="QSpinBox" name="spinBox_BM_SADWindowSize">
             <property name="minimum">
              <number>5</number>
             </property>
             <property name="maximum">
-             <number>51</number>
+             <number>255</number>
             </property>
             <property name="singleStep">
              <number>2</number>
             </property>
-            <property name="pageStep">
-             <number>2</number>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_27">
+            <property name="text">
+             <string>视差搜索起点</string>
             </property>
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="label_30">
+            <property name="text">
+             <string>视差唯一度</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QSpinBox" name="spinBox_BM_uniquenessRatio"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_22">
+         <property name="title">
+          <string>后处理</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_11">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_31">
+            <property name="text">
+             <string>散斑滤波窗口大小</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QSpinBox" name="spinBox_BM_speckleWindowSize"/>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_33">
+            <property name="text">
+             <string>散斑窗口内的最大容差</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QSpinBox" name="spinBox_BM_speckleRange"/>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_34">
+            <property name="text">
+             <string>左右一致性检查的最大容差</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QSpinBox" name="spinBox_BM_disp12MaxDiff">
+            <property name="minimum">
+             <number>-1</number>
             </property>
            </widget>
           </item>
          </layout>
         </widget>
        </item>
-       <item row="5" column="0">
-        <widget class="QGroupBox" name="groupBox_5">
-         <property name="toolTip">
-          <string>最小视差值</string>
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
          </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="page_SGBM">
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <widget class="QGroupBox" name="groupBox_26">
          <property name="title">
-          <string>minDisparity</string>
+          <string>模式</string>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_7">
+         <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
-           <widget class="QLineEdit" name="lineEdit_MinDisp">
-            <property name="minimumSize">
-             <size>
-              <width>35</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>30</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-            <property name="placeholderText">
-             <string>0</string>
+           <widget class="QRadioButton" name="radioButton_SGBM_MODEL_3WAY">
+            <property name="text">
+             <string>SGBM_3WAY</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QSlider" name="horizontalSlider_MinDisp">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
+           <widget class="QRadioButton" name="radioButton_SGBM_MODEL_HH4">
+            <property name="text">
+             <string>HH4</string>
             </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>20</height>
-             </size>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="radioButton_SGBM_MODEL_Default">
+            <property name="text">
+             <string>Default_SGBM</string>
             </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="radioButton_SGBM_MODEL_HH">
+            <property name="text">
+             <string>HH</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_23">
+         <property name="title">
+          <string>前处理参数</string>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_21">
+          <item>
+           <widget class="QLabel" name="label_35">
+            <property name="text">
+             <string>预处理截断值</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="spinBox_SGBM_preFilterCap"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_24">
+         <property name="title">
+          <string>SGBM</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_8">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_36">
+            <property name="text">
+             <string>视差搜索起点</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QSpinBox" name="spinBox_SGBM_minDisparity"/>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_37">
+            <property name="text">
+             <string>视差窗口</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QSpinBox" name="spinBox_SGBM_numDisparities">
             <property name="minimum">
-             <number>-64</number>
+             <number>1</number>
             </property>
             <property name="maximum">
-             <number>16</number>
-            </property>
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
+             <number>256</number>
             </property>
            </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_38">
+            <property name="text">
+             <string>匹配块大小</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QSpinBox" name="spinBox_SGBM_blockSize">
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="singleStep">
+             <number>2</number>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_39">
+            <property name="text">
+             <string>惩罚项P1</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QSpinBox" name="spinBox_SGBM_P1"/>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="label_40">
+            <property name="text">
+             <string>惩罚项P2</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QSpinBox" name="spinBox_SGBM_P2"/>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="label_41">
+            <property name="text">
+             <string>视差唯一度</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QSpinBox" name="spinBox_SGBM_uniquenessRatio"/>
           </item>
          </layout>
         </widget>
        </item>
-       <item row="4" column="0">
-        <widget class="QGroupBox" name="groupBox_4">
-         <property name="toolTip">
-          <string>视差连通区域变化度的窗口大小</string>
-         </property>
+       <item>
+        <widget class="QGroupBox" name="groupBox_25">
          <property name="title">
-          <string>SpeckleWindowSize</string>
+          <string>后处理参数</string>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_6">
-          <item>
-           <widget class="QLineEdit" name="lineEdit_specwinsz">
-            <property name="minimumSize">
-             <size>
-              <width>35</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>30</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-            <property name="placeholderText">
-             <string>0</string>
+         <layout class="QGridLayout" name="gridLayout_12">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_42">
+            <property name="text">
+             <string>散斑滤波窗口大小</string>
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QSlider" name="horizontalSlider_specwinsz">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>20</height>
-             </size>
+          <item row="0" column="1">
+           <widget class="QSpinBox" name="spinBox_SGBM_speckleWindowSize">
+            <property name="minimum">
+             <number>50</number>
             </property>
             <property name="maximum">
              <number>200</number>
             </property>
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_43">
+            <property name="text">
+             <string>散斑窗口内的最大容差</string>
             </property>
            </widget>
           </item>
+          <item row="1" column="1">
+           <widget class="QSpinBox" name="spinBox_SGBM_speckleRange"/>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_44">
+            <property name="text">
+             <string>左右一致性检查的最大容差</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QSpinBox" name="spinBox_SGBM_disp12MaxDiff"/>
+          </item>
          </layout>
         </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </widget>
@@ -1603,262 +1437,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>radioButton_MODE_HH</sender>
-   <signal>clicked(bool)</signal>
-   <receiver>MatcherView</receiver>
-   <slot>onClicked_MODE_HH(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>1051</x>
-     <y>88</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>971</x>
-     <y>435</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButton_MODE_3WAY</sender>
-   <signal>clicked(bool)</signal>
-   <receiver>MatcherView</receiver>
-   <slot>onClicked_MODE_3WAY(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>867</x>
-     <y>88</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>972</x>
-     <y>470</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButton_MODE_SGBM</sender>
-   <signal>clicked(bool)</signal>
-   <receiver>MatcherView</receiver>
-   <slot>onClicked_MODE_SGBM(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>959</x>
-     <y>88</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>971</x>
-     <y>507</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSlider_uniradio</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
-   <slot>valueChanged_uniradio(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>1044</x>
-     <y>139</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>656</x>
-     <y>70</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSlider_prefilcap</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
-   <slot>valueChanged_Prefilcap(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>1044</x>
-     <y>192</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>655</x>
-     <y>130</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSlider_specwinsz</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
-   <slot>valueChanged_specwinsz(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>1044</x>
-     <y>297</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>655</x>
-     <y>180</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSlider_SadWinSiz</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
-   <slot>valueChanged_SadWinSize(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>1044</x>
-     <y>244</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>654</x>
-     <y>238</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSlider_MinDisp</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
-   <slot>valueChanged_MinDisp(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>1044</x>
-     <y>350</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>656</x>
-     <y>296</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSlider_NumDisparities</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
-   <slot>valueChanged_NumDisparities(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>1044</x>
-     <y>402</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>654</x>
-     <y>341</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSlider_specrange</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
-   <slot>valueChanged_Specrange(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>1044</x>
-     <y>455</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>655</x>
-     <y>385</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSlider_maxdifdisp12</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
-   <slot>valueChanged_MaxDifdisp2(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>1044</x>
-     <y>508</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>656</x>
-     <y>433</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSlider_textThread</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
-   <slot>valueChanged_TextThread(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>1044</x>
-     <y>560</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>655</x>
-     <y>474</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSlider_NumDisparities</sender>
-   <signal>sliderReleased()</signal>
-   <receiver>MatcherView</receiver>
-   <slot>onReleased_NumDisparities()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>1044</x>
-     <y>402</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>996</x>
-     <y>307</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSlider_NumDisparities</sender>
-   <signal>sliderPressed()</signal>
-   <receiver>MatcherView</receiver>
-   <slot>onReleased_NumDisparities()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>1044</x>
-     <y>402</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>996</x>
-     <y>353</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSlider_SadWinSiz</sender>
-   <signal>sliderPressed()</signal>
-   <receiver>MatcherView</receiver>
-   <slot>onReleased_SadWinSize()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>1044</x>
-     <y>244</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>994</x>
-     <y>209</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSlider_SadWinSiz</sender>
-   <signal>sliderReleased()</signal>
-   <receiver>MatcherView</receiver>
-   <slot>onReleased_SadWinSize()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>1044</x>
-     <y>244</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>996</x>
-     <y>262</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>radioButton_ImageL</sender>
    <signal>clicked(bool)</signal>
    <receiver>MatcherView</receiver>
@@ -2025,7 +1603,7 @@
    <slot>valueChanged_DMin(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>911</x>
+     <x>837</x>
      <y>107</y>
     </hint>
     <hint type="destinationlabel">
@@ -2041,7 +1619,7 @@
    <slot>valueChanged_DMax(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1044</x>
+     <x>970</x>
      <y>107</y>
     </hint>
     <hint type="destinationlabel">
@@ -2057,7 +1635,7 @@
    <slot>valueChanged_CensusWinW(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>911</x>
+     <x>837</x>
      <y>156</y>
     </hint>
     <hint type="destinationlabel">
@@ -2073,7 +1651,7 @@
    <slot>valueChanged_CensusWinH(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>911</x>
+     <x>837</x>
      <y>182</y>
     </hint>
     <hint type="destinationlabel">
@@ -2089,7 +1667,7 @@
    <slot>valueChanged_LambdaCensus(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1044</x>
+     <x>970</x>
      <y>156</y>
     </hint>
     <hint type="destinationlabel">
@@ -2105,7 +1683,7 @@
    <slot>valueChanged_LambdaAD(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1044</x>
+     <x>970</x>
      <y>182</y>
     </hint>
     <hint type="destinationlabel">
@@ -2121,7 +1699,7 @@
    <slot>valueChanged_DefaultBorderCost(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1044</x>
+     <x>970</x>
      <y>208</y>
     </hint>
     <hint type="destinationlabel">
@@ -2137,7 +1715,7 @@
    <slot>valueChanged_MaxLength1(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>914</x>
+     <x>840</x>
      <y>254</y>
     </hint>
     <hint type="destinationlabel">
@@ -2153,7 +1731,7 @@
    <slot>valueChanged_MaxLength2(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>914</x>
+     <x>840</x>
      <y>280</y>
     </hint>
     <hint type="destinationlabel">
@@ -2169,7 +1747,7 @@
    <slot>valueChanged_AggregatingIterations(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>914</x>
+     <x>840</x>
      <y>306</y>
     </hint>
     <hint type="destinationlabel">
@@ -2185,7 +1763,7 @@
    <slot>valueChanged_ColorThreshold1(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1044</x>
+     <x>970</x>
      <y>254</y>
     </hint>
     <hint type="destinationlabel">
@@ -2201,7 +1779,7 @@
    <slot>valueChanged_ColorThreshold2(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1044</x>
+     <x>970</x>
      <y>280</y>
     </hint>
     <hint type="destinationlabel">
@@ -2217,7 +1795,7 @@
    <slot>valueChanged_ColorDifference(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>855</x>
+     <x>781</x>
      <y>354</y>
     </hint>
     <hint type="destinationlabel">
@@ -2233,7 +1811,7 @@
    <slot>valueChanged_Pi1(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>949</x>
+     <x>875</x>
      <y>354</y>
     </hint>
     <hint type="destinationlabel">
@@ -2249,7 +1827,7 @@
    <slot>valueChanged_Pi2(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1044</x>
+     <x>970</x>
      <y>354</y>
     </hint>
     <hint type="destinationlabel">
@@ -2265,7 +1843,7 @@
    <slot>valueChanged_DispTolerance(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>908</x>
+     <x>834</x>
      <y>405</y>
     </hint>
     <hint type="destinationlabel">
@@ -2281,7 +1859,7 @@
    <slot>valueChanged_MaxSearchDepth(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1044</x>
+     <x>970</x>
      <y>405</y>
     </hint>
     <hint type="destinationlabel">
@@ -2297,7 +1875,7 @@
    <slot>valueChanged_VotingThreshold(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>911</x>
+     <x>837</x>
      <y>456</y>
     </hint>
     <hint type="destinationlabel">
@@ -2313,7 +1891,7 @@
    <slot>valueChanged_VotingRatioThreshold(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1044</x>
+     <x>970</x>
      <y>456</y>
     </hint>
     <hint type="destinationlabel">
@@ -2329,7 +1907,7 @@
    <slot>valueChanged_CannyKernelSize(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>872</x>
+     <x>798</x>
      <y>507</y>
     </hint>
     <hint type="destinationlabel">
@@ -2345,7 +1923,7 @@
    <slot>valueChanged_CannyThreshold1(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>958</x>
+     <x>884</x>
      <y>507</y>
     </hint>
     <hint type="destinationlabel">
@@ -2361,7 +1939,7 @@
    <slot>valueChanged_CannyThreshold2(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1044</x>
+     <x>970</x>
      <y>507</y>
     </hint>
     <hint type="destinationlabel">
@@ -2393,8 +1971,8 @@
    <slot>valueChanged_DMin(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1005</x>
-     <y>94</y>
+     <x>953</x>
+     <y>99</y>
     </hint>
     <hint type="destinationlabel">
      <x>761</x>
@@ -2409,8 +1987,8 @@
    <slot>valueChanged_DMax(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>976</x>
-     <y>129</y>
+     <x>953</x>
+     <y>125</y>
     </hint>
     <hint type="destinationlabel">
      <x>762</x>
@@ -2425,8 +2003,8 @@
    <slot>valueChanged_SupportThreshold(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>948</x>
-     <y>160</y>
+     <x>953</x>
+     <y>151</y>
     </hint>
     <hint type="destinationlabel">
      <x>763</x>
@@ -2441,8 +2019,8 @@
    <slot>valueChanged_SupportTexture(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1024</x>
-     <y>196</y>
+     <x>953</x>
+     <y>177</y>
     </hint>
     <hint type="destinationlabel">
      <x>761</x>
@@ -2457,8 +2035,8 @@
    <slot>valueChanged_CandidateStepsize(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1004</x>
-     <y>233</y>
+     <x>953</x>
+     <y>203</y>
     </hint>
     <hint type="destinationlabel">
      <x>762</x>
@@ -2473,8 +2051,8 @@
    <slot>valueChanged_InconWindowSize(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>973</x>
-     <y>265</y>
+     <x>953</x>
+     <y>229</y>
     </hint>
     <hint type="destinationlabel">
      <x>761</x>
@@ -2489,8 +2067,8 @@
    <slot>valueChanged_InconThreshold(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>948</x>
-     <y>296</y>
+     <x>953</x>
+     <y>255</y>
     </hint>
     <hint type="destinationlabel">
      <x>761</x>
@@ -2505,8 +2083,8 @@
    <slot>valueChanged_InconMinSupport(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>952</x>
-     <y>326</y>
+     <x>953</x>
+     <y>281</y>
     </hint>
     <hint type="destinationlabel">
      <x>763</x>
@@ -2521,8 +2099,8 @@
    <slot>valueChanged_GridSize(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>982</x>
-     <y>361</y>
+     <x>953</x>
+     <y>307</y>
     </hint>
     <hint type="destinationlabel">
      <x>762</x>
@@ -2537,8 +2115,8 @@
    <slot>valueChanged_Beta(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>989</x>
-     <y>392</y>
+     <x>953</x>
+     <y>333</y>
     </hint>
     <hint type="destinationlabel">
      <x>763</x>
@@ -2553,8 +2131,8 @@
    <slot>valueChanged_Gamma(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>991</x>
-     <y>434</y>
+     <x>953</x>
+     <y>359</y>
     </hint>
     <hint type="destinationlabel">
      <x>762</x>
@@ -2569,8 +2147,8 @@
    <slot>valueChanged_Sigma(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>999</x>
-     <y>466</y>
+     <x>953</x>
+     <y>385</y>
     </hint>
     <hint type="destinationlabel">
      <x>761</x>
@@ -2585,8 +2163,8 @@
    <slot>valueChanged_Sradius(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1012</x>
-     <y>494</y>
+     <x>953</x>
+     <y>411</y>
     </hint>
     <hint type="destinationlabel">
      <x>763</x>
@@ -2601,8 +2179,8 @@
    <slot>valueChanged_MatchTexture(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>991</x>
-     <y>526</y>
+     <x>953</x>
+     <y>437</y>
     </hint>
     <hint type="destinationlabel">
      <x>761</x>
@@ -2617,8 +2195,8 @@
    <slot>valueChanged_LrThreshold(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1000</x>
-     <y>558</y>
+     <x>953</x>
+     <y>463</y>
     </hint>
     <hint type="destinationlabel">
      <x>762</x>
@@ -2633,8 +2211,8 @@
    <slot>valueChanged_SpeckleSimThreshold(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1010</x>
-     <y>593</y>
+     <x>953</x>
+     <y>489</y>
     </hint>
     <hint type="destinationlabel">
      <x>761</x>
@@ -2649,8 +2227,8 @@
    <slot>valueChanged_SpeckleSize(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>978</x>
-     <y>631</y>
+     <x>953</x>
+     <y>515</y>
     </hint>
     <hint type="destinationlabel">
      <x>762</x>
@@ -2665,8 +2243,8 @@
    <slot>valueChanged_IpolGapWidth(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1013</x>
-     <y>664</y>
+     <x>953</x>
+     <y>541</y>
     </hint>
     <hint type="destinationlabel">
      <x>762</x>
@@ -2681,8 +2259,8 @@
    <slot>valueChanged_AddCorners(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>830</x>
-     <y>690</y>
+     <x>859</x>
+     <y>563</y>
     </hint>
     <hint type="destinationlabel">
      <x>1071</x>
@@ -2697,8 +2275,8 @@
    <slot>valueChanged_SubSampling(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>873</x>
-     <y>722</y>
+     <x>859</x>
+     <y>585</y>
     </hint>
     <hint type="destinationlabel">
      <x>1072</x>
@@ -2713,12 +2291,12 @@
    <slot>valueChanged_PostprocessOnlyLeft(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>896</x>
-     <y>745</y>
+     <x>859</x>
+     <y>607</y>
     </hint>
     <hint type="destinationlabel">
      <x>1073</x>
-     <y>743</y>
+     <y>741</y>
     </hint>
    </hints>
   </connection>
@@ -2729,12 +2307,12 @@
    <slot>valueChanged_FilterAdaptiveMean(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>899</x>
-     <y>774</y>
+     <x>859</x>
+     <y>629</y>
     </hint>
     <hint type="destinationlabel">
      <x>1071</x>
-     <y>780</y>
+     <y>741</y>
     </hint>
    </hints>
   </connection>
@@ -2745,12 +2323,428 @@
    <slot>valueChanged_FilterMedian(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>863</x>
-     <y>807</y>
+     <x>859</x>
+     <y>651</y>
     </hint>
     <hint type="destinationlabel">
      <x>1069</x>
-     <y>820</y>
+     <y>741</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_BM_Prefilter_Normalzed</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_BM_preFilterType_NORMALIZED(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>837</x>
+     <y>107</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1167</x>
+     <y>23</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_BM_Prefilter_XSobel</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_BM_preFilterType_XSOBEL(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>970</x>
+     <y>107</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1166</x>
+     <y>56</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_BM_preFilterSize</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_BM_preFilterSize(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>970</x>
+     <y>165</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1168</x>
+     <y>99</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_BM_preFilterCap</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_BM_preFilterCap(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>970</x>
+     <y>191</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1166</x>
+     <y>137</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_BM_SADWindowSize</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_BM_SADWindowSize(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>970</x>
+     <y>249</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1167</x>
+     <y>182</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_BM_minDisparity</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_BM_minDisparity(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>970</x>
+     <y>275</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1168</x>
+     <y>218</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_BM_numDisparities</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_BM_numDisparities(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>970</x>
+     <y>301</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1167</x>
+     <y>257</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_BM_textureThreshold</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_BM_textureThreshold(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>970</x>
+     <y>327</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1168</x>
+     <y>297</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_BM_uniquenessRatio</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_BM_uniquenessRatio(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>970</x>
+     <y>353</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1166</x>
+     <y>336</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_BM_speckleWindowSize</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_BM_speckleWindowSize(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>970</x>
+     <y>411</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1166</x>
+     <y>378</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_BM_speckleRange</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_BM_speckleRange(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>970</x>
+     <y>437</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1167</x>
+     <y>420</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_BM_disp12MaxDiff</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_BM_disp12MaxDiff(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>970</x>
+     <y>463</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1167</x>
+     <y>460</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_SGBM_MODEL_3WAY</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_SGBM_MODEL_3WAY(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>902</x>
+     <y>95</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>859</x>
+     <y>64</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_SGBM_MODEL_HH4</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_SGBM_MODEL_HH4(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>891</x>
+     <y>123</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>858</x>
+     <y>101</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_SGBM_MODEL_Default</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_SGBM_MODEL_Default(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>915</x>
+     <y>146</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>859</x>
+     <y>138</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_SGBM_preFilterCap</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_SGBM_preFilterCap(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>970</x>
+     <y>231</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1165</x>
+     <y>170</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_SGBM_minDisparity</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_SGBM_minDisparity(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>970</x>
+     <y>289</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1166</x>
+     <y>207</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_SGBM_numDisparities</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_SGBM_numDisparities(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>970</x>
+     <y>315</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1167</x>
+     <y>246</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_SGBM_blockSize</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_SGBM_blockSize(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>970</x>
+     <y>341</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1167</x>
+     <y>288</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_SGBM_P1</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_SGBM_P1(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>970</x>
+     <y>367</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1169</x>
+     <y>328</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_SGBM_P2</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_SGBM_P2(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>970</x>
+     <y>393</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1167</x>
+     <y>364</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_SGBM_uniquenessRatio</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_SGBM_uniquenessRatio(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>970</x>
+     <y>419</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1167</x>
+     <y>404</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_SGBM_speckleWindowSize</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_SGBM_speckleWindowSize(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>970</x>
+     <y>477</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1167</x>
+     <y>446</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_SGBM_speckleRange</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_SGBM_speckleRange(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>970</x>
+     <y>503</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1166</x>
+     <y>488</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_SGBM_disp12MaxDiff</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_SGBM_disp12MaxDiff(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>970</x>
+     <y>529</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1165</x>
+     <y>560</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_SGBM_MODEL_HH</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MatcherView</receiver>
+   <slot>valueChanged_SGBM_MODEL_HH(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>742</x>
+     <y>163</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>995</x>
+     <y>116</y>
     </hint>
    </hints>
   </connection>
@@ -2761,20 +2755,6 @@
   <slot>RefreshStereoMatch()</slot>
   <slot>onClicked_BM(bool)</slot>
   <slot>onClicked_SGBM(bool)</slot>
-  <slot>onClicked_MODE_HH(bool)</slot>
-  <slot>onClicked_MODE_SGBM(bool)</slot>
-  <slot>onClicked_MODE_3WAY(bool)</slot>
-  <slot>valueChanged_MinDisp(int)</slot>
-  <slot>valueChanged_uniradio(int)</slot>
-  <slot>valueChanged_specwinsz(int)</slot>
-  <slot>valueChanged_NumDisparities(int)</slot>
-  <slot>valueChanged_Specrange(int)</slot>
-  <slot>valueChanged_Prefilcap(int)</slot>
-  <slot>valueChanged_SadWinSize(int)</slot>
-  <slot>valueChanged_TextThread(int)</slot>
-  <slot>valueChanged_MaxDifdisp2(int)</slot>
-  <slot>onReleased_NumDisparities()</slot>
-  <slot>onReleased_SadWinSize()</slot>
   <slot>onClicked_IconImgL(bool)</slot>
   <slot>onClicked_IconImgR(bool)</slot>
   <slot>onClicked_IconRawDisp(bool)</slot>
@@ -2829,5 +2809,31 @@
   <slot>valueChanged_PostprocessOnlyLeft(bool)</slot>
   <slot>valueChanged_SubSampling(bool)</slot>
   <slot>valueChanged_CandidateStepsize(int)</slot>
+  <slot>valueChanged_BM_preFilterType_NORMALIZED(bool)</slot>
+  <slot>valueChanged_BM_preFilterType_XSOBEL(bool)</slot>
+  <slot>valueChanged_BM_preFilterSize(int)</slot>
+  <slot>valueChanged_BM_preFilterCap(int)</slot>
+  <slot>valueChanged_BM_SADWindowSize(int)</slot>
+  <slot>valueChanged_BM_minDisparity(int)</slot>
+  <slot>valueChanged_BM_numDisparities(int)</slot>
+  <slot>valueChanged_BM_textureThreshold(int)</slot>
+  <slot>valueChanged_BM_uniquenessRatio(int)</slot>
+  <slot>valueChanged_BM_speckleRange(int)</slot>
+  <slot>valueChanged_BM_speckleWindowSize(int)</slot>
+  <slot>valueChanged_BM_disp12MaxDiff(int)</slot>
+  <slot>valueChanged_SGBM_minDisparity(int)</slot>
+  <slot>valueChanged_SGBM_numDisparities(int)</slot>
+  <slot>valueChanged_SGBM_blockSize(int)</slot>
+  <slot>valueChanged_SGBM_P1(int)</slot>
+  <slot>valueChanged_SGBM_P2(int)</slot>
+  <slot>valueChanged_SGBM_disp12MaxDiff(int)</slot>
+  <slot>valueChanged_SGBM_preFilterCap(int)</slot>
+  <slot>valueChanged_SGBM_uniquenessRatio(int)</slot>
+  <slot>valueChanged_SGBM_speckleWindowSize(int)</slot>
+  <slot>valueChanged_SGBM_speckleRange(int)</slot>
+  <slot>valueChanged_SGBM_MODEL_3WAY(bool)</slot>
+  <slot>valueChanged_SGBM_MODEL_HH4(bool)</slot>
+  <slot>valueChanged_SGBM_MODEL_Default(bool)</slot>
+  <slot>valueChanged_SGBM_MODEL_HH(bool)</slot>
  </slots>
 </ui>

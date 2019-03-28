@@ -17,28 +17,31 @@ void StereoMatchController::setDefaultMatchParamCommand()
 {
 	if (m_entity->getBM())
 	{
-		m_entity->setUniradio(5);
-		m_entity->setPrefilcap(31);
-		m_entity->setSpecwinsz(69);
-		m_entity->setSadWinsz(21);
-		m_entity->setMinDisp(-3);
-		m_entity->setNumDisparities(144);
-		m_entity->setSpecrange(34);
-		m_entity->setMaxdifdisp12(2);
-		m_entity->setTextThread(50);
-
+		m_entity->setBM_preFilterType_NORMALIZED(true);
+		m_entity->setBM_preFilterSize(5);
+		m_entity->setBM_uniquenessRatio(5);
+		m_entity->setBM_preFilterCap(31);
+		m_entity->setBM_speckleWindowSize(69);
+		m_entity->setBM_SADWindowSize(21);
+		m_entity->setBM_minDisparity(-1);
+		m_entity->setBM_numDisparities(144);
+		m_entity->setBM_speckleRange(34);
+		m_entity->setBM_disp12MaxDiff(2);
+		m_entity->setBM_textureThreshold(50);
 	}
 	else if (m_entity->getSGBM())
 	{
-		m_entity->setUniradio(5);
-		m_entity->setPrefilcap(47);
-		m_entity->setSpecwinsz(1);
-		m_entity->setSadWinsz(17);
-		m_entity->setMinDisp(1);
-		m_entity->setNumDisparities(64);
-		m_entity->setSpecrange(14);
-		m_entity->setMaxdifdisp12(1);
-		m_entity->setMODE_HH(true);
+		m_entity->setSGBM_minDisparity(1);
+		m_entity->setSGBM_numDisparities(64);
+		m_entity->setSGBM_blockSize(3);
+		m_entity->setSGBM_P1(8);
+		m_entity->setSGBM_P2(32);
+		m_entity->setSGBM_disp12MaxDiff(6);
+		m_entity->setSGBM_preFilterCap(47);
+		m_entity->setSGBM_uniquenessRatio(5);
+		m_entity->setSGBM_speckleWindowSize(1);
+		m_entity->setSGBM_speckleRange(14);
+		m_entity->setSGBM_MODEL_Default(true);
 	}
 	else if (m_entity->getElas())
 	{

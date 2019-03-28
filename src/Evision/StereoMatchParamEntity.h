@@ -15,16 +15,36 @@ private:
 	StereoMatchParamEntity(QObject *parent = 0);
 private:
 #pragma region params
-	//BM和SGBM的参数
-	int Uniradio = 0;			//
-	int Prefilcap = 0;			//
-	int Specwinsz = 0;			//
-	int SadWinsz = 0;			//
-	int MinDisp = 0;			//
-	int TextThread = 0;			//
-	int NumDisparities = 0;		// numDisparities	
-	int Specrange = 0;			//	
-	int Maxdifdisp12 = 0;		//	
+	//BM 参数
+	bool BM_preFilterType_NORMALIZED = false; //使用归一化作为前处理
+	bool BM_preFilterType_XSOBEL = false;	  //使用XSOBEL作为前处理
+	int BM_preFilterSize = 0;				  //归一化窗口大小,[5,255]之间的奇数
+	int BM_preFilterCap = 0;				  //XSobel截断值.[1,63]
+	int BM_SADWindowSize = 0;				  //SAD窗口大小,[5,255]之间的奇数且不能大于图片的宽或高
+	int BM_minDisparity = 0;				  //视差搜索起点
+	int BM_numDisparities = 0;				  //视差窗口,一个推荐值是((width / 8) + 15) & (~0xfl),必须能被16整除
+	int BM_textureThreshold = 0;			  //低纹理区域的判断阈值. 非负数
+	int BM_uniquenessRatio = 0;				  //视差唯一性百分比,非负数
+	int BM_speckleRange = 0;				  //散斑窗口内允许的最大波动值
+	int BM_speckleWindowSize = 0;			  //散斑滤波窗口大小,<=0时不进行散斑滤波
+	int BM_disp12MaxDiff = 0;				  //左右一致性检查的最大容差,小于0时跳过
+
+	//SGBM参数
+	int SGBM_minDisparity = 0;				  //视差搜索起点
+	int SGBM_numDisparities = 0;			  //视差窗口,一个推荐值是((width / 8) + 15) & (~0xfl),必须能被16整除
+	int SGBM_blockSize = 0;					  //匹配块大小,一般在[3,11]
+	int SGBM_P1 = 0;						  //惩罚系数P1
+	int SGBM_P2 = 0;						  //惩罚系数P2,P2>P1
+	int SGBM_disp12MaxDiff = 0;				  //左右一致性检查的最大容差,小于0时跳过
+	int SGBM_preFilterCap = 0;				  //前处理截断值.
+	int SGBM_uniquenessRatio = 0;			  //视差唯一性百分比,非负数,[5,15]	
+	int SGBM_speckleWindowSize = 0;			  //散斑滤波窗口大小,<=0时不进行散斑滤波,0禁用,取值[50,200]
+	int SGBM_speckleRange = 0;				  //散斑窗口内允许的最大波动值,内部乘16起效,整数,常[1,2]
+	bool SGBM_MODEL_3WAY = false;			  //3Way模式
+	bool SGBM_MODEL_HH4 = false;			  //HH4模式
+	bool SGBM_MODEL_Default = false;		  //默认模式
+	bool SGBM_MODEL_HH = false;				  //HH模式
+
 	//ADCensus的参数
 	// Minimum and maximum disparity
 	uint dMin = 0;
@@ -83,10 +103,6 @@ private:
 	bool postprocess_only_left;	   // saves time by not postprocessing the right image
 	bool subsampling;			   // saves time by only computing disparities for each 2nd pixel
 	// note: for this option D1 and D2 must be passed with size width/2 x height/2 (rounded towards zero)
-	//SGBM的三种模式
-	bool MODE_HH = false;
-	bool MODE_SGBM = false;
-	bool MODE_3WAY = false;
 
 	//四种可选算法
 	bool BM = false;
@@ -107,23 +123,11 @@ private:
 
 signals:
 #pragma region param_Changed_signals
-	void paramChanged_Uniradio();
-	void paramChanged_Prefilcap();
-	void paramChanged_Specwinsz();
-	void paramChanged_SadWinsz();
-	void paramChanged_MinDisp();
-	void paramChanged_TextThread();
-	void paramChanged_NumDisparities();
-	void paramChanged_Specrange();
-	void paramChanged_Maxdifdisp12();
 	void paramChanged_BM();
 	void paramChanged_SGBM();
 	void paramChanged_ELAS();
 	void paramChanged_RectifiedInput();
 	void paramChanged_ADCensus();
-	void paramChanged_MODE_HH();
-	void paramChanged_MODE_SGBM();
-	void paramChanged_MODE_3WAY();
 	void paramChanged_ImageDtoShow();
 	void paramChanged_IconImgL();
 	void paramChanged_IconImgR();
@@ -178,37 +182,37 @@ signals:
 	void paramChanged_postprocess_only_left();
 	void paramChanged_subsampling();
 
+	void paramChanged_BM_preFilterType_NORMALIZED();
+	void paramChanged_BM_preFilterType_XSOBEL();
+	void paramChanged_BM_preFilterSize();
+	void paramChanged_BM_preFilterCap();
+	void paramChanged_BM_SADWindowSize();
+	void paramChanged_BM_minDisparity();
+	void paramChanged_BM_numDisparities();
+	void paramChanged_BM_textureThreshold();
+	void paramChanged_BM_uniquenessRatio();
+	void paramChanged_BM_speckleRange();
+	void paramChanged_BM_speckleWindowSize();
+	void paramChanged_BM_disp12MaxDiff();
+	void paramChanged_SGBM_minDisparity();
+	void paramChanged_SGBM_numDisparities();
+	void paramChanged_SGBM_blockSize();
+	void paramChanged_SGBM_P1();
+	void paramChanged_SGBM_P2();
+	void paramChanged_SGBM_disp12MaxDiff();
+	void paramChanged_SGBM_preFilterCap();
+	void paramChanged_SGBM_uniquenessRatio();
+	void paramChanged_SGBM_speckleWindowSize();
+	void paramChanged_SGBM_speckleRange();
+	void paramChanged_SGBM_MODEL_3WAY();
+	void paramChanged_SGBM_MODEL_HH4();
+	void paramChanged_SGBM_MODEL_Default();
+	void paramChanged_SGBM_MODEL_HH();
+
 #pragma endregion
 
 public:
 #pragma region getter And setter
-	int getUniradio();
-	void setUniradio(int value);
-
-	int getPrefilcap();
-	void setPrefilcap(int value);
-
-	int getSpecwinsz();
-	void setSpecwinsz(int value);
-
-	int getSadWinsz();
-	void setSadWinsz(int value);
-
-	int getMinDisp();
-	void setMinDisp(int value);
-
-	int getTextThread();
-	void setTextThread(int value);
-
-	int getNumDisparities();
-	void setNumDisparities(int value);
-
-	int getSpecrange();
-	void setSpecrange(int value);
-
-	int getMaxdifdisp12();
-	void setMaxdifdisp12(int value);
-
 	bool getBM();
 	void setBM(bool value);
 
@@ -220,15 +224,6 @@ public:
 
 	bool getADCensus();
 	void setADCensus(bool value);
-
-	bool getMODE_HH();
-	void setMODE_HH(bool value);
-
-	bool getMODE_SGBM();
-	void setMODE_SGBM(bool value);
-
-	bool getMODE_3WAY();
-	void setMODE_3WAY(bool value);
 
 	bool getRectifiedInput();
 	void setRectifiedInput(bool value);
@@ -371,6 +366,84 @@ public:
 
 	void setSubSampling(bool value);
 	bool getSubSampling();
+
+	void setBM_preFilterType_NORMALIZED(bool value);
+	bool getBM_preFilterType_NORMALIZED();
+
+	void setBM_preFilterType_XSOBEL(bool value);
+	bool getBM_preFilterType_XSOBEL();
+
+	void setBM_preFilterSize(int value);
+	int getBM_preFilterSize();
+
+	void setBM_preFilterCap(int value);
+	int getBM_preFilterCap();
+
+	void setBM_SADWindowSize(int value);
+	int getBM_SADWindowSize();
+
+	void setBM_minDisparity(int value);
+	int getBM_minDisparity();
+
+	void setBM_numDisparities(int value);
+	int getBM_numDisparities();
+
+	void setBM_textureThreshold(int value);
+	int getBM_textureThreshold();
+
+	void setBM_uniquenessRatio(int value);
+	int getBM_uniquenessRatio();
+
+	void setBM_speckleRange(int value);
+	int getBM_speckleRange();
+
+	void setBM_speckleWindowSize(int value);
+	int getBM_speckleWindowSize();
+
+	void setBM_disp12MaxDiff(int value);
+	int getBM_disp12MaxDiff();
+
+	void setSGBM_minDisparity(int value);
+	int getSGBM_minDisparity();
+
+	void setSGBM_numDisparities(int value);
+	int getSGBM_numDisparities();
+
+	void setSGBM_blockSize(int value);
+	int getSGBM_blockSize();
+
+	void setSGBM_P1(int value);
+	int getSGBM_P1();
+
+	void setSGBM_P2(int value);
+	int getSGBM_P2();
+
+	void setSGBM_disp12MaxDiff(int value);
+	int getSGBM_disp12MaxDiff();
+
+	void setSGBM_preFilterCap(int value);
+	int getSGBM_preFilterCap();
+
+	void setSGBM_uniquenessRatio(int value);
+	int getSGBM_uniquenessRatio();
+
+	void setSGBM_speckleWindowSize(int value);
+	int getSGBM_speckleWindowSize();
+
+	void setSGBM_speckleRange(int value);
+	int getSGBM_speckleRange();
+
+	void setSGBM_MODEL_3WAY(bool value);
+	bool getSGBM_MODEL_3WAY();
+
+	void setSGBM_MODEL_HH4(bool value);
+	bool getSGBM_MODEL_HH4();
+
+	void setSGBM_MODEL_Default(bool value);
+	bool getSGBM_MODEL_Default();
+
+	void setSGBM_MODEL_HH(bool value);
+	bool getSGBM_MODEL_HH();
 
 	cv::Mat getImageDtoShow();
 	void setImageDtoShow(cv::Mat value);

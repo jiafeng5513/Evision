@@ -271,15 +271,24 @@ void StereoMatch::OpenCVBM()
 	cv::Ptr<cv::StereoBM> bm = cv::StereoBM::create();
 	//bm->setROI1(roi1);
 	//bm->setROI2(roi2);
-	bm->setPreFilterCap(m_entity->getPrefilcap());
-	bm->setBlockSize(m_entity->getSadWinsz());
-	bm->setMinDisparity(m_entity->getMinDisp());
-	bm->setNumDisparities(m_entity->getNumDisparities());
-	bm->setTextureThreshold(m_entity->getTextThread());
-	bm->setUniquenessRatio(m_entity->getUniradio());
-	bm->setSpeckleWindowSize(m_entity->getSpecwinsz());
-	bm->setSpeckleRange(m_entity->getSpecrange());
-	bm->setDisp12MaxDiff(m_entity->getMaxdifdisp12());
+	if (m_entity->getBM_preFilterType_XSOBEL()==true)
+	{
+		bm->setPreFilterType(cv::StereoBM::PREFILTER_XSOBEL);
+	}
+	else
+	{
+		bm->setPreFilterType(cv::StereoBM::PREFILTER_NORMALIZED_RESPONSE);
+	}
+	bm->setPreFilterSize(m_entity->getBM_preFilterSize());
+	bm->setPreFilterCap(m_entity->getBM_preFilterCap());
+	bm->setBlockSize(m_entity->getBM_SADWindowSize());//bm算法的BlockSize就是SADWindowSize
+	bm->setMinDisparity(m_entity->getBM_minDisparity());
+	bm->setNumDisparities(m_entity->getBM_numDisparities());
+	bm->setTextureThreshold(m_entity->getBM_textureThreshold());
+	bm->setUniquenessRatio(m_entity->getBM_uniquenessRatio());
+	bm->setSpeckleRange(m_entity->getBM_speckleRange());
+	bm->setSpeckleWindowSize(m_entity->getBM_speckleWindowSize());
+	bm->setDisp12MaxDiff(m_entity->getBM_disp12MaxDiff());
 	int64 t = cv::getTickCount();
 	bm->compute(img1G, img2G, Raw_Disp_Data);
 
@@ -301,25 +310,33 @@ void StereoMatch::OpenCVSGBM()
 	std::cout << "SGBM 开始计算..." << std::endl;
 	m_entity->setIconImgL(img1);
 	m_entity->setIconImgR(img2);
+
 	cv::Ptr<cv::StereoSGBM> sgbm = cv::StereoSGBM::create(0, 16, 3);
 
-	sgbm->setPreFilterCap(m_entity->getPrefilcap());
-	sgbm->setBlockSize(m_entity->getSadWinsz());
-	int cn = img1.channels();
-	sgbm->setP1(8 * cn*m_entity->getSadWinsz()*m_entity->getSadWinsz());
-	sgbm->setP2(32 * cn*m_entity->getSadWinsz()*m_entity->getSadWinsz());
-	sgbm->setMinDisparity(m_entity->getMinDisp());
-	sgbm->setNumDisparities(m_entity->getNumDisparities());
-	sgbm->setUniquenessRatio(m_entity->getUniradio());
-	sgbm->setSpeckleWindowSize(m_entity->getSpecwinsz());
-	sgbm->setSpeckleRange(m_entity->getSpecrange());
-	sgbm->setDisp12MaxDiff(m_entity->getMaxdifdisp12());
-	if (m_entity->getMODE_HH())
-		sgbm->setMode(cv::StereoSGBM::MODE_HH);
-	else if (m_entity->getMODE_SGBM())
-		sgbm->setMode(cv::StereoSGBM::MODE_SGBM);
-	else if (m_entity->getMODE_3WAY())
+	sgbm->setMinDisparity(m_entity->getSGBM_minDisparity());
+	sgbm->setNumDisparities(m_entity->getSGBM_numDisparities());
+	sgbm->setBlockSize(m_entity->getSGBM_blockSize());
+
+	int delta = img1.channels()*m_entity->getSGBM_blockSize()*m_entity->getSGBM_blockSize();
+	int p1 = (m_entity->getSGBM_P1() < m_entity->getSGBM_P2() ? m_entity->getSGBM_P1() : 8 * delta);
+	int p2 = (m_entity->getSGBM_P1() < m_entity->getSGBM_P2() ? m_entity->getSGBM_P2() : 32 * delta);
+	sgbm->setP1(p1);
+	sgbm->setP2(p2);
+
+	sgbm->setDisp12MaxDiff(m_entity->getSGBM_disp12MaxDiff());
+	sgbm->setPreFilterCap(m_entity->getSGBM_preFilterCap());
+	sgbm->setUniquenessRatio(m_entity->getSGBM_uniquenessRatio());
+	sgbm->setSpeckleWindowSize(m_entity->getSGBM_speckleWindowSize());
+	sgbm->setSpeckleRange(m_entity->getSGBM_speckleRange());
+
+	if (m_entity->getSGBM_MODEL_HH4())
+		sgbm->setMode(cv::StereoSGBM::MODE_HH4);
+	else if (m_entity->getSGBM_MODEL_3WAY())
 		sgbm->setMode(cv::StereoSGBM::MODE_SGBM_3WAY);
+	else if (m_entity->getSGBM_MODEL_Default())
+		sgbm->setMode(cv::StereoSGBM::MODE_SGBM);
+	else 
+		sgbm->setMode(cv::StereoSGBM::MODE_HH);
 
 	int64 t = cv::getTickCount();
 	sgbm->compute(img1, img2, Raw_Disp_Data);

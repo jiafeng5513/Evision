@@ -17,96 +17,6 @@ StereoMatchParamEntity::~StereoMatchParamEntity()
 {
 }
 
-int StereoMatchParamEntity::getUniradio()
-{
-	return Uniradio;
-}
-void StereoMatchParamEntity::setUniradio(int value)
-{
-	Uniradio = value;
-	emit paramChanged_Uniradio();
-}
-
-int StereoMatchParamEntity::getPrefilcap()
-{
-	return Prefilcap;
-}
-void StereoMatchParamEntity::setPrefilcap(int value)
-{
-	Prefilcap = value;
-	emit paramChanged_Prefilcap();
-}
-
-int StereoMatchParamEntity::getSpecwinsz()
-{
-	return Specwinsz;
-}
-void StereoMatchParamEntity::setSpecwinsz(int value)
-{
-	Specwinsz = value;
-	emit paramChanged_Specwinsz();
-}
-
-int StereoMatchParamEntity::getSadWinsz()
-{
-	return SadWinsz;
-}
-void StereoMatchParamEntity::setSadWinsz(int value)
-{
-	SadWinsz = value;
-	emit paramChanged_SadWinsz();
-}
-
-int StereoMatchParamEntity::getMinDisp()
-{
-	return MinDisp;
-}
-void StereoMatchParamEntity::setMinDisp(int value)
-{
-	MinDisp = value;
-	emit paramChanged_MinDisp();
-}
-
-int StereoMatchParamEntity::getTextThread()
-{
-	return TextThread;
-}
-void StereoMatchParamEntity::setTextThread(int value)
-{
-	TextThread = value;
-	emit paramChanged_TextThread();
-}
-
-int StereoMatchParamEntity::getNumDisparities()
-{
-	return NumDisparities;
-}
-void StereoMatchParamEntity::setNumDisparities(int value)
-{
-	NumDisparities = value;
-	emit paramChanged_NumDisparities();
-}
-
-int StereoMatchParamEntity::getSpecrange()
-{
-	return Specrange;
-}
-void StereoMatchParamEntity::setSpecrange(int value)
-{
-	Specrange = value;
-	emit paramChanged_Specrange();
-}
-
-int StereoMatchParamEntity::getMaxdifdisp12()
-{
-	return Maxdifdisp12;
-}
-void StereoMatchParamEntity::setMaxdifdisp12(int value)
-{
-	Maxdifdisp12 = value;
-	emit paramChanged_Maxdifdisp12();
-}
-
 bool StereoMatchParamEntity::getBM()
 {
 	return BM;
@@ -169,51 +79,6 @@ void StereoMatchParamEntity::setADCensus(bool value)
 		ELAS = false;
 	}
 	emit paramChanged_ADCensus();
-}
-
-bool StereoMatchParamEntity::getMODE_HH()
-{
-	return MODE_HH;
-}
-void StereoMatchParamEntity::setMODE_HH(bool value)
-{
-	MODE_HH = value;
-	if (value)
-	{
-		MODE_SGBM = false;
-		MODE_3WAY = false;
-	}
-	emit paramChanged_MODE_HH();
-}
-
-bool StereoMatchParamEntity::getMODE_SGBM()
-{
-	return MODE_SGBM;
-}
-void StereoMatchParamEntity::setMODE_SGBM(bool value)
-{
-	MODE_SGBM = value;
-	if (value)
-	{
-		MODE_HH = false;
-		MODE_3WAY = false;
-	}
-	emit paramChanged_MODE_SGBM();
-}
-
-bool StereoMatchParamEntity::getMODE_3WAY()
-{
-	return MODE_3WAY;
-}
-void StereoMatchParamEntity::setMODE_3WAY(bool value)
-{
-	MODE_3WAY = value;
-	if (value)
-	{
-		MODE_HH = false;
-		MODE_SGBM = false;
-	}
-	emit paramChanged_MODE_3WAY();
 }
 
 bool StereoMatchParamEntity::getRectifiedInput()
@@ -573,6 +438,216 @@ bool StereoMatchParamEntity::getSubSampling() {
 	return subsampling;
 }
 
+void StereoMatchParamEntity::setBM_preFilterType_NORMALIZED(bool value) {
+	BM_preFilterType_NORMALIZED = value;
+	emit paramChanged_BM_preFilterType_NORMALIZED();
+}
+bool StereoMatchParamEntity::getBM_preFilterType_NORMALIZED() {
+	return BM_preFilterType_NORMALIZED;
+}
+
+void StereoMatchParamEntity::setBM_preFilterType_XSOBEL(bool value) {
+	BM_preFilterType_XSOBEL = value;
+	emit paramChanged_BM_preFilterType_XSOBEL();
+}
+bool StereoMatchParamEntity::getBM_preFilterType_XSOBEL() {
+	return BM_preFilterType_XSOBEL;
+}
+
+void StereoMatchParamEntity::setBM_preFilterSize(int value) {
+	BM_preFilterSize = value;
+	emit paramChanged_BM_preFilterSize();
+}
+int StereoMatchParamEntity::getBM_preFilterSize() {
+	return BM_preFilterSize;
+}
+
+void StereoMatchParamEntity::setBM_preFilterCap(int value) {
+	BM_preFilterCap = value;
+	emit paramChanged_BM_preFilterCap();
+}
+int StereoMatchParamEntity::getBM_preFilterCap() {
+	return BM_preFilterCap;
+}
+
+void StereoMatchParamEntity::setBM_SADWindowSize(int value) {
+	BM_SADWindowSize = value;
+	emit paramChanged_BM_SADWindowSize();
+}
+int StereoMatchParamEntity::getBM_SADWindowSize() {
+	return BM_SADWindowSize;
+}
+
+void StereoMatchParamEntity::setBM_minDisparity(int value) {
+	BM_minDisparity = value;
+	emit paramChanged_BM_minDisparity();
+}
+int StereoMatchParamEntity::getBM_minDisparity() {
+	return BM_minDisparity;
+}
+
+void StereoMatchParamEntity::setBM_numDisparities(int value) {
+	BM_numDisparities = value;
+	emit paramChanged_BM_numDisparities();
+}
+int StereoMatchParamEntity::getBM_numDisparities() {
+	return BM_numDisparities;
+}
+
+void StereoMatchParamEntity::setBM_textureThreshold(int value) {
+	BM_textureThreshold = value;
+	emit paramChanged_BM_textureThreshold();
+}
+int StereoMatchParamEntity::getBM_textureThreshold() {
+	return BM_textureThreshold;
+}
+
+void StereoMatchParamEntity::setBM_uniquenessRatio(int value) {
+	BM_uniquenessRatio = value;
+	emit paramChanged_BM_uniquenessRatio();
+}
+int StereoMatchParamEntity::getBM_uniquenessRatio() {
+	return BM_uniquenessRatio;
+}
+
+void StereoMatchParamEntity::setBM_speckleRange(int value) {
+	BM_speckleRange = value;
+	emit paramChanged_BM_speckleRange();
+}
+int StereoMatchParamEntity::getBM_speckleRange() {
+	return BM_speckleRange;
+}
+
+void StereoMatchParamEntity::setBM_speckleWindowSize(int value) {
+	BM_speckleWindowSize = value;
+	emit paramChanged_BM_speckleWindowSize();
+}
+int StereoMatchParamEntity::getBM_speckleWindowSize() {
+	return BM_speckleWindowSize;
+}
+
+void StereoMatchParamEntity::setBM_disp12MaxDiff(int value) {
+	BM_disp12MaxDiff = value;
+	emit paramChanged_BM_disp12MaxDiff();
+}
+int StereoMatchParamEntity::getBM_disp12MaxDiff() {
+	return BM_disp12MaxDiff;
+}
+
+void StereoMatchParamEntity::setSGBM_minDisparity(int value) {
+	SGBM_minDisparity = value;
+	emit paramChanged_SGBM_minDisparity();
+}
+int StereoMatchParamEntity::getSGBM_minDisparity() {
+	return SGBM_minDisparity;
+}
+
+void StereoMatchParamEntity::setSGBM_numDisparities(int value) {
+	SGBM_numDisparities = value;
+	emit paramChanged_SGBM_numDisparities();
+}
+int StereoMatchParamEntity::getSGBM_numDisparities() {
+	return SGBM_numDisparities;
+}
+
+void StereoMatchParamEntity::setSGBM_blockSize(int value) {
+	SGBM_blockSize = value;
+	emit paramChanged_SGBM_blockSize();
+}
+int StereoMatchParamEntity::getSGBM_blockSize() {
+	return SGBM_blockSize;
+}
+
+void StereoMatchParamEntity::setSGBM_P1(int value) {
+	SGBM_P1 = value;
+	emit paramChanged_SGBM_P1();
+}
+int StereoMatchParamEntity::getSGBM_P1() {
+	return SGBM_P1;
+}
+
+void StereoMatchParamEntity::setSGBM_P2(int value) {
+	SGBM_P2 = value;
+	emit paramChanged_SGBM_P2();
+}
+int StereoMatchParamEntity::getSGBM_P2() {
+	return SGBM_P2;
+}
+
+void StereoMatchParamEntity::setSGBM_disp12MaxDiff(int value) {
+	SGBM_disp12MaxDiff = value;
+	emit paramChanged_SGBM_disp12MaxDiff();
+}
+int StereoMatchParamEntity::getSGBM_disp12MaxDiff() {
+	return SGBM_disp12MaxDiff;
+}
+
+void StereoMatchParamEntity::setSGBM_preFilterCap(int value) {
+	SGBM_preFilterCap = value;
+	emit paramChanged_SGBM_preFilterCap();
+}
+int StereoMatchParamEntity::getSGBM_preFilterCap() {
+	return SGBM_preFilterCap;
+}
+
+void StereoMatchParamEntity::setSGBM_uniquenessRatio(int value) {
+	SGBM_uniquenessRatio = value;
+	emit paramChanged_SGBM_uniquenessRatio();
+}
+int StereoMatchParamEntity::getSGBM_uniquenessRatio() {
+	return SGBM_uniquenessRatio;
+}
+
+void StereoMatchParamEntity::setSGBM_speckleWindowSize(int value) {
+	SGBM_speckleWindowSize = value;
+	emit paramChanged_SGBM_speckleWindowSize();
+}
+int StereoMatchParamEntity::getSGBM_speckleWindowSize() {
+	return SGBM_speckleWindowSize;
+}
+
+void StereoMatchParamEntity::setSGBM_speckleRange(int value) {
+	SGBM_speckleRange = value;
+	emit paramChanged_SGBM_speckleRange();
+}
+int StereoMatchParamEntity::getSGBM_speckleRange() {
+	return SGBM_speckleRange;
+}
+
+void StereoMatchParamEntity::setSGBM_MODEL_3WAY(bool value) {
+	SGBM_MODEL_3WAY = value;
+	emit paramChanged_SGBM_MODEL_3WAY();
+}
+bool StereoMatchParamEntity::getSGBM_MODEL_3WAY() {
+	return SGBM_MODEL_3WAY;
+}
+
+void StereoMatchParamEntity::setSGBM_MODEL_HH4(bool value) {
+	SGBM_MODEL_HH4 = value;
+	emit paramChanged_SGBM_MODEL_HH4();
+}
+bool StereoMatchParamEntity::getSGBM_MODEL_HH4() {
+	return SGBM_MODEL_HH4;
+}
+
+void StereoMatchParamEntity::setSGBM_MODEL_Default(bool value) {
+	SGBM_MODEL_Default = value;
+	emit paramChanged_SGBM_MODEL_Default();
+}
+bool StereoMatchParamEntity::getSGBM_MODEL_Default() {
+	return SGBM_MODEL_Default;
+}
+
+void StereoMatchParamEntity::setSGBM_MODEL_HH(bool value)
+{
+	SGBM_MODEL_HH = value;
+	emit paramChanged_SGBM_MODEL_HH();
+}
+
+bool StereoMatchParamEntity::getSGBM_MODEL_HH()
+{
+	return SGBM_MODEL_HH;
+}
 
 cv::Mat StereoMatchParamEntity::getImageDtoShow()
 {

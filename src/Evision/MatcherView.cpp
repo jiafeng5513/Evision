@@ -10,23 +10,11 @@ MatcherView::MatcherView(QWidget *parent)
 	ui.setupUi(this);
 	m_entity = StereoMatchParamEntity::getInstance();
 	m_controller = new StereoMatchController();
-	connect(m_entity, SIGNAL(paramChanged_MinDisp()), this, SLOT(onParamChanged_MinDisp()));
-	connect(m_entity, SIGNAL(paramChanged_Uniradio()), this, SLOT(onParamChanged_uniradio()));
-	connect(m_entity, SIGNAL(paramChanged_Specwinsz()), this, SLOT(onParamChanged_specwinsz()));
-	connect(m_entity, SIGNAL(paramChanged_NumDisparities()), this, SLOT(onParamChanged_NumDisparities()));
-	connect(m_entity, SIGNAL(paramChanged_Specrange()), this, SLOT(onParamChanged_Specrange()));
-	connect(m_entity, SIGNAL(paramChanged_Prefilcap()), this, SLOT(onParamChanged_Prefilcap()));
-	connect(m_entity, SIGNAL(paramChanged_SadWinsz()), this, SLOT(onParamChanged_SadWinSize()));
-	connect(m_entity, SIGNAL(paramChanged_TextThread()), this, SLOT(onParamChanged_TextThread()));
-	connect(m_entity, SIGNAL(paramChanged_Maxdifdisp12()), this, SLOT(onParamChanged_MaxDifdisp2()));
 	connect(m_entity, SIGNAL(paramChanged_BM()), this, SLOT(onParamChanged_BM()));
 	connect(m_entity, SIGNAL(paramChanged_SGBM()), this, SLOT(onParamChanged_SGBM()));
 	connect(m_entity, SIGNAL(paramChanged_ELAS()), this, SLOT(onParamChanged_ELAS()));
 	connect(m_entity, SIGNAL(paramChanged_ADCensus()), this, SLOT(onParamChanged_ADCensus()));
 	connect(m_entity, SIGNAL(paramChanged_RectifiedInput()), this, SLOT(onParamChanged_RectifiedInput()));
-	connect(m_entity, SIGNAL(paramChanged_MODE_3WAY()), this, SLOT(onParamChanged_MODE_3WAY()));
-	connect(m_entity, SIGNAL(paramChanged_MODE_SGBM()), this, SLOT(onParamChanged_MODE_SGBM()));
-	connect(m_entity, SIGNAL(paramChanged_MODE_HH()), this, SLOT(onParamChanged_MODE_HH()));
 	connect(m_entity, SIGNAL(paramChanged_ImageDtoShow()), this, SLOT(onParamChanged_imgDtoShow()));
 	connect(m_entity, SIGNAL(paramChanged_IconImgL()), this, SLOT(onParamChanged_IconImgL()));
 	connect(m_entity, SIGNAL(paramChanged_IconImgR()), this, SLOT(onParamChanged_IconImgR()));
@@ -79,6 +67,33 @@ MatcherView::MatcherView(QWidget *parent)
 	connect(m_entity, SIGNAL(paramChanged_postprocess_only_left()), this, SLOT(onParamChanged_PostprocessOnlyLeft()));
 	connect(m_entity, SIGNAL(paramChanged_subsampling()), this, SLOT(onParamChanged_SubSampling()));
 
+	connect(m_entity, SIGNAL(paramChanged_BM_preFilterType_NORMALIZED()), this, SLOT(onParamChanged_BM_preFilterType_NORMALIZED()));
+	connect(m_entity, SIGNAL(paramChanged_BM_preFilterType_XSOBEL()), this, SLOT(onParamChanged_BM_preFilterType_XSOBEL()));
+	connect(m_entity, SIGNAL(paramChanged_BM_preFilterSize()), this, SLOT(onParamChanged_BM_preFilterSize()));
+	connect(m_entity, SIGNAL(paramChanged_BM_preFilterCap()), this, SLOT(onParamChanged_BM_preFilterCap()));
+	connect(m_entity, SIGNAL(paramChanged_BM_SADWindowSize()), this, SLOT(onParamChanged_BM_SADWindowSize()));
+	connect(m_entity, SIGNAL(paramChanged_BM_minDisparity()), this, SLOT(onParamChanged_BM_minDisparity()));
+	connect(m_entity, SIGNAL(paramChanged_BM_numDisparities()), this, SLOT(onParamChanged_BM_numDisparities()));
+	connect(m_entity, SIGNAL(paramChanged_BM_textureThreshold()), this, SLOT(onParamChanged_BM_textureThreshold()));
+	connect(m_entity, SIGNAL(paramChanged_BM_uniquenessRatio()), this, SLOT(onParamChanged_BM_uniquenessRatio()));
+	connect(m_entity, SIGNAL(paramChanged_BM_speckleRange()), this, SLOT(onParamChanged_BM_speckleRange()));
+	connect(m_entity, SIGNAL(paramChanged_BM_speckleWindowSize()), this, SLOT(onParamChanged_BM_speckleWindowSize()));
+	connect(m_entity, SIGNAL(paramChanged_BM_disp12MaxDiff()), this, SLOT(onParamChanged_BM_disp12MaxDiff()));
+	connect(m_entity, SIGNAL(paramChanged_SGBM_minDisparity()), this, SLOT(onParamChanged_SGBM_minDisparity()));
+	connect(m_entity, SIGNAL(paramChanged_SGBM_numDisparities()), this, SLOT(onParamChanged_SGBM_numDisparities()));
+	connect(m_entity, SIGNAL(paramChanged_SGBM_blockSize()), this, SLOT(onParamChanged_SGBM_blockSize()));
+	connect(m_entity, SIGNAL(paramChanged_SGBM_P1()), this, SLOT(onParamChanged_SGBM_P1()));
+	connect(m_entity, SIGNAL(paramChanged_SGBM_P2()), this, SLOT(onParamChanged_SGBM_P2()));
+	connect(m_entity, SIGNAL(paramChanged_SGBM_disp12MaxDiff()), this, SLOT(onParamChanged_SGBM_disp12MaxDiff()));
+	connect(m_entity, SIGNAL(paramChanged_SGBM_preFilterCap()), this, SLOT(onParamChanged_SGBM_preFilterCap()));
+	connect(m_entity, SIGNAL(paramChanged_SGBM_uniquenessRatio()), this, SLOT(onParamChanged_SGBM_uniquenessRatio()));
+	connect(m_entity, SIGNAL(paramChanged_SGBM_speckleWindowSize()), this, SLOT(onParamChanged_SGBM_speckleWindowSize()));
+	connect(m_entity, SIGNAL(paramChanged_SGBM_speckleRange()), this, SLOT(onParamChanged_SGBM_speckleRange()));
+	connect(m_entity, SIGNAL(paramChanged_SGBM_MODEL_3WAY()), this, SLOT(onParamChanged_SGBM_MODEL_3WAY()));
+	connect(m_entity, SIGNAL(paramChanged_SGBM_MODEL_HH4()), this, SLOT(onParamChanged_SGBM_MODEL_HH4()));
+	connect(m_entity, SIGNAL(paramChanged_SGBM_MODEL_Default()), this, SLOT(onParamChanged_SGBM_MODEL_Default()));
+	connect(m_entity, SIGNAL(paramChanged_SGBM_MODEL_HH()), this, SLOT(onParamChanged_SGBM_MODEL_HH()));
+
 	m_entity->setImageToShow(StereoMatchParamEntity::RAW_DISP);
 }
 
@@ -120,157 +135,6 @@ void MatcherView::Help()
   在Release模式下会表现出正常速度.");
 	QMessageBox::information(this, QStringLiteral("帮助"), helpMsg);
 }
-
-void MatcherView::valueChanged_MinDisp(int value)
-{
-	ui.lineEdit_MinDisp->setText(QString::fromStdString(std::to_string(value)));
-	if (m_entity->getMinDisp() != value)
-	{
-		m_entity->setMinDisp(value);
-	}
-}
-void MatcherView::onParamChanged_MinDisp()
-{
-	ui.horizontalSlider_MinDisp->setValue(m_entity->getMinDisp());
-}
-
-void MatcherView::valueChanged_uniradio(int value)
-{
-	ui.lineEdit_uniradio->setText(QString::fromStdString(std::to_string(value)));
-	if (m_entity->getUniradio() != value)
-	{
-		m_entity->setUniradio(value);
-	}
-}
-
-void MatcherView::onParamChanged_uniradio()
-{
-	ui.horizontalSlider_uniradio->setValue(m_entity->getUniradio());
-}
-
-void MatcherView::valueChanged_specwinsz(int value)
-{
-	ui.lineEdit_specwinsz->setText(QString::fromStdString(std::to_string(value)));
-	if (m_entity->getSpecwinsz() != value)
-	{
-		m_entity->setSpecwinsz(value);
-	}
-}
-
-void MatcherView::onParamChanged_specwinsz()
-{
-	ui.horizontalSlider_specwinsz->setValue(m_entity->getSpecwinsz());
-
-}
-
-void MatcherView::valueChanged_NumDisparities(int value)
-{
-	ui.lineEdit_NumDisparities->setText(QString::fromStdString(std::to_string(value)));
-	if (m_entity->getNumDisparities() != value)
-	{
-		m_entity->setNumDisparities(value);
-	}
-}
-
-void MatcherView::onParamChanged_NumDisparities()
-{
-	ui.horizontalSlider_NumDisparities->setValue(m_entity->getNumDisparities());
-
-}
-
-void MatcherView::onReleased_NumDisparities()
-{
-	int oldvalue=ui.horizontalSlider_NumDisparities->value();
-	if(oldvalue%16!=0)
-	{
-		ui.horizontalSlider_NumDisparities->setValue(oldvalue - oldvalue % 16);
-	}
-}
-
-void MatcherView::valueChanged_Specrange(int value)
-{
-	ui.lineEdit_specrange->setText(QString::fromStdString(std::to_string(value)));
-	if (m_entity->getSpecrange() != value)
-	{
-		m_entity->setSpecrange(value);
-	}
-}
-
-void MatcherView::onParamChanged_Specrange()
-{
-	ui.horizontalSlider_specrange->setValue(m_entity->getSpecrange());
-
-}
-
-void MatcherView::valueChanged_Prefilcap(int value)
-{
-	ui.lineEdit_prefilcap->setText(QString::fromStdString(std::to_string(value)));
-	if (m_entity->getPrefilcap() != value)
-	{
-		m_entity->setPrefilcap(value);
-	}
-}
-
-void MatcherView::onParamChanged_Prefilcap()
-{
-	ui.horizontalSlider_prefilcap->setValue(m_entity->getPrefilcap());
-
-}
-
-void MatcherView::valueChanged_SadWinSize(int value)
-{
-	ui.lineEdit_SadWinSiz->setText(QString::fromStdString(std::to_string(value)));
-	if (m_entity->getSadWinsz() != value)
-	{
-		m_entity->setSadWinsz(value);
-	}
-}
-
-void MatcherView::onParamChanged_SadWinSize()
-{
-	ui.horizontalSlider_SadWinSiz->setValue(m_entity->getSadWinsz());
-
-}
-
-void MatcherView::onReleased_SadWinSize()
-{
-	int oldvalue = ui.horizontalSlider_SadWinSiz->value();
-	if(oldvalue%2==0)
-	{
-		ui.horizontalSlider_SadWinSiz->setValue(max(oldvalue-1,5));
-	}
-}
-
-void MatcherView::valueChanged_TextThread(int value)
-{
-	ui.lineEdit_textThread->setText(QString::fromStdString(std::to_string(value)));
-	if (m_entity->getTextThread() != value)
-	{
-		m_entity->setTextThread(value);
-	}
-}
-
-void MatcherView::onParamChanged_TextThread()
-{
-	ui.horizontalSlider_textThread->setValue(m_entity->getTextThread());
-
-}
-
-void MatcherView::valueChanged_MaxDifdisp2(int value)
-{
-	ui.lineEdit_maxdifdisp12->setText(QString::fromStdString(std::to_string(value)));
-	if (m_entity->getMaxdifdisp12() != value)
-	{
-		m_entity->setMaxdifdisp12(value);
-	}
-}
-
-void MatcherView::onParamChanged_MaxDifdisp2()
-{
-	ui.horizontalSlider_maxdifdisp12->setValue(m_entity->getMaxdifdisp12());
-
-}
-
 
 //1.int
 void MatcherView::valueChanged_DMin(int value) {
@@ -673,10 +537,6 @@ void MatcherView::onClicked_BM(bool value)
 		m_entity->setBM(value);
 	}
 	ui.stackedWidget->setCurrentIndex(0);
-	ui.horizontalSlider_textThread->setEnabled(true);
-	ui.radioButton_MODE_HH->setEnabled(false);
-	ui.radioButton_MODE_SGBM->setEnabled(false);
-	ui.radioButton_MODE_3WAY->setEnabled(false);
 }
 
 void MatcherView::onParamChanged_BM()
@@ -691,11 +551,7 @@ void MatcherView::onClicked_SGBM(bool value)
 	{
 		m_entity->setSGBM(value);
 	}
-	ui.stackedWidget->setCurrentIndex(0);
-	ui.horizontalSlider_textThread->setEnabled(false);
-	ui.radioButton_MODE_HH->setEnabled(true);
-	ui.radioButton_MODE_SGBM->setEnabled(true);
-	ui.radioButton_MODE_3WAY->setEnabled(true);
+	ui.stackedWidget->setCurrentIndex(1);
 }
 
 void MatcherView::onParamChanged_SGBM()
@@ -710,7 +566,7 @@ void MatcherView::onClicked_ELAS(bool value)
 	{
 		m_entity->setElas(value);
 	}
-	ui.stackedWidget->setCurrentIndex(1);
+	ui.stackedWidget->setCurrentIndex(2);
 }
 
 void MatcherView::onParamChanged_ELAS()
@@ -724,7 +580,7 @@ void MatcherView::onClicked_ADCensus(bool value)
 	{
 		m_entity->setADCensus(value);
 	}
-	ui.stackedWidget->setCurrentIndex(2);
+	ui.stackedWidget->setCurrentIndex(3);
 }
 
 void MatcherView::onParamChanged_ADCensus()
@@ -745,46 +601,242 @@ void MatcherView::onParamChanged_RectifiedInput()
 	ui.checkBox_RectifiedInput->setChecked(m_entity->getRectifiedInput());
 }
 
-void MatcherView::onClicked_MODE_HH(bool value)
-{
-	if (m_entity->getMODE_HH() != value)
+void MatcherView::valueChanged_BM_preFilterType_NORMALIZED(bool value) {
+	if (m_entity->getBM_preFilterType_NORMALIZED() != value)
 	{
-		m_entity->setMODE_HH(value);
+		m_entity->setBM_preFilterType_NORMALIZED(value);
 	}
 }
-
-void MatcherView::onParamChanged_MODE_HH()
-{
-	ui.radioButton_MODE_HH->setChecked(m_entity->getMODE_HH());
-
+void MatcherView::onParamChanged_BM_preFilterType_NORMALIZED() {
+	ui.radioButton_BM_Prefilter_Normalzed->setChecked(m_entity->getBM_preFilterType_NORMALIZED());
 }
-
-void MatcherView::onClicked_MODE_SGBM(bool value)
-{
-	if (m_entity->getMODE_SGBM() != value)
+void MatcherView::valueChanged_BM_preFilterType_XSOBEL(bool value) {
+	if (m_entity->getBM_preFilterType_XSOBEL() != value)
 	{
-		m_entity->setMODE_SGBM(value);
+		m_entity->setBM_preFilterType_XSOBEL(value);
 	}
 }
-
-void MatcherView::onParamChanged_MODE_SGBM()
-{
-	ui.radioButton_MODE_SGBM->setChecked(m_entity->getMODE_SGBM());
-
+void MatcherView::onParamChanged_BM_preFilterType_XSOBEL() {
+	ui.radioButton_BM_Prefilter_XSobel->setChecked(m_entity->getBM_preFilterType_XSOBEL());
 }
-
-void MatcherView::onClicked_MODE_3WAY(bool value)
-{
-	if (m_entity->getMODE_3WAY() != value)
+void MatcherView::valueChanged_BM_preFilterSize(int value) {
+	if (m_entity->getBM_preFilterSize() != value)
 	{
-		m_entity->setMODE_3WAY(value);
+		m_entity->setBM_preFilterSize(value);
 	}
 }
+void MatcherView::onParamChanged_BM_preFilterSize() {
+	ui.spinBox_BM_preFilterSize->setValue(m_entity->getBM_preFilterSize());
+}
+void MatcherView::valueChanged_BM_preFilterCap(int value) {
+	if (m_entity->getBM_preFilterCap() != value)
+	{
+		m_entity->setBM_preFilterCap(value);
+	}
+}
+void MatcherView::onParamChanged_BM_preFilterCap() {
+	ui.spinBox_BM_preFilterCap->setValue(m_entity->getBM_preFilterCap());
+}
+void MatcherView::valueChanged_BM_SADWindowSize(int value) {
+	if (m_entity->getBM_SADWindowSize() != value)
+	{
+		m_entity->setBM_SADWindowSize(value);
+	}
+}
+void MatcherView::onParamChanged_BM_SADWindowSize() {
+	ui.spinBox_BM_SADWindowSize->setValue(m_entity->getBM_SADWindowSize());
+}
+void MatcherView::valueChanged_BM_minDisparity(int value) {
+	if (m_entity->getBM_minDisparity() != value)
+	{
+		m_entity->setBM_minDisparity(value);
+	}
+}
+void MatcherView::onParamChanged_BM_minDisparity() {
+	ui.spinBox_BM_minDisparity->setValue(m_entity->getBM_minDisparity());
+}
+void MatcherView::valueChanged_BM_numDisparities(int value) {
+	if (m_entity->getBM_numDisparities() != value)
+	{
+		m_entity->setBM_numDisparities(value);
+	}
+}
+void MatcherView::onParamChanged_BM_numDisparities() {
+	ui.spinBox_BM_numDisparities->setValue(m_entity->getBM_numDisparities());
+}
+void MatcherView::valueChanged_BM_textureThreshold(int value) {
+	if (m_entity->getBM_textureThreshold() != value)
+	{
+		m_entity->setBM_textureThreshold(value);
+	}
+}
+void MatcherView::onParamChanged_BM_textureThreshold() {
+	ui.spinBox_BM_textureThreshold->setValue(m_entity->getBM_textureThreshold());
+}
+void MatcherView::valueChanged_BM_uniquenessRatio(int value) {
+	if (m_entity->getBM_uniquenessRatio() != value)
+	{
+		m_entity->setBM_uniquenessRatio(value);
+	}
+}
+void MatcherView::onParamChanged_BM_uniquenessRatio() {
+	ui.spinBox_BM_uniquenessRatio->setValue(m_entity->getBM_uniquenessRatio());
+}
+void MatcherView::valueChanged_BM_speckleRange(int value) {
+	if (m_entity->getBM_speckleRange() != value)
+	{
+		m_entity->setBM_speckleRange(value);
+	}
+}
+void MatcherView::onParamChanged_BM_speckleRange() {
+	ui.spinBox_BM_speckleRange->setValue(m_entity->getBM_speckleRange());
+}
+void MatcherView::valueChanged_BM_speckleWindowSize(int value) {
+	if (m_entity->getBM_speckleWindowSize() != value)
+	{
+		m_entity->setBM_speckleWindowSize(value);
+	}
+}
+void MatcherView::onParamChanged_BM_speckleWindowSize() {
+	ui.spinBox_BM_speckleWindowSize->setValue(m_entity->getBM_speckleWindowSize());
+}
+void MatcherView::valueChanged_BM_disp12MaxDiff(int value) {
+	if (m_entity->getBM_disp12MaxDiff() != value)
+	{
+		m_entity->setBM_disp12MaxDiff(value);
+	}
+}
+void MatcherView::onParamChanged_BM_disp12MaxDiff() {
+	ui.spinBox_BM_disp12MaxDiff->setValue(m_entity->getBM_disp12MaxDiff());
+}
+void MatcherView::valueChanged_SGBM_minDisparity(int value) {
+	if (m_entity->getSGBM_minDisparity() != value)
+	{
+		m_entity->setSGBM_minDisparity(value);
+	}
+}
+void MatcherView::onParamChanged_SGBM_minDisparity() {
+	ui.spinBox_SGBM_minDisparity->setValue(m_entity->getSGBM_minDisparity());
+}
+void MatcherView::valueChanged_SGBM_numDisparities(int value) {
+	if (m_entity->getSGBM_numDisparities() != value)
+	{
+		m_entity->setSGBM_numDisparities(value);
+	}
+}
+void MatcherView::onParamChanged_SGBM_numDisparities() {
+	ui.spinBox_SGBM_numDisparities->setValue(m_entity->getSGBM_numDisparities());
+}
+void MatcherView::valueChanged_SGBM_blockSize(int value) {
+	if (m_entity->getSGBM_blockSize() != value)
+	{
+		m_entity->setSGBM_blockSize(value);
+	}
+}
+void MatcherView::onParamChanged_SGBM_blockSize() {
+	ui.spinBox_SGBM_blockSize->setValue(m_entity->getSGBM_blockSize());
+}
+void MatcherView::valueChanged_SGBM_P1(int value) {
+	if (m_entity->getSGBM_P1() != value)
+	{
+		m_entity->setSGBM_P1(value);
+	}
+}
+void MatcherView::onParamChanged_SGBM_P1() {
+	ui.spinBox_SGBM_P1->setValue(m_entity->getSGBM_P1());
+}
+void MatcherView::valueChanged_SGBM_P2(int value) {
+	if (m_entity->getSGBM_P2() != value)
+	{
+		m_entity->setSGBM_P2(value);
+	}
+}
+void MatcherView::onParamChanged_SGBM_P2() {
+	ui.spinBox_SGBM_P2->setValue(m_entity->getSGBM_P2());
+}
+void MatcherView::valueChanged_SGBM_disp12MaxDiff(int value) {
+	if (m_entity->getSGBM_disp12MaxDiff() != value)
+	{
+		m_entity->setSGBM_disp12MaxDiff(value);
+	}
+}
+void MatcherView::onParamChanged_SGBM_disp12MaxDiff() {
+	ui.spinBox_SGBM_disp12MaxDiff->setValue(m_entity->getSGBM_disp12MaxDiff());
+}
+void MatcherView::valueChanged_SGBM_preFilterCap(int value) {
+	if (m_entity->getSGBM_preFilterCap() != value)
+	{
+		m_entity->setSGBM_preFilterCap(value);
+	}
+}
+void MatcherView::onParamChanged_SGBM_preFilterCap() {
+	ui.spinBox_SGBM_preFilterCap->setValue(m_entity->getSGBM_preFilterCap());
+}
+void MatcherView::valueChanged_SGBM_uniquenessRatio(int value) {
+	if (m_entity->getSGBM_uniquenessRatio() != value)
+	{
+		m_entity->setSGBM_uniquenessRatio(value);
+	}
+}
+void MatcherView::onParamChanged_SGBM_uniquenessRatio() {
+	ui.spinBox_SGBM_uniquenessRatio->setValue(m_entity->getSGBM_uniquenessRatio());
+}
+void MatcherView::valueChanged_SGBM_speckleWindowSize(int value) {
+	if (m_entity->getSGBM_speckleWindowSize() != value)
+	{
+		m_entity->setSGBM_speckleWindowSize(value);
+	}
+}
+void MatcherView::onParamChanged_SGBM_speckleWindowSize() {
+	ui.spinBox_SGBM_speckleWindowSize->setValue(m_entity->getSGBM_speckleWindowSize());
+}
+void MatcherView::valueChanged_SGBM_speckleRange(int value) {
+	if (m_entity->getSGBM_speckleRange() != value)
+	{
+		m_entity->setSGBM_speckleRange(value);
+	}
+}
+void MatcherView::onParamChanged_SGBM_speckleRange() {
+	ui.spinBox_SGBM_speckleRange->setValue(m_entity->getSGBM_speckleRange());
+}
+void MatcherView::valueChanged_SGBM_MODEL_3WAY(bool value) {
+	if (m_entity->getSGBM_MODEL_3WAY() != value)
+	{
+		m_entity->setSGBM_MODEL_3WAY(value);
+	}
+}
+void MatcherView::onParamChanged_SGBM_MODEL_3WAY() {
+	ui.radioButton_SGBM_MODEL_3WAY->setChecked(m_entity->getSGBM_MODEL_3WAY());
+}
+void MatcherView::valueChanged_SGBM_MODEL_HH4(bool value) {
+	if (m_entity->getSGBM_MODEL_HH4() != value)
+	{
+		m_entity->setSGBM_MODEL_HH4(value);
+	}
+}
+void MatcherView::onParamChanged_SGBM_MODEL_HH4() {
+	ui.radioButton_SGBM_MODEL_HH4->setChecked(m_entity->getSGBM_MODEL_HH4());
+}
+void MatcherView::valueChanged_SGBM_MODEL_Default(bool value) {
+	if (m_entity->getSGBM_MODEL_Default() != value)
+	{
+		m_entity->setSGBM_MODEL_Default(value);
+	}
+}
+void MatcherView::onParamChanged_SGBM_MODEL_Default() {
+	ui.radioButton_SGBM_MODEL_Default->setChecked(m_entity->getSGBM_MODEL_Default());
+}
 
-void MatcherView::onParamChanged_MODE_3WAY()
+void MatcherView::valueChanged_SGBM_MODEL_HH(bool value)
 {
-	ui.radioButton_MODE_3WAY->setChecked(m_entity->getMODE_3WAY());
-
+	if (m_entity->getSGBM_MODEL_HH4() != value)
+	{
+		m_entity->setSGBM_MODEL_HH4(value);
+	}
+}
+void MatcherView::onParamChanged_SGBM_MODEL_HH()
+{
+	ui.radioButton_SGBM_MODEL_HH->setChecked(m_entity->getSGBM_MODEL_HH());
 }
 
 void MatcherView::onParamChanged_imgDtoShow()
