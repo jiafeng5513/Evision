@@ -16,7 +16,7 @@ int __declspec(dllexport)ElasMatch(cv::Mat leftImage, cv::Mat rightImage)
 	const int32_t dims[3] = { leftImage.cols,leftImage.rows,leftImage.cols };
 	cv::Mat leftdpf = cv::Mat::zeros(cv::Size(leftImage.cols, leftImage.rows), CV_32F);
 	cv::Mat rightdpf = cv::Mat::zeros(cv::Size(leftImage.cols, leftImage.rows), CV_32F);
-	Elas::parameters param(Elas::ROBOTICS);
+	Elas::parameters param(Elas::MIDDLEBURY);
 	param.postprocess_only_left = false;
 	Elas elas(param);
 	elas.process(leftImage.data, rightImage.data, leftdpf.ptr<float>(0), rightdpf.ptr<float>(0), dims);

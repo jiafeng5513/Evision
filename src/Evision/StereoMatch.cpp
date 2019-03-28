@@ -386,7 +386,7 @@ void StereoMatch::Elas()
 			*seelr = new cv::Mat, 
 			*seerl = new cv::Mat;
 	ElasMatch(img1, img2, param, rawlr, rawrl, seelr, seerl);
-
+	ElasMatch(img1, img2);
 	rawlr->copyTo(Raw_Disp_Data);
 
 	seelr->copyTo(Visual_Disp_Data);
