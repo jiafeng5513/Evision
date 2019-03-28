@@ -22,7 +22,10 @@ public:
 	 * QImage转换为cv::Mat
 	 */
 	static cv::Mat QImage2cvMat(QImage image);
-
+	/*
+	 * 创建并返回idle image
+	 */
+	static QImage getDefaultImage();
 	/*
 	 * 把img显示在view上
 	 */

@@ -841,7 +841,7 @@ void MatcherView::onParamChanged_SGBM_MODEL_HH()
 
 void MatcherView::onParamChanged_imgDtoShow()
 {
-	QImage DQImage = EvisionUtils::cvMat2QImage(m_entity->getImageDtoShow());
+	QImage DQImage = (m_entity->getImageDtoShow().empty()?EvisionUtils::getDefaultImage():EvisionUtils::cvMat2QImage(m_entity->getImageDtoShow()));
 	QGraphicsScene *sceneD = new QGraphicsScene;
 	sceneD->addPixmap(QPixmap::fromImage(DQImage));
 	ui.graphicsView_D->setScene(sceneD);

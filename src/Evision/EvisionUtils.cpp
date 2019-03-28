@@ -77,7 +77,7 @@ QImage EvisionUtils::cvMat2QImage(const cv::Mat& mat)
 	}
 	else
 	{
-		return QImage();
+		return getDefaultImage();
 	}
 }
 
@@ -104,6 +104,52 @@ cv::Mat EvisionUtils::QImage2cvMat(QImage image)
 		break;
 	}
 	return mat;
+}
+/*
+ * 创建并返回idle image
+ */
+QImage EvisionUtils::getDefaultImage()
+{
+	//图片上的字符串，例如 HELLO
+	QString imageText = "Evision";
+	QFont font;
+	
+	font.setPixelSize(13);//设置显示字体的大小
+
+
+	QFontMetrics fm(font);
+	int charWidth = fm.width(imageText);
+	charWidth = fm.boundingRect(imageText).width();
+	
+	QSize size(charWidth + 8, 15);//指定图片大小为字体的大小
+	//QSize size(1920, 1080);//指定图片大小为字体的大小
+
+
+	//以ARGB32格式构造一个QImage
+	QImage image(size, QImage::Format_ARGB32);
+	//填充图片背景,120/250为透明度
+	image.fill(qRgba(255, 255, 255, 0));
+
+
+	//为这个QImage构造一个QPainter
+	QPainter painter(&image);
+	//设置画刷的组合模式CompositionMode_SourceOut这个模式为目标图像在上。
+	//改变组合模式和上面的填充方式可以画出透明的图片。
+	painter.setCompositionMode(QPainter::CompositionMode_DestinationOver);
+
+
+	//改变画笔和字体
+	QPen pen = painter.pen();
+	pen.setColor(QColor(0, 141, 239));
+
+
+	painter.setPen(pen);
+	painter.setFont(font);
+
+
+	//将Hello写在Image的中心
+	painter.drawText(image.rect(), Qt::AlignCenter, imageText);
+	return image;
 }
 
 void EvisionUtils::ShowImageOnUi(cv::Mat& img, QGraphicsScene* sense, QGraphicsView* view)
