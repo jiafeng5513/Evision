@@ -57,6 +57,14 @@ EvisionView::EvisionView(QWidget *parent)
 	on_action_LogViewSwitch();//Logview的准备
 
 	std::cout << "Qt Detected:"<< QT_VERSION_MAJOR<<"."<<QT_VERSION_MINOR << "." <<QT_VERSION_PATCH<<std::endl;
+#ifdef DEBUG
+	std::cout << "Evision is in debug mode and running slowly!" << std::endl;
+	std::cout << "Evision正处于调试模式,运行速度受限." << std::endl;
+
+#else
+	std::cout << "Evision is in release mode and running at full speed!" << std::endl;
+	std::cout << "Evision正处于部署模式,全速运行." << std::endl;
+#endif
 }
 
 

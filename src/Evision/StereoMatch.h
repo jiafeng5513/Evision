@@ -79,8 +79,8 @@ private:
 	cv::Rect roi1;
 	cv::Rect roi2;
 
-	cv::Mat Raw_Disp_Data;	//原始视差数据,用于保存成xml文件,测距时使用
-	cv::Mat Gray_Disp_Data;	//用于显示在界面上和保存为png的视差示意图
+	cv::Mat Raw_Disp_Data;		//原始视差数据,用于保存成xml文件,测距时使用
+	cv::Mat Visual_Disp_Data;	//用于显示在界面上和保存为png的视差示意图
 
 	bool no_display=false;
 private:	

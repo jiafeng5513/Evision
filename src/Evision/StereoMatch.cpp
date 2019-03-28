@@ -161,7 +161,7 @@ void StereoMatch::run()
  */
 void StereoMatch::Save()
 {
-	if (!Raw_Disp_Data.empty() && !Gray_Disp_Data.empty())
+	if (!Raw_Disp_Data.empty() && !Visual_Disp_Data.empty())
 	{
 		try
 		{
@@ -174,7 +174,7 @@ void StereoMatch::Save()
 			 * 例如归一化到0~255会改变原始的视差数据,因此,测量时必须使用原始视差数据
 			 */
 			 //获取灰度视差图并保存
-			cv::imwrite(disparity_filename, Gray_Disp_Data);
+			cv::imwrite(disparity_filename, Visual_Disp_Data);
 			std::cout << "已经保存视差示意图:" << disparity_filename << std::endl;
 
 //			//保存pcd点云
@@ -240,9 +240,10 @@ void StereoMatch::ADCensusDriver()
 				 * 例如归一化到0~255会改变原始的视差数据,因此,测量时必须使用原始视差数据
 				 */
 
-				Gray_Disp_Data = sP.getGrayDisparity();
+				Visual_Disp_Data = sP.getGrayDisparity();
+				//cv::normalize(Visual_Disp_Data, Visual_Disp_Data, 0, 255, cv::NORM_MINMAX);
 				//界面显示灰度视差图
-				m_entity->setIconRawDisp(Gray_Disp_Data);
+				m_entity->setIconRawDisp(Visual_Disp_Data);
 			}
 			else
 			{
@@ -291,15 +292,12 @@ void StereoMatch::OpenCVBM()
 	bm->setDisp12MaxDiff(m_entity->getBM_disp12MaxDiff());
 	int64 t = cv::getTickCount();
 	bm->compute(img1G, img2G, Raw_Disp_Data);
-
+	Raw_Disp_Data.convertTo(Raw_Disp_Data, CV_8U, 1 / 16.);
 	//获取用于显示的视差示意图
-	//EvisionUtils::getGrayDisparity<UINT8>(Raw_Disp_Data, Gray_Disp_Data,true);
-	Raw_Disp_Data.convertTo(Gray_Disp_Data, CV_8U, 1 / 16.);
-	Raw_Disp_Data = Gray_Disp_Data;
-	m_entity->setIconRawDisp(Gray_Disp_Data);
+	cv::normalize(Raw_Disp_Data, Visual_Disp_Data, 0, 255, CV_MINMAX);
+	m_entity->setIconRawDisp(Visual_Disp_Data);
 
 	t = cv::getTickCount() - t;
-
 	std::cout << "Time elapsed: " << t * 1000 / cv::getTickFrequency() << "ms\n BM计算完毕" << std::endl;
 }
 /*
@@ -340,12 +338,11 @@ void StereoMatch::OpenCVSGBM()
 
 	int64 t = cv::getTickCount();
 	sgbm->compute(img1, img2, Raw_Disp_Data);
-	
+	Raw_Disp_Data.convertTo(Raw_Disp_Data, CV_8U, 1 / 16.);
 
 	//获取用于显示的视差示意图
-	Raw_Disp_Data.convertTo(Gray_Disp_Data, CV_8U, 1 / 16.);
-	Raw_Disp_Data = Gray_Disp_Data;
-	m_entity->setIconRawDisp(Gray_Disp_Data);
+	cv::normalize(Raw_Disp_Data, Visual_Disp_Data, 0, 255, CV_MINMAX);
+	m_entity->setIconRawDisp(Visual_Disp_Data);
 
 	t = cv::getTickCount() - t;
 	std::cout << "Time elapsed: " << t * 1000 / cv::getTickFrequency() << "ms\n SGBM计算完毕" << std::endl;
@@ -384,12 +381,15 @@ void StereoMatch::Elas()
 	param.postprocess_only_left = m_entity->getPostprocessOnlyLeft();
 	param.subsampling = m_entity->getSubSampling();
 
-	cv::Mat *rawlr=new cv::Mat, *rawrl = new cv::Mat, *seelr = new cv::Mat, *seerl = new cv::Mat;
+	cv::Mat *rawlr=new cv::Mat, 
+			*rawrl = new cv::Mat, 
+			*seelr = new cv::Mat, 
+			*seerl = new cv::Mat;
 	ElasMatch(img1, img2, param, rawlr, rawrl, seelr, seerl);
 
 	rawlr->copyTo(Raw_Disp_Data);
 
-	seelr->copyTo(Gray_Disp_Data);
-	m_entity->setIconRawDisp(Gray_Disp_Data);
+	seelr->copyTo(Visual_Disp_Data);
+	m_entity->setIconRawDisp(Visual_Disp_Data);
 
 }
