@@ -316,10 +316,8 @@ void StereoMatch::OpenCVSGBM()
 	sgbm->setBlockSize(m_entity->getSGBM_blockSize());
 
 	int delta = img1.channels()*m_entity->getSGBM_blockSize()*m_entity->getSGBM_blockSize();
-	int p1 = (m_entity->getSGBM_P1() < m_entity->getSGBM_P2() ? m_entity->getSGBM_P1() : 8 * delta);
-	int p2 = (m_entity->getSGBM_P1() < m_entity->getSGBM_P2() ? m_entity->getSGBM_P2() : 32 * delta);
-	sgbm->setP1(p1);
-	sgbm->setP2(p2);
+	sgbm->setP1((m_entity->getSGBM_P1() < m_entity->getSGBM_P2() ? m_entity->getSGBM_P1()* delta : 8 * delta));
+	sgbm->setP2((m_entity->getSGBM_P1() < m_entity->getSGBM_P2() ? m_entity->getSGBM_P2()* delta : 32 * delta));
 
 	sgbm->setDisp12MaxDiff(m_entity->getSGBM_disp12MaxDiff());
 	sgbm->setPreFilterCap(m_entity->getSGBM_preFilterCap());
@@ -385,8 +383,12 @@ void StereoMatch::Elas()
 			*rawrl = new cv::Mat, 
 			*seelr = new cv::Mat, 
 			*seerl = new cv::Mat;
+	//"D:/Libraries/libelas/img/cones_left.pgm", "D:/Libraries/libelas/img/cones_right.pgm"
+	/*cv::Mat pgml = cv::imread("D:/Libraries/libelas/img/cones_left.pgm");
+	cv::Mat pgmr = cv::imread("D:/Libraries/libelas/img/cones_right.pgm");*/
+
 	ElasMatch(img1, img2, param, rawlr, rawrl, seelr, seerl);
-	ElasMatch(img1, img2);
+	//ElasMatch(pgml, pgmr);
 	rawlr->copyTo(Raw_Disp_Data);
 
 	seelr->copyTo(Visual_Disp_Data);
