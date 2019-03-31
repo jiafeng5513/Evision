@@ -387,8 +387,8 @@ void StereoMatch::Elas()
 	/*cv::Mat pgml = cv::imread("D:/Libraries/libelas/img/cones_left.pgm");
 	cv::Mat pgmr = cv::imread("D:/Libraries/libelas/img/cones_right.pgm");*/
 
-	ElasMatch(img1, img2, param, rawlr, rawrl, seelr, seerl);
-	//ElasMatch(pgml, pgmr);
+	//ElasMatch(img1, img2, param, rawlr, rawrl, seelr, seerl);
+	ElasMatch(img1, img2);
 	rawlr->copyTo(Raw_Disp_Data);
 
 	seelr->copyTo(Visual_Disp_Data);

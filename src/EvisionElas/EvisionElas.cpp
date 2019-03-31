@@ -4,6 +4,7 @@
 #include <opencv2\opencv.hpp>
 #include "elas.h"
 #include "image.h"
+#include "StereoEfficientLargeScale.h"
 
 using namespace std;
 void process(const char* file_1, const char* file_2) {
@@ -148,8 +149,102 @@ void process2(image<uchar> *I1, image<uchar> *I2) {
 	free(D2_data);
 }
 
+cv::Vec3b makeDepthColor(float id)
+{
+	if (id <= 0) return cv::Vec3b(128, 0, 0);
+	if (id >= 1) return cv::Vec3b(0, 0, 128);
+
+	int icP = (id * 8);
+	float ifP = (id * 8) - icP;
+
+	if (icP == 0) return cv::Vec3b(255 * (0.5 + 0.5*ifP), 0, 0);
+	if (icP == 1) return cv::Vec3b(255, 255 * (0.5*ifP), 0);
+	if (icP == 2) return cv::Vec3b(255, 255 * (0.5 + 0.5*ifP), 0);
+	if (icP == 3) return cv::Vec3b(255 * (1 - 0.5*ifP), 255, 255 * (0.5*ifP));
+	if (icP == 4) return cv::Vec3b(255 * (0.5 - 0.5*ifP), 255, 255 * (0.5 + 0.5*ifP));
+	if (icP == 5) return cv::Vec3b(0, 255 * (1 - 0.5*ifP), 255);
+	if (icP == 6) return cv::Vec3b(0, 255 * (0.5 - 0.5*ifP), 255);
+	if (icP == 7) return cv::Vec3b(0, 0, 255 * (1 - 0.5*ifP));
+
+}
+
+void process3()
+{
+	cv::Mat leftImg, rightImg;
+
+
+	std::stringstream leftFile_ss;
+	std::stringstream rightFile_ss;
+	leftFile_ss << "D:/Libraries/libelas/img/aloe_left_000.png";
+	rightFile_ss << "D:/Libraries/libelas/img/aloe_right_000.png";
+	//leftFile_ss<<"/home/hyj/bagfiles/stereo/new_1/left_img/"<<std::setw(6) << std::setfill('0') <<i<< ".jpg";
+	//rightFile_ss<<"/home/hyj/bagfiles/stereo/new_1/right_img/"<<std::setw(6) << std::setfill('0') <<i<< ".jpg";
+
+	std::cout << "reading image " << leftFile_ss.str() << std::endl;
+	leftImg = cv::imread(leftFile_ss.str().c_str(), CV_LOAD_IMAGE_GRAYSCALE);
+	rightImg = cv::imread(rightFile_ss.str().c_str(), CV_LOAD_IMAGE_GRAYSCALE);
+
+	if (leftImg.data == NULL || rightImg.data == NULL) {
+		return;
+	}
+
+	double t = (double)cvGetTickCount();
+
+	cv::Mat gradx = cv::Mat::zeros(leftImg.rows, leftImg.cols, CV_32F);
+	cv::Mat grady = cv::Mat::zeros(leftImg.rows, leftImg.cols, CV_32F);
+	cv::Mat mag = cv::Mat::zeros(leftImg.rows, leftImg.cols, CV_32F);
+	cv::Mat img;
+	cv::GaussianBlur(leftImg, img, cv::Size(3, 3), 0, 0);
+	cv::Scharr(img, gradx, CV_32F, 1, 0, 1 / 32.0);
+	cv::Scharr(img, grady, CV_32F, 0, 1, 1 / 32.0);
+	cv::magnitude(gradx, grady, mag);
+	cv::Mat ipOut;
+	cv::threshold(mag, ipOut, 15, 0, cv::THRESH_TOZERO);
+
+	cv::Mat dest;
+	StereoEfficientLargeScale * stereo_ = new StereoEfficientLargeScale(0, 128);
+	stereo_->operator ()(leftImg, rightImg, dest, 100, mag);
+
+	t = (double)cvGetTickCount() - t;
+	printf("used time is %gms\n", (t / (cvGetTickFrequency() * 1000)));
+
+	cv::Mat show;
+	dest.convertTo(show, CV_8U, 1.0 / 8);
+	imshow("disp", show);
+	imshow("left", leftImg);
+	imshow("mag", mag);
+
+	cv::Mat result;
+	cv::cvtColor(leftImg, result, CV_GRAY2BGR);
+	cv::Mat map = stereo_->GetDenseMap();
+	for (size_t v = 2; v < map.rows - 2; v += 1)
+		for (size_t u = 2; u < map.cols - 2; u += 1)
+		{
+			//if(mag.at<float>(v,u) < 10) continue;
+			if (map.at<short>(v, u) > 0)
+			{
+				float z = 379.8145 / map.at<short>(v, u);
+				cv::Vec3b color = makeDepthColor(1 / z);
+				result.at<cv::Vec3b>(v, u)[0] = color[2];
+				result.at<cv::Vec3b>(v, u)[1] = color[1];
+				result.at<cv::Vec3b>(v, u)[2] = color[0];
+			}
+
+		}
+	cv::imshow("result", result);
+
+
+
+
+	//if(viewer_->IsFinished())
+	//    std::cout<<"finished"<<std::endl;
+	//usleep(500000);
+
+}
+
 int __declspec(dllexport)ElasMatch(cv::Mat leftImage, cv::Mat rightImage)
 {
+	process3();
 	//process("D:/Libraries/libelas/img/im0.png", "D:/Libraries/libelas/img/im1.png");
 	//process("D:/Libraries/libelas/img/cones_left.pgm", "D:/Libraries/libelas/img/cones_right.pgm");
 	//process("D:/Libraries/libelas/img/aloe_left.pgm", "D:/Libraries/libelas/img/aloe_right.pgm");
@@ -249,3 +344,4 @@ int __declspec(dllexport)ElasMatch(cv::Mat leftImage, cv::Mat rightImage,
 	cout << endl << "ELAS over" << endl;
 	return 0;
 }
+

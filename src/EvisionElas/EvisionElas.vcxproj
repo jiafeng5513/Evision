@@ -92,6 +92,7 @@
     <ClInclude Include="filter.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="matrix.h" />
+    <ClInclude Include="StereoEfficientLargeScale.h" />
     <ClInclude Include="timer.h" />
     <ClInclude Include="triangle.h" />
   </ItemGroup>
@@ -101,6 +102,7 @@
     <ClCompile Include="filter.cpp" />
     <ClCompile Include="EvisionElas.cpp" />
     <ClCompile Include="matrix.cpp" />
+    <ClCompile Include="StereoEfficientLargeScale.cpp" />
     <ClCompile Include="triangle.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

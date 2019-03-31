@@ -34,6 +34,10 @@ Street, Fifth Floor, Boston, MA 02110-1301, USA
 #ifndef _MSC_VER
   #include <stdint.h>
 #else
+namespace cv {
+	class Mat;
+}
+
 //  typedef __int8            int8_t;
   typedef __int16           int16_t;
   typedef __int32           int32_t;
@@ -142,7 +146,10 @@ public:
       }
     }
   };
-
+  // parameter set
+  parameters param;
+  //
+  Elas() :param(ROBOTICS) {}
   // constructor, input: parameters  
   Elas (parameters param) : param(param) {}
 
@@ -159,7 +166,7 @@ public:
   //               if subsampling is not active their size is width x height,
   //               otherwise width/2 x height/2 (rounded towards zero)
   void process (uint8_t* I1,uint8_t* I2,float* D1,float* D2,const int32_t* dims);
-  
+  void process(uint8_t* I1_, uint8_t* I2_, float* D1, float* D2, const int32_t* dims, cv::Mat grad);
 private:
   
   struct support_pt {
@@ -168,6 +175,8 @@ private:
     int32_t d;
     support_pt(int32_t u,int32_t v,int32_t d):u(u),v(v),d(d){}
   };
+
+
 
   struct triangle {
     int32_t c1,c2,c3;
@@ -205,9 +214,15 @@ private:
   inline void findMatch (int32_t &u,int32_t &v,float &plane_a,float &plane_b,float &plane_c,
                          int32_t* disparity_grid,int32_t *grid_dims,uint8_t* I1_desc,uint8_t* I2_desc,
                          int32_t *P,int32_t &plane_radius,bool &valid,bool &right_image,float* D);
+  inline void findMatch(int32_t &u, int32_t &v, float &plane_a, float &plane_b, float &plane_c,
+	  int32_t* disparity_grid, int32_t *grid_dims, uint8_t* I1_desc, uint8_t* I2_desc,
+	  int32_t *P, int32_t &plane_radius, bool &valid, bool &right_image, float* D, cv::Mat grad);
+
   void computeDisparity (std::vector<support_pt> p_support,std::vector<triangle> tri,int32_t* disparity_grid,int32_t* grid_dims,
                          uint8_t* I1_desc,uint8_t* I2_desc,bool right_image,float* D);
 
+  void computeDisparity(std::vector<support_pt> p_support, std::vector<triangle> tri, int32_t* disparity_grid, int32_t *grid_dims,
+	  uint8_t* I1_desc, uint8_t* I2_desc, bool right_image, float* D, cv::Mat grad);
   // L/R consistency check
   void leftRightConsistencyCheck (float* D1,float* D2);
   
@@ -219,8 +234,7 @@ private:
   void adaptiveMean (float* D);
   void median (float* D);
   
-  // parameter set
-  parameters param;
+
   
   // memory aligned input images + dimensions
   uint8_t *I1,*I2;

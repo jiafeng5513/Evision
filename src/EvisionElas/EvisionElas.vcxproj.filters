@@ -39,6 +39,9 @@
     <ClInclude Include="EvisionElas.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="StereoEfficientLargeScale.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="descriptor.cpp">
@@ -57,6 +60,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="EvisionElas.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="StereoEfficientLargeScale.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
