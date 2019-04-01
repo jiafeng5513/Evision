@@ -122,6 +122,6 @@ Introduction:
 12. Martull, Sarah, Martin Peris, and Kazuhiro Fukui. "Realistic CG stereo image dataset with ground truth disparity maps." ICPR workshop TrakMark2012. Vol. 111. No. 430. 2012.
 13. Hirschmuller H. Stereo processing by semiglobal matching and mutual information[J]. IEEE Transactions on pattern analysis and machine intelligence, 2008, 30(2): 328-341.
 14. [视差算法](./doc/立体匹配算法.md)
-
+15. [warpped libelas with opencv and used pangolin as GUI](https://github.com/HeYijia/stereo_elas)
 #### 10.部分框图
 <div align=center><img src="./doc/flowchart.png"/></div>

@@ -2,14 +2,11 @@
 
 
 
-StereoEfficientLargeScale::StereoEfficientLargeScale(int mindis, int dispRange) :elas()
+StereoEfficientLargeScale::StereoEfficientLargeScale(Elas::parameters param) :elas(param)
 {
-	minDisparity = mindis;
-	disparityRange = dispRange;
-	elas.param.disp_min = mindis;
-	elas.param.disp_max = mindis + dispRange;
 
-	elas.param.postprocess_only_left = 1;
+	minDisparity = param.disp_min;
+	disparityRange = param.disp_max- minDisparity;
 }
 
 void StereoEfficientLargeScale::operator()(cv::Mat& leftim, cv::Mat& rightim, cv::Mat& leftdisp, cv::Mat& rightdisp, int bd)

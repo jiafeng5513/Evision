@@ -379,19 +379,10 @@ void StereoMatch::Elas()
 	param.postprocess_only_left = m_entity->getPostprocessOnlyLeft();
 	param.subsampling = m_entity->getSubSampling();
 
-	cv::Mat *rawlr=new cv::Mat, 
-			*rawrl = new cv::Mat, 
-			*seelr = new cv::Mat, 
-			*seerl = new cv::Mat;
-	//"D:/Libraries/libelas/img/cones_left.pgm", "D:/Libraries/libelas/img/cones_right.pgm"
-	/*cv::Mat pgml = cv::imread("D:/Libraries/libelas/img/cones_left.pgm");
-	cv::Mat pgmr = cv::imread("D:/Libraries/libelas/img/cones_right.pgm");*/
-
-	//ElasMatch(img1, img2, param, rawlr, rawrl, seelr, seerl);
-	ElasMatch(img1, img2);
-	rawlr->copyTo(Raw_Disp_Data);
-
-	seelr->copyTo(Visual_Disp_Data);
+	int64 t = cv::getTickCount();
+	ElasMatch(param,img1, img2,&Raw_Disp_Data, &Visual_Disp_Data);
+	t = cv::getTickCount() - t;
+	std::cout << "Time elapsed: " << t * 1000 / cv::getTickFrequency() << "ms\n ELAS¼ÆËãÍê±Ï" << std::endl;
 	m_entity->setIconRawDisp(Visual_Disp_Data);
 
 }

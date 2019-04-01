@@ -165,12 +165,12 @@ void RulerView::onStart()
 
 	if (RawDisp.type() == CV_32F)
 	{
-		//ELAS和ADCensus的原始视差数据是CV_32F,不能直接显示
+		//ADCensus的原始视差数据是CV_32F,不能直接显示
 		EvisionUtils::getGrayDisparity<float>(RawDisp, disparityGary, true);
 	}
 	else if(RawDisp.type() == CV_8U)
 	{
-		//BM和SGBM的视差数据是CV_8U,可以直接显示
+		//BM,SGBM和ELAS的视差数据是CV_8U,可以直接显示
 		disparityGary = RawDisp;
 	}
 	printImgToO(disparityGary);

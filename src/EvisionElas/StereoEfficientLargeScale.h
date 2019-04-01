@@ -16,7 +16,7 @@ private:
 
 public:
 	Elas elas;
-	StereoEfficientLargeScale(int mindis, int dispRange);
+	StereoEfficientLargeScale(Elas::parameters param);
 	void operator()(cv::Mat& leftim, cv::Mat& rightim, cv::Mat& leftdisp, cv::Mat& rightdisp, int border);
 	void operator()(cv::Mat& leftim, cv::Mat& rightim, cv::Mat& leftdisp, int border);
 

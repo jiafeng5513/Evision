@@ -1,7 +1,8 @@
 #pragma once
 #include <opencv2\opencv.hpp>
 #include "elas.h"
-int __declspec(dllexport)ElasMatch(cv::Mat leftImage, cv::Mat rightImage);
 
-int __declspec(dllexport)ElasMatch(cv::Mat leftImage, cv::Mat rightImage,
-	Elas::parameters param, cv::Mat * rawlr, cv::Mat * rawrl, cv::Mat * seelr, cv::Mat * seerl);
+//interface to Original libelas,debug only!
+int __declspec(dllexport)ElasMatch();
+//warpped with opencv
+int __declspec(dllexport)ElasMatch(Elas::parameters param, cv::Mat leftImg, cv::Mat rightImg, cv::Mat *disp_raw, cv::Mat* disp_show);
