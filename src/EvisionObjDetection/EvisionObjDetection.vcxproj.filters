@@ -1,0 +1,413 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CudaCompile Include=".\activation_kernels.cu">
+      <Filter>CU文件</Filter>
+    </CudaCompile>
+    <CudaCompile Include=".\avgpool_layer_kernels.cu">
+      <Filter>CU文件</Filter>
+    </CudaCompile>
+    <CudaCompile Include=".\blas_kernels.cu">
+      <Filter>CU文件</Filter>
+    </CudaCompile>
+    <CudaCompile Include=".\col2im_kernels.cu">
+      <Filter>CU文件</Filter>
+    </CudaCompile>
+    <CudaCompile Include=".\convolutional_kernels.cu">
+      <Filter>CU文件</Filter>
+    </CudaCompile>
+    <CudaCompile Include=".\deconvolutional_kernels.cu">
+      <Filter>CU文件</Filter>
+    </CudaCompile>
+    <CudaCompile Include=".\crop_layer_kernels.cu">
+      <Filter>CU文件</Filter>
+    </CudaCompile>
+    <CudaCompile Include=".\dropout_layer_kernels.cu">
+      <Filter>CU文件</Filter>
+    </CudaCompile>
+    <CudaCompile Include=".\im2col_kernels.cu">
+      <Filter>CU文件</Filter>
+    </CudaCompile>
+    <CudaCompile Include=".\maxpool_layer_kernels.cu">
+      <Filter>CU文件</Filter>
+    </CudaCompile>
+    <CudaCompile Include=".\network_kernels.cu">
+      <Filter>CU文件</Filter>
+    </CudaCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include=".\activation_layer.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\activations.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\art.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\avgpool_layer.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\batchnorm_layer.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\blas.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\box.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\captcha.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\cifar.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\classifier.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\coco.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\col2im.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\compare.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\connected_layer.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\convolutional_layer.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\cost_layer.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\cpu_gemm.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\crnn_layer.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\crop_layer.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\cuda.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\darknet.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\data.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\deconvolutional_layer.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\demo.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\detection_layer.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\detector.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\dice.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\dropout_layer.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\gemm.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\getopt.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\gettimeofday.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\go.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\gru_layer.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\http_stream.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\im2col.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\image.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\layer.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\list.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\local_layer.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\lstm_layer.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\matrix.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\maxpool_layer.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\network.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\nightmare.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\normalization_layer.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\option_list.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\parser.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\region_layer.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\reorg_layer.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\reorg_old_layer.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\rnn.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\rnn_layer.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\rnn_vid.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\route_layer.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\shortcut_layer.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\softmax_layer.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\super.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\swag.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\tag.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\tree.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\upsample_layer.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\utils.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\voxel.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\writing.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\yolo.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\yolo_layer.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include=".\yolo_v2_class.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include=".\activation_layer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\activations.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\avgpool_layer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\batchnorm_layer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\blas.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\box.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\classifier.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\col2im.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\connected_layer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\convolutional_layer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\cost_layer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\crnn_layer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\crop_layer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\cuda.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\data.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\deconvolutional_layer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\demo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\detection_layer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\dropout_layer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\gemm.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\getopt.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\gettimeofday.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\gru_layer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\include\yolo_v2_class.hpp">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include=".\include\darknet.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include=".\http_stream.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\im2col.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\image.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\layer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\list.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\local_layer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\lstm_layer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\matrix.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\maxpool_layer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\network.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\normalization_layer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\option_list.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\parser.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\region_layer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\reorg_layer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\reorg_old_layer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\rnn_layer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\route_layer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\shortcut_layer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\softmax_layer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\stb_image.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\stb_image_write.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\tree.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\unistd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\upsample_layer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\utils.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include=".\yolo_layer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{2c00e147-5c4e-4536-b601-250b2ac9d14a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{f95cbec7-9799-43a6-81e2-5f5ef542c688}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CU文件">
+      <UniqueIdentifier>{aa98f672-906b-43ba-9c50-6f8c26e44c01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{30e6938c-fb37-41ff-a396-0a54a59848d1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

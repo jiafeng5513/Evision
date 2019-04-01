@@ -234,9 +234,6 @@
     <ClInclude Include="EvisionUtils.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="yolo_v2_class.h">
-      <Filter>ObjectDetection</Filter>
-    </ClInclude>
     <ClInclude Include="resource1.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
