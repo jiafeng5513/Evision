@@ -17,17 +17,18 @@ Introduction:
 
 目录
 =========
-- [Introduction:](#introduction)
+- [Introduction:](#Introduction)
 - [目录](#%E7%9B%AE%E5%BD%95)
-      - [1.Dependencies](#1dependencies)
-      - [2.Installation_guide](#2installationguide)
-      - [3.Directory_specification](#3directoryspecification)
-      - [4.Solutions_and_projects](#4solutionsandprojects)
-      - [6.Evision(C++/Qt版本)](#6evisioncqt%E7%89%88%E6%9C%AC)
-      - [7.CvLabMain和CvLabSandbox(C#版本)](#7cvlabmain%E5%92%8Ccvlabsandboxc%E7%89%88%E6%9C%AC)
+      - [1.Dependencies](#1Dependencies)
+      - [2.Installation_guide](#2Installationguide)
+      - [3.Directory_specification](#3Directoryspecification)
+      - [4.Solutions_and_projects](#4Solutionsandprojects)
+      - [6.Evision(C++/Qt版本)](#6EvisionCQt%E7%89%88%E6%9C%AC)
+      - [7.CvLabMain和CvLabSandbox(C#版本)](#7CvLabMain%E5%92%8CCvLabSandboxC%E7%89%88%E6%9C%AC)
       - [8.双目设备](#8%E5%8F%8C%E7%9B%AE%E8%AE%BE%E5%A4%87)
       - [9.参考文献](#9%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE)
       - [10.部分框图](#10%E9%83%A8%E5%88%86%E6%A1%86%E5%9B%BE)
+      - [11.未来计划](#11%E6%9C%AA%E6%9D%A5%E8%AE%A1%E5%88%92)
 
 #### 1.Dependencies
 1. Qt :5.12.0
@@ -125,3 +126,9 @@ Introduction:
 15. [warpped libelas with opencv and used pangolin as GUI](https://github.com/HeYijia/stereo_elas)
 #### 10.部分框图
 <div align=center><img src="./doc/flowchart.png"/></div>
+
+#### 11.未来计划
+1. 参考[这篇文章](http://blog.csdn.net/hysteric314/article/details/51357318).<br>
+2. 简化程序的部署,使用CMake或者提供安装包.<br>
+3. 去除Qt,使用轻量化的UI框架.<br>
+4. 跨平台.<br>
