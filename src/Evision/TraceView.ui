@@ -305,24 +305,27 @@
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_4">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <property name="spacing">
+        <number>0</number>
+       </property>
        <item row="0" column="0">
-        <widget class="CustomGraphicsView" name="customGraphicsView_O">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>0</height>
-          </size>
+        <layout class="QGridLayout" name="TraceLayout">
+         <property name="spacing">
+          <number>0</number>
          </property>
-         <property name="verticalScrollBarPolicy">
-          <enum>Qt::ScrollBarAlwaysOff</enum>
-         </property>
-         <property name="horizontalScrollBarPolicy">
-          <enum>Qt::ScrollBarAlwaysOff</enum>
-         </property>
-         <property name="sizeAdjustPolicy">
-          <enum>QAbstractScrollArea::AdjustToContents</enum>
-         </property>
-        </widget>
+        </layout>
        </item>
       </layout>
      </widget>
@@ -331,63 +334,8 @@
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <customwidgets>
-  <customwidget>
-   <class>CustomGraphicsView</class>
-   <extends>QGraphicsView</extends>
-   <header>CustomGraphicsView.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections>
-  <connection>
-   <sender>customGraphicsView_O</sender>
-   <signal>mouseMove(int,int)</signal>
-   <receiver>RulerView</receiver>
-   <slot>onMouseMove(int,int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>265</x>
-     <y>322</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>57</x>
-     <y>122</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>customGraphicsView_O</sender>
-   <signal>mouseLDown(int,int)</signal>
-   <receiver>RulerView</receiver>
-   <slot>onMouseLButtonDown(int,int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>78</x>
-     <y>302</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>5</x>
-     <y>183</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>customGraphicsView_O</sender>
-   <signal>mouseRDown(int,int)</signal>
-   <receiver>RulerView</receiver>
-   <slot>onMouseRButtonDown(int,int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>145</x>
-     <y>337</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>3</x>
-     <y>373</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>pushButton_start</sender>
    <signal>clicked()</signal>
@@ -396,7 +344,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>817</x>
-     <y>151</y>
+     <y>150</y>
     </hint>
     <hint type="destinationlabel">
      <x>265</x>
@@ -459,8 +407,8 @@
    <slot>onSwitchImageToShow()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>786</x>
-     <y>203</y>
+     <x>817</x>
+     <y>197</y>
     </hint>
     <hint type="destinationlabel">
      <x>536</x>

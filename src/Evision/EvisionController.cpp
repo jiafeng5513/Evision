@@ -9,7 +9,7 @@
 #include "StereoCalibrate.h"
 #include "QMessageBox"
 #include "StereoMatch.h"
-#include "RulerView.h"
+#include "TraceView.h"
 #include "CameraView.h"
 #include "StereoCameraView.h"
 

@@ -7,7 +7,7 @@
 #include <qevent.h>
 #include <qmimedata.h>
 #include <QFileDialog>
-#include "RulerView.h"
+#include "TraceView.h"
 #include "StereoCameraView.h"
 #include "CameraView.h"
 #include "WatchImageView.h"
@@ -119,7 +119,7 @@ void EvisionView::on_action_stereoMatch_view()
 //显示交互式测距视图
 void EvisionView::on_action_Measure_view()
 {
-	RulerView * _Rfinterface = new RulerView();
+	TraceView * _Rfinterface = new TraceView();
 	ui.mdiArea->addSubWindow(_Rfinterface);
 	_Rfinterface->show();
 }

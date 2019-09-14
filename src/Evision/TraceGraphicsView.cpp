@@ -1,12 +1,16 @@
-#include "CustomGraphicsView.h"
+#include "TraceGraphicsView.h"
 #include "QMouseEvent"
-CustomGraphicsView::CustomGraphicsView(QWidget *parent)
+TraceGraphicsView::TraceGraphicsView(QWidget *parent)
 	: QGraphicsView(parent)
 {
 	setMouseTracking(true);
 }
-//鼠标击键事件
-void CustomGraphicsView::mousePressEvent(QMouseEvent* event)
+
+TraceGraphicsView::~TraceGraphicsView()
+{
+}
+
+void TraceGraphicsView::mousePressEvent(QMouseEvent* event)
 {
 	if (event->button() == Qt::MouseButton::LeftButton)
 	{
@@ -17,8 +21,8 @@ void CustomGraphicsView::mousePressEvent(QMouseEvent* event)
 		emit mouseRDown(event->pos().x(), event->pos().y());
 	}
 }
-//鼠标移动事件
-void CustomGraphicsView::mouseMoveEvent(QMouseEvent* event)
+
+void TraceGraphicsView::mouseMoveEvent(QMouseEvent* event)
 {
 	emit mouseMove(event->pos().x(), event->pos().y());
 }

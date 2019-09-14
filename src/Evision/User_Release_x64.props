@@ -3,14 +3,14 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <IncludePath>$(SolutionDir)CustomGraphicsView;$(SolutionDir)Evision3dViz\GeneratedFiles;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Evision3dViz\GeneratedFiles;$(IncludePath)</IncludePath>
     <LibraryPath>$(OutDir);$(LibraryPath)</LibraryPath>
     <_PropertySheetDisplayName>User_Release_x64</_PropertySheetDisplayName>
     <OutDir>$(SolutionDir)..\bin\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
-      <AdditionalDependencies>CustomGraphicsView.lib;EvisionElas.lib;EvisionADCensus.lib;Evision3dViz.lib;EvisionObjDetection.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>EvisionElas.lib;EvisionADCensus.lib;Evision3dViz.lib;EvisionObjDetection.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <DelayLoadDLLs>EvisionObjDetection.dll</DelayLoadDLLs>
     </Link>
     <ClCompile>

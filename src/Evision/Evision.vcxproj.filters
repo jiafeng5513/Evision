@@ -112,14 +112,17 @@
     <ClCompile Include="WatchImageView.cpp">
       <Filter>WatchImage</Filter>
     </ClCompile>
-    <ClCompile Include="RulerView.cpp">
-      <Filter>DepthPrediction</Filter>
-    </ClCompile>
     <ClCompile Include="rectify.cpp">
       <Filter>StereoRectify</Filter>
     </ClCompile>
     <ClCompile Include="CreateCameraParamFile.cpp">
       <Filter>CreateCamerParam</Filter>
+    </ClCompile>
+    <ClCompile Include="TraceGraphicsView.cpp">
+      <Filter>DepthPrediction</Filter>
+    </ClCompile>
+    <ClCompile Include="TraceView.cpp">
+      <Filter>DepthPrediction</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -183,11 +186,14 @@
     <QtMoc Include="WatchImageView.h">
       <Filter>WatchImage</Filter>
     </QtMoc>
-    <QtMoc Include="RulerView.h">
-      <Filter>DepthPrediction</Filter>
-    </QtMoc>
     <QtMoc Include="CreateCameraParamFile.h">
       <Filter>CreateCamerParam</Filter>
+    </QtMoc>
+    <QtMoc Include="TraceGraphicsView.h">
+      <Filter>DepthPrediction</Filter>
+    </QtMoc>
+    <QtMoc Include="TraceView.h">
+      <Filter>DepthPrediction</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -215,14 +221,14 @@
     <QtUic Include="ObjectDetectionView.ui">
       <Filter>ObjectDetection</Filter>
     </QtUic>
-    <QtUic Include="RulerView.ui">
-      <Filter>DepthPrediction</Filter>
-    </QtUic>
     <QtUic Include="WatchImageView.ui">
       <Filter>WatchImage</Filter>
     </QtUic>
     <QtUic Include="CreateCameraParamFile.ui">
       <Filter>CreateCamerParam</Filter>
+    </QtUic>
+    <QtUic Include="TraceView.ui">
+      <Filter>DepthPrediction</Filter>
     </QtUic>
   </ItemGroup>
   <ItemGroup>

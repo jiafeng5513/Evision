@@ -3,13 +3,13 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <IncludePath>$(IncludePath);$(SolutionDir)CustomGraphicsView;$(SolutionDir)Evision3dViz\GeneratedFiles</IncludePath>
+    <IncludePath>$(IncludePath);$(SolutionDir)Evision3dViz\GeneratedFiles</IncludePath>
     <LibraryPath>$(OutDir);$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)..\bin\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
-      <AdditionalDependencies>CustomGraphicsView.lib;EvisionObjDetection.lib;Evision3dViz.lib;EvisionElas.lib;EvisionADCensus.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>EvisionObjDetection.lib;Evision3dViz.lib;EvisionElas.lib;EvisionADCensus.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <DelayLoadDLLs>EvisionObjDetection.dll</DelayLoadDLLs>
     </Link>
     <ClCompile>

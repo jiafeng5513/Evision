@@ -1,4 +1,4 @@
-#include "RulerView.h"
+#include "TraceView.h"
 #include "EvisionUtils.h"
 #include "QGraphicsScene"
 #include <QFileDialog>
@@ -6,10 +6,17 @@
 #include <QMessageBox>
 #include <iostream>
 //直接启动视图,后设置参数
-RulerView::RulerView(QWidget *parent)
+TraceView::TraceView(QWidget *parent)
 	: QWidget(parent)
 {
 	ui.setupUi(this);
+	trace_graphics_view = new TraceGraphicsView(this);
+	//
+	ui.TraceLayout->addWidget(trace_graphics_view);
+	connect(trace_graphics_view, SIGNAL(mouseMove(int,int)), this, SLOT(onMouseMove(int, int)), Qt::QueuedConnection);
+	connect(trace_graphics_view, SIGNAL(mouseLDown(int, int)), this, SLOT(onMouseLButtonDown(int, int)), Qt::QueuedConnection);
+	connect(trace_graphics_view, SIGNAL(mouseRDown(int, int)), this, SLOT(onMouseRButtonDown(int, int)), Qt::QueuedConnection);
+	//
 	ui.checkBox_RawDispOK->setEnabled(false);
 	ui.checkBox_OriginOK->setEnabled(false);
 	ui.checkBox_CameraParamOK->setEnabled(false);
@@ -17,23 +24,23 @@ RulerView::RulerView(QWidget *parent)
 	sceneL = new QGraphicsScene();
 }
 
-RulerView::~RulerView()
+TraceView::~TraceView()
 {
 }
 //向O窗口画图
-void RulerView::printImgToO(cv::Mat value)
+void TraceView::printImgToO(cv::Mat value)
 {
 	sceneL->clear();
 	QImage QImage = EvisionUtils::cvMat2QImage(value);
 	sceneL->addPixmap(QPixmap::fromImage(QImage));
-	ui.customGraphicsView_O->setScene(sceneL);
-	ui.customGraphicsView_O->setMinimumSize(QImage.width(), QImage.height());
-	ui.customGraphicsView_O->setMaximumSize(QImage.width(), QImage.height());
-	ui.customGraphicsView_O->show();
-	ui.customGraphicsView_O->update();
+	trace_graphics_view->setScene(sceneL);
+	trace_graphics_view->setMinimumSize(QImage.width(), QImage.height());
+	trace_graphics_view->setMaximumSize(QImage.width(), QImage.height());
+	trace_graphics_view->show();
+	trace_graphics_view->update();
 }
 
-void RulerView::checkEnable()
+void TraceView::checkEnable()
 {
 	if(ui.checkBox_RawDispOK->isChecked()&&ui.checkBox_OriginOK->isChecked()&&ui.checkBox_CameraParamOK->isChecked())
 	{
@@ -42,14 +49,14 @@ void RulerView::checkEnable()
 }
 
 //响应鼠标移动
-void RulerView::onMouseMove(int x, int y)
+void TraceView::onMouseMove(int x, int y)
 {
 	ui.lineEdit_ImgX->setText(QString::fromStdString(std::to_string(x)));
 	ui.lineEdit_ImgY->setText(QString::fromStdString(std::to_string(y)));
 
 }
 //响应鼠标左键击键
-void RulerView::onMouseLButtonDown(int x, int y)
+void TraceView::onMouseLButtonDown(int x, int y)
 {
 	if (started)
 	{
@@ -74,14 +81,14 @@ void RulerView::onMouseLButtonDown(int x, int y)
 	}
 }
 //响应鼠标右键击键
-void RulerView::onMouseRButtonDown(int x, int y)
+void TraceView::onMouseRButtonDown(int x, int y)
 {
 
 }
 /*
  * 选择原始视差文件
  */
-void RulerView::onSelectRawDispFile()
+void TraceView::onSelectRawDispFile()
 {
 	QFileDialog * fileDialog = new QFileDialog();
 	fileDialog->setWindowTitle(QStringLiteral("请选择原始视差文件"));
@@ -106,7 +113,7 @@ void RulerView::onSelectRawDispFile()
 /*
  * 选择原图
  */
-void RulerView::onSelectOriginImg()
+void TraceView::onSelectOriginImg()
 {
 	QFileDialog * fileDialog = new QFileDialog();
 	fileDialog->setWindowTitle(QStringLiteral("请选择参与生成所选视差图的左视图或右视图"));
@@ -129,7 +136,7 @@ void RulerView::onSelectOriginImg()
 /*
  * 选择相机参数文件
  */
-void RulerView::onSelectCameraParamFile()
+void TraceView::onSelectCameraParamFile()
 {
 	QFileDialog * fileDialog = new QFileDialog();
 	fileDialog->setWindowTitle(QStringLiteral("请选择相机参数文件"));
@@ -153,7 +160,7 @@ void RulerView::onSelectCameraParamFile()
 	}
 }
 
-void RulerView::onStart()
+void TraceView::onStart()
 {
 	cv::reprojectImageTo3D(RawDisp, image3D, Q);
 	cv::Mat resizedImage, resizedDispMap;
@@ -180,7 +187,7 @@ void RulerView::onStart()
 	started = true;
 }
 
-void RulerView::onSwitchImageToShow()
+void TraceView::onSwitchImageToShow()
 {
 	if(DispIsShowing)
 	{

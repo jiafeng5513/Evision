@@ -1,19 +1,21 @@
 #pragma once
 
 #include <QWidget>
-#include "ui_RulerView.h"
+#include "ui_TraceView.h"
 #include <core/core.hpp>
 #include <QtWidgets/QGraphicsView>
+#include "TraceGraphicsView.h"
+
 /*
  * 负责交互式测量功能的view
  */
-class RulerView : public QWidget
+class TraceView : public QWidget
 {
 	Q_OBJECT
 
 public:
-	RulerView(QWidget *parent = Q_NULLPTR);
-	~RulerView();
+	TraceView(QWidget *parent = Q_NULLPTR);
+	~TraceView();
 
 private:
 	Ui::RulerView ui;
@@ -27,6 +29,7 @@ private:
 	bool DispIsShowing = true;
 	QGraphicsScene *sceneL;
 	bool started = false;
+	TraceGraphicsView * trace_graphics_view;
 private:
 	void printImgToO(cv::Mat value);
 	void checkEnable();
