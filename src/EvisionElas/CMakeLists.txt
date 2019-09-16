@@ -1,0 +1,37 @@
+# cmake needs this line
+cmake_minimum_required(VERSION 3.13.0)
+
+# Find OpenCV, you may need to set OpenCV_DIR variable
+# to the absolute path to the directory containing OpenCVConfig.cmake file
+# via the command line or GUI
+find_package(OpenCV REQUIRED)
+
+# If the package has been found, several variables will
+# be set, you can find the full list with descriptions
+# in the OpenCVConfig.cmake file.
+# Print some message showing some of them
+message(STATUS "OpenCV library status:")
+message(STATUS "    version: ${OpenCV_VERSION}")
+message(STATUS "    libraries: ${OpenCV_LIBS}")
+message(STATUS "    include path: ${OpenCV_INCLUDE_DIRS}")
+
+# Add OpenCV headers location to your include paths
+include_directories(${OpenCV_INCLUDE_DIRS})
+
+#查找当前文件夹中的所有源代码文件，也可以通过Set命令将所有文件设置为一个变量
+FILE(GLOB SRC_FILES "./*.cpp") 
+#同理，查找当前文件夹中所有的头文件
+FILE(GLOB HEAD_FILES "./*.h") 
+
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/../install/Debug/lib)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/../install/Release/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/../install/Debug/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/../install/Release/bin)
+set(CMAKE_DEBUG_POSTFIX "_d")
+set_target_properties(${TARGET_NAME} PROPERTIES DEBUG_POSTFIX "_d")
+
+#生成动态链接库
+ADD_LIBRARY(EvisionElas SHARED ${SRC_FILES} ${HEAD_FILES})
+
+# Link your application with OpenCV libraries
+target_link_libraries(EvisionElas ${OpenCV_LIBS})

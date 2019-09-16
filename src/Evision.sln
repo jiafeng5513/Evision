@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2003
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Evision", "Evision\Evision.vcxproj", "{B12702AD-ABFB-343A-A199-8E24837244A3}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EvisionSandbox", "EvisionSandbox\EvisionSandbox.vcxproj", "{B12702AD-ABFB-343A-A199-8E24837244A3}"
 	ProjectSection(ProjectDependencies) = postProject
 		{D8FB0A1E-98A3-4017-B6D4-A7421987314F} = {D8FB0A1E-98A3-4017-B6D4-A7421987314F}
 		{1A38C54A-D846-4329-8EE8-9C1AFDC58FFD} = {1A38C54A-D846-4329-8EE8-9C1AFDC58FFD}
