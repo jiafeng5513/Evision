@@ -14,21 +14,21 @@ Introduction:
 6. 如果您需要安装依赖,请仔细阅读本文下方的安装指南,从官方网站下载安装包,并且不要按照其他形如"OpenCV和VS2017环境搭建"之类的教程进行所谓的环境配置.<br>
 7. 项目中自带了OpenCV,请不要修改项目的"包含目录,库目录和附加依赖项"等项目,除非您非常清楚这些东西的意义.<br>
 8.  关于程序使用方面的问题,可以联系邮件jiafeng5513@outlook.com,有关课程设计和毕业论文(Windows程序开发,机器视觉,深度学习,图像处理)也可以联系作者<br>
-
+9. 已经添加CMakeLists.txt,目前正在调试.<br>
 目录
 =========
-- [Introduction:](#Introduction)
-- [目录](#%E7%9B%AE%E5%BD%95)
-      - [1.Dependencies](#1Dependencies)
-      - [2.Installation_guide](#2Installationguide)
-      - [3.Directory_specification](#3Directoryspecification)
-      - [4.Solutions_and_projects](#4Solutionsandprojects)
-      - [6.Evision(C++/Qt版本)](#6EvisionCQt%E7%89%88%E6%9C%AC)
-      - [7.CvLabMain和CvLabSandbox(C#版本)](#7CvLabMain%E5%92%8CCvLabSandboxC%E7%89%88%E6%9C%AC)
-      - [8.双目设备](#8%E5%8F%8C%E7%9B%AE%E8%AE%BE%E5%A4%87)
-      - [9.参考文献](#9%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE)
-      - [10.部分框图](#10%E9%83%A8%E5%88%86%E6%A1%86%E5%9B%BE)
-      - [11.未来计划](#11%E6%9C%AA%E6%9D%A5%E8%AE%A1%E5%88%92)
+- [Introduction:](#introduction)
+- [目录](#%e7%9b%ae%e5%bd%95)
+      - [1.Dependencies](#1dependencies)
+      - [2.Installation_guide](#2installationguide)
+      - [3.Directory_specification](#3directoryspecification)
+      - [4.Solutions_and_projects](#4solutionsandprojects)
+      - [6.Evision(C++/Qt版本)](#6evisioncqt%e7%89%88%e6%9c%ac)
+      - [7.CvLabMain和CvLabSandbox(C#版本)](#7cvlabmain%e5%92%8ccvlabsandboxc%e7%89%88%e6%9c%ac)
+      - [8.双目设备](#8%e5%8f%8c%e7%9b%ae%e8%ae%be%e5%a4%87)
+      - [9.参考文献](#9%e5%8f%82%e8%80%83%e6%96%87%e7%8c%ae)
+      - [10.部分框图](#10%e9%83%a8%e5%88%86%e6%a1%86%e5%9b%be)
+      - [11.未来计划](#11%e6%9c%aa%e6%9d%a5%e8%ae%a1%e5%88%92)
 
 #### 1.Dependencies
 1. Qt :5.12.0
@@ -129,6 +129,3 @@ Introduction:
 
 #### 11.未来计划
 1. 参考[这篇文章](http://blog.csdn.net/hysteric314/article/details/51357318).<br>
-2. 简化程序的部署,使用CMake或者提供安装包.<br>
-3. 去除Qt,使用轻量化的UI框架.<br>
-4. 跨平台.<br>
