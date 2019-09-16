@@ -1,4 +1,4 @@
-<div align=center><img width="100" height="100" src="./src/Evision/resource/Evision.ico"/></div>
+<div align=center><img width="100" height="100" src="./src/EvisionSandbox/resource/Evision.ico"/></div>
 
 <div align=center>Evision 双目视觉系统</div>
 <div align=center><a href="https://www.bilibili.com/video/av46024738">演示视频</a></div>
@@ -14,7 +14,8 @@ Introduction:
 6. 如果您需要安装依赖,请仔细阅读本文下方的安装指南,从官方网站下载安装包,并且不要按照其他形如"OpenCV和VS2017环境搭建"之类的教程进行所谓的环境配置.<br>
 7. 项目中自带了OpenCV,请不要修改项目的"包含目录,库目录和附加依赖项"等项目,除非您非常清楚这些东西的意义.<br>
 8.  关于程序使用方面的问题,可以联系邮件jiafeng5513@outlook.com,有关课程设计和毕业论文(Windows程序开发,机器视觉,深度学习,图像处理)也可以联系作者<br>
-9. 已经添加CMakeLists.txt,目前正在调试.<br>
+9. 已经添加CMake支持,目前正在调试.<br>
+
 目录
 =========
 - [Introduction:](#introduction)
