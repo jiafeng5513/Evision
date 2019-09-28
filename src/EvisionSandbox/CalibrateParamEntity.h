@@ -1,7 +1,7 @@
 #pragma once
 
 #include <QObject>
-#include <core/mat.hpp>
+#include <opencv2/core/mat.hpp>
 
 class CalibrateParamEntity : public QObject
 {

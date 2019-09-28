@@ -1,3 +1,4 @@
+# Evision Elas
 # cmake needs this line
 cmake_minimum_required(VERSION 3.13.0)
 
@@ -18,15 +19,14 @@ message(STATUS "    include path: ${OpenCV_INCLUDE_DIRS}")
 # Add OpenCV headers location to your include paths
 include_directories(${OpenCV_INCLUDE_DIRS})
 
-#查找当前文件夹中的所有源代码文件，也可以通过Set命令将所有文件设置为一个变量
+FILE(GLOB INCLUDE_FILES "EvisionElas.h" "elas.h")# will be included by apps
 FILE(GLOB SRC_FILES "./*.cpp") 
-#同理，查找当前文件夹中所有的头文件
 FILE(GLOB HEAD_FILES "./*.h") 
 
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/../install/Debug/lib)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/../install/Release/lib)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/../install/Debug/bin)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/../install/Release/bin)
+# set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/../install/Debug/lib)
+# set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/../install/Release/lib)
+# set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/../install/Debug/bin)
+# set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/../install/Release/bin)
 set(CMAKE_DEBUG_POSTFIX "_d")
 set_target_properties(${TARGET_NAME} PROPERTIES DEBUG_POSTFIX "_d")
 
@@ -35,3 +35,23 @@ ADD_LIBRARY(EvisionElas SHARED ${SRC_FILES} ${HEAD_FILES})
 
 # Link your application with OpenCV libraries
 target_link_libraries(EvisionElas ${OpenCV_LIBS})
+
+# 自定义库导出安装设置
+SET(CMAKE_INSTALL_PREFIX ${PROJECT_SOURCE_DIR}/../install/EvisionElas)
+
+target_include_directories(EvisionElas PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>)
+
+set_target_properties(EvisionElas PROPERTIES PUBLIC_HEADER "${INCLUDE_FILES}")
+
+install(TARGETS EvisionElas
+    EXPORT EvisionElas-targets
+    PUBLIC_HEADER DESTINATION include
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+    RUNTIME DESTINATION bin)
+
+install(EXPORT EvisionObjDetection-targets
+    NAMESPACE EvisionObjDetection:: FILE EvisionObjDetection-config.cmake DESTINATION lib/cmake/EvisionObjDetection)
+

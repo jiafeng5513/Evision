@@ -1,6 +1,6 @@
 #include "CreateCameraParamFile.h"
 #include <QMessageBox>
-#include <core/mat.hpp>
+#include <opencv2/core/mat.hpp>
 #include <opencv2/opencv.hpp>
 #include "EvisionRectifyView.h"
 #include "EvisionUtils.h"

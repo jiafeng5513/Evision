@@ -1,7 +1,7 @@
 #pragma once
 
 #include <QObject>
-#include <opencv.hpp>
+#include <opencv2/opencv.hpp>
 
 class StereoMatchParamEntity : public QObject
 {

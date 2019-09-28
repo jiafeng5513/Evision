@@ -2,7 +2,7 @@
 #include "StereoCalibrate.h"
 #include <QMessageBox>
 #include <QFileDialog>
-#include <opencv.hpp>
+#include <opencv2/opencv.hpp>
 
 CalibrateController::CalibrateController(QObject *parent)
 	: QObject(parent)

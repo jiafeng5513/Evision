@@ -32,9 +32,15 @@ include_directories(${QT_INCLUDE_MultimediaWidgets})
 include_directories(${QT_INCLUDE_Multimedia})
 include_directories(${QT_INCLUDE_CORE_PRIVATE})
 include_directories(${QT_INCLUDE_CORE_INNER})
+include_directories(${QT_INCLUDE_CORE_INNER}/../)
+
+include_directories("../Evision3dViz/GeneratedFiles")
 #设置工程包含当前目录
 set(CMAKE_INCLUDE_CURRENT_DIR ON) 
- 
+
+add_definitions(-D UNICODE)
+add_definitions(-D WIN32)
+add_definitions(-D WIN64)
 add_definitions(-D QT_CORE_LIB)
 add_definitions(-D QT_GUI_LIB)
 add_definitions(-D QT_WIDGETS_LIB)
@@ -59,6 +65,8 @@ find_package(Qt5 COMPONENTS Widgets REQUIRED)
 find_package(Qt5 COMPONENTS Core REQUIRED)
 find_package(Qt5 COMPONENTS Gui REQUIRED)
 find_package(Qt5 COMPONENTS UiPlugin REQUIRED)
+find_package(Qt5 COMPONENTS Multimedia REQUIRED)
+find_package(Qt5 COMPONENTS MultimediaWidgets REQUIRED)
 #查找当前文件夹中的所有源代码文件
 FILE(GLOB SRC_FILES "./*.cpp") 
 #查找当前文件夹中所有的头文件
@@ -79,7 +87,6 @@ source_group("Generated Files" FILES ${UIC_FILES} ${MOC_FILES} ${QRC_FILES})
 source_group("Form Files" FILES ${UI_FILES})
 source_group("Resource Files" FILES ${RES_FILES})
 
-
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/../install/Debug/lib)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/../install/Release/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/../install/Debug/bin)
@@ -91,4 +98,13 @@ set_target_properties(${TARGET_NAME} PROPERTIES DEBUG_POSTFIX "_d")
 add_executable(EvisionSandbox ${SRC_FILES} ${HEAD_FILES} ${MOC_FILES} ${RES_FILES} ${UIC_FILES} ${QRC_FILES})
 
 #链接Qt5依赖项
-target_link_libraries(EvisionSandbox Qt5::Widgets Qt5::Core Qt5::Gui)
+target_link_libraries(EvisionSandbox Qt5::Widgets Qt5::Core Qt5::Gui Qt5::Multimedia Qt5::MultimediaWidgets)
+#链接boost
+target_link_libraries(EvisionSandbox ${Boost_LIBRARIES})
+#链接OpenCV
+target_link_libraries(EvisionSandbox ${OpenCV_LIBS})
+#链接PCL
+target_link_libraries(EvisionSandbox ${PCL_COMMON_LIBRARIES} ${PCL_IO_LIBRARIES})
+#链接VTK
+target_link_libraries(EvisionSandbox ${VTK_LIBRARIES})
+#链接自定义库

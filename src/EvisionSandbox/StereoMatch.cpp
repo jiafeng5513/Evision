@@ -8,7 +8,7 @@
 #include "../EvisionADCensus/stereoprocessor.h"
 #include "rectify.h"
 #include <algorithm>
-#include "../EvisionElas/elas.h"
+//#include "../EvisionElas/elas.h"
 
 StereoMatch::StereoMatch(std::string img1_filename, std::string img2_filename, std::string cameraParams_filename)
 {

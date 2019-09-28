@@ -4,7 +4,7 @@
 #include <QThread>
 #include <iomanip>
 #include "opencv2/opencv.hpp"            // C++#include "opencv2/opencv.hpp"            // C++
-#include "../EvisionObjDetection/include/yolo_v2_class.hpp"
+#include "../EvisionObjDetection/include/yolo_v2_class.h"
 #include "ObjectDetectionEntity.h"
 #ifdef _WIN32
 #define OPENCV

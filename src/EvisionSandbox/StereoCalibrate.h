@@ -1,6 +1,6 @@
 #pragma once
 #include <QThread>
-#include <core/mat.hpp>
+#include <opencv2/core/mat.hpp>
 #include "EvisionParamEntity.h"
 #include "CalibrateParamEntity.h"
 
