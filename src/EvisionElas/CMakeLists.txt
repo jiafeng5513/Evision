@@ -31,7 +31,7 @@ set(CMAKE_DEBUG_POSTFIX "_d")
 set_target_properties(${TARGET_NAME} PROPERTIES DEBUG_POSTFIX "_d")
 
 #生成动态链接库
-ADD_LIBRARY(EvisionElas SHARED ${SRC_FILES} ${HEAD_FILES})
+ADD_LIBRARY(EvisionElas SHARED ${SRC_FILES} ${HEAD_FILES} ${INCLUDE_FILES})
 
 # Link your application with OpenCV libraries
 target_link_libraries(EvisionElas ${OpenCV_LIBS})
@@ -52,6 +52,6 @@ install(TARGETS EvisionElas
     LIBRARY DESTINATION lib
     RUNTIME DESTINATION bin)
 
-install(EXPORT EvisionObjDetection-targets
-    NAMESPACE EvisionObjDetection:: FILE EvisionObjDetection-config.cmake DESTINATION lib/cmake/EvisionObjDetection)
+install(EXPORT EvisionElas-targets
+    NAMESPACE EvisionElas:: FILE EvisionElas-config.cmake DESTINATION lib/cmake/EvisionElas)
 
