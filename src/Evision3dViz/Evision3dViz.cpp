@@ -25,6 +25,7 @@ Evision3dViz::Evision3dViz(QWidget *parent)
 	//myOutputWindow->SetGlobalWarningDisplay(false);
 	//vtkOutputWindow::SetInstance(myOutputWindow);
 }
+
 //´ò¿ª
 void Evision3dViz::onPushButton_Open()
 {

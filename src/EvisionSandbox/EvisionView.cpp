@@ -16,10 +16,11 @@
 #endif
 
 #if (defined WITH_PCL) && (defined WITH_VTK)  
-#include "../Evision3dViz/Evision3dViz.h"
+#include "../Evision3dViz/Evision3dVizFactory.h"
 #endif
 #include "EvisionRectifyView.h"
 #include "CreateCameraParamFile.h"
+#include "../Evision3dViz/Evision3dVizFactory.h"
 
 // 浮点数判等
 // ulp: units in the last place.
@@ -48,7 +49,7 @@ EvisionView::EvisionView(QWidget *parent)
 	statusBar()->setStyleSheet(QString("QStatusBar::item{border: 0px}"));
 
 	m_entity = EvisionParamEntity::getInstance();
-	m_controller = new EvisionController();
+	//m_controller = new EvisionController();
 
 
 	connect(m_entity, SIGNAL(paramChanged_StatusBar()), this, SLOT(onParamChanged_StatusBarText()), Qt::QueuedConnection);
@@ -87,7 +88,7 @@ void EvisionView::onStereoCamera()
 void EvisionView::onShowPointCloud()
 {
 #if (defined WITH_PCL) && (defined WITH_VTK)  
-	Evision3dViz  * evision3dViz = new Evision3dViz();
+	QWidget  * evision3dViz = Evision3dVizFactory::CreateEvision3dViz();
 	ui.mdiArea->addSubWindow(evision3dViz);
 	evision3dViz->show();
 #else
@@ -235,7 +236,7 @@ void EvisionView::on_action_disp_to_pcd()
 		append("/").												   //F:/test/
 		append(_fileInfo->baseName().toStdString()).				   //F:/test/123
 		append(".pcd");												   //F:/test/123.pcd
-		EvisionUtils::createAndSavePointCloud(RawDisp, img, Q, filename);
+		Evision3dVizFactory::createAndSavePointCloud(RawDisp, img, Q, filename);
 	}
 #else
 	QMessageBox::information(this, QStringLiteral("该功能未启用!"), QStringLiteral("请在项目属性/C++/预处理器中添加\"WITH_PCL\"并配置好PCL依赖"));

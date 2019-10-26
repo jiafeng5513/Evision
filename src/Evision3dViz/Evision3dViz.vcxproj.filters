@@ -37,6 +37,9 @@
     <ClCompile Include="GeneratedFiles\qrc_Evision3dViz.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="Evision3dVizFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_Evision3dViz.h">
@@ -140,6 +143,9 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Evision3dViz.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Evision3dVizFactory.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

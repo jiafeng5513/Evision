@@ -11,6 +11,11 @@ cmake_minimum_required(VERSION 3.13.0)
 # via the command line or GUI
 find_package(OpenCV REQUIRED)
 find_package(PCL REQUIRED)
+# 自定义库
+# find_package(EvisionObjDetection REQUIRED)
+# find_package(Evision3dViz REQUIRED)
+# find_package(EvisionADCensus REQUIRED)
+# find_package(EvisionElas REQUIRED)
 # If the package has been found, several variables will
 # be set, you can find the full list with descriptions
 # in the OpenCVConfig.cmake file.
@@ -53,7 +58,14 @@ add_definitions(-D WITH_PCL)
 add_definitions(-D WITH_CUDA)
 add_definitions(-D WITH_VTK)
 
+#自定义库的输出路径就是主程序的链接路径
+IF (CMAKE_BUILD_TYPE STREQUAL Debug)
+link_directories(${PROJECT_SOURCE_DIR}/../install/Debug/lib)
+ENDIF()
 
+IF (CMAKE_BUILD_TYPE STREQUAL Release)
+link_directories(${PROJECT_SOURCE_DIR}/../install/Release/lib)
+ENDIF()
 
 #自动moc,uic,qrc,
 #set(CMAKE_AUTOMOC ON) 
@@ -108,3 +120,18 @@ target_link_libraries(EvisionSandbox ${PCL_COMMON_LIBRARIES} ${PCL_IO_LIBRARIES}
 #链接VTK
 target_link_libraries(EvisionSandbox ${VTK_LIBRARIES})
 #链接自定义库
+# target_link_libraries(EvisionSandbox EvisionObjDetection::EvisionObjDetection)
+# target_link_libraries(EvisionSandbox Evision3dViz::Evision3dViz)
+# target_link_libraries(EvisionSandbox EvisionADCensus::EvisionADCensus)
+# target_link_libraries(EvisionSandbox EvisionElas::EvisionElas)
+
+IF (CMAKE_BUILD_TYPE STREQUAL Debug)
+target_link_libraries(EvisionSandbox EvisionObjDetection_d)
+target_link_libraries(EvisionSandbox Evision3dViz_d)
+target_link_libraries(EvisionSandbox EvisionADCensus_d)
+target_link_libraries(EvisionSandbox EvisionElas_d)
+ENDIF()
+
+IF (CMAKE_BUILD_TYPE STREQUAL Release)
+target_link_libraries(EvisionSandbox EvisionObjDetection Evision3dViz EvisionADCensus EvisionElas)
+ENDIF()

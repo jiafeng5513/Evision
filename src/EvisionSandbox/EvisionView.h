@@ -3,7 +3,6 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_Evision.h"
 #include "EvisionParamEntity.h"
-#include "EvisionController.h"
 #include <QLabel>
 #include "LogView.h"
 
@@ -17,7 +16,7 @@ public:
 private:
 	Ui::EvisionClass ui;
 	EvisionParamEntity * m_entity;
-	EvisionController * m_controller;
+	//EvisionController * m_controller;
 	QLabel *msgLabel;
 
 	QPoint old_pos;

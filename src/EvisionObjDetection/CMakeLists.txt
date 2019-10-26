@@ -42,10 +42,10 @@ source_group("Header Files" FILES ${HEAD_FILES})
 source_group("Source Files" FILES ${SRC_FILES})
 source_group("CU Files" FILES ${CU_FILES})
 
-# set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/../install/Debug/lib)
-# set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/../install/Release/lib)
-# set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/../install/Debug/bin)
-# set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/../install/Release/bin)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/../install/Debug/lib)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/../install/Release/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/../install/Debug/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/../install/Release/bin)
 set(CMAKE_DEBUG_POSTFIX "_d")
 set_target_properties(${TARGET_NAME} PROPERTIES DEBUG_POSTFIX "_d")
 
@@ -55,23 +55,23 @@ target_link_libraries(EvisionObjDetection ../../package/pthread/lib/x64/pthreadV
 #链接CUDA
 target_link_libraries(EvisionObjDetection ${CUDA_BLAS_LIBRARY} ${CUDA_RANDOM_LIBRARY} ${CUDA_CUDA_LIBRARY} ${CUDA_cublas_LIBRARY} ${CUDA_curand_LIBRARY} ${CUDA_CUDART_LIBRARY})
 #自定义库的安装位置
-SET(CMAKE_INSTALL_PREFIX ${PROJECT_SOURCE_DIR}/../install/EvisionObjDetection)
+# SET(CMAKE_INSTALL_PREFIX ${PROJECT_SOURCE_DIR}/../install/EvisionObjDetection)
 
-target_include_directories(EvisionObjDetection PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    $<INSTALL_INTERFACE:include>)
+# target_include_directories(EvisionObjDetection PUBLIC
+#     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+#     $<INSTALL_INTERFACE:include>)
 
-set_target_properties(EvisionObjDetection PROPERTIES PUBLIC_HEADER "${INCLUDE_FILES}")
+# set_target_properties(EvisionObjDetection PROPERTIES PUBLIC_HEADER "${INCLUDE_FILES}")
 
-install(TARGETS EvisionObjDetection
-    EXPORT EvisionObjDetection-targets
-    PUBLIC_HEADER DESTINATION include
-    ARCHIVE DESTINATION lib
-    LIBRARY DESTINATION lib
-    RUNTIME DESTINATION bin)
+# install(TARGETS EvisionObjDetection
+#     EXPORT EvisionObjDetection-targets
+#     PUBLIC_HEADER DESTINATION include
+#     ARCHIVE DESTINATION lib
+#     LIBRARY DESTINATION lib
+#     RUNTIME DESTINATION bin)
 
-install(EXPORT EvisionObjDetection-targets
-    NAMESPACE EvisionObjDetection::
-    FILE EvisionObjDetection-config.cmake
-    DESTINATION lib/cmake/EvisionObjDetection)
+# install(EXPORT EvisionObjDetection-targets
+#     NAMESPACE EvisionObjDetection::
+#     FILE EvisionObjDetection-config.cmake
+#     DESTINATION lib/cmake/EvisionObjDetection)
 

@@ -73,9 +73,6 @@
     <ClCompile Include="EvisionView.cpp">
       <Filter>main</Filter>
     </ClCompile>
-    <ClCompile Include="EvisionController.cpp">
-      <Filter>main</Filter>
-    </ClCompile>
     <ClCompile Include="StereoMatchController.cpp">
       <Filter>StereoMatch</Filter>
     </ClCompile>
@@ -145,9 +142,6 @@
       <Filter>main</Filter>
     </QtMoc>
     <QtMoc Include="EvisionView.h">
-      <Filter>main</Filter>
-    </QtMoc>
-    <QtMoc Include="EvisionController.h">
       <Filter>main</Filter>
     </QtMoc>
     <QtMoc Include="StereoMatchController.h">
