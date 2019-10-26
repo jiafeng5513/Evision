@@ -16,11 +16,10 @@
 #endif
 
 #if (defined WITH_PCL) && (defined WITH_VTK)  
-#include "../Evision3dViz/Evision3dVizFactory.h"
+#include "../Evision3dViz/include/Evision3dVizFactory.h"
 #endif
 #include "EvisionRectifyView.h"
 #include "CreateCameraParamFile.h"
-#include "../Evision3dViz/Evision3dVizFactory.h"
 
 // ¸¡µãÊýÅÐµÈ
 // ulp: units in the last place.

@@ -29,6 +29,9 @@
       <Extensions>ui</Extensions>
       <ParseFiles>true</ParseFiles>
     </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{f7abcd89-00b3-4693-a3ea-5b881f04bc35}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Evision3dViz.cpp">
@@ -145,8 +148,8 @@
     <QtMoc Include="Evision3dViz.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Evision3dVizFactory.h">
-      <Filter>Header Files</Filter>
+    <QtMoc Include="include\Evision3dVizFactory.h">
+      <Filter>include</Filter>
     </QtMoc>
   </ItemGroup>
 </Project>
