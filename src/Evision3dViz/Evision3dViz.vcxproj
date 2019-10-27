@@ -140,7 +140,6 @@
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtMultimediaWidgets</IncludePath>
     </QtMoc>
     <QtMoc Include="Evision3dViz.h" />
-    <ClInclude Include="evision3dviz_global.h" />
     <ClInclude Include="GeneratedFiles\ui_Evision3dViz.h" />
   </ItemGroup>
   <ItemGroup>

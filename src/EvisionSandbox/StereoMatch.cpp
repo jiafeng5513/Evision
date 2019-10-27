@@ -3,7 +3,7 @@
 #include <QFileDialog>
 #include <QTime>
 #include "EvisionUtils.h"
-#include "../EvisionElas/EvisionElas.h"
+#include "../EvisionElas/include/EvisionElas.h"
 #include "../EvisionADCensus/imageprocessor.h"
 #include "../EvisionADCensus/stereoprocessor.h"
 #include "rectify.h"
@@ -354,33 +354,17 @@ void StereoMatch::Elas()
 	std::cout << "Elas 开始计算..." << std::endl;
 	m_entity->setIconImgL(img1);
 	m_entity->setIconImgR(img2);
-	Elas::parameters param;
-	param.disp_min = m_entity->getDispMin();
-	param.disp_max = m_entity->getDispMax();
-	param.support_threshold = m_entity->getSupportThreshold();
-	param.support_texture = m_entity->getSupportTexture();
-	param.candidate_stepsize = m_entity->getCandidateStepsize();
-	param.incon_window_size = m_entity->getInconWindowSize();
-	param.incon_threshold = m_entity->getInconThreshold();
-	param.incon_min_support = m_entity->getInconMinSupport();
-	param.add_corners = m_entity->getAddCorners();
-	param.grid_size = m_entity->getGridSize();
-	param.beta = m_entity->getBeta();
-	param.gamma = m_entity->getGamma();
-	param.sigma = m_entity->getSigma();
-	param.sradius = m_entity->getSradius();
-	param.match_texture = m_entity->getMatchTexture();
-	param.lr_threshold = m_entity->getLrThreshold();
-	param.speckle_sim_threshold = m_entity->getSpeckleSimThreshold();
-	param.speckle_size = m_entity->getSpeckleSize();
-	param.ipol_gap_width = m_entity->getIpolGapWidth();
-	param.filter_median = m_entity->getFilterMedian();
-	param.filter_adaptive_mean = m_entity->getFilterAdaptiveMean();
-	param.postprocess_only_left = m_entity->getPostprocessOnlyLeft();
-	param.subsampling = m_entity->getSubSampling();
+	EvisionElas elas(
+		m_entity->getDispMin(),m_entity->getDispMax(),m_entity->getSupportThreshold(),m_entity->getSupportTexture(),
+		m_entity->getCandidateStepsize(),m_entity->getInconWindowSize(),m_entity->getInconThreshold(),
+		m_entity->getInconMinSupport(),m_entity->getAddCorners(),m_entity->getGridSize(),m_entity->getBeta(),
+		m_entity->getGamma(),m_entity->getSigma(),m_entity->getSradius(),m_entity->getMatchTexture(),
+		m_entity->getLrThreshold(),m_entity->getSpeckleSimThreshold(),m_entity->getSpeckleSize(),
+		m_entity->getIpolGapWidth(),m_entity->getFilterMedian(),m_entity->getFilterAdaptiveMean(),
+		m_entity->getPostprocessOnlyLeft(),m_entity->getSubSampling(), 100);
 
 	int64 t = cv::getTickCount();
-	ElasMatch(param,img1, img2,&Raw_Disp_Data, &Visual_Disp_Data);
+	elas.Match(img1, img2, &Raw_Disp_Data, &Visual_Disp_Data);
 	t = cv::getTickCount() - t;
 	std::cout << "Time elapsed: " << t * 1000 / cv::getTickFrequency() << "ms\n ELAS计算完毕" << std::endl;
 	m_entity->setIconRawDisp(Visual_Disp_Data);

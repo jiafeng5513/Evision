@@ -52,7 +52,7 @@ namespace cv {
 #include "timer.h"
 #endif
 
-class __declspec(dllexport) Elas {
+class Elas {
   
 public:
   

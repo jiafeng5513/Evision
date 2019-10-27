@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{538b5223-298b-4992-9ddb-f3b57d6d06de}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="descriptor.h">
@@ -36,11 +39,11 @@
     <ClInclude Include="triangle.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="EvisionElas.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="StereoEfficientLargeScale.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EvisionElas.h">
+      <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
