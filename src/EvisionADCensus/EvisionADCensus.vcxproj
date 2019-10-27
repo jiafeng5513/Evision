@@ -39,10 +39,12 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\props\OpenCV_x64_debug.props" />
+    <Import Project="User_Debug_x64.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\props\OpenCV_x64_release.props" />
+    <Import Project="User_Release_x64.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -96,6 +98,7 @@
     <ClInclude Include="common.h" />
     <ClInclude Include="disparityrefinement.h" />
     <ClInclude Include="imageprocessor.h" />
+    <ClInclude Include="include\EvisionADCensus.h" />
     <ClInclude Include="scanlineoptimization.h" />
     <ClInclude Include="stereoprocessor.h" />
   </ItemGroup>
@@ -103,6 +106,7 @@
     <ClCompile Include="adcensuscv.cpp" />
     <ClCompile Include="aggregation.cpp" />
     <ClCompile Include="disparityrefinement.cpp" />
+    <ClCompile Include="EvisionADCensus.cpp" />
     <ClCompile Include="imageprocessor.cpp" />
     <ClCompile Include="scanlineoptimization.cpp" />
     <ClCompile Include="stereoprocessor.cpp" />

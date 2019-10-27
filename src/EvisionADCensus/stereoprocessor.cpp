@@ -43,10 +43,15 @@
 
 #include "stereoprocessor.h"
 #include <limits>
-
+#include "imageprocessor.h"
+#include <omp.h>
+#include "common.h"
+#include "adcensuscv.h"
+#include "scanlineoptimization.h"
 //#define DEBUG
 
-StereoProcessor::StereoProcessor(uint dMin, uint dMax, cv::Mat leftImage, cv::Mat rightImage, cv::Size censusWin, float defaultBorderCost,
+StereoProcessor::StereoProcessor(float percentageOfDeletion, std::string blurMethod, int kernelSize, float alpha, float beta,
+	uint dMin, uint dMax, cv::Mat leftImage, cv::Mat rightImage, cv::Size censusWin, float defaultBorderCost,
                                  float lambdaAD, float lambdaCensus, string savePath, uint aggregatingIterations,
                                  uint colorThreshold1, uint colorThreshold2, uint maxLength1, uint maxLength2, uint colorDifference,
                                  float pi1, float pi2, uint dispTolerance, uint votingThreshold, float votingRatioThreshold,
@@ -54,8 +59,16 @@ StereoProcessor::StereoProcessor(uint dMin, uint dMax, cv::Mat leftImage, cv::Ma
 {
     this->dMin = dMin;
     this->dMax = dMax;
-    this->images[0] = leftImage;
-    this->images[1] = rightImage;
+
+	//float percentageOfDeletion = 0.1;
+	//std::string blurMethod = "gauss";//"median"
+	//int kernelSize = 3;
+	//float alpha = 1.9;
+	//float beta = -1;
+	ImageProcessor iP(percentageOfDeletion);
+	this->images[0] = iP.unsharpMasking(leftImage, blurMethod, kernelSize, alpha, beta);
+	this->images[1] = iP.unsharpMasking(rightImage, blurMethod, kernelSize, alpha, beta);
+
     this->censusWin = censusWin;
     this->defaultBorderCost = defaultBorderCost;
     this->lambdaAD = lambdaAD;

@@ -47,7 +47,7 @@
 #include "common.h"
 
 
-class __declspec(dllexport)ImageProcessor
+class ImageProcessor
 {
 public:
     ImageProcessor(float percentageOfDeletion);
