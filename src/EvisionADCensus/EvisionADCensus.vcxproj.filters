@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{d0bd766b-cd5e-4e4d-b817-8a9a8b55ff50}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="adcensuscv.h">
@@ -36,6 +39,9 @@
     <ClInclude Include="stereoprocessor.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="include\EvisionADCensus.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="adcensuscv.cpp">
@@ -54,6 +60,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="stereoprocessor.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="EvisionADCensus.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,6 +1,5 @@
 #pragma once
 #include <qobject.h>
-#include <core/core.hpp>
 /*
  * 参数实体类
  * 对数值的直接更改会发出valuechanged事件,由view类接到消息,然后更新界面

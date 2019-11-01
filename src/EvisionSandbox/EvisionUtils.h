@@ -96,12 +96,6 @@ public:
 	static bool read_ParamsForStereoRectify(std::string& filename,cv::Mat* cameraMatrix1,
 		cv::Mat* distCoeffs1,cv::Mat* cameraMatrix2,cv::Mat* distCoeffs2,
 		cv::Mat* R1,cv::Mat* P1,cv::Mat* R2,cv::Mat* P2,cv::Rect* roi1,cv::Rect* roi2);
-#ifdef WITH_PCL
-	/*
-	 * 保存PCD点云
-	 */
-	static void createAndSavePointCloud(cv::Mat &disparity, cv::Mat &leftImage, cv::Mat &Q, std::string filename);
-#endif
 	/*
 	 *将原始视差数据转换为适合显示和存储为图片的灰度视差图
 	 */

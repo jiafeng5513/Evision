@@ -1,12 +1,15 @@
 ﻿#pragma once
-
-#include "evision3dviz_global.h"
 #include <vtkAutoInit.h> 
 VTK_MODULE_INIT(vtkRenderingOpenGL2);
 VTK_MODULE_INIT(vtkInteractionStyle);
 
 #include <QtWidgets/QWidget>
+#include <QTreeWidgetItem>
+#include <QTime>
 #include "ui_Evision3dViz.h"
+
+#include <vtkRenderWindow.h>
+#include "QVTKWidget.h"
 #include <pcl/io/pcd_io.h>
 #include <pcl/io/ply_io.h>
 #include <pcl/io/vtk_io.h>
@@ -19,20 +22,18 @@ VTK_MODULE_INIT(vtkInteractionStyle);
 #include <pcl/features/normal_3d.h>
 #include <pcl/search/kdtree.h>
 #include <pcl/surface/gp3.h>
-#include "QVTKWidget.h"
-#include <vtkRenderWindow.h>
-#include <QTreeWidgetItem>
-#include "evision3dviz_global.h"
-#include <QTime>
+
+
 
 typedef pcl::PointXYZRGBA PointT;
 typedef pcl::PointCloud<PointT> PointCloudT;
 
-class EVISION3DVIZ_EXPORT Evision3dViz : public QWidget
+class Evision3dViz : public QWidget
 {
 	Q_OBJECT
 public:
 	Evision3dViz(QWidget *parent = Q_NULLPTR);
+	
 private:
 	struct MyCloud
 	{

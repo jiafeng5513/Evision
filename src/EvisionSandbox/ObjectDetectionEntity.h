@@ -1,5 +1,5 @@
 #pragma once
-#include <opencv.hpp>
+#include <opencv2/opencv.hpp>
 #include <QStringList>
 #include <QObject>
 

@@ -3,12 +3,10 @@
 #include <QFileDialog>
 #include <QTime>
 #include "EvisionUtils.h"
-#include "../EvisionElas/EvisionElas.h"
-#include "../EvisionADCensus/imageprocessor.h"
-#include "../EvisionADCensus/stereoprocessor.h"
+#include "../EvisionElas/include/EvisionElas.h"
+#include "../EvisionADCensus/include/EvisionADCensus.h"
 #include "rectify.h"
 #include <algorithm>
-#include "../EvisionElas/elas.h"
 
 StereoMatch::StereoMatch(std::string img1_filename, std::string img2_filename, std::string cameraParams_filename)
 {
@@ -202,8 +200,8 @@ void StereoMatch::ADCensusDriver()
 	m_entity->setIconImgL(img1);
 	m_entity->setIconImgR(img2);
 	//加载Q矩阵
-	cv::Mat Q(4, 4, CV_64F);
-	Q=this->Q;
+	//cv::Mat Q(4, 4, CV_64F);
+	//Q=this->Q;
 	//加载images
 	std::vector<cv::Mat> images;
 	images.push_back(img1);
@@ -216,38 +214,40 @@ void StereoMatch::ADCensusDriver()
 			QTime time;
 			time.start();//计时开始
 
-			ImageProcessor iP(0.1);
-			cv::Mat eLeft, eRight;
-			eLeft = iP.unsharpMasking(images[i * 2], "gauss", 3, 1.9, -1);
-			eRight = iP.unsharpMasking(images[i * 2 + 1], "gauss", 3, 1.9, -1);
+			float percentageOfDeletion = 0.1;
+			std::string blurMethod = "gauss";//"median"
+			int kernelSize = 3;
+			float alpha = 1.9;
+			float beta = -1;
 
-			StereoProcessor sP(m_entity->getDMin(), m_entity->getDMax(), images[i * 2], images[i * 2 + 1],
+			EvisionADCensus adcensus( percentageOfDeletion, blurMethod, kernelSize, alpha, beta,
+				m_entity->getDMin(), m_entity->getDMax(), images[i * 2], images[i * 2 + 1],
 				censusWin, m_entity->getDefaultBorderCost(), m_entity->getLambdaAD(), m_entity->getLambdaCensus(), root,
 				m_entity->getAggregatingIterations(), m_entity->getColorThreshold1(), m_entity->getColorThreshold2(), 
 				m_entity->getMaxLength1(), m_entity->getMaxLength2(),m_entity->getColorDifference(), m_entity->getPi1(), 
 				m_entity->getPi2(), m_entity->getDispTolerance(), m_entity->getVotingThreshold(), m_entity->getVotingRatioThreshold(),
 				m_entity->getMaxSearchDepth(), m_entity->getBlurKernelSize(), 
 				m_entity->getCannyThreshold1(), m_entity->getCannyThreshold2(), m_entity->getCannyKernelSize());
-			string errorMsg;
-			error = !sP.init(errorMsg);
+			std::string errorMsg;
+			error = !adcensus.init(errorMsg);
 
-			if (!error && sP.compute())
+			if (!error && adcensus.compute())
 			{
 				//保存视差数据
-				Raw_Disp_Data = sP.getDisparity();
+				Raw_Disp_Data = adcensus.getDisparity();
 				/*
 				 * 用于显示的视差图并不是准确数据,为了获得良好的显示效果而对数据进行了一些裁剪和压缩
 				 * 例如归一化到0~255会改变原始的视差数据,因此,测量时必须使用原始视差数据
 				 */
 
-				Visual_Disp_Data = sP.getGrayDisparity();
+				Visual_Disp_Data = adcensus.getGrayDisparity();
 				//cv::normalize(Visual_Disp_Data, Visual_Disp_Data, 0, 255, cv::NORM_MINMAX);
 				//界面显示灰度视差图
 				m_entity->setIconRawDisp(Visual_Disp_Data);
 			}
 			else
 			{
-				std::cout << "[ADCensusCV] " << errorMsg << endl;
+				std::cout << "[ADCensusCV] " << errorMsg << std::endl;
 			}
 			std::cout << "Finished computation after " << time.elapsed() / 1000.0 << "s" << std::endl;
 		}
@@ -354,33 +354,17 @@ void StereoMatch::Elas()
 	std::cout << "Elas 开始计算..." << std::endl;
 	m_entity->setIconImgL(img1);
 	m_entity->setIconImgR(img2);
-	Elas::parameters param;
-	param.disp_min = m_entity->getDispMin();
-	param.disp_max = m_entity->getDispMax();
-	param.support_threshold = m_entity->getSupportThreshold();
-	param.support_texture = m_entity->getSupportTexture();
-	param.candidate_stepsize = m_entity->getCandidateStepsize();
-	param.incon_window_size = m_entity->getInconWindowSize();
-	param.incon_threshold = m_entity->getInconThreshold();
-	param.incon_min_support = m_entity->getInconMinSupport();
-	param.add_corners = m_entity->getAddCorners();
-	param.grid_size = m_entity->getGridSize();
-	param.beta = m_entity->getBeta();
-	param.gamma = m_entity->getGamma();
-	param.sigma = m_entity->getSigma();
-	param.sradius = m_entity->getSradius();
-	param.match_texture = m_entity->getMatchTexture();
-	param.lr_threshold = m_entity->getLrThreshold();
-	param.speckle_sim_threshold = m_entity->getSpeckleSimThreshold();
-	param.speckle_size = m_entity->getSpeckleSize();
-	param.ipol_gap_width = m_entity->getIpolGapWidth();
-	param.filter_median = m_entity->getFilterMedian();
-	param.filter_adaptive_mean = m_entity->getFilterAdaptiveMean();
-	param.postprocess_only_left = m_entity->getPostprocessOnlyLeft();
-	param.subsampling = m_entity->getSubSampling();
+	EvisionElas elas(
+		m_entity->getDispMin(),m_entity->getDispMax(),m_entity->getSupportThreshold(),m_entity->getSupportTexture(),
+		m_entity->getCandidateStepsize(),m_entity->getInconWindowSize(),m_entity->getInconThreshold(),
+		m_entity->getInconMinSupport(),m_entity->getAddCorners(),m_entity->getGridSize(),m_entity->getBeta(),
+		m_entity->getGamma(),m_entity->getSigma(),m_entity->getSradius(),m_entity->getMatchTexture(),
+		m_entity->getLrThreshold(),m_entity->getSpeckleSimThreshold(),m_entity->getSpeckleSize(),
+		m_entity->getIpolGapWidth(),m_entity->getFilterMedian(),m_entity->getFilterAdaptiveMean(),
+		m_entity->getPostprocessOnlyLeft(),m_entity->getSubSampling(), 100);
 
 	int64 t = cv::getTickCount();
-	ElasMatch(param,img1, img2,&Raw_Disp_Data, &Visual_Disp_Data);
+	elas.Match(img1, img2, &Raw_Disp_Data, &Visual_Disp_Data);
 	t = cv::getTickCount() - t;
 	std::cout << "Time elapsed: " << t * 1000 / cv::getTickFrequency() << "ms\n ELAS计算完毕" << std::endl;
 	m_entity->setIconRawDisp(Visual_Disp_Data);

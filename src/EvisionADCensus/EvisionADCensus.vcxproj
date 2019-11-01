@@ -39,10 +39,12 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\props\OpenCV_x64_debug.props" />
+    <Import Project="User_Debug_x64.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\props\OpenCV_x64_release.props" />
+    <Import Project="User_Release_x64.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -65,6 +67,7 @@
       <DebugInformationFormat>None</DebugInformationFormat>
       <WholeProgramOptimization>false</WholeProgramOptimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DisableSpecificWarnings>4819</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -80,6 +83,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;EVISIONADCENSUS_EXPORTS;_WINDOWS;_USRDLL;_SILENCE_FPOS_SEEKPOS_DEPRECATION_WARNING;_CRT_SECURE_NO_WARNINGS;_WIN64;__STDC_LIMIT_MACROS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <DisableSpecificWarnings>4819</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -94,6 +98,7 @@
     <ClInclude Include="common.h" />
     <ClInclude Include="disparityrefinement.h" />
     <ClInclude Include="imageprocessor.h" />
+    <ClInclude Include="include\EvisionADCensus.h" />
     <ClInclude Include="scanlineoptimization.h" />
     <ClInclude Include="stereoprocessor.h" />
   </ItemGroup>
@@ -101,6 +106,7 @@
     <ClCompile Include="adcensuscv.cpp" />
     <ClCompile Include="aggregation.cpp" />
     <ClCompile Include="disparityrefinement.cpp" />
+    <ClCompile Include="EvisionADCensus.cpp" />
     <ClCompile Include="imageprocessor.cpp" />
     <ClCompile Include="scanlineoptimization.cpp" />
     <ClCompile Include="stereoprocessor.cpp" />

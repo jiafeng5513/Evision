@@ -29,6 +29,9 @@
       <Extensions>ui</Extensions>
       <ParseFiles>true</ParseFiles>
     </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{f7abcd89-00b3-4693-a3ea-5b881f04bc35}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Evision3dViz.cpp">
@@ -37,15 +40,13 @@
     <ClCompile Include="GeneratedFiles\qrc_Evision3dViz.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="Evision3dVizFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_Evision3dViz.h">
       <Filter>Generated Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="evision3dviz_global.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -141,6 +142,9 @@
   <ItemGroup>
     <QtMoc Include="Evision3dViz.h">
       <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="include\Evision3dVizFactory.h">
+      <Filter>include</Filter>
     </QtMoc>
   </ItemGroup>
 </Project>

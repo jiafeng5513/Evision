@@ -2,7 +2,7 @@
 
 #include <QWidget>
 #include "ui_TraceView.h"
-#include <core/core.hpp>
+#include <opencv2/core/core.hpp>
 #include <QtWidgets/QGraphicsView>
 #include "TraceGraphicsView.h"
 
