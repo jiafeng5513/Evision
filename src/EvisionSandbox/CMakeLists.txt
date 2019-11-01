@@ -10,12 +10,12 @@ cmake_minimum_required(VERSION 3.13.0)
 # to the absolute path to the directory containing OpenCVConfig.cmake file
 # via the command line or GUI
 find_package(OpenCV REQUIRED)
-find_package(PCL REQUIRED)
 # 自定义库
 # find_package(EvisionObjDetection REQUIRED)
 # find_package(Evision3dViz REQUIRED)
 # find_package(EvisionADCensus REQUIRED)
 # find_package(EvisionElas REQUIRED)
+
 # If the package has been found, several variables will
 # be set, you can find the full list with descriptions
 # in the OpenCVConfig.cmake file.
@@ -32,14 +32,23 @@ find_path(QT_INCLUDE_CORE_PRIVATE QtCore_private_path)
 find_path(QT_INCLUDE_CORE_INNER QtCore_version_QtCore_path)
 # Add OpenCV headers location to your include paths
 include_directories(${OpenCV_INCLUDE_DIRS})
-include_directories(${PCL_INCLUDE_DIRS})
 include_directories(${QT_INCLUDE_MultimediaWidgets})
 include_directories(${QT_INCLUDE_Multimedia})
 include_directories(${QT_INCLUDE_CORE_PRIVATE})
 include_directories(${QT_INCLUDE_CORE_INNER})
 include_directories(${QT_INCLUDE_CORE_INNER}/../)
 
-include_directories("../Evision3dViz/GeneratedFiles")
+include_directories("../EvisionADCensus/include/")
+include_directories("../EvisionElas/include/")
+if (PointCloudViewer)
+include_directories("../Evision3dViz/include/")
+endif()
+if(ObjectDetection)
+include_directories("../EvisionObjDetection/include/")
+endif()
+LINK_DIRECTORIES(../install/lib)
+
+
 #设置工程包含当前目录
 set(CMAKE_INCLUDE_CURRENT_DIR ON) 
 
@@ -54,18 +63,22 @@ add_definitions(-D QT_MULTIMEDIAWIDGETS_LIB)
 add_definitions(-D QT_IMAGE_LIB)
 add_definitions(-D QT_CORE_PRIVATE)
 add_definitions(-D OPENCV)
-add_definitions(-D WITH_PCL)
-add_definitions(-D WITH_CUDA)
+if (PointCloudViewer)
 add_definitions(-D WITH_VTK)
+add_definitions(-D WITH_PCL)
+endif()
+if (ObjectDetection)
+add_definitions(-D WITH_CUDA)
+endif()
 
-#自定义库的输出路径就是主程序的链接路径
-IF (CMAKE_BUILD_TYPE STREQUAL Debug)
-link_directories(${PROJECT_SOURCE_DIR}/../install/Debug/lib)
-ENDIF()
+# #自定义库的输出路径就是主程序的链接路径
+# IF (CMAKE_BUILD_TYPE STREQUAL Debug)
+# link_directories(${PROJECT_SOURCE_DIR}/../install/Debug/lib)
+# ENDIF()
 
-IF (CMAKE_BUILD_TYPE STREQUAL Release)
-link_directories(${PROJECT_SOURCE_DIR}/../install/Release/lib)
-ENDIF()
+# IF (CMAKE_BUILD_TYPE STREQUAL Release)
+# link_directories(${PROJECT_SOURCE_DIR}/../install/Release/lib)
+# ENDIF()
 
 #自动moc,uic,qrc,
 #set(CMAKE_AUTOMOC ON) 
@@ -98,40 +111,32 @@ qt5_add_resources(QRC_FILES ${RES_FILES})
 source_group("Generated Files" FILES ${UIC_FILES} ${MOC_FILES} ${QRC_FILES})
 source_group("Form Files" FILES ${UI_FILES})
 source_group("Resource Files" FILES ${RES_FILES})
+source_group("Source Files" FILES ${SRC_FILES})
+source_group("Header Files" FILES ${HEAD_FILES})
 
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/../install/Debug/lib)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/../install/Release/lib)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/../install/Debug/bin)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/../install/Release/bin)
-set(CMAKE_DEBUG_POSTFIX "_d")
-set_target_properties(${TARGET_NAME} PROPERTIES DEBUG_POSTFIX "_d")
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/../install/lib/Debug)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/../install/lib/Release)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/../install/bin/Debug)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/../install/bin/Release)
+#set(CMAKE_DEBUG_POSTFIX "_d")
+#set_target_properties(${TARGET_NAME} PROPERTIES DEBUG_POSTFIX "_d")
 
 #创建可执行文件工程
 add_executable(EvisionSandbox ${SRC_FILES} ${HEAD_FILES} ${MOC_FILES} ${RES_FILES} ${UIC_FILES} ${QRC_FILES})
 
 #链接Qt5依赖项
 target_link_libraries(EvisionSandbox Qt5::Widgets Qt5::Core Qt5::Gui Qt5::Multimedia Qt5::MultimediaWidgets)
-#链接boost
-target_link_libraries(EvisionSandbox ${Boost_LIBRARIES})
 #链接OpenCV
 target_link_libraries(EvisionSandbox ${OpenCV_LIBS})
-#链接PCL
-target_link_libraries(EvisionSandbox ${PCL_COMMON_LIBRARIES} ${PCL_IO_LIBRARIES})
-#链接VTK
-target_link_libraries(EvisionSandbox ${VTK_LIBRARIES})
-#链接自定义库
-# target_link_libraries(EvisionSandbox EvisionObjDetection::EvisionObjDetection)
-# target_link_libraries(EvisionSandbox Evision3dViz::Evision3dViz)
-# target_link_libraries(EvisionSandbox EvisionADCensus::EvisionADCensus)
-# target_link_libraries(EvisionSandbox EvisionElas::EvisionElas)
 
-IF (CMAKE_BUILD_TYPE STREQUAL Debug)
-target_link_libraries(EvisionSandbox EvisionObjDetection_d)
-target_link_libraries(EvisionSandbox Evision3dViz_d)
-target_link_libraries(EvisionSandbox EvisionADCensus_d)
-target_link_libraries(EvisionSandbox EvisionElas_d)
-ENDIF()
 
-IF (CMAKE_BUILD_TYPE STREQUAL Release)
-target_link_libraries(EvisionSandbox EvisionObjDetection Evision3dViz EvisionADCensus EvisionElas)
-ENDIF()
+target_link_libraries(EvisionSandbox EvisionADCensus)
+target_link_libraries(EvisionSandbox EvisionElas)
+
+if (ObjectDetection)
+target_link_libraries(EvisionSandbox EvisionObjDetection)
+endif()
+
+if (PointCloudViewer)
+target_link_libraries(EvisionSandbox Evision3dViz)
+endif()

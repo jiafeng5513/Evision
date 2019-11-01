@@ -186,7 +186,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include=".\include\darknet.h" />
-    <ClInclude Include=".\include\yolo_v2_class.hpp" />
+    <ClInclude Include="include\yolo_v2_class.h" />
     <ClInclude Include=".\activations.h" />
     <ClInclude Include=".\activation_layer.h" />
     <ClInclude Include=".\avgpool_layer.h" />

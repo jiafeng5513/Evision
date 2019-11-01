@@ -1,0 +1,10 @@
+OPENCV_DIR
+D:/Libraries/OpenCV/3.4.5/build_without_cuda/install
+
+C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v10.0/lib/x64/cublas.lib
+C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v10.0/lib/x64/curand.lib
+
+D:/Libraries/Qt/5.12.0/msvc2017_64/include/QtCore/5.12.0/QtCore
+D:/Libraries/Qt/5.12.0/msvc2017_64/include/QtCore/5.12.0/QtCore/private
+D:/Libraries/Qt/5.12.0/msvc2017_64/include/QtMultimedia
+D:/Libraries/Qt/5.12.0/msvc2017_64/include/QtMultimediaWidgets

@@ -308,9 +308,6 @@
     <ClInclude Include=".\gru_layer.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include=".\include\yolo_v2_class.hpp">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include=".\include\darknet.h">
       <Filter>include</Filter>
     </ClInclude>
@@ -394,6 +391,9 @@
     </ClInclude>
     <ClInclude Include=".\yolo_layer.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\yolo_v2_class.h">
+      <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
