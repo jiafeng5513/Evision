@@ -175,7 +175,6 @@ QuantEvision/.vs/*
 /src/Evision3dViz/x64
 /src/EvisionADCensus/x64
 /src/EvisionElas/x64
-/src/EvisionObjDetection/include
 /src/EvisionObjDetection/x64
 /src/packages
 /src/.vs
