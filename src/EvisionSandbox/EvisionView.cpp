@@ -16,7 +16,6 @@
 #endif
 
 #if (defined WITH_PCL) && (defined WITH_VTK)  
-#include "../Evision3dViz/include/Evision3dVizFactory.h"
 #include "../EvisionCloudViewer/include/EvisionCloudViewerFactory.h"
 #endif
 #include "EvisionRectifyView.h"
@@ -249,7 +248,7 @@ void EvisionView::on_action_disp_to_pcd()
 		append("/").												   //F:/test/
 		append(_fileInfo->baseName().toStdString()).				   //F:/test/123
 		append(".pcd");												   //F:/test/123.pcd
-		Evision3dVizFactory::createAndSavePointCloud(RawDisp, img, Q, filename);
+		EvisionCloudViewerFactory::createAndSavePointCloud(RawDisp, img, Q, filename);
 	}
 #else
 	QMessageBox::information(this, QStringLiteral("该功能未启用!"), QStringLiteral("请在项目属性/C++/预处理器中添加\"WITH_PCL\"并配置好PCL依赖"));

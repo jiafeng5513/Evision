@@ -9,7 +9,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
-      <AdditionalDependencies>EvisionObjDetection.lib;Evision3dViz.lib;EvisionElas.lib;EvisionADCensus.lib;EvisionCloudViewer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>EvisionObjDetection.lib;EvisionElas.lib;EvisionADCensus.lib;EvisionCloudViewer.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <DelayLoadDLLs>EvisionObjDetection.dll</DelayLoadDLLs>
     </Link>
     <ClCompile>

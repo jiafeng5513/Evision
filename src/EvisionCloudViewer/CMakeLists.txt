@@ -3,12 +3,14 @@ cmake_minimum_required(VERSION 3.13.0)
 find_package(VTK)# 需要看CMake文档确认这个查找方法
 find_package(PCL REQUIRED)
 find_package(OpenGL)
+find_package(OpenCV)
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 find_package(Qt5 COMPONENTS Core REQUIRED)
 find_package(Qt5 COMPONENTS Gui REQUIRED)
 find_package(Qt5 COMPONENTS OpenGL REQUIRED)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 include_directories(${PCL_INCLUDE_DIRS})
+include_directories(${OpenCV_INCLUDE_DIRS})
 include_directories("./include/")
 add_definitions(-D QT_DLL)
 add_definitions(-D QT_CORE_LIB)
@@ -50,4 +52,4 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/../install/bin/
 
 add_library(EvisionCloudViewer SHARED ${SRC_FILES} ${HEAD_FILES} ${MOC_FILES} ${RES_FILES} ${INCLUDE_FILES} ${UIC_FILES} ${QRC_FILES})
 #链接Qt5依赖项
-target_link_libraries(EvisionCloudViewer ${PCL_LIBRARIES}  ${OPENGL_gl_LIBRARY} ${Qt5OpenGL_LIBRARIES} Qt5::OpenGL Qt5::Widgets Qt5::Core Qt5::Gui)
+target_link_libraries(EvisionCloudViewer ${OpenCV_LIBS} ${PCL_LIBRARIES}  ${OPENGL_gl_LIBRARY} ${Qt5OpenGL_LIBRARIES} Qt5::OpenGL Qt5::Widgets Qt5::Core Qt5::Gui)
