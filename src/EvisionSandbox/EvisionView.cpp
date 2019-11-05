@@ -17,6 +17,7 @@
 
 #if (defined WITH_PCL) && (defined WITH_VTK)  
 #include "../Evision3dViz/include/Evision3dVizFactory.h"
+#include "../EvisionCloudViewer/include/EvisionCloudViewerFactory.h"
 #endif
 #include "EvisionRectifyView.h"
 #include "CreateCameraParamFile.h"
@@ -87,9 +88,22 @@ void EvisionView::onStereoCamera()
 void EvisionView::onShowPointCloud()
 {
 #if (defined WITH_PCL) && (defined WITH_VTK)  
-	QWidget  * evision3dViz = Evision3dVizFactory::CreateEvision3dViz();
-	ui.mdiArea->addSubWindow(evision3dViz);
-	evision3dViz->show();
+	//QWidget  * evision3dViz = Evision3dVizFactory::CreateEvision3dViz();
+	//ui.mdiArea->addSubWindow(evision3dViz);
+	//evision3dViz->show();
+	QFileDialog * fileDialog = new QFileDialog();
+	fileDialog->setWindowTitle(QStringLiteral("请选择点云文件"));
+	fileDialog->setNameFilter(QStringLiteral("pcl点云文件(*.pcd)"));
+	fileDialog->setFileMode(QFileDialog::ExistingFile);
+	if (fileDialog->exec() == QDialog::Accepted)
+	{
+		QWidget * evisionCloudViewer = 
+			EvisionCloudViewerFactory::CreateEvisionEvisionCloudViewer(fileDialog->selectedFiles().at(0).toStdString(),this);
+		ui.mdiArea->addSubWindow(evisionCloudViewer);
+		evisionCloudViewer->showMaximized();
+		evisionCloudViewer ->show();
+	}
+	
 #else
 	QMessageBox::information(this, QStringLiteral("该功能未启用!"), 
 		QStringLiteral("请在项目属性/C++/预处理器中添加\"WITH_PCL\"和\"WITH_VTK\",配置好PCL和VTK依赖,并确认Evision3dViz模块正常工作!"));

@@ -19,6 +19,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EvisionElas", "EvisionElas\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EvisionADCensus", "EvisionADCensus\EvisionADCensus.vcxproj", "{1A38C54A-D846-4329-8EE8-9C1AFDC58FFD}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EvisionCloudViewer", "EvisionCloudViewer\EvisionCloudViewer.vcxproj", "{37BB86EC-C92F-4262-BE96-7976FFD6E7E6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -57,12 +59,18 @@ Global
 		{1A38C54A-D846-4329-8EE8-9C1AFDC58FFD}.Release|x64.ActiveCfg = Release|x64
 		{1A38C54A-D846-4329-8EE8-9C1AFDC58FFD}.Release|x64.Build.0 = Release|x64
 		{1A38C54A-D846-4329-8EE8-9C1AFDC58FFD}.Release|x86.ActiveCfg = Release|x64
+		{37BB86EC-C92F-4262-BE96-7976FFD6E7E6}.Debug|x64.ActiveCfg = Debug|x64
+		{37BB86EC-C92F-4262-BE96-7976FFD6E7E6}.Debug|x64.Build.0 = Debug|x64
+		{37BB86EC-C92F-4262-BE96-7976FFD6E7E6}.Debug|x86.ActiveCfg = Debug|x64
+		{37BB86EC-C92F-4262-BE96-7976FFD6E7E6}.Release|x64.ActiveCfg = Release|x64
+		{37BB86EC-C92F-4262-BE96-7976FFD6E7E6}.Release|x64.Build.0 = Release|x64
+		{37BB86EC-C92F-4262-BE96-7976FFD6E7E6}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {4E5A88CF-E7F9-487A-96B0-1A2E96298935}
 		Qt5Version = msvc2017_64
+		SolutionGuid = {4E5A88CF-E7F9-487A-96B0-1A2E96298935}
 	EndGlobalSection
 EndGlobal

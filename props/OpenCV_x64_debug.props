@@ -3,8 +3,8 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <IncludePath>$(SolutionDir)..\package\opencv3.4.5\include;$(SolutionDir)..\package\opencv3.4.5\include\opencv;$(SolutionDir)..\package\opencv3.4.5\include\opencv2;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)..\package\opencv3.4.5\x64\vc15\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Libraries\OpenCV\3.4.5\build_without_cuda\install\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Libraries\OpenCV\3.4.5\build_without_cuda\install\x64\vc15\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
