@@ -12,7 +12,7 @@ Introduction:
 4. 关于双目的中文资料重复度太高,希望各位后来者能够吸取前人精华,摒弃前人的糟粕,多多自行探索,不要抄来抄去<br>
 5.  关于程序使用方面的问题,可以联系邮件jiafeng5513@outlook.com,有关课程设计和毕业论文(Windows程序开发,机器视觉,深度学习,图像处理)也可以联系作者<br>
 6.  您可能会在目录中找到Visual Studio的解决方案文件`*.sln`,那是作者开发时使用的,未来的版本中将会移除,请不要视图打开或者修改自带的解决方案,推荐使用CMake进行build.<br>
-
+7. 当前版本已经不再需要QVTK,改为自己实现的点云浏览器.<br>
 目录
 =========
 - [Introduction:](#introduction)
@@ -32,9 +32,8 @@ Introduction:
 2. OpenCV : 3.4.5(支持3.X.X版本,不支持2.X.X版本和4.X.X版本)
 3. 可选依赖
    1. PCL 1.9.1(不使用PCL,将不能使用Evision3dViz和保存点云的功能)
-   2. VTK 8.1.0 with QVTKWidget(不使用VTK,将不能使用Evision3dViz)
-   3. CUDA 10.0(不使用CUDA,将无法使用目标检测模块)
-   4. NVIDIA GTX 1060同级别或更高级,理论上也支持NVIDIA更老的显卡(如果没有NVIDIA显卡,将无法安装CUDA和CUDNN)
+   2. CUDA 10.0(不使用CUDA,将无法使用目标检测模块)
+   3. NVIDIA GTX 1060同级别或更高级,理论上也支持NVIDIA更老的显卡(如果没有NVIDIA显卡,将无法安装CUDA和CUDNN)
 
 #### 2.Installation_guide
 作者在windows平台上完成开发和测试,要在windows上使用本项目,您可能需要以下安装指南.如果您熟悉windows平台开发和Visual Studio的特性,您可不比理会这些安装指南,使用自己熟悉的方式和软件版本.<br>
@@ -50,6 +49,7 @@ Introduction:
 4. `props`中存储的是属性表<br>
 5. `scripts`文件夹存储编译脚本.<br>
 6. `src`文件夹中存放代码文件.<br>
+7. `legacy`文件夹中存放的是一些有一定保留价值的弃用模块.<br>
 * `props`和`scripts`是作者开发期间使用的,对于使用者没有实际意义.<br>
 * `package`中含有pthread的window版本,将会在未来改为使用CMake管理.<br>
 
