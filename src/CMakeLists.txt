@@ -12,6 +12,7 @@ option(ObjectDetection "Object Detection" OFF)
 if (PointCloudViewer)
 # 点云浏览器,生成动态库
 add_subdirectory(Evision3dViz)
+add_subdirectory(EvisionCloudViewer)
 endif()
 
 # ADCensus视差算法,生成动态库,依赖OpenCV
