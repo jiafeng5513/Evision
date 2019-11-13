@@ -3,41 +3,48 @@
 #设置cmake最小版本号
 cmake_minimum_required(VERSION 3.13.0)
  
-#设置工程名称
-#project(EvisionSandbox)
- 
-# Find OpenCV, you may need to set OpenCV_DIR variable
-# to the absolute path to the directory containing OpenCVConfig.cmake file
-# via the command line or GUI
-find_package(OpenCV REQUIRED)
-# 自定义库
-# find_package(EvisionObjDetection REQUIRED)
-# find_package(Evision3dViz REQUIRED)
-# find_package(EvisionADCensus REQUIRED)
-# find_package(EvisionElas REQUIRED)
 
-# If the package has been found, several variables will
-# be set, you can find the full list with descriptions
-# in the OpenCVConfig.cmake file.
+ 
+# Find OpenCV
+find_package(OpenCV REQUIRED)
 # Print some message showing some of them
 message(STATUS "OpenCV library status:")
 message(STATUS "    version: ${OpenCV_VERSION}")
 message(STATUS "    libraries: ${OpenCV_LIBS}")
 message(STATUS "    include path: ${OpenCV_INCLUDE_DIRS}")
-
-
-find_path(QT_INCLUDE_MultimediaWidgets QtMultimediaWidgets_Path)
-find_path(QT_INCLUDE_Multimedia QtMultimedia_Path)
-find_path(QT_INCLUDE_CORE_PRIVATE QtCore_private_path)
-find_path(QT_INCLUDE_CORE_INNER QtCore_version_QtCore_path)
 # Add OpenCV headers location to your include paths
 include_directories(${OpenCV_INCLUDE_DIRS})
-include_directories(${QT_INCLUDE_MultimediaWidgets})
-include_directories(${QT_INCLUDE_Multimedia})
-include_directories(${QT_INCLUDE_CORE_PRIVATE})
-include_directories(${QT_INCLUDE_CORE_INNER})
-include_directories(${QT_INCLUDE_CORE_INNER}/../)
 
+#查找需要的Qt库
+find_package(Qt5 COMPONENTS Widgets REQUIRED)
+find_package(Qt5 COMPONENTS Core REQUIRED)
+find_package(Qt5 COMPONENTS Gui REQUIRED)
+find_package(Qt5 COMPONENTS UiPlugin REQUIRED)
+find_package(Qt5 COMPONENTS Multimedia REQUIRED)
+find_package(Qt5 COMPONENTS MultimediaWidgets REQUIRED)
+
+#Qt版本号
+message(STATUS "Qt5Widgets_VERSION:${Qt5Widgets_VERSION}")
+#Qt的includes
+message(STATUS "Qt5Widgets_INCLUDE_DIRS:${Qt5Widgets_INCLUDE_DIRS}")
+#取include的根目录,是列表变量的第一个元素
+list(GET Qt5Widgets_INCLUDE_DIRS 0 Qt5_INCLUDE_DIR)
+message(STATUS "Qt5Widgets_INCLUDE_DIR:${Qt5_INCLUDE_DIR}")
+
+#查找一些特定的Qt目录
+#find_path(QT_INCLUDE_MultimediaWidgets QtMultimediaWidgets_Path)
+#find_path(QT_INCLUDE_Multimedia QtMultimedia_Path)
+#find_path(QT_INCLUDE_CORE_PRIVATE QtCore_private_path)
+#find_path(QT_INCLUDE_CORE_INNER QtCore_version_QtCore_path)
+
+include_directories(${Qt5_INCLUDE_DIR}QtMultimediaWidgets/)
+include_directories(${Qt5_INCLUDE_DIR}QtMultimedia/)
+include_directories(${Qt5_INCLUDE_DIR}QtCore/${Qt5Widgets_VERSION}/QtCore/private/)
+include_directories(${Qt5_INCLUDE_DIR}QtCore/${Qt5Widgets_VERSION}/QtCore/)
+include_directories(${Qt5_INCLUDE_DIR}QtCore/${Qt5Widgets_VERSION}/)
+
+
+#包含自定义组件
 include_directories("../EvisionADCensus/include/")
 include_directories("../EvisionElas/include/")
 if (PointCloudViewer)
@@ -52,7 +59,7 @@ LINK_DIRECTORIES(../install/lib)
 
 #设置工程包含当前目录
 set(CMAKE_INCLUDE_CURRENT_DIR ON) 
-
+#预处理器定义
 add_definitions(-D UNICODE)
 add_definitions(-D WIN32)
 add_definitions(-D WIN64)
@@ -86,13 +93,6 @@ endif()
 #set(CMAKE_AUTORCC ON)
 #set(CMAKE_AUTOUIC ON)
 
-#查找需要的Qt库文
-find_package(Qt5 COMPONENTS Widgets REQUIRED)
-find_package(Qt5 COMPONENTS Core REQUIRED)
-find_package(Qt5 COMPONENTS Gui REQUIRED)
-find_package(Qt5 COMPONENTS UiPlugin REQUIRED)
-find_package(Qt5 COMPONENTS Multimedia REQUIRED)
-find_package(Qt5 COMPONENTS MultimediaWidgets REQUIRED)
 #查找当前文件夹中的所有源代码文件
 FILE(GLOB SRC_FILES "./*.cpp") 
 #查找当前文件夹中所有的头文件

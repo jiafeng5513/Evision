@@ -182,3 +182,5 @@ QuantEvision/.vs/*
 /install/
 /bin/
 /.vscode/
+src/.idea
+src/cmake-build-debug

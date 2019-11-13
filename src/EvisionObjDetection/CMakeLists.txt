@@ -3,7 +3,10 @@
 cmake_minimum_required(VERSION 3.13.0)
 # packages
 enable_language(CUDA)
-
+find_package(CUDA)
+message(STATUS "CUDA_CUDA_LIBRARY: ${CUDA_CUDA_LIBRARY}")
+message(STATUS "CUDA_BLAS_LIBRARY: ${CUDA_BLAS_LIBRARY}")
+message(STATUS "CUDA_RANDOM_LIBRARY: ${CUDA_RANDOM_LIBRARY}")
 find_package(OpenCV REQUIRED)
 
 include_directories(${CUDA_INCLUDE_DIRS})
@@ -12,8 +15,8 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 include_directories("./include/")
 include_directories("../../package/pthread/include/")
 
-find_library(CUDA_BLAS_LIBRARY cublas ${CMAKE_CUDA_IMPLICIT_LINK_DIRECTORIES})
-find_library(CUDA_RANDOM_LIBRARY curand ${CMAKE_CUDA_IMPLICIT_LINK_DIRECTORIES})
+# find_library(CUDA_BLAS_LIBRARY cublas ${CMAKE_CUDA_IMPLICIT_LINK_DIRECTORIES})
+# find_library(CUDA_RANDOM_LIBRARY curand ${CMAKE_CUDA_IMPLICIT_LINK_DIRECTORIES})
 
 set(CUDA_SEPARABLE_COMPILATION ON)
 set(CUDA_PROPAGATE_HOST_FLAGS ON)
