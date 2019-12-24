@@ -42,9 +42,10 @@
  * ------------------------------------------------------------------------- */
 
 #include "disparityrefinement.h"
-#include <opencv2/core/matx.hpp>
-#include <opencv2/core/mat.hpp>
-#include <opencv2/videostab/ring_buffer.hpp>
+#include <opencv2/opencv.hpp>
+//#include <opencv2/core/matx.hpp>
+//#include <opencv2/core/mat.hpp>
+//#include <opencv2/videostab/ring_buffer.hpp>
 
 const int DisparityRefinement::DISP_OCCLUSION = 1;
 const int DisparityRefinement::DISP_MISMATCH = 2;

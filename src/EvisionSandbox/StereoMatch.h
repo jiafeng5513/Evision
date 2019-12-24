@@ -26,7 +26,7 @@
 //#include<time.h>
 
 #include "opencv2/features2d.hpp"
-#include "opencv2/xfeatures2d.hpp"
+
 // sift is 50 times slower but get 7 times more matched points
 // FAST detect more points than SURF
 // STAR/MSER generate very few keypoints,

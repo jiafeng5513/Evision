@@ -43,8 +43,10 @@
 
 #include "imageprocessor.h"
 #include <limits>
-#include <opencv2/core/mat.hpp>
-#include <opencv2/shape/hist_cost.hpp>
+#include <opencv2/opencv.hpp>
+#include <opencv2\imgproc\types_c.h>
+//#include <opencv2/core/mat.hpp>
+//#include <opencv2/shape/hist_cost.hpp>
 
 ImageProcessor::ImageProcessor(float percentageOfDeletion)
 {

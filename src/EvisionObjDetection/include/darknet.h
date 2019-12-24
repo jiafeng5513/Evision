@@ -4,12 +4,12 @@
 #if defined(_MSC_VER) && _MSC_VER < 1900
 #define inline __inline
 #endif
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <pthread.h>
 #include <stdint.h>
+
 
 #ifdef LIB_EXPORTS
 #if defined(_MSC_VER)
@@ -578,8 +578,6 @@ typedef struct network {
     float clip;
 
 #ifdef GPU
-    //float *input_gpu;
-    //float *truth_gpu;
     float *delta_gpu;
     float *output_gpu;
 
@@ -608,16 +606,6 @@ typedef struct network_state {
     network net;
 } network_state;
 
-//typedef struct {
-//    int w;
-//    int h;
-//    float scale;
-//    float rad;
-//    float dx;
-//    float dy;
-//    float aspect;
-//} augment_args;
-
 // image.h
 typedef struct image {
     int w;
@@ -625,13 +613,6 @@ typedef struct image {
     int c;
     float *data;
 } image;
-
-//typedef struct {
-//    int w;
-//    int h;
-//    int c;
-//    float *data;
-//} image;
 
 // box.h
 typedef struct box {
@@ -712,20 +693,6 @@ typedef struct box_label {
     float x, y, w, h;
     float left, right, top, bottom;
 } box_label;
-
-// list.h
-//typedef struct node {
-//    void *val;
-//    struct node *next;
-//    struct node *prev;
-//} node;
-
-// list.h
-//typedef struct list {
-//    int size;
-//    node *front;
-//    node *back;
-//} list;
 
 // -----------------------------------------------------
 

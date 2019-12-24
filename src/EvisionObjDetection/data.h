@@ -11,6 +11,7 @@
 #include "list.h"
 #include "image.h"
 #include "tree.h"
+//#include <thread>
 
 static inline float distance_from_edge(int x, int max)
 {
@@ -23,65 +24,6 @@ static inline float distance_from_edge(int x, int max)
     return dist;
 }
 
-//typedef struct{
-//    int w, h;
-//    matrix X;
-//    matrix y;
-//    int shallow;
-//    int *num_boxes;
-//    box **boxes;
-//} data;
-
-//typedef enum {
-//    CLASSIFICATION_DATA, DETECTION_DATA, CAPTCHA_DATA, REGION_DATA, IMAGE_DATA, LETTERBOX_DATA, COMPARE_DATA, WRITING_DATA, SWAG_DATA, TAG_DATA, OLD_CLASSIFICATION_DATA, STUDY_DATA, DET_DATA, SUPER_DATA
-//} data_type;
-/*
-typedef struct load_args{
-    int threads;
-    char **paths;
-    char *path;
-    int n;
-    int m;
-    char **labels;
-    int h;
-    int w;
-	int c; // color depth
-	int out_w;
-    int out_h;
-    int nh;
-    int nw;
-    int num_boxes;
-    int min, max, size;
-    int classes;
-    int background;
-    int scale;
-	int small_object;
-    float jitter;
-    int flip;
-    float angle;
-    float aspect;
-    float saturation;
-    float exposure;
-    float hue;
-    data *d;
-    image *im;
-    image *resized;
-    data_type type;
-    tree *hierarchy;
-} load_args;
-
-typedef struct{
-    int id;
-    float x,y,w,h;
-    float left, right, top, bottom;
-} box_label;
-
-void free_data(data d);
-
-pthread_t load_data(load_args args);
-
-pthread_t load_data_in_thread(load_args args);
-*/
 void print_letters(float *pred, int n);
 data load_data_captcha(char **paths, int n, int m, int k, int w, int h);
 data load_data_captcha_encode(char **paths, int n, int m, int w, int h);

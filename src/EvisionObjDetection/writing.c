@@ -51,22 +51,6 @@ void train_writing(char *cfgfile, char *weightfile)
         time=clock();
         float loss = train_network(net, train);
 
-        /*
-           image pred = float_to_image(64, 64, 1, out);
-           print_image(pred);
-         */
-
-        /*
-           image im = float_to_image(256, 256, 3, train.X.vals[0]);
-           image lab = float_to_image(64, 64, 1, train.y.vals[0]);
-           image pred = float_to_image(64, 64, 1, out);
-           show_image(im, "image");
-           show_image(lab, "label");
-           print_image(lab);
-           show_image(pred, "pred");
-           cvWaitKey(0);
-         */
-
         if(avg_loss == -1) avg_loss = loss;
         avg_loss = avg_loss*.9 + loss*.1;
         printf("%d, %.3f: %f, %f avg, %f rate, %lf seconds, %d images\n", get_current_batch(net), (float)(*net.seen)/N, loss, avg_loss, get_current_rate(net), sec(clock()-time), *net.seen);
