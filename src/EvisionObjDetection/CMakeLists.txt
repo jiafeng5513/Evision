@@ -27,7 +27,7 @@ if(NOT DEFINED CMAKE_CUDA_STANDARD)
     set(CMAKE_CUDA_STANDARD 11)
     set(CMAKE_CUDA_STANDARD_REQUIRED ON)
 endif()
-link_directories("../../package/pthread/lib/x64/")
+link_directories("../../package/pthread/lib/")
 add_compile_options(-Xcompiler "/wd4819 ")
 #add_definitions(-D OPENCV)
 add_definitions(-D _MBCS)
@@ -60,7 +60,7 @@ ADD_LIBRARY(EvisionObjDetection SHARED ${CU_FILES} ${INCLUDE_FILES} ${HEAD_FILES
 target_link_libraries(EvisionObjDetection ${OpenCV_LIBS})
 set_target_properties(EvisionObjDetection PROPERTIES CUDA_SEPARABLE_COMPILATION ON)
 #链接pthread
-target_link_libraries(EvisionObjDetection ../../package/pthread/lib/x64/pthreadVC2)
+target_link_libraries(EvisionObjDetection ../../package/pthread/lib/pthreadVC2)
 #链接CUDA
 target_link_libraries(EvisionObjDetection ${CUDA_BLAS_LIBRARY} ${CUDA_RANDOM_LIBRARY} ${CUDA_CUDA_LIBRARY} ${CUDA_cublas_LIBRARY} ${CUDA_curand_LIBRARY} ${CUDA_CUDART_LIBRARY})
 # 添加编译前事件
@@ -68,5 +68,5 @@ target_link_libraries(EvisionObjDetection ${CUDA_BLAS_LIBRARY} ${CUDA_RANDOM_LIB
 # -E copy_directory 拷贝目录下的所有文件
 add_custom_command(TARGET EvisionObjDetection POST_BUILD        # Adds a post-build event to MyTest
     COMMAND ${CMAKE_COMMAND} -E copy_directory  # which executes "cmake - E copy_if_different..."
-        "../../package/pthread/dll/x64/"      # <--this is in-file
+        "../../package/pthread/dll/"      # <--this is in-file
         $<TARGET_FILE_DIR:EvisionObjDetection>)                 # <--this is out-file path
