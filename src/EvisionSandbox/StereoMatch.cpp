@@ -3,8 +3,8 @@
 #include <QFileDialog>
 #include <QTime>
 #include "EvisionUtils.h"
-#include "../EvisionElas/include/EvisionElas.h"
-#include "../EvisionADCensus/include/EvisionADCensus.h"
+#include "EvisionElas.h"
+#include "EvisionADCensus.h"
 #include "rectify.h"
 #include <algorithm>
 

@@ -15,8 +15,8 @@
 #include "ObjectDetectionView.h"
 #endif
 
-#if (defined WITH_PCL) && (defined WITH_VTK)  
-#include "../EvisionCloudViewer/include/EvisionCloudViewerFactory.h"
+#if (defined WITH_PCL) 
+#include "EvisionCloudViewerFactory.h"
 #endif
 #include "EvisionRectifyView.h"
 #include "CreateCameraParamFile.h"
@@ -86,7 +86,7 @@ void EvisionView::onStereoCamera()
 //显示点云
 void EvisionView::onShowPointCloud()
 {
-#if (defined WITH_PCL) && (defined WITH_VTK)  
+#if (defined WITH_PCL) 
 	//QWidget  * evision3dViz = Evision3dVizFactory::CreateEvision3dViz();
 	//ui.mdiArea->addSubWindow(evision3dViz);
 	//evision3dViz->show();
@@ -105,7 +105,7 @@ void EvisionView::onShowPointCloud()
 	
 #else
 	QMessageBox::information(this, QStringLiteral("该功能未启用!"), 
-		QStringLiteral("请在项目属性/C++/预处理器中添加\"WITH_PCL\"和\"WITH_VTK\",配置好PCL和VTK依赖,并确认Evision3dViz模块正常工作!"));
+		QStringLiteral("请在项目属性/C++/预处理器中添加\"WITH_PCL\",配置好PCL和VTK依赖,并确认Evision3dViz模块正常工作!"));
 #endif
 }
 //显示标定视图
