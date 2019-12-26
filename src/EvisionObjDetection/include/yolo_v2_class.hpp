@@ -38,7 +38,8 @@ struct bbox_t_container {
 #include <vector>
 #include <deque>
 #include <algorithm>
-
+#include <string>
+#include <stdexcept>
 #ifdef OPENCV
 #include <opencv2/opencv.hpp>            // C++
 #include "opencv2/highgui/highgui_c.h"    // C

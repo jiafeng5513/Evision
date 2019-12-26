@@ -2,8 +2,12 @@
 cmake_minimum_required(VERSION 3.13)
 project(Evision)
 
-option(PointCloudViewer "Point Cloud Viewer" OFF)
-option(ObjectDetection "Object Detection" OFF)
+#set path
+set(OpenCV_DIR "D:/Libraries/OpenCV/4.1.2/build_vc16_withcuda/install")
+set(Qt5_DIR "D:/Libraries/Qt/5.13.2/msvc2017_64/lib/cmake/Qt5")
+
+option(PointCloudViewer "Point Cloud Viewer" ON)
+option(ObjectDetection "Object Detection" ON)
 
 
 #add_definitions(-DTEST_DEBUG)

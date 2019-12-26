@@ -4,6 +4,7 @@
 #include <QMessageBox>
 #include "rectify.h"
 #include "EvisionUtils.h"
+#include <opencv2\imgproc\types_c.h>
 
 EvisionRectifyView::EvisionRectifyView(QWidget *parent)
 	: QWidget(parent)

@@ -18,7 +18,7 @@
 #include "opencv2/core/version.hpp"
 #ifndef CV_VERSION_EPOCH
 #include "opencv2/videoio/videoio_c.h"
-#include "opencv2/imgcodecs/imgcodecs_c.h"
+#include "opencv2/opencv.hpp"
 #include "http_stream.h"
 #endif
 #include "http_stream.h"

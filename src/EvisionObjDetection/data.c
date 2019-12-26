@@ -717,7 +717,7 @@ data load_data_swag(char **paths, int n, int classes, float jitter)
 #include "opencv2/core/version.hpp"
 #ifndef CV_VERSION_EPOCH
 #include "opencv2/videoio/videoio_c.h"
-#include "opencv2/imgcodecs/imgcodecs_c.h"
+#include "opencv2/opencv.hpp"
 #endif
 
 #include "http_stream.h"
