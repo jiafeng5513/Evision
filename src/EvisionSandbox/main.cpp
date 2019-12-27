@@ -13,7 +13,9 @@ static int __=[]()
 
 int main(int argc, char *argv[])
 {	
-	ShowWindow(GetConsoleWindow(), SW_HIDE);//Òþ²Ø¿ØÖÆÌ¨
+#ifdef WIN32
+	ShowWindow(GetConsoleWindow(), SW_HIDE);//ï¿½ï¿½ï¿½Ø¿ï¿½ï¿½ï¿½Ì¨
+#endif
 	QApplication a(argc, argv);
 	EvisionView w;
 	w.show();

@@ -13,8 +13,9 @@ include_directories(${CUDA_INCLUDE_DIRS})
 include_directories(${CUDA_TOOLKIT_INCLUDE})
 include_directories(${OpenCV_INCLUDE_DIRS})
 include_directories("./include/")
+if(WIN32)
 include_directories("../../package/pthread/include/")
-
+endif(WIN32)
 # find_library(CUDA_BLAS_LIBRARY cublas ${CMAKE_CUDA_IMPLICIT_LINK_DIRECTORIES})
 # find_library(CUDA_RANDOM_LIBRARY curand ${CMAKE_CUDA_IMPLICIT_LINK_DIRECTORIES})
 
@@ -27,8 +28,10 @@ if(NOT DEFINED CMAKE_CUDA_STANDARD)
     set(CMAKE_CUDA_STANDARD 11)
     set(CMAKE_CUDA_STANDARD_REQUIRED ON)
 endif()
+if(WIN32)
 link_directories("../../package/pthread/lib/")
-add_compile_options(-Xcompiler "/wd4819 ")
+endif(WIN32)
+
 #add_definitions(-D OPENCV)
 add_definitions(-D _MBCS)
 add_definitions(-D LIB_EXPORTS)
@@ -36,7 +39,7 @@ add_definitions(-D _TIMESPEC_DEFINED)
 add_definitions(-D _SCL_SECURE_NO_WARNINGS)
 add_definitions(-D _CRT_SECURE_NO_WARNINGS)
 add_definitions(-D GPU)
-add_definitions(-D WIN32)
+#add_definitions(-D WIN32)
 add_definitions(-D NDEBUG)
 add_definitions(-D _CONSOLE)
 add_definitions(-D _LIB)
@@ -59,14 +62,18 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/../install/bin/
 ADD_LIBRARY(EvisionObjDetection SHARED ${CU_FILES} ${INCLUDE_FILES} ${HEAD_FILES} ${SRC_FILES} )
 target_link_libraries(EvisionObjDetection ${OpenCV_LIBS})
 set_target_properties(EvisionObjDetection PROPERTIES CUDA_SEPARABLE_COMPILATION ON)
+if(WIN32)
 #链接pthread
 target_link_libraries(EvisionObjDetection ../../package/pthread/lib/pthreadVC2)
+endif(WIN32)
 #链接CUDA
 target_link_libraries(EvisionObjDetection ${CUDA_BLAS_LIBRARY} ${CUDA_RANDOM_LIBRARY} ${CUDA_CUDA_LIBRARY} ${CUDA_cublas_LIBRARY} ${CUDA_curand_LIBRARY} ${CUDA_CUDART_LIBRARY})
 # 添加编译前事件
 # -E copy_if_different 拷贝文件,相同则跳过
 # -E copy_directory 拷贝目录下的所有文件
+if(WIN32)
 add_custom_command(TARGET EvisionObjDetection POST_BUILD        # Adds a post-build event to MyTest
     COMMAND ${CMAKE_COMMAND} -E copy_directory  # which executes "cmake - E copy_if_different..."
         "../../package/pthread/dll/"      # <--this is in-file
         $<TARGET_FILE_DIR:EvisionObjDetection>)                 # <--this is out-file path
+endif(WIN32)

@@ -3,8 +3,14 @@ cmake_minimum_required(VERSION 3.13)
 project(Evision)
 
 #set path
-set(OpenCV_DIR "D:/Libraries/OpenCV/4.1.2/build_vc16_withcuda/install")
-set(Qt5_DIR "D:/Libraries/Qt/5.13.2/msvc2017_64/lib/cmake/Qt5")
+if(WIN32)
+    set(OpenCV_DIR "D:/Libraries/OpenCV/4.1.2/build_vc16_withcuda/install")
+    set(Qt5_DIR "D:/Libraries/Qt/5.13.2/msvc2017_64/lib/cmake/Qt5")
+    #CUDA
+    #PCL
+ELSEIF (UNIX)
+
+ENDIF()
 
 option(PointCloudViewer "Point Cloud Viewer" ON)
 option(ObjectDetection "Object Detection" ON)
