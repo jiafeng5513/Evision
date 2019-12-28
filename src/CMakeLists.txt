@@ -9,7 +9,7 @@ if(WIN32)
     #CUDA
     #PCL
 ELSEIF (UNIX)
-
+    set(Qt5_DIR "/usr/local/Qt/5.13.1/gcc_64/lib/cmake/Qt5")
 ENDIF()
 
 option(PointCloudViewer "Point Cloud Viewer" ON)

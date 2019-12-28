@@ -1,6 +1,7 @@
 #pragma once
 
-#include < time.h >
+#include <time.h>
+#ifdef WIN32
 #include <windows.h> //I've ommited this line.
 #if defined(_MSC_VER) || defined(_MSC_EXTENSIONS)
   #define DELTA_EPOCH_IN_MICROSECS  11644473600000000Ui64
@@ -18,3 +19,4 @@ int gettimeofday(struct timeval *tv, struct timezone *tz);
 
 /* never worry about timersub type activies again -- from GLIBC and upcased. */
 int timersub(struct timeval *a, struct timeval *b, struct timeval *result);
+#endif

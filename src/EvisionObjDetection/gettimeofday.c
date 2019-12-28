@@ -1,5 +1,5 @@
 #include "gettimeofday.h"
-
+#ifdef WIN32
 int gettimeofday(struct timeval *tv, struct timezone *tz)
 {
   FILETIME ft;
@@ -47,3 +47,4 @@ int timersub(struct timeval *a, struct timeval *b, struct timeval *result)
 
     return 0;
 }
+#endif
