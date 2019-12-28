@@ -8,7 +8,7 @@
 #include "cuda.h"
 #include "blas.h"
 #include "connected_layer.h"
-#include <crtdbg.h>
+//#include <crtdbg.h>
 
 #ifdef OPENCV
 #include "opencv2/highgui/highgui_c.h"

@@ -105,7 +105,7 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr CloudAnalyzer::openCloudFile(std::string fil
 	else if (!strcmp(fileType, "txt"))
 	{
 		// load txt data file	
-		long float x = 0.0, y = 0.0, z = 0.0;
+		double x = 0.0, y = 0.0, z = 0.0;
 		FILE *fp_txt = fopen(filename.c_str(), "r");
 		int num = 0;
 		if (fp_txt)
