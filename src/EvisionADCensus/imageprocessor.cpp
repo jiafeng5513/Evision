@@ -44,9 +44,6 @@
 #include "imageprocessor.h"
 #include <limits>
 #include <opencv2/opencv.hpp>
-#include <opencv2\imgproc\types_c.h>
-//#include <opencv2/core/mat.hpp>
-//#include <opencv2/shape/hist_cost.hpp>
 
 ImageProcessor::ImageProcessor(float percentageOfDeletion)
 {
@@ -63,7 +60,7 @@ cv::Mat ImageProcessor::stretchHistogram(cv::Mat image)
     hist.resize(std::numeric_limits<uchar>::max() + 1);
 
 
-    cvtColor(image, output, CV_BGR2YCrCb); //change the color image from BGR to YCrCb format
+    cvtColor(image, output, cv::COLOR_BGR2YCrCb); //change the color image from BGR to YCrCb format
     split(output, channels); //split the image into channels
 
     uchar min = std::numeric_limits<uchar>::max();
@@ -126,7 +123,7 @@ cv::Mat ImageProcessor::stretchHistogram(cv::Mat image)
     }
 
     merge(channels,output); //merge 3 channels including the modified 1st channel into one image
-    cvtColor(output, output, CV_YCrCb2BGR); //change the color image from YCrCb to BGR format (to display image properly)
+    cvtColor(output, output, cv::COLOR_YCrCb2BGR); //change the color image from YCrCb to BGR format (to display image properly)
 
     return output;
 }

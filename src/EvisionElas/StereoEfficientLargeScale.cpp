@@ -1,5 +1,5 @@
 #include "StereoEfficientLargeScale.h"
-#include <opencv2\imgproc\types_c.h>
+
 
 
 
@@ -13,10 +13,10 @@ StereoEfficientLargeScale::StereoEfficientLargeScale(Elas::parameters param) :el
 void StereoEfficientLargeScale::operator()(cv::Mat& leftim, cv::Mat& rightim, cv::Mat& leftdisp, cv::Mat& rightdisp, int bd)
 {
 	cv::Mat l, r;
-	if (leftim.channels() == 3) { cvtColor(leftim, l, CV_BGR2GRAY);
+	if (leftim.channels() == 3) { cvtColor(leftim, l, cv::COLOR_BGR2GRAY);
 		std::cout << "convert gray" << std::endl; }
 	else l = leftim;
-	if (rightim.channels() == 3)cvtColor(rightim, r, CV_BGR2GRAY);
+	if (rightim.channels() == 3)cvtColor(rightim, r, cv::COLOR_BGR2GRAY);
 	else r = rightim;
 
 	cv::Mat lb, rb;
@@ -58,10 +58,10 @@ void StereoEfficientLargeScale::operator()(cv::Mat& leftim, cv::Mat& rightim, cv
 void StereoEfficientLargeScale::operator()(cv::Mat& leftim, cv::Mat& rightim, cv::Mat& leftdisp, cv::Mat& rightdisp, int bd, const cv::Mat grad)
 {
 	cv::Mat l, r;
-	if (leftim.channels() == 3) { cvtColor(leftim, l, CV_BGR2GRAY);
+	if (leftim.channels() == 3) { cvtColor(leftim, l, cv::COLOR_BGR2GRAY);
 		std::cout << "convert gray" << std::endl; }
 	else l = leftim;
-	if (rightim.channels() == 3)cvtColor(rightim, r, CV_BGR2GRAY);
+	if (rightim.channels() == 3)cvtColor(rightim, r, cv::COLOR_BGR2GRAY);
 	else r = rightim;
 
 	cv::Mat lb, rb;
