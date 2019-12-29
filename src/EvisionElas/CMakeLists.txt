@@ -28,6 +28,8 @@ source_group("Include Files" FILES ${INCLUDE_FILES})
 source_group("Source Files" FILES ${SRC_FILES})
 source_group("Header Files" FILES ${HEAD_FILES})
 
+add_definitions(-D LIB_EXPORTS)
+
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/../install/lib/Debug)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/../install/lib/Release)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/../install/bin/Debug)
