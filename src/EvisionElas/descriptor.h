@@ -45,8 +45,8 @@ Street, Fifth Floor, Boston, MA 02110-1301, USA
   //typedef unsigned __int32  uint32_t;
   //typedef unsigned __int64  uint64_t;
 #endif
-
-class __declspec(dllexport) Descriptor {
+#include <libapi.h>
+class LIB_API Descriptor {
   
 public:
   

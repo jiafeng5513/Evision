@@ -27,6 +27,7 @@ Street, Fifth Floor, Boston, MA 02110-1301, USA
 #include <stdlib.h>
 #include <iostream>
 #include <vector>
+#include <libapi.h>
 
 #ifndef _MSC_VER
   #include <stdint.h>
@@ -46,7 +47,7 @@ Street, Fifth Floor, Boston, MA 02110-1301, USA
 typedef double FLOAT;      // double precision
 //typedef float  FLOAT;    // single precision
 
-class __declspec(dllexport)Matrix {
+class LIB_API Matrix {
 
 public:
 

@@ -248,7 +248,7 @@
 /*  not used, `numberofsegments' will indicate the number of boundary edges. */
 /*                                                                           */
 /*****************************************************************************/
-
+#include <libapi.h>
 struct triangulateio {
   float *pointlist;                                               /* In / out */
   float *pointattributelist;                                      /* In / out */
@@ -280,6 +280,6 @@ struct triangulateio {
   int numberofedges;                                             /* Out only */
 };
 
-void __declspec(dllexport)triangulate(char *,triangulateio *,triangulateio *,triangulateio *);
-void __declspec(dllexport)trifree(int *memptr);
+void LIB_API triangulate(char *,triangulateio *,triangulateio *,triangulateio *);
+void LIB_API trifree(int *memptr);
 

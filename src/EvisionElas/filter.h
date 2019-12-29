@@ -38,19 +38,7 @@ Street, Fifth Floor, Boston, MA 02110-1301, USA
   typedef unsigned __int32  uint32_t;
   typedef unsigned __int64  uint64_t;
 #endif
-#ifdef LIB_EXPORTS
-#if defined(_MSC_VER)
-#define LIB_API __declspec(dllexport)
-#else
-#define LIB_API __attribute__((visibility("default")))
-#endif
-#else
-#if defined(_MSC_VER)
-#define LIB_API
-#else
-#define LIB_API
-#endif
-#endif
+#include <libapi.h>
 // fast filters: implements 3x3 and 5x5 sobel filters and 
 //               5x5 blob and corner filters based on SSE2/3 instructions
 namespace filter {
