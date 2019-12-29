@@ -1,8 +1,8 @@
 #pragma once
 #include <qobject.h>
 /*
- * ²ÎÊıÊµÌåÀà
- * ¶ÔÊıÖµµÄÖ±½Ó¸ü¸Ä»á·¢³övaluechangedÊÂ¼ş,ÓÉviewÀà½Óµ½ÏûÏ¢,È»ºó¸üĞÂ½çÃæ
+ * å‚æ•°å®ä½“ç±»
+ * å¯¹æ•°å€¼çš„ç›´æ¥æ›´æ”¹ä¼šå‘å‡ºvaluechangedäº‹ä»¶,ç”±viewç±»æ¥åˆ°æ¶ˆæ¯,ç„¶åæ›´æ–°ç•Œé¢
  * 
  */
 class EvisionParamEntity : public QObject

@@ -7,7 +7,7 @@ ObjectDetectionView::ObjectDetectionView(QWidget *parent)
 {
 	ui.setupUi(this);
 	m_engine = new ObjectDetectionEngine();
-	//Á´½ÓÐÅºÅ²Û
+	//é“¾æŽ¥ä¿¡å·æ§½
 	m_entity = ObjectDetectionEntity::getInstance();
 
 	connect(m_entity, SIGNAL(paramChanged_DetectionPlayer()), this, SLOT(OnParamChanged_DetectionPlayer()));
@@ -19,36 +19,36 @@ ObjectDetectionView::ObjectDetectionView(QWidget *parent)
 ObjectDetectionView::~ObjectDetectionView()
 {
 }
-//Ñ¡ÔñCFGÎÄ¼þ
+//é€‰æ‹©CFGæ–‡ä»¶
 void ObjectDetectionView::OnBrowseCfg()
 {
 	QFileDialog * fileDialog = new QFileDialog();
-	fileDialog->setWindowTitle(QStringLiteral("ÇëÑ¡ÔñCFG"));
-	fileDialog->setNameFilter(QStringLiteral("CFGÎÄ¼þ(*.cfg)"));
+	fileDialog->setWindowTitle(QStringLiteral("è¯·é€‰æ‹©CFG"));
+	fileDialog->setNameFilter(QStringLiteral("CFGæ–‡ä»¶(*.cfg)"));
 	fileDialog->setFileMode(QFileDialog::ExistingFile);
 	if (fileDialog->exec() == QDialog::Accepted)
 	{
 		m_entity->setCfgFilename(fileDialog->selectedFiles().at(0));
 	}
 }
-//Ñ¡ÔñWeightsÎÄ¼þ
+//é€‰æ‹©Weightsæ–‡ä»¶
 void ObjectDetectionView::OnBrowseWeights()
 {
 	QFileDialog * fileDialog = new QFileDialog();
-	fileDialog->setWindowTitle(QStringLiteral("ÇëÑ¡ÔñweightsÎÄ¼þ"));
-	fileDialog->setNameFilter(QStringLiteral("weighesÎÄ¼þ(*.weights)"));
+	fileDialog->setWindowTitle(QStringLiteral("è¯·é€‰æ‹©weightsæ–‡ä»¶"));
+	fileDialog->setNameFilter(QStringLiteral("weighesæ–‡ä»¶(*.weights)"));
 	fileDialog->setFileMode(QFileDialog::ExistingFile);
 	if (fileDialog->exec() == QDialog::Accepted)
 	{
 		m_entity->setweightsFilename( fileDialog->selectedFiles().at(0));
 	}
 }
-//Ñ¡ÔñNamesÎÄ¼þ
+//é€‰æ‹©Namesæ–‡ä»¶
 void ObjectDetectionView::OnBrowseNames()
 {
 	QFileDialog * fileDialog = new QFileDialog();
-	fileDialog->setWindowTitle(QStringLiteral("ÇëÑ¡ÔñnamesÎÄ¼þ"));
-	fileDialog->setNameFilter(QStringLiteral("namesÎÄ¼þ(*.names)"));
+	fileDialog->setWindowTitle(QStringLiteral("è¯·é€‰æ‹©namesæ–‡ä»¶"));
+	fileDialog->setNameFilter(QStringLiteral("namesæ–‡ä»¶(*.names)"));
 
 	fileDialog->setFileMode(QFileDialog::ExistingFile);
 	if (fileDialog->exec() == QDialog::Accepted)
@@ -59,7 +59,7 @@ void ObjectDetectionView::OnBrowseNames()
 //Switch
 void ObjectDetectionView::OnSwitch()
 {
-	//»¹Ã»ÓÐ¿ªÊ¼ÔËÐÐ:¼ì²é²ÎÊý,Æô¶¯Ïß³Ì
+	//è¿˜æ²¡æœ‰å¼€å§‹è¿è¡Œ:æ£€æŸ¥å‚æ•°,å¯åŠ¨çº¿ç¨‹
 	if (m_engine->isRunning() == false)
 	{
 		if (!m_entity->getCfgFilename().isEmpty()&& !m_entity->getnamesFilename().isEmpty() && !m_entity->getweightsFilename().isEmpty())
@@ -71,10 +71,10 @@ void ObjectDetectionView::OnSwitch()
 		m_entity->setRunningState(false);
 	}
 	
-	//ÒÑ¾­¿ªÊ¼ÔËÐÐ:Í£Ö¹ÔËÐÐ
+	//å·²ç»å¼€å§‹è¿è¡Œ:åœæ­¢è¿è¡Œ
 
 }
-//ÏìÓ¦Ö¡Ë¢ÐÂ
+//å“åº”å¸§åˆ·æ–°
 void ObjectDetectionView::OnParamChanged_DetectionPlayer()
 {
 	QImage LQImage = EvisionUtils::cvMat2QImage(m_entity->getDetectionPlayer());
@@ -90,17 +90,17 @@ void ObjectDetectionView::OnParamChanged_DetectionPlayer()
 	ui.graphicsView->update();
 }
 
-//ÏìÓ¦cfgFileµÄ¸ü¸Ä
+//å“åº”cfgFileçš„æ›´æ”¹
 void ObjectDetectionView::OnParamChanged_cfgFilename()
 {
 	ui.lineEdit_Cfg->setText(m_entity->getCfgFilename());
 }
-//ÏìÓ¦weights fileµÄ¸üÐÂ
+//å“åº”weights fileçš„æ›´æ–°
 void ObjectDetectionView::OnParamChanged_weightsFilename()
 {
 	ui.lineEdit_Weight->setText(m_entity->getweightsFilename());
 }
-//ÏìÓ¦names fileµÄ¸üÐÂ
+//å“åº”names fileçš„æ›´æ–°
 void ObjectDetectionView::OnParamChanged_namesFilename()
 {
 	ui.lineEdit_Name->setText(m_entity->getnamesFilename());

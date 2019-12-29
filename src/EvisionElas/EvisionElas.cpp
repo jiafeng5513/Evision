@@ -98,8 +98,8 @@ bool EvisionElas::Match(cv::Mat leftImg, cv::Mat rightImg, cv::Mat* disp_raw, cv
 	disp_raw->convertTo(*disp_show, CV_8U, 1.0 / 16);
 	disp_show->copyTo(*disp_raw);
 	/*
-	 *disp_raw Ô­Ê¼ÊÓ²îÊı¾İ
-	 *disp_show ¿ÉÊÓ»¯ÊÓ²îÊı¾İ
+	 *disp_raw åŸå§‹è§†å·®æ•°æ®
+	 *disp_show å¯è§†åŒ–è§†å·®æ•°æ®
 	 *mag
 	 */
 

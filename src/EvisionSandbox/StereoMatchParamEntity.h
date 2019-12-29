@@ -15,37 +15,37 @@ private:
 	StereoMatchParamEntity(QObject *parent = 0);
 private:
 #pragma region params
-	//BM ²ÎÊı
-	bool BM_preFilterType_NORMALIZED = false; //Ê¹ÓÃ¹éÒ»»¯×÷ÎªÇ°´¦Àí
-	bool BM_preFilterType_XSOBEL = false;	  //Ê¹ÓÃXSOBEL×÷ÎªÇ°´¦Àí
-	int BM_preFilterSize = 0;				  //¹éÒ»»¯´°¿Ú´óĞ¡,[5,255]Ö®¼äµÄÆæÊı
-	int BM_preFilterCap = 0;				  //XSobel½Ø¶ÏÖµ.[1,63]
-	int BM_SADWindowSize = 0;				  //SAD´°¿Ú´óĞ¡,[5,255]Ö®¼äµÄÆæÊıÇÒ²»ÄÜ´óÓÚÍ¼Æ¬µÄ¿í»ò¸ß
-	int BM_minDisparity = 0;				  //ÊÓ²îËÑË÷Æğµã
-	int BM_numDisparities = 0;				  //ÊÓ²î´°¿Ú,Ò»¸öÍÆ¼öÖµÊÇ((width / 8) + 15) & (~0xfl),±ØĞëÄÜ±»16Õû³ı
-	int BM_textureThreshold = 0;			  //µÍÎÆÀíÇøÓòµÄÅĞ¶ÏãĞÖµ. ·Ç¸ºÊı
-	int BM_uniquenessRatio = 0;				  //ÊÓ²îÎ¨Ò»ĞÔ°Ù·Ö±È,·Ç¸ºÊı
-	int BM_speckleRange = 0;				  //É¢°ß´°¿ÚÄÚÔÊĞíµÄ×î´ó²¨¶¯Öµ
-	int BM_speckleWindowSize = 0;			  //É¢°ßÂË²¨´°¿Ú´óĞ¡,<=0Ê±²»½øĞĞÉ¢°ßÂË²¨
-	int BM_disp12MaxDiff = 0;				  //×óÓÒÒ»ÖÂĞÔ¼ì²éµÄ×î´óÈİ²î,Ğ¡ÓÚ0Ê±Ìø¹ı
+	//BM å‚æ•°
+	bool BM_preFilterType_NORMALIZED = false; //ä½¿ç”¨å½’ä¸€åŒ–ä½œä¸ºå‰å¤„ç†
+	bool BM_preFilterType_XSOBEL = false;	  //ä½¿ç”¨XSOBELä½œä¸ºå‰å¤„ç†
+	int BM_preFilterSize = 0;				  //å½’ä¸€åŒ–çª—å£å¤§å°,[5,255]ä¹‹é—´çš„å¥‡æ•°
+	int BM_preFilterCap = 0;				  //XSobelæˆªæ–­å€¼.[1,63]
+	int BM_SADWindowSize = 0;				  //SADçª—å£å¤§å°,[5,255]ä¹‹é—´çš„å¥‡æ•°ä¸”ä¸èƒ½å¤§äºå›¾ç‰‡çš„å®½æˆ–é«˜
+	int BM_minDisparity = 0;				  //è§†å·®æœç´¢èµ·ç‚¹
+	int BM_numDisparities = 0;				  //è§†å·®çª—å£,ä¸€ä¸ªæ¨èå€¼æ˜¯((width / 8) + 15) & (~0xfl),å¿…é¡»èƒ½è¢«16æ•´é™¤
+	int BM_textureThreshold = 0;			  //ä½çº¹ç†åŒºåŸŸçš„åˆ¤æ–­é˜ˆå€¼. éè´Ÿæ•°
+	int BM_uniquenessRatio = 0;				  //è§†å·®å”¯ä¸€æ€§ç™¾åˆ†æ¯”,éè´Ÿæ•°
+	int BM_speckleRange = 0;				  //æ•£æ–‘çª—å£å†…å…è®¸çš„æœ€å¤§æ³¢åŠ¨å€¼
+	int BM_speckleWindowSize = 0;			  //æ•£æ–‘æ»¤æ³¢çª—å£å¤§å°,<=0æ—¶ä¸è¿›è¡Œæ•£æ–‘æ»¤æ³¢
+	int BM_disp12MaxDiff = 0;				  //å·¦å³ä¸€è‡´æ€§æ£€æŸ¥çš„æœ€å¤§å®¹å·®,å°äº0æ—¶è·³è¿‡
 
-	//SGBM²ÎÊı
-	int SGBM_minDisparity = 0;				  //ÊÓ²îËÑË÷Æğµã
-	int SGBM_numDisparities = 0;			  //ÊÓ²î´°¿Ú,Ò»¸öÍÆ¼öÖµÊÇ((width / 8) + 15) & (~0xfl),±ØĞëÄÜ±»16Õû³ı
-	int SGBM_blockSize = 0;					  //Æ¥Åä¿é´óĞ¡,Ò»°ãÔÚ[3,11]
-	int SGBM_P1 = 0;						  //³Í·£ÏµÊıP1
-	int SGBM_P2 = 0;						  //³Í·£ÏµÊıP2,P2>P1
-	int SGBM_disp12MaxDiff = 0;				  //×óÓÒÒ»ÖÂĞÔ¼ì²éµÄ×î´óÈİ²î,Ğ¡ÓÚ0Ê±Ìø¹ı
-	int SGBM_preFilterCap = 0;				  //Ç°´¦Àí½Ø¶ÏÖµ.
-	int SGBM_uniquenessRatio = 0;			  //ÊÓ²îÎ¨Ò»ĞÔ°Ù·Ö±È,·Ç¸ºÊı,[5,15]	
-	int SGBM_speckleWindowSize = 0;			  //É¢°ßÂË²¨´°¿Ú´óĞ¡,<=0Ê±²»½øĞĞÉ¢°ßÂË²¨,0½ûÓÃ,È¡Öµ[50,200]
-	int SGBM_speckleRange = 0;				  //É¢°ß´°¿ÚÄÚÔÊĞíµÄ×î´ó²¨¶¯Öµ,ÄÚ²¿³Ë16ÆğĞ§,ÕûÊı,³£[1,2]
-	bool SGBM_MODEL_3WAY = false;			  //3WayÄ£Ê½
-	bool SGBM_MODEL_HH4 = false;			  //HH4Ä£Ê½
-	bool SGBM_MODEL_Default = false;		  //Ä¬ÈÏÄ£Ê½
-	bool SGBM_MODEL_HH = false;				  //HHÄ£Ê½
+	//SGBMå‚æ•°
+	int SGBM_minDisparity = 0;				  //è§†å·®æœç´¢èµ·ç‚¹
+	int SGBM_numDisparities = 0;			  //è§†å·®çª—å£,ä¸€ä¸ªæ¨èå€¼æ˜¯((width / 8) + 15) & (~0xfl),å¿…é¡»èƒ½è¢«16æ•´é™¤
+	int SGBM_blockSize = 0;					  //åŒ¹é…å—å¤§å°,ä¸€èˆ¬åœ¨[3,11]
+	int SGBM_P1 = 0;						  //æƒ©ç½šç³»æ•°P1
+	int SGBM_P2 = 0;						  //æƒ©ç½šç³»æ•°P2,P2>P1
+	int SGBM_disp12MaxDiff = 0;				  //å·¦å³ä¸€è‡´æ€§æ£€æŸ¥çš„æœ€å¤§å®¹å·®,å°äº0æ—¶è·³è¿‡
+	int SGBM_preFilterCap = 0;				  //å‰å¤„ç†æˆªæ–­å€¼.
+	int SGBM_uniquenessRatio = 0;			  //è§†å·®å”¯ä¸€æ€§ç™¾åˆ†æ¯”,éè´Ÿæ•°,[5,15]	
+	int SGBM_speckleWindowSize = 0;			  //æ•£æ–‘æ»¤æ³¢çª—å£å¤§å°,<=0æ—¶ä¸è¿›è¡Œæ•£æ–‘æ»¤æ³¢,0ç¦ç”¨,å–å€¼[50,200]
+	int SGBM_speckleRange = 0;				  //æ•£æ–‘çª—å£å†…å…è®¸çš„æœ€å¤§æ³¢åŠ¨å€¼,å†…éƒ¨ä¹˜16èµ·æ•ˆ,æ•´æ•°,å¸¸[1,2]
+	bool SGBM_MODEL_3WAY = false;			  //3Wayæ¨¡å¼
+	bool SGBM_MODEL_HH4 = false;			  //HH4æ¨¡å¼
+	bool SGBM_MODEL_Default = false;		  //é»˜è®¤æ¨¡å¼
+	bool SGBM_MODEL_HH = false;				  //HHæ¨¡å¼
 
-	//ADCensusµÄ²ÎÊı
+	//ADCensusçš„å‚æ•°
 	// Minimum and maximum disparity
 	uint dMin = 0;
 	uint dMax = 0;
@@ -78,7 +78,7 @@ private:
 	uint cannyKernelSize = 0;
 	// Parameters for the sub-pixel enhancement
 	uint blurKernelSize = 0;
-	/*======================ELASµÄ²ÎÊı==========================*/
+	/*======================ELASçš„å‚æ•°==========================*/
 	int disp_min;                  // min disparity
 	int disp_max;                  // max disparity
 	double support_threshold;      // max. uniqueness ratio (best vs. second best support match)
@@ -89,7 +89,7 @@ private:
 	int incon_min_support;		   // minimum number of consistent support points
 	bool add_corners;              // add support points at image corners with nearest neighbor disparities
 	int grid_size;                 // size of neighborhood for additional support point extrapolation
-	double beta;                   // Í¼ÏñËÆÈ»²ÎÊı
+	double beta;                   // å›¾åƒä¼¼ç„¶å‚æ•°
 	double gamma;                  // prior constant
 	double sigma;                  // prior sigma
 	double sradius;                // prior sigma radius
@@ -104,17 +104,17 @@ private:
 	bool subsampling;			   // saves time by only computing disparities for each 2nd pixel
 	// note: for this option D1 and D2 must be passed with size width/2 x height/2 (rounded towards zero)
 
-	//ËÄÖÖ¿ÉÑ¡Ëã·¨
+	//å››ç§å¯é€‰ç®—æ³•
 	bool BM = false;
 	bool SGBM = false;
 	bool ELAS = false;
 	bool ADCensus = false;
 
-	bool RectifiedInput = false;//ÊäÈëÍ¼ÏñÊÇ·ñÒÑ¾­½øĞĞÁËĞ£×¼
+	bool RectifiedInput = false;//è¾“å…¥å›¾åƒæ˜¯å¦å·²ç»è¿›è¡Œäº†æ ¡å‡†
 
-	cv::Mat imgDtoShow;//ÔÚÖĞĞÄÏÔÊ¾µÄ´óÍ¼
-	cv::Mat iconImgL, iconImgR, iconRawDisp;//ËõÂÔÍ¼
-	IMGID ImageToShow = NONE;//Ä¬ÈÏÇé¿öÏÂ,ÖĞĞÄ´óÍ¼Ê²Ã´Ò²²»ÏÔÊ¾
+	cv::Mat imgDtoShow;//åœ¨ä¸­å¿ƒæ˜¾ç¤ºçš„å¤§å›¾
+	cv::Mat iconImgL, iconImgR, iconRawDisp;//ç¼©ç•¥å›¾
+	IMGID ImageToShow = NONE;//é»˜è®¤æƒ…å†µä¸‹,ä¸­å¿ƒå¤§å›¾ä»€ä¹ˆä¹Ÿä¸æ˜¾ç¤º
 
 	cv::Mat disparity;
 	cv::Mat xyz;

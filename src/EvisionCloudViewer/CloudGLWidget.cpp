@@ -3,8 +3,8 @@
 #include <cmath>
 #include <iostream>              
 #include <string> 
-#include <pcl/io/pcd_io.h>       //PCD¶ÁĞ´ÀàÏà¹ØµÄÍ·ÎÄ¼ş
-#include <pcl/point_types.h>     //PCLÖĞÖ§³ÖµÄµãÀàĞÍµÄÍ·ÎÄ¼ş
+#include <pcl/io/pcd_io.h>       //PCDè¯»å†™ç±»ç›¸å…³çš„å¤´æ–‡ä»¶
+#include <pcl/point_types.h>     //PCLä¸­æ”¯æŒçš„ç‚¹ç±»å‹çš„å¤´æ–‡ä»¶
 #ifndef GL_MULTISAMPLE
 #define GL_MULTISAMPLE 0x809D
 #endif
@@ -14,38 +14,38 @@
 #include <pcl/common/time.h>
 
 /*
- * 1. Çó½âÍâ°üÎ§ºĞ
- * 2. Çó½âºÏÊÊµÄËõ·Å
- * 3. Í¨¹ıĞÍĞÄÇóÆ½ÒÆ±ä»»,°ÑĞÍĞÄ·Åµ½ÖĞ¼ä
- * 4. ×ÅÉ«
+ * 1. æ±‚è§£å¤–åŒ…å›´ç›’
+ * 2. æ±‚è§£åˆé€‚çš„ç¼©æ”¾
+ * 3. é€šè¿‡å‹å¿ƒæ±‚å¹³ç§»å˜æ¢,æŠŠå‹å¿ƒæ”¾åˆ°ä¸­é—´
+ * 4. ç€è‰²
  *
- * ÎÒĞèÒªÏÔÊ¾µÄÓĞ:
- * ²Ù×÷ÌáÊ¾
- * µãÊı¼ÆÊı
+ * æˆ‘éœ€è¦æ˜¾ç¤ºçš„æœ‰:
+ * æ“ä½œæç¤º
+ * ç‚¹æ•°è®¡æ•°
  *
  *
  */
- //¹¹Ôì
+ //æ„é€ 
 CloudGLWidget::CloudGLWidget(std::string filename, QWidget *parent)
 	: QGLWidget(parent)
 {
-	//µ÷ÓÃsetFormat£¨£©Ê¹OpenGLµÄÏÔÊ¾ÃèÊö±íÖ§³Ö·¹×ßÑù¡£
+	//è°ƒç”¨setFormatï¼ˆï¼‰ä½¿OpenGLçš„æ˜¾ç¤ºæè¿°è¡¨æ”¯æŒé¥­èµ°æ ·ã€‚
 	setFormat(QGLFormat(QGL::SampleBuffers));
 
-	//³õÊ¼»¯Ë½ÓĞ±äÁ¿
+	//åˆå§‹åŒ–ç§æœ‰å˜é‡
 	rotationX = -38.0;
 	rotationY = -58.0;
 	rotationZ = 0.0;
 	scaling = 1.0;
-	//Æ½ÒÆ¿ØÖÆ
+	//å¹³ç§»æ§åˆ¶
 	transX = 0;
 	transY = 0;
 	transZ = -10;
 	numofPoints = 0;
 	this->filename = filename;
-	//ÉèÖÃÌî³ä±³¾°µÄQRadialGradient
+	//è®¾ç½®å¡«å……èƒŒæ™¯çš„QRadialGradient
 	createGradient();
-	//´´½¨OpenGL¶ÔÏó
+	//åˆ›å»ºOpenGLå¯¹è±¡
 	createGLObject();
 
 	setAutoBufferSwap(false);
@@ -55,63 +55,63 @@ CloudGLWidget::CloudGLWidget(std::string filename, QWidget *parent)
 	
 
 }
-//Îö¹¹
+//ææ„
 CloudGLWidget::~CloudGLWidget()
 {
 	makeCurrent();
-	//É¾³ı¹¹Ôìº¯Êı´´½¨µÄOpenGLÁ¢·½Ìå¶ÔÏó
+	//åˆ é™¤æ„é€ å‡½æ•°åˆ›å»ºçš„OpenGLç«‹æ–¹ä½“å¯¹è±¡
 	glDeleteLists(glObject, 1);
 }
 
-//»æÖÆ,ÔÚpaintEvent()ÖĞ´´½¨Ò»¸öQPainter,ÔÚ½øĞĞ´¿OpenGL²Ù×÷Ê±
-//±£´æºÍ»Ö¸´Æä×´Ì¬¡£
-//QPainterµÄ¹¹Ôìº¯Êı(»òÕßQPainter::begin())×Ô¶¯µ÷ÓÃglClear
-//³ı·ÇÔ¤ÏÈµ÷ÓÃ´°¿Ú²¿¼şµÄsetAutoFillBackground(false)
-//QPainterµÄÎö¹¹º¯Êı£¨»òÕßQPainter::end()£©×Ô¶¯µ÷ÓÃQGLWidget::swapBuffers()
-//ÇĞ»»¿É¼û»º´æºÍÀëÆÁ»º´æ£¬³ı·ÇÔ¤ÏÈµ÷ÓÃsetAutoBufferSwap(false).
-//µ±QPainter±»¼¤»î£¬ÎÒÃÇ¿ÉÒÔ½»²æÊ¹ÓÃ´¿OpenGLÃüÁî£¬Ö»ÒªÔÚÖ´ĞĞ´¿OpenGLÃüÁîÖ®Ç°±£´æOpenGL×´Ì¬£¬Ö®ºó»Ö¸´OpenGL×´Ì¬
+//ç»˜åˆ¶,åœ¨paintEvent()ä¸­åˆ›å»ºä¸€ä¸ªQPainter,åœ¨è¿›è¡Œçº¯OpenGLæ“ä½œæ—¶
+//ä¿å­˜å’Œæ¢å¤å…¶çŠ¶æ€ã€‚
+//QPainterçš„æ„é€ å‡½æ•°(æˆ–è€…QPainter::begin())è‡ªåŠ¨è°ƒç”¨glClear
+//é™¤éé¢„å…ˆè°ƒç”¨çª—å£éƒ¨ä»¶çš„setAutoFillBackground(false)
+//QPainterçš„ææ„å‡½æ•°ï¼ˆæˆ–è€…QPainter::end()ï¼‰è‡ªåŠ¨è°ƒç”¨QGLWidget::swapBuffers()
+//åˆ‡æ¢å¯è§ç¼“å­˜å’Œç¦»å±ç¼“å­˜ï¼Œé™¤éé¢„å…ˆè°ƒç”¨setAutoBufferSwap(false).
+//å½“QPainterè¢«æ¿€æ´»ï¼Œæˆ‘ä»¬å¯ä»¥äº¤å‰ä½¿ç”¨çº¯OpenGLå‘½ä»¤ï¼Œåªè¦åœ¨æ‰§è¡Œçº¯OpenGLå‘½ä»¤ä¹‹å‰ä¿å­˜OpenGLçŠ¶æ€ï¼Œä¹‹åæ¢å¤OpenGLçŠ¶æ€
 void CloudGLWidget::paintEvent(QPaintEvent * /* event */)
 {
 	QPainter painter(this);
-	//»æÖÆ±³¾°
+	//ç»˜åˆ¶èƒŒæ™¯
 	drawBackground(&painter);
-	//±³¾°»æÖÆ½áÊø
+	//èƒŒæ™¯ç»˜åˆ¶ç»“æŸ
 	painter.end();
-	//»æÖÆÁ¢·½Ìå
+	//ç»˜åˆ¶ç«‹æ–¹ä½“
 	drawItem();
-	//»æÖÆ¿ªÊ¼
+	//ç»˜åˆ¶å¼€å§‹
 	painter.begin(this);
-	//Ê¹ÓÃHTMLÎÄ×ÖÉèÖÃQTextDocument¶ÔÏó
+	//ä½¿ç”¨HTMLæ–‡å­—è®¾ç½®QTextDocumentå¯¹è±¡
 	drawLegend(&painter);
 	painter.end();
 	swapBuffers();
 }
 
-//Êó±ê°´ÏÂÊÂ¼ş:¼ÇÂ¼Êó±êµÄÎ»ÖÃ
+//é¼ æ ‡æŒ‰ä¸‹äº‹ä»¶:è®°å½•é¼ æ ‡çš„ä½ç½®
 void CloudGLWidget::mousePressEvent(QMouseEvent *event)
 {
 	lastPos = event->pos();
 }
 
-//Êó±êÒÆ¶¯ÊÂ¼ş:ÓÃÓÚ¿ØÖÆÆ½ÒÆºÍĞı×ª
+//é¼ æ ‡ç§»åŠ¨äº‹ä»¶:ç”¨äºæ§åˆ¶å¹³ç§»å’Œæ—‹è½¬
 void CloudGLWidget::mouseMoveEvent(QMouseEvent *event)
 {
 	GLfloat dx = GLfloat(event->x() - lastPos.x()) / width();
 	GLfloat dy = GLfloat(event->y() - lastPos.y()) / height();
 
-	if (event->buttons() & Qt::LeftButton) {//×ó¼ü
+	if (event->buttons() & Qt::LeftButton) {//å·¦é”®
 		rotationX -= 180 * dy;
 		rotationY -= 180 * dx;
 		update();
 	}
-	else if (event->buttons() & Qt::RightButton) {//ÓÒ¼ü
+	else if (event->buttons() & Qt::RightButton) {//å³é”®
 		transX += dx;
 		transY -= dy;
 		//rotationX += 180 * dy;
 		//rotationZ += 180 * dx;
 		update();
 	}
-	else if (event->buttons() & Qt::MiddleButton)//ÖĞ¼ü
+	else if (event->buttons() & Qt::MiddleButton)//ä¸­é”®
 	{
 		//transZ += (5 / scaling)*std::min(dx,dy);
 		////rotationX += 180 * dy;
@@ -121,7 +121,7 @@ void CloudGLWidget::mouseMoveEvent(QMouseEvent *event)
 	lastPos = event->pos();
 }
 
-//Êó±ê¹ö¶¯µÄÊÂ¼ş:ÓÃÓÚ¿ØÖÆËõ·Å
+//é¼ æ ‡æ»šåŠ¨çš„äº‹ä»¶:ç”¨äºæ§åˆ¶ç¼©æ”¾
 void CloudGLWidget::wheelEvent(QWheelEvent *event)
 {
 	double numDegrees = -event->delta() / 8.0;
@@ -130,12 +130,12 @@ void CloudGLWidget::wheelEvent(QWheelEvent *event)
 	update();
 }
 
-//Ê¹ÓÃÀ¶É«½¥±äÉ«ÉèÖÃQRadialGradient
+//ä½¿ç”¨è“è‰²æ¸å˜è‰²è®¾ç½®QRadialGradient
 void CloudGLWidget::createGradient()
 {
-	//È·±£Ö¸¶¨µÄÖĞĞÄºÍ½¹µã×ø±ê¸ù¾İ´°¿Ú²¿¼ş´óĞ¡½øĞĞµ÷Õû
+	//ç¡®ä¿æŒ‡å®šçš„ä¸­å¿ƒå’Œç„¦ç‚¹åæ ‡æ ¹æ®çª—å£éƒ¨ä»¶å¤§å°è¿›è¡Œè°ƒæ•´
 	gradient.setCoordinateMode(QGradient::ObjectBoundingMode);
-	//Î»ÖÃÓÃ0ºÍ1Ö®¼äµÄ¸¡µãÊı±íÊ¾£¬0¶ÔÓ¦½¹µã×ø±ê£¬1¶ÔÓ¦Ô²µÄ±ßÔµ
+	//ä½ç½®ç”¨0å’Œ1ä¹‹é—´çš„æµ®ç‚¹æ•°è¡¨ç¤ºï¼Œ0å¯¹åº”ç„¦ç‚¹åæ ‡ï¼Œ1å¯¹åº”åœ†çš„è¾¹ç¼˜
 	gradient.setCenter(0.45, 0.50);
 	gradient.setFocalPoint(0.40, 0.45);
 	gradient.setColorAt(0.0, QColor(105, 146, 182));
@@ -143,7 +143,7 @@ void CloudGLWidget::createGradient()
 	gradient.setColorAt(0.8, QColor(16, 56, 121));
 }
 
-//´´½¨´ı»æÖÆµÄÄ¿±ê
+//åˆ›å»ºå¾…ç»˜åˆ¶çš„ç›®æ ‡
 void CloudGLWidget::createGLObject()
 {
 	makeCurrent();
@@ -157,7 +157,7 @@ void CloudGLWidget::createGLObject()
 
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ>);
 
-	//´ò¿ªµãÔÆÎÄ¼ş"F:\\pcl\\test\\car6.pcd""C:\\Users\\Anna\\Desktop\\test.pcd"0_cloud
+	//æ‰“å¼€ç‚¹äº‘æ–‡ä»¶"F:\\pcl\\test\\car6.pcd""C:\\Users\\Anna\\Desktop\\test.pcd"0_cloud
 	if (pcl::io::loadPCDFile<pcl::PointXYZ>(this->filename, *cloud) == -1)
 	{
 		PCL_ERROR("Couldn't read file,the file name is :\n");
@@ -175,7 +175,7 @@ void CloudGLWidget::createGLObject()
 	glEnd();
 
 	CloudAnalyzer ca;
-	this->bbox = ca.bbox(cloud);//µÃµ½Íâ°üÎ§ºĞ
+	this->bbox = ca.bbox(cloud);//å¾—åˆ°å¤–åŒ…å›´ç›’
 
 	//	    V4 ---------- V6
 	//        |\        |\
@@ -186,14 +186,14 @@ void CloudGLWidget::createGLObject()
 	//         \|________\|
 	//         V1         V3
 
-	//scaling = getScalingFactor(bbox);//»ñÈ¡Ëõ·Å
-	getTranslationV(bbox);//¼ÆËãÆ½ÒÆ
+	//scaling = getScalingFactor(bbox);//è·å–ç¼©æ”¾
+	getTranslationV(bbox);//è®¡ç®—å¹³ç§»
 	GLint index_list[][2] = { {0, 1},{2, 3},{4, 5},{6, 7},{0, 2},{1, 3},
 							{4, 6},{5, 7},{0, 4},{1, 5},{7, 3},{2, 6} };
 	glBegin(GL_LINES);
-	for (int i = 0; i < 12; ++i) // 12 ÌõÏß¶Î
+	for (int i = 0; i < 12; ++i) // 12 æ¡çº¿æ®µ
 	{
-		for (int j = 0; j < 2; ++j) // Ã¿ÌõÏß¶Î 2¸ö¶¥µã
+		for (int j = 0; j < 2; ++j) // æ¯æ¡çº¿æ®µ 2ä¸ªé¡¶ç‚¹
 		{
 			glVertex3f(bbox[index_list[i][j]][0], bbox[index_list[i][j]][1], bbox[index_list[i][j]][2]);
 		}
@@ -203,7 +203,7 @@ void CloudGLWidget::createGLObject()
 	glEndList();
 }
 
-//±³¾°µÄ»æÖÆ
+//èƒŒæ™¯çš„ç»˜åˆ¶
 void CloudGLWidget::drawBackground(QPainter *painter)
 {
 	painter->setPen(Qt::NoPen);
@@ -211,7 +211,7 @@ void CloudGLWidget::drawBackground(QPainter *painter)
 	painter->drawRect(rect());
 }
 
-//»æÖÆÖ÷Ìå
+//ç»˜åˆ¶ä¸»ä½“
 void CloudGLWidget::drawItem()
 {
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
@@ -239,23 +239,23 @@ void CloudGLWidget::drawItem()
 	glPushMatrix();
 	glLoadIdentity();
 
-	glRotatef(rotationX, 1.0, 0.0, 0.0);//Ğı×ª
+	glRotatef(rotationX, 1.0, 0.0, 0.0);//æ—‹è½¬
 	glRotatef(rotationY, 0.0, 1.0, 0.0);
 	glRotatef(rotationZ, 0.0, 0.0, 1.0);
-	glScalef(scaling, scaling, scaling);//Ëõ·Å
-	glTranslatef(transX, transY, transZ);//Æ½ÒÆ
+	glScalef(scaling, scaling, scaling);//ç¼©æ”¾
+	glTranslatef(transX, transY, transZ);//å¹³ç§»
 
-	//ÉèÖÃ·´×ßÑù
+	//è®¾ç½®åèµ°æ ·
 	glEnable(GL_MULTISAMPLE);
 
-	//»æÖÆÁ¢·½Ìå
+	//ç»˜åˆ¶ç«‹æ–¹ä½“
 	glCallList(glObject);
 
-	//ÉèÖÃÎÄ×ÖÑÕÉ«ºÍ×ÖÌå
+	//è®¾ç½®æ–‡å­—é¢œè‰²å’Œå­—ä½“
 	setFont(QFont("Times", 18));
 	qglColor(QColor(255, 223, 127));
 
-	//»æÖÆ×Ö·û£¬renderTextÊ¹ÎÄ×Ö²»±äĞÎ
+	//ç»˜åˆ¶å­—ç¬¦ï¼ŒrenderTextä½¿æ–‡å­—ä¸å˜å½¢
 	for (int i = 0; i < 8; ++i)
 	{
 		renderText(bbox[i][0], bbox[i][1], bbox[i][2], QChar(i + 48));
@@ -271,7 +271,7 @@ void CloudGLWidget::drawItem()
 }
 
 
-//Ê¹ÓÃHTMLÎÄ×ÖÉèÖÃQTextDocument¶ÔÏó£¬ÔÚ°ëÍ¸Ã÷µÄÀ¶É«¾ØĞÎÉÏ»æÖÆËüÃÇ
+//ä½¿ç”¨HTMLæ–‡å­—è®¾ç½®QTextDocumentå¯¹è±¡ï¼Œåœ¨åŠé€æ˜çš„è“è‰²çŸ©å½¢ä¸Šç»˜åˆ¶å®ƒä»¬
 void CloudGLWidget::drawLegend(QPainter *painter)
 {
 	const int Margin = 11;
@@ -301,7 +301,7 @@ void CloudGLWidget::drawLegend(QPainter *painter)
 
 GLfloat CloudGLWidget::getScalingFactor(std::vector<std::vector<float>> bbox)
 {
-	//1. È¡´°¿Ú´óĞ¡
+	//1. å–çª—å£å¤§å°
 	std::cout << width() << " , " << height() << std::endl;
 
 	GLfloat target = std::sqrt(std::pow(width(), 2) + std::pow(height(), 2));
@@ -316,7 +316,7 @@ GLfloat CloudGLWidget::getScalingFactor(std::vector<std::vector<float>> bbox)
 //         \|________\|
 //         V1         V3
 
-	//2. ¼ÆËãv0ºÍv7µÄ¾àÀë
+	//2. è®¡ç®—v0å’Œv7çš„è·ç¦»
 	GLfloat dis = std::sqrt(std::pow(bbox[0][0] - bbox[7][0], 2) + std::pow(bbox[0][1] - bbox[7][1], 2)/*+ std::pow(bbox[0][2] - bbox[7][2], 2)*/);
 
 	//3. some magic
@@ -326,12 +326,12 @@ GLfloat CloudGLWidget::getScalingFactor(std::vector<std::vector<float>> bbox)
 
 void CloudGLWidget::getTranslationV(std::vector<std::vector<float>> bbox)
 {
-	//1. ¼ÆËã¼¸ºÎÖĞĞÄ
+	//1. è®¡ç®—å‡ ä½•ä¸­å¿ƒ
 	GLfloat x = (bbox[0][0] + bbox[7][0]) / 2;
 	GLfloat y = (bbox[0][1] + bbox[7][1]) / 2;
 	GLfloat z = (bbox[0][2] + bbox[7][2]) / 2;
-	//Eigen::Vector3f c1 = 0.5f*(min_p.getVector3fMap() + max_p.getVector3fMap());//¼¸ºÎÖĞĞÄ
-	//2. ¼ÆËãÆ½ÒÆÏòÁ¿
+	//Eigen::Vector3f c1 = 0.5f*(min_p.getVector3fMap() + max_p.getVector3fMap());//å‡ ä½•ä¸­å¿ƒ
+	//2. è®¡ç®—å¹³ç§»å‘é‡
 	this->transX = -x;
 	this->transY = -y;
 	this->transZ = -z;

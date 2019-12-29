@@ -18,12 +18,12 @@ StereoMatch::StereoMatch(std::string img1_filename, std::string img2_filename, s
 	
 	if(_fileInfo1->absolutePath()!=_fileInfo2->absolutePath())
 	{
-		//×óÓÒÊÓÍ¼²»ÔÚÒ»Æğ
-		//ÏÈ°Ñ×óÓÒÊÓÍ¼¿½±´µ½Ò»Æğ
+		//å·¦å³è§†å›¾ä¸åœ¨ä¸€èµ·
+		//å…ˆæŠŠå·¦å³è§†å›¾æ‹·è´åˆ°ä¸€èµ·
 	}
 
 	this->cameraParams_filename = cameraParams_filename;
-	//¹¹Ôìmidname:×óÊÓÍ¼Ãû_ÓÒÊÓÍ¼Ãû
+	//æ„é€ midname:å·¦è§†å›¾å_å³è§†å›¾å
 	std::string midname = _fileInfo1->baseName().toStdString();
 	midname.append("_");
 	midname.append(_fileInfo2->baseName().toStdString());
@@ -38,36 +38,36 @@ StereoMatch::~StereoMatch()
 {
 }
 /*
- * ³õÊ¼»¯
+ * åˆå§‹åŒ–
  */
 bool StereoMatch::init(bool needCameraParamFile)
 {
-	std::cout<<"³õÊ¼»¯..." <<std::endl;
+	std::cout<<"åˆå§‹åŒ–..." <<std::endl;
 	try
 	{
-		//1.´ò¿ªÍ¼Æ¬,°´ÕÕÔ­Í¼¸ñÊ½´ò¿ª,Èç¹ûËùÑ¡µÄËã·¨¶ÔÓÚÍ¼Æ¬µÄ¸ñÊ½ÓĞÒªÇó,×ÔĞĞ×ª»»
-		std::cout << "¼ÓÔØÍ¼Æ¬..." << std::endl;
+		//1.æ‰“å¼€å›¾ç‰‡,æŒ‰ç…§åŸå›¾æ ¼å¼æ‰“å¼€,å¦‚æœæ‰€é€‰çš„ç®—æ³•å¯¹äºå›¾ç‰‡çš„æ ¼å¼æœ‰è¦æ±‚,è‡ªè¡Œè½¬æ¢
+		std::cout << "åŠ è½½å›¾ç‰‡..." << std::endl;
 		img1 = cv::imread(img1_filename);
 		img2 = cv::imread(img2_filename);
 		if (img1.empty() || img2.empty())
 		{
-			emit openMessageBox(QStringLiteral("´íÎó"), QStringLiteral("ÊäÈëÍ¼ÏñÎª¿Õ!"));
+			emit openMessageBox(QStringLiteral("é”™è¯¯"), QStringLiteral("è¾“å…¥å›¾åƒä¸ºç©º!"));
 			return false;
 		}
 
-		//2.Èç¹ûÊäÈëµÄÊÇÎ´Ğ£ÕıµÄÍ¼Æ¬,ÔòÔÚ´Ë´¦½øĞĞĞ£Õı
+		//2.å¦‚æœè¾“å…¥çš„æ˜¯æœªæ ¡æ­£çš„å›¾ç‰‡,åˆ™åœ¨æ­¤å¤„è¿›è¡Œæ ¡æ­£
 		if (!m_entity->getRectifiedInput())
 		{
-			//3.¶ÁÈ¡Ïà»ú²ÎÊı
-			std::cout << "¶ÁÈ¡Ïà»ú²ÎÊı..." << std::endl;
+			//3.è¯»å–ç›¸æœºå‚æ•°
+			std::cout << "è¯»å–ç›¸æœºå‚æ•°..." << std::endl;
 			bool flag = EvisionUtils::read_AllCameraParams(cameraParams_filename,
 				&cameraMatrix1, &distCoeffs1, &cameraMatrix2, &distCoeffs2, &R, &T, &E, &F, &img_size, &R1, &P1, &R2, &P2, &Q, &roi1, &roi2);
 			if(flag==false)
 			{
-				std::cout << "Ïà»ú²ÎÊı¶ÁÈ¡Ê§°Ü!" << std::endl;
+				std::cout << "ç›¸æœºå‚æ•°è¯»å–å¤±è´¥!" << std::endl;
 				return false;
 			}
-			std::cout << "ÊäÈëµÄÊÇÎ´Ğ£ÕıµÄÍ¼Æ¬,½øĞĞĞ£Õı..." << std::endl;
+			std::cout << "è¾“å…¥çš„æ˜¯æœªæ ¡æ­£çš„å›¾ç‰‡,è¿›è¡Œæ ¡æ­£..." << std::endl;
 			try
 			{
 				std::vector<cv::Mat>images, undistortedImages;
@@ -78,15 +78,15 @@ bool StereoMatch::init(bool needCameraParamFile)
 				imageSize.height = ((cv::Mat)images.at(0)).rows;
 				imageSize.width = ((cv::Mat)images.at(0)).cols;
 
-				//ÏÈ°ÑÁ½²àµÄÍ¼Æ¬ÀûÓÃ»û±ä¾ØÕó·Ö±ğÏû³ı»û±ä
+				//å…ˆæŠŠä¸¤ä¾§çš„å›¾ç‰‡åˆ©ç”¨ç•¸å˜çŸ©é˜µåˆ†åˆ«æ¶ˆé™¤ç•¸å˜
 				intrinsicExtrinsic::undistortStereoImages(images, undistortedImages, cameraMatrix1, cameraMatrix2, distCoeffs1, distCoeffs2);
-				//ÕâÒ»²½¼ÆËã¼«Ïß½ÃÕı¾ØÕó,»û±äÒÑ¾­Ïû³ıÁËËùÒÔ»û±ä²ÎÊıÉèÖÃÎªÁË0
+				//è¿™ä¸€æ­¥è®¡ç®—æçº¿çŸ«æ­£çŸ©é˜µ,ç•¸å˜å·²ç»æ¶ˆé™¤äº†æ‰€ä»¥ç•¸å˜å‚æ•°è®¾ç½®ä¸ºäº†0
 				cv::Mat rmap[2][2];
 				cv::Mat noDist = cv::Mat::zeros(5, 1, CV_32F);
 				initUndistortRectifyMap(cameraMatrix1, noDist, R1, P1, imageSize, CV_16SC2, rmap[0][0], rmap[0][1]);
 				initUndistortRectifyMap(cameraMatrix2, noDist, R2, P2, imageSize, CV_16SC2, rmap[1][0], rmap[1][1]);
 				int imgCount = undistortedImages.size() / 2;
-				//¼ÆËãROI
+				//è®¡ç®—ROI
 				/*
 				 *(std::max)for disable the macro max in winnt.h
 				 *see: http://www.voidcn.com/article/p-okycmabx-bms.html
@@ -97,36 +97,36 @@ bool StereoMatch::init(bool needCameraParamFile)
 				cv::Rect validRoi = cv::Rect(rectCorner1.x, rectCorner1.y, rectCorner2.x - rectCorner1.x, rectCorner2.y - rectCorner1.y);
 				cv::Mat  remapImg1, rectImg1, remapImg2, rectImg2;
 				remap(undistortedImages[0], remapImg1, rmap[0][0], rmap[0][1], CV_INTER_LINEAR);
-				rectImg1 = remapImg1(validRoi);//Ğ£Õı½á¹û
+				rectImg1 = remapImg1(validRoi);//æ ¡æ­£ç»“æœ
 				remap(undistortedImages[1], remapImg2, rmap[1][0], rmap[1][1], CV_INTER_LINEAR);
-				rectImg2 = remapImg2(validRoi);//Ğ£Õı½á¹û
+				rectImg2 = remapImg2(validRoi);//æ ¡æ­£ç»“æœ
 
 				img1 = rectImg1;
 				img2 = rectImg2;
-				std::cout << "Ğ£ÕıÍê±Ï" << std::endl;
+				std::cout << "æ ¡æ­£å®Œæ¯•" << std::endl;
 
 			}catch(...)
 			{
-				std::cout << "Ğ£Õı¹ı³ÌÖĞ·¢ÉúÁËÑÏÖØ´íÎó" << std::endl;
+				std::cout << "æ ¡æ­£è¿‡ç¨‹ä¸­å‘ç”Ÿäº†ä¸¥é‡é”™è¯¯" << std::endl;
 				return false;
 			}
 		}
 		else
 		{
-			std::cout << "ÊäÈëµÄÊÇĞ£Õı¹ıµÄÍ¼Æ¬,Ìø¹ıĞ£Õı..." << std::endl;
+			std::cout << "è¾“å…¥çš„æ˜¯æ ¡æ­£è¿‡çš„å›¾ç‰‡,è·³è¿‡æ ¡æ­£..." << std::endl;
 		}		
 	}
 	catch (...)
 	{
-		std::cout << "Æ¥ÅäÄ£¿éµÄ³õÊ¼»¯¹ı³Ì·¢ÉúÑÏÖØ´íÎó!" << std::endl;
+		std::cout << "åŒ¹é…æ¨¡å—çš„åˆå§‹åŒ–è¿‡ç¨‹å‘ç”Ÿä¸¥é‡é”™è¯¯!" << std::endl;
 		return false;
 	}
-	std::cout << "³õÊ¼»¯Íê±Ï..." << std::endl;
+	std::cout << "åˆå§‹åŒ–å®Œæ¯•..." << std::endl;
 	return true;
 }
 
 /*
- * Ïß³Ì·½·¨
+ * çº¿ç¨‹æ–¹æ³•
  */
 void StereoMatch::run()
 {
@@ -151,11 +151,11 @@ void StereoMatch::run()
 	}
 	catch(...)
 	{
-		std::cout << "Ëã·¨Ö´ĞĞ¹ı³ÌÖĞ³öÏÖÑÏÖØ´íÎó,µØµãÔÚ:[StereoMatch Ïß³Ì·½·¨]" << std::endl;
+		std::cout << "ç®—æ³•æ‰§è¡Œè¿‡ç¨‹ä¸­å‡ºç°ä¸¥é‡é”™è¯¯,åœ°ç‚¹åœ¨:[StereoMatch çº¿ç¨‹æ–¹æ³•]" << std::endl;
 	}
 }
 /*
- * ±£´æÔ­Ê¼ÊÓ²îÊı¾İ,ÊÓ²îÊ¾ÒâÍ¼,PCDµãÔÆ
+ * ä¿å­˜åŸå§‹è§†å·®æ•°æ®,è§†å·®ç¤ºæ„å›¾,PCDç‚¹äº‘
  */
 void StereoMatch::Save()
 {
@@ -166,24 +166,24 @@ void StereoMatch::Save()
 			cv::FileStorage fs(disparity_raw_filename, cv::FileStorage::WRITE);
 			fs << "disp" << Raw_Disp_Data;
 			fs.release();
-			std::cout << "ÒÑ¾­±£´æÔ­Ê¼ÊÓ²îÊı¾İ:" << disparity_raw_filename << std::endl;
+			std::cout << "å·²ç»ä¿å­˜åŸå§‹è§†å·®æ•°æ®:" << disparity_raw_filename << std::endl;
 			/*
-			 * ÓÃÓÚÏÔÊ¾µÄÊÓ²îÍ¼²¢²»ÊÇ×¼È·Êı¾İ,ÎªÁË»ñµÃÁ¼ºÃµÄÏÔÊ¾Ğ§¹û¶ø¶ÔÊı¾İ½øĞĞÁËÒ»Ğ©²Ã¼ôºÍÑ¹Ëõ
-			 * ÀıÈç¹éÒ»»¯µ½0~255»á¸Ä±äÔ­Ê¼µÄÊÓ²îÊı¾İ,Òò´Ë,²âÁ¿Ê±±ØĞëÊ¹ÓÃÔ­Ê¼ÊÓ²îÊı¾İ
+			 * ç”¨äºæ˜¾ç¤ºçš„è§†å·®å›¾å¹¶ä¸æ˜¯å‡†ç¡®æ•°æ®,ä¸ºäº†è·å¾—è‰¯å¥½çš„æ˜¾ç¤ºæ•ˆæœè€Œå¯¹æ•°æ®è¿›è¡Œäº†ä¸€äº›è£å‰ªå’Œå‹ç¼©
+			 * ä¾‹å¦‚å½’ä¸€åŒ–åˆ°0~255ä¼šæ”¹å˜åŸå§‹çš„è§†å·®æ•°æ®,å› æ­¤,æµ‹é‡æ—¶å¿…é¡»ä½¿ç”¨åŸå§‹è§†å·®æ•°æ®
 			 */
-			 //»ñÈ¡»Ò¶ÈÊÓ²îÍ¼²¢±£´æ
+			 //è·å–ç°åº¦è§†å·®å›¾å¹¶ä¿å­˜
 			cv::imwrite(disparity_filename, Visual_Disp_Data);
-			std::cout << "ÒÑ¾­±£´æÊÓ²îÊ¾ÒâÍ¼:" << disparity_filename << std::endl;
+			std::cout << "å·²ç»ä¿å­˜è§†å·®ç¤ºæ„å›¾:" << disparity_filename << std::endl;
 
-//			//±£´æpcdµãÔÆ
+//			//ä¿å­˜pcdç‚¹äº‘
 //#ifdef WITH_PCL
 //			EvisionUtils::createAndSavePointCloud(Raw_Disp_Data, img2, Q, point_cloud_filename);
-//			std::cout << "ÒÑ¾­±£´æPCDµãÔÆ:" << point_cloud_filename << std::endl;
+//			std::cout << "å·²ç»ä¿å­˜PCDç‚¹äº‘:" << point_cloud_filename << std::endl;
 //#endif
 		}
 		catch (...)
 		{
-			std::cout << "±£´æ¹ı³ÌÖĞ³öÏÖÑÏÖØ´íÎó!\n" << "µØµãÔÚ:StereoMatch.cpp, void StereoMatch::Save()" << std::endl;
+			std::cout << "ä¿å­˜è¿‡ç¨‹ä¸­å‡ºç°ä¸¥é‡é”™è¯¯!\n" << "åœ°ç‚¹åœ¨:StereoMatch.cpp, void StereoMatch::Save()" << std::endl;
 		}
 
 	}
@@ -199,10 +199,10 @@ void StereoMatch::ADCensusDriver()
 	censusWin.width = m_entity->getCensusWinW();
 	m_entity->setIconImgL(img1);
 	m_entity->setIconImgR(img2);
-	//¼ÓÔØQ¾ØÕó
+	//åŠ è½½QçŸ©é˜µ
 	//cv::Mat Q(4, 4, CV_64F);
 	//Q=this->Q;
-	//¼ÓÔØimages
+	//åŠ è½½images
 	std::vector<cv::Mat> images;
 	images.push_back(img1);
 	images.push_back(img2);
@@ -212,7 +212,7 @@ void StereoMatch::ADCensusDriver()
 		for (int i = 0; i < (images.size() / 2) && !error; ++i)
 		{
 			QTime time;
-			time.start();//¼ÆÊ±¿ªÊ¼
+			time.start();//è®¡æ—¶å¼€å§‹
 
 			float percentageOfDeletion = 0.1;
 			std::string blurMethod = "gauss";//"median"
@@ -233,16 +233,16 @@ void StereoMatch::ADCensusDriver()
 
 			if (!error && adcensus.compute())
 			{
-				//±£´æÊÓ²îÊı¾İ
+				//ä¿å­˜è§†å·®æ•°æ®
 				Raw_Disp_Data = adcensus.getDisparity();
 				/*
-				 * ÓÃÓÚÏÔÊ¾µÄÊÓ²îÍ¼²¢²»ÊÇ×¼È·Êı¾İ,ÎªÁË»ñµÃÁ¼ºÃµÄÏÔÊ¾Ğ§¹û¶ø¶ÔÊı¾İ½øĞĞÁËÒ»Ğ©²Ã¼ôºÍÑ¹Ëõ
-				 * ÀıÈç¹éÒ»»¯µ½0~255»á¸Ä±äÔ­Ê¼µÄÊÓ²îÊı¾İ,Òò´Ë,²âÁ¿Ê±±ØĞëÊ¹ÓÃÔ­Ê¼ÊÓ²îÊı¾İ
+				 * ç”¨äºæ˜¾ç¤ºçš„è§†å·®å›¾å¹¶ä¸æ˜¯å‡†ç¡®æ•°æ®,ä¸ºäº†è·å¾—è‰¯å¥½çš„æ˜¾ç¤ºæ•ˆæœè€Œå¯¹æ•°æ®è¿›è¡Œäº†ä¸€äº›è£å‰ªå’Œå‹ç¼©
+				 * ä¾‹å¦‚å½’ä¸€åŒ–åˆ°0~255ä¼šæ”¹å˜åŸå§‹çš„è§†å·®æ•°æ®,å› æ­¤,æµ‹é‡æ—¶å¿…é¡»ä½¿ç”¨åŸå§‹è§†å·®æ•°æ®
 				 */
 
 				Visual_Disp_Data = adcensus.getGrayDisparity();
 				//cv::normalize(Visual_Disp_Data, Visual_Disp_Data, 0, 255, cv::NORM_MINMAX);
-				//½çÃæÏÔÊ¾»Ò¶ÈÊÓ²îÍ¼
+				//ç•Œé¢æ˜¾ç¤ºç°åº¦è§†å·®å›¾
 				m_entity->setIconRawDisp(Visual_Disp_Data);
 			}
 			else
@@ -262,10 +262,10 @@ void StereoMatch::ADCensusDriver()
  */
 void StereoMatch::OpenCVBM()
 {
-	std::cout << "BM¿ªÊ¼¼ÆËã..." << std::endl;
+	std::cout << "BMå¼€å§‹è®¡ç®—..." << std::endl;
 	cv::Mat img1G,img2G;
-	cv::cvtColor(img1, img1G, CV_RGB2GRAY);//°ÑÍ¼Æ¬×ª»¯Îª»Ò¶ÈÍ¼
-	cv::cvtColor(img2, img2G, CV_RGB2GRAY);//°ÑÍ¼Æ¬×ª»¯Îª»Ò¶ÈÍ¼
+	cv::cvtColor(img1, img1G, CV_RGB2GRAY);//æŠŠå›¾ç‰‡è½¬åŒ–ä¸ºç°åº¦å›¾
+	cv::cvtColor(img2, img2G, CV_RGB2GRAY);//æŠŠå›¾ç‰‡è½¬åŒ–ä¸ºç°åº¦å›¾
 
 	m_entity->setIconImgL(img1G);
 	m_entity->setIconImgR(img2G);
@@ -282,7 +282,7 @@ void StereoMatch::OpenCVBM()
 	}
 	bm->setPreFilterSize(m_entity->getBM_preFilterSize());
 	bm->setPreFilterCap(m_entity->getBM_preFilterCap());
-	bm->setBlockSize(m_entity->getBM_SADWindowSize());//bmËã·¨µÄBlockSize¾ÍÊÇSADWindowSize
+	bm->setBlockSize(m_entity->getBM_SADWindowSize());//bmç®—æ³•çš„BlockSizeå°±æ˜¯SADWindowSize
 	bm->setMinDisparity(m_entity->getBM_minDisparity());
 	bm->setNumDisparities(m_entity->getBM_numDisparities());
 	bm->setTextureThreshold(m_entity->getBM_textureThreshold());
@@ -293,19 +293,19 @@ void StereoMatch::OpenCVBM()
 	int64 t = cv::getTickCount();
 	bm->compute(img1G, img2G, Raw_Disp_Data);
 	Raw_Disp_Data.convertTo(Raw_Disp_Data, CV_8U, 1 / 16.);
-	//»ñÈ¡ÓÃÓÚÏÔÊ¾µÄÊÓ²îÊ¾ÒâÍ¼
+	//è·å–ç”¨äºæ˜¾ç¤ºçš„è§†å·®ç¤ºæ„å›¾
 	cv::normalize(Raw_Disp_Data, Visual_Disp_Data, 0, 255, CV_MINMAX);
 	m_entity->setIconRawDisp(Visual_Disp_Data);
 
 	t = cv::getTickCount() - t;
-	std::cout << "Time elapsed: " << t * 1000 / cv::getTickFrequency() << "ms\n BM¼ÆËãÍê±Ï" << std::endl;
+	std::cout << "Time elapsed: " << t * 1000 / cv::getTickFrequency() << "ms\n BMè®¡ç®—å®Œæ¯•" << std::endl;
 }
 /*
  * OpenCV-SGBM
  */
 void StereoMatch::OpenCVSGBM()
 {
-	std::cout << "SGBM ¿ªÊ¼¼ÆËã..." << std::endl;
+	std::cout << "SGBM å¼€å§‹è®¡ç®—..." << std::endl;
 	m_entity->setIconImgL(img1);
 	m_entity->setIconImgR(img2);
 
@@ -338,12 +338,12 @@ void StereoMatch::OpenCVSGBM()
 	sgbm->compute(img1, img2, Raw_Disp_Data);
 	Raw_Disp_Data.convertTo(Raw_Disp_Data, CV_8U, 1 / 16.);
 
-	//»ñÈ¡ÓÃÓÚÏÔÊ¾µÄÊÓ²îÊ¾ÒâÍ¼
+	//è·å–ç”¨äºæ˜¾ç¤ºçš„è§†å·®ç¤ºæ„å›¾
 	cv::normalize(Raw_Disp_Data, Visual_Disp_Data, 0, 255, CV_MINMAX);
 	m_entity->setIconRawDisp(Visual_Disp_Data);
 
 	t = cv::getTickCount() - t;
-	std::cout << "Time elapsed: " << t * 1000 / cv::getTickFrequency() << "ms\n SGBM¼ÆËãÍê±Ï" << std::endl;
+	std::cout << "Time elapsed: " << t * 1000 / cv::getTickFrequency() << "ms\n SGBMè®¡ç®—å®Œæ¯•" << std::endl;
 }
 /*
  * Elas
@@ -351,7 +351,7 @@ void StereoMatch::OpenCVSGBM()
 void StereoMatch::Elas()
 {
 
-	std::cout << "Elas ¿ªÊ¼¼ÆËã..." << std::endl;
+	std::cout << "Elas å¼€å§‹è®¡ç®—..." << std::endl;
 	m_entity->setIconImgL(img1);
 	m_entity->setIconImgR(img2);
 	EvisionElas elas(
@@ -366,7 +366,7 @@ void StereoMatch::Elas()
 	int64 t = cv::getTickCount();
 	elas.Match(img1, img2, &Raw_Disp_Data, &Visual_Disp_Data);
 	t = cv::getTickCount() - t;
-	std::cout << "Time elapsed: " << t * 1000 / cv::getTickFrequency() << "ms\n ELAS¼ÆËãÍê±Ï" << std::endl;
+	std::cout << "Time elapsed: " << t * 1000 / cv::getTickFrequency() << "ms\n ELASè®¡ç®—å®Œæ¯•" << std::endl;
 	m_entity->setIconRawDisp(Visual_Disp_Data);
 
 }

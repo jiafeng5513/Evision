@@ -3,10 +3,10 @@
 
 #include <QGLWidget>
 #include <QRadialGradient>
-//Ê¹ÓÃOpenGL»æÖÆÁ¢·½Ìå£¬Ê¹ÓÃQPainter»æÖÆ±³¾°
-//µÄ½¥±ä£¬½Ó×ÅÊ¹ÓÃrenderText£¨£©»æÖÆÁ¢·½Ìå½ÇÉÏµÄ8¸ö
-//ÔªÒô×ÖÄ¸£¬×îºóÊ¹ÓÃQPainterºÍQTextDocument»æÖÆÍ¼Àý¡£
-//ÓÃ»§¿ÉÒÔµ¥»÷²¢ÍÏ¶¯Êó±êÀ´Ðý×ªÁ¢·½Ìå£¬²¢ÇÒ¿ÉÒÔÊ¹ÓÃÊó±ê¹öÂÖ½øÐÐ·Å´ó»òËõÐ¡
+//ä½¿ç”¨OpenGLç»˜åˆ¶ç«‹æ–¹ä½“ï¼Œä½¿ç”¨QPainterç»˜åˆ¶èƒŒæ™¯
+//çš„æ¸å˜ï¼ŒæŽ¥ç€ä½¿ç”¨renderTextï¼ˆï¼‰ç»˜åˆ¶ç«‹æ–¹ä½“è§’ä¸Šçš„8ä¸ª
+//å…ƒéŸ³å­—æ¯ï¼Œæœ€åŽä½¿ç”¨QPainterå’ŒQTextDocumentç»˜åˆ¶å›¾ä¾‹ã€‚
+//ç”¨æˆ·å¯ä»¥å•å‡»å¹¶æ‹–åŠ¨é¼ æ ‡æ¥æ—‹è½¬ç«‹æ–¹ä½“ï¼Œå¹¶ä¸”å¯ä»¥ä½¿ç”¨é¼ æ ‡æ»šè½®è¿›è¡Œæ”¾å¤§æˆ–ç¼©å°
 class CloudGLWidget : public QGLWidget
 {
 	Q_OBJECT

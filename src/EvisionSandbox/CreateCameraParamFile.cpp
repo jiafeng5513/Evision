@@ -1,4 +1,4 @@
-#include "CreateCameraParamFile.h"
+ï»¿#include "CreateCameraParamFile.h"
 #include <QMessageBox>
 #include <opencv2/core/mat.hpp>
 #include <opencv2/opencv.hpp>
@@ -15,7 +15,7 @@ CreateCameraParamFile::~CreateCameraParamFile()
 {
 }
 /*
- * Ğ£Ñé²ÎÊı
+ * æ ¡éªŒå‚æ•°
  */
 void CreateCameraParamFile::onPush_check()
 {
@@ -26,7 +26,7 @@ void CreateCameraParamFile::onPush_check()
 	cyl = ui.lineEdit_cyl->text().toDouble();
 	if (fxl<=0|| fyl<=0|| cxl<=0||cyl<=0)
 	{
-		QMessageBox::information(this, QStringLiteral("²ÎÊı²»ÍêÕû"), QStringLiteral("×óÏà»úÄÚ²ÎÓĞÎó!"));
+		QMessageBox::information(this, QStringLiteral("å‚æ•°ä¸å®Œæ•´"), QStringLiteral("å·¦ç›¸æœºå†…å‚æœ‰è¯¯!"));
 		return;
 	}
 	fxr = ui.lineEdit_fxr->text().toDouble();
@@ -36,7 +36,7 @@ void CreateCameraParamFile::onPush_check()
 
 	if (fxr <= 0 || fyr <= 0 || cxr <= 0 || cyr <= 0)
 	{
-		QMessageBox::information(this, QStringLiteral("²ÎÊı²»ÍêÕû"), QStringLiteral("ÓÒÏà»úÄÚ²ÎÓĞÎó!"));
+		QMessageBox::information(this, QStringLiteral("å‚æ•°ä¸å®Œæ•´"), QStringLiteral("å³ç›¸æœºå†…å‚æœ‰è¯¯!"));
 		return;
 	}
 	QList<QString> qlistL = ui.lineEdit_coeffsl->text().split(',', QString::SkipEmptyParts);
@@ -48,7 +48,7 @@ void CreateCameraParamFile::onPush_check()
 	coeffsl.resize(qlistL.size());
 	if (coeffsl.size()<=1|| coeffsl.size()>=14)
 	{
-		QMessageBox::information(this, QStringLiteral("²ÎÊı²»ÍêÕû"), QStringLiteral("×óÏà»ú»û±äÓĞÎó!"));
+		QMessageBox::information(this, QStringLiteral("å‚æ•°ä¸å®Œæ•´"), QStringLiteral("å·¦ç›¸æœºç•¸å˜æœ‰è¯¯!"));
 		return;
 	}
 	QList<QString> qlistR = ui.lineEdit_coeffsr->text().split(',', QString::SkipEmptyParts);
@@ -60,7 +60,7 @@ void CreateCameraParamFile::onPush_check()
 	coeffsr.resize(qlistR.size());
 	if (coeffsr.size() <=1|| coeffsr.size()>=14)
 	{
-		QMessageBox::information(this, QStringLiteral("²ÎÊı²»ÍêÕû"), QStringLiteral("ÓÒÏà»ú»û±äÓĞÎó!"));
+		QMessageBox::information(this, QStringLiteral("å‚æ•°ä¸å®Œæ•´"), QStringLiteral("å³ç›¸æœºç•¸å˜æœ‰è¯¯!"));
 		return;
 	}
 	QList<QString> qlistRotation=ui.lineEdit_R->text().split(',', QString::SkipEmptyParts);
@@ -72,7 +72,7 @@ void CreateCameraParamFile::onPush_check()
 	rotation.resize(qlistRotation.size());
 	if (rotation.size() != 9)
 	{
-		QMessageBox::information(this, QStringLiteral("²ÎÊı²»ÍêÕû"), QStringLiteral("Ğı×ª¾ØÕóÓĞÎó!"));
+		QMessageBox::information(this, QStringLiteral("å‚æ•°ä¸å®Œæ•´"), QStringLiteral("æ—‹è½¬çŸ©é˜µæœ‰è¯¯!"));
 		return;
 	}
 	QList<QString> qlistTranslation=ui.lineEdit_t->text().split(',', QString::SkipEmptyParts);
@@ -84,25 +84,25 @@ void CreateCameraParamFile::onPush_check()
 	translation.resize(qlistTranslation.size());
 	if (translation.size() != 3)
 	{
-		QMessageBox::information(this, QStringLiteral("²ÎÊı²»ÍêÕû"), QStringLiteral("Æ½ÒÆ¾ØÕóÓĞÎó!"));
+		QMessageBox::information(this, QStringLiteral("å‚æ•°ä¸å®Œæ•´"), QStringLiteral("å¹³ç§»çŸ©é˜µæœ‰è¯¯!"));
 		return;
 	}
-	QMessageBox::information(this, QStringLiteral("ÏûÏ¢"), QStringLiteral("Ğ£ÑéÍ¨¹ı!"));
+	QMessageBox::information(this, QStringLiteral("æ¶ˆæ¯"), QStringLiteral("æ ¡éªŒé€šè¿‡!"));
 
 	checkpass = true;
 
 }
 /*
- * ±£´æ²ÎÊı
+ * ä¿å­˜å‚æ•°
  */
 void CreateCameraParamFile::onPush_save()
 {
-	QString fileName = QFileDialog::getSaveFileName(this,QStringLiteral("±£´æÉú³ÉµÄÏà»ú²ÎÊıÎÄ¼ş"),"",tr("opencv yml (*.yml)"));
+	QString fileName = QFileDialog::getSaveFileName(this,QStringLiteral("ä¿å­˜ç”Ÿæˆçš„ç›¸æœºå‚æ•°æ–‡ä»¶"),"",tr("opencv yml (*.yml)"));
 	if (fileName.isNull())
 	{
 		return;
 	}
-	//¹¹ÔìÊäÈë²ÎÊı
+	//æ„é€ è¾“å…¥å‚æ•°
 	cv::Mat cameraMatrix_L = cv::Mat::zeros(3, 3, CV_64F);
 	cv::Mat distCoeffs_L = cv::Mat::zeros(coeffsl.size(), 1, CV_64F);
 	cv::Mat cameraMatrix_R = cv::Mat::zeros(3, 3, CV_64F);;
@@ -138,7 +138,7 @@ void CreateCameraParamFile::onPush_save()
 	imageSize.height = ui.lineEdit_H->text().toInt();
 	cv::Size tempsize(0, 0);
 
-	//Êä³ö²ÎÊı
+	//è¾“å‡ºå‚æ•°
 	try
 	{
 		cv::Rect validRoi[2];
@@ -151,11 +151,11 @@ void CreateCameraParamFile::onPush_save()
 
 		bool flag = EvisionUtils::write_AllCameraParams(cameraParamsFilename, cameraMatrix_L, distCoeffs_L,
 			cameraMatrix_R, distCoeffs_R, R, T, imageSize, R1, P1, R2, P2, Q, validRoi[0], validRoi[1]);
-		std::cout << "²ÎÊıÒÑ¾­±£´æµ½:" << cameraParamsFilename << std::endl;
+		std::cout << "å‚æ•°å·²ç»ä¿å­˜åˆ°:" << cameraParamsFilename << std::endl;
 	}
 	catch (cv::Exception e)
 	{
-		std::cout << "´íÎó " << e.code << e.err << e.msg << e.what() << std::endl;
+		std::cout << "é”™è¯¯ " << e.code << e.err << e.msg << e.what() << std::endl;
 	}
 
 }

@@ -4,7 +4,7 @@
 
 ObjectDetectionEntity::ObjectDetectionEntity()
 {
-	//¹¹Ôìº¯Êı
+	//æ„é€ å‡½æ•°
 	cfgFilename="";
 	weightsFilename="";
 	namesFilename="";
@@ -70,7 +70,7 @@ void ObjectDetectionEntity::setRunningState(bool value)
 ObjectDetectionEntity *ObjectDetectionEntity::getInstance()
 {
 	static ObjectDetectionEntity *m_pInstance;
-	if (m_pInstance == NULL) //ÅĞ¶ÏÊÇ·ñµÚÒ»´Îµ÷ÓÃ
+	if (m_pInstance == NULL) //åˆ¤æ–­æ˜¯å¦ç¬¬ä¸€æ¬¡è°ƒç”¨
 		m_pInstance = new ObjectDetectionEntity();
 	return m_pInstance;
 }

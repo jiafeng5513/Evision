@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <QObject>
 #include "CalibrateParamEntity.h"
@@ -8,7 +8,7 @@ class CalibrateController : public QObject
 {
 	Q_OBJECT
 private:
-	QStringList ImageListL, ImageListR;//´ÓÍ¼Æ¬±ê¶¨Ê±ĞèÒªµÄÁ½×éÍ¼Æ¬
+	QStringList ImageListL, ImageListR;//ä»å›¾ç‰‡æ ‡å®šæ—¶éœ€è¦çš„ä¸¤ç»„å›¾ç‰‡
 	CalibrateParamEntity * m_calib_entity;
 	QString ImageL, ImageR, insFile, extFile;
 	StereoCalibrate * _stereoCalib;

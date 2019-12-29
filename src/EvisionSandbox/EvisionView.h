@@ -23,25 +23,25 @@ private:
 	QSize old_size;
 	LogView * logView;
 public slots:
-	//²Ëµ¥
+	//èœå•
 	void onCamera();
 	void onStereoCamera();
-	void onShowPointCloud();//ÏÔÊ¾µãÔÆ
+	void onShowPointCloud();//æ˜¾ç¤ºç‚¹äº‘
 
-	void on_action_calibrate_view();		//Æô¶¯±ê¶¨ÊÓÍ¼
-	void on_action_rectify();				//Æô¶¯Ğ£ÕıÊÓÍ¼
-	void on_action_stereoMatch_view();		//Æô¶¯Æ¥ÅäÊÓÍ¼
-	void on_action_Measure_view();			//Æô¶¯²âÁ¿½çÃæ
-	void on_action_ObjectDetection_view();	//Æô¶¯Ä¿±ê¼ì²âÊÓÍ¼
+	void on_action_calibrate_view();		//å¯åŠ¨æ ‡å®šè§†å›¾
+	void on_action_rectify();				//å¯åŠ¨æ ¡æ­£è§†å›¾
+	void on_action_stereoMatch_view();		//å¯åŠ¨åŒ¹é…è§†å›¾
+	void on_action_Measure_view();			//å¯åŠ¨æµ‹é‡ç•Œé¢
+	void on_action_ObjectDetection_view();	//å¯åŠ¨ç›®æ ‡æ£€æµ‹è§†å›¾
 	void on_action_LogViewSwitch();			//LOGVIEW
-	void on_action_disp_to_pcd();			//ÊÓ²î×ªµãÔÆ
-	void on_action_create_param();			//´´½¨Ïà»ú²ÎÊıÎÄ¼ş
-	//×´Ì¬À¸
+	void on_action_disp_to_pcd();			//è§†å·®è½¬ç‚¹äº‘
+	void on_action_create_param();			//åˆ›å»ºç›¸æœºå‚æ•°æ–‡ä»¶
+	//çŠ¶æ€æ 
 	void onParamChanged_StatusBarText();
 private:
-	void dragEnterEvent(QDragEnterEvent *event) override;//ÎÄ¼ş±»ÍÏµ½´°¿ÚÇøÓòÉÏ
-	void dropEvent(QDropEvent *event) override;//ÎÄ¼şÔÚ´°¿ÚÇøÓòÉÏ±»·ÅÏÂ
-	void mouseReleaseEvent(QMouseEvent *event) override;//Êó±êÊÍ·ÅÊÂ¼ş
+	void dragEnterEvent(QDragEnterEvent *event) override;//æ–‡ä»¶è¢«æ‹–åˆ°çª—å£åŒºåŸŸä¸Š
+	void dropEvent(QDropEvent *event) override;//æ–‡ä»¶åœ¨çª—å£åŒºåŸŸä¸Šè¢«æ”¾ä¸‹
+	void mouseReleaseEvent(QMouseEvent *event) override;//é¼ æ ‡é‡Šæ”¾äº‹ä»¶
 	void moveEvent(QMoveEvent* event) override;
 	void resizeEvent(QResizeEvent* event) override;
 	void changeEvent(QEvent*) override;

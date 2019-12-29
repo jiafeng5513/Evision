@@ -1,4 +1,4 @@
-#include "StereoMatchController.h"
+ï»¿#include "StereoMatchController.h"
 #include <QMessageBox>
 #include <QFileDialog>
 #include "StereoMatch.h"
@@ -12,7 +12,7 @@ StereoMatchController::StereoMatchController(QObject *parent)
 StereoMatchController::~StereoMatchController()
 {
 }
-//ÃüÁî:Æ¥ÅäÄ¬ÈÏ²ÎÊı
+//å‘½ä»¤:åŒ¹é…é»˜è®¤å‚æ•°
 void StereoMatchController::setDefaultMatchParamCommand()
 {
 	if (m_entity->getBM())
@@ -97,17 +97,17 @@ void StereoMatchController::setDefaultMatchParamCommand()
 	}
 	else
 	{
-		QMessageBox::information(NULL, QStringLiteral("´íÎó"), QStringLiteral("Ã»ÓĞÑ¡ÔñÆ¥ÅäËã·¨"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+		QMessageBox::information(NULL, QStringLiteral("é”™è¯¯"), QStringLiteral("æ²¡æœ‰é€‰æ‹©åŒ¹é…ç®—æ³•"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
 	}
 }
-//ÃüÁî:Æ¥Åä
+//å‘½ä»¤:åŒ¹é…
 void StereoMatchController::MatchCommand()
 {
 	bool ok = false;
 	QFileDialog * fileDialog = new QFileDialog();
 
-	fileDialog->setWindowTitle(QStringLiteral("ÇëÑ¡Ôñ×óÉãÏñÍ·ÅÄÉãµÄÍ¼Æ¬"));
-	fileDialog->setNameFilter(QStringLiteral("Í¼Æ¬ÎÄ¼ş(*.jpg *.png *.jpeg *.bmp)"));
+	fileDialog->setWindowTitle(QStringLiteral("è¯·é€‰æ‹©å·¦æ‘„åƒå¤´æ‹æ‘„çš„å›¾ç‰‡"));
+	fileDialog->setNameFilter(QStringLiteral("å›¾ç‰‡æ–‡ä»¶(*.jpg *.png *.jpeg *.bmp)"));
 	fileDialog->setFileMode(QFileDialog::ExistingFile);
 	if (fileDialog->exec() == QDialog::Accepted)
 	{
@@ -122,7 +122,7 @@ void StereoMatchController::MatchCommand()
 	if (ok)
 	{
 		ok = false;
-		fileDialog->setWindowTitle(QStringLiteral("ÇëÑ¡ÔñÓÒÉãÏñÍ·ÅÄÉãµÄÍ¼Æ¬"));
+		fileDialog->setWindowTitle(QStringLiteral("è¯·é€‰æ‹©å³æ‘„åƒå¤´æ‹æ‘„çš„å›¾ç‰‡"));
 		if (fileDialog->exec() == QDialog::Accepted)
 		{
 			ImageR = fileDialog->selectedFiles().at(0);
@@ -140,15 +140,15 @@ void StereoMatchController::MatchCommand()
 		ok = false;
 		if (m_entity->getRectifiedInput()==true)
 		{
-			//Ê¹ÓÃĞ£×¼ºÃµÄÊäÈëÍ¼Æ¬
+			//ä½¿ç”¨æ ¡å‡†å¥½çš„è¾“å…¥å›¾ç‰‡
 			ok = true;
 		}
 		else
 		{
-			//Ê¹ÓÃÃ»Ğ£×¼µÄÍ¼Æ¬
+			//ä½¿ç”¨æ²¡æ ¡å‡†çš„å›¾ç‰‡
 			QFileDialog * fileDialog2 = new QFileDialog();
-			fileDialog2->setWindowTitle(QStringLiteral("ÇëÑ¡ÔñÏà»ú²ÎÊıÎÄ¼ş"));
-			fileDialog2->setNameFilter(QStringLiteral("YML/XMLÎÄ¼ş(*.yml *.yaml *.xml)"));
+			fileDialog2->setWindowTitle(QStringLiteral("è¯·é€‰æ‹©ç›¸æœºå‚æ•°æ–‡ä»¶"));
+			fileDialog2->setNameFilter(QStringLiteral("YML/XMLæ–‡ä»¶(*.yml *.yaml *.xml)"));
 			fileDialog2->setFileMode(QFileDialog::ExistingFile);
 			if (fileDialog2->exec() == QDialog::Accepted)
 			{
@@ -160,7 +160,7 @@ void StereoMatchController::MatchCommand()
 	if (ok) 
 	{
 		_stereoMatch = new StereoMatch(ImageL.toStdString(),ImageR.toStdString(), paramsFile.toStdString());
-		//×¢Òâ.´ËÊ±paramsFile.toStdString()¿ÉÄÜÊÇ¿ÕµÄ(µ±m_entity->getRectifiedInput()==trueÊ±)
+		//æ³¨æ„.æ­¤æ—¶paramsFile.toStdString()å¯èƒ½æ˜¯ç©ºçš„(å½“m_entity->getRectifiedInput()==trueæ—¶)
 		if (_stereoMatch->init())
 		{
 			connect(_stereoMatch, SIGNAL(openMessageBox(QString, QString)), this, SLOT(onOpenMessageBox(QString, QString)));
@@ -168,13 +168,13 @@ void StereoMatchController::MatchCommand()
 		}
 		else
 		{
-			QMessageBox::information(NULL, QStringLiteral("´íÎó"), QStringLiteral("Æ¥Åä³õÊ¼»¯Ê§°Ü!"));
+			QMessageBox::information(NULL, QStringLiteral("é”™è¯¯"), QStringLiteral("åŒ¹é…åˆå§‹åŒ–å¤±è´¥!"));
 			return;
 		}
 	}
 
 }
-//ÃüÁî:Ë¢ĞÂÊÓ²îÍ¼
+//å‘½ä»¤:åˆ·æ–°è§†å·®å›¾
 void StereoMatchController::RefreshStereoMatchCommand()
 {
 	_stereoMatch = new StereoMatch(ImageL.toStdString(),
@@ -186,10 +186,10 @@ void StereoMatchController::RefreshStereoMatchCommand()
 	}
 	else
 	{
-		QMessageBox::information(NULL, QStringLiteral("´íÎó"), QStringLiteral("Æ¥Åä³õÊ¼»¯Ê§°Ü!"));
+		QMessageBox::information(NULL, QStringLiteral("é”™è¯¯"), QStringLiteral("åŒ¹é…åˆå§‹åŒ–å¤±è´¥!"));
 	}
 }
-//ÃüÁî:±£´æ
+//å‘½ä»¤:ä¿å­˜
 void StereoMatchController::SaveCommand()
 {
 	if (_stereoMatch != NULL)
@@ -198,7 +198,7 @@ void StereoMatchController::SaveCommand()
 	}
 }
 
-//ÏûÏ¢ÏìÓ¦:µ¯³ö¶Ô»°¿ò
+//æ¶ˆæ¯å“åº”:å¼¹å‡ºå¯¹è¯æ¡†
 void StereoMatchController::onOpenMessageBox(QString title, QString msg)
 {
 	QMessageBox::information(NULL, title, msg);

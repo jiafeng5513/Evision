@@ -20,23 +20,23 @@ private:
 	int BoardHeight = 0;
 	int SquareSize = 0;
 
-	bool CALIB_FIX_PRINCIPAL_POINT = false;	//²»ÓÅ»¯Ö÷µãÎ»ÖÃ
-	bool CALIB_FIX_ASPECT_RATIO = false;	//¹Ì¶¨¿í¸ß±È
-	bool CALIB_ZERO_TANGENT_DIST = false;	//ºöÂÔÇĞÏò»û±äÏµÊıP1,P2
-	bool CALIB_SAME_FOCAL_LENGTH = false;	//Ç¿ÖÆÁ½²àÏà»úµÄ½¹¾àÏàµÈ
-	bool CALIB_FIX_K1 = false;				//ºöÂÔ¾¶Ïò»û±äÏµÊıK1
-	bool CALIB_FIX_K2 = false;				//ºöÂÔ¾¶Ïò»û±äÏµÊıK2
-	bool CALIB_FIX_K3 = false;				//ºöÂÔ¾¶Ïò»û±äÏµÊıK3
-	bool CALIB_FIX_K4 = false;				//ºöÂÔ¾¶Ïò»û±äÏµÊıK4
-	bool CALIB_FIX_K5 = false;				//ºöÂÔ¾¶Ïò»û±äÏµÊıK5
-	bool CALIB_FIX_K6 = false;				//ºöÂÔ¾¶Ïò»û±äÏµÊıK6
-	bool CALIB_RATIONAL_MODEL = false;		//Ê¹ÓÃÀíÏëÄ£ĞÍ(8ÏµÊı)
-	bool CALIB_THIN_PRISM_MODEL = false;	//Ê¹ÓÃ±¡Àâ¾µÄ£ĞÍ(12ÏµÊı)
-	bool CALIB_FIX_S1_S2_S3_S4 = false;		//²»ÓÅ»¯±¡Àâ¾µ»û±äÏµÊıS1-S4
-	bool CALIB_TILTED_MODEL = false;		//Ê¹ÓÃÇãĞ±´«¸ĞÆ÷Ä£ĞÍ(14ÏµÊı)
-	bool CALIB_FIX_TAUX_TAUY = false;		//²»ÓÅ»¯ÇãĞ±´«¸ĞÆ÷»û±äÏµÊı(TauX,TauY)
+	bool CALIB_FIX_PRINCIPAL_POINT = false;	//ä¸ä¼˜åŒ–ä¸»ç‚¹ä½ç½®
+	bool CALIB_FIX_ASPECT_RATIO = false;	//å›ºå®šå®½é«˜æ¯”
+	bool CALIB_ZERO_TANGENT_DIST = false;	//å¿½ç•¥åˆ‡å‘ç•¸å˜ç³»æ•°P1,P2
+	bool CALIB_SAME_FOCAL_LENGTH = false;	//å¼ºåˆ¶ä¸¤ä¾§ç›¸æœºçš„ç„¦è·ç›¸ç­‰
+	bool CALIB_FIX_K1 = false;				//å¿½ç•¥å¾„å‘ç•¸å˜ç³»æ•°K1
+	bool CALIB_FIX_K2 = false;				//å¿½ç•¥å¾„å‘ç•¸å˜ç³»æ•°K2
+	bool CALIB_FIX_K3 = false;				//å¿½ç•¥å¾„å‘ç•¸å˜ç³»æ•°K3
+	bool CALIB_FIX_K4 = false;				//å¿½ç•¥å¾„å‘ç•¸å˜ç³»æ•°K4
+	bool CALIB_FIX_K5 = false;				//å¿½ç•¥å¾„å‘ç•¸å˜ç³»æ•°K5
+	bool CALIB_FIX_K6 = false;				//å¿½ç•¥å¾„å‘ç•¸å˜ç³»æ•°K6
+	bool CALIB_RATIONAL_MODEL = false;		//ä½¿ç”¨ç†æƒ³æ¨¡å‹(8ç³»æ•°)
+	bool CALIB_THIN_PRISM_MODEL = false;	//ä½¿ç”¨è–„æ£±é•œæ¨¡å‹(12ç³»æ•°)
+	bool CALIB_FIX_S1_S2_S3_S4 = false;		//ä¸ä¼˜åŒ–è–„æ£±é•œç•¸å˜ç³»æ•°S1-S4
+	bool CALIB_TILTED_MODEL = false;		//ä½¿ç”¨å€¾æ–œä¼ æ„Ÿå™¨æ¨¡å‹(14ç³»æ•°)
+	bool CALIB_FIX_TAUX_TAUY = false;		//ä¸ä¼˜åŒ–å€¾æ–œä¼ æ„Ÿå™¨ç•¸å˜ç³»æ•°(TauX,TauY)
 
-	std::map<QString, cv::Mat> itemMap;//´æ´¢<Ë÷Òı,Mat>
+	std::map<QString, cv::Mat> itemMap;//å­˜å‚¨<ç´¢å¼•,Mat>
 	int index = 0;
 #pragma endregion 
 
@@ -120,9 +120,9 @@ public:
 	bool getCALIB_FIX_TAUX_TAUY();
 	void setCALIB_FIX_TAUX_TAUY(bool value);
 
-	std::map<QString, cv::Mat> & getItemMap();//·ÃÎÊËõÂÔÍ¼Map
-	void insertItem(cv::Mat value);//ÏòËõÂÔÍ¼MapÖĞ²åÈëÒ»Ìõ
-	void clearItemMap();//Çå¿ÕMap
-	int getIndex();//»ñÈ¡×îĞÂµÄËõÂÔÍ¼index,¸ÃÖµÊÇÖ»¶ÁµÄ
+	std::map<QString, cv::Mat> & getItemMap();//è®¿é—®ç¼©ç•¥å›¾Map
+	void insertItem(cv::Mat value);//å‘ç¼©ç•¥å›¾Mapä¸­æ’å…¥ä¸€æ¡
+	void clearItemMap();//æ¸…ç©ºMap
+	int getIndex();//è·å–æœ€æ–°çš„ç¼©ç•¥å›¾index,è¯¥å€¼æ˜¯åªè¯»çš„
 #pragma endregion 
 };

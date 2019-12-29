@@ -100,40 +100,40 @@ MatcherView::MatcherView(QWidget *parent)
 MatcherView::~MatcherView()
 {
 }
-//Ä¬ÈÏÆ¥Åä²ÎÊý
+//é»˜è®¤åŒ¹é…å‚æ•°
 void MatcherView::setDefaultMatchParam()
 {
 	m_controller->setDefaultMatchParamCommand();
 }
-//Æ¥Åä
+//åŒ¹é…
 void MatcherView::doMatch()
 {
 	m_controller->MatchCommand();
 }
-//Ë¢ÐÂÆ¥Åä½á¹û
+//åˆ·æ–°åŒ¹é…ç»“æžœ
 void MatcherView::RefreshStereoMatch()
 {
 	m_controller->RefreshStereoMatchCommand();
 }
-//±£´æ
+//ä¿å­˜
 void MatcherView::SaveDisparities()
 {
 	m_controller->SaveCommand();
 }
-//ÏÔÊ¾°ïÖúÐÅÏ¢
+//æ˜¾ç¤ºå¸®åŠ©ä¿¡æ¯
 void MatcherView::Help()
 {
 	QString helpMsg = QStringLiteral("\
-Ëã·¨Ñ¡ÔñÖ¸ÄÏ\n\n\
-1.ËÙ¶È:OpenCV BM>OpenCV SGBM>ELAS>ADCensus\n\
-2.Ð§¹û:ADCensus>ELAS>SGBM>BM\n\
-  BMºÍSGBMµÄÐ§¹ûºÍËÙ¶ÈÀàËÆ\n\
-3.BM»áÖ»ÄÜ´¦Àí»Ò¶ÈÍ¼,ÆäËûµÄÄÜ´¦Àí²ÊÉ«Í¼,ADCensusÔÚÊäÈë²ÊÉ«Í¼Ê±ÄÜ»ñµÃ¶îÍâµÄÐ§¹û\n\
-4.½çÃæÉÏÏÔÊ¾µÄÊÓ²îÍ¼Ö»ÊÇÊ¾ÒâÍ¼,ÎªÁËÄÜÏÔÊ¾ÔÚÆÁÄ»ÉÏ,½øÐÐÁËÒ»Ð©´¦Àí(ÀýÈç¹éÒ»»¯µ½[0,255])\n\
-  ÕæÊµµÄÊÓ²îÊý¾Ý±£´æÔÚxmlÖÐ,²â¾àºÍÈýÎ¬ÖØ½¨ÊÇÒÔÔ­Ê¼ÊÓ²îÊý¾ÝÎª»ù´¡µÄ.\n\
-5.ADCensusËã·¨ÔÚDebugÄ£Ê½ÏÂÔËÐÐËÙ¶È»á·Ç³£Âý,ÕâÊÇÎªÁË±ãÓÚµ÷ÊÔÊ¹ÓÃ¶àÏß³ÌÄ£Ê½µÄ·½·¨µ¼ÖÂµÄ,\n\
-  ÔÚReleaseÄ£Ê½ÏÂ»á±íÏÖ³öÕý³£ËÙ¶È.");
-	QMessageBox::information(this, QStringLiteral("°ïÖú"), helpMsg);
+ç®—æ³•é€‰æ‹©æŒ‡å—\n\n\
+1.é€Ÿåº¦:OpenCV BM>OpenCV SGBM>ELAS>ADCensus\n\
+2.æ•ˆæžœ:ADCensus>ELAS>SGBM>BM\n\
+  BMå’ŒSGBMçš„æ•ˆæžœå’Œé€Ÿåº¦ç±»ä¼¼\n\
+3.BMä¼šåªèƒ½å¤„ç†ç°åº¦å›¾,å…¶ä»–çš„èƒ½å¤„ç†å½©è‰²å›¾,ADCensusåœ¨è¾“å…¥å½©è‰²å›¾æ—¶èƒ½èŽ·å¾—é¢å¤–çš„æ•ˆæžœ\n\
+4.ç•Œé¢ä¸Šæ˜¾ç¤ºçš„è§†å·®å›¾åªæ˜¯ç¤ºæ„å›¾,ä¸ºäº†èƒ½æ˜¾ç¤ºåœ¨å±å¹•ä¸Š,è¿›è¡Œäº†ä¸€äº›å¤„ç†(ä¾‹å¦‚å½’ä¸€åŒ–åˆ°[0,255])\n\
+  çœŸå®žçš„è§†å·®æ•°æ®ä¿å­˜åœ¨xmlä¸­,æµ‹è·å’Œä¸‰ç»´é‡å»ºæ˜¯ä»¥åŽŸå§‹è§†å·®æ•°æ®ä¸ºåŸºç¡€çš„.\n\
+5.ADCensusç®—æ³•åœ¨Debugæ¨¡å¼ä¸‹è¿è¡Œé€Ÿåº¦ä¼šéžå¸¸æ…¢,è¿™æ˜¯ä¸ºäº†ä¾¿äºŽè°ƒè¯•ä½¿ç”¨å¤šçº¿ç¨‹æ¨¡å¼çš„æ–¹æ³•å¯¼è‡´çš„,\n\
+  åœ¨Releaseæ¨¡å¼ä¸‹ä¼šè¡¨çŽ°å‡ºæ­£å¸¸é€Ÿåº¦.");
+	QMessageBox::information(this, QStringLiteral("å¸®åŠ©"), helpMsg);
 }
 
 //1.int
@@ -912,10 +912,10 @@ void MatcherView::onParamChanged_IconRawDisp()
 }
 
 
-//ÒªÔÚÖÐ¼ä·Å´óÏÔÊ¾µÄÍ¼Æ¬·¢Éú±ä¸ü
+//è¦åœ¨ä¸­é—´æ”¾å¤§æ˜¾ç¤ºçš„å›¾ç‰‡å‘ç”Ÿå˜æ›´
 void MatcherView::onParamChanged_ImageToShow()
 {
-	//¸ù¾ÝÃ¶¾ÙÖµµ÷Õûµ¥Ñ¡¿òµÄ×´Ì¬
+	//æ ¹æ®æžšä¸¾å€¼è°ƒæ•´å•é€‰æ¡†çš„çŠ¶æ€
 	ui.radioButton_ImageL->setChecked(false);
 	ui.radioButton_ImageR->setChecked(false);
 	ui.radioButton_RawDisp->setChecked(false);

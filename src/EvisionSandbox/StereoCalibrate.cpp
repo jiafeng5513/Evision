@@ -1,4 +1,4 @@
-#include "StereoCalibrate.h"
+ï»¿#include "StereoCalibrate.h"
 #include <QMessageBox>
 #include "QFileDialog"
 #include <opencv2/opencv.hpp>
@@ -25,14 +25,14 @@ StereoCalibrate::~StereoCalibrate()
 
 }
 /*
- * Ïß³Ì·½·¨
+ * çº¿ç¨‹æ–¹æ³•
  */
 void StereoCalibrate::run()
 {
 	ready_to_save = false;
-	if (imagelistL->size()!= imagelistR->size())//Í¼Æ¬²»³É¶Ô
+	if (imagelistL->size()!= imagelistR->size())//å›¾ç‰‡ä¸æˆå¯¹
 	{
-		emit openMessageBox(QStringLiteral("´íÎó"), QStringLiteral("Í¼Æ¬²»³É¶Ô!"));
+		emit openMessageBox(QStringLiteral("é”™è¯¯"), QStringLiteral("å›¾ç‰‡ä¸æˆå¯¹!"));
 		return;
 	}
 
@@ -57,40 +57,40 @@ void StereoCalibrate::run()
 			imagelist_double->push_back(imagelistR->at(i));
 		}
 
-		std::cout << "±ê¶¨×óÏà»ú" << std::endl;
+		std::cout << "æ ‡å®šå·¦ç›¸æœº" << std::endl;
 		Calib1D(boardSize, squareSize, *imagelistL, cameraMatrix_L, distCoeffs_L, aspectRatio, pattern, flags_1D, showUndistorted);
-		std::cout << "±ê¶¨ÓÒÏà»ú" << std::endl;
+		std::cout << "æ ‡å®šå³ç›¸æœº" << std::endl;
 		Calib1D(boardSize, squareSize, *imagelistR, cameraMatrix_R, distCoeffs_R, aspectRatio, pattern, flags_1D, showUndistorted);
-		std::cout << "±ê¶¨Ë«Ä¿ÏµÍ³" << std::endl;
+		std::cout << "æ ‡å®šåŒç›®ç³»ç»Ÿ" << std::endl;
 		StereoCalib(*imagelist_double, boardSize, squareSize, cameraMatrix_L, distCoeffs_L, cameraMatrix_R, distCoeffs_R,
 			R, T, E, F, R1, P1, R2, P2, Q, roi1, roi2, flags_2D, false, true, showRectified);
 		ready_to_save = true;
 	}
 	catch (std::exception e)
 	{
-		std::cout << "±ê¶¨³öÏÖÑÏÖØ´íÎó!" <<e.what() << std::endl;
+		std::cout << "æ ‡å®šå‡ºç°ä¸¥é‡é”™è¯¯!" <<e.what() << std::endl;
 
 	}
 }
 /*
- * °Ñ±ê¶¨²úÉúµÄ²ÎÊı±£´æµ½ÎÄ¼ş
+ * æŠŠæ ‡å®šäº§ç”Ÿçš„å‚æ•°ä¿å­˜åˆ°æ–‡ä»¶
  */
 bool StereoCalibrate::SaveCameraParamsToFile()
 {
 	if (ready_to_save==false)
 	{
-		std::cout << "Ã»ÓĞ×¼±¸ºÃ±£´æ²ÎÊı!" << std::endl;
+		std::cout << "æ²¡æœ‰å‡†å¤‡å¥½ä¿å­˜å‚æ•°!" << std::endl;
 		return false;
 	}
 	else
 	{
-		// ±£´æ²ÎÊı
+		// ä¿å­˜å‚æ•°
 		bool flag = EvisionUtils::write_AllCameraParams(cameraParamsFilename, cameraMatrix_L, distCoeffs_L,
 			cameraMatrix_R, distCoeffs_R, R, T, imageSize, R1, P1, R2, P2, Q, roi1, roi2);
-		std::cout << "²ÎÊıÒÑ¾­±£´æµ½:" << cameraParamsFilename << std::endl;
+		std::cout << "å‚æ•°å·²ç»ä¿å­˜åˆ°:" << cameraParamsFilename << std::endl;
 		if (!flag)
 		{
-			emit openMessageBox(QStringLiteral("ÎÄ¼ş·ÃÎÊ´íÎó"), QStringLiteral("ÎŞ·¨Ğ´Èë:cameraParams.yml"));
+			emit openMessageBox(QStringLiteral("æ–‡ä»¶è®¿é—®é”™è¯¯"), QStringLiteral("æ— æ³•å†™å…¥:cameraParams.yml"));
 			return false;
 		}
 	}
@@ -98,7 +98,7 @@ bool StereoCalibrate::SaveCameraParamsToFile()
 }
 
 /*
- * ¼ÆËãÖØÍ¶Ó°Îó²î
+ * è®¡ç®—é‡æŠ•å½±è¯¯å·®
  */
 double StereoCalibrate::computeReprojectionErrors(const std::vector<std::vector<cv::Point3f>>& objectPoints,
 	const std::vector<std::vector<cv::Point2f>>& imagePoints, const std::vector<cv::Mat>& rvecs,
@@ -124,7 +124,7 @@ double StereoCalibrate::computeReprojectionErrors(const std::vector<std::vector<
 	return std::sqrt(totalErr / totalPoints);
 }
 /*
- * ³õÊ¼»¯±ê¶¨°åcorners
+ * åˆå§‹åŒ–æ ‡å®šæ¿corners
  */
 void StereoCalibrate::calcChessboardCorners(cv::Size boardSize, float squareSize, std::vector<cv::Point3f>& corners,
 	Pattern patternType)
@@ -153,7 +153,7 @@ void StereoCalibrate::calcChessboardCorners(cv::Size boardSize, float squareSize
 	}
 }
 /*
- * µ¥Ä¿±ê¶¨µÄºËĞÄ´úÂë
+ * å•ç›®æ ‡å®šçš„æ ¸å¿ƒä»£ç 
  */
 bool StereoCalibrate::calibrate_1D_core(const std::vector<std::vector<cv::Point2f>>& imagePoints, cv::Size imageSize,
 	cv::Size boardSize, float squareSize, float aspectRatio, int flags, cv::Mat& cameraMatrix, cv::Mat& distCoeffs)
@@ -187,29 +187,29 @@ bool StereoCalibrate::calibrate_1D_core(const std::vector<std::vector<cv::Point2
 	return ok;
 }
 /*
- * µ¥Ä¿±ê¶¨µÄÇı¶¯´úÂë
- *	cv::Size		[in]	boardSize				±ê¶¨°å³ß´ç
-	float			[in]	squareSize				·½¸ñ³ß´ç
-	vector<string>	[in]	imageList				±ê¶¨Í¼Æ¬ÎÄ¼şÃû
-	Mat&			[io]	cameraMatrix			Ïà»ú¾ØÕó
-	Mat&			[io]	distCoeffs				»û±äÏµÊı
-	float			[in]	aspectRatio=1			¿í¸ß±È,Ö»ÓĞµ±flagÖĞÖ¸¶¨CALIB_FIX_ASPECT_RATIOÊ±²ÅÆğ×÷ÓÃ
-	Pattern			[in]	pattern=CHESSBOARD		±ê¶¨°åÄ£Ê½,¿ÉÑ¡:
-														CHESSBOARD				ÏóÆåÅÌ,
-														CIRCLES_GRID			Ô²µãÕóÁĞ,
-														ASYMMETRIC_CIRCLES_GRID	·Ç¶Ô³ÆÔ²µãÕóÁĞ
-	int				[in]	flags=0					±ê¶¨±êÖ¾Î»,¿ÉÑ¡
-														CALIB_FIX_ASPECT_RATIO	¹Ì¶¨¿í¸ß±È
+ * å•ç›®æ ‡å®šçš„é©±åŠ¨ä»£ç 
+ *	cv::Size		[in]	boardSize				æ ‡å®šæ¿å°ºå¯¸
+	float			[in]	squareSize				æ–¹æ ¼å°ºå¯¸
+	vector<string>	[in]	imageList				æ ‡å®šå›¾ç‰‡æ–‡ä»¶å
+	Mat&			[io]	cameraMatrix			ç›¸æœºçŸ©é˜µ
+	Mat&			[io]	distCoeffs				ç•¸å˜ç³»æ•°
+	float			[in]	aspectRatio=1			å®½é«˜æ¯”,åªæœ‰å½“flagä¸­æŒ‡å®šCALIB_FIX_ASPECT_RATIOæ—¶æ‰èµ·ä½œç”¨
+	Pattern			[in]	pattern=CHESSBOARD		æ ‡å®šæ¿æ¨¡å¼,å¯é€‰:
+														CHESSBOARD				è±¡æ£‹ç›˜,
+														CIRCLES_GRID			åœ†ç‚¹é˜µåˆ—,
+														ASYMMETRIC_CIRCLES_GRID	éå¯¹ç§°åœ†ç‚¹é˜µåˆ—
+	int				[in]	flags=0					æ ‡å®šæ ‡å¿—ä½,å¯é€‰
+														CALIB_FIX_ASPECT_RATIO	å›ºå®šå®½é«˜æ¯”
 														CALIB_ZERO_TANGENT_DIST
 														CALIB_FIX_PRINCIPAL_POINT
-	bool			[in]	showUndistorted=true	ÊÇ·ñÏÔÊ¾½ÃÕıÖ®ºóµÄÇé¿ö
+	bool			[in]	showUndistorted=true	æ˜¯å¦æ˜¾ç¤ºçŸ«æ­£ä¹‹åçš„æƒ…å†µ
  */
 void StereoCalibrate::Calib1D(cv::Size boardSize, float squareSize, std::vector<std::string> imageList,
 	cv::Mat& cameraMatrix, cv::Mat& distCoeffs, float aspectRatio, Pattern pattern, int flags, bool showUndistorted)
 {
 	try
 	{
-		//cv::Size imageSize;//¸Ä³É³ÉÔ±±äÁ¿
+		//cv::Size imageSize;//æ”¹æˆæˆå‘˜å˜é‡
 		std::vector<std::vector<cv::Point2f> > imagePoints;
 		int nframes = (int)imageList.size();
 		//cv::namedWindow("Image View", 1);
@@ -222,10 +222,10 @@ void StereoCalibrate::Calib1D(cv::Size boardSize, float squareSize, std::vector<
 			if (i < (int)imageList.size())
 				view = cv::imread(imageList[i], 1);
 
-			if (view.empty())//Êı¾İ¶ÁÍêÁË,¿ªÊ¼±ê¶¨
+			if (view.empty())//æ•°æ®è¯»å®Œäº†,å¼€å§‹æ ‡å®š
 			{
 				if (imagePoints.size() > 0)
-					std::cout << "Êı¾İ¶ÁÍêÁË,¿ªÊ¼±ê¶¨" << std::endl;
+					std::cout << "æ•°æ®è¯»å®Œäº†,å¼€å§‹æ ‡å®š" << std::endl;
 					calibrate_1D_core(imagePoints, imageSize, boardSize, squareSize, aspectRatio, flags, cameraMatrix, distCoeffs);
 				break;
 			}
@@ -293,16 +293,16 @@ void StereoCalibrate::Calib1D(cv::Size boardSize, float squareSize, std::vector<
 				remap(view, rview, map1, map2, cv::INTER_LINEAR);
 				m_entity->insertItem(rview);
 			}
-			std::cout << "µÚÒ»´Î½ÃÕı³É¹¦Íê³É" << std::endl;
+			std::cout << "ç¬¬ä¸€æ¬¡çŸ«æ­£æˆåŠŸå®Œæˆ" << std::endl;
 		}
 	}
 	catch (std::exception e)
 	{
-		std::cout << "Calib1D³öÏÖÑÏÖØ´íÎó" << e.what() << std::endl;
+		std::cout << "Calib1Då‡ºç°ä¸¥é‡é”™è¯¯" << e.what() << std::endl;
 	}
 }
 /*
- * Ë«Ä¿±ê¶¨
+ * åŒç›®æ ‡å®š
  */
 void StereoCalibrate::StereoCalib(
 	const std::vector<std::string>& imagelist,
@@ -597,11 +597,11 @@ void StereoCalibrate::StereoCalib(
 	}
 	catch (std::exception e)
 	{
-		std::cout << "StereoCalib³öÏÖÑÏÖØ´íÎó" << e.what() << std::endl;
+		std::cout << "StereoCalibå‡ºç°ä¸¥é‡é”™è¯¯" << e.what() << std::endl;
 	}
 }
 /*
- * »ñÈ¡µ¥Ä¿±ê¶¨µÄflags
+ * è·å–å•ç›®æ ‡å®šçš„flags
  */
 int StereoCalibrate::getCalibrate1D_flags()
 {
@@ -666,7 +666,7 @@ int StereoCalibrate::getCalibrate1D_flags()
 	return flag;
 }
 /*
- * »ñÈ¡Á¢Ìå±ê¶¨µÄflags
+ * è·å–ç«‹ä½“æ ‡å®šçš„flags
  */
 int StereoCalibrate::getCalibrate2D_flags()
 {

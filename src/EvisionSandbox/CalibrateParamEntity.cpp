@@ -8,7 +8,7 @@ CalibrateParamEntity::CalibrateParamEntity(QObject *parent)
 CalibrateParamEntity* CalibrateParamEntity::getInstance()
 {
 	static CalibrateParamEntity *m_pInstance;
-	if (m_pInstance == NULL) //ÅĞ¶ÏÊÇ·ñµÚÒ»´Îµ÷ÓÃ
+	if (m_pInstance == NULL) //åˆ¤æ–­æ˜¯å¦ç¬¬ä¸€æ¬¡è°ƒç”¨
 		m_pInstance = new CalibrateParamEntity();
 	return m_pInstance;
 }
@@ -25,7 +25,7 @@ int CalibrateParamEntity::getBoardWidth()
 void CalibrateParamEntity::setBoardWidth(int value)
 {
 	BoardWidth = value;
-	//·¢³öÖµ¸ü¸ÄÊÂ¼ş
+	//å‘å‡ºå€¼æ›´æ”¹äº‹ä»¶
 	emit paramChanged_BoardWidth();
 }
 

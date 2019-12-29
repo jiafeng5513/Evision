@@ -24,7 +24,7 @@ public slots:
 	void RefreshStereoMatch();
 	void SaveDisparities();
 	void Help();
-	//Æ¥Åä²ÎÊı
+	//åŒ¹é…å‚æ•°
 	//1.int
 	void valueChanged_DMin(int value);
 	void onParamChanged_DMin();
@@ -163,7 +163,7 @@ public slots:
 
 	void valueChanged_SubSampling(bool value);
 	void onParamChanged_SubSampling();
-	//Æ¥ÅäËã·¨
+	//åŒ¹é…ç®—æ³•
 	void onClicked_BM(bool value);
 	void onParamChanged_BM();
 
@@ -257,7 +257,7 @@ public slots:
 	void valueChanged_SGBM_MODEL_HH(bool value);
 	void onParamChanged_SGBM_MODEL_HH();
 
-	//Í¼Æ¬ÏÔÊ¾
+	//å›¾ç‰‡æ˜¾ç¤º
 	void onParamChanged_imgDtoShow();
 	void onParamChanged_IconImgL();
 	void onParamChanged_IconImgR();

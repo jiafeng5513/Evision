@@ -8,7 +8,7 @@ StereoMatchParamEntity::StereoMatchParamEntity(QObject *parent)
 StereoMatchParamEntity* StereoMatchParamEntity::getInstance()
 {
 	static StereoMatchParamEntity * m_pInstance;
-	if (m_pInstance == NULL) //ÅĞ¶ÏÊÇ·ñµÚÒ»´Îµ÷ÓÃ
+	if (m_pInstance == NULL) //åˆ¤æ–­æ˜¯å¦ç¬¬ä¸€æ¬¡è°ƒç”¨
 		m_pInstance = new StereoMatchParamEntity();
 	return m_pInstance;
 }

@@ -5,7 +5,7 @@
 #include "StereoMatch.h"
 #include <QMessageBox>
 #include <iostream>
-//Ö±½ÓÆô¶¯ÊÓÍ¼,ºóÉèÖÃ²ÎÊı
+//ç›´æ¥å¯åŠ¨è§†å›¾,åè®¾ç½®å‚æ•°
 TraceView::TraceView(QWidget *parent)
 	: QWidget(parent)
 {
@@ -27,7 +27,7 @@ TraceView::TraceView(QWidget *parent)
 TraceView::~TraceView()
 {
 }
-//ÏòO´°¿Ú»­Í¼
+//å‘Oçª—å£ç”»å›¾
 void TraceView::printImgToO(cv::Mat value)
 {
 	sceneL->clear();
@@ -48,14 +48,14 @@ void TraceView::checkEnable()
 	}
 }
 
-//ÏìÓ¦Êó±êÒÆ¶¯
+//å“åº”é¼ æ ‡ç§»åŠ¨
 void TraceView::onMouseMove(int x, int y)
 {
 	ui.lineEdit_ImgX->setText(QString::fromStdString(std::to_string(x)));
 	ui.lineEdit_ImgY->setText(QString::fromStdString(std::to_string(y)));
 
 }
-//ÏìÓ¦Êó±ê×ó¼ü»÷¼ü
+//å“åº”é¼ æ ‡å·¦é”®å‡»é”®
 void TraceView::onMouseLButtonDown(int x, int y)
 {
 	if (started)
@@ -80,19 +80,19 @@ void TraceView::onMouseLButtonDown(int x, int y)
 		ui.lineEdit_Res->setText(QString::fromStdString(std::to_string(vec3DAbs)));
 	}
 }
-//ÏìÓ¦Êó±êÓÒ¼ü»÷¼ü
+//å“åº”é¼ æ ‡å³é”®å‡»é”®
 void TraceView::onMouseRButtonDown(int x, int y)
 {
 
 }
 /*
- * Ñ¡ÔñÔ­Ê¼ÊÓ²îÎÄ¼ş
+ * é€‰æ‹©åŸå§‹è§†å·®æ–‡ä»¶
  */
 void TraceView::onSelectRawDispFile()
 {
 	QFileDialog * fileDialog = new QFileDialog();
-	fileDialog->setWindowTitle(QStringLiteral("ÇëÑ¡ÔñÔ­Ê¼ÊÓ²îÎÄ¼ş"));
-	fileDialog->setNameFilter(QStringLiteral("ĞòÁĞ»¯(*.xml)"));
+	fileDialog->setWindowTitle(QStringLiteral("è¯·é€‰æ‹©åŸå§‹è§†å·®æ–‡ä»¶"));
+	fileDialog->setNameFilter(QStringLiteral("åºåˆ—åŒ–(*.xml)"));
 	fileDialog->setFileMode(QFileDialog::ExistingFile);
 	if (fileDialog->exec() == QDialog::Accepted)
 	{
@@ -104,20 +104,20 @@ void TraceView::onSelectRawDispFile()
 		}
 		catch (cv::Exception e)
 		{
-			std::cout << "Ô­Ê¼ÊÓ²îÊı¾İ¶ÁÈ¡Ê§°Ü!" << e.err << std::endl;
+			std::cout << "åŸå§‹è§†å·®æ•°æ®è¯»å–å¤±è´¥!" << e.err << std::endl;
 		}
 		ui.checkBox_RawDispOK->setChecked(true);
 		checkEnable();
 	}
 }
 /*
- * Ñ¡ÔñÔ­Í¼
+ * é€‰æ‹©åŸå›¾
  */
 void TraceView::onSelectOriginImg()
 {
 	QFileDialog * fileDialog = new QFileDialog();
-	fileDialog->setWindowTitle(QStringLiteral("ÇëÑ¡Ôñ²ÎÓëÉú³ÉËùÑ¡ÊÓ²îÍ¼µÄ×óÊÓÍ¼»òÓÒÊÓÍ¼"));
-	fileDialog->setNameFilter(QStringLiteral("Í¼Æ¬ÎÄ¼ş(*.jpg *.png *.jpeg *.bmp)"));
+	fileDialog->setWindowTitle(QStringLiteral("è¯·é€‰æ‹©å‚ä¸ç”Ÿæˆæ‰€é€‰è§†å·®å›¾çš„å·¦è§†å›¾æˆ–å³è§†å›¾"));
+	fileDialog->setNameFilter(QStringLiteral("å›¾ç‰‡æ–‡ä»¶(*.jpg *.png *.jpeg *.bmp)"));
 	fileDialog->setFileMode(QFileDialog::ExistingFile);
 	if (fileDialog->exec() == QDialog::Accepted)
 	{
@@ -127,20 +127,20 @@ void TraceView::onSelectOriginImg()
 		}
 		catch (cv::Exception e)
 		{
-			std::cout << "Ô­Í¼¶ÁÈ¡Ê§°Ü!" << e.err << std::endl;
+			std::cout << "åŸå›¾è¯»å–å¤±è´¥!" << e.err << std::endl;
 		}
 		ui.checkBox_OriginOK->setChecked(true);
 		checkEnable();
 	}
 }
 /*
- * Ñ¡ÔñÏà»ú²ÎÊıÎÄ¼ş
+ * é€‰æ‹©ç›¸æœºå‚æ•°æ–‡ä»¶
  */
 void TraceView::onSelectCameraParamFile()
 {
 	QFileDialog * fileDialog = new QFileDialog();
-	fileDialog->setWindowTitle(QStringLiteral("ÇëÑ¡ÔñÏà»ú²ÎÊıÎÄ¼ş"));
-	fileDialog->setNameFilter(QStringLiteral("ĞòÁĞ»¯ÎÄ¼ş(*.xml *.yml)"));
+	fileDialog->setWindowTitle(QStringLiteral("è¯·é€‰æ‹©ç›¸æœºå‚æ•°æ–‡ä»¶"));
+	fileDialog->setNameFilter(QStringLiteral("åºåˆ—åŒ–æ–‡ä»¶(*.xml *.yml)"));
 	fileDialog->setFileMode(QFileDialog::ExistingFile);
 	if (fileDialog->exec() == QDialog::Accepted)
 	{
@@ -154,7 +154,7 @@ void TraceView::onSelectCameraParamFile()
 		}
 		catch (cv::Exception e)
 		{
-			std::cout << "Ïà»ú²ÎÊı¶ÁÈ¡Ê§°Ü!" << e.err << std::endl;
+			std::cout << "ç›¸æœºå‚æ•°è¯»å–å¤±è´¥!" << e.err << std::endl;
 		}
 
 	}
@@ -172,12 +172,12 @@ void TraceView::onStart()
 
 	if (RawDisp.type() == CV_32F)
 	{
-		//ADCensusµÄÔ­Ê¼ÊÓ²îÊı¾İÊÇCV_32F,²»ÄÜÖ±½ÓÏÔÊ¾
+		//ADCensusçš„åŸå§‹è§†å·®æ•°æ®æ˜¯CV_32F,ä¸èƒ½ç›´æ¥æ˜¾ç¤º
 		EvisionUtils::getGrayDisparity<float>(RawDisp, disparityGary, true);
 	}
 	else if(RawDisp.type() == CV_8U)
 	{
-		//BM,SGBMºÍELASµÄÊÓ²îÊı¾İÊÇCV_8U,¿ÉÒÔÖ±½ÓÏÔÊ¾
+		//BM,SGBMå’ŒELASçš„è§†å·®æ•°æ®æ˜¯CV_8U,å¯ä»¥ç›´æ¥æ˜¾ç¤º
 		disparityGary = RawDisp;
 	}
 	printImgToO(disparityGary);

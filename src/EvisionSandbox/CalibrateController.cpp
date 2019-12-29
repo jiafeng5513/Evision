@@ -1,10 +1,10 @@
-#include "CalibrateController.h"
+ï»¿#include "CalibrateController.h"
 #include "StereoCalibrate.h"
 #include <QMessageBox>
 #include <QFileDialog>
 #include <opencv2/opencv.hpp>
 
-CalibrateController::CalibrateController(QObject *parent)
+CalibrateController::CalibrateController(QObject* parent)
 	: QObject(parent)
 {
 	m_calib_entity = CalibrateParamEntity::getInstance();
@@ -13,7 +13,7 @@ CalibrateController::CalibrateController(QObject *parent)
 CalibrateController::~CalibrateController()
 {
 }
-//ÃüÁî:Ä¬ÈÏ±ê¶¨²ÎÊı
+//å‘½ä»¤:é»˜è®¤æ ‡å®šå‚æ•°
 void CalibrateController::setDefaultCalibParamCommand()
 {
 	m_calib_entity->setBoardWidth(9);
@@ -25,40 +25,40 @@ void CalibrateController::setDefaultCalibParamCommand()
 	m_calib_entity->setCALIB_FIX_K4(true);
 	m_calib_entity->setCALIB_FIX_K5(true);
 }
-//ÃüÁî:±ê¶¨
+//å‘½ä»¤:æ ‡å®š
 void CalibrateController::CalibrateCommand()
 {
-	//1.ÑéÖ¤²ÎÊı
-	if (m_calib_entity->getBoardWidth()*m_calib_entity->getBoardHeight()*m_calib_entity->getSquareSize() <= 0)
+	//1.éªŒè¯å‚æ•°
+	if (m_calib_entity->getBoardWidth() * m_calib_entity->getBoardHeight() * m_calib_entity->getSquareSize() <= 0)
 	{
-		//Î´Í¨¹ı²ÎÊıÍêÕûĞÔÑéÖ¤
-		QMessageBox::information(NULL, QStringLiteral("´íÎó"), QStringLiteral("²ÎÊıÓĞÎó!Çë¼ì²é!"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+		//æœªé€šè¿‡å‚æ•°å®Œæ•´æ€§éªŒè¯
+		QMessageBox::information(NULL, QStringLiteral("é”™è¯¯"), QStringLiteral("å‚æ•°æœ‰è¯¯!è¯·æ£€æŸ¥!"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
 		return;
 	}
-	//2.Ñ¡ÔñÎÄ¼ş
-	QFileDialog * fileDialog = new QFileDialog();
-	fileDialog->setWindowTitle(QStringLiteral("ÇëÑ¡Ôñ×óÉãÏñÍ·ÅÄÉãµÄÍ¼Æ¬ÎÄ¼şĞòÁĞ"));
-	fileDialog->setNameFilter("Í¼Æ¬ÎÄ¼ş(*.jpg *.png *.jpeg *.bmp)");
+	//2.é€‰æ‹©æ–‡ä»¶
+	QFileDialog* fileDialog = new QFileDialog();
+	fileDialog->setWindowTitle(QStringLiteral("è¯·é€‰æ‹©å·¦æ‘„åƒå¤´æ‹æ‘„çš„å›¾ç‰‡æ–‡ä»¶åºåˆ—"));
+	fileDialog->setNameFilter("å›¾ç‰‡æ–‡ä»¶(*.jpg *.png *.jpeg *.bmp)");
 	fileDialog->setFileMode(QFileDialog::ExistingFiles);
 	if (fileDialog->exec() == QDialog::Accepted)
 	{
 		ImageListL = fileDialog->selectedFiles();
-		fileDialog->setWindowTitle(QStringLiteral("ÇëÑ¡ÔñÓÒÉãÏñÍ·ÅÄÉãµÄÍ¼Æ¬ÎÄ¼şĞòÁĞ"));
+		fileDialog->setWindowTitle(QStringLiteral("è¯·é€‰æ‹©å³æ‘„åƒå¤´æ‹æ‘„çš„å›¾ç‰‡æ–‡ä»¶åºåˆ—"));
 		if (fileDialog->exec() == QDialog::Accepted)
 		{
 			ImageListR = fileDialog->selectedFiles();
-			//Á½¸öÎÄ¼şÁĞ±í¶¼µã»÷ÁËÈ·¶¨
-			//ÑéÖ¤ÊıÁ¿
+			//ä¸¤ä¸ªæ–‡ä»¶åˆ—è¡¨éƒ½ç‚¹å‡»äº†ç¡®å®š
+			//éªŒè¯æ•°é‡
 			if (ImageListL.size() != ImageListR.size() || ImageListL.size() == 0 || ImageListR.size() == 0)
 			{
-				//ÓĞÒ»²àÍ¼ÏñÊıÄ¿Îª0»òÕßÁ½²àµÄÍ¼ÏñÊıÁ¿²»Ò»Ñù,ÍË³ö
-				QMessageBox::information(NULL, QStringLiteral("´íÎó"), QStringLiteral("×óÓÒÊÓÍ¼ÊıÁ¿²»ÏàµÈ»òÎª¿Õ"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+				//æœ‰ä¸€ä¾§å›¾åƒæ•°ç›®ä¸º0æˆ–è€…ä¸¤ä¾§çš„å›¾åƒæ•°é‡ä¸ä¸€æ ·,é€€å‡º
+				QMessageBox::information(NULL, QStringLiteral("é”™è¯¯"), QStringLiteral("å·¦å³è§†å›¾æ•°é‡ä¸ç›¸ç­‰æˆ–ä¸ºç©º"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
 				return;
 			}
 			else
 			{
 				/*
-				 *3.Ò»ÇĞÕı³£,¿ÉÒÔ½øĞĞ´ÓÍ¼Æ¬±ê¶¨
+				 *3.ä¸€åˆ‡æ­£å¸¸,å¯ä»¥è¿›è¡Œä»å›¾ç‰‡æ ‡å®š
 				 */
 				std::vector<std::string>* imagelistL = new std::vector<std::string>();
 				std::vector<std::string>* imagelistR = new std::vector<std::string>();
@@ -75,26 +75,26 @@ void CalibrateController::CalibrateCommand()
 		}
 		else
 		{
-			//Ñ¡ÔñÓÒÍ¼µÄÊ±ºòÍË³ö
+			//é€‰æ‹©å³å›¾çš„æ—¶å€™é€€å‡º
 			return;
 		}
 	}
 	else
 	{
-		//Ñ¡Ôñ×óÍ¼µÄÊ±ºòÍË³ö
+		//é€‰æ‹©å·¦å›¾çš„æ—¶å€™é€€å‡º
 		return;
 	}
 }
-//ÃüÁî:°Ñ²ÎÊı±£´æµ½ÎÄ¼şÖĞ
+//å‘½ä»¤:æŠŠå‚æ•°ä¿å­˜åˆ°æ–‡ä»¶ä¸­
 void CalibrateController::SaveParamsToFileCommand()
 {
-	if (_stereoCalib!=NULL)
+	if (_stereoCalib != NULL)
 	{
 		_stereoCalib->SaveCameraParamsToFile();
 	}
 }
 
-//ÏûÏ¢ÏìÓ¦:µ¯³ö¶Ô»°¿ò
+//æ¶ˆæ¯å“åº”:å¼¹å‡ºå¯¹è¯æ¡†
 void CalibrateController::onOpenMessageBox(QString title, QString msg)
 {
 	QMessageBox::information(NULL, title, msg);

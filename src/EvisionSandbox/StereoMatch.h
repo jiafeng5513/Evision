@@ -57,30 +57,30 @@ private:
 	//PARAM
 	Algorithm g_algo = DENSE;//DENSE; // 2 algorithms to select corresponding points and reconstruct 3D scene
 	StereoMatchParamEntity * m_entity;
-	//¼´½«¶ÁÈ¡µÄÎÄ¼ş
+	//å³å°†è¯»å–çš„æ–‡ä»¶
 	std::string img1_filename = "";
 	std::string img2_filename = "";
 	std::string cameraParams_filename = "";
-	//ÓÃÓÚ±£´æµÄÎÄ¼ş
-	std::string root = "";						//ÎÄ¼ş±£´æÎ»ÖÃ
-	std::string disparity_filename = "";		//ÊÓ²îÍ¼ÎÄ¼şÃû
-	std::string disparity_raw_filename = "";	//Ô­Ê¼ÊÓ²îÊı¾İÎÄ¼şÃû
-	std::string point_cloud_filename = "";		//PCDµãÔÆÎÄ¼şÃû
+	//ç”¨äºä¿å­˜çš„æ–‡ä»¶
+	std::string root = "";						//æ–‡ä»¶ä¿å­˜ä½ç½®
+	std::string disparity_filename = "";		//è§†å·®å›¾æ–‡ä»¶å
+	std::string disparity_raw_filename = "";	//åŸå§‹è§†å·®æ•°æ®æ–‡ä»¶å
+	std::string point_cloud_filename = "";		//PCDç‚¹äº‘æ–‡ä»¶å
 	//
 	cv::Mat img1, img2;
 	cv::Size img_size;
 
-	cv::Mat cameraMatrix1;//×óÏà»úÄÚ²Î
-	cv::Mat distCoeffs1;//×óÏà»ú»û±äÏµÊı
-	cv::Mat cameraMatrix2;//ÓÒÏà»úÄÚ²Î
-	cv::Mat distCoeffs2;//ÓÒÏà»ú»û±äÏµÊı
-	cv::Mat R1, P1, R2, P2,Q;//Ó³Éä¼ÆËã½á¹û
+	cv::Mat cameraMatrix1;//å·¦ç›¸æœºå†…å‚
+	cv::Mat distCoeffs1;//å·¦ç›¸æœºç•¸å˜ç³»æ•°
+	cv::Mat cameraMatrix2;//å³ç›¸æœºå†…å‚
+	cv::Mat distCoeffs2;//å³ç›¸æœºç•¸å˜ç³»æ•°
+	cv::Mat R1, P1, R2, P2,Q;//æ˜ å°„è®¡ç®—ç»“æœ
 	cv::Mat R, T, E, F;
 	cv::Rect roi1;
 	cv::Rect roi2;
 
-	cv::Mat Raw_Disp_Data;		//Ô­Ê¼ÊÓ²îÊı¾İ,ÓÃÓÚ±£´æ³ÉxmlÎÄ¼ş,²â¾àÊ±Ê¹ÓÃ
-	cv::Mat Visual_Disp_Data;	//ÓÃÓÚÏÔÊ¾ÔÚ½çÃæÉÏºÍ±£´æÎªpngµÄÊÓ²îÊ¾ÒâÍ¼
+	cv::Mat Raw_Disp_Data;		//åŸå§‹è§†å·®æ•°æ®,ç”¨äºä¿å­˜æˆxmlæ–‡ä»¶,æµ‹è·æ—¶ä½¿ç”¨
+	cv::Mat Visual_Disp_Data;	//ç”¨äºæ˜¾ç¤ºåœ¨ç•Œé¢ä¸Šå’Œä¿å­˜ä¸ºpngçš„è§†å·®ç¤ºæ„å›¾
 
 	bool no_display=false;
 private:	

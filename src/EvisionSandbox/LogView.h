@@ -16,7 +16,7 @@ private:
 	Ui::LogView ui;
 	StdoutRedirector *redirector;
 public slots:
-	void readData();//½ÓÊÕÖØ¶¨Ïò¹ıÀ´µÄĞÅÏ¢
-	void onChecked_StayOnTop(bool value);//±£³ÖÔÚÇ°¶Ë
-	void onPush_Delete();//Çå¿Õ
+	void readData();//æ¥æ”¶é‡å®šå‘è¿‡æ¥çš„ä¿¡æ¯
+	void onChecked_StayOnTop(bool value);//ä¿æŒåœ¨å‰ç«¯
+	void onPush_Delete();//æ¸…ç©º
 };

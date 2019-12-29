@@ -63,7 +63,7 @@ void ObjectDetectionEngine::show_console_result(std::vector<bbox_t> const result
 	}
 }
 
-//Ïß³Ì·½·¨
+//çº¿ç¨‹æ–¹æ³•
 void ObjectDetectionEngine::run()
 {
 	std::string  names_file = m_entity->getnamesFilename().toStdString();
@@ -94,7 +94,7 @@ void ObjectDetectionEngine::run()
 		show_console_result(result_vec, obj_names);
 	}
 }
-//ÓĞÈËÍ¨¹ı¸Ä±äEntityÖĞµÄÔËĞĞ×´Ì¬±ê¼Ç,±í´ïÁËÏë¹Ø±ÕÏß³ÌµÄÏë·¨
+//æœ‰äººé€šè¿‡æ”¹å˜Entityä¸­çš„è¿è¡ŒçŠ¶æ€æ ‡è®°,è¡¨è¾¾äº†æƒ³å…³é—­çº¿ç¨‹çš„æƒ³æ³•
 void ObjectDetectionEngine::onChangeRunState()
 {
 	keepRun = false;

@@ -1,4 +1,4 @@
-#include "EvisionView.h"
+ï»¿#include "EvisionView.h"
 #include "QDebug"
 #include "QMessageBox"
 #include "EvisionUtils.h"
@@ -21,7 +21,7 @@
 #include "EvisionRectifyView.h"
 #include "CreateCameraParamFile.h"
 
-// ¸¡µãÊıÅĞµÈ
+// æµ®ç‚¹æ•°åˆ¤ç­‰
 // ulp: units in the last place.
 template <typename T>
 typename std::enable_if<!std::numeric_limits<T>::is_integer, bool>::type
@@ -34,8 +34,8 @@ IsAlmostEqual(T x, T y, int ulp = 2)
 		|| std::abs(x - y) < std::numeric_limits<T>::min();
 }
 
-//¹¹Ôìº¯Êı
-EvisionView::EvisionView(QWidget *parent)
+//æ„é€ å‡½æ•°
+EvisionView::EvisionView(QWidget* parent)
 	: QMainWindow(parent)
 {
 	ui.setupUi(this);
@@ -43,7 +43,7 @@ EvisionView::EvisionView(QWidget *parent)
 	msgLabel = new QLabel;
 	msgLabel->setMinimumSize(msgLabel->sizeHint());
 	msgLabel->setAlignment(Qt::AlignHCenter);
-	msgLabel->setText(QStringLiteral("¾ÍĞ÷"));
+	msgLabel->setText(QStringLiteral("å°±ç»ª"));
 	statusBar()->addWidget(msgLabel);
 	statusBar()->setStyleSheet(QString("QStatusBar::item{border: 0px}"));
 
@@ -54,89 +54,89 @@ EvisionView::EvisionView(QWidget *parent)
 	connect(m_entity, SIGNAL(paramChanged_StatusBar()), this, SLOT(onParamChanged_StatusBarText()), Qt::QueuedConnection);
 
 
-	on_action_LogViewSwitch();//LogviewµÄ×¼±¸
+	on_action_LogViewSwitch();//Logviewçš„å‡†å¤‡
 
-	std::cout << "Qt Detected:"<< QT_VERSION_MAJOR<<"."<<QT_VERSION_MINOR << "." <<QT_VERSION_PATCH<<std::endl;
+	std::cout << "Qt Detected:" << QT_VERSION_MAJOR << "." << QT_VERSION_MINOR << "." << QT_VERSION_PATCH << std::endl;
 #ifdef DEBUG
 	std::cout << "Evision is in debug mode and running slowly!" << std::endl;
-	std::cout << "EvisionÕı´¦ÓÚµ÷ÊÔÄ£Ê½,ÔËĞĞËÙ¶ÈÊÜÏŞ." << std::endl;
+	std::cout << "Evisionæ­£å¤„äºè°ƒè¯•æ¨¡å¼,è¿è¡Œé€Ÿåº¦å—é™." << std::endl;
 
 #else
 	std::cout << "Evision is in release mode and running at full speed!" << std::endl;
-	std::cout << "EvisionÕı´¦ÓÚ²¿ÊğÄ£Ê½,È«ËÙÔËĞĞ." << std::endl;
+	std::cout << "Evisionæ­£å¤„äºéƒ¨ç½²æ¨¡å¼,å…¨é€Ÿè¿è¡Œ." << std::endl;
 #endif
 }
 
 
-//ÏÔÊ¾µ¥Ä¿Ïà»úÊÓÍ¼
+//æ˜¾ç¤ºå•ç›®ç›¸æœºè§†å›¾
 void EvisionView::onCamera()
 {
-	CameraView * _camera = new CameraView();
+	CameraView* _camera = new CameraView();
 	ui.mdiArea->addSubWindow(_camera);
 	_camera->show();
 }
-//ÏÔÊ¾Ë«Ä¿Ïà»úÊÓÍ¼
+//æ˜¾ç¤ºåŒç›®ç›¸æœºè§†å›¾
 void EvisionView::onStereoCamera()
 {
-	StereoCameraView * _stereoCamera = new StereoCameraView();
+	StereoCameraView* _stereoCamera = new StereoCameraView();
 	ui.mdiArea->addSubWindow(_stereoCamera);
 	_stereoCamera->show();
 }
 
-//ÏÔÊ¾µãÔÆ
+//æ˜¾ç¤ºç‚¹äº‘
 void EvisionView::onShowPointCloud()
 {
 #if (defined WITH_PCL) 
 	//QWidget  * evision3dViz = Evision3dVizFactory::CreateEvision3dViz();
 	//ui.mdiArea->addSubWindow(evision3dViz);
 	//evision3dViz->show();
-	QFileDialog * fileDialog = new QFileDialog();
-	fileDialog->setWindowTitle(QStringLiteral("ÇëÑ¡ÔñµãÔÆÎÄ¼ş"));
-	fileDialog->setNameFilter(QStringLiteral("pclµãÔÆÎÄ¼ş(*.pcd)"));
+	QFileDialog* fileDialog = new QFileDialog();
+	fileDialog->setWindowTitle(QStringLiteral("è¯·é€‰æ‹©ç‚¹äº‘æ–‡ä»¶"));
+	fileDialog->setNameFilter(QStringLiteral("pclç‚¹äº‘æ–‡ä»¶(*.pcd)"));
 	fileDialog->setFileMode(QFileDialog::ExistingFile);
 	if (fileDialog->exec() == QDialog::Accepted)
 	{
-		QWidget * evisionCloudViewer = 
-			EvisionCloudViewerFactory::CreateEvisionEvisionCloudViewer(fileDialog->selectedFiles().at(0).toStdString(),this);
+		QWidget* evisionCloudViewer =
+			EvisionCloudViewerFactory::CreateEvisionEvisionCloudViewer(fileDialog->selectedFiles().at(0).toStdString(), this);
 		ui.mdiArea->addSubWindow(evisionCloudViewer);
 		evisionCloudViewer->showMaximized();
-		evisionCloudViewer ->show();
+		evisionCloudViewer->show();
 	}
-	
+
 #else
-	QMessageBox::information(this, QStringLiteral("¸Ã¹¦ÄÜÎ´ÆôÓÃ!"), 
-		QStringLiteral("ÇëÔÚÏîÄ¿ÊôĞÔ/C++/Ô¤´¦ÀíÆ÷ÖĞÌí¼Ó\"WITH_PCL\",ÅäÖÃºÃPCLºÍVTKÒÀÀµ,²¢È·ÈÏEvision3dVizÄ£¿éÕı³£¹¤×÷!"));
+	QMessageBox::information(this, QStringLiteral("è¯¥åŠŸèƒ½æœªå¯ç”¨!"),
+		QStringLiteral("è¯·åœ¨é¡¹ç›®å±æ€§/C++/é¢„å¤„ç†å™¨ä¸­æ·»åŠ \"WITH_PCL\",é…ç½®å¥½PCLå’ŒVTKä¾èµ–,å¹¶ç¡®è®¤Evision3dVizæ¨¡å—æ­£å¸¸å·¥ä½œ!"));
 #endif
 }
-//ÏÔÊ¾±ê¶¨ÊÓÍ¼
+//æ˜¾ç¤ºæ ‡å®šè§†å›¾
 void EvisionView::on_action_calibrate_view()
 {
-	CalibraterView * m_calibrate = new CalibraterView();
+	CalibraterView* m_calibrate = new CalibraterView();
 	ui.mdiArea->addSubWindow(m_calibrate);
 	m_calibrate->show();
 }
-//ÏÔÊ¾½ÃÕıÊÓÍ¼
+//æ˜¾ç¤ºçŸ«æ­£è§†å›¾
 void EvisionView::on_action_rectify()
 {
-	EvisionRectifyView * m_Rectify = new EvisionRectifyView();
+	EvisionRectifyView* m_Rectify = new EvisionRectifyView();
 	ui.mdiArea->addSubWindow(m_Rectify);
 	m_Rectify->show();
 }
-//ÏÔÊ¾Á¢ÌåÆ¥ÅäÊÓÍ¼
+//æ˜¾ç¤ºç«‹ä½“åŒ¹é…è§†å›¾
 void EvisionView::on_action_stereoMatch_view()
 {
-	MatcherView * m_matcher = new MatcherView();
+	MatcherView* m_matcher = new MatcherView();
 	ui.mdiArea->addSubWindow(m_matcher);
 	m_matcher->show();
 }
-//ÏÔÊ¾½»»¥Ê½²â¾àÊÓÍ¼
+//æ˜¾ç¤ºäº¤äº’å¼æµ‹è·è§†å›¾
 void EvisionView::on_action_Measure_view()
 {
-	TraceView * _Rfinterface = new TraceView();
+	TraceView* _Rfinterface = new TraceView();
 	ui.mdiArea->addSubWindow(_Rfinterface);
 	_Rfinterface->show();
 }
-//Æô¶¯Ä¿±ê¼ì²âÊÓÍ¼
+//å¯åŠ¨ç›®æ ‡æ£€æµ‹è§†å›¾
 void EvisionView::on_action_ObjectDetection_view()
 {
 #ifdef WITH_CUDA
@@ -144,8 +144,8 @@ void EvisionView::on_action_ObjectDetection_view()
 	ui.mdiArea->addSubWindow(_ObjectDetectionView);
 	_ObjectDetectionView->show();
 #else
-	QMessageBox::information(this, QStringLiteral("¸Ã¹¦ÄÜÎ´ÆôÓÃ!"),
-		QStringLiteral("ÇëÔÚÏîÄ¿ÊôĞÔ/C++/Ô¤´¦ÀíÆ÷ÖĞÌí¼Ó\"WITH_CUDA\"²¢È·±£EvisionObjDetectionÄ£¿éÕı³£¹¤×÷"));
+	QMessageBox::information(this, QStringLiteral("è¯¥åŠŸèƒ½æœªå¯ç”¨!"),
+		QStringLiteral("è¯·åœ¨é¡¹ç›®å±æ€§/C++/é¢„å¤„ç†å™¨ä¸­æ·»åŠ \"WITH_CUDA\"å¹¶ç¡®ä¿EvisionObjDetectionæ¨¡å—æ­£å¸¸å·¥ä½œ"));
 #endif
 }
 //LogView
@@ -158,17 +158,17 @@ void EvisionView::on_action_LogViewSwitch()
 	old_size = this->size();
 	logView->move(*new QPoint(old_pos.x() + 10 + this->frameGeometry().width(), old_pos.y()));
 }
-//ÊÓ²î×ªµãÔÆ
+//è§†å·®è½¬ç‚¹äº‘
 void EvisionView::on_action_disp_to_pcd()
 {
 #ifdef WITH_PCL
-	//1.Ñ¡ÔñÊÓ²î
-	cv::Mat RawDisp,img, Q;
+	//1.é€‰æ‹©è§†å·®
+	cv::Mat RawDisp, img, Q;
 	bool ok = false;
-	QFileDialog * fileDialog = new QFileDialog();
+	QFileDialog* fileDialog = new QFileDialog();
 	QString dispFilename;
-	fileDialog->setWindowTitle(QStringLiteral("ÇëÑ¡ÔñÔ­Ê¼ÊÓ²îÎÄ¼ş"));
-	fileDialog->setNameFilter(QStringLiteral("ĞòÁĞ»¯(*.xml)"));
+	fileDialog->setWindowTitle(QStringLiteral("è¯·é€‰æ‹©åŸå§‹è§†å·®æ–‡ä»¶"));
+	fileDialog->setNameFilter(QStringLiteral("åºåˆ—åŒ–(*.xml)"));
 	fileDialog->setFileMode(QFileDialog::ExistingFile);
 	if (fileDialog->exec() == QDialog::Accepted)
 	{
@@ -182,7 +182,7 @@ void EvisionView::on_action_disp_to_pcd()
 		}
 		catch (cv::Exception e)
 		{
-			std::cout << "Ô­Ê¼ÊÓ²îÊı¾İ¶ÁÈ¡Ê§°Ü!" << e.err << std::endl;
+			std::cout << "åŸå§‹è§†å·®æ•°æ®è¯»å–å¤±è´¥!" << e.err << std::endl;
 		}
 	}
 	else
@@ -192,8 +192,8 @@ void EvisionView::on_action_disp_to_pcd()
 	if (ok)
 	{
 		ok = false;
-		fileDialog->setWindowTitle(QStringLiteral("ÇëÑ¡Ôñ²ÎÓëÉú³ÉËùÑ¡ÊÓ²îÍ¼µÄ×óÊÓÍ¼»òÓÒÊÓÍ¼"));
-		fileDialog->setNameFilter(QStringLiteral("Í¼Æ¬ÎÄ¼ş(*.jpg *.png *.jpeg *.bmp)"));
+		fileDialog->setWindowTitle(QStringLiteral("è¯·é€‰æ‹©å‚ä¸ç”Ÿæˆæ‰€é€‰è§†å·®å›¾çš„å·¦è§†å›¾æˆ–å³è§†å›¾"));
+		fileDialog->setNameFilter(QStringLiteral("å›¾ç‰‡æ–‡ä»¶(*.jpg *.png *.jpeg *.bmp)"));
 		fileDialog->setFileMode(QFileDialog::ExistingFile);
 		if (fileDialog->exec() == QDialog::Accepted)
 		{
@@ -204,21 +204,23 @@ void EvisionView::on_action_disp_to_pcd()
 			}
 			catch (cv::Exception e)
 			{
-				std::cout << "Ô­Í¼¶ÁÈ¡Ê§°Ü!" << e.err << std::endl;
+				std::cout << "åŸå›¾è¯»å–å¤±è´¥!" << e.err << std::endl;
 			}
-		}else
+		}
+		else
 		{
 			return;
 		}
-	}else
+	}
+	else
 	{
 		return;
 	}
 	if (ok)
 	{
 		ok = false;
-		fileDialog->setWindowTitle(QStringLiteral("ÇëÑ¡ÔñÏà»ú²ÎÊıÎÄ¼ş"));
-		fileDialog->setNameFilter(QStringLiteral("ĞòÁĞ»¯ÎÄ¼ş(*.xml *.yml)"));
+		fileDialog->setWindowTitle(QStringLiteral("è¯·é€‰æ‹©ç›¸æœºå‚æ•°æ–‡ä»¶"));
+		fileDialog->setNameFilter(QStringLiteral("åºåˆ—åŒ–æ–‡ä»¶(*.xml *.yml)"));
 		fileDialog->setFileMode(QFileDialog::ExistingFile);
 		if (fileDialog->exec() == QDialog::Accepted)
 		{
@@ -231,106 +233,109 @@ void EvisionView::on_action_disp_to_pcd()
 			}
 			catch (cv::Exception e)
 			{
-				std::cout << "Ïà»ú²ÎÊı¶ÁÈ¡Ê§°Ü!" << e.err << std::endl;
+				std::cout << "ç›¸æœºå‚æ•°è¯»å–å¤±è´¥!" << e.err << std::endl;
 			}
-		}else
+		}
+		else
 		{
 			return;
 		}
-	}else
+	}
+	else
 	{
 		return;
 	}
-	if(ok)
+	if (ok)
 	{
-		QFileInfo *_fileInfo = new QFileInfo(dispFilename);//path like F:/test/123.xml
+		QFileInfo* _fileInfo = new QFileInfo(dispFilename);//path like F:/test/123.xml
 		std::string filename = _fileInfo->absolutePath().toStdString().//F:/test
-		append("/").												   //F:/test/
-		append(_fileInfo->baseName().toStdString()).				   //F:/test/123
-		append(".pcd");												   //F:/test/123.pcd
+			append("/").												   //F:/test/
+			append(_fileInfo->baseName().toStdString()).				   //F:/test/123
+			append(".pcd");												   //F:/test/123.pcd
 		EvisionCloudViewerFactory::createAndSavePointCloud(RawDisp, img, Q, filename);
 	}
 #else
-	QMessageBox::information(this, QStringLiteral("¸Ã¹¦ÄÜÎ´ÆôÓÃ!"), QStringLiteral("ÇëÔÚÏîÄ¿ÊôĞÔ/C++/Ô¤´¦ÀíÆ÷ÖĞÌí¼Ó\"WITH_PCL\"²¢ÅäÖÃºÃPCLÒÀÀµ"));
+	QMessageBox::information(this, QStringLiteral("è¯¥åŠŸèƒ½æœªå¯ç”¨!"), QStringLiteral("è¯·åœ¨é¡¹ç›®å±æ€§/C++/é¢„å¤„ç†å™¨ä¸­æ·»åŠ \"WITH_PCL\"å¹¶é…ç½®å¥½PCLä¾èµ–"));
 #endif
 }
 /*
- * ´´½¨Ïà»ú²ÎÊıÎÄ¼ş
+ * åˆ›å»ºç›¸æœºå‚æ•°æ–‡ä»¶
  */
 void EvisionView::on_action_create_param()
 {
-	CreateCameraParamFile * _createCameraParamFile = new CreateCameraParamFile();
+	CreateCameraParamFile* _createCameraParamFile = new CreateCameraParamFile();
 	ui.mdiArea->addSubWindow(_createCameraParamFile);
 	_createCameraParamFile->show();
 }
 
-//×´Ì¬À¸¸üĞÂ
+//çŠ¶æ€æ æ›´æ–°
 void EvisionView::onParamChanged_StatusBarText()
 {
 	msgLabel->setText(m_entity->getStatusBarText());
 }
 
-//ÎÄ¼ş±»ÍÏµ½´°¿ÚÇøÓòÉÏ
-void EvisionView::dragEnterEvent(QDragEnterEvent * event)
+//æ–‡ä»¶è¢«æ‹–åˆ°çª—å£åŒºåŸŸä¸Š
+void EvisionView::dragEnterEvent(QDragEnterEvent* event)
 {
 	if (event->mimeData()->hasFormat("text/uri-list"))
 	{
 		event->acceptProposedAction();
-		//QMessageBox::information(NULL, QStringLiteral("ÏûÏ¢"), QStringLiteral("ÎÄ¼ş±»ÍÏÉÏÀ´"));
+		//QMessageBox::information(NULL, QStringLiteral("æ¶ˆæ¯"), QStringLiteral("æ–‡ä»¶è¢«æ‹–ä¸Šæ¥"));
 		m_entity->setStatusBarText("Drop the file for open!");
 	}
 }
-//ÎÄ¼şÔÚ´°¿ÚÇøÓòÉÏ±»·ÅÏÂ
-void EvisionView::dropEvent(QDropEvent * event)
+//æ–‡ä»¶åœ¨çª—å£åŒºåŸŸä¸Šè¢«æ”¾ä¸‹
+void EvisionView::dropEvent(QDropEvent* event)
 {
-	m_entity->setStatusBarText(QStringLiteral("¾ÍĞ÷"));
-	//QMessageBox::information(NULL, QStringLiteral("ÏûÏ¢"), QStringLiteral("ÎÄ¼ş±»ÊÍ·ÅÔÚ´°¿ÚÉÏ"));
+	m_entity->setStatusBarText(QStringLiteral("å°±ç»ª"));
+	//QMessageBox::information(NULL, QStringLiteral("æ¶ˆæ¯"), QStringLiteral("æ–‡ä»¶è¢«é‡Šæ”¾åœ¨çª—å£ä¸Š"));
 	QList<QUrl> urls = event->mimeData()->urls();
 	if (urls.isEmpty())
 	{
 		return;
 	}
-	else if(urls.size()>1)
+	else if (urls.size() > 1)
 	{
-		//QMessageBox::information(NULL, QStringLiteral("ÏûÏ¢"), QStringLiteral("¶àÓÚÒ»¸öÎÄ¼ş"));
-	}else if(urls.size()==1)
+		//QMessageBox::information(NULL, QStringLiteral("æ¶ˆæ¯"), QStringLiteral("å¤šäºä¸€ä¸ªæ–‡ä»¶"));
+	}
+	else if (urls.size() == 1)
 	{
-		//QMessageBox::information(NULL, QStringLiteral("ÏûÏ¢"), QStringLiteral("Ò»¸öÎÄ¼ş"));
-		//ÎÄ¼ş·ÖÀàÊ¶±ğºÍ´ò¿ª
+		//QMessageBox::information(NULL, QStringLiteral("æ¶ˆæ¯"), QStringLiteral("ä¸€ä¸ªæ–‡ä»¶"));
+		//æ–‡ä»¶åˆ†ç±»è¯†åˆ«å’Œæ‰“å¼€
 		QString file_name = urls[0].toLocalFile();
 		QFileInfo fileinfo(file_name);
-		if (!fileinfo.isFile())//²»ÊÇÎÄ¼ş
+		if (!fileinfo.isFile())//ä¸æ˜¯æ–‡ä»¶
 		{
 			return;
 		}
 		else
 		{
-			if (fileinfo.suffix() == "png"|| fileinfo.suffix() == "jpg"||
+			if (fileinfo.suffix() == "png" || fileinfo.suffix() == "jpg" ||
 				fileinfo.suffix() == "jpeg")
 			{
-				WatchImageView * m_WatchImage = new WatchImageView(file_name);
+				WatchImageView* m_WatchImage = new WatchImageView(file_name);
 				ui.mdiArea->addSubWindow(m_WatchImage);
 				m_WatchImage->show();
 			}
 		}
 	}
-		
+
 }
-//Êó±êÊÍ·ÅÊÂ¼ş
-void EvisionView::mouseReleaseEvent(QMouseEvent * event)
+//é¼ æ ‡é‡Šæ”¾äº‹ä»¶
+void EvisionView::mouseReleaseEvent(QMouseEvent* event)
 {
 	if (event->button() == Qt::LeftButton)
 	{
-		m_entity->setStatusBarText(QStringLiteral("¾ÍĞ÷"));
+		m_entity->setStatusBarText(QStringLiteral("å°±ç»ª"));
 	}
 }
-//´°¿ÚÒÆ¶¯ÊÂ¼ş
+//çª—å£ç§»åŠ¨äº‹ä»¶
 void EvisionView::moveEvent(QMoveEvent* event)
 {
 	//QWidget::moveEvent(event);
 	QPoint delta = this->pos() - old_pos;
-	//Ëã³öÖ÷´°¿ÚµÄÒÆ¶¯Á¿
-	//×Ó´°¿Ú½øĞĞµÈÁ¿ÒÆ¶¯
+	//ç®—å‡ºä¸»çª—å£çš„ç§»åŠ¨é‡
+	//å­çª—å£è¿›è¡Œç­‰é‡ç§»åŠ¨
 	logView->move(delta + *new QPoint(old_pos.x() + 10 + this->frameGeometry().width(), old_pos.y()));
 	old_pos = this->pos();
 }
@@ -344,14 +349,14 @@ void EvisionView::resizeEvent(QResizeEvent* event)
 	}
 }
 
-void EvisionView::changeEvent(QEvent*event)
+void EvisionView::changeEvent(QEvent* event)
 {
 	if (event->type() != QEvent::WindowStateChange) return;
-	if (this->windowState() == Qt::WindowMaximized)//×î´ó»¯
+	if (this->windowState() == Qt::WindowMaximized)//æœ€å¤§åŒ–
 	{
 		//logView->setWindowFlags(windowFlags() | Qt::WindowMaximizeButtonHint);
 	}
-	if (this->windowState() == Qt::WindowMinimized)//×îĞ¡»¯
+	if (this->windowState() == Qt::WindowMinimized)//æœ€å°åŒ–
 	{
 		//logView->setWindowFlags(windowFlags() | Qt::WindowMinimizeButtonHint);
 
@@ -362,4 +367,3 @@ void EvisionView::closeEvent(QCloseEvent* event)
 {
 	logView->close();
 }
-

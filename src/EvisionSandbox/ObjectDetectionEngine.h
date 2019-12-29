@@ -37,5 +37,5 @@ private:
 	ObjectDetectionEntity * m_entity;
 	bool keepRun = true;
 public slots:
-	void onChangeRunState();//ÏìÓ¦ÔËĞĞ×´Ì¬¸Ä±äÃüÁî
+	void onChangeRunState();//å“åº”è¿è¡ŒçŠ¶æ€æ”¹å˜å‘½ä»¤
 };

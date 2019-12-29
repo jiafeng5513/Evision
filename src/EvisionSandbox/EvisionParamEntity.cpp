@@ -1,15 +1,15 @@
 #include "EvisionParamEntity.h"
 
-//¹¹Ôìº¯ÊıÊÇË½ÓĞµÄ
+//æ„é€ å‡½æ•°æ˜¯ç§æœ‰çš„
 EvisionParamEntity::EvisionParamEntity(QObject * parent) : QObject(parent)
 { 
 }
 
-//»ñÈ¡ÊµÀı(µ¥ÀıÄ£Ê½)
+//è·å–å®ä¾‹(å•ä¾‹æ¨¡å¼)
 EvisionParamEntity * EvisionParamEntity::getInstance()
 {
      static EvisionParamEntity *m_pInstance;
-     if (m_pInstance == NULL) //ÅĞ¶ÏÊÇ·ñµÚÒ»´Îµ÷ÓÃ
+     if (m_pInstance == NULL) //åˆ¤æ–­æ˜¯å¦ç¬¬ä¸€æ¬¡è°ƒç”¨
          m_pInstance = new EvisionParamEntity();
      return m_pInstance;
 }
@@ -22,7 +22,7 @@ QString EvisionParamEntity::getStatusBarText()
 {
 	return StatusBarText;
 }
-void EvisionParamEntity::setStatusBarText(QString value=QStringLiteral("¾ÍĞ÷"))
+void EvisionParamEntity::setStatusBarText(QString value=QStringLiteral("å°±ç»ª"))
 {
 	StatusBarText = value;
 	emit paramChanged_StatusBar();

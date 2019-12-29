@@ -5,7 +5,7 @@
 #include <QGraphicsScene>
 
 /*
- * ÊµÓÃ¹¤¾ß·½·¨
+ * å®ç”¨å·¥å…·æ–¹æ³•
  */
 class EvisionUtils
 {
@@ -13,43 +13,43 @@ public:
 	EvisionUtils();
 	~EvisionUtils();
 	/*
-	 * cv::Mat×ª»»ÎªQImage
+	 * cv::Matè½¬æ¢ä¸ºQImage
 	 */
 	static QImage cvMat2QImage(const cv::Mat& mat);
 
 	/*
-	 * QImage×ª»»Îªcv::Mat
+	 * QImageè½¬æ¢ä¸ºcv::Mat
 	 */
 	static cv::Mat QImage2cvMat(QImage image);
 	/*
-	 * ´´½¨²¢·µ»Øidle image
+	 * åˆ›å»ºå¹¶è¿”å›idle image
 	 */
 	static QImage getDefaultImage();
 	/*
-	 * °ÑimgÏÔÊ¾ÔÚviewÉÏ
+	 * æŠŠimgæ˜¾ç¤ºåœ¨viewä¸Š
 	 */
 	static void ShowImageOnUi(cv::Mat& img, QGraphicsScene*sense, QGraphicsView* view);
 	/*
-	 * °ÑË«Ä¿±ê¶¨µÃµ½µÄËùÓĞ²ÎÊıĞ´ÈëÎÄ¼ş
-	 * 1.ÎÄ¼şÃû							std::string filename
-	 * 2.Ïà»ú¾ØÕó1(Ïà¶Ô½¹¾àºÍÖ÷µã×ø±ê)	cv::Mat& cameraMatrix1
-	 * 3.»û±äÏµÊı1						cv::Mat& distCoeffs1
-	 * 4.Ïà»ú¾ØÕó2						cv::Mat& cameraMatrix2
-	 * 5.»û±äÏµÊı2						cv::Mat& distCoeffs2
-	 * 6.Á½¸öÏà»úÖ®¼äµÄĞı×ª				cv::Mat& R
-	 * 7.Á½¸öÏà»úÖ®¼äµÄÆ½ÒÆ				cv::Mat& T
-	 * 8.±¾ÖÊ¾ØÕó						cv::Mat& E
-	 * 9.»ù±¾¾ØÕó						cv::Mat& F
-	 * 10.Í¼Æ¬³ß´ç						cv::Size& imageSize,
-	 * 11.Ğı×ªÓ³Éä¾ØÕó1                 cv::Mat& R1,
-	 * 12.Í¶Ó°Ó³Éä¾ØÕó1                 cv::Mat& P1,
-	 * 13.Ğı×ªÓ³Éä¾ØÕó2                 cv::Mat& R2,
-	 * 14.Í¶Ó°Ó³Éä¾ØÕó2                 cv::Mat& P2,
-	 * 15.ÈıÎ¬Ó³Éä¾ØÕó                  cv::Mat& Q,
-	 * 16.½ÃÕıºóµÄroi1                  cv::Rect& roi1,
-	 * 17.½ÃÕıºóµÄroi2                  cv::Rect& roi2
-	 * ·µ»ØÖµ:
-	 *	³É¹¦:true,Ê§°ÜºÍ³ö´í:false
+	 * æŠŠåŒç›®æ ‡å®šå¾—åˆ°çš„æ‰€æœ‰å‚æ•°å†™å…¥æ–‡ä»¶
+	 * 1.æ–‡ä»¶å							std::string filename
+	 * 2.ç›¸æœºçŸ©é˜µ1(ç›¸å¯¹ç„¦è·å’Œä¸»ç‚¹åæ ‡)	cv::Mat& cameraMatrix1
+	 * 3.ç•¸å˜ç³»æ•°1						cv::Mat& distCoeffs1
+	 * 4.ç›¸æœºçŸ©é˜µ2						cv::Mat& cameraMatrix2
+	 * 5.ç•¸å˜ç³»æ•°2						cv::Mat& distCoeffs2
+	 * 6.ä¸¤ä¸ªç›¸æœºä¹‹é—´çš„æ—‹è½¬				cv::Mat& R
+	 * 7.ä¸¤ä¸ªç›¸æœºä¹‹é—´çš„å¹³ç§»				cv::Mat& T
+	 * 8.æœ¬è´¨çŸ©é˜µ						cv::Mat& E
+	 * 9.åŸºæœ¬çŸ©é˜µ						cv::Mat& F
+	 * 10.å›¾ç‰‡å°ºå¯¸						cv::Size& imageSize,
+	 * 11.æ—‹è½¬æ˜ å°„çŸ©é˜µ1                 cv::Mat& R1,
+	 * 12.æŠ•å½±æ˜ å°„çŸ©é˜µ1                 cv::Mat& P1,
+	 * 13.æ—‹è½¬æ˜ å°„çŸ©é˜µ2                 cv::Mat& R2,
+	 * 14.æŠ•å½±æ˜ å°„çŸ©é˜µ2                 cv::Mat& P2,
+	 * 15.ä¸‰ç»´æ˜ å°„çŸ©é˜µ                  cv::Mat& Q,
+	 * 16.çŸ«æ­£åçš„roi1                  cv::Rect& roi1,
+	 * 17.çŸ«æ­£åçš„roi2                  cv::Rect& roi2
+	 * è¿”å›å€¼:
+	 *	æˆåŠŸ:true,å¤±è´¥å’Œå‡ºé”™:false
 	 */
 	static bool write_AllCameraParams(std::string& filename,
 		cv::Mat& cameraMatrix1,cv::Mat& distCoeffs1,cv::Mat& cameraMatrix2,cv::Mat& distCoeffs2,
@@ -57,26 +57,26 @@ public:
 		cv::Mat& Q,cv::Rect& roi1,cv::Rect& roi2);
 
 	/*
-	 * ´ÓÎÄ¼şÖĞ¶ÁÈ¡Ë«Ä¿±ê¶¨µÃµ½µÄ²ÎÊı
-	 * 1.ÎÄ¼şÃû							std::string filename
-	 * 2.Ïà»ú¾ØÕó1(Ïà¶Ô½¹¾àºÍÖ÷µã×ø±ê)	cv::Mat* cameraMatrix1
-	 * 3.»û±äÏµÊı1						cv::Mat* distCoeffs1
-	 * 4.Ïà»ú¾ØÕó2						cv::Mat* cameraMatrix2
-	 * 5.»û±äÏµÊı2						cv::Mat* distCoeffs2
-	 * 6.Á½¸öÏà»úÖ®¼äµÄĞı×ª				cv::Mat* R
-	 * 7.Á½¸öÏà»úÖ®¼äµÄÆ½ÒÆ				cv::Mat* T
-	 * 8.±¾ÖÊ¾ØÕó						cv::Mat* E
-	 * 9.»ù±¾¾ØÕó						cv::Mat* F
-	 * 10.Í¼Æ¬³ß´ç						cv::Size* imageSize,
-	 * 11.Ğı×ªÓ³Éä¾ØÕó1                 cv::Mat* R1,
-	 * 12.Í¶Ó°Ó³Éä¾ØÕó1                 cv::Mat* P1,
-	 * 13.Ğı×ªÓ³Éä¾ØÕó2                 cv::Mat* R2,
-	 * 14.Í¶Ó°Ó³Éä¾ØÕó2                 cv::Mat* P2,
-	 * 15.ÈıÎ¬Ó³Éä¾ØÕó                  cv::Mat* Q,
-	 * 16.½ÃÕıºóµÄroi1                  cv::Rect* roi1,
-	 * 17.½ÃÕıºóµÄroi2                  cv::Rect* roi2
-	 * ·µ»ØÖµ:
-	 *	³É¹¦:true,Ê§°ÜºÍ³ö´í:false
+	 * ä»æ–‡ä»¶ä¸­è¯»å–åŒç›®æ ‡å®šå¾—åˆ°çš„å‚æ•°
+	 * 1.æ–‡ä»¶å							std::string filename
+	 * 2.ç›¸æœºçŸ©é˜µ1(ç›¸å¯¹ç„¦è·å’Œä¸»ç‚¹åæ ‡)	cv::Mat* cameraMatrix1
+	 * 3.ç•¸å˜ç³»æ•°1						cv::Mat* distCoeffs1
+	 * 4.ç›¸æœºçŸ©é˜µ2						cv::Mat* cameraMatrix2
+	 * 5.ç•¸å˜ç³»æ•°2						cv::Mat* distCoeffs2
+	 * 6.ä¸¤ä¸ªç›¸æœºä¹‹é—´çš„æ—‹è½¬				cv::Mat* R
+	 * 7.ä¸¤ä¸ªç›¸æœºä¹‹é—´çš„å¹³ç§»				cv::Mat* T
+	 * 8.æœ¬è´¨çŸ©é˜µ						cv::Mat* E
+	 * 9.åŸºæœ¬çŸ©é˜µ						cv::Mat* F
+	 * 10.å›¾ç‰‡å°ºå¯¸						cv::Size* imageSize,
+	 * 11.æ—‹è½¬æ˜ å°„çŸ©é˜µ1                 cv::Mat* R1,
+	 * 12.æŠ•å½±æ˜ å°„çŸ©é˜µ1                 cv::Mat* P1,
+	 * 13.æ—‹è½¬æ˜ å°„çŸ©é˜µ2                 cv::Mat* R2,
+	 * 14.æŠ•å½±æ˜ å°„çŸ©é˜µ2                 cv::Mat* P2,
+	 * 15.ä¸‰ç»´æ˜ å°„çŸ©é˜µ                  cv::Mat* Q,
+	 * 16.çŸ«æ­£åçš„roi1                  cv::Rect* roi1,
+	 * 17.çŸ«æ­£åçš„roi2                  cv::Rect* roi2
+	 * è¿”å›å€¼:
+	 *	æˆåŠŸ:true,å¤±è´¥å’Œå‡ºé”™:false
 	 */
 	static bool read_AllCameraParams(std::string& filename,
 		cv::Mat* cameraMatrix1,cv::Mat* distCoeffs1,cv::Mat* cameraMatrix2,cv::Mat* distCoeffs2,
@@ -84,19 +84,19 @@ public:
 		cv::Mat* Q,cv::Rect* roi1,cv::Rect* roi2);
 
 	/*
-	 * ¶ÁÈ¡Æ¥ÅäËùĞèµÄ²ÎÊı
+	 * è¯»å–åŒ¹é…æ‰€éœ€çš„å‚æ•°
 	 */
 	static bool read_ParamsForStereoMatch(std::string& filename,
 		cv::Mat* cameraMatrix1,cv::Mat* distCoeffs1,cv::Mat* cameraMatrix2,cv::Mat* distCoeffs2, 
 		cv::Mat* R1,cv::Mat* P1,cv::Mat* R2,cv::Mat* P2,cv::Mat* Q, cv::Rect* roi1,cv::Rect* roi2);
 	/*
-	 * ¶ÁÈ¡Ğ£ÕıËùĞèµÄ²ÎÊı
+	 * è¯»å–æ ¡æ­£æ‰€éœ€çš„å‚æ•°
 	 */
 	static bool read_ParamsForStereoRectify(std::string& filename,cv::Mat* cameraMatrix1,
 		cv::Mat* distCoeffs1,cv::Mat* cameraMatrix2,cv::Mat* distCoeffs2,
 		cv::Mat* R1,cv::Mat* P1,cv::Mat* R2,cv::Mat* P2,cv::Rect* roi1,cv::Rect* roi2);
 	/*
-	 *½«Ô­Ê¼ÊÓ²îÊı¾İ×ª»»ÎªÊÊºÏÏÔÊ¾ºÍ´æ´¢ÎªÍ¼Æ¬µÄ»Ò¶ÈÊÓ²îÍ¼
+	 *å°†åŸå§‹è§†å·®æ•°æ®è½¬æ¢ä¸ºé€‚åˆæ˜¾ç¤ºå’Œå­˜å‚¨ä¸ºå›¾ç‰‡çš„ç°åº¦è§†å·®å›¾
 	 */
 	template <typename T>
 	static void getGrayDisparity(const cv::Mat& disp, cv::Mat& grayDisp, bool stretch = true);

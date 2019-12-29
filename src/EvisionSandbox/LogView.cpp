@@ -9,8 +9,8 @@ LogView::LogView(QWidget *parent)
 	: QWidget(parent)
 {
 	ui.setupUi(this);
-	this->setWindowFlags(this->windowFlags() &~Qt::WindowMinMaxButtonsHint);//½ûÖ¹×î´óºÍ×îÐ¡»¯
-	this->setWindowFlags(this->windowFlags() | Qt::WindowStaysOnTopHint);//±£³ÖÔÚ½çÃæµÄ×îÇ°Ãæ
+	this->setWindowFlags(this->windowFlags() &~Qt::WindowMinMaxButtonsHint);//ç¦æ­¢æœ€å¤§å’Œæœ€å°åŒ–
+	this->setWindowFlags(this->windowFlags() | Qt::WindowStaysOnTopHint);//ä¿æŒåœ¨ç•Œé¢çš„æœ€å‰é¢
 	ui.checkBox_StayOnTop->setChecked(true);
 	redirector = new StdoutRedirector(this, StdoutRedirector::StandardOutput | StdoutRedirector::StandardError);
 	connect(redirector, SIGNAL(readyRead()), this, SLOT(readData()));
@@ -20,11 +20,11 @@ LogView::LogView(QWidget *parent)
 LogView::~LogView()
 {
 }
-//»ñÈ¡ÊµÀý
+//èŽ·å–å®žä¾‹
 LogView* LogView::getInstance()
 {
 	static LogView * m_pInstance;
-	if (m_pInstance == NULL) //ÅÐ¶ÏÊÇ·ñµÚÒ»´Îµ÷ÓÃ
+	if (m_pInstance == NULL) //åˆ¤æ–­æ˜¯å¦ç¬¬ä¸€æ¬¡è°ƒç”¨
 		m_pInstance = new LogView();
 	return m_pInstance;
 }
@@ -38,7 +38,7 @@ void LogView::onChecked_StayOnTop(bool value)
 {
 	if (value==true)
 	{
-		this->setWindowFlags(this->windowFlags() | Qt::WindowStaysOnTopHint);//±£³ÖÔÚ½çÃæµÄ×îÇ°Ãæ
+		this->setWindowFlags(this->windowFlags() | Qt::WindowStaysOnTopHint);//ä¿æŒåœ¨ç•Œé¢çš„æœ€å‰é¢
 	}
 	else
 	{
@@ -46,7 +46,7 @@ void LogView::onChecked_StayOnTop(bool value)
 	}
 	this->show();
 }
-//Çå¿Õ
+//æ¸…ç©º
 void LogView::onPush_Delete()
 {
 	ui.textEdit->clear();

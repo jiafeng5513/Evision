@@ -15,7 +15,7 @@ StereoCameraView::StereoCameraView(QWidget *parent)
 	if(availableCameras.size()<=1)
 	{
 		this->close();
-		QMessageBox::information(NULL, QStringLiteral("¾¯¸æ"), QStringLiteral("¿ÉÓÃÉãÏñÍ·ÊıÁ¿Ğ¡ÓÚ2,ÎŞ·¨Æô¶¯¸Ã¹¦ÄÜ!"));
+		QMessageBox::information(NULL, QStringLiteral("è­¦å‘Š"), QStringLiteral("å¯ç”¨æ‘„åƒå¤´æ•°é‡å°äº2,æ— æ³•å¯åŠ¨è¯¥åŠŸèƒ½!"));
 		return;
 	}
 
@@ -41,36 +41,36 @@ StereoCameraView::~StereoCameraView()
 	m_pLCamera->stop();
 	m_pRCamera->stop();
 }
-//ÉèÖÃ×óÏà»ú
+//è®¾ç½®å·¦ç›¸æœº
 void StereoCameraView::setLCamera(QCameraInfo* cameraInfo)
 {
 	m_pLCamera.reset(new QCamera(*cameraInfo));
 	m_pLImageCapture.reset(new QCameraImageCapture(m_pLCamera.data()));
-	//ÉèÖÃ²É¼¯Ä¿±ê
+	//è®¾ç½®é‡‡é›†ç›®æ ‡
 	//m_pCamera->setCaptureMode(QCameraImageCapture::CaptureToFile);
 	refreshResAndCodecListL();
-	//ÉèÖÃ²É¼¯Ä£Ê½
-	m_pLCamera->setCaptureMode(QCamera::CaptureStillImage);//½«Æä²É¼¯ÎªÍ¼Æ¬
-	m_pLCamera->setCaptureMode(QCamera::CaptureMode::CaptureViewfinder);//½«Æä²É¼¯µ½È¡¾°Æ÷ÖĞ
-	//ÉèÖÃÈ¡¾°Æ÷
+	//è®¾ç½®é‡‡é›†æ¨¡å¼
+	m_pLCamera->setCaptureMode(QCamera::CaptureStillImage);//å°†å…¶é‡‡é›†ä¸ºå›¾ç‰‡
+	m_pLCamera->setCaptureMode(QCamera::CaptureMode::CaptureViewfinder);//å°†å…¶é‡‡é›†åˆ°å–æ™¯å™¨ä¸­
+	//è®¾ç½®å–æ™¯å™¨
 	m_pLCamera->setViewfinder(ui.viewfinderL);
-	//¿ªÆôÏà»ú
+	//å¼€å¯ç›¸æœº
 	m_pLCamera->start();
 }
-//ÉèÖÃÓÒÏà»ú
+//è®¾ç½®å³ç›¸æœº
 void StereoCameraView::setRCamera(QCameraInfo* cameraInfo)
 {
 	m_pRCamera.reset(new QCamera(*cameraInfo));
 	m_pRImageCapture.reset(new QCameraImageCapture(m_pRCamera.data()));
-	//ÉèÖÃ²É¼¯Ä¿±ê
+	//è®¾ç½®é‡‡é›†ç›®æ ‡
 	//m_pCamera->setCaptureMode(QCameraImageCapture::CaptureToFile);
 	refreshResAndCodecListR();
-	//ÉèÖÃ²É¼¯Ä£Ê½
-	m_pRCamera->setCaptureMode(QCamera::CaptureStillImage);//½«Æä²É¼¯ÎªÍ¼Æ¬
-	m_pRCamera->setCaptureMode(QCamera::CaptureMode::CaptureViewfinder);//½«Æä²É¼¯µ½È¡¾°Æ÷ÖĞ
-	//ÉèÖÃÈ¡¾°Æ÷
+	//è®¾ç½®é‡‡é›†æ¨¡å¼
+	m_pRCamera->setCaptureMode(QCamera::CaptureStillImage);//å°†å…¶é‡‡é›†ä¸ºå›¾ç‰‡
+	m_pRCamera->setCaptureMode(QCamera::CaptureMode::CaptureViewfinder);//å°†å…¶é‡‡é›†åˆ°å–æ™¯å™¨ä¸­
+	//è®¾ç½®å–æ™¯å™¨
 	m_pRCamera->setViewfinder(ui.viewfinder_R);
-	//¿ªÆôÏà»ú
+	//å¼€å¯ç›¸æœº
 	m_pRCamera->start();
 }
 
@@ -130,8 +130,8 @@ void StereoCameraView::closeEvent(QCloseEvent* e)
 void StereoCameraView::OnFindSavePath()
 {
 	QFileDialog * fileDialog2 = new QFileDialog();
-	fileDialog2->setWindowTitle(QStringLiteral("ÇëÑ¡Ôñ±£´æÎ»ÖÃ"));
-	//fileDialog2->setNameFilter(QStringLiteral("µãÔÆÎÄ¼ş(*.xml *.yml *.yaml)"));
+	fileDialog2->setWindowTitle(QStringLiteral("è¯·é€‰æ‹©ä¿å­˜ä½ç½®"));
+	//fileDialog2->setNameFilter(QStringLiteral("ç‚¹äº‘æ–‡ä»¶(*.xml *.yml *.yaml)"));
 	fileDialog2->setFileMode(QFileDialog::DirectoryOnly);
 	if (fileDialog2->exec() == QDialog::Accepted)
 	{
@@ -140,7 +140,7 @@ void StereoCameraView::OnFindSavePath()
 	}
 }
 
-//ÅÄÕÕ
+//æ‹ç…§
 void StereoCameraView::OnShot()
 {
 	QString idt=QDateTime::currentDateTime().toString("yyyyMMddhhmmsszzz");

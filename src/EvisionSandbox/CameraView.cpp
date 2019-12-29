@@ -36,24 +36,24 @@ CameraView::~CameraView()
 	m_pCamera->stop();
 }
 /*
- *setCamera£ºÉèÖÃÏà»ú
- *QCameraInfo* £ºÏà»úÐÅÏ¢µÄÖ¸Õë
+ *setCameraï¼šè®¾ç½®ç›¸æœº
+ *QCameraInfo* ï¼šç›¸æœºä¿¡æ¯çš„æŒ‡é’ˆ
  *
- *return£ºvoid
+ *returnï¼švoid
  */
 void CameraView::setCamera(QCameraInfo* cameraInfo)
 {	
 	m_pCamera.reset(new QCamera(*cameraInfo));
 	m_pImageCapture.reset(new QCameraImageCapture(m_pCamera.data()));
-	//ÉèÖÃ²É¼¯Ä¿±ê
+	//è®¾ç½®é‡‡é›†ç›®æ ‡
 	//m_pCamera->setCaptureMode(QCameraImageCapture::CaptureToFile);
 	refreshResAndCodecList();
-	//ÉèÖÃ²É¼¯Ä£Ê½
-	m_pCamera->setCaptureMode(QCamera::CaptureStillImage);//½«Æä²É¼¯ÎªÍ¼Æ¬
-	m_pCamera->setCaptureMode(QCamera::CaptureMode::CaptureViewfinder);//½«Æä²É¼¯µ½È¡¾°Æ÷ÖÐ
-	//ÉèÖÃÈ¡¾°Æ÷
+	//è®¾ç½®é‡‡é›†æ¨¡å¼
+	m_pCamera->setCaptureMode(QCamera::CaptureStillImage);//å°†å…¶é‡‡é›†ä¸ºå›¾ç‰‡
+	m_pCamera->setCaptureMode(QCamera::CaptureMode::CaptureViewfinder);//å°†å…¶é‡‡é›†åˆ°å–æ™¯å™¨ä¸­
+	//è®¾ç½®å–æ™¯å™¨
 	m_pCamera->setViewfinder(ui.viewfinder);
-	//¿ªÆôÏà»ú
+	//å¼€å¯ç›¸æœº
 	m_pCamera->start();
 
 }
@@ -94,8 +94,8 @@ void CameraView::closeEvent(QCloseEvent * e)
 void CameraView::OnFindSavePath()
 {
 	QFileDialog * fileDialog2 = new QFileDialog();
-	fileDialog2->setWindowTitle(QStringLiteral("ÇëÑ¡Ôñ±£´æÎ»ÖÃ"));
-	//fileDialog2->setNameFilter(QStringLiteral("µãÔÆÎÄ¼þ(*.xml *.yml *.yaml)"));
+	fileDialog2->setWindowTitle(QStringLiteral("è¯·é€‰æ‹©ä¿å­˜ä½ç½®"));
+	//fileDialog2->setNameFilter(QStringLiteral("ç‚¹äº‘æ–‡ä»¶(*.xml *.yml *.yaml)"));
 	fileDialog2->setFileMode(QFileDialog::DirectoryOnly);
 	if (fileDialog2->exec() == QDialog::Accepted)
 	{

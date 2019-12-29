@@ -13,7 +13,7 @@ EvisionUtils::~EvisionUtils()
 }
 
 /*
- * cv::Mat×ª»»ÎªQImage
+ * cv::Matè½¬æ¢ä¸ºQImage
  */
 QImage EvisionUtils::cvMat2QImage(const cv::Mat& mat)
 {
@@ -77,7 +77,7 @@ QImage EvisionUtils::cvMat2QImage(const cv::Mat& mat)
 }
 
 /*
- * QImage×ª»»Îªcv::Mat
+ * QImageè½¬æ¢ä¸ºcv::Mat
  */
 cv::Mat EvisionUtils::QImage2cvMat(QImage image)
 {
@@ -101,39 +101,39 @@ cv::Mat EvisionUtils::QImage2cvMat(QImage image)
 	return mat;
 }
 /*
- * ´´½¨²¢·µ»Øidle image
+ * åˆ›å»ºå¹¶è¿”å›idle image
  */
 QImage EvisionUtils::getDefaultImage()
 {
-	//Í¼Æ¬ÉÏµÄ×Ö·û´®£¬ÀıÈç HELLO
+	//å›¾ç‰‡ä¸Šçš„å­—ç¬¦ä¸²ï¼Œä¾‹å¦‚ HELLO
 	QString imageText = "Evision";
 	QFont font;
 	
-	font.setPixelSize(13);//ÉèÖÃÏÔÊ¾×ÖÌåµÄ´óĞ¡
+	font.setPixelSize(13);//è®¾ç½®æ˜¾ç¤ºå­—ä½“çš„å¤§å°
 
 
 	QFontMetrics fm(font);
 	int charWidth = fm.width(imageText);
 	charWidth = fm.boundingRect(imageText).width();
 	
-	QSize size(charWidth + 8, 15);//Ö¸¶¨Í¼Æ¬´óĞ¡Îª×ÖÌåµÄ´óĞ¡
-	//QSize size(1920, 1080);//Ö¸¶¨Í¼Æ¬´óĞ¡Îª×ÖÌåµÄ´óĞ¡
+	QSize size(charWidth + 8, 15);//æŒ‡å®šå›¾ç‰‡å¤§å°ä¸ºå­—ä½“çš„å¤§å°
+	//QSize size(1920, 1080);//æŒ‡å®šå›¾ç‰‡å¤§å°ä¸ºå­—ä½“çš„å¤§å°
 
 
-	//ÒÔARGB32¸ñÊ½¹¹ÔìÒ»¸öQImage
+	//ä»¥ARGB32æ ¼å¼æ„é€ ä¸€ä¸ªQImage
 	QImage image(size, QImage::Format_ARGB32);
-	//Ìî³äÍ¼Æ¬±³¾°,120/250ÎªÍ¸Ã÷¶È
+	//å¡«å……å›¾ç‰‡èƒŒæ™¯,120/250ä¸ºé€æ˜åº¦
 	image.fill(qRgba(255, 255, 255, 0));
 
 
-	//ÎªÕâ¸öQImage¹¹ÔìÒ»¸öQPainter
+	//ä¸ºè¿™ä¸ªQImageæ„é€ ä¸€ä¸ªQPainter
 	QPainter painter(&image);
-	//ÉèÖÃ»­Ë¢µÄ×éºÏÄ£Ê½CompositionMode_SourceOutÕâ¸öÄ£Ê½ÎªÄ¿±êÍ¼ÏñÔÚÉÏ¡£
-	//¸Ä±ä×éºÏÄ£Ê½ºÍÉÏÃæµÄÌî³ä·½Ê½¿ÉÒÔ»­³öÍ¸Ã÷µÄÍ¼Æ¬¡£
+	//è®¾ç½®ç”»åˆ·çš„ç»„åˆæ¨¡å¼CompositionMode_SourceOutè¿™ä¸ªæ¨¡å¼ä¸ºç›®æ ‡å›¾åƒåœ¨ä¸Šã€‚
+	//æ”¹å˜ç»„åˆæ¨¡å¼å’Œä¸Šé¢çš„å¡«å……æ–¹å¼å¯ä»¥ç”»å‡ºé€æ˜çš„å›¾ç‰‡ã€‚
 	painter.setCompositionMode(QPainter::CompositionMode_DestinationOver);
 
 
-	//¸Ä±ä»­±ÊºÍ×ÖÌå
+	//æ”¹å˜ç”»ç¬”å’Œå­—ä½“
 	QPen pen = painter.pen();
 	pen.setColor(QColor(0, 141, 239));
 
@@ -142,7 +142,7 @@ QImage EvisionUtils::getDefaultImage()
 	painter.setFont(font);
 
 
-	//½«HelloĞ´ÔÚImageµÄÖĞĞÄ
+	//å°†Helloå†™åœ¨Imageçš„ä¸­å¿ƒ
 	painter.drawText(image.rect(), Qt::AlignCenter, imageText);
 	return image;
 }
@@ -159,26 +159,26 @@ void EvisionUtils::ShowImageOnUi(cv::Mat& img, QGraphicsScene* sense, QGraphicsV
 }
 
 /*
- * °ÑË«Ä¿±ê¶¨µÃµ½µÄËùÓĞ²ÎÊıĞ´ÈëÎÄ¼ş
- * 1.ÎÄ¼şÃû							std::string filename
- * 2.Ïà»ú¾ØÕó1(Ïà¶Ô½¹¾àºÍÖ÷µã×ø±ê)	cv::Mat& cameraMatrix1
- * 3.»û±äÏµÊı1						cv::Mat& distCoeffs1
- * 4.Ïà»ú¾ØÕó2						cv::Mat& cameraMatrix2
- * 5.»û±äÏµÊı2						cv::Mat& distCoeffs2
- * 6.Á½¸öÏà»úÖ®¼äµÄĞı×ª				cv::Mat& R
- * 7.Á½¸öÏà»úÖ®¼äµÄÆ½ÒÆ				cv::Mat& T
- * 8.±¾ÖÊ¾ØÕó						cv::Mat& E
- * 9.»ù±¾¾ØÕó						cv::Mat& F
- * 10.Í¼Æ¬³ß´ç						cv::Size& imageSize,
- * 11.Ğı×ªÓ³Éä¾ØÕó1                 cv::Mat& R1,
- * 12.Í¶Ó°Ó³Éä¾ØÕó1                 cv::Mat& P1,
- * 13.Ğı×ªÓ³Éä¾ØÕó2                 cv::Mat& R2,
- * 14.Í¶Ó°Ó³Éä¾ØÕó2                 cv::Mat& P2,
- * 15.ÈıÎ¬Ó³Éä¾ØÕó                  cv::Mat& Q,
- * 16.½ÃÕıºóµÄroi1                  cv::Rect& roi1,
- * 17.½ÃÕıºóµÄroi2                  cv::Rect& roi2
- * ·µ»ØÖµ:
- *	³É¹¦:true,Ê§°ÜºÍ³ö´í:false
+ * æŠŠåŒç›®æ ‡å®šå¾—åˆ°çš„æ‰€æœ‰å‚æ•°å†™å…¥æ–‡ä»¶
+ * 1.æ–‡ä»¶å							std::string filename
+ * 2.ç›¸æœºçŸ©é˜µ1(ç›¸å¯¹ç„¦è·å’Œä¸»ç‚¹åæ ‡)	cv::Mat& cameraMatrix1
+ * 3.ç•¸å˜ç³»æ•°1						cv::Mat& distCoeffs1
+ * 4.ç›¸æœºçŸ©é˜µ2						cv::Mat& cameraMatrix2
+ * 5.ç•¸å˜ç³»æ•°2						cv::Mat& distCoeffs2
+ * 6.ä¸¤ä¸ªç›¸æœºä¹‹é—´çš„æ—‹è½¬				cv::Mat& R
+ * 7.ä¸¤ä¸ªç›¸æœºä¹‹é—´çš„å¹³ç§»				cv::Mat& T
+ * 8.æœ¬è´¨çŸ©é˜µ						cv::Mat& E
+ * 9.åŸºæœ¬çŸ©é˜µ						cv::Mat& F
+ * 10.å›¾ç‰‡å°ºå¯¸						cv::Size& imageSize,
+ * 11.æ—‹è½¬æ˜ å°„çŸ©é˜µ1                 cv::Mat& R1,
+ * 12.æŠ•å½±æ˜ å°„çŸ©é˜µ1                 cv::Mat& P1,
+ * 13.æ—‹è½¬æ˜ å°„çŸ©é˜µ2                 cv::Mat& R2,
+ * 14.æŠ•å½±æ˜ å°„çŸ©é˜µ2                 cv::Mat& P2,
+ * 15.ä¸‰ç»´æ˜ å°„çŸ©é˜µ                  cv::Mat& Q,
+ * 16.çŸ«æ­£åçš„roi1                  cv::Rect& roi1,
+ * 17.çŸ«æ­£åçš„roi2                  cv::Rect& roi2
+ * è¿”å›å€¼:
+ *	æˆåŠŸ:true,å¤±è´¥å’Œå‡ºé”™:false
  */
 bool EvisionUtils::write_AllCameraParams(std::string& filename, cv::Mat& cameraMatrix1, cv::Mat& distCoeffs1,
 	cv::Mat& cameraMatrix2, cv::Mat& distCoeffs2, cv::Mat& R, cv::Mat& T, cv::Size& imageSize,
@@ -222,26 +222,26 @@ bool EvisionUtils::write_AllCameraParams(std::string& filename, cv::Mat& cameraM
 }
 
 /*
- * ´ÓÎÄ¼şÖĞ¶ÁÈ¡Ë«Ä¿±ê¶¨µÃµ½µÄ²ÎÊı
- * 1.ÎÄ¼şÃû							std::string filename
- * 2.Ïà»ú¾ØÕó1(Ïà¶Ô½¹¾àºÍÖ÷µã×ø±ê)	cv::Mat* cameraMatrix1
- * 3.»û±äÏµÊı1						cv::Mat* distCoeffs1
- * 4.Ïà»ú¾ØÕó2						cv::Mat* cameraMatrix2
- * 5.»û±äÏµÊı2						cv::Mat* distCoeffs2
- * 6.Á½¸öÏà»úÖ®¼äµÄĞı×ª				cv::Mat* R
- * 7.Á½¸öÏà»úÖ®¼äµÄÆ½ÒÆ				cv::Mat* T
- * 8.±¾ÖÊ¾ØÕó						cv::Mat* E
- * 9.»ù±¾¾ØÕó						cv::Mat* F
- * 10.Í¼Æ¬³ß´ç						cv::Size* imageSize,
- * 11.Ğı×ªÓ³Éä¾ØÕó1                 cv::Mat* R1,
- * 12.Í¶Ó°Ó³Éä¾ØÕó1                 cv::Mat* P1,
- * 13.Ğı×ªÓ³Éä¾ØÕó2                 cv::Mat* R2,
- * 14.Í¶Ó°Ó³Éä¾ØÕó2                 cv::Mat* P2,
- * 15.ÈıÎ¬Ó³Éä¾ØÕó                  cv::Mat* Q,
- * 16.½ÃÕıºóµÄroi1                  cv::Rect* roi1,
- * 17.½ÃÕıºóµÄroi2                  cv::Rect* roi2
- * ·µ»ØÖµ:
- *	³É¹¦:true,Ê§°ÜºÍ³ö´í:false
+ * ä»æ–‡ä»¶ä¸­è¯»å–åŒç›®æ ‡å®šå¾—åˆ°çš„å‚æ•°
+ * 1.æ–‡ä»¶å							std::string filename
+ * 2.ç›¸æœºçŸ©é˜µ1(ç›¸å¯¹ç„¦è·å’Œä¸»ç‚¹åæ ‡)	cv::Mat* cameraMatrix1
+ * 3.ç•¸å˜ç³»æ•°1						cv::Mat* distCoeffs1
+ * 4.ç›¸æœºçŸ©é˜µ2						cv::Mat* cameraMatrix2
+ * 5.ç•¸å˜ç³»æ•°2						cv::Mat* distCoeffs2
+ * 6.ä¸¤ä¸ªç›¸æœºä¹‹é—´çš„æ—‹è½¬				cv::Mat* R
+ * 7.ä¸¤ä¸ªç›¸æœºä¹‹é—´çš„å¹³ç§»				cv::Mat* T
+ * 8.æœ¬è´¨çŸ©é˜µ						cv::Mat* E
+ * 9.åŸºæœ¬çŸ©é˜µ						cv::Mat* F
+ * 10.å›¾ç‰‡å°ºå¯¸						cv::Size* imageSize,
+ * 11.æ—‹è½¬æ˜ å°„çŸ©é˜µ1                 cv::Mat* R1,
+ * 12.æŠ•å½±æ˜ å°„çŸ©é˜µ1                 cv::Mat* P1,
+ * 13.æ—‹è½¬æ˜ å°„çŸ©é˜µ2                 cv::Mat* R2,
+ * 14.æŠ•å½±æ˜ å°„çŸ©é˜µ2                 cv::Mat* P2,
+ * 15.ä¸‰ç»´æ˜ å°„çŸ©é˜µ                  cv::Mat* Q,
+ * 16.çŸ«æ­£åçš„roi1                  cv::Rect* roi1,
+ * 17.çŸ«æ­£åçš„roi2                  cv::Rect* roi2
+ * è¿”å›å€¼:
+ *	æˆåŠŸ:true,å¤±è´¥å’Œå‡ºé”™:false
  */
 bool EvisionUtils::read_AllCameraParams(std::string& filename, cv::Mat* cameraMatrix1, cv::Mat* distCoeffs1,
 	cv::Mat* cameraMatrix2, cv::Mat* distCoeffs2, cv::Mat* R, cv::Mat* T, cv::Mat* E, cv::Mat* F, cv::Size* imageSize,
@@ -286,7 +286,7 @@ bool EvisionUtils::read_AllCameraParams(std::string& filename, cv::Mat* cameraMa
 	}
 }
 /*
- * ¶ÁÈ¡Æ¥ÅäËùĞèµÄ²ÎÊı
+ * è¯»å–åŒ¹é…æ‰€éœ€çš„å‚æ•°
  */
 bool EvisionUtils::read_ParamsForStereoMatch(std::string& filename, cv::Mat* cameraMatrix1, cv::Mat* distCoeffs1,
 	cv::Mat* cameraMatrix2, cv::Mat* distCoeffs2, cv::Mat* R1, cv::Mat* P1, cv::Mat* R2, cv::Mat* P2, cv::Mat* Q, cv::Rect* roi1,

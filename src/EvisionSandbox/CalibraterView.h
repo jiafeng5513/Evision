@@ -5,7 +5,7 @@
 #include "CalibrateParamEntity.h"
 #include "CalibrateController.h"
 /*
- * ±ê¶¨:view
+ * æ ‡å®š:view
  */
 class CalibraterView : public QWidget
 {
@@ -23,7 +23,7 @@ private:
 public slots:
 	void setDefaultCalibParam();
 	void doCalib();
-	//±ê¶¨²ÎÊıÖµ¸ü¸ÄÊÂ¼ş
+	//æ ‡å®šå‚æ•°å€¼æ›´æ”¹äº‹ä»¶
 	void onValueChanged_BoardWidth(QString value);
 	void onParamChanged_BoardWidth() const;
 
@@ -79,9 +79,9 @@ public slots:
 	void onParamChanged_FIX_TAUX_TAUY();
 
 
-	void onParamChanged_NewToItemMap();//ÓĞÈË²åÈëÁËËõÂÔÍ¼Map,½çÃæÉÏÒªÏìÓ¦Ò»ÏÂ
-	void onParamChanged_ClearItemMap();//ÓĞÈËÇå¿ÕÁËËõÂÔÍ¼µÄMap,½çÃæÉÏÏìÓ¦Ò»ÏÂ
-	void onItemClicked(QListWidgetItem*item);//ÏìÓ¦µã»÷ËõÂÔÍ¼
+	void onParamChanged_NewToItemMap();//æœ‰äººæ’å…¥äº†ç¼©ç•¥å›¾Map,ç•Œé¢ä¸Šè¦å“åº”ä¸€ä¸‹
+	void onParamChanged_ClearItemMap();//æœ‰äººæ¸…ç©ºäº†ç¼©ç•¥å›¾çš„Map,ç•Œé¢ä¸Šå“åº”ä¸€ä¸‹
+	void onItemClicked(QListWidgetItem*item);//å“åº”ç‚¹å‡»ç¼©ç•¥å›¾
 
 	void onPush_saveParamsToFile();
 };

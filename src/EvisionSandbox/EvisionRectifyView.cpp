@@ -1,4 +1,4 @@
-#include "EvisionRectifyView.h"
+ï»¿#include "EvisionRectifyView.h"
 #include <QFileDialog>
 #include <QListWidgetItem>
 #include <QMessageBox>
@@ -18,7 +18,7 @@ EvisionRectifyView::~EvisionRectifyView()
 {
 }
 /*
- * ³õÊ¼»¯
+ * åˆå§‹åŒ–
  */
 void EvisionRectifyView::init()
 {
@@ -28,7 +28,7 @@ void EvisionRectifyView::init()
 void EvisionRectifyView::onPush_SelectSrcFolder()
 {
 	QFileDialog * fileDialog = new QFileDialog();
-	fileDialog->setWindowTitle(QStringLiteral("ÇëÑ¡Ôñ´ı½ÃÕıÍ¼Æ¬ËùÔÚµÄÎÄ¼ş¼Ğ"));
+	fileDialog->setWindowTitle(QStringLiteral("è¯·é€‰æ‹©å¾…çŸ«æ­£å›¾ç‰‡æ‰€åœ¨çš„æ–‡ä»¶å¤¹"));
 	fileDialog->setFileMode(QFileDialog::Directory);
 	if (fileDialog->exec() == QDialog::Accepted)
 	{
@@ -50,7 +50,7 @@ void EvisionRectifyView::onPush_SelectSrcFolder()
 void EvisionRectifyView::onPush_SelectTargetFolder()
 {
 	QFileDialog * fileDialog = new QFileDialog();
-	fileDialog->setWindowTitle(QStringLiteral("ÇëÑ¡ÔñĞ£ÕıºóµÄÍ¼Æ¬±£´æÔÚÄÄÀï"));
+	fileDialog->setWindowTitle(QStringLiteral("è¯·é€‰æ‹©æ ¡æ­£åçš„å›¾ç‰‡ä¿å­˜åœ¨å“ªé‡Œ"));
 	fileDialog->setFileMode(QFileDialog::Directory);
 	if (fileDialog->exec() == QDialog::Accepted)
 	{
@@ -62,8 +62,8 @@ void EvisionRectifyView::onPush_SelectTargetFolder()
 void EvisionRectifyView::onPush_SelectCameraParamFile()
 {
 	QFileDialog * fileDialog = new QFileDialog();
-	fileDialog->setWindowTitle(QStringLiteral("ÇëÑ¡ÔñÏà»ú²ÎÊıÎÄ¼ş"));
-	fileDialog->setNameFilter(QStringLiteral("ĞòÁĞ»¯ÎÄ¼ş(*.yml)"));
+	fileDialog->setWindowTitle(QStringLiteral("è¯·é€‰æ‹©ç›¸æœºå‚æ•°æ–‡ä»¶"));
+	fileDialog->setNameFilter(QStringLiteral("åºåˆ—åŒ–æ–‡ä»¶(*.yml)"));
 	fileDialog->setFileMode(QFileDialog::ExistingFile);
 	if (fileDialog->exec() == QDialog::Accepted)
 	{
@@ -89,17 +89,17 @@ void EvisionRectifyView::onDeleteFromTargetList()
 		ui.listWidget_Target->takeItem(ui.listWidget_Target->row(itemlist[i]));
 	}
 }
-//¿ªÊ¼Ğ£×¼
+//å¼€å§‹æ ¡å‡†
 void EvisionRectifyView::onStart()
 {
 	if(ui.listWidget_Target->count()<=0|| camera_param_file.empty()|| target_path.isEmpty())
 	{
-		QMessageBox::information(this, QStringLiteral("¾¯¸æ"), QStringLiteral("¼ì²é²ÎÊıµÄÍêÕûĞÔ"));
+		QMessageBox::information(this, QStringLiteral("è­¦å‘Š"), QStringLiteral("æ£€æŸ¥å‚æ•°çš„å®Œæ•´æ€§"));
 		return;
 	}
 	ui.progressBar->setValue(0);
 	ui.progressBar->setRange(0, ui.listWidget_Target->count() + 5);
-	//1.±éÀú³öÈ«²¿µÄtarget image
+	//1.éå†å‡ºå…¨éƒ¨çš„target image
 	for (int i = 0; i < ui.listWidget_Target->count(); ++i)
 	{
 		QString itemText = ui.listWidget_Target->item(i)->text();
@@ -109,25 +109,25 @@ void EvisionRectifyView::onStart()
 	cv::Size imageSize;
 	imageSize.height = ((cv::Mat)images.at(0)).rows;
 	imageSize.width = ((cv::Mat)images.at(0)).cols;
-	//TODO:¶ÁÈ¡Ïà»ú²ÎÊıÎÄ¼ş,»ñÈ¡Ïà»ú¾ØÕóºÍ»û±ä²ÎÊı,p1 p2 r1 r2,roi1,roi2
+	//TODO:è¯»å–ç›¸æœºå‚æ•°æ–‡ä»¶,è·å–ç›¸æœºçŸ©é˜µå’Œç•¸å˜å‚æ•°,p1 p2 r1 r2,roi1,roi2
 	bool ok=EvisionUtils::read_ParamsForStereoRectify(camera_param_file,&cameraMatrix1,&distCoeffs1,&cameraMatrix2,&distCoeffs2,&R1,&P1,&R2,&P2,&roi1,&roi2);
 	if(!ok)
 	{
-		std::cout << "¶Á²ÎÊ§°Ü" << std::endl;
+		std::cout << "è¯»å‚å¤±è´¥" << std::endl;
 		return;
 	}
 	ui.progressBar->setValue(ui.progressBar->value() + 1);
-	//ÏÈ°ÑÁ½²àµÄÍ¼Æ¬ÀûÓÃ»û±ä¾ØÕó·Ö±ğÏû³ı»û±ä
+	//å…ˆæŠŠä¸¤ä¾§çš„å›¾ç‰‡åˆ©ç”¨ç•¸å˜çŸ©é˜µåˆ†åˆ«æ¶ˆé™¤ç•¸å˜
 	intrinsicExtrinsic::undistortStereoImages(images, undistortedImages, cameraMatrix1, cameraMatrix2, distCoeffs1, distCoeffs2);
 	ui.progressBar->setValue(ui.progressBar->value() + 1);
-	//ÕâÒ»²½¼ÆËã¼«Ïß½ÃÕı¾ØÕó,»û±äÒÑ¾­Ïû³ıÁËËùÒÔ»û±ä²ÎÊıÉèÖÃÎªÁË0
+	//è¿™ä¸€æ­¥è®¡ç®—æçº¿çŸ«æ­£çŸ©é˜µ,ç•¸å˜å·²ç»æ¶ˆé™¤äº†æ‰€ä»¥ç•¸å˜å‚æ•°è®¾ç½®ä¸ºäº†0
 	cv::Mat rmap[2][2];
 	cv::Mat noDist = cv::Mat::zeros(5, 1, CV_32F);
 	initUndistortRectifyMap(cameraMatrix1, noDist, R1, P1, imageSize, CV_16SC2, rmap[0][0], rmap[0][1]);
 	initUndistortRectifyMap(cameraMatrix2, noDist, R2, P2, imageSize, CV_16SC2, rmap[1][0], rmap[1][1]);
 	int imgCount = undistortedImages.size() / 2;
 	ui.progressBar->setValue(ui.progressBar->value() + 1);
-	//¼ÆËãROI
+	//è®¡ç®—ROI
 	cv::Point2i rectCorner1(std::max(roi1.x, roi2.x), std::max(roi1.y, roi2.y));
 	cv::Point2i rectCorner2(std::min(roi1.x + roi1.width, roi2.x + roi2.width),
 		std::min(roi1.y + roi1.height, roi2.y + roi2.height));

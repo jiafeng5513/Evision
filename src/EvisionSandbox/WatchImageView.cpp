@@ -12,7 +12,7 @@ WatchImageView::WatchImageView(QWidget *parent)
 {
 	ui.setupUi(this);
 }
-//´ø²ÎÊıÖ±½Ó´ò¿ª
+//å¸¦å‚æ•°ç›´æ¥æ‰“å¼€
 WatchImageView::WatchImageView(QString filename, QWidget* parent)
 {
 	ui.setupUi(this);
@@ -34,7 +34,7 @@ WatchImageView::WatchImageView(QString filename, QWidget* parent)
 WatchImageView::~WatchImageView()
 {
 }
-//ÏìÓ¦Êó±ê¹öÂÖµÄ¶¯×÷
+//å“åº”é¼ æ ‡æ»šè½®çš„åŠ¨ä½œ
 void WatchImageView::onMouseWheelZoom(int delta)
 {
 	qDebug() << QString::fromStdString(std::to_string(delta));

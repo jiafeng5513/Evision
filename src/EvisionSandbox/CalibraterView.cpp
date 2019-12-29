@@ -33,12 +33,12 @@ CalibraterView::CalibraterView(QWidget *parent)
 CalibraterView::~CalibraterView()
 {
 }
-//默认标定参数
+//榛樿鏍囧畾鍙傛暟
 void CalibraterView::setDefaultCalibParam()
 {
 	m_calib_controller->setDefaultCalibParamCommand();
 }
-//标定
+//鏍囧畾
 void CalibraterView::doCalib()
 {
 	m_calib_controller->CalibrateCommand();
@@ -278,7 +278,7 @@ void CalibraterView::onParamChanged_FIX_TAUX_TAUY()
 	}
 }
 /*
- * 新图加入ListView
+ * 鏂板浘鍔犲叆ListView
  */
 void CalibraterView::onParamChanged_NewToItemMap()
 {
@@ -319,7 +319,7 @@ void CalibraterView::onItemClicked(QListWidgetItem* item)
 	ui.graphicsView->update();
 }
 /*
- * 保存参数文件
+ * 淇濆瓨鍙傛暟鏂囦欢
  */
 void CalibraterView::onPush_saveParamsToFile()
 {

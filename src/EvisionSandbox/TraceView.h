@@ -7,7 +7,7 @@
 #include "TraceGraphicsView.h"
 
 /*
- * ¸ºÔğ½»»¥Ê½²âÁ¿¹¦ÄÜµÄview
+ * è´Ÿè´£äº¤äº’å¼æµ‹é‡åŠŸèƒ½çš„view
  */
 class TraceView : public QWidget
 {
@@ -20,12 +20,12 @@ public:
 private:
 	Ui::RulerView ui;
 
-	cv::Mat img;		   //Ô­Í¼
-	cv::Mat RawDisp;	   //Ô­Ê¼ÊÓ²îÍ¼
-	cv::Mat Q;			   //Q¾ØÕó
+	cv::Mat img;		   //åŸå›¾
+	cv::Mat RawDisp;	   //åŸå§‹è§†å·®å›¾
+	cv::Mat Q;			   //QçŸ©é˜µ
 	cv::Mat image3D;	   //
-	float scaleFactor=1.0;     //Ëõ·ÅÒò×Ó
-	cv::Mat disparityGary; //»Ò¶ÈÊÓ²îÍ¼
+	float scaleFactor=1.0;     //ç¼©æ”¾å› å­
+	cv::Mat disparityGary; //ç°åº¦è§†å·®å›¾
 	bool DispIsShowing = true;
 	QGraphicsScene *sceneL;
 	bool started = false;

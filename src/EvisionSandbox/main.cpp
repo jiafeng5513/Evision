@@ -4,17 +4,19 @@
 /*
  * magic
  */
-static int __=[]()
+static int __ = []()
 {
 	std::ios::sync_with_stdio(false);
 	std::cin.tie(NULL);
 	return 0;
 }();
-
-int main(int argc, char *argv[])
-{	
+/*
+VS输入
+*/
+int main(int argc, char* argv[])
+{
 #ifdef WIN32
-	ShowWindow(GetConsoleWindow(), SW_HIDE);//���ؿ���̨
+	ShowWindow(GetConsoleWindow(), SW_HIDE);
 #endif
 	QApplication a(argc, argv);
 	EvisionView w;
