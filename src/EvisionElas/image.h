@@ -29,6 +29,7 @@ Street, Fifth Floor, Boston, MA 02110-1301, USA
 #include <cstring>
 #include <fstream>
 #include <iostream>
+#include <libapi.h>
 
 // use imRef to access image data.
 #define imRef(im, x, y) (im->access[y][x])
@@ -46,7 +47,7 @@ inline bool operator==(const rgb &a, const rgb &b) {
 }
 
 // image class
-template <class T> class __declspec(dllexport) image {
+template <class T> class LIB_API image {
 public:
 
   // create image
