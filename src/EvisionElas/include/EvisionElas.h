@@ -1,5 +1,5 @@
 #pragma once
-#include <opencv2\opencv.hpp>
+#include <opencv2/opencv.hpp>
 #ifdef LIB_EXPORTS
 #if defined(_MSC_VER)
 #define LIB_API __declspec(dllexport)

@@ -29,7 +29,7 @@ Street, Fifth Floor, Boston, MA 02110-1301, USA
 #include <stdlib.h>
 #include <vector>
 #include <emmintrin.h>
-
+#include <opencv2/opencv.hpp>
 // define fixed-width datatypes for Visual Studio projects
 #ifndef _MSC_VER
   #include <stdint.h>

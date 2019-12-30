@@ -277,10 +277,11 @@ void CloudGLWidget::drawLegend(QPainter *painter)
 	const int Margin = 11;
 	const int Padding = 6;
 
-	QString text = QString().sprintf("<h4 align=\"center\">Point Cloud Viewer</h4>"
-		"<p align=\"center\"><table width=\"100%\">"
-		"<tr><td>numbers:<td>%d<td>"
-		"</table>", numofPoints);
+    QString text;
+    text = QString().sprintf("<h4 align=\"center\">Point Cloud Viewer</h4>"
+                             "<p align=\"center\"><table width=\"100%\">"
+                             "<tr><td>numbers:<td>%d<td>"
+                             "</table>", numofPoints);
 
 	QTextDocument textDocument;
 	textDocument.setDefaultStyleSheet("* { color: #FFEFEF }");

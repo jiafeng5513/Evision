@@ -23,6 +23,7 @@
   </component>
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
+    <option name="clangWarnings" value="-Wno-unused-variable,-Werror=implicit-function-declaration,-Wshadow,-Wno-shadow-field-in-constructor-modified,-Wno-shadow-ivar,-Wno--Wformat-invalid-specifier" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="Git.Settings">
@@ -101,7 +102,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1577435537701</updated>
-      <workItem from="1577435540810" duration="4728000" />
+      <workItem from="1577435540810" duration="10481000" />
     </task>
     <servers />
   </component>
@@ -121,5 +122,9 @@
       <screen x="0" y="25" width="1920" height="1055" />
     </state>
     <state x="614" y="379" key="com.intellij.ide.util.TipDialog/0.25.1920.1055@0.25.1920.1055" timestamp="1577435592680" />
+    <state x="623" y="258" width="672" height="678" key="search.everywhere.popup" timestamp="1577694027314">
+      <screen x="0" y="25" width="1920" height="1055" />
+    </state>
+    <state x="623" y="258" width="672" height="678" key="search.everywhere.popup/0.25.1920.1055@0.25.1920.1055" timestamp="1577694027314" />
   </component>
 </project>
