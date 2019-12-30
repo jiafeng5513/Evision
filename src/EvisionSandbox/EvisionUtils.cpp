@@ -1,5 +1,5 @@
 #include "EvisionUtils.h"
-#include <opencv2\imgproc\types_c.h>
+//#include <opencv2\imgproc\types_c.h>
 
 
 
@@ -92,7 +92,7 @@ cv::Mat EvisionUtils::QImage2cvMat(QImage image)
 		break;
 	case QImage::Format_RGB888:
 		mat = cv::Mat(image.height(), image.width(), CV_8UC3, (void*)image.constBits(), image.bytesPerLine());
-		cv::cvtColor(mat, mat, CV_BGR2RGB);
+		cv::cvtColor(mat, mat, cv::COLOR_BGR2RGB);
 		break;
 	case QImage::Format_Indexed8:
 		mat = cv::Mat(image.height(), image.width(), CV_8UC1, (void*)image.constBits(), image.bytesPerLine());
