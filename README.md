@@ -11,7 +11,7 @@ Introduction:
 3. ELAS,ADCensus视差算法.<br>
 4. 关于双目的中文资料重复度太高,希望各位后来者能够吸取前人精华,摒弃前人的糟粕,多多自行探索,不要抄来抄去<br>
 5.  关于程序使用方面的问题,可以联系邮件jiafeng5513@outlook.com,有关课程设计和毕业论文(Windows程序开发,机器视觉,深度学习,图像处理)也可以联系作者<br>
-
+6.  
 目录
 =========
 - [Introduction:](#introduction)
@@ -25,11 +25,12 @@ Introduction:
       - [7.未来计划](#7%e6%9c%aa%e6%9d%a5%e8%ae%a1%e5%88%92)
 
 #### 1.Dependencies
-1. Qt :5.13.2
-2. OpenCV : 4.1.2
-3. (可选的)PCL 1.9.1(不使用PCL,将不能使用Evision3dViz和保存点云的功能)
-4. (可选的)CUDA 10.2(不使用CUDA,将无法使用目标检测模块)
-5. (可选的)NVIDIA显卡
+1. Qt :5.13.2.<br>
+2. OpenCV : 4.1.2.<br>
+3. (可选的)PCL 1.9.1(不使用PCL,将不能使用Evision3dViz和保存点云的功能).<br>
+4. (可选的)CUDA 10.2(不使用CUDA,将无法使用目标检测模块).<br>
+5. (可选的)NVIDIA显卡.<br>
+6. Windows(test pass) or Ubuntu(build pass).<br>
 
 #### 2.Directory_specification
 1. `data`文件夹存储测试用例.<br>
@@ -111,4 +112,3 @@ Introduction:
 1. [参考](http://blog.csdn.net/hysteric314/article/details/51357318).<br>
 2. 移除目标检测部分的代码,相关功能将会在新的仓库进行后续开发.<br>
 3. UI和功能的进一步剥离,对于所有UI能实现的功能,应该都有对应的命令行方法.<br>
-4. build过程更简单.<br>
