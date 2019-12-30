@@ -1,4 +1,5 @@
 #include "ObjectDetectionEngine.h"
+#include <fstream>
 
 ObjectDetectionEngine::ObjectDetectionEngine(QObject *parent)
 {

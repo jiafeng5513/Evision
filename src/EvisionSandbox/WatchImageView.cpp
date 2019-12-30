@@ -1,6 +1,6 @@
 #include "WatchImageView.h"
 #include"QWheelEvent"
-#include "qDebug"
+
 void MyGraphicsView::wheelEvent(QWheelEvent * event)
 {
 	emit mouseWheelZoom( event->delta());
@@ -37,7 +37,6 @@ WatchImageView::~WatchImageView()
 //响应鼠标滚轮的动作
 void WatchImageView::onMouseWheelZoom(int delta)
 {
-	qDebug() << QString::fromStdString(std::to_string(delta));
 	if (delta > 0 && scaleFactor >= 0)
 	{
 		scaleFactor += 5;

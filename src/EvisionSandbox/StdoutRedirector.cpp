@@ -22,7 +22,7 @@
 ** WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **
 ****************************************************************************/
-#include "stdoutredirector.h"
+#include "StdoutRedirector.h"
 #include <QUuid>
 #include <QSocketNotifier>
 
@@ -118,7 +118,8 @@ QByteArray StdoutRedirector::read(qint64 maxlen)
 		result.resize(int(readBytes));
 	return result;
 #else
-	return buffer->read(maxlen);
+	//return buffer->read(maxlen);
+    buffer->read();
 #endif
 }
 

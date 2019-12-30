@@ -2,7 +2,7 @@
 
 #include <QWidget>
 #include "ui_LogView.h"
-#include "stdoutredirector.h"
+#include "StdoutRedirector.h"
 
 class LogView : public QWidget
 {

@@ -1,7 +1,7 @@
 #include "MatcherView.h"
 #include "EvisionUtils.h"
 #include "math.h"
-#include<qDebug>
+//#include<qDebug>
 #include <QMessageBox>
 
 MatcherView::MatcherView(QWidget *parent)

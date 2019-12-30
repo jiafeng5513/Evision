@@ -16,8 +16,8 @@
 #include <opencv2/imgproc/imgproc_c.h>
 #include <opencv2/calib3d/calib3d.hpp>
 #include <opencv2/features2d/features2d.hpp>
-#include <atlstr.h> // use STL string instead, although not as convenient...
-#include <atltrace.h>
+//#include <atlstr.h> // use STL string instead, although not as convenient...
+//#include <atltrace.h>
 #define TRACE ATLTRACE
 
 #include <iostream>

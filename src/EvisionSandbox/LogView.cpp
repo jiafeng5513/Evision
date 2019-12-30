@@ -1,9 +1,11 @@
 #include "LogView.h"
+#ifdef WIN32
 #include <corecrt_wstdio.h>
+#endif
 #include <stdio.h>
 #include <iostream>
 #include <QTimer>
-#include <qDebug>
+#include <qdebug.h>
 #include <QDateTime>
 LogView::LogView(QWidget *parent)
 	: QWidget(parent)
