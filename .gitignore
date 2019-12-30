@@ -186,3 +186,4 @@ src/.idea
 src/cmake-build-debug
 src/out
 /build/
+.idea
