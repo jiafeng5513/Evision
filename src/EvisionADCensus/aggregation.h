@@ -46,10 +46,11 @@
 #include <opencv2/opencv.hpp>
 #include <omp.h>
 #include "common.h"
+#include <libapi.h>
 
 using namespace std;
 
-class __declspec(dllexport)Aggregation
+class LIB_API Aggregation
 {
 public:
     Aggregation(const cv::Mat &leftImage, const cv::Mat &rightImage, uint colorThreshold1, uint colorThreshold2,

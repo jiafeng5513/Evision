@@ -47,10 +47,11 @@
 #include <opencv2/opencv.hpp>
 #include "adcensuscv.h"
 #include "common.h"
+#include <libapi.h>
 
 using namespace std;
 
-class __declspec(dllexport)DisparityRefinement
+class LIB_API DisparityRefinement
 {
 public:
     DisparityRefinement(uint dispTolerance, int dMin, int dMax,

@@ -47,10 +47,11 @@
 #include <opencv2/opencv.hpp>
 #include <omp.h>
 #include "common.h"
+#include <libapi.h>
 
 using namespace std;
 
-class __declspec(dllexport) ScanlineOptimization
+class LIB_API ScanlineOptimization
 {
 public:
     ScanlineOptimization(const cv::Mat &leftImage, const cv::Mat &rightImage, int dMin, int dMax,

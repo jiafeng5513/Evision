@@ -45,9 +45,9 @@
 #define ADCENSUSCV_H
 
 #include <opencv2/opencv.hpp>
+#include <libapi.h>
 
-
-class __declspec(dllexport) ADCensusCV
+class LIB_API ADCensusCV
 {
 public:
     ADCensusCV(const cv::Mat &leftImage, const cv::Mat &rightImage, cv::Size censusWin, float lambdaAD, float lambdaCensus);
