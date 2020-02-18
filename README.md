@@ -2,6 +2,7 @@
 
 <div align=center>Evision 双目视觉系统</div>
 <div align=center><a href="https://www.bilibili.com/video/av46024738">演示视频</a></div>
+<div align=center>如果您觉得有帮助,请为该项目点star.以便于及时收到最新更新.您的star就是对我最好的鼓励.</div>
 
 Introduction:
 =========
