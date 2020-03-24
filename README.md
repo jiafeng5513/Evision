@@ -2,7 +2,11 @@
 
 <div align=center>Evision 双目视觉系统</div>
 <div align=center><a href="https://www.bilibili.com/video/av46024738">演示视频</a></div>
+<div align=center></div>
 <div align=center>如果您觉得有帮助,请为该项目点star.以便于及时收到最新更新.您的star就是对我最好的鼓励.</div>
+
+## 如果您有问题要反馈,请使用Github的issues功能,请尽量不要发邮件!作者可能无法及时回复您的邮件!使用issues可以为后来者提供相似问题的解决思路,您将成为Evision的开源贡献者!
+
 
 Introduction:
 =========
