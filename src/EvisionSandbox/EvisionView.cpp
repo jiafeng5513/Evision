@@ -12,7 +12,7 @@
 #include "CameraView.h"
 #include "WatchImageView.h"
 #ifdef WITH_CUDA
-#include "ObjectDetectionView.h"
+#include "EvisionObjDetectionFactory.h"
 #endif
 
 #if (defined WITH_PCL) 
@@ -66,8 +66,6 @@ EvisionView::EvisionView(QWidget* parent)
 	std::cout << "Evision正处于部署模式,全速运行." << std::endl;
 #endif
 }
-
-
 //显示单目相机视图
 void EvisionView::onCamera()
 {
@@ -82,7 +80,6 @@ void EvisionView::onStereoCamera()
 	ui.mdiArea->addSubWindow(_stereoCamera);
 	_stereoCamera->show();
 }
-
 //显示点云
 void EvisionView::onShowPointCloud()
 {
@@ -140,7 +137,7 @@ void EvisionView::on_action_Measure_view()
 void EvisionView::on_action_ObjectDetection_view()
 {
 #ifdef WITH_CUDA
-	ObjectDetectionView* _ObjectDetectionView = new ObjectDetectionView();
+	auto _ObjectDetectionView = EvisionObjDetectionFactory::CreateEvisionEvisionCloudViewer(this);
 	ui.mdiArea->addSubWindow(_ObjectDetectionView);
 	_ObjectDetectionView->show();
 #else

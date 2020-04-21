@@ -1,4 +1,4 @@
-#include "StereoMatchParamEntity.h"
+﻿#include "StereoMatchParamEntity.h"
 
 StereoMatchParamEntity::StereoMatchParamEntity(QObject *parent)
 	: QObject(parent)

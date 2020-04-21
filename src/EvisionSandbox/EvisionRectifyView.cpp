@@ -1,4 +1,4 @@
-#include "EvisionRectifyView.h"
+﻿#include "EvisionRectifyView.h"
 #include <QFileDialog>
 #include <QListWidgetItem>
 #include <QMessageBox>

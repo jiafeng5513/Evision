@@ -1,4 +1,4 @@
-#include "ObjectDetectionEngine.h"
+﻿#include "ObjectDetectionEngine.h"
 #include <fstream>
 
 ObjectDetectionEngine::ObjectDetectionEngine(QObject *parent)
@@ -39,7 +39,7 @@ void ObjectDetectionEngine::draw_boxes(cv::Mat mat_img, std::vector<bbox_t> resu
 			cv::rectangle(mat_img, cv::Point2f(std::max((int)i.x - 1, 0), std::max((int)i.y - 30, 0)),
 			              cv::Point2f(std::min((int)i.x + max_width, mat_img.cols - 1),
 			                          std::min((int)i.y, mat_img.rows - 1)),
-			              color, CV_FILLED, 8, 0);
+			              color, cv::FILLED, 8, 0);
 			putText(mat_img, obj_name, cv::Point2f(i.x, i.y - 10), cv::FONT_HERSHEY_COMPLEX_SMALL, 1.2,
 			        cv::Scalar(0, 0, 0), 2);
 		}

@@ -1,4 +1,4 @@
-#include "CalibrateParamEntity.h"
+﻿#include "CalibrateParamEntity.h"
 
 CalibrateParamEntity::CalibrateParamEntity(QObject *parent)
 	: QObject(parent)

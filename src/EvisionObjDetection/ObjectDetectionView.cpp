@@ -1,6 +1,6 @@
-#include "ObjectDetectionView.h"
+﻿#include "ObjectDetectionView.h"
 #include <QFileDialog>
-#include "EvisionUtils.h"
+
 
 ObjectDetectionView::ObjectDetectionView(QWidget *parent)
 	: QWidget(parent)
@@ -77,7 +77,7 @@ void ObjectDetectionView::OnSwitch()
 //响应帧刷新
 void ObjectDetectionView::OnParamChanged_DetectionPlayer()
 {
-	QImage LQImage = EvisionUtils::cvMat2QImage(m_entity->getDetectionPlayer());
+	QImage LQImage = _cvMat2QImage(m_entity->getDetectionPlayer());
 	QGraphicsScene *sceneL = new QGraphicsScene;
 	sceneL->addPixmap(QPixmap::fromImage(LQImage));
 	ui.graphicsView->setScene(sceneL);
@@ -104,4 +104,68 @@ void ObjectDetectionView::OnParamChanged_weightsFilename()
 void ObjectDetectionView::OnParamChanged_namesFilename()
 {
 	ui.lineEdit_Name->setText(m_entity->getnamesFilename());
+}
+
+/*
+ * cv::Mat转换为QImage
+ */
+QImage ObjectDetectionView::_cvMat2QImage(const cv::Mat& mat)
+{
+	cv::Mat mat_8;
+	switch (mat.channels())
+	{
+	case 1:
+		mat.convertTo(mat_8, CV_8UC1);
+		break;
+	case 2:
+		mat.convertTo(mat_8, CV_8UC2);
+		break;
+	case 3:
+		mat.convertTo(mat_8, CV_8UC3);
+		break;
+	case 4:
+		mat.convertTo(mat_8, CV_8UC4);
+		break;
+	}
+	// 8-bits unsigned, NO. OF CHANNELS = 1
+	if (mat_8.type() == CV_8UC1)
+	{
+		QImage image(mat_8.cols, mat_8.rows, QImage::Format_Indexed8);
+		// Set the color table (used to translate colour indexes to qRgb values)
+		image.setColorCount(256);
+		for (int i = 0; i < 256; i++)
+		{
+			image.setColor(i, qRgb(i, i, i));
+		}
+		// Copy input Mat
+		uchar* pSrc = mat_8.data;
+		for (int row = 0; row < mat_8.rows; row++)
+		{
+			uchar* pDest = image.scanLine(row);
+			memcpy(pDest, pSrc, mat_8.cols);
+			pSrc += mat_8.step;
+		}
+		return image;
+	}
+	// 8-bits unsigned, NO. OF CHANNELS = 3
+	else if (mat_8.type() == CV_8UC3)
+	{
+		// Copy input Mat
+		const uchar* pSrc = (const uchar*)mat_8.data;
+		// Create QImage with same dimensions as input Mat
+		QImage image(pSrc, mat_8.cols, mat_8.rows, mat_8.step, QImage::Format_RGB888);
+		return image.rgbSwapped();
+	}
+	else if (mat_8.type() == CV_8UC4)
+	{
+		// Copy input Mat
+		const uchar* pSrc = (const uchar*)mat_8.data;
+		// Create QImage with same dimensions as input Mat
+		QImage image(pSrc, mat_8.cols, mat_8.rows, mat_8.step, QImage::Format_ARGB32);
+		return image.copy();
+	}
+	else
+	{
+		return QImage();
+	}
 }

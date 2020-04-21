@@ -1,4 +1,4 @@
-#ifndef VOWELCUBE_H
+﻿#ifndef VOWELCUBE_H
 #define VOWELCUBE_H
 
 #include <QGLWidget>

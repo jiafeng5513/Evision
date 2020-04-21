@@ -1,4 +1,4 @@
-#EvisionSandbox:主程序
+﻿#EvisionSandbox:主程序
 
 #设置cmake最小版本号
 cmake_minimum_required(VERSION 3.13.0)
@@ -138,6 +138,5 @@ target_link_libraries(EvisionSandbox EvisionObjDetection)
 endif()
 
 if (PointCloudViewer)
-#target_link_libraries(EvisionSandbox Evision3dViz)
 target_link_libraries(EvisionSandbox EvisionCloudViewer)
 endif()

@@ -1,4 +1,4 @@
-#include "WatchImageView.h"
+﻿#include "WatchImageView.h"
 #include"QWheelEvent"
 
 void MyGraphicsView::wheelEvent(QWheelEvent * event)

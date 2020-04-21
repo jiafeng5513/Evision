@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 /*
  * 在CMake中添加:add_definitions(-D LIB_EXPORTS)以启用
  */

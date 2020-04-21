@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <QThread>
 #include <opencv2/core/matx.hpp>
 #include "opencv2/calib3d/calib3d.hpp"

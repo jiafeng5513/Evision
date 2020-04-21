@@ -1,4 +1,4 @@
-#include <QtGui>
+﻿#include <QtGui>
 #include <QtOpenGL>
 #include <cmath>
 #include <iostream>              

@@ -1,4 +1,4 @@
-#include "LogView.h"
+﻿#include "LogView.h"
 #ifdef WIN32
 #include <corecrt_wstdio.h>
 #endif

@@ -1,4 +1,4 @@
-#include "CameraView.h"
+﻿#include "CameraView.h"
 #include <QMessageBox>
 #include <QPalette>
 #include <QMediaMetaData>

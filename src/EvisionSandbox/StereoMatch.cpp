@@ -1,4 +1,4 @@
-#define NOMINMAX
+﻿#define NOMINMAX
 #include "StereoMatch.h"
 #include <QFileDialog>
 #include <QTime>

@@ -1,4 +1,4 @@
-#include "TraceView.h"
+﻿#include "TraceView.h"
 #include "EvisionUtils.h"
 #include "QGraphicsScene"
 #include <QFileDialog>

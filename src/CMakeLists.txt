@@ -21,7 +21,6 @@ option(ObjectDetection "Object Detection" ON)
 
 if (PointCloudViewer)
 # 点云浏览器,生成动态库
-#add_subdirectory(Evision3dViz)
 add_subdirectory(EvisionCloudViewer)
 endif()
 
@@ -34,6 +33,7 @@ add_subdirectory(EvisionElas)
 if (ObjectDetection)
 # 目标检测,生成动态库
 add_subdirectory(EvisionObjDetection)
+add_subdirectory(EvisionObjDetectionEngine)
 endif()
 
 # 主程序,生成可执行程序

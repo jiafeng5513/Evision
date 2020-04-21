@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QWidget>
+#include <QImage>
 #include "ui_ObjectDetectionView.h"
 #include "ObjectDetectionEntity.h"
 #include "ObjectDetectionEngine.h"
@@ -17,6 +18,7 @@ private:
 	Ui::ObjectDetectionView ui;
 	ObjectDetectionEntity * m_entity;
 	ObjectDetectionEngine * m_engine;
+	QImage _cvMat2QImage(const cv::Mat& mat);
 public slots:
 	void OnBrowseCfg();
 	void OnBrowseWeights();

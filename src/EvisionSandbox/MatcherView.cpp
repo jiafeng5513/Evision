@@ -1,4 +1,4 @@
-#include "MatcherView.h"
+﻿#include "MatcherView.h"
 #include "EvisionUtils.h"
 #include "math.h"
 //#include<qDebug>

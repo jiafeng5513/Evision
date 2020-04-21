@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <qobject.h>
 /*
  * 参数实体类
