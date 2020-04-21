@@ -14,7 +14,7 @@
    <string>ObjectDetectionView</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
-   <item row="0" column="0">
+   <item row="1" column="0">
     <widget class="QGraphicsView" name="graphicsView">
      <property name="minimumSize">
       <size>
@@ -24,11 +24,11 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="1">
+   <item row="0" column="0">
     <widget class="QFrame" name="frame">
      <property name="maximumSize">
       <size>
-       <width>350</width>
+       <width>16777215</width>
        <height>16777215</height>
       </size>
      </property>
@@ -39,22 +39,15 @@
       <enum>QFrame::Raised</enum>
      </property>
      <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="0">
-       <widget class="QLabel" name="label">
+      <item row="1" column="2">
+       <widget class="QPushButton" name="pushButton_weight">
         <property name="text">
-         <string>Cfg:</string>
+         <string>浏览</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="QLineEdit" name="lineEdit_Cfg"/>
-      </item>
-      <item row="0" column="2">
-       <widget class="QPushButton" name="pushButton_cfg">
-        <property name="text">
-         <string>浏览</string>
-        </property>
-       </widget>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="label_2">
@@ -63,52 +56,56 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
-       <widget class="QLineEdit" name="lineEdit_Weight"/>
-      </item>
-      <item row="1" column="2">
-       <widget class="QPushButton" name="pushButton_weight">
-        <property name="text">
-         <string>浏览</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
+      <item row="0" column="3">
        <widget class="QLabel" name="label_3">
         <property name="text">
          <string>Names</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="1">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Cfg:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QPushButton" name="pushButton_cfg">
+        <property name="text">
+         <string>浏览</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="lineEdit_Weight"/>
+      </item>
+      <item row="0" column="4">
        <widget class="QLineEdit" name="lineEdit_Name"/>
       </item>
-      <item row="2" column="2">
+      <item row="0" column="5">
        <widget class="QPushButton" name="pushButton_names">
         <property name="text">
          <string>浏览</string>
         </property>
        </widget>
       </item>
-      <item row="3" column="0">
+      <item row="1" column="3">
        <widget class="QLabel" name="label_4">
         <property name="text">
          <string>Camera</string>
         </property>
        </widget>
       </item>
-      <item row="3" column="1">
+      <item row="1" column="4">
        <widget class="QComboBox" name="comboBox_Camera"/>
       </item>
-      <item row="3" column="2">
+      <item row="1" column="5">
        <widget class="QPushButton" name="pushButton_switch">
         <property name="text">
          <string>switch</string>
         </property>
        </widget>
-      </item>
-      <item row="4" column="0" colspan="3">
-       <widget class="QTextEdit" name="textEdit"/>
       </item>
      </layout>
     </widget>

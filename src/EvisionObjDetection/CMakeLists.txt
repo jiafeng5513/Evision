@@ -1,4 +1,4 @@
-# Evision Object Detection (View)
+﻿# Evision Object Detection (View)
 # required cmake version
 cmake_minimum_required(VERSION 3.13.0)
 # packages
@@ -32,10 +32,9 @@ add_definitions(-D OPENCV)
 FILE(GLOB INCLUDE_FILES "./include/*.h") # [include]文件夹中的头文件
 FILE(GLOB HEAD_FILES "./*.h")                    # 其他头文件 
 FILE(GLOB SRC_FILES "./*.cpp")                     # 其他源文件 
-#查找当前文件夹中所有的ui文件
 FILE(GLOB UI_FILES "./*.ui") 
-#查找当前文件夹中所有的ui文件
 FILE(GLOB RES_FILES "./*.qrc") 
+
 
 #编译ui文件
 qt5_wrap_ui(UIC_FILES ${UI_FILES})
