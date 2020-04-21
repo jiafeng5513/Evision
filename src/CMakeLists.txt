@@ -1,15 +1,15 @@
-#根目录CMAKE
+﻿#根目录CMAKE
 cmake_minimum_required(VERSION 3.13)
 project(Evision)
 
 #set path
 if(WIN32)
-    set(OpenCV_DIR "D:/Libraries/OpenCV/4.1.2/build_vc16_withcuda/install")
-    set(Qt5_DIR "D:/Libraries/Qt/5.13.2/msvc2017_64/lib/cmake/Qt5")
+    #set(OpenCV_DIR "D:/Libraries/OpenCV/4.1.2/build_vc16_withcuda/install")
+    #set(Qt5_DIR "D:/Libraries/Qt/5.13.2/msvc2017_64/lib/cmake/Qt5")
     #CUDA
     #PCL
 ELSEIF (UNIX)
-    set(Qt5_DIR "/usr/local/Qt/5.13.1/gcc_64/lib/cmake/Qt5")
+    #set(Qt5_DIR "/usr/local/Qt/5.13.1/gcc_64/lib/cmake/Qt5")
 ENDIF()
 
 option(PointCloudViewer "Point Cloud Viewer" ON)

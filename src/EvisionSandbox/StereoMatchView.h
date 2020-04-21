@@ -1,21 +1,21 @@
-#pragma once
+﻿#pragma once
 
 #include <QWidget>
-#include "ui_MatcherView.h"
+#include "ui_StereoMatchView.h"
 #include "StereoMatch.h"
 #include "StereoMatchParamEntity.h"
 #include "StereoMatchController.h"
 
-class MatcherView : public QWidget
+class StereoMatchView : public QWidget
 {
 	Q_OBJECT
 
 public:
-	MatcherView(QWidget *parent = Q_NULLPTR);
-	~MatcherView();
+	StereoMatchView(QWidget *parent = Q_NULLPTR);
+	~StereoMatchView();
 
 private:
-	Ui::MatcherView ui;
+	Ui::StereoMatchView ui;
 	StereoMatchParamEntity * m_entity;
 	StereoMatchController * m_controller;
 public slots:
@@ -262,9 +262,11 @@ public slots:
 	void onParamChanged_IconImgL();
 	void onParamChanged_IconImgR();
 	void onParamChanged_IconRawDisp();
+	void onParamChanged_IconRainbow();
 	void onParamChanged_ImageToShow();
 
 	void onClicked_IconImgL(bool value);
 	void onClicked_IconImgR(bool value);
 	void onClicked_IconRawDisp(bool value);
+	void onClicked_IconRainbow(bool value);
 };

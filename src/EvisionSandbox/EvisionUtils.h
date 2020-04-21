@@ -22,6 +22,62 @@ public:
 	 */
 	static cv::Mat QImage2cvMat(QImage image);
 	/*
+	 * 灰度图转彩虹图
+	 */
+	static cv::Mat gray2rainbowcolor(cv::Mat& img) {
+		cv::Mat img_color = cv::Mat::zeros(img.rows, img.cols, CV_8UC3);
+		#define IMG_B(img,y,x) img.at<cv::Vec3b>(y,x)[0]
+		#define IMG_G(img,y,x) img.at<cv::Vec3b>(y,x)[1]
+		#define IMG_R(img,y,x) img.at<cv::Vec3b>(y,x)[2]
+		uchar tmp2 = 0;
+		//转为彩虹图的具体算法，主要思路是把灰度图对
+		//应的0～255的数值分别转换成彩虹色：红、橙、黄、绿、青、蓝。
+		for (int y = 0; y < img.rows; y++)
+		{
+			for (int x = 0; x < img.cols; x++)
+			{
+				tmp2 = img.at<uchar>(y, x);
+				if (tmp2 == 0)
+					continue;
+				if (tmp2 <= 51)
+				{
+					IMG_B(img_color, y, x) = 255;
+					IMG_G(img_color, y, x) = tmp2 * 5;
+					IMG_R(img_color, y, x) = 0;
+				}
+				else if (tmp2 <= 102)
+				{
+					tmp2 -= 51;
+					IMG_B(img_color, y, x) = 255 - tmp2 * 5;
+					IMG_G(img_color, y, x) = 255;
+					IMG_R(img_color, y, x) = 0;
+				}
+				else if (tmp2 <= 153)
+				{
+					tmp2 -= 102;
+					IMG_B(img_color, y, x) = 0;
+					IMG_G(img_color, y, x) = 255;
+					IMG_R(img_color, y, x) = tmp2 * 5;
+				}
+				else if (tmp2 <= 204)
+				{
+					tmp2 -= 153;
+					IMG_B(img_color, y, x) = 0;
+					IMG_G(img_color, y, x) = 255 - uchar(128.0 * tmp2 / 51.0 + 0.5);
+					IMG_R(img_color, y, x) = 255;
+				}
+				else
+				{
+					tmp2 -= 204;
+					IMG_B(img_color, y, x) = 0;
+					IMG_G(img_color, y, x) = 127 - uchar(127.0 * tmp2 / 51.0 + 0.5);
+					IMG_R(img_color, y, x) = 255;
+				}
+			}
+		}
+		return img_color;
+	}
+	/*
 	 * 创建并返回idle image
 	 */
 	static QImage getDefaultImage();
@@ -101,6 +157,7 @@ public:
 	template <typename T>
 	static void getGrayDisparity(const cv::Mat& disp, cv::Mat& grayDisp, bool stretch = true);
 };
+
 template <typename T>
 void EvisionUtils::getGrayDisparity(const cv::Mat& disp, cv::Mat& grayDisp, bool stretch)
 {

@@ -3,7 +3,7 @@
 #include "QMessageBox"
 #include "EvisionUtils.h"
 #include "CalibraterView.h"
-#include "MatcherView.h"
+#include "StereoMatchView.h"
 #include <qevent.h>
 #include <qmimedata.h>
 #include <QFileDialog>
@@ -122,7 +122,7 @@ void EvisionView::on_action_rectify()
 //显示立体匹配视图
 void EvisionView::on_action_stereoMatch_view()
 {
-	MatcherView* m_matcher = new MatcherView();
+	StereoMatchView* m_matcher = new StereoMatchView();
 	ui.mdiArea->addSubWindow(m_matcher);
 	m_matcher->show();
 }
@@ -255,22 +255,18 @@ void EvisionView::on_action_disp_to_pcd()
 	QMessageBox::information(this, QStringLiteral("该功能未启用!"), QStringLiteral("请在项目属性/C++/预处理器中添加\"WITH_PCL\"并配置好PCL依赖"));
 #endif
 }
-/*
- * 创建相机参数文件
- */
+//创建相机参数文件
 void EvisionView::on_action_create_param()
 {
 	CreateCameraParamFile* _createCameraParamFile = new CreateCameraParamFile();
 	ui.mdiArea->addSubWindow(_createCameraParamFile);
 	_createCameraParamFile->show();
 }
-
 //状态栏更新
 void EvisionView::onParamChanged_StatusBarText()
 {
 	msgLabel->setText(m_entity->getStatusBarText());
 }
-
 //文件被拖到窗口区域上
 void EvisionView::dragEnterEvent(QDragEnterEvent* event)
 {

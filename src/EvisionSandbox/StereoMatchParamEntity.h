@@ -10,7 +10,7 @@ class StereoMatchParamEntity : public QObject
 public:
 	static StereoMatchParamEntity* getInstance();
 	~StereoMatchParamEntity();
-	enum IMGID { NONE,IMG_L, IMG_R, RAW_DISP, FIX_DISP, PCOLOR_DISP };
+	enum IMGID { NONE,IMG_L, IMG_R, RAW_DISP, DEPTH, RAINBOW };  // 空,左图,右图,视差图,深度图,彩虹图
 private:
 	StereoMatchParamEntity(QObject *parent = 0);
 private:
@@ -113,7 +113,7 @@ private:
 	bool RectifiedInput = false;//输入图像是否已经进行了校准
 
 	cv::Mat imgDtoShow;//在中心显示的大图
-	cv::Mat iconImgL, iconImgR, iconRawDisp;//缩略图
+	cv::Mat iconImgL, iconImgR, iconRawDisp, iconRainbow;//缩略图
 	IMGID ImageToShow = NONE;//默认情况下,中心大图什么也不显示
 
 	cv::Mat disparity;
@@ -132,7 +132,7 @@ signals:
 	void paramChanged_IconImgL();
 	void paramChanged_IconImgR();
 	void paramChanged_IconRawDisp();
-	void paramChanged_IconFixDisp();
+	void paramChanged_IconRainbow();
 	void paramChanged_IconPcolorDisp();
 	void paramChanged_ImageToShow();
 	void paramChanged_dMin();
@@ -465,6 +465,9 @@ public:
 
 	cv::Mat getIconRawDisp();
 	void setIconRawDisp(cv::Mat value);
+
+	cv::Mat getIconRainbow();
+	void setIconRainbow(cv::Mat value);
 
 	IMGID getImageToShow();
 	void setImageToShow(IMGID value);

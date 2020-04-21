@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MatcherView</class>
- <widget class="QWidget" name="MatcherView">
+ <class>StereoMatchView</class>
+ <widget class="QWidget" name="StereoMatchView">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -469,7 +469,7 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>261</width>
+            <width>233</width>
             <height>590</height>
            </rect>
           </property>
@@ -1368,6 +1368,26 @@
        </widget>
       </item>
       <item>
+       <widget class="QGraphicsView" name="graphicsView_Rainbow">
+        <property name="maximumSize">
+         <size>
+          <width>133</width>
+          <height>100</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioButton_Rainbow">
+        <property name="text">
+         <string>彩虹图</string>
+        </property>
+        <property name="autoExclusive">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
        <spacer name="verticalSpacer">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
@@ -1391,7 +1411,7 @@
   <connection>
    <sender>pushButton_MatchDefault</sender>
    <signal>clicked()</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>setDefaultMatchParam()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -1407,7 +1427,7 @@
   <connection>
    <sender>pushButton_MatchChooseFiles</sender>
    <signal>clicked()</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>doMatch()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -1423,7 +1443,7 @@
   <connection>
    <sender>pushButton_RefreshStereoMatch</sender>
    <signal>clicked()</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>RefreshStereoMatch()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -1439,12 +1459,12 @@
   <connection>
    <sender>radioButton_ImageL</sender>
    <signal>clicked(bool)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>onClicked_IconImgL(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>72</x>
-     <y>134</y>
+     <x>85</x>
+     <y>114</y>
     </hint>
     <hint type="destinationlabel">
      <x>153</x>
@@ -1455,12 +1475,12 @@
   <connection>
    <sender>radioButton_ImageR</sender>
    <signal>clicked(bool)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>onClicked_IconImgR(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>74</x>
-     <y>262</y>
+     <x>87</x>
+     <y>222</y>
     </hint>
     <hint type="destinationlabel">
      <x>153</x>
@@ -1471,12 +1491,12 @@
   <connection>
    <sender>radioButton_RawDisp</sender>
    <signal>clicked(bool)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>onClicked_IconRawDisp(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>78</x>
-     <y>390</y>
+     <x>91</x>
+     <y>330</y>
     </hint>
     <hint type="destinationlabel">
      <x>153</x>
@@ -1487,7 +1507,7 @@
   <connection>
    <sender>radioButton_BM</sender>
    <signal>clicked(bool)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>onClicked_BM(bool)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -1503,7 +1523,7 @@
   <connection>
    <sender>radioButton_SGBM</sender>
    <signal>clicked(bool)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>onClicked_SGBM(bool)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -1519,7 +1539,7 @@
   <connection>
    <sender>radioButton_ELAS</sender>
    <signal>clicked(bool)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>onClicked_ELAS(bool)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -1535,7 +1555,7 @@
   <connection>
    <sender>radioButton_ADC</sender>
    <signal>clicked(bool)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>onClicked_ADCensus(bool)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -1551,7 +1571,7 @@
   <connection>
    <sender>checkBox_RectifiedInput</sender>
    <signal>clicked(bool)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>onClicked_RectifiedInput(bool)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -1567,7 +1587,7 @@
   <connection>
    <sender>pushButton_Save</sender>
    <signal>clicked()</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>SaveDisparities()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -1583,7 +1603,7 @@
   <connection>
    <sender>pushButton_Help</sender>
    <signal>clicked()</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>Help()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -1599,12 +1619,12 @@
   <connection>
    <sender>spinBox_dMin</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_DMin(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>837</x>
-     <y>107</y>
+     <x>737</x>
+     <y>84</y>
     </hint>
     <hint type="destinationlabel">
      <x>724</x>
@@ -1615,12 +1635,12 @@
   <connection>
    <sender>spinBox_dMax</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_DMax(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>970</x>
-     <y>107</y>
+     <x>771</x>
+     <y>84</y>
     </hint>
     <hint type="destinationlabel">
      <x>1032</x>
@@ -1631,12 +1651,12 @@
   <connection>
    <sender>spinBox_censusWinW</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_CensusWinW(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>837</x>
-     <y>156</y>
+     <x>737</x>
+     <y>87</y>
     </hint>
     <hint type="destinationlabel">
      <x>723</x>
@@ -1647,12 +1667,12 @@
   <connection>
    <sender>spinBox_censusWinH</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_CensusWinH(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>837</x>
-     <y>182</y>
+     <x>737</x>
+     <y>87</y>
     </hint>
     <hint type="destinationlabel">
      <x>724</x>
@@ -1663,12 +1683,12 @@
   <connection>
    <sender>doubleSpinBox_lambdaCensus</sender>
    <signal>valueChanged(double)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_LambdaCensus(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>970</x>
-     <y>156</y>
+     <x>771</x>
+     <y>87</y>
     </hint>
     <hint type="destinationlabel">
      <x>1033</x>
@@ -1679,12 +1699,12 @@
   <connection>
    <sender>doubleSpinBox_lambdaAD</sender>
    <signal>valueChanged(double)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_LambdaAD(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>970</x>
-     <y>182</y>
+     <x>771</x>
+     <y>87</y>
     </hint>
     <hint type="destinationlabel">
      <x>1032</x>
@@ -1695,12 +1715,12 @@
   <connection>
    <sender>doubleSpinBox_defaultBorderCost</sender>
    <signal>valueChanged(double)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_DefaultBorderCost(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>970</x>
-     <y>208</y>
+     <x>771</x>
+     <y>80</y>
     </hint>
     <hint type="destinationlabel">
      <x>1032</x>
@@ -1711,12 +1731,12 @@
   <connection>
    <sender>spinBox_maxLength1</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_MaxLength1(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>840</x>
-     <y>254</y>
+     <x>790</x>
+     <y>89</y>
     </hint>
     <hint type="destinationlabel">
      <x>724</x>
@@ -1727,12 +1747,12 @@
   <connection>
    <sender>spinBox_maxLength2</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_MaxLength2(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>840</x>
-     <y>280</y>
+     <x>790</x>
+     <y>89</y>
     </hint>
     <hint type="destinationlabel">
      <x>723</x>
@@ -1743,12 +1763,12 @@
   <connection>
    <sender>spinBox_aggregatingIterations</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_AggregatingIterations(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>840</x>
-     <y>306</y>
+     <x>732</x>
+     <y>80</y>
     </hint>
     <hint type="destinationlabel">
      <x>723</x>
@@ -1759,12 +1779,12 @@
   <connection>
    <sender>spinBox_colorThreshold1</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_ColorThreshold1(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>970</x>
-     <y>254</y>
+     <x>790</x>
+     <y>89</y>
     </hint>
     <hint type="destinationlabel">
      <x>1033</x>
@@ -1775,12 +1795,12 @@
   <connection>
    <sender>spinBox_colorThreshold2</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_ColorThreshold2(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>970</x>
-     <y>280</y>
+     <x>790</x>
+     <y>89</y>
     </hint>
     <hint type="destinationlabel">
      <x>1032</x>
@@ -1791,12 +1811,12 @@
   <connection>
    <sender>spinBox_colorDifference</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_ColorDifference(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>781</x>
-     <y>354</y>
+     <x>790</x>
+     <y>89</y>
     </hint>
     <hint type="destinationlabel">
      <x>723</x>
@@ -1807,12 +1827,12 @@
   <connection>
    <sender>doubleSpinBox_pi1</sender>
    <signal>valueChanged(double)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_Pi1(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>875</x>
-     <y>354</y>
+     <x>790</x>
+     <y>89</y>
     </hint>
     <hint type="destinationlabel">
      <x>723</x>
@@ -1823,12 +1843,12 @@
   <connection>
    <sender>doubleSpinBox_pi2</sender>
    <signal>valueChanged(double)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_Pi2(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>970</x>
-     <y>354</y>
+     <x>790</x>
+     <y>89</y>
     </hint>
     <hint type="destinationlabel">
      <x>1031</x>
@@ -1839,12 +1859,12 @@
   <connection>
    <sender>spinBox_dispTolerance</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_DispTolerance(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>834</x>
-     <y>405</y>
+     <x>790</x>
+     <y>89</y>
     </hint>
     <hint type="destinationlabel">
      <x>723</x>
@@ -1855,12 +1875,12 @@
   <connection>
    <sender>spinBox_maxSearchDepth</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_MaxSearchDepth(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>970</x>
-     <y>405</y>
+     <x>790</x>
+     <y>89</y>
     </hint>
     <hint type="destinationlabel">
      <x>1033</x>
@@ -1871,12 +1891,12 @@
   <connection>
    <sender>spinBox_votingThreshold</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_VotingThreshold(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>837</x>
-     <y>456</y>
+     <x>790</x>
+     <y>89</y>
     </hint>
     <hint type="destinationlabel">
      <x>724</x>
@@ -1887,12 +1907,12 @@
   <connection>
    <sender>doubleSpinBox_votingRatioThreshold</sender>
    <signal>valueChanged(double)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_VotingRatioThreshold(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>970</x>
-     <y>456</y>
+     <x>790</x>
+     <y>89</y>
     </hint>
     <hint type="destinationlabel">
      <x>1034</x>
@@ -1903,12 +1923,12 @@
   <connection>
    <sender>spinBox_cannyKernelSize</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_CannyKernelSize(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>798</x>
-     <y>507</y>
+     <x>790</x>
+     <y>89</y>
     </hint>
     <hint type="destinationlabel">
      <x>723</x>
@@ -1919,12 +1939,12 @@
   <connection>
    <sender>spinBox_cannyThreshold1</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_CannyThreshold1(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>884</x>
-     <y>507</y>
+     <x>790</x>
+     <y>89</y>
     </hint>
     <hint type="destinationlabel">
      <x>1034</x>
@@ -1935,12 +1955,12 @@
   <connection>
    <sender>spinBox_cannyThreshold2</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_CannyThreshold2(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>970</x>
-     <y>507</y>
+     <x>790</x>
+     <y>89</y>
     </hint>
     <hint type="destinationlabel">
      <x>1033</x>
@@ -1951,12 +1971,12 @@
   <connection>
    <sender>spinBox_blurKernelSize</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_BlurKernelSize(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>970</x>
-     <y>558</y>
+     <x>790</x>
+     <y>89</y>
     </hint>
     <hint type="destinationlabel">
      <x>1035</x>
@@ -1967,12 +1987,12 @@
   <connection>
    <sender>spinBox_disp_min</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_DMin(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>953</x>
-     <y>99</y>
+     <x>915</x>
+     <y>89</y>
     </hint>
     <hint type="destinationlabel">
      <x>761</x>
@@ -1983,12 +2003,12 @@
   <connection>
    <sender>spinBox_disp_max</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_DMax(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>953</x>
-     <y>125</y>
+     <x>915</x>
+     <y>115</y>
     </hint>
     <hint type="destinationlabel">
      <x>762</x>
@@ -1999,12 +2019,12 @@
   <connection>
    <sender>doubleSpinBox_support_threshold</sender>
    <signal>valueChanged(double)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_SupportThreshold(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>953</x>
-     <y>151</y>
+     <x>915</x>
+     <y>141</y>
     </hint>
     <hint type="destinationlabel">
      <x>763</x>
@@ -2015,12 +2035,12 @@
   <connection>
    <sender>spinBox_support_texture</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_SupportTexture(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>953</x>
-     <y>177</y>
+     <x>915</x>
+     <y>167</y>
     </hint>
     <hint type="destinationlabel">
      <x>761</x>
@@ -2031,12 +2051,12 @@
   <connection>
    <sender>spinBox_candidate_stepsize</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_CandidateStepsize(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>953</x>
-     <y>203</y>
+     <x>915</x>
+     <y>193</y>
     </hint>
     <hint type="destinationlabel">
      <x>762</x>
@@ -2047,12 +2067,12 @@
   <connection>
    <sender>spinBox_incon_window_size</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_InconWindowSize(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>953</x>
-     <y>229</y>
+     <x>915</x>
+     <y>219</y>
     </hint>
     <hint type="destinationlabel">
      <x>761</x>
@@ -2063,12 +2083,12 @@
   <connection>
    <sender>spinBox_incon_threshold</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_InconThreshold(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>953</x>
-     <y>255</y>
+     <x>915</x>
+     <y>245</y>
     </hint>
     <hint type="destinationlabel">
      <x>761</x>
@@ -2079,12 +2099,12 @@
   <connection>
    <sender>spinBox_incon_min_support</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_InconMinSupport(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>953</x>
-     <y>281</y>
+     <x>915</x>
+     <y>271</y>
     </hint>
     <hint type="destinationlabel">
      <x>763</x>
@@ -2095,12 +2115,12 @@
   <connection>
    <sender>spinBox_grid_size</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_GridSize(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>953</x>
-     <y>307</y>
+     <x>915</x>
+     <y>297</y>
     </hint>
     <hint type="destinationlabel">
      <x>762</x>
@@ -2111,12 +2131,12 @@
   <connection>
    <sender>doubleSpinBox_beta</sender>
    <signal>valueChanged(double)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_Beta(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>953</x>
-     <y>333</y>
+     <x>915</x>
+     <y>323</y>
     </hint>
     <hint type="destinationlabel">
      <x>763</x>
@@ -2127,12 +2147,12 @@
   <connection>
    <sender>doubleSpinBox_gamma</sender>
    <signal>valueChanged(double)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_Gamma(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>953</x>
-     <y>359</y>
+     <x>915</x>
+     <y>349</y>
     </hint>
     <hint type="destinationlabel">
      <x>762</x>
@@ -2143,12 +2163,12 @@
   <connection>
    <sender>doubleSpinBox_sigma</sender>
    <signal>valueChanged(double)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_Sigma(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>953</x>
-     <y>385</y>
+     <x>915</x>
+     <y>375</y>
     </hint>
     <hint type="destinationlabel">
      <x>761</x>
@@ -2159,12 +2179,12 @@
   <connection>
    <sender>doubleSpinBox_sradius</sender>
    <signal>valueChanged(double)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_Sradius(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>953</x>
-     <y>411</y>
+     <x>915</x>
+     <y>401</y>
     </hint>
     <hint type="destinationlabel">
      <x>763</x>
@@ -2175,12 +2195,12 @@
   <connection>
    <sender>spinBox_match_texture</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_MatchTexture(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>953</x>
-     <y>437</y>
+     <x>915</x>
+     <y>427</y>
     </hint>
     <hint type="destinationlabel">
      <x>761</x>
@@ -2191,12 +2211,12 @@
   <connection>
    <sender>spinBox_lr_threshold</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_LrThreshold(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>953</x>
-     <y>463</y>
+     <x>915</x>
+     <y>453</y>
     </hint>
     <hint type="destinationlabel">
      <x>762</x>
@@ -2207,12 +2227,12 @@
   <connection>
    <sender>doubleSpinBox_speckle_sim_threshold</sender>
    <signal>valueChanged(double)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_SpeckleSimThreshold(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>953</x>
-     <y>489</y>
+     <x>915</x>
+     <y>479</y>
     </hint>
     <hint type="destinationlabel">
      <x>761</x>
@@ -2223,12 +2243,12 @@
   <connection>
    <sender>spinBox_speckle_size</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_SpeckleSize(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>953</x>
-     <y>515</y>
+     <x>915</x>
+     <y>505</y>
     </hint>
     <hint type="destinationlabel">
      <x>762</x>
@@ -2239,12 +2259,12 @@
   <connection>
    <sender>spinBox_ipol_gap_width</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_IpolGapWidth(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>953</x>
-     <y>541</y>
+     <x>915</x>
+     <y>531</y>
     </hint>
     <hint type="destinationlabel">
      <x>762</x>
@@ -2255,12 +2275,12 @@
   <connection>
    <sender>checkBox_add_corners</sender>
    <signal>clicked(bool)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_AddCorners(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>859</x>
-     <y>563</y>
+     <x>849</x>
+     <y>553</y>
     </hint>
     <hint type="destinationlabel">
      <x>1071</x>
@@ -2271,12 +2291,12 @@
   <connection>
    <sender>checkBox_subsampling</sender>
    <signal>clicked(bool)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_SubSampling(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>859</x>
-     <y>585</y>
+     <x>849</x>
+     <y>575</y>
     </hint>
     <hint type="destinationlabel">
      <x>1072</x>
@@ -2287,12 +2307,12 @@
   <connection>
    <sender>checkBox_postprocess_only_left</sender>
    <signal>clicked(bool)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_PostprocessOnlyLeft(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>859</x>
-     <y>607</y>
+     <x>849</x>
+     <y>597</y>
     </hint>
     <hint type="destinationlabel">
      <x>1073</x>
@@ -2303,12 +2323,12 @@
   <connection>
    <sender>checkBox_filter_adaptive_mean</sender>
    <signal>clicked(bool)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_FilterAdaptiveMean(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>859</x>
-     <y>629</y>
+     <x>849</x>
+     <y>619</y>
     </hint>
     <hint type="destinationlabel">
      <x>1071</x>
@@ -2319,12 +2339,12 @@
   <connection>
    <sender>checkBox_filter_median</sender>
    <signal>clicked(bool)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_FilterMedian(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>859</x>
-     <y>651</y>
+     <x>849</x>
+     <y>641</y>
     </hint>
     <hint type="destinationlabel">
      <x>1069</x>
@@ -2335,12 +2355,12 @@
   <connection>
    <sender>radioButton_BM_Prefilter_Normalzed</sender>
    <signal>clicked(bool)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_BM_preFilterType_NORMALIZED(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>837</x>
-     <y>107</y>
+     <x>737</x>
+     <y>90</y>
     </hint>
     <hint type="destinationlabel">
      <x>1167</x>
@@ -2351,12 +2371,12 @@
   <connection>
    <sender>radioButton_BM_Prefilter_XSobel</sender>
    <signal>clicked(bool)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_BM_preFilterType_XSOBEL(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>970</x>
-     <y>107</y>
+     <x>771</x>
+     <y>90</y>
     </hint>
     <hint type="destinationlabel">
      <x>1166</x>
@@ -2367,12 +2387,12 @@
   <connection>
    <sender>spinBox_BM_preFilterSize</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_BM_preFilterSize(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>970</x>
-     <y>165</y>
+     <x>771</x>
+     <y>94</y>
     </hint>
     <hint type="destinationlabel">
      <x>1168</x>
@@ -2383,12 +2403,12 @@
   <connection>
    <sender>spinBox_BM_preFilterCap</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_BM_preFilterCap(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>970</x>
-     <y>191</y>
+     <x>771</x>
+     <y>88</y>
     </hint>
     <hint type="destinationlabel">
      <x>1166</x>
@@ -2399,12 +2419,12 @@
   <connection>
    <sender>spinBox_BM_SADWindowSize</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_BM_SADWindowSize(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>970</x>
-     <y>249</y>
+     <x>771</x>
+     <y>98</y>
     </hint>
     <hint type="destinationlabel">
      <x>1167</x>
@@ -2415,12 +2435,12 @@
   <connection>
    <sender>spinBox_BM_minDisparity</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_BM_minDisparity(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>970</x>
-     <y>275</y>
+     <x>771</x>
+     <y>95</y>
     </hint>
     <hint type="destinationlabel">
      <x>1168</x>
@@ -2431,12 +2451,12 @@
   <connection>
    <sender>spinBox_BM_numDisparities</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_BM_numDisparities(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>970</x>
-     <y>301</y>
+     <x>771</x>
+     <y>92</y>
     </hint>
     <hint type="destinationlabel">
      <x>1167</x>
@@ -2447,12 +2467,12 @@
   <connection>
    <sender>spinBox_BM_textureThreshold</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_BM_textureThreshold(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>970</x>
-     <y>327</y>
+     <x>771</x>
+     <y>88</y>
     </hint>
     <hint type="destinationlabel">
      <x>1168</x>
@@ -2463,12 +2483,12 @@
   <connection>
    <sender>spinBox_BM_uniquenessRatio</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_BM_uniquenessRatio(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>970</x>
-     <y>353</y>
+     <x>771</x>
+     <y>85</y>
     </hint>
     <hint type="destinationlabel">
      <x>1166</x>
@@ -2479,12 +2499,12 @@
   <connection>
    <sender>spinBox_BM_speckleWindowSize</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_BM_speckleWindowSize(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>970</x>
-     <y>411</y>
+     <x>771</x>
+     <y>102</y>
     </hint>
     <hint type="destinationlabel">
      <x>1166</x>
@@ -2495,12 +2515,12 @@
   <connection>
    <sender>spinBox_BM_speckleRange</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_BM_speckleRange(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>970</x>
-     <y>437</y>
+     <x>771</x>
+     <y>97</y>
     </hint>
     <hint type="destinationlabel">
      <x>1167</x>
@@ -2511,12 +2531,12 @@
   <connection>
    <sender>spinBox_BM_disp12MaxDiff</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_BM_disp12MaxDiff(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>970</x>
-     <y>463</y>
+     <x>771</x>
+     <y>92</y>
     </hint>
     <hint type="destinationlabel">
      <x>1167</x>
@@ -2527,7 +2547,7 @@
   <connection>
    <sender>radioButton_SGBM_MODEL_3WAY</sender>
    <signal>clicked(bool)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_SGBM_MODEL_3WAY(bool)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -2543,7 +2563,7 @@
   <connection>
    <sender>radioButton_SGBM_MODEL_HH4</sender>
    <signal>clicked(bool)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_SGBM_MODEL_HH4(bool)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -2559,7 +2579,7 @@
   <connection>
    <sender>radioButton_SGBM_MODEL_Default</sender>
    <signal>clicked(bool)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_SGBM_MODEL_Default(bool)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -2575,7 +2595,7 @@
   <connection>
    <sender>spinBox_SGBM_preFilterCap</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_SGBM_preFilterCap(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -2591,7 +2611,7 @@
   <connection>
    <sender>spinBox_SGBM_minDisparity</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_SGBM_minDisparity(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -2607,7 +2627,7 @@
   <connection>
    <sender>spinBox_SGBM_numDisparities</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_SGBM_numDisparities(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -2623,7 +2643,7 @@
   <connection>
    <sender>spinBox_SGBM_blockSize</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_SGBM_blockSize(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -2639,7 +2659,7 @@
   <connection>
    <sender>spinBox_SGBM_P1</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_SGBM_P1(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -2655,7 +2675,7 @@
   <connection>
    <sender>spinBox_SGBM_P2</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_SGBM_P2(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -2671,7 +2691,7 @@
   <connection>
    <sender>spinBox_SGBM_uniquenessRatio</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_SGBM_uniquenessRatio(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -2687,7 +2707,7 @@
   <connection>
    <sender>spinBox_SGBM_speckleWindowSize</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_SGBM_speckleWindowSize(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -2703,7 +2723,7 @@
   <connection>
    <sender>spinBox_SGBM_speckleRange</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_SGBM_speckleRange(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -2719,7 +2739,7 @@
   <connection>
    <sender>spinBox_SGBM_disp12MaxDiff</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_SGBM_disp12MaxDiff(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -2735,7 +2755,7 @@
   <connection>
    <sender>radioButton_SGBM_MODEL_HH</sender>
    <signal>clicked(bool)</signal>
-   <receiver>MatcherView</receiver>
+   <receiver>StereoMatchView</receiver>
    <slot>valueChanged_SGBM_MODEL_HH(bool)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -2745,6 +2765,22 @@
     <hint type="destinationlabel">
      <x>995</x>
      <y>116</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_Rainbow</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>StereoMatchView</receiver>
+   <slot>onClicked_IconRainbow(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>59</x>
+     <y>537</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>150</x>
+     <y>581</y>
     </hint>
    </hints>
   </connection>
@@ -2835,5 +2871,6 @@
   <slot>valueChanged_SGBM_MODEL_HH4(bool)</slot>
   <slot>valueChanged_SGBM_MODEL_Default(bool)</slot>
   <slot>valueChanged_SGBM_MODEL_HH(bool)</slot>
+  <slot>onClicked_IconRainbow(bool)</slot>
  </slots>
 </ui>

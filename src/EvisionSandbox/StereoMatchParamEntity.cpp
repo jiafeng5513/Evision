@@ -1,5 +1,5 @@
 ﻿#include "StereoMatchParamEntity.h"
-
+#include "EvisionUtils.h"
 StereoMatchParamEntity::StereoMatchParamEntity(QObject *parent)
 	: QObject(parent)
 {
@@ -713,7 +713,21 @@ cv::Mat StereoMatchParamEntity::getIconRawDisp()
 void StereoMatchParamEntity::setIconRawDisp(cv::Mat value)
 {
 	iconRawDisp = value;
+	//生成彩虹图
+	iconRainbow = EvisionUtils::gray2rainbowcolor(value);
 	emit paramChanged_IconRawDisp();
+	emit paramChanged_IconRainbow();
+}
+
+cv::Mat StereoMatchParamEntity::getIconRainbow()
+{
+	return iconRainbow;
+}
+
+void StereoMatchParamEntity::setIconRainbow(cv::Mat value)
+{
+	iconRainbow = value;
+	emit paramChanged_IconRainbow();
 }
 
 StereoMatchParamEntity::IMGID StereoMatchParamEntity::getImageToShow()
