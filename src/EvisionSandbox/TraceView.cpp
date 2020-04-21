@@ -173,7 +173,7 @@ void TraceView::onStart()
 	if (RawDisp.type() == CV_32F)
 	{
 		//ADCensus的原始视差数据是CV_32F,不能直接显示
-		EvisionUtils::getGrayDisparity<float>(RawDisp, disparityGary, true);
+		EvisionUtils::getGrayDisparity(RawDisp, disparityGary, true);
 	}
 	else if(RawDisp.type() == CV_8U)
 	{

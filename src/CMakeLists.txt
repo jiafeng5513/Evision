@@ -38,3 +38,6 @@ endif()
 
 # 主程序,生成可执行程序
 add_subdirectory(EvisionSandbox)
+
+# 通用工具类
+add_subdirectory(EvisionUtils)

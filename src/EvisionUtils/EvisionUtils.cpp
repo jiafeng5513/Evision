@@ -100,6 +100,64 @@ cv::Mat EvisionUtils::QImage2cvMat(QImage image)
 	}
 	return mat;
 }
+
+/*
+* 灰度图转彩虹图
+*/
+
+cv::Mat EvisionUtils::gray2rainbowcolor(cv::Mat& img) {
+	cv::Mat img_color = cv::Mat::zeros(img.rows, img.cols, CV_8UC3);
+#define IMG_B(img,y,x) img.at<cv::Vec3b>(y,x)[0]
+#define IMG_G(img,y,x) img.at<cv::Vec3b>(y,x)[1]
+#define IMG_R(img,y,x) img.at<cv::Vec3b>(y,x)[2]
+	uchar tmp2 = 0;
+	//转为彩虹图的具体算法，主要思路是把灰度图对
+	//应的0～255的数值分别转换成彩虹色：红、橙、黄、绿、青、蓝。
+	for (int y = 0; y < img.rows; y++)
+	{
+		for (int x = 0; x < img.cols; x++)
+		{
+			tmp2 = img.at<uchar>(y, x);
+			if (tmp2 == 0)
+				continue;
+			if (tmp2 <= 51)
+			{
+				IMG_B(img_color, y, x) = 255;
+				IMG_G(img_color, y, x) = tmp2 * 5;
+				IMG_R(img_color, y, x) = 0;
+			}
+			else if (tmp2 <= 102)
+			{
+				tmp2 -= 51;
+				IMG_B(img_color, y, x) = 255 - tmp2 * 5;
+				IMG_G(img_color, y, x) = 255;
+				IMG_R(img_color, y, x) = 0;
+			}
+			else if (tmp2 <= 153)
+			{
+				tmp2 -= 102;
+				IMG_B(img_color, y, x) = 0;
+				IMG_G(img_color, y, x) = 255;
+				IMG_R(img_color, y, x) = tmp2 * 5;
+			}
+			else if (tmp2 <= 204)
+			{
+				tmp2 -= 153;
+				IMG_B(img_color, y, x) = 0;
+				IMG_G(img_color, y, x) = 255 - uchar(128.0 * tmp2 / 51.0 + 0.5);
+				IMG_R(img_color, y, x) = 255;
+			}
+			else
+			{
+				tmp2 -= 204;
+				IMG_B(img_color, y, x) = 0;
+				IMG_G(img_color, y, x) = 127 - uchar(127.0 * tmp2 / 51.0 + 0.5);
+				IMG_R(img_color, y, x) = 255;
+			}
+		}
+	}
+	return img_color;
+}
 /*
  * 创建并返回idle image
  */
@@ -361,4 +419,59 @@ bool EvisionUtils::read_ParamsForStereoRectify(std::string& filename, cv::Mat* c
 	{
 		return false;
 	}
+}
+
+void EvisionUtils::getGrayDisparity(const cv::Mat& disp, cv::Mat& grayDisp, bool stretch)
+{
+	cv::Size imgSize = disp.size();
+	cv::Mat output(imgSize, CV_8UC3);
+	float min, max;
+
+	if (stretch)
+	{
+		min = (std::numeric_limits<float>::max());
+		max = 0;
+		for (size_t h = 0; h < imgSize.height; h++)
+		{
+			for (size_t w = 0; w < imgSize.width; w++)
+			{
+				float disparity = disp.at<float>(h, w);
+
+				if (disparity < min && disparity >= 0)
+					min = disparity;
+				else if (disparity > max)
+					max = disparity;
+			}
+		}
+	}
+
+	for (size_t h = 0; h < imgSize.height; h++)
+	{
+		for (size_t w = 0; w < imgSize.width; w++)
+		{
+			cv::Vec3b color;
+			float disparity = disp.at<float>(h, w);
+
+			if (disparity >= 0)
+			{
+				if (stretch)
+					disparity = (255 / (max - min)) * (disparity - min);
+
+				color[0] = (uchar)disparity;
+				color[1] = (uchar)disparity;
+				color[2] = (uchar)disparity;
+
+			}
+			else
+			{
+				color[0] = 0;
+				color[1] = 0;
+				color[2] = 0;
+			}
+
+			output.at<cv::Vec3b>(h, w) = color;
+		}
+	}
+
+	grayDisp = output.clone();
 }
