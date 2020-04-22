@@ -41,3 +41,6 @@ add_subdirectory(EvisionSandbox)
 
 # 通用工具类
 add_subdirectory(EvisionUtils)
+
+# 标定
+add_subdirectory(EvisionCalibrate)

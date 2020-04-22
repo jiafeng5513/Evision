@@ -2,7 +2,6 @@
 #include "QDebug"
 #include "QMessageBox"
 #include "EvisionUtils.h"
-#include "CalibraterView.h"
 #include "StereoMatchView.h"
 #include <qevent.h>
 #include <qmimedata.h>
@@ -20,7 +19,7 @@
 #endif
 #include "EvisionRectifyView.h"
 #include "CreateCameraParamFile.h"
-
+#include "EvisionCalibrateFactory.h"
 // 浮点数判等
 // ulp: units in the last place.
 template <typename T>
@@ -108,7 +107,7 @@ void EvisionView::onShowPointCloud()
 //显示标定视图
 void EvisionView::on_action_calibrate_view()
 {
-	CalibraterView* m_calibrate = new CalibraterView();
+	auto m_calibrate = EvisionCalibrateFactory::CreateEvisionCalibrateViewer(this);
 	ui.mdiArea->addSubWindow(m_calibrate);
 	m_calibrate->show();
 }

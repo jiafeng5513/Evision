@@ -1,7 +1,6 @@
-#pragma once
+﻿#pragma once
 #include <QThread>
 #include <opencv2/core/mat.hpp>
-#include "EvisionParamEntity.h"
 #include "CalibrateParamEntity.h"
 
 class StereoCalibrate:public QThread
