@@ -5,7 +5,6 @@
 #include <qevent.h>
 #include <qmimedata.h>
 #include <QFileDialog>
-#include "TraceView.h"
 #include "StereoCameraView.h"
 #include "CameraView.h"
 #include "WatchImageView.h"
@@ -20,6 +19,7 @@
 #include "CreateCameraParamFile.h"
 #include "EvisionCalibrateFactory.h"
 #include "EvisionDisparityFactory.h"
+#include "EvisionTraceFactory.h"
 // 浮点数判等
 // ulp: units in the last place.
 template <typename T>
@@ -128,7 +128,7 @@ void EvisionView::on_action_stereoMatch_view()
 //显示交互式测距视图
 void EvisionView::on_action_Measure_view()
 {
-	TraceView* _Rfinterface = new TraceView();
+	auto _Rfinterface = EvisionTraceFactory::CreateEvisionTraceView(this);
 	ui.mdiArea->addSubWindow(_Rfinterface);
 	_Rfinterface->show();
 }

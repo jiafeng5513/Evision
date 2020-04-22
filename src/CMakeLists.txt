@@ -50,3 +50,6 @@ add_subdirectory(EvisionDisparity)
 
 # 校正
 add_subdirectory(EvisionUndistortion)
+
+# 测量
+add_subdirectory(EvisionTrace)
