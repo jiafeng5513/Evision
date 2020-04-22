@@ -16,7 +16,7 @@
 #if (defined WITH_PCL) 
 #include "EvisionCloudViewerFactory.h"
 #endif
-#include "EvisionRectifyView.h"
+#include "EvisionUndistortionFactory.h"
 #include "CreateCameraParamFile.h"
 #include "EvisionCalibrateFactory.h"
 #include "EvisionDisparityFactory.h"
@@ -114,7 +114,7 @@ void EvisionView::on_action_calibrate_view()
 //显示矫正视图
 void EvisionView::on_action_rectify()
 {
-	EvisionRectifyView* m_Rectify = new EvisionRectifyView();
+	auto m_Rectify = EvisionUndistortionFactory::CreateEvisionUndistortionView(this);
 	ui.mdiArea->addSubWindow(m_Rectify);
 	m_Rectify->show();
 }

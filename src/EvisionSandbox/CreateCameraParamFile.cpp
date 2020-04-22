@@ -1,8 +1,8 @@
 ﻿#include "CreateCameraParamFile.h"
 #include <QMessageBox>
+#include <QFileDialog>
 #include <opencv2/core/mat.hpp>
 #include <opencv2/opencv.hpp>
-#include "EvisionRectifyView.h"
 #include "EvisionUtils.h"
 
 CreateCameraParamFile::CreateCameraParamFile(QWidget *parent)

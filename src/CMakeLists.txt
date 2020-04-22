@@ -47,3 +47,6 @@ add_subdirectory(EvisionCalibrate)
 
 # 视差
 add_subdirectory(EvisionDisparity)
+
+# 校正
+add_subdirectory(EvisionUndistortion)
