@@ -5,9 +5,8 @@
 #include <qevent.h>
 #include <qmimedata.h>
 #include <QFileDialog>
-#include "StereoCameraView.h"
-#include "CameraView.h"
 #include "WatchImageView.h"
+
 #ifdef WITH_CUDA
 #include "EvisionObjDetectionFactory.h"
 #endif
@@ -15,11 +14,14 @@
 #if (defined WITH_PCL) 
 #include "EvisionCloudViewerFactory.h"
 #endif
+
 #include "EvisionUndistortionFactory.h"
 #include "CreateCameraParamFile.h"
 #include "EvisionCalibrateFactory.h"
 #include "EvisionDisparityFactory.h"
 #include "EvisionTraceFactory.h"
+#include "EvisionCameraFactory.h"
+
 // 浮点数判等
 // ulp: units in the last place.
 template <typename T>
@@ -68,14 +70,14 @@ EvisionView::EvisionView(QWidget* parent)
 //显示单目相机视图
 void EvisionView::onCamera()
 {
-	CameraView* _camera = new CameraView();
+	auto _camera = EvisionCameraFactory::CreateCameraView(this);
 	ui.mdiArea->addSubWindow(_camera);
 	_camera->show();
 }
 //显示双目相机视图
 void EvisionView::onStereoCamera()
 {
-	StereoCameraView* _stereoCamera = new StereoCameraView();
+	auto _stereoCamera = EvisionCameraFactory::CreateStereoCameraView(this);
 	ui.mdiArea->addSubWindow(_stereoCamera);
 	_stereoCamera->show();
 }

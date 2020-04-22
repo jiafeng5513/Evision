@@ -53,3 +53,6 @@ add_subdirectory(EvisionUndistortion)
 
 # 测量
 add_subdirectory(EvisionTrace)
+
+# 相机
+add_subdirectory(EvisionCamera)
