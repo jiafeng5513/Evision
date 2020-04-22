@@ -1198,20 +1198,6 @@
        </widget>
       </item>
       <item>
-       <widget class="QCheckBox" name="checkBox_RectifiedInput">
-        <property name="text">
-         <string>输入校正好的图片</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="Line" name="line_3">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QPushButton" name="pushButton_MatchDefault">
         <property name="minimumSize">
          <size>
@@ -1565,22 +1551,6 @@
     <hint type="destinationlabel">
      <x>299</x>
      <y>4</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>checkBox_RectifiedInput</sender>
-   <signal>clicked(bool)</signal>
-   <receiver>StereoMatchView</receiver>
-   <slot>onClicked_RectifiedInput(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>447</x>
-     <y>34</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>402</x>
-     <y>5</y>
     </hint>
    </hints>
   </connection>

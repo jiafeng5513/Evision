@@ -2,7 +2,6 @@
 #include "EvisionUtils.h"
 #include "QGraphicsScene"
 #include <QFileDialog>
-#include "StereoMatch.h"
 #include <QMessageBox>
 #include <iostream>
 //直接启动视图,后设置参数

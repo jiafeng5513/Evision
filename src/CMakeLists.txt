@@ -44,3 +44,6 @@ add_subdirectory(EvisionUtils)
 
 # 标定
 add_subdirectory(EvisionCalibrate)
+
+# 视差
+add_subdirectory(EvisionDisparity)

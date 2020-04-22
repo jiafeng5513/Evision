@@ -81,17 +81,6 @@ void StereoMatchParamEntity::setADCensus(bool value)
 	emit paramChanged_ADCensus();
 }
 
-bool StereoMatchParamEntity::getRectifiedInput()
-{
-	return RectifiedInput;
-}
-
-void StereoMatchParamEntity::setRectifiedInput(bool value)
-{
-	RectifiedInput = value;
-	emit paramChanged_RectifiedInput();
-}
-
 int StereoMatchParamEntity::getDMin() {
 	return dMin;
 }

@@ -135,28 +135,6 @@ void StereoMatchController::MatchCommand()
 	}
 	ok = (!ImageL.isEmpty() && !ImageR.isEmpty());
 
-	if (ok)
-	{
-		ok = false;
-		if (m_entity->getRectifiedInput()==true)
-		{
-			//使用校准好的输入图片
-			ok = true;
-		}
-		else
-		{
-			//使用没校准的图片
-			QFileDialog * fileDialog2 = new QFileDialog();
-			fileDialog2->setWindowTitle(QStringLiteral("请选择相机参数文件"));
-			fileDialog2->setNameFilter(QStringLiteral("YML/XML文件(*.yml *.yaml *.xml)"));
-			fileDialog2->setFileMode(QFileDialog::ExistingFile);
-			if (fileDialog2->exec() == QDialog::Accepted)
-			{
-				paramsFile = fileDialog2->selectedFiles().at(0);
-				ok = true;
-			}
-		}
-	}
 	if (ok) 
 	{
 		_stereoMatch = new StereoMatch(ImageL.toStdString(),ImageR.toStdString(), paramsFile.toStdString());

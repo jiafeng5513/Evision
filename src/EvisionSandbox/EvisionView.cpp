@@ -2,7 +2,6 @@
 #include "QDebug"
 #include "QMessageBox"
 #include "EvisionUtils.h"
-#include "StereoMatchView.h"
 #include <qevent.h>
 #include <qmimedata.h>
 #include <QFileDialog>
@@ -20,6 +19,7 @@
 #include "EvisionRectifyView.h"
 #include "CreateCameraParamFile.h"
 #include "EvisionCalibrateFactory.h"
+#include "EvisionDisparityFactory.h"
 // 浮点数判等
 // ulp: units in the last place.
 template <typename T>
@@ -121,7 +121,7 @@ void EvisionView::on_action_rectify()
 //显示立体匹配视图
 void EvisionView::on_action_stereoMatch_view()
 {
-	StereoMatchView* m_matcher = new StereoMatchView();
+	auto m_matcher = EvisionDisparityFactory::CreateEvisionDisparity(this);
 	ui.mdiArea->addSubWindow(m_matcher);
 	m_matcher->show();
 }

@@ -176,9 +176,6 @@ public slots:
 	void onClicked_ADCensus(bool value);
 	void onParamChanged_ADCensus();
 
-	void onClicked_RectifiedInput(bool value);
-	void onParamChanged_RectifiedInput();
-
 	void valueChanged_BM_preFilterType_NORMALIZED(bool value);
 	void onParamChanged_BM_preFilterType_NORMALIZED();
 

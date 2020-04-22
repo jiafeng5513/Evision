@@ -110,8 +110,6 @@ private:
 	bool ELAS = false;
 	bool ADCensus = false;
 
-	bool RectifiedInput = false;//输入图像是否已经进行了校准
-
 	cv::Mat imgDtoShow;//在中心显示的大图
 	cv::Mat iconImgL, iconImgR, iconRawDisp, iconRainbow;//缩略图
 	IMGID ImageToShow = NONE;//默认情况下,中心大图什么也不显示
@@ -126,7 +124,6 @@ signals:
 	void paramChanged_BM();
 	void paramChanged_SGBM();
 	void paramChanged_ELAS();
-	void paramChanged_RectifiedInput();
 	void paramChanged_ADCensus();
 	void paramChanged_ImageDtoShow();
 	void paramChanged_IconImgL();
@@ -224,9 +221,6 @@ public:
 
 	bool getADCensus();
 	void setADCensus(bool value);
-
-	bool getRectifiedInput();
-	void setRectifiedInput(bool value);
 
 	//1.int
 	void setDMin(int value);

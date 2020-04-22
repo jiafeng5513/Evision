@@ -5,7 +5,6 @@
 #include "EvisionUtils.h"
 #include "EvisionElas.h"
 #include "EvisionADCensus.h"
-#include "rectify.h"
 #include <algorithm>
 
 StereoMatch::StereoMatch(std::string img1_filename, std::string img2_filename, std::string cameraParams_filename)
@@ -53,68 +52,7 @@ bool StereoMatch::init(bool needCameraParamFile)
 		{
 			emit openMessageBox(QStringLiteral("错误"), QStringLiteral("输入图像为空!"));
 			return false;
-		}
-
-		//2.如果输入的是未校正的图片,则在此处进行校正
-		if (!m_entity->getRectifiedInput())
-		{
-			//3.读取相机参数
-			std::cout << "读取相机参数..." << std::endl;
-			bool flag = EvisionUtils::read_AllCameraParams(cameraParams_filename,
-				&cameraMatrix1, &distCoeffs1, &cameraMatrix2, &distCoeffs2, &R, &T, &E, &F, &img_size, &R1, &P1, &R2, &P2, &Q, &roi1, &roi2);
-			if(flag==false)
-			{
-				std::cout << "相机参数读取失败!" << std::endl;
-				return false;
-			}
-			std::cout << "输入的是未校正的图片,进行校正..." << std::endl;
-			try
-			{
-				std::vector<cv::Mat>images, undistortedImages;
-				images.push_back(img1);
-				images.push_back(img2);
-
-				cv::Size imageSize;
-				imageSize.height = ((cv::Mat)images.at(0)).rows;
-				imageSize.width = ((cv::Mat)images.at(0)).cols;
-
-				//先把两侧的图片利用畸变矩阵分别消除畸变
-				intrinsicExtrinsic::undistortStereoImages(images, undistortedImages, cameraMatrix1, cameraMatrix2, distCoeffs1, distCoeffs2);
-				//这一步计算极线矫正矩阵,畸变已经消除了所以畸变参数设置为了0
-				cv::Mat rmap[2][2];
-				cv::Mat noDist = cv::Mat::zeros(5, 1, CV_32F);
-				initUndistortRectifyMap(cameraMatrix1, noDist, R1, P1, imageSize, CV_16SC2, rmap[0][0], rmap[0][1]);
-				initUndistortRectifyMap(cameraMatrix2, noDist, R2, P2, imageSize, CV_16SC2, rmap[1][0], rmap[1][1]);
-				int imgCount = undistortedImages.size() / 2;
-				//计算ROI
-				/*
-				 *(std::max)for disable the macro max in winnt.h
-				 *see: http://www.voidcn.com/article/p-okycmabx-bms.html
-				 */
-				cv::Point2i rectCorner1((std::max)(roi1.x, roi2.x), (std::max)(roi1.y, roi2.y));
-				cv::Point2i rectCorner2((std::min)(roi1.x + roi1.width, roi2.x + roi2.width),
-					(std::min)(roi1.y + roi1.height, roi2.y + roi2.height));
-				cv::Rect validRoi = cv::Rect(rectCorner1.x, rectCorner1.y, rectCorner2.x - rectCorner1.x, rectCorner2.y - rectCorner1.y);
-				cv::Mat  remapImg1, rectImg1, remapImg2, rectImg2;
-				remap(undistortedImages[0], remapImg1, rmap[0][0], rmap[0][1], CV_INTER_LINEAR);
-				rectImg1 = remapImg1(validRoi);//校正结果
-				remap(undistortedImages[1], remapImg2, rmap[1][0], rmap[1][1], CV_INTER_LINEAR);
-				rectImg2 = remapImg2(validRoi);//校正结果
-
-				img1 = rectImg1;
-				img2 = rectImg2;
-				std::cout << "校正完毕" << std::endl;
-
-			}catch(...)
-			{
-				std::cout << "校正过程中发生了严重错误" << std::endl;
-				return false;
-			}
-		}
-		else
-		{
-			std::cout << "输入的是校正过的图片,跳过校正..." << std::endl;
-		}		
+		}	
 	}
 	catch (...)
 	{

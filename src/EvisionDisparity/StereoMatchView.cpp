@@ -14,7 +14,6 @@ StereoMatchView::StereoMatchView(QWidget *parent)
 	connect(m_entity, SIGNAL(paramChanged_SGBM()), this, SLOT(onParamChanged_SGBM()));
 	connect(m_entity, SIGNAL(paramChanged_ELAS()), this, SLOT(onParamChanged_ELAS()));
 	connect(m_entity, SIGNAL(paramChanged_ADCensus()), this, SLOT(onParamChanged_ADCensus()));
-	connect(m_entity, SIGNAL(paramChanged_RectifiedInput()), this, SLOT(onParamChanged_RectifiedInput()));
 	connect(m_entity, SIGNAL(paramChanged_ImageDtoShow()), this, SLOT(onParamChanged_imgDtoShow()));
 	connect(m_entity, SIGNAL(paramChanged_IconImgL()), this, SLOT(onParamChanged_IconImgL()));
 	connect(m_entity, SIGNAL(paramChanged_IconImgR()), this, SLOT(onParamChanged_IconImgR()));
@@ -587,19 +586,6 @@ void StereoMatchView::onClicked_ADCensus(bool value)
 void StereoMatchView::onParamChanged_ADCensus()
 {
 	ui.radioButton_ADC->setChecked(m_entity->getADCensus());
-}
-
-void StereoMatchView::onClicked_RectifiedInput(bool value)
-{
-	if(m_entity->getRectifiedInput()!=value)
-	{
-		m_entity->setRectifiedInput(value);
-	}
-}
-
-void StereoMatchView::onParamChanged_RectifiedInput()
-{
-	ui.checkBox_RectifiedInput->setChecked(m_entity->getRectifiedInput());
 }
 
 void StereoMatchView::valueChanged_BM_preFilterType_NORMALIZED(bool value) {
