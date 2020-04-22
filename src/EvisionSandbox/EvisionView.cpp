@@ -16,11 +16,11 @@
 #endif
 
 #include "EvisionUndistortionFactory.h"
-#include "CreateCameraParamFile.h"
 #include "EvisionCalibrateFactory.h"
 #include "EvisionDisparityFactory.h"
 #include "EvisionTraceFactory.h"
 #include "EvisionCameraFactory.h"
+#include "EvisionParamBridgeFactory.h"
 
 // 浮点数判等
 // ulp: units in the last place.
@@ -259,7 +259,7 @@ void EvisionView::on_action_disp_to_pcd()
 //创建相机参数文件
 void EvisionView::on_action_create_param()
 {
-	CreateCameraParamFile* _createCameraParamFile = new CreateCameraParamFile();
+	auto _createCameraParamFile = EvisionParamBridgeFactory::CreateEvisionParamBridgeView(this);
 	ui.mdiArea->addSubWindow(_createCameraParamFile);
 	_createCameraParamFile->show();
 }

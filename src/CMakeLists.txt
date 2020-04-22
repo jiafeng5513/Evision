@@ -56,3 +56,6 @@ add_subdirectory(EvisionTrace)
 
 # 相机
 add_subdirectory(EvisionCamera)
+
+# 手动参数转换
+add_subdirectory(EvisionParamBridge)
