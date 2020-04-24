@@ -45,8 +45,6 @@ include_directories(${Qt5_INCLUDE_DIR}QtCore/${Qt5Widgets_VERSION}/)
 
 
 #包含自定义组件
-include_directories("../EvisionADCensus/include/")
-include_directories("../EvisionElas/include/")
 include_directories("../EvisionUtils/include/")
 include_directories("../EvisionCalibrate/include/")
 include_directories("../EvisionDisparity/include/")
@@ -135,8 +133,6 @@ target_link_libraries(EvisionSandbox Qt5::Widgets Qt5::Core Qt5::Gui Qt5::Multim
 #链接OpenCV
 target_link_libraries(EvisionSandbox ${OpenCV_LIBS})
 #链接自定义库
-target_link_libraries(EvisionSandbox EvisionADCensus)
-target_link_libraries(EvisionSandbox EvisionElas)
 target_link_libraries(EvisionSandbox EvisionUtils)
 target_link_libraries(EvisionSandbox EvisionCalibrate)
 target_link_libraries(EvisionSandbox EvisionDisparity)

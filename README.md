@@ -15,8 +15,8 @@ Introduction:
 2. 基于Yolo的实时目标检测.<br>
 3. ELAS,ADCensus视差算法.<br>
 4. 关于双目的中文资料重复度太高,希望各位后来者能够吸取前人精华,摒弃前人的糟粕,多多自行探索,不要抄来抄去<br>
-5.  关于程序使用方面的问题,可以联系邮件jiafeng5513@outlook.com,有关课程设计和毕业论文(Windows程序开发,机器视觉,深度学习,图像处理)也可以联系作者<br>
-6.  
+5. 关于程序的BUG,以及其他困惑,请使用issues.<br>
+6. 如有Windows程序开发,机器视觉,深度学习,图像处理等方面的定制开发需求,请联系邮件jiafeng5513@outlook.com<br>
 目录
 =========
 - [Introduction:](#introduction)
@@ -39,25 +39,36 @@ Introduction:
 
 #### 2.Directory_specification
 1. `data`文件夹存储测试用例.<br>
-2. `doc`文件夹中存储的是文档和文档中所用的图片等资源.<br>
+2. `doc`文件夹中存储的是文档和文档中所用的图片等资源,提供了本项目使用的一些算法相关的论文.<br>
 3. `package`文件夹存储项目所需的依赖.<br>
 4. `props`中存储的是属性表<br>
 5. `scripts`文件夹存储编译脚本.<br>
 6. `src`文件夹中存放代码文件.<br>
 7. `legacy`文件夹中存放的是一些有一定保留价值的弃用模块.<br>
-* `props`和`scripts`是作者开发期间使用的,对于使用者没有实际意义.<br>
+* `scripts`是作者开发期间使用的,对于使用者没有实际意义.<br>
 * `package`中含有pthread的window版本,将会在未来改为使用CMake管理.<br>
 
 #### 3.build
 1. 笔者使用CMake 3.15构建Visual Studio解决方案,并使用Visual Studio 2019完成开发.<br>
-2. 如果是Linux用户,或者不习惯使用VS,推荐使用CLion.<br>
-3. 目前Evision只能在Windows上运行,将会支持跨平台.<br>
-4. Evision目前由5个模块组成:
-   1. Evision是Qt版的Evision主程序,生成目标是可执行程序.<br>
-   2. Evision3dViz是点云模块,提供3维点云的观看和一些其他操作,依赖PCL和VTK.<br>
-   3. EvisionADCensus是ADCensus视差算法模块.<br>
-   4. EvisionElas是Elas视差算法模块.<br>
-   5. EvisionObjDetection是目标检测模块,依赖CUDA.<br>
+2. 使用CLion的用户需要自行编辑`src/CMakeLists.txt`以指定相关依赖的路径.<br>
+3. master分支的最新版仅保证windows上编译成功并正常运行,理论上支持Linux.<br>
+4. Evision目前由多个模块组成:
+   
+   |      |模块名|功能|是否具有UI|输出目标|
+   |:----:|:----:|:----:|:----:|:----:|
+   |1 |EvisionSandbox            |主程序UI          | 有    |可执行程序|
+   |2 |EvisionCloudViewer        |三维点云查看      | 有    |动态链接库|
+   |3 |EvisionADCensus           |ADCensus视差算法  | 无    |动态链接库|
+   |4 |EvisionElas               |Elas视差算法      | 无    |动态链接库|
+   |5 |EvisionObjDetection       |目标检测UI        | 有    |动态链接库|
+   |6 |EvisionObjDetectionEngine |目标检测算法       | 无   |动态链接库|
+   |7 |EvisionCamera             |单目和双目相机功能 | 有    |动态链接库|
+   |8 |EvisionCalibrate          |标定              | 有    |动态链接库|
+   |9 |EvisionDisparity          |视差(立体匹配)     | 有   |动态链接库|
+   |10|EvisionParamBridge        |外部参数传递       | 有   |动态链接库|
+   |11|EvisionTrace              |交互式测量         | 有   |动态链接库|
+   |12|EvisionUndistortion       |畸变校正           | 有   |动态链接库|
+   |13|EvisionUtils              |通用工具类         | 无   |动态链接库|
 5. build方案:
    1. `./src/`目录下面含有的CMakeLists.txt,Evision基于CMake3.15编写,请使用版本大于等于3.13.X的CMake.<br>
    2. Evision是只能工作在64位下,另外如果您不是很熟悉CMake,推荐使用CMake GUI.
@@ -115,5 +126,3 @@ Introduction:
 
 #### 7.未来计划
 1. [参考](http://blog.csdn.net/hysteric314/article/details/51357318).<br>
-2. 移除目标检测部分的代码,相关功能将会在新的仓库进行后续开发.<br>
-3. UI和功能的进一步剥离,对于所有UI能实现的功能,应该都有对应的命令行方法.<br>

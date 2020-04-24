@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifdef LIB_EXPORTS
 #if defined(_MSC_VER)
 #define LIB_API __declspec(dllexport)
@@ -611,51 +611,3 @@ public:
 
 //extern "C" {
 #endif    // __cplusplus
-
-/*
-    // C - wrappers
-    LIB_API void create_detector(char const* cfg_filename, char const* weight_filename, int gpu_id);
-    LIB_API void delete_detector();
-    LIB_API bbox_t* detect_custom(image_t img, float thresh, bool use_mean, int *result_size);
-    LIB_API bbox_t* detect_resized(image_t img, int init_w, int init_h, float thresh, bool use_mean, int *result_size);
-    LIB_API bbox_t* detect(image_t img, int *result_size);
-    LIB_API image_t load_img(char *image_filename);
-    LIB_API void free_img(image_t m);
-
-#ifdef __cplusplus
-}    // extern "C"
-
-static std::shared_ptr<void> c_detector_ptr;
-static std::vector<bbox_t> c_result_vec;
-
-void create_detector(char const* cfg_filename, char const* weight_filename, int gpu_id) {
-    c_detector_ptr = std::make_shared<LIB_API Detector>(cfg_filename, weight_filename, gpu_id);
-}
-
-void delete_detector() { c_detector_ptr.reset(); }
-
-bbox_t* detect_custom(image_t img, float thresh, bool use_mean, int *result_size) {
-    c_result_vec = static_cast<Detector*>(c_detector_ptr.get())->detect(img, thresh, use_mean);
-    *result_size = c_result_vec.size();
-    return c_result_vec.data();
-}
-
-bbox_t* detect_resized(image_t img, int init_w, int init_h, float thresh, bool use_mean, int *result_size) {
-    c_result_vec = static_cast<Detector*>(c_detector_ptr.get())->detect_resized(img, init_w, init_h, thresh, use_mean);
-    *result_size = c_result_vec.size();
-    return c_result_vec.data();
-}
-
-bbox_t* detect(image_t img, int *result_size) {
-    return detect_custom(img, 0.24, true, result_size);
-}
-
-image_t load_img(char *image_filename) {
-    return static_cast<Detector*>(c_detector_ptr.get())->load_image(image_filename);
-}
-void free_img(image_t m) {
-    static_cast<Detector*>(c_detector_ptr.get())->free_image(m);
-}
-
-#endif    // __cplusplus
-*/

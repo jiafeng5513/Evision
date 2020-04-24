@@ -20,7 +20,6 @@ public:
 	void setStatusBarText(QString value);
 
 signals:
-	void paramChanged_distance();
 	void paramChanged_StatusBar();
 };
 
