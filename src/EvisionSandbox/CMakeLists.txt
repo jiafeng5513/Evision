@@ -58,6 +58,9 @@ endif()
 if(ObjectDetection)
 include_directories("../EvisionObjDetection/include/")
 endif()
+if(RealSense)
+include_directories("../RealSenseCamera/include/")
+endif()
 LINK_DIRECTORIES(../install/lib)
 
 
@@ -80,6 +83,9 @@ add_definitions(-D WITH_PCL)
 endif()
 if (ObjectDetection)
 add_definitions(-D WITH_CUDA)
+endif()
+if(RealSense)
+add_definitions(-D WITH_REAL_SENSE)
 endif()
 
 # #自定义库的输出路径就是主程序的链接路径
@@ -147,4 +153,8 @@ endif()
 
 if (PointCloudViewer)
 target_link_libraries(EvisionSandbox EvisionCloudViewer)
+endif()
+
+if (RealSense)
+target_link_libraries(EvisionSandbox RealSenseCamera)
 endif()

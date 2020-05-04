@@ -24,9 +24,10 @@ private:
 	LogView * logView;
 public slots:
 	//菜单
-	void onCamera();
-	void onStereoCamera();
-	void onShowPointCloud();//显示点云
+	void onCamera();						//单目相机
+	void onStereoCamera();					//双目相机
+	void on_action_RealSenseCamera();		//Realsense相机
+	void onShowPointCloud();				//显示点云
 
 	void on_action_calibrate_view();		//启动标定视图
 	void on_action_rectify();				//启动校正视图

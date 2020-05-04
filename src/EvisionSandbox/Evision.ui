@@ -78,6 +78,7 @@
     <addaction name="action_Camera"/>
     <addaction name="action_ShowPointCloud"/>
     <addaction name="action_CreateParamFile"/>
+    <addaction name="action_RealSenseCamera"/>
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">
@@ -244,6 +245,11 @@
    </property>
    <property name="text">
     <string>构造参数文件</string>
+   </property>
+  </action>
+  <action name="action_RealSenseCamera">
+   <property name="text">
+    <string>RealSenseCamera</string>
    </property>
   </action>
  </widget>
@@ -428,6 +434,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>action_RealSenseCamera</sender>
+   <signal>triggered()</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>on_action_RealSenseCamera()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>511</x>
+     <y>354</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>onShowPointCloud()</slot>
@@ -441,5 +463,6 @@
   <slot>on_action_rectify()</slot>
   <slot>on_action_disp_to_pcd()</slot>
   <slot>on_action_create_param()</slot>
+  <slot>on_action_RealSenseCamera()</slot>
  </slots>
 </ui>

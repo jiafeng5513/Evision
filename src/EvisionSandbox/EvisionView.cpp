@@ -15,6 +15,10 @@
 #include "EvisionCloudViewerFactory.h"
 #endif
 
+#ifdef WITH_REAL_SENSE
+#include "RealSenseCameraFactory.h"
+#endif
+
 #include "EvisionUndistortionFactory.h"
 #include "EvisionCalibrateFactory.h"
 #include "EvisionDisparityFactory.h"
@@ -80,6 +84,13 @@ void EvisionView::onStereoCamera()
 	auto _stereoCamera = EvisionCameraFactory::CreateStereoCameraView(this);
 	ui.mdiArea->addSubWindow(_stereoCamera);
 	_stereoCamera->show();
+}
+//显示Realsense相机视图
+void EvisionView::on_action_RealSenseCamera()
+{
+	auto _realSenseCamera = RealSenseCameraFactory::CreateRealSenseCameraView(this);
+	ui.mdiArea->addSubWindow(_realSenseCamera);
+	_realSenseCamera->show();
 }
 //显示点云
 void EvisionView::onShowPointCloud()

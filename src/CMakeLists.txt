@@ -17,7 +17,7 @@ ENDIF()
 
 option(PointCloudViewer "Point Cloud Viewer" ON)
 option(ObjectDetection "Object Detection" ON)
-
+option(RealSense "RealSense Support" ON)
 
 #add_definitions(-DTEST_DEBUG)
 
@@ -33,6 +33,11 @@ if (ObjectDetection)
     add_subdirectory(EvisionObjDetectionEngine)
     SET_TARGET_PROPERTIES(EvisionObjDetectionEngine PROPERTIES FOLDER Algorithm) 
     SET_TARGET_PROPERTIES(EvisionObjDetection PROPERTIES FOLDER Ai) 
+endif()
+
+if (RealSense)
+    add_subdirectory(RealSenseCamera)
+    SET_TARGET_PROPERTIES(RealSenseCamera PROPERTIES FOLDER RealSenseTools) 
 endif()
 
 # ADCensus视差算法,生成动态库,依赖OpenCV
@@ -65,7 +70,20 @@ add_subdirectory(EvisionCamera)
 # 手动参数转换
 add_subdirectory(EvisionParamBridge)
 
+# pnplib
+add_subdirectory(pnplib)
+
+# pnpDetection 6DoF跟踪
+add_subdirectory(pnpDetection)
+
+# pnpRegistration 6DoF跟踪的特征工程
+add_subdirectory(pnpRegistration)
+
+# createPly 6DoF跟踪的小工具
+add_subdirectory(createPly)
+
 # 配置工程筛选器
 SET_TARGET_PROPERTIES(EvisionUtils EvisionCamera EvisionParamBridge PROPERTIES FOLDER Utils) 
-SET_TARGET_PROPERTIES(EvisionADCensus EvisionElas PROPERTIES FOLDER Algorithm)
+SET_TARGET_PROPERTIES(EvisionADCensus EvisionElas pnplib PROPERTIES FOLDER Algorithm)
 SET_TARGET_PROPERTIES(EvisionCalibrate EvisionDisparity EvisionTrace EvisionUndistortion PROPERTIES FOLDER Stereo) 
+SET_TARGET_PROPERTIES(pnpDetection pnpRegistration createPly PROPERTIES FOLDER VideoTracker)
