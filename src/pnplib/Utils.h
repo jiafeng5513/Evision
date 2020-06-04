@@ -12,7 +12,8 @@
 
 #include <opencv2/features2d.hpp>
 #include "PnPProblem.h"
-
+// get current path
+std::string _declspec(dllexport) getCurrentPath();
 // Draw a text with the question point
 void _declspec(dllexport) drawQuestion(cv::Mat image, cv::Point3f point, cv::Scalar color);
 

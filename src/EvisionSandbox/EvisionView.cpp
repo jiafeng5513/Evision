@@ -25,7 +25,7 @@
 #include "EvisionTraceFactory.h"
 #include "EvisionCameraFactory.h"
 #include "EvisionParamBridgeFactory.h"
-
+#include "EvisionPolyTrackerFactory.h"
 // 浮点数判等
 // ulp: units in the last place.
 template <typename T>
@@ -156,6 +156,13 @@ void EvisionView::on_action_ObjectDetection_view()
 	QMessageBox::information(this, QStringLiteral("该功能未启用!"),
 		QStringLiteral("请在项目属性/C++/预处理器中添加\"WITH_CUDA\"并确保EvisionObjDetection模块正常工作"));
 #endif
+}
+//启动几何体追踪
+void EvisionView::on_action_PolyTracker_view()
+{
+	auto tracker = EvisionPolyTrackerFactory::CreateEvisionPolyTrackerViewer(this);
+	ui.mdiArea->addSubWindow(tracker);
+	tracker->show();
 }
 //LogView
 void EvisionView::on_action_LogViewSwitch()

@@ -50,13 +50,15 @@ int main(int argc, char *argv[])
             "{feature           |ORB   | 特征描述方法 (ORB, KAZE, AKAZE, BRISK, SIFT, SURF, BINBOOST, VGG)}"
             "{FLANN             |false | 使用FLANN进行特征描述符匹配                                      }"
             "{save              |      | 结果保存路径                                                     }"
-            "{displayFiltered   |false | display filtered pose (from Kalman filter)                       }"
+            "{displayFiltered   |true  | display filtered pose (from Kalman filter)                       }"
             ;
     CommandLineParser parser(argc, argv, keys);
 
-    string video_read_path = samples::findFile("E:/VisualStudio/Tracker/VideoTracker/Data/box.mp4");       // recorded video
-    string yml_read_path = samples::findFile("E:/VisualStudio/Tracker/VideoTracker/Data/cookies_ORB.yml"); // 3dpts + descriptors
-    string ply_read_path = samples::findFile("E:/VisualStudio/Tracker/VideoTracker/Data/box.ply");         // mesh
+    std::string datapath = getCurrentPath() + "\\..\\..\\..\\data";
+
+    string video_read_path = (datapath + "/Tracker/box.mp4");       // recorded video
+    string yml_read_path = (datapath + "/Tracker/cookies_ORB.yml"); // 3dpts + descriptors
+    string ply_read_path = (datapath + "/Tracker/box.ply");         // mesh
 
     // 相机的内参
     double f = 55;                           // focal length in mm

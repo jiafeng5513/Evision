@@ -1,0 +1,185 @@
+
+
+---core
+    activations.c
+    activations.h
+    activation_kernels.cu
+    activation_layer.c
+    activation_layer.h
+
+    avgpool_layer.c
+    avgpool_layer.h
+    avgpool_layer_kernels.cu    
+
+    batchnorm_layer.c
+    batchnorm_layer.h
+
+    blas.c
+    blas.h
+    blas_kernels.cu
+    
+    im2col.c
+    im2col.h
+    im2col_kernels.cu
+
+    col2im.c
+    col2im.h
+    col2im_kernels.cu
+
+    connected_layer.c
+    connected_layer.h
+
+    convolutional_layer.c
+    convolutional_layer.h
+    convolutional_kernels.cu
+
+    cost_layer.c
+    cost_layer.h
+
+    deconvolutional_layer.c
+    deconvolutional_layer.h
+    deconvolutional_kernels.cu
+
+    detection_layer.c
+    detection_layer.h
+
+    dropout_layer.c
+    dropout_layer.h
+    dropout_layer_kernels.cu
+
+
+    shortcut_layer.c
+    shortcut_layer.h
+
+    softmax_layer.c
+    softmax_layer.h
+
+    normalization_layer.c
+    normalization_layer.h
+
+    upsample_layer.c
+    upsample_layer.h
+
+    maxpool_layer.c
+    maxpool_layer.h
+    maxpool_layer_kernels.cu
+
+    crop_layer.c
+    crop_layer.h
+    crop_layer_kernels.cu
+
+    region_layer.c
+    region_layer.h
+    
+    reorg_layer.c
+    reorg_layer.h
+    
+    reorg_old_layer.c
+    reorg_old_layer.h
+
+    gru_layer.c
+    gru_layer.h
+
+    network.c
+    network.h
+    network_kernels.cu
+
+    gemm.c
+    gemm.h
+    cpu_gemm.c
+
+    route_layer.c
+    route_layer.h
+
+    layer.c
+    layer.h
+
+    local_layer.c
+    local_layer.h
+
+---API(example)
+    darknet.c
+    art.c
+    captcha.c
+    cifar.c
+    classifier.c
+    classifier.h
+    coco.c
+    compare.c
+    demo.c
+    demo.h
+    detector.c
+    dice.c
+    go.c
+    nightmare.c
+    rnn.c
+    rnn_vid.c
+    super.c
+    swag.c
+    tag.c
+    voxel.c
+    writing.c
+    yolo.c
+
+---model
+    rnn_layer.c
+    rnn_layer.h
+
+    crnn_layer.c
+    crnn_layer.h
+
+    yolo_layer.c
+    yolo_layer.h
+
+    lstm_layer.c
+    lstm_layer.h
+    
+    yolo_v2_class.cpp
+
+---utils
+
+
+    image.c
+    image.h
+
+    tree.c
+    tree.h
+
+    utils.c
+    utils.h
+
+    data.c
+    data.h
+
+    box.c
+    box.h
+
+    cuda.c
+    cuda.h
+
+    list.c
+    list.h
+
+    option_list.c
+    option_list.h
+
+    parser.c
+    parser.h
+
+    http_stream.cpp
+    http_stream.h
+
+---CrossPlatform
+    gettimeofday.c
+    gettimeofday.h
+    
+    matrix.c
+    matrix.h
+
+    stb_image.h
+    stb_image_write.h
+
+    unistd.h
+
+    getopt.c
+    getopt.h

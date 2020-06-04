@@ -42,8 +42,6 @@ struct bbox_t_container {
 #include <stdexcept>
 #ifdef OPENCV
 #include <opencv2/opencv.hpp>            // C++
-#include "opencv2/highgui/highgui_c.h"    // C
-#include "opencv2/imgproc/imgproc_c.h"    // C
 #endif    // OPENCV
 
 extern "C" LIB_API int init(const char *configurationFilename, const char *weightsFilename, int gpu);
@@ -86,6 +84,14 @@ public:
     }
 
 #ifdef OPENCV
+    static int getWidthStep(cv::Mat* src) {
+        //see https://blog.csdn.net/xidianzhimeng/article/details/16845097
+        auto align = 4; // DEFAULT_IMAGE_ROW_ALIGN;
+        //#define IPL_DEPTH_SIGN 0x80000000
+        int widthStep = (((src->size().width * src->channels * (src->depth & ~0x80000000) + 7) / 8) + align - 1) & (~(align - 1));
+        return widthStep;
+    }
+
     std::vector<bbox_t> detect(cv::Mat mat, float thresh = 0.2, bool use_mean = false)
     {
         if(mat.data == NULL)
@@ -113,34 +119,28 @@ public:
         cv::Mat img;
         cv::cvtColor(img_src, img, cv::COLOR_RGB2BGR);
         std::shared_ptr<image_t> image_ptr(new image_t, [](image_t *img) { free_image(*img); delete img; });
-        std::shared_ptr<IplImage> ipl_small = std::make_shared<IplImage>(img);
-        *image_ptr = ipl_to_image(ipl_small.get());
-        return image_ptr;
-    }
 
-private:
-
-    static image_t ipl_to_image(IplImage* src)
-    {
-        unsigned char *data = (unsigned char *)src->imageData;
-        int h = src->height;
-        int w = src->width;
-        int c = src->nChannels;
-        int step = src->widthStep;
+        unsigned char* data = (unsigned char*)img_src.data;
+        int h = img_src.size().height;
+        int w = img_src.size().width;
+        int c = img_src.channels;
+        int step = getWidthStep(&img_src);
         image_t out = make_image_custom(w, h, c);
         int count = 0;
 
         for (int k = 0; k < c; ++k) {
             for (int i = 0; i < h; ++i) {
-                int i_step = i*step;
+                int i_step = i * step;
                 for (int j = 0; j < w; ++j) {
-                    out.data[count++] = data[i_step + j*c + k] / 255.;
+                    out.data[count++] = data[i_step + j * c + k] / 255.;
                 }
             }
         }
-
-        return out;
+        *image_ptr = out;
+        return image_ptr;
     }
+
+private:
 
     static image_t make_empty_image(int w, int h, int c)
     {

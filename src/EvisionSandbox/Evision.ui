@@ -104,7 +104,14 @@
     </property>
     <addaction name="action_ObjectDetection"/>
    </widget>
+   <widget class="QMenu" name="menu_4">
+    <property name="title">
+     <string>单目视觉</string>
+    </property>
+    <addaction name="action_PolyTracker"/>
+   </widget>
    <addaction name="menu"/>
+   <addaction name="menu_4"/>
    <addaction name="menu_3"/>
    <addaction name="menuAi"/>
    <addaction name="menu_2"/>
@@ -124,6 +131,8 @@
    <addaction name="action_ShowPointCloud"/>
    <addaction name="action_CreateParamFile"/>
    <addaction name="separator"/>
+   <addaction name="action_PolyTracker"/>
+   <addaction name="separator"/>
    <addaction name="action_CalibrateView"/>
    <addaction name="actio_Rectify"/>
    <addaction name="action_StereoMatchView"/>
@@ -133,6 +142,7 @@
    <addaction name="action_ObjectDetection"/>
    <addaction name="separator"/>
    <addaction name="action_LogView"/>
+   <addaction name="separator"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="action_StereoCamera">
@@ -196,7 +206,7 @@
      <normaloff>:/Evision/resource/checkered_128px_1155158_easyicon.net.ico</normaloff>:/Evision/resource/checkered_128px_1155158_easyicon.net.ico</iconset>
    </property>
    <property name="text">
-    <string>相机标定</string>
+    <string>双目相机标定</string>
    </property>
   </action>
   <action name="action_ObjectDetection">
@@ -250,6 +260,18 @@
   <action name="action_RealSenseCamera">
    <property name="text">
     <string>RealSenseCamera</string>
+   </property>
+  </action>
+  <action name="action_PolyTracker">
+   <property name="icon">
+    <iconset resource="Evision.qrc">
+     <normaloff>:/Evision/resource/tracker_128px_1199969_easyicon.net.ico</normaloff>:/Evision/resource/tracker_128px_1199969_easyicon.net.ico</iconset>
+   </property>
+   <property name="text">
+    <string>单目几何体追踪</string>
+   </property>
+   <property name="toolTip">
+    <string>单目几何体追踪</string>
    </property>
   </action>
  </widget>
@@ -450,6 +472,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>action_PolyTracker</sender>
+   <signal>triggered()</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>on_action_PolyTracker_view()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>511</x>
+     <y>354</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>onShowPointCloud()</slot>
@@ -464,5 +502,6 @@
   <slot>on_action_disp_to_pcd()</slot>
   <slot>on_action_create_param()</slot>
   <slot>on_action_RealSenseCamera()</slot>
+  <slot>on_action_PolyTracker_view()</slot>
  </slots>
 </ui>

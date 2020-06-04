@@ -20,14 +20,14 @@ Introduction:
 目录
 =========
 - [Introduction:](#introduction)
-- [目录](#%e7%9b%ae%e5%bd%95)
+- [目录](#目录)
       - [1.Dependencies](#1dependencies)
-      - [2.Directory_specification](#2directoryspecification)
+      - [2.Directory_specification](#2directory_specification)
       - [3.build](#3build)
-      - [4.Deprecated_Version](#4deprecatedversion)
-      - [5.双目设备](#5%e5%8f%8c%e7%9b%ae%e8%ae%be%e5%a4%87)
-      - [6.参考文献](#6%e5%8f%82%e8%80%83%e6%96%87%e7%8c%ae)
-      - [7.未来计划](#7%e6%9c%aa%e6%9d%a5%e8%ae%a1%e5%88%92)
+      - [4.Deprecated_Version](#4deprecated_version)
+      - [5.双目设备](#5双目设备)
+      - [6.参考文献](#6参考文献)
+      - [7.未来计划](#7未来计划)
 
 #### 1.Dependencies
 1. Qt :5.13.2.<br>

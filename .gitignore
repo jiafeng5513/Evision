@@ -187,3 +187,4 @@ src/cmake-build-debug
 src/out
 /build/
 .idea
+data/Tracker/test_reg

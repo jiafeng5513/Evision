@@ -1,5 +1,6 @@
 ﻿// C++
 #include <iostream>
+#include "stdlib.h"
 // OpenCV
 #include <opencv2/core.hpp>
 #include <opencv2/imgproc.hpp>
@@ -81,6 +82,7 @@ static void onMouseModelRegistration( int event, int x, int y, int, void* )
 int main(int argc, char *argv[])
 {
     help();
+    std::string datapath = getCurrentPath() + "\\..\\..\\..\\data";
 
     const String keys =
             "{help h        |      | 帮助信息                                                       }"
@@ -92,9 +94,9 @@ int main(int argc, char *argv[])
             ;
     CommandLineParser parser(argc, argv, keys);
 
-    string img_path = samples::findFile("E:/VisualStudio/Tracker/VideoTracker/Data/resized_IMG_3875.JPG");  // image to register
-    string ply_read_path = samples::findFile("E:/VisualStudio/Tracker/VideoTracker/Data/test_reg/box.ply");          // object mesh
-    string write_path = samples::findFile("E:/VisualStudio/Tracker/VideoTracker/Data/test_reg/cookies_ORB.yml");     // output file
+    string img_path = (datapath+"\\Tracker\\resized_IMG_3875.JPG");  // image to register
+    string ply_read_path = (datapath + "\\Tracker\\box.ply");          // object mesh
+    string write_path = (datapath + "\\Tracker\\test_reg\\cookies_ORB.yml");     // output file
     int numKeyPoints = 2000;
     string featureName = "ORB";
 

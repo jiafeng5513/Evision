@@ -82,8 +82,11 @@ add_subdirectory(pnpRegistration)
 # createPly 6DoF跟踪的小工具
 add_subdirectory(createPly)
 
+# 单目几何体追踪
+add_subdirectory(EvisionPolyTracker)
+
 # 配置工程筛选器
 SET_TARGET_PROPERTIES(EvisionUtils EvisionCamera EvisionParamBridge PROPERTIES FOLDER Utils) 
 SET_TARGET_PROPERTIES(EvisionADCensus EvisionElas pnplib PROPERTIES FOLDER Algorithm)
 SET_TARGET_PROPERTIES(EvisionCalibrate EvisionDisparity EvisionTrace EvisionUndistortion PROPERTIES FOLDER Stereo) 
-SET_TARGET_PROPERTIES(pnpDetection pnpRegistration createPly PROPERTIES FOLDER VideoTracker)
+SET_TARGET_PROPERTIES(pnpDetection pnpRegistration createPly EvisionPolyTracker PROPERTIES FOLDER VideoTracker)

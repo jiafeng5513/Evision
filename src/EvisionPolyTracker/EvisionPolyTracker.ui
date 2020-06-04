@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EvisionPolyTrackerClass</class>
+ <widget class="QWidget" name="EvisionPolyTrackerClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>931</width>
+    <height>627</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>EvisionPolyTracker</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QWidget" name="widget" native="true">
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>45</height>
+      </size>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="pushButton_CreatePoly">
+        <property name="text">
+         <string>Create Poly</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_FeatureDetection">
+        <property name="text">
+         <string>Feature Detection</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_TextureTracking">
+        <property name="text">
+         <string>Texture Box Tracking</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QSplitter" name="splitter">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <widget class="QGraphicsView" name="graphicsView"/>
+     <widget class="TrackerGLWidget" name="openGLWidget"/>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>TrackerGLWidget</class>
+   <extends>QOpenGLWidget</extends>
+   <header>TrackerGLWidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="EvisionPolyTracker.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>pushButton_CreatePoly</sender>
+   <signal>clicked()</signal>
+   <receiver>EvisionPolyTrackerClass</receiver>
+   <slot>onButtonDown_CreatePoly()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>154</x>
+     <y>36</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>159</x>
+     <y>57</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_FeatureDetection</sender>
+   <signal>clicked()</signal>
+   <receiver>EvisionPolyTrackerClass</receiver>
+   <slot>onButtonDown_FeatureDetection()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>523</x>
+     <y>29</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>530</x>
+     <y>58</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_TextureTracking</sender>
+   <signal>clicked()</signal>
+   <receiver>EvisionPolyTrackerClass</receiver>
+   <slot>onButtonDown_TextureTracking()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>737</x>
+     <y>31</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>770</x>
+     <y>57</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>onButtonDown_CreatePoly()</slot>
+  <slot>onButtonDown_FeatureDetection()</slot>
+  <slot>onButtonDown_TextureTracking()</slot>
+ </slots>
+</ui>

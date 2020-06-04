@@ -52,13 +52,14 @@ static void onMouseDown(int event, int x, int y, int, void*)
         std::cout << "请标下一个点" << std::endl;
     }
 }
-
+bool getWorldCoordinate(cv::Mat& disparity, cv::Mat& Q, int ix, int iy, cv::Point3f& point);
 
 int main(int argc, char const *argv[])
 {
-    std::string cameraParamFile = "";
-    std::string leftImgFile = "";
-    std::string RawDispFile = "";
+    std::string datapath = getCurrentPath() + "\\..\\..\\..\\data";
+    std::string cameraParamFile = datapath + "";
+    std::string leftImgFile = datapath + "";
+    std::string RawDispFile = datapath + "";
 
     //step 1 :打开文件,读取Q矩阵,左图,原始视差数据
     cv::Mat Q, img, RawDisp;
@@ -66,8 +67,8 @@ int main(int argc, char const *argv[])
     fStorage["Q"] >> Q;
     fStorage.release();
     img = cv::imread(leftImgFile);
-    cv::FileStorage fStorage(RawDispFile, cv::FileStorage::READ);
-    fStorage["disp"] >> RawDisp;
+    cv::FileStorage fStorage_2(RawDispFile, cv::FileStorage::READ);
+    fStorage_2["disp"] >> RawDisp;
 
     //step 2: 标点,获得四个图像坐标
     imgToShow = img.clone();
