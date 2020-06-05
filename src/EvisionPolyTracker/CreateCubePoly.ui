@@ -52,7 +52,7 @@
       <item row="1" column="1" colspan="2">
        <widget class="QLabel" name="label_2">
         <property name="text">
-         <string>请输入box的长宽高,即图中的CD,BC,CG:</string>
+         <string>请输入box的长宽高:</string>
         </property>
        </widget>
       </item>

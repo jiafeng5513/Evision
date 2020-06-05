@@ -31,13 +31,15 @@ private:
     static bool end_registration;
 
     // 相机内参
-    const double f = 45; // focal length in mm
-    const double sx = 22.3, sy = 14.9;
-    const double width = 2592, height = 1944;
-    const double params_CANON[4] = { width * f / sx,   // fx
-                                    height * f / sy,  // fy
-                                    width / 2,      // cx
-                                    height / 2 };    // cy
+    //double f = 45; // focal length in mm
+    //double sx = 22.3, sy = 14.9;
+    //double width = 2592, height = 1944;
+    //double params_CANON[4] = { width * f / sx,   // fx = 5230.493273542601
+    //                                height * f / sy,   // fy = 5871.140939597315
+    //                                width / 2,         // cx = 1296.0
+    //                                height / 2 };      // cy = 972.0
+
+    double fx,fy,cx,cy;
 
     // Setup the points to register in the image
     // In the order of the *.ply file and starting at 1

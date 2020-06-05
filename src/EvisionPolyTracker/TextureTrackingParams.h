@@ -32,6 +32,7 @@ private:
     bool fast_match;
     bool useFLANN;
     bool displayFilteredPose;
+    double fx, fy, cx, cy;
 private:
     void TrackingThread();
     void initKalmanFilter(cv::KalmanFilter& KF, int nStates, int nMeasurements, int nInputs, double dt);

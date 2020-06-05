@@ -53,6 +53,15 @@ TextureTrackingParams::TextureTrackingParams(QWidget *parent)
     ui.checkBox_useFLANN->setChecked(useFLANN);
     displayFilteredPose = false;
     ui.checkBox_displayFilteredPose->setChecked(displayFilteredPose);
+    // 转换为内参矩阵的四个自由变量
+    fx = 1578.47533632287;
+    fy = 1771.8120805369126;
+    cx = 320.0;
+    cy = 240.0;
+    ui.lineEdit_fx->setText(QString::number(this->fx));
+    ui.lineEdit_fy->setText(QString::number(this->fy));
+    ui.lineEdit_cx->setText(QString::number(this->cx));
+    ui.lineEdit_cy->setText(QString::number(this->cy));
 }
 
 void TextureTrackingParams::onPush_confirm()
@@ -67,7 +76,11 @@ void TextureTrackingParams::onPush_confirm()
         (minInliersKalman = ui.lineEdit_minInliersKalman->text().toInt()) > 0 &&
         (ratioTest = ui.lineEdit_ratioTest->text().toFloat()) > 0 &&
         (reprojectionError = ui.lineEdit_reprojectionError->text().toFloat()) > 0 &&
-        (confidence = ui.lineEdit_confidence->text().toFloat()) > 0) 
+        (confidence = ui.lineEdit_confidence->text().toFloat()) > 0&&
+        (this->fx = ui.lineEdit_fx->text().toDouble()) > 0 &&
+        (this->fy = ui.lineEdit_fy->text().toDouble()) > 0 &&
+        (this->cx = ui.lineEdit_cx->text().toDouble()) > 0 &&
+        (this->cy = ui.lineEdit_cy->text().toDouble()) > 0)
     {
         featureName = ui.comboBox_featureName->currentText().toStdString();
         pnpMethod = ui.comboBox_pnpMethod->currentIndex();
@@ -88,16 +101,8 @@ void TextureTrackingParams::onPush_confirm()
 
 void TextureTrackingParams::TrackingThread()
 {
-    // 相机的内参
-    double f = 55;                           // focal length in mm
-    double sx = 22.3, sy = 14.9;             // sensor size
-    double width = 640, height = 480;        // image size
-
-    // 转换为内参矩阵的四个自由变量
-    double params_WEBCAM[] = { width * f / sx,   // fx
-                               height * f / sy,  // fy
-                               width / 2,      // cx
-                               height / 2 };    // cy
+    // 内参矩阵的四个自由变量
+    double params_WEBCAM[4] = {this->fx,this->fy,this->cx,this->cy};
 
     // 颜色值定义
     cv::Scalar red(0, 0, 255);

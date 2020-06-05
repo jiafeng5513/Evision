@@ -23,6 +23,14 @@ EvisionFeatureDetection::EvisionFeatureDetection(QWidget* parent)
     this->write_path = datapath + "\\test_reg";
     this->numKeyPoints = 2000;
     this->featureName = "ORB";
+    this->fx = 5230.493273542601;
+    this->fy = 5871.140939597315;
+    this->cx = 1296.0;
+    this->cy = 972.0;
+    ui.lineEdit_fx->setText(QString::number(this->fx));
+    ui.lineEdit_fy->setText(QString::number(this->fy));
+    ui.lineEdit_cx->setText(QString::number(this->cx));
+    ui.lineEdit_cy->setText(QString::number(this->cy));
 
     ui.lineEdit_img_path->setText(QString::fromStdString(this->img_path));
     ui.lineEdit_ply_read_path->setText(QString::fromStdString(this->ply_read_path));
@@ -38,7 +46,11 @@ void EvisionFeatureDetection::onPush_confirm()
     if ((this->img_path=ui.lineEdit_img_path->text().toStdString())!="" &&
         (this->ply_read_path=ui.lineEdit_ply_read_path->text().toStdString())!= "" &&
         (this->write_path = ui.lineEdit_write_path->text().toStdString()) != "" &&
-        (this->numKeyPoints = ui.lineEdit_numKeyPoints->text().toInt())>0)
+        (this->numKeyPoints = ui.lineEdit_numKeyPoints->text().toInt())>0 &&
+        (this->fx = ui.lineEdit_fx->text().toDouble()) > 0 &&
+        (this->fy = ui.lineEdit_fy->text().toDouble()) > 0 &&
+        (this->cx = ui.lineEdit_cx->text().toDouble()) > 0 &&
+        (this->cy = ui.lineEdit_cy->text().toDouble()) > 0 )
     {
         //参数传递
         this->featureName = ui.comboBox_featureName->currentText().toStdString();
@@ -56,7 +68,10 @@ void EvisionFeatureDetection::onPush_confirm()
 void EvisionFeatureDetection::RegistrationThread()
 {
     Model model;
-    
+    double params_CANON[4] = { this->fx,   // fx = 5230.493273542601
+                                this->fy,   // fy = 5871.140939597315
+                                this->cx,         // cx = 1296.0
+                                this->cy};      // cy = 972.0
     PnPProblem pnp_registration(params_CANON);
 
 
