@@ -1,0 +1,736 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MonocularCalibraterView</class>
+ <widget class="QWidget" name="MonocularCalibraterView">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1004</width>
+    <height>589</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>单目标定</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="1" column="1">
+    <widget class="QFrame" name="frame">
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>210</height>
+      </size>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Box</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <property name="leftMargin">
+       <number>4</number>
+      </property>
+      <property name="topMargin">
+       <number>4</number>
+      </property>
+      <property name="rightMargin">
+       <number>4</number>
+      </property>
+      <property name="bottomMargin">
+       <number>4</number>
+      </property>
+      <property name="spacing">
+       <number>4</number>
+      </property>
+      <item row="1" column="0">
+       <widget class="QGroupBox" name="groupBox">
+        <property name="title">
+         <string>标定参数</string>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>Width:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEdit_BoardWidth">
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>20</width>
+             <height>16777215</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_6">
+           <property name="text">
+            <string>Height:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEdit_BoardHeight">
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>20</width>
+             <height>16777215</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_8">
+           <property name="text">
+            <string>Size:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEdit_SquareSize">
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>20</width>
+             <height>16777215</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QGroupBox" name="groupBox_4">
+        <property name="title">
+         <string>标定</string>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <property name="spacing">
+          <number>4</number>
+         </property>
+         <property name="leftMargin">
+          <number>4</number>
+         </property>
+         <property name="topMargin">
+          <number>4</number>
+         </property>
+         <property name="rightMargin">
+          <number>4</number>
+         </property>
+         <property name="bottomMargin">
+          <number>4</number>
+         </property>
+         <item>
+          <widget class="QPushButton" name="pushButton_CalibDefault">
+           <property name="text">
+            <string>默认参数</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton">
+           <property name="text">
+            <string>标定</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_2">
+           <property name="text">
+            <string>保存参数</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="0" column="0" colspan="2">
+       <widget class="QGroupBox" name="groupBox_3">
+        <property name="title">
+         <string>标定设置</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_3">
+         <item row="1" column="0">
+          <widget class="QCheckBox" name="checkBox_CALIB_FIX_ASPECT_RATIO">
+           <property name="text">
+            <string>固定宽高比</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="4">
+          <widget class="QCheckBox" name="checkBox_CALIB_FIX_K6">
+           <property name="text">
+            <string>忽略径向畸变系数K6</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="3" rowspan="5">
+          <widget class="Line" name="line_2">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1" rowspan="5">
+          <widget class="Line" name="line">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="2">
+          <widget class="QCheckBox" name="checkBox_CALIB_FIX_S1_S2_S3_S4">
+           <property name="text">
+            <string>忽略薄棱镜参数S1-S4</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QCheckBox" name="checkBox_CALIB_FIX_PRINCIPAL_POINT">
+           <property name="text">
+            <string>不优化主点位置</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QCheckBox" name="checkBox_CALIB_ZERO_TANGENT_DIST">
+           <property name="text">
+            <string>忽略切向畸变系数(P1,P2)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QCheckBox" name="checkBox_CALIB_FIX_K1">
+           <property name="text">
+            <string>忽略径向畸变系数K1</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="2">
+          <widget class="QCheckBox" name="checkBox_CALIB_FIX_K3">
+           <property name="text">
+            <string>忽略径向畸变系数K3</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QCheckBox" name="checkBox_CALIB_FIX_K2">
+           <property name="text">
+            <string>忽略径向畸变系数K2</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="4">
+          <widget class="QCheckBox" name="checkBox_CALIB_FIX_TAUX_TAUY">
+           <property name="text">
+            <string>忽略倾斜传感器参数TauX和TauY</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QCheckBox" name="checkBox_CALIB_RATIONAL_MODEL">
+           <property name="text">
+            <string>使用理想模型(8参数)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="4">
+          <widget class="QCheckBox" name="checkBox_CALIB_TILTED_MODEL">
+           <property name="text">
+            <string>使用倾斜传感器模型(14参数)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QCheckBox" name="checkBox_CALIB_THIN_PRISM_MODEL">
+           <property name="text">
+            <string>使用薄棱镜模型(12参数)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="2">
+          <widget class="QCheckBox" name="checkBox_CALIB_FIX_K4">
+           <property name="text">
+            <string>忽略径向畸变系数K4</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="4">
+          <widget class="QCheckBox" name="checkBox_CALIB_FIX_K5">
+           <property name="text">
+            <string>忽略径向畸变系数K5</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="0" rowspan="2">
+    <widget class="QListWidget" name="listWidget">
+     <property name="maximumSize">
+      <size>
+       <width>220</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(129, 129, 129);</string>
+     </property>
+     <property name="dragDropMode">
+      <enum>QAbstractItemView::DragDrop</enum>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>60</width>
+       <height>60</height>
+      </size>
+     </property>
+     <property name="flow">
+      <enum>QListView::LeftToRight</enum>
+     </property>
+     <property name="viewMode">
+      <enum>QListView::IconMode</enum>
+     </property>
+     <property name="modelColumn">
+      <number>0</number>
+     </property>
+     <property name="currentRow">
+      <number>-1</number>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1" colspan="2">
+    <widget class="QScrollArea" name="scrollArea">
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="scrollAreaWidgetContents">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>758</width>
+        <height>359</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <item row="0" column="0">
+        <widget class="QGraphicsView" name="graphicsView">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(181, 181, 181);</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>lineEdit_BoardWidth</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MonocularCalibraterView</receiver>
+   <slot>onValueChanged_BoardWidth(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>528</x>
+     <y>558</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>246</x>
+     <y>282</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_BoardHeight</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MonocularCalibraterView</receiver>
+   <slot>onValueChanged_BoardHeight(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>632</x>
+     <y>558</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>131</x>
+     <y>282</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_SquareSize</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MonocularCalibraterView</receiver>
+   <slot>onValueChanged_SquareSize(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>724</x>
+     <y>558</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>174</x>
+     <y>283</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_CalibDefault</sender>
+   <signal>clicked()</signal>
+   <receiver>MonocularCalibraterView</receiver>
+   <slot>setDefaultCalibParam()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>820</x>
+     <y>559</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>426</x>
+     <y>472</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MonocularCalibraterView</receiver>
+   <slot>doCalib()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>899</x>
+     <y>559</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>569</x>
+     <y>469</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>listWidget</sender>
+   <signal>itemClicked(QListWidgetItem*)</signal>
+   <receiver>MonocularCalibraterView</receiver>
+   <slot>onItemClicked(QListWidgetItem*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>154</x>
+     <y>152</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>259</x>
+     <y>6</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>MonocularCalibraterView</receiver>
+   <slot>onPush_saveParamsToFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>954</x>
+     <y>555</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>999</x>
+     <y>485</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_CALIB_FIX_PRINCIPAL_POINT</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MonocularCalibraterView</receiver>
+   <slot>onValueChanged_FIX_PRINCIPAL_POINT(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>312</x>
+     <y>411</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>233</x>
+     <y>333</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_CALIB_RATIONAL_MODEL</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MonocularCalibraterView</receiver>
+   <slot>onValueChanged_RATIONAL_MODEL(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>587</x>
+     <y>409</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>233</x>
+     <y>40</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_CALIB_TILTED_MODEL</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MonocularCalibraterView</receiver>
+   <slot>onValueChanged_TILTED_MODEL(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>791</x>
+     <y>409</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>705</x>
+     <y>4</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_CALIB_FIX_ASPECT_RATIO</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MonocularCalibraterView</receiver>
+   <slot>onValueChanged_FIX_ASPECT_RATIO(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>342</x>
+     <y>430</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>332</x>
+     <y>374</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_CALIB_ZERO_TANGENT_DIST</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MonocularCalibraterView</receiver>
+   <slot>onValueChanged_ZERO_TANGENT_DIST(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>393</x>
+     <y>456</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>466</x>
+     <y>5</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_CALIB_FIX_K1</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MonocularCalibraterView</receiver>
+   <slot>onValueChanged_FIX_K1(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>281</x>
+     <y>471</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>231</x>
+     <y>142</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_CALIB_FIX_K2</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MonocularCalibraterView</receiver>
+   <slot>onValueChanged_FIX_K2(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>305</x>
+     <y>495</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>232</x>
+     <y>231</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_CALIB_THIN_PRISM_MODEL</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MonocularCalibraterView</receiver>
+   <slot>onValueChanged_THIN_PRISM_MODEL(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>558</x>
+     <y>427</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>730</x>
+     <y>8</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_CALIB_FIX_S1_S2_S3_S4</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MonocularCalibraterView</receiver>
+   <slot>onValueChanged_FIX_S1_S2_S3_S4(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>530</x>
+     <y>448</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>966</x>
+     <y>3</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_CALIB_FIX_K3</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MonocularCalibraterView</receiver>
+   <slot>onValueChanged_FIX_K3(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>602</x>
+     <y>481</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>998</x>
+     <y>37</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_CALIB_FIX_K4</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MonocularCalibraterView</receiver>
+   <slot>onValueChanged_FIX_K4(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>644</x>
+     <y>504</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1001</x>
+     <y>73</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_CALIB_FIX_TAUX_TAUY</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MonocularCalibraterView</receiver>
+   <slot>onValueChanged_FIX_TAUX_TAUY(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>836</x>
+     <y>432</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1001</x>
+     <y>113</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_CALIB_FIX_K5</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MonocularCalibraterView</receiver>
+   <slot>onValueChanged_FIX_K5(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>812</x>
+     <y>478</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1001</x>
+     <y>194</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_CALIB_FIX_K6</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MonocularCalibraterView</receiver>
+   <slot>onValueChanged_FIX_K6(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>787</x>
+     <y>499</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1004</x>
+     <y>243</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>onValueChanged_BoardWidth(QString)</slot>
+  <slot>onValueChanged_BoardHeight(QString)</slot>
+  <slot>onValueChanged_SquareSize(QString)</slot>
+  <slot>onClicked_showRectified(bool)</slot>
+  <slot>onClicked_Bouguet(bool)</slot>
+  <slot>onClicked_Hartley(bool)</slot>
+  <slot>setDefaultCalibParam()</slot>
+  <slot>doCalib()</slot>
+  <slot>onItemClicked(QListWidgetItem*)</slot>
+  <slot>onPush_saveParamsToFile()</slot>
+  <slot>onValueChanged_FIX_PRINCIPAL_POINT(bool)</slot>
+  <slot>onValueChanged_FIX_ASPECT_RATIO(bool)</slot>
+  <slot>onValueChanged_ZERO_TANGENT_DIST(bool)</slot>
+  <slot>onValueChanged_SAME_FOCAL_LENGTH(bool)</slot>
+  <slot>onValueChanged_FIX_K1(bool)</slot>
+  <slot>onValueChanged_FIX_K2(bool)</slot>
+  <slot>onValueChanged_FIX_K3(bool)</slot>
+  <slot>onValueChanged_FIX_K4(bool)</slot>
+  <slot>onValueChanged_FIX_K5(bool)</slot>
+  <slot>onValueChanged_FIX_K6(bool)</slot>
+  <slot>onValueChanged_RATIONAL_MODEL(bool)</slot>
+  <slot>onValueChanged_THIN_PRISM_MODEL(bool)</slot>
+  <slot>onValueChanged_FIX_S1_S2_S3_S4(bool)</slot>
+  <slot>onValueChanged_TILTED_MODEL(bool)</slot>
+  <slot>onValueChanged_FIX_TAUX_TAUY(bool)</slot>
+ </slots>
+</ui>

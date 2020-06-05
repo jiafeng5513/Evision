@@ -279,6 +279,35 @@ bool EvisionUtils::write_AllCameraParams(std::string& filename, cv::Mat& cameraM
 	}
 }
 
+bool EvisionUtils::write_MonocularCameraParams(std::string& filename, cv::Mat& cameraMatrix1, cv::Mat& distCoeffs1, cv::Size& imageSize)
+{
+	if (filename.empty() == true)
+	{
+		return false;
+	}
+	try
+	{
+		cv::FileStorage fs(filename, cv::FileStorage::WRITE);
+		if (fs.isOpened())
+		{
+			fs << "cameraMatrix1" << cameraMatrix1;
+			fs << "distCoeffs1" << distCoeffs1;
+			fs << "imageSize" << imageSize;
+			fs.release();
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	catch (...)
+	{
+		return false;
+	}
+}
+
+
 /*
  * 从文件中读取双目标定得到的参数
  * 1.文件名							std::string filename
@@ -330,6 +359,33 @@ bool EvisionUtils::read_AllCameraParams(std::string& filename, cv::Mat* cameraMa
 			fs["Q"] >> *Q;
 			fs["roi1"] >> *roi1;
 			fs["roi2"] >> *roi2;
+			fs.release();
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	catch (...)
+	{
+		return false;
+	}
+}
+bool EvisionUtils::read_MonocularParams(std::string& filename, cv::Mat* cameraMatrix1, cv::Mat* distCoeffs1, cv::Size* imageSize)
+{
+	if (filename.empty() == true)
+	{
+		return false;
+	}
+	try
+	{
+		cv::FileStorage fs(filename, cv::FileStorage::READ);
+		if (fs.isOpened())
+		{
+			fs["cameraMatrix1"] >> *cameraMatrix1;
+			fs["distCoeffs1"] >> *distCoeffs1;
+			fs["imageSize"] >> *imageSize;
 			fs.release();
 			return true;
 		}

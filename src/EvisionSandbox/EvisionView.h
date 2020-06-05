@@ -38,6 +38,7 @@ public slots:
 	void on_action_LogViewSwitch();			//LOGVIEW
 	void on_action_disp_to_pcd();			//视差转点云
 	void on_action_create_param();			//创建相机参数文件
+	void on_action_MonocularCalib_view();   //单目标定视图
 	//状态栏
 	void onParamChanged_StatusBarText();
 private:

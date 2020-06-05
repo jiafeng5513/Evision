@@ -108,6 +108,7 @@
     <property name="title">
      <string>单目视觉</string>
     </property>
+    <addaction name="action_MonocularCalib"/>
     <addaction name="action_PolyTracker"/>
    </widget>
    <addaction name="menu"/>
@@ -131,6 +132,7 @@
    <addaction name="action_ShowPointCloud"/>
    <addaction name="action_CreateParamFile"/>
    <addaction name="separator"/>
+   <addaction name="action_MonocularCalib"/>
    <addaction name="action_PolyTracker"/>
    <addaction name="separator"/>
    <addaction name="action_CalibrateView"/>
@@ -272,6 +274,15 @@
    </property>
    <property name="toolTip">
     <string>单目几何体追踪</string>
+   </property>
+  </action>
+  <action name="action_MonocularCalib">
+   <property name="icon">
+    <iconset resource="Evision.qrc">
+     <normaloff>:/Evision/resource/20200605091322415_easyicon_net_256.ico</normaloff>:/Evision/resource/20200605091322415_easyicon_net_256.ico</iconset>
+   </property>
+   <property name="text">
+    <string>单目标定</string>
    </property>
   </action>
  </widget>
@@ -488,6 +499,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>action_MonocularCalib</sender>
+   <signal>triggered()</signal>
+   <receiver>EvisionClass</receiver>
+   <slot>on_action_MonocularCalib_view()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>511</x>
+     <y>354</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>onShowPointCloud()</slot>
@@ -503,5 +530,6 @@
   <slot>on_action_create_param()</slot>
   <slot>on_action_RealSenseCamera()</slot>
   <slot>on_action_PolyTracker_view()</slot>
+  <slot>on_action_MonocularCalib_view()</slot>
  </slots>
 </ui>

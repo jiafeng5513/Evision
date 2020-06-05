@@ -69,6 +69,8 @@ public:
 		cv::Mat& R,cv::Mat& T,cv::Size& imageSize,cv::Mat& R1,cv::Mat& P1,cv::Mat& R2,cv::Mat& P2,
 		cv::Mat& Q,cv::Rect& roi1,cv::Rect& roi2);
 
+	//保存单目相机标定的参数
+	static bool write_MonocularCameraParams(std::string& filename,cv::Mat& cameraMatrix1, cv::Mat& distCoeffs1, cv::Size& imageSize);
 	/*
 	 * 从文件中读取双目标定得到的参数
 	 * 1.文件名							std::string filename
@@ -95,7 +97,8 @@ public:
 		cv::Mat* cameraMatrix1,cv::Mat* distCoeffs1,cv::Mat* cameraMatrix2,cv::Mat* distCoeffs2,
 		cv::Mat* R,cv::Mat* T,cv::Mat* E,cv::Mat* F,cv::Size* imageSize,cv::Mat* R1,cv::Mat* P1,cv::Mat* R2,cv::Mat* P2,
 		cv::Mat* Q,cv::Rect* roi1,cv::Rect* roi2);
-
+	//读取单目相机标定的参数
+	static bool read_MonocularParams(std::string& filename,cv::Mat* cameraMatrix1, cv::Mat* distCoeffs1, cv::Size* imageSize);
 	/*
 	 * 读取匹配所需的参数
 	 */

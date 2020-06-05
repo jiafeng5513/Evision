@@ -26,6 +26,7 @@
 #include "EvisionCameraFactory.h"
 #include "EvisionParamBridgeFactory.h"
 #include "EvisionPolyTrackerFactory.h"
+#include "EvisionMonocularCalibFactory.h"
 // 浮点数判等
 // ulp: units in the last place.
 template <typename T>
@@ -280,6 +281,13 @@ void EvisionView::on_action_create_param()
 	auto _createCameraParamFile = EvisionParamBridgeFactory::CreateEvisionParamBridgeView(this);
 	ui.mdiArea->addSubWindow(_createCameraParamFile);
 	_createCameraParamFile->show();
+}
+//打开单目标定视图
+void EvisionView::on_action_MonocularCalib_view()
+{
+	auto _monocularCalibView = EvisionMonocularCalibFactory::CreateEvisionMonocularCalibViewer(this);
+	ui.mdiArea->addSubWindow(_monocularCalibView);
+	_monocularCalibView->show();
 }
 //状态栏更新
 void EvisionView::onParamChanged_StatusBarText()

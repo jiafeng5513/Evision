@@ -73,20 +73,14 @@ add_subdirectory(EvisionParamBridge)
 # pnplib
 add_subdirectory(pnplib)
 
-# pnpDetection 6DoF跟踪
-add_subdirectory(pnpDetection)
-
-# pnpRegistration 6DoF跟踪的特征工程
-add_subdirectory(pnpRegistration)
-
-# createPly 6DoF跟踪的小工具
-add_subdirectory(createPly)
-
 # 单目几何体追踪
 add_subdirectory(EvisionPolyTracker)
+
+# 单目标定
+add_subdirectory(EvisionMonocularCalib)
 
 # 配置工程筛选器
 SET_TARGET_PROPERTIES(EvisionUtils EvisionCamera EvisionParamBridge PROPERTIES FOLDER Utils) 
 SET_TARGET_PROPERTIES(EvisionADCensus EvisionElas pnplib PROPERTIES FOLDER Algorithm)
 SET_TARGET_PROPERTIES(EvisionCalibrate EvisionDisparity EvisionTrace EvisionUndistortion PROPERTIES FOLDER Stereo) 
-SET_TARGET_PROPERTIES(pnpDetection pnpRegistration createPly EvisionPolyTracker PROPERTIES FOLDER VideoTracker)
+SET_TARGET_PROPERTIES(EvisionPolyTracker EvisionMonocularCalib PROPERTIES FOLDER Monocular)
