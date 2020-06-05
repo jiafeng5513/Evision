@@ -1,8 +1,9 @@
 ﻿#include "TextureTrackingParams.h"
 
 #include <QMessageBox>
+#include <QFileInfo>
 #include <thread>
-
+#include "EvisionUtils.h"
 // OpenCV
 #include <opencv2/core.hpp>
 #include <opencv2/core/utils/filesystem.hpp>
@@ -17,19 +18,20 @@
 #include "RobustMatcher.h"
 #include "ModelRegistration.h"
 #include "Utils.h"
+
 TextureTrackingParams::TextureTrackingParams(QWidget *parent)
     : QDialog(parent)
 {
     ui.setupUi(this);
-    std::string datapath = getCurrentPath() + "\\..\\..\\..\\data\\Tracker";
+    std::string datapath = EvisionUtils::pathPurify(EvisionUtils::getCurrentPath() + "\\..\\..\\..\\data\\Tracker");
 
-    video_read_path = datapath+ "\\box.mp4";
+    video_read_path = datapath+ "/box.mp4";
     ui.lineEdit_video_read_path->setText(QString::fromStdString(video_read_path));
-    yml_read_path = datapath + "\\cookies_ORB.yml";
+    yml_read_path = datapath + "/cookies_ORB.yml";
     ui.lineEdit_yml_read_path->setText(QString::fromStdString(yml_read_path));
-    ply_read_path = datapath + "\\box.ply";
+    ply_read_path = datapath + "/box.ply";
     ui.lineEdit_ply_read_path->setText(QString::fromStdString(ply_read_path));
-    saveDirectory = datapath + "\\test_reg";
+    saveDirectory = datapath + "/test_reg";
     ui.lineEdit_saveDirectory->setText(QString::fromStdString(saveDirectory));
     featureName = "ORB";
 
@@ -67,10 +69,16 @@ TextureTrackingParams::TextureTrackingParams(QWidget *parent)
 void TextureTrackingParams::onPush_confirm()
 {
     //校验->传参->开线程
-    if ((video_read_path = ui.lineEdit_video_read_path->text().toStdString()) != "" &&
-        (yml_read_path = ui.lineEdit_yml_read_path->text().toStdString()) != "" &&
-        (ply_read_path = ui.lineEdit_ply_read_path->text().toStdString()) != "" &&
-        (saveDirectory = ui.lineEdit_saveDirectory->text().toStdString()) != "" &&
+    QFileInfo* fileinfo_video_read_path = new QFileInfo(ui.lineEdit_video_read_path->text());
+    QFileInfo* fileinfo_yml_read_path = new QFileInfo(ui.lineEdit_yml_read_path->text());
+    QFileInfo* fileinfo_ply_read_path = new QFileInfo(ui.lineEdit_ply_read_path->text());
+    QFileInfo* fileinfo_saveDirectory = new QFileInfo(ui.lineEdit_saveDirectory->text());
+
+    if ((fileinfo_video_read_path->exists() && fileinfo_video_read_path->isFile()) &&
+        (fileinfo_yml_read_path->exists() && fileinfo_yml_read_path->isFile()) &&
+        (fileinfo_ply_read_path->exists() && fileinfo_ply_read_path->isFile()) &&
+        (fileinfo_saveDirectory->exists() && fileinfo_saveDirectory->isDir()) &&
+
         (numKeyPoints = ui.lineEdit_numKeyPoints->text().toInt()) > 0 &&
         (iterationsCount = ui.lineEdit_iterationsCount->text().toInt()) > 0 &&
         (minInliersKalman = ui.lineEdit_minInliersKalman->text().toInt()) > 0 &&
@@ -82,11 +90,16 @@ void TextureTrackingParams::onPush_confirm()
         (this->cx = ui.lineEdit_cx->text().toDouble()) > 0 &&
         (this->cy = ui.lineEdit_cy->text().toDouble()) > 0)
     {
-        featureName = ui.comboBox_featureName->currentText().toStdString();
-        pnpMethod = ui.comboBox_pnpMethod->currentIndex();
-        fast_match = ui.checkBox_fast_match->isChecked();
-        useFLANN = ui.checkBox_useFLANN->isChecked();
-        displayFilteredPose = ui.checkBox_displayFilteredPose->isChecked();
+        this->featureName = ui.comboBox_featureName->currentText().toStdString();
+        this->pnpMethod = ui.comboBox_pnpMethod->currentIndex();
+        this->fast_match = ui.checkBox_fast_match->isChecked();
+        this->useFLANN = ui.checkBox_useFLANN->isChecked();
+        this->displayFilteredPose = ui.checkBox_displayFilteredPose->isChecked();
+
+        this->video_read_path = ui.lineEdit_video_read_path->text().toStdString();
+        this->yml_read_path= ui.lineEdit_yml_read_path->text().toStdString();
+        this->ply_read_path= ui.lineEdit_ply_read_path->text().toStdString();
+        this->saveDirectory= ui.lineEdit_saveDirectory->text().toStdString();
 
         std::thread _t(&TextureTrackingParams::TrackingThread, this);
         _t.detach();

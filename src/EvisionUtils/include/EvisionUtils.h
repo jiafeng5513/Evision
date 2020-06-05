@@ -22,6 +22,14 @@ public:
 	EvisionUtils();
 	~EvisionUtils();
 	/*
+	 * 获取当前路径
+	 */
+	static std::string getCurrentPath();
+	/*
+	 * 路径整理
+     */
+	static std::string pathPurify(std::string& src);
+	/*
 	 * cv::Mat转换为QImage
 	 */
 	static QImage cvMat2QImage(const cv::Mat& mat);

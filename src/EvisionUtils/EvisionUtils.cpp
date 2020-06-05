@@ -1,7 +1,6 @@
 ﻿#include "EvisionUtils.h"
-//#include <opencv2\imgproc\types_c.h>
-
-
+#include <sstream>
+#include <QFileInfo>
 
 EvisionUtils::EvisionUtils()
 {
@@ -10,6 +9,32 @@ EvisionUtils::EvisionUtils()
 
 EvisionUtils::~EvisionUtils()
 {
+}
+/*
+ * 获取当前路径
+ */
+std::string EvisionUtils::getCurrentPath()
+{
+	std::ostringstream ss;
+	ss << _pgmptr;
+	std::string abspath = ss.str();
+	int last_slash_pos = abspath.rfind("\\");
+	std::string path = abspath.substr(0, last_slash_pos);
+	return path;
+}
+/*
+ * 路径整理
+ */
+std::string EvisionUtils::pathPurify(std::string& src)
+{
+	QString str1 = QString::fromStdString(src);
+	QString str2 = str1.replace(QRegExp("\\\\"), "/");
+	QFileInfo* fileinfo = new QFileInfo(str2);
+	if (fileinfo->exists())
+	{
+		return fileinfo->absoluteFilePath().toStdString();
+	}
+	return str2.toStdString();
 }
 
 /*

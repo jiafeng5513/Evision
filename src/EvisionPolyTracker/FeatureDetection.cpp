@@ -1,12 +1,12 @@
 ﻿#include "FeatureDetection.h"
-#include "Utils.h"
+#include "EvisionUtils.h"
 #include <QDateTime>
 #include <QMessageBox>
 #include <thread>
 #include <opencv2/opencv.hpp>
 #include <opencv2/calib3d.hpp>
 #include <opencv2/features2d.hpp>
-
+#include <QFileInfo>
 //静态变量初始化
 
 bool EvisionFeatureDetection::end_registration = false;
@@ -17,10 +17,11 @@ EvisionFeatureDetection::EvisionFeatureDetection(QWidget* parent)
     : QDialog(parent)
 {
     ui.setupUi(this);
-    std::string datapath = getCurrentPath() + "\\..\\..\\..\\data\\Tracker";
-    this->img_path = datapath + "\\object.jpg";
-    this->ply_read_path = datapath + "\\box.ply";
-    this->write_path = datapath + "\\test_reg";
+    std::string datapath = EvisionUtils::pathPurify(EvisionUtils::getCurrentPath() + "\\..\\..\\..\\data\\Tracker");
+
+    this->img_path = datapath + "/object.jpg";
+    this->ply_read_path = datapath + "/box.ply";
+    this->write_path = datapath + "/test_reg";
     this->numKeyPoints = 2000;
     this->featureName = "ORB";
     this->fx = 5230.493273542601;
@@ -43,9 +44,13 @@ EvisionFeatureDetection::EvisionFeatureDetection(QWidget* parent)
 //确认,启动后台线程
 void EvisionFeatureDetection::onPush_confirm() 
 {
-    if ((this->img_path=ui.lineEdit_img_path->text().toStdString())!="" &&
-        (this->ply_read_path=ui.lineEdit_ply_read_path->text().toStdString())!= "" &&
-        (this->write_path = ui.lineEdit_write_path->text().toStdString()) != "" &&
+    QFileInfo* fileinfo_img_path = new QFileInfo(ui.lineEdit_img_path->text());
+    QFileInfo* fileinfo_ply_read_path = new QFileInfo(ui.lineEdit_ply_read_path->text());
+    QFileInfo* fileinfo_write_path = new QFileInfo(ui.lineEdit_write_path->text());
+
+    if ((fileinfo_img_path->exists()&& fileinfo_img_path->isFile()) &&
+        (fileinfo_ply_read_path->exists() && fileinfo_ply_read_path->isFile()) &&
+        (fileinfo_write_path->exists() && fileinfo_write_path->isDir()) &&
         (this->numKeyPoints = ui.lineEdit_numKeyPoints->text().toInt())>0 &&
         (this->fx = ui.lineEdit_fx->text().toDouble()) > 0 &&
         (this->fy = ui.lineEdit_fy->text().toDouble()) > 0 &&
@@ -54,6 +59,9 @@ void EvisionFeatureDetection::onPush_confirm()
     {
         //参数传递
         this->featureName = ui.comboBox_featureName->currentText().toStdString();
+        this->img_path = ui.lineEdit_img_path->text().toStdString();
+        this->ply_read_path = ui.lineEdit_ply_read_path->text().toStdString();
+        this->write_path = ui.lineEdit_write_path->text().toStdString();
 
         std::thread _t(&EvisionFeatureDetection::RegistrationThread, this);
         _t.detach();
@@ -68,10 +76,7 @@ void EvisionFeatureDetection::onPush_confirm()
 void EvisionFeatureDetection::RegistrationThread()
 {
     Model model;
-    double params_CANON[4] = { this->fx,   // fx = 5230.493273542601
-                                this->fy,   // fy = 5871.140939597315
-                                this->cx,         // cx = 1296.0
-                                this->cy};      // cy = 972.0
+    double params_CANON[4] = {this->fx,this->fy,this->cx,this->cy};
     PnPProblem pnp_registration(params_CANON);
 
 

@@ -5,10 +5,8 @@
  *      Author: AnnaSkyWalker
  */
 
-#include <iostream>
-#include <fstream>
-#include <stdlib.h>
 
+#include <fstream>
 #include "PnPProblem.h"
 #include "ModelRegistration.h"
 #include "Utils.h"
@@ -29,16 +27,6 @@ const int thickness_font = 2;
 // For circles
 const int lineType = 8;
 const int radius = 4;
-//get Current Path
-std::string getCurrentPath()
-{
-    std::ostringstream ss;
-    ss << _pgmptr;
-    std::string abspath = ss.str();
-    int last_slash_pos = abspath.rfind("\\");
-    std::string path = abspath.substr(0, last_slash_pos);
-    return path;
-}
 
 // Draw a text with the question point
 void drawQuestion(cv::Mat image, cv::Point3f point, cv::Scalar color)
