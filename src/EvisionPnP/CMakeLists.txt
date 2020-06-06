@@ -23,7 +23,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/../install/bin/
 #set_target_properties(${TARGET_NAME} PROPERTIES DEBUG_POSTFIX "_d")
 
 #创建动态链接库
-ADD_LIBRARY(pnplib SHARED ${HEAD_FILES} ${SRC_FILES} )
+ADD_LIBRARY(EvisionPnP SHARED ${HEAD_FILES} ${SRC_FILES} )
 
 #链接OpenCV
-target_link_libraries(pnplib ${OpenCV_LIBS})
+target_link_libraries(EvisionPnP ${OpenCV_LIBS})

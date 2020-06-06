@@ -71,7 +71,7 @@ add_subdirectory(EvisionCamera)
 add_subdirectory(EvisionParamBridge)
 
 # pnplib
-add_subdirectory(pnplib)
+add_subdirectory(EvisionPnP)
 
 # 单目几何体追踪
 add_subdirectory(EvisionPolyTracker)
@@ -81,6 +81,6 @@ add_subdirectory(EvisionMonocularCalib)
 
 # 配置工程筛选器
 SET_TARGET_PROPERTIES(EvisionUtils EvisionCamera EvisionParamBridge PROPERTIES FOLDER Utils) 
-SET_TARGET_PROPERTIES(EvisionADCensus EvisionElas pnplib PROPERTIES FOLDER Algorithm)
+SET_TARGET_PROPERTIES(EvisionADCensus EvisionElas EvisionPnP PROPERTIES FOLDER Algorithm)
 SET_TARGET_PROPERTIES(EvisionCalibrate EvisionDisparity EvisionTrace EvisionUndistortion PROPERTIES FOLDER Stereo) 
 SET_TARGET_PROPERTIES(EvisionPolyTracker EvisionMonocularCalib PROPERTIES FOLDER Monocular)
