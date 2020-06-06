@@ -134,7 +134,7 @@ void StereoCameraView::OnFindSavePath()
 	fileDialog2->setWindowTitle(QStringLiteral("请选择保存位置"));
 	//fileDialog2->setNameFilter(QStringLiteral("点云文件(*.xml *.yml *.yaml)"));
 	fileDialog2->setFileMode(QFileDialog::DirectoryOnly);
-	fileDialog2->setDirectory(QString::fromStdString(EvisionUtils::pathPurify(EvisionUtils::getCurrentPath() + "\\..\\..\\..\\data")));
+	fileDialog2->setDirectory(QString::fromStdString(EvisionUtils::getDataPath()));
 	if (fileDialog2->exec() == QDialog::Accepted)
 	{
 		saveToHere = fileDialog2->selectedFiles().at(0);

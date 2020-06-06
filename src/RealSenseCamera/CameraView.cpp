@@ -160,7 +160,7 @@ void CameraView::OnFindSavePath()
 {
 	QFileDialog * fileDialog2 = new QFileDialog();
 	fileDialog2->setWindowTitle(QStringLiteral("请选择保存位置"));
-    fileDialog2->setDirectory(QString::fromStdString(EvisionUtils::pathPurify(EvisionUtils::getCurrentPath() + "\\..\\..\\..\\data")));
+    fileDialog2->setDirectory(QString::fromStdString(EvisionUtils::getDataPath()));
 	fileDialog2->setFileMode(QFileDialog::DirectoryOnly);
 	if (fileDialog2->exec() == QDialog::Accepted)
 	{

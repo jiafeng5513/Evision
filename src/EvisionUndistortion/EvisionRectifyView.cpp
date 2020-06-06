@@ -27,7 +27,7 @@ void EvisionRectifyView::init()
 void EvisionRectifyView::onPush_SelectSrcFolder()
 {
 	QFileDialog * fileDialog = new QFileDialog();
-	fileDialog->setDirectory(QString::fromStdString(EvisionUtils::pathPurify(EvisionUtils::getCurrentPath() + "\\..\\..\\..\\data")));
+	fileDialog->setDirectory(QString::fromStdString(EvisionUtils::getDataPath()));
 	fileDialog->setWindowTitle("Please select the folder of the pictures to be rectified");
 	fileDialog->setFileMode(QFileDialog::Directory);
 	if (fileDialog->exec() == QDialog::Accepted)
@@ -51,7 +51,7 @@ void EvisionRectifyView::onPush_SelectSrcFolder()
 void EvisionRectifyView::onPush_SelectTargetFolder()
 {
 	QFileDialog * fileDialog = new QFileDialog();
-	fileDialog->setDirectory(QString::fromStdString(EvisionUtils::pathPurify(EvisionUtils::getCurrentPath() + "\\..\\..\\..\\data")));
+	fileDialog->setDirectory(QString::fromStdString(EvisionUtils::getDataPath()));
 	fileDialog->setWindowTitle("Please choose where to save the rectified pictures");
 	fileDialog->setFileMode(QFileDialog::Directory);
 	if (fileDialog->exec() == QDialog::Accepted)
@@ -64,7 +64,7 @@ void EvisionRectifyView::onPush_SelectTargetFolder()
 void EvisionRectifyView::onPush_SelectCameraParamFile()
 {
 	QFileDialog * fileDialog = new QFileDialog();
-	fileDialog->setDirectory(QString::fromStdString(EvisionUtils::pathPurify(EvisionUtils::getCurrentPath() + "\\..\\..\\..\\data")));
+	fileDialog->setDirectory(QString::fromStdString(EvisionUtils::getDataPath()));
 	fileDialog->setWindowTitle("Please select camera parameter file");
 	fileDialog->setNameFilter("camera parameter file(*.yml)");
 	fileDialog->setFileMode(QFileDialog::ExistingFile);

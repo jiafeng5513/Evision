@@ -30,6 +30,10 @@ public:
      */
 	static std::string pathPurify(std::string& src);
 	/*
+	 * 获取数据文件夹
+	 */
+	static std::string getDataPath();
+	/*
 	 * cv::Mat转换为QImage
 	 */
 	static QImage cvMat2QImage(const cv::Mat& mat);

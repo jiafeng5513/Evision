@@ -56,19 +56,24 @@ Introduction:
    
    |      |模块名|功能|是否具有UI|输出目标|
    |:----:|:----:|:----:|:----:|:----:|
-   |1 |EvisionSandbox            |主程序UI          | 有    |可执行程序|
-   |2 |EvisionCloudViewer        |三维点云查看      | 有    |动态链接库|
-   |3 |EvisionADCensus           |ADCensus视差算法  | 无    |动态链接库|
-   |4 |EvisionElas               |Elas视差算法      | 无    |动态链接库|
-   |5 |EvisionObjDetection       |目标检测UI        | 有    |动态链接库|
-   |6 |EvisionObjDetectionEngine |目标检测算法       | 无   |动态链接库|
-   |7 |EvisionCamera             |单目和双目相机功能 | 有    |动态链接库|
-   |8 |EvisionCalibrate          |标定              | 有    |动态链接库|
-   |9 |EvisionDisparity          |视差(立体匹配)     | 有   |动态链接库|
-   |10|EvisionParamBridge        |外部参数传递       | 有   |动态链接库|
-   |11|EvisionTrace              |交互式测量         | 有   |动态链接库|
-   |12|EvisionUndistortion       |畸变校正           | 有   |动态链接库|
-   |13|EvisionUtils              |通用工具类         | 无   |动态链接库|
+   | 1|EvisionADCensus           |ADCensus视差算法  | 无    |动态链接库|
+   | 2|EvisionElas               |Elas视差算法      | 无    |动态链接库|
+   | 3|EvisionPnP                |PnP              | 无    |动态链接库|
+   | 4|EvisionObjDetection       |目标检测UI        | 有    |动态链接库|
+   | 5|EvisionObjDetectionEngine |目标检测算法       | 无   |动态链接库| 
+   | 6|EvisionMonocularCalib     |单目标定           | 有    |动态链接库|
+   | 7|EvisionPolyTracker        |单目几何体追踪     | 有    |动态链接库|
+   | 8|RealSenseCamera           |RealSense相机     | 有    |动态链接库|
+   | 9|EvisionCalibrate          |双目标定          | 有    |动态链接库|
+   |10|EvisionDisparity          |视差(立体匹配)    | 有   |动态链接库|
+   |11|EvisionTrace              |交互式测量        | 有   |动态链接库|
+   |12|EvisionUndistortion       |畸变校正          | 有   |动态链接库|  
+   |13|EvisionCamera             |单目和双目相机功能 | 有    |动态链接库|   
+   |14|EvisionCloudViewer        |三维点云查看      | 有    |动态链接库|
+   |15|EvisionParamBridge        |外部参数传递       | 有   |动态链接库|  
+   |16|EvisionUtils              |通用工具类         | 无   |动态链接库|    
+   |17|EvisionSandbox            |主程序UI          | 有    |可执行程序|
+
 5. build方案:
    1. `./src/`目录下面含有的CMakeLists.txt,Evision基于CMake3.15编写,请使用版本大于等于3.13.X的CMake.<br>
    2. Evision是只能工作在64位下,另外如果您不是很熟悉CMake,推荐使用CMake GUI.

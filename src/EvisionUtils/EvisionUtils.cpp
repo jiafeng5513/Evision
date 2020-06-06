@@ -37,6 +37,11 @@ std::string EvisionUtils::pathPurify(std::string& src)
 	return str2.toStdString();
 }
 
+std::string EvisionUtils::getDataPath()
+{
+	return EvisionUtils::pathPurify(EvisionUtils::getCurrentPath() + "\\..\\..\\..\\data");
+}
+
 /*
  * cv::Mat转换为QImage
  */

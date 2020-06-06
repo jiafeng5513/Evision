@@ -63,7 +63,7 @@ EvisionView::EvisionView(QWidget* parent)
 	on_action_LogViewSwitch();//Logview的准备
 
 	std::cout << "Qt Detected:" << QT_VERSION_MAJOR << "." << QT_VERSION_MINOR << "." << QT_VERSION_PATCH << std::endl;
-#ifdef DEBUG
+#ifdef _DEBUG
 	std::cout << "Evision is in debug mode and running slowly!" << std::endl;
 	std::cout << "Evision正处于调试模式,运行速度受限." << std::endl;
 
@@ -101,7 +101,7 @@ void EvisionView::onShowPointCloud()
 	//ui.mdiArea->addSubWindow(evision3dViz);
 	//evision3dViz->show();
 	QFileDialog* fileDialog = new QFileDialog();
-	fileDialog->setDirectory(QString::fromStdString(EvisionUtils::pathPurify(EvisionUtils::getCurrentPath() + "\\..\\..\\..\\data")));
+	fileDialog->setDirectory(QString::fromStdString(EvisionUtils::getDataPath()));
 	fileDialog->setWindowTitle(QStringLiteral("请选择点云文件"));
 	fileDialog->setNameFilter(QStringLiteral("pcl点云文件(*.pcd)"));
 	fileDialog->setFileMode(QFileDialog::ExistingFile);
@@ -184,6 +184,7 @@ void EvisionView::on_action_disp_to_pcd()
 	cv::Mat RawDisp, img, Q;
 	bool ok = false;
 	QFileDialog* fileDialog = new QFileDialog();
+	fileDialog->setDirectory(QString::fromStdString(EvisionUtils::getDataPath()));
 	QString dispFilename;
 	fileDialog->setWindowTitle(QStringLiteral("请选择原始视差文件"));
 	fileDialog->setNameFilter(QStringLiteral("序列化(*.xml)"));

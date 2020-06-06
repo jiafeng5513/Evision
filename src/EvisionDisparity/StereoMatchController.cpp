@@ -106,7 +106,7 @@ void StereoMatchController::MatchCommand()
 {
 	bool ok = false;
 	QFileDialog * fileDialog = new QFileDialog();
-	fileDialog->setDirectory(QString::fromStdString(EvisionUtils::pathPurify(EvisionUtils::getCurrentPath() + "\\..\\..\\..\\data")));
+	fileDialog->setDirectory(QString::fromStdString(EvisionUtils::getDataPath()));
 	fileDialog->setWindowTitle(QStringLiteral("请选择左摄像头拍摄的图片"));
 	fileDialog->setNameFilter(QStringLiteral("图片文件(*.jpg *.png *.jpeg *.bmp)"));
 	fileDialog->setFileMode(QFileDialog::ExistingFile);
