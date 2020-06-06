@@ -101,6 +101,7 @@ void EvisionView::onShowPointCloud()
 	//ui.mdiArea->addSubWindow(evision3dViz);
 	//evision3dViz->show();
 	QFileDialog* fileDialog = new QFileDialog();
+	fileDialog->setDirectory(QString::fromStdString(EvisionUtils::pathPurify(EvisionUtils::getCurrentPath() + "\\..\\..\\..\\data")));
 	fileDialog->setWindowTitle(QStringLiteral("请选择点云文件"));
 	fileDialog->setNameFilter(QStringLiteral("pcl点云文件(*.pcd)"));
 	fileDialog->setFileMode(QFileDialog::ExistingFile);

@@ -90,6 +90,7 @@ void TraceView::onMouseRButtonDown(int x, int y)
 void TraceView::onSelectRawDispFile()
 {
 	QFileDialog * fileDialog = new QFileDialog();
+	fileDialog->setDirectory(QString::fromStdString(EvisionUtils::pathPurify(EvisionUtils::getCurrentPath() + "\\..\\..\\..\\data")));
 	fileDialog->setWindowTitle(QStringLiteral("请选择原始视差文件"));
 	fileDialog->setNameFilter(QStringLiteral("序列化(*.xml)"));
 	fileDialog->setFileMode(QFileDialog::ExistingFile);
@@ -115,6 +116,7 @@ void TraceView::onSelectRawDispFile()
 void TraceView::onSelectOriginImg()
 {
 	QFileDialog * fileDialog = new QFileDialog();
+	fileDialog->setDirectory(QString::fromStdString(EvisionUtils::pathPurify(EvisionUtils::getCurrentPath() + "\\..\\..\\..\\data")));
 	fileDialog->setWindowTitle(QStringLiteral("请选择参与生成所选视差图的左视图或右视图"));
 	fileDialog->setNameFilter(QStringLiteral("图片文件(*.jpg *.png *.jpeg *.bmp)"));
 	fileDialog->setFileMode(QFileDialog::ExistingFile);
@@ -138,6 +140,7 @@ void TraceView::onSelectOriginImg()
 void TraceView::onSelectCameraParamFile()
 {
 	QFileDialog * fileDialog = new QFileDialog();
+	fileDialog->setDirectory(QString::fromStdString(EvisionUtils::pathPurify(EvisionUtils::getCurrentPath() + "\\..\\..\\..\\data")));
 	fileDialog->setWindowTitle(QStringLiteral("请选择相机参数文件"));
 	fileDialog->setNameFilter(QStringLiteral("序列化文件(*.xml *.yml)"));
 	fileDialog->setFileMode(QFileDialog::ExistingFile);

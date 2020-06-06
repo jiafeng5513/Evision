@@ -6,6 +6,7 @@
 #include <QVariant>
 #include <QCameraInfo>
 #include <QCameraImageCapture>
+#include <EvisionUtils.h>
 
 Q_DECLARE_METATYPE(QCameraInfo)
 
@@ -96,6 +97,7 @@ void CameraView::OnFindSavePath()
 	QFileDialog * fileDialog2 = new QFileDialog();
 	fileDialog2->setWindowTitle(QStringLiteral("请选择保存位置"));
 	//fileDialog2->setNameFilter(QStringLiteral("点云文件(*.xml *.yml *.yaml)"));
+	fileDialog2->setDirectory(QString::fromStdString(EvisionUtils::pathPurify(EvisionUtils::getCurrentPath() + "\\..\\..\\..\\data")));
 	fileDialog2->setFileMode(QFileDialog::DirectoryOnly);
 	if (fileDialog2->exec() == QDialog::Accepted)
 	{

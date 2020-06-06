@@ -3,7 +3,7 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include <opencv2/opencv.hpp>
-
+#include <EvisionUtils.h>
 MonocularCalibrateController::MonocularCalibrateController(QObject* parent)
 	: QObject(parent)
 {
@@ -37,6 +37,7 @@ void MonocularCalibrateController::CalibrateCommand()
 	//2.选择文件
 	QFileDialog* fileDialog = new QFileDialog();
 	fileDialog->setWindowTitle(QStringLiteral("请选择单目摄像头拍摄的图片文件序列"));
+	fileDialog->setDirectory(QString::fromStdString(EvisionUtils::pathPurify(EvisionUtils::getCurrentPath() + "\\..\\..\\..\\data")));
 	fileDialog->setNameFilter("图片文件(*.jpg *.png *.jpeg *.bmp)");
 	fileDialog->setFileMode(QFileDialog::ExistingFiles);
 	if (fileDialog->exec() == QDialog::Accepted)

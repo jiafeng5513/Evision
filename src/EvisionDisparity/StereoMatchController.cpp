@@ -2,6 +2,7 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include "StereoMatch.h"
+#include "EvisionUtils.h"
 
 StereoMatchController::StereoMatchController(QObject *parent)
 	: QObject(parent)
@@ -105,7 +106,7 @@ void StereoMatchController::MatchCommand()
 {
 	bool ok = false;
 	QFileDialog * fileDialog = new QFileDialog();
-
+	fileDialog->setDirectory(QString::fromStdString(EvisionUtils::pathPurify(EvisionUtils::getCurrentPath() + "\\..\\..\\..\\data")));
 	fileDialog->setWindowTitle(QStringLiteral("请选择左摄像头拍摄的图片"));
 	fileDialog->setNameFilter(QStringLiteral("图片文件(*.jpg *.png *.jpeg *.bmp)"));
 	fileDialog->setFileMode(QFileDialog::ExistingFile);
