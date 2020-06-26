@@ -29,16 +29,16 @@
 #include "EvisionMonocularCalibFactory.h"
 // 浮点数判等
 // ulp: units in the last place.
-template <typename T>
-typename std::enable_if<!std::numeric_limits<T>::is_integer, bool>::type
-IsAlmostEqual(T x, T y, int ulp = 2)
-{
-	// the machine epsilon has to be scaled to the magnitude of the values used
-	// and multiplied by the desired precision in ULPs (units in the last place)
-	return std::abs(x - y) < std::numeric_limits<T>::epsilon() * std::abs(x + y) * ulp
-		// unless the result is subnormal
-		|| std::abs(x - y) < std::numeric_limits<T>::min();
-}
+//template <typename T>
+//typename std::enable_if<!std::numeric_limits<T>::is_integer, bool>::type
+//IsAlmostEqual(T x, T y, int ulp = 2)
+//{
+//	// the machine epsilon has to be scaled to the magnitude of the values used
+//	// and multiplied by the desired precision in ULPs (units in the last place)
+//	return std::abs(x - y) < std::numeric_limits<T>::epsilon() * std::abs(x + y) * ulp
+//		// unless the result is subnormal
+//		|| std::abs(x - y) < std::numeric_limits<T>::min();
+//}
 
 //构造函数
 EvisionView::EvisionView(QWidget* parent)
@@ -89,9 +89,14 @@ void EvisionView::onStereoCamera()
 //显示Realsense相机视图
 void EvisionView::on_action_RealSenseCamera()
 {
+#ifdef WITH_REAL_SENSE
 	auto _realSenseCamera = RealSenseCameraFactory::CreateRealSenseCameraView(this);
 	ui.mdiArea->addSubWindow(_realSenseCamera);
 	_realSenseCamera->show();
+#else
+	QMessageBox::information(this, QStringLiteral("该功能未启用!"),
+		QStringLiteral("请开启WITH_REAL_SENSE,该功能需要安装RealSense SDK并连接RealSense硬件!"));
+#endif
 }
 //显示点云
 void EvisionView::onShowPointCloud()
