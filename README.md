@@ -3,7 +3,7 @@
 <div align=center>Evision 双目视觉系统</div>
 <div align=center><a href="https://www.bilibili.com/video/av46024738">演示视频</a></div>
 <div align=center></div>
-<div align=center>如果您觉得有帮助,请为该项目点star.以便于及时收到最新更新.您的star就是对我最好的鼓励.</div>
+<div align=center>如果您觉得有帮助,请为该项目点star.以便于及时收到最新更新.</div>
 
 ## 如果您有问题要反馈,请使用Github的issues功能,请尽量不要发邮件!作者可能无法及时回复您的邮件!使用issues可以为后来者提供相似问题的解决思路,您将成为Evision的开源贡献者!
 
@@ -17,9 +17,16 @@ Introduction:
 4. 关于双目的中文资料重复度太高,希望各位后来者能够吸取前人精华,摒弃前人的糟粕,多多自行探索,不要抄来抄去<br>
 5. 关于程序的BUG,以及其他困惑,请使用issues.<br>
 6. 如有Windows程序开发,机器视觉,深度学习,图像处理等方面的定制开发需求,请联系邮件jiafeng5513@outlook.com<br>
+
+资助作者
+========
+<div align=center><img width="500" height="339" src="./doc/pay.png"/></div>
+
+
 目录
 =========
 - [Introduction:](#introduction)
+- [资助作者](#资助作者)
 - [目录](#目录)
       - [1.Dependencies](#1dependencies)
       - [2.Directory_specification](#2directory_specification)
@@ -63,16 +70,15 @@ Introduction:
    | 5|EvisionObjDetectionEngine |目标检测算法       | 无   |动态链接库| 
    | 6|EvisionMonocularCalib     |单目标定           | 有    |动态链接库|
    | 7|EvisionPolyTracker        |单目几何体追踪     | 有    |动态链接库|
-   | 8|RealSenseCamera           |RealSense相机     | 有    |动态链接库|
-   | 9|EvisionCalibrate          |双目标定          | 有    |动态链接库|
-   |10|EvisionDisparity          |视差(立体匹配)    | 有   |动态链接库|
-   |11|EvisionTrace              |交互式测量        | 有   |动态链接库|
-   |12|EvisionUndistortion       |畸变校正          | 有   |动态链接库|  
-   |13|EvisionCamera             |单目和双目相机功能 | 有    |动态链接库|   
-   |14|EvisionCloudViewer        |三维点云查看      | 有    |动态链接库|
-   |15|EvisionParamBridge        |外部参数传递       | 有   |动态链接库|  
-   |16|EvisionUtils              |通用工具类         | 无   |动态链接库|    
-   |17|EvisionSandbox            |主程序UI          | 有    |可执行程序|
+   | 8|EvisionCalibrate          |双目标定          | 有    |动态链接库|
+   | 9|EvisionDisparity          |视差(立体匹配)    | 有   |动态链接库|
+   |10|EvisionTrace              |交互式测量        | 有   |动态链接库|
+   |11|EvisionUndistortion       |畸变校正          | 有   |动态链接库|  
+   |12|EvisionCamera             |单目和双目相机功能 | 有    |动态链接库|   
+   |13|EvisionCloudViewer        |三维点云查看      | 有    |动态链接库|
+   |14|EvisionParamBridge        |外部参数传递       | 有   |动态链接库|  
+   |15|EvisionUtils              |通用工具类         | 无   |动态链接库|    
+   |16|EvisionSandbox            |主程序UI          | 有    |可执行程序|
 
 5. build方案:
    1. `./src/`目录下面含有的CMakeLists.txt,Evision基于CMake3.15编写,请使用版本大于等于3.13.X的CMake.<br>
