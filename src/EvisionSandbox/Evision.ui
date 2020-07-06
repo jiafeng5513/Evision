@@ -78,7 +78,6 @@
     <addaction name="action_Camera"/>
     <addaction name="action_ShowPointCloud"/>
     <addaction name="action_CreateParamFile"/>
-    <addaction name="action_RealSenseCamera"/>
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">

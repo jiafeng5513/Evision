@@ -160,6 +160,3 @@ if (PointCloudViewer)
 target_link_libraries(EvisionSandbox EvisionCloudViewer)
 endif()
 
-if (RealSense)
-target_link_libraries(EvisionSandbox RealSenseCamera)
-endif()

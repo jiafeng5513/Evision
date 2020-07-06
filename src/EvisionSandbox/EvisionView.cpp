@@ -15,10 +15,6 @@
 #include "EvisionCloudViewerFactory.h"
 #endif
 
-#ifdef WITH_REAL_SENSE
-#include "RealSenseCameraFactory.h"
-#endif
-
 #include "EvisionUndistortionFactory.h"
 #include "EvisionCalibrateFactory.h"
 #include "EvisionDisparityFactory.h"
@@ -85,18 +81,6 @@ void EvisionView::onStereoCamera()
 	auto _stereoCamera = EvisionCameraFactory::CreateStereoCameraView(this);
 	ui.mdiArea->addSubWindow(_stereoCamera);
 	_stereoCamera->show();
-}
-//显示Realsense相机视图
-void EvisionView::on_action_RealSenseCamera()
-{
-#ifdef WITH_REAL_SENSE
-	auto _realSenseCamera = RealSenseCameraFactory::CreateRealSenseCameraView(this);
-	ui.mdiArea->addSubWindow(_realSenseCamera);
-	_realSenseCamera->show();
-#else
-	QMessageBox::information(this, QStringLiteral("该功能未启用!"),
-		QStringLiteral("请开启WITH_REAL_SENSE,该功能需要安装RealSense SDK并连接RealSense硬件!"));
-#endif
 }
 //显示点云
 void EvisionView::onShowPointCloud()

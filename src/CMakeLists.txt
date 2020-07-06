@@ -17,7 +17,6 @@ ENDIF()
 
 option(PointCloudViewer "Point Cloud Viewer" ON)
 option(ObjectDetection "Object Detection" ON)
-option(RealSense "RealSense Support" ON)
 
 #add_definitions(-DTEST_DEBUG)
 
@@ -35,10 +34,6 @@ if (ObjectDetection)
     SET_TARGET_PROPERTIES(EvisionObjDetection PROPERTIES FOLDER Ai) 
 endif()
 
-if (RealSense)
-    add_subdirectory(RealSenseCamera)
-    SET_TARGET_PROPERTIES(RealSenseCamera PROPERTIES FOLDER RealSenseTools) 
-endif()
 
 # ADCensus视差算法,生成动态库,依赖OpenCV
 add_subdirectory(EvisionADCensus)
