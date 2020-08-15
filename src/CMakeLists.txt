@@ -15,8 +15,8 @@ ELSEIF (UNIX)
     #set(Qt5_DIR "/usr/local/Qt/5.13.1/gcc_64/lib/cmake/Qt5")
 ENDIF()
 
-option(PointCloudViewer "Point Cloud Viewer" ON)
-option(ObjectDetection "Object Detection" ON)
+option(PointCloudViewer "Point Cloud Viewer" OFF)
+option(ObjectDetection "Object Detection" OFF)
 
 #add_definitions(-DTEST_DEBUG)
 
