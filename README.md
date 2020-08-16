@@ -15,8 +15,8 @@ Introduction:
 2. 基于Yolo的实时目标检测.<br>
 3. ELAS,ADCensus视差算法.<br>
 4. 关于双目的中文资料重复度太高,希望各位后来者能够吸取前人精华,摒弃前人的糟粕,多多自行探索,不要抄来抄去<br>
-5. 关于程序的BUG,以及其他困惑,请使用issues.<br>
-6. 如有Windows程序开发,机器视觉,深度学习,图像处理等方面的定制开发需求,请联系邮件jiafeng5513@outlook.com<br>
+5. 关于程序的BUG,以及其他困惑,请使用issues,或联系邮件jiafeng5513@outlook.com<br>
+6. 轻量版正在开发,请查看作者的GitHUb仓库并搜索"EvisionLight",未来Evision会采用ImgUI作为界面,不再基于Qt,以提供更方便的安装体验,并提高运行效率.<br>
 
 资助作者
 ========
