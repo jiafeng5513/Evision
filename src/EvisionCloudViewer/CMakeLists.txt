@@ -1,17 +1,17 @@
 # EvisionCloudViewer
-cmake_minimum_required(VERSION 3.13.0)
-find_package(VTK)# 需要看CMake文档确认这个查找方法
-find_package(PCL REQUIRED)
-find_package(OpenGL)
-find_package(OpenCV)
-find_package(Qt5 COMPONENTS Widgets REQUIRED)
-find_package(Qt5 COMPONENTS Core REQUIRED)
-find_package(Qt5 COMPONENTS Gui REQUIRED)
-find_package(Qt5 COMPONENTS OpenGL REQUIRED)
+
+find_package(VTK)
+if(NOT DEFINED CMAKE_SUPPRESS_DEVELOPER_WARNINGS)
+     set(CMAKE_SUPPRESS_DEVELOPER_WARNINGS 1 CACHE INTERNAL "No dev warnings")
+endif()
+find_package(PCL REQUIRED COMPONENTS io common)
+# find_package(OpenGL)
+
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 include_directories(${PCL_INCLUDE_DIRS})
 include_directories(${OpenCV_INCLUDE_DIRS})
 include_directories("./include/")
+
 add_definitions(-D QT_DLL)
 add_definitions(-D QT_CORE_LIB)
 add_definitions(-D QT_GUI_LIB)
@@ -41,14 +41,6 @@ source_group("include" FILES ${INCLUDE_FILES})
 source_group("Source Files" FILES ${SRC_FILES})
 source_group("Header Files" FILES ${HEAD_FILES})
 source_group("Generated Files" FILES ${UIC_FILES} ${MOC_FILES} ${QRC_FILES})
-
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/../install/lib/Debug)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/../install/lib/Release)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/../install/bin/Debug)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/../install/bin/Release)
-# set(CMAKE_DEBUG_POSTFIX "_d")
-# set_target_properties(${TARGET_NAME} PROPERTIES DEBUG_POSTFIX "_d")
-
 
 add_library(EvisionCloudViewer SHARED ${SRC_FILES} ${HEAD_FILES} ${MOC_FILES} ${RES_FILES} ${INCLUDE_FILES} ${UIC_FILES} ${QRC_FILES})
 #链接Qt5依赖项

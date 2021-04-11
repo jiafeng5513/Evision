@@ -1,5 +1,4 @@
 ﻿# Evision ObjectDetection Engine (algorithm)
-cmake_minimum_required(VERSION 3.13.0)
 
 option(DarkNetExamples "build Object Detection Examples" OFF)
 # packages
@@ -8,7 +7,7 @@ find_package(CUDA)
 message(STATUS "CUDA_CUDA_LIBRARY: ${CUDA_CUDA_LIBRARY}")
 message(STATUS "CUDA_BLAS_LIBRARY: ${CUDA_BLAS_LIBRARY}")
 message(STATUS "CUDA_RANDOM_LIBRARY: ${CUDA_RANDOM_LIBRARY}")
-find_package(OpenCV REQUIRED)
+# find_package(OpenCV REQUIRED)
 
 include_directories(${CUDA_INCLUDE_DIRS})
 include_directories(${CUDA_TOOLKIT_INCLUDE})
@@ -66,10 +65,6 @@ endif()
 source_group("Models" FILES ${MODELS_FILES})
 source_group("Utils" FILES ${UTILS_FILES})
 
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/../install/lib/Debug)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/../install/lib/Release)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/../install/bin/Debug)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/../install/bin/Release)
 
 set(BUILD_SRC ${CORE_FILES} ${INCLUDE_FILES} ${CROSS_PLATFORM_FILES} ${UTILS_FILES} ${MODELS_FILES} )
 if(DarkNetExamples)

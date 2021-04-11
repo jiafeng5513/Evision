@@ -5,7 +5,7 @@
 <div align=center></div>
 <div align=center>如果您觉得有帮助,请为该项目点star.以便于及时收到最新更新.</div>
 
-## 重要提示:当前master分支的目标检测功能处于维护状态,CMake中的开关默认已经关闭,请及时关注最新进展.
+## 重要提示:Evision已支持vcpkg
 
 
 Introduction:
@@ -35,6 +35,20 @@ Introduction:
       - [5.双目设备](#5双目设备)
       - [6.参考文献](#6参考文献)
       - [7.未来计划](#7未来计划)
+
+### 0. 目前可以使用vcpkg进行依赖安装
+* 安装visual studio 2019 + 使用C++的桌面开发工作负载 + 英文语言包
+* 安装vcpkg
+* vcpkg install eigen
+* vcpkg install opencv
+* vcpkg install boost
+* vcpkg install vtk
+* vcpkg install pcl
+* vcpkg install qt5
+* mkdir sln,cd sln
+* `cmake ..\src\ -DCMAKE_TOOLCHAIN_FILE="${vcpkg_root}/vcpkg/scripts/buildsystems/vcpkg.cmake" -G"Visual Studio 16" -DPointCloudViewer=ON`
+* 打开Evision.sln
+
 
 #### 1.Dependencies
 1. Qt :5.13.2.<br>
