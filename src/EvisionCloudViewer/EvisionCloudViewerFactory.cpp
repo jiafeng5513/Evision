@@ -8,8 +8,6 @@
 #include <pcl/io/obj_io.h>
 #include <pcl/point_types.h>
 #include <pcl/point_cloud.h>
-#include <pcl/visualization/pcl_visualizer.h>
-#include <pcl/visualization/common/common.h>
 #include <pcl/ModelCoefficients.h>
 #include <pcl/features/normal_3d.h>
 #include <pcl/search/kdtree.h>
