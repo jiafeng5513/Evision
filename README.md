@@ -14,9 +14,10 @@ Introduction:
 1. 双目系统的标定,畸变校正,视差,三维重建,距离测量等.<br>
 2. 基于Yolo的实时目标检测.<br>
 3. ELAS,ADCensus视差算法.<br>
-4. 关于双目的中文资料重复度太高,希望各位后来者能够吸取前人精华,摒弃前人的糟粕,多多自行探索,不要抄来抄去<br>
-5. 关于程序的BUG,以及其他困惑,请使用issues,或联系邮件jiafeng5513@outlook.com<br>
-6. 轻量版正在开发,请查看作者的GitHUb仓库并搜索"EvisionLight",未来Evision会采用ImgUI作为界面,不再基于Qt,以提供更方便的安装体验,并提高运行效率.<br>
+4. 关于双目的中文资料重复度太高,希望各位后来者能够吸取前人精华,摒弃前人的糟粕,多多自行探索,不要抄来抄去.<br>
+5. 关于程序的BUG,以及其他困惑,请使用issues,或联系邮件jiafeng5513@outlook.com.<br>
+6. Evision使用cmake-vcpkg工具链进行编译,开发者使用Visual Studio 2019作为IDE.<br>
+7. 轻量版正在开发,请查看作者的GitHUb仓库并搜索"EvisionLight",未来Evision会采用ImgUI作为界面,不再基于Qt,以提供更方便的安装体验,并提高运行效率.<br>
 
 资助作者
 ========
@@ -36,29 +37,7 @@ Introduction:
       - [6.参考文献](#6参考文献)
       - [7.未来计划](#7未来计划)
 
-### 0. 目前可以使用vcpkg进行依赖安装
-* 安装visual studio 2019 + 使用C++的桌面开发工作负载 + 英文语言包
-* 安装vcpkg
-* vcpkg install eigen
-* vcpkg install opencv
-* vcpkg install boost
-* vcpkg install vtk
-* vcpkg install pcl
-* vcpkg install qt5
-* mkdir sln,cd sln
-* `cmake ..\src\ -DCMAKE_TOOLCHAIN_FILE="${vcpkg_root}/vcpkg/scripts/buildsystems/vcpkg.cmake" -G"Visual Studio 16" -DPointCloudViewer=ON`
-* 打开Evision.sln
-
-
-#### 1.Dependencies
-1. Qt :5.13.2.<br>
-2. OpenCV : 4.1.2.<br>
-3. (可选的)PCL 1.9.1(不使用PCL,将不能使用Evision3dViz和保存点云的功能).<br>
-4. (可选的)CUDA 10.2(不使用CUDA,将无法使用目标检测模块).<br>
-5. (可选的)NVIDIA显卡.<br>
-6. Windows(test pass) or Ubuntu(build pass).<br>
-
-#### 2.Directory_specification
+#### 1.路径说明
 1. `data`文件夹存储测试用例.<br>
 2. `doc`文件夹中存储的是文档和文档中所用的图片等资源,提供了本项目使用的一些算法相关的论文.<br>
 3. `package`文件夹存储项目所需的依赖.<br>
@@ -69,39 +48,56 @@ Introduction:
 * `scripts`是作者开发期间使用的,对于使用者没有实际意义.<br>
 * `package`中含有pthread的window版本,将会在未来改为使用CMake管理.<br>
 
-#### 3.build
-1. 笔者使用CMake 3.15构建Visual Studio解决方案,并使用Visual Studio 2019完成开发.<br>
-2. 使用CLion的用户需要自行编辑`src/CMakeLists.txt`以指定相关依赖的路径.<br>
-3. master分支的最新版仅保证windows上编译成功并正常运行,理论上支持Linux.<br>
-4. Evision目前由多个模块组成:
-   
-   |      |模块名|功能|是否具有UI|输出目标|
-   |:----:|:----:|:----:|:----:|:----:|
-   | 1|EvisionADCensus           |ADCensus视差算法  | 无    |动态链接库|
-   | 2|EvisionElas               |Elas视差算法      | 无    |动态链接库|
-   | 3|EvisionPnP                |PnP              | 无    |动态链接库|
-   | 4|EvisionObjDetection       |目标检测UI        | 有    |动态链接库|
-   | 5|EvisionObjDetectionEngine |目标检测算法       | 无   |动态链接库| 
-   | 6|EvisionMonocularCalib     |单目标定           | 有    |动态链接库|
-   | 7|EvisionPolyTracker        |单目几何体追踪     | 有    |动态链接库|
-   | 8|EvisionCalibrate          |双目标定          | 有    |动态链接库|
-   | 9|EvisionDisparity          |视差(立体匹配)    | 有   |动态链接库|
-   |10|EvisionTrace              |交互式测量        | 有   |动态链接库|
-   |11|EvisionUndistortion       |畸变校正          | 有   |动态链接库|  
-   |12|EvisionCamera             |单目和双目相机功能 | 有    |动态链接库|   
-   |13|EvisionCloudViewer        |三维点云查看      | 有    |动态链接库|
-   |14|EvisionParamBridge        |外部参数传递       | 有   |动态链接库|  
-   |15|EvisionUtils              |通用工具类         | 无   |动态链接库|    
-   |16|EvisionSandbox            |主程序UI          | 有    |可执行程序|
+#### 2.编译基础组件
+1. 安装visual studio 2019 + 使用C++的桌面开发工作负载 + 英文语言包.([visual studio Installer](https://visualstudio.microsoft.com/zh-hans/vs/))<br>
+2. 安装CMake 3.20.([Download CMake](https://cmake.org/download/))<br>
+3. 安装vcpkg.([GitHub For vcpkg](https://github.com/Microsoft/vcpkg))<br>
+4. `vcpkg install eigen:x64-windows`<br>
+5. `vcpkg install opencv:x64-windows`<br>
+6. `vcpkg install boost:x64-windows`<br>
+7. `vcpkg install pcl:x64-windows`<br>
+8. `vcpkg install qt5:x64-windows`<br>
+9. `mkdir sln,cd sln`<br>
+10. `cmake ..\src\ -DCMAKE_TOOLCHAIN_FILE="${vcpkg_root}/vcpkg/scripts/buildsystems/vcpkg.cmake" -G"Visual Studio 16" -DPointCloudViewer=ON`<br>
+11. 使用visual studio打开Evision.sln.<br>
+12. 右键_CMakeTargets/ALL_BUILD,生成.<br>
+13. 右键EvisionSandBox,设为启动项目.<br>
+14. 点击"本地Windows调试器",启动程序.<br>
+* 如果vcpkg下载包的速度过慢,可以上代理(以PowerShell为例)`$env:HTTP_PROXY="http://127.0.0.1:1080"`
 
-5. build方案:
-   1. `./src/`目录下面含有的CMakeLists.txt,Evision基于CMake3.15编写,请使用版本大于等于3.13.X的CMake.<br>
-   2. Evision是只能工作在64位下,另外如果您不是很熟悉CMake,推荐使用CMake GUI.
-   3. 在CMake GUI中打开ObjectDetection和PointCloudViewer的开关,就会build目标检测和点云显示模块,并会询问相关的依赖路径.<br>
-   4. Evision依赖Qt和OpenCV,请正确安装并设置环境变量;此外如果开启了ObjectDetection,需要安装CUDA(版本不低于10.0),如果开启了PointCloudViewer,需要安装PCL
+#### 3.编译目标检测和硬件加速模块
+1. 必须具备支持CUDA的NVIDIA显卡.<br>
+2. 安装CUDA 10.2.<br>
+3. 基础组件编译并运行成功.
+4. `cd sln, rm -r * `<br>
+5. `cmake ..\src\ -DCMAKE_TOOLCHAIN_FILE="${vcpkg_root}/vcpkg/scripts/buildsystems/vcpkg.cmake" -G"Visual Studio 16" -DPointCloudViewer=ON -DObjectDetection`<br>
+6. 使用visual studio打开Evision.sln.<br>
+7. 右键_CMakeTargets/ALL_BUILD,生成.<br>
+8. 右键EvisionSandBox,设为启动项目.<br>
+9. 点击"本地Windows调试器",启动程序.<br>
 
-   
-#### 4.Deprecated_Version
+#### 4.模块说明   
+|      |模块名|功能|UI|输出目标|
+|:----:|:----:|:----:|:----:|:----:|
+| 1|EvisionADCensus           |ADCensus视差算法  | ×    |动态链接库|
+| 2|EvisionElas               |Elas视差算法      | ×    |动态链接库|
+| 3|EvisionPnP                |PnP              | ×    |动态链接库|
+| 4|EvisionObjDetection       |目标检测UI        | √    |动态链接库|
+| 5|EvisionObjDetectionEngine |目标检测算法      | ×   |动态链接库| 
+| 6|EvisionMonocularCalib     |单目标定          | √    |动态链接库|
+| 7|EvisionPolyTracker        |单目几何体追踪     | √    |动态链接库|
+| 8|EvisionCalibrate          |双目标定          | √    |动态链接库|
+| 9|EvisionDisparity          |视差(立体匹配)    |√   |动态链接库|
+|10|EvisionTrace              |交互式测量        | √   |动态链接库|
+|11|EvisionUndistortion       |畸变校正          | √   |动态链接库|  
+|12|EvisionCamera             |单目和双目相机功能 | √    |动态链接库|   
+|13|EvisionCloudViewer        |三维点云查看      | √    |动态链接库|
+|14|EvisionParamBridge        |外部参数传递      | √   |动态链接库|  
+|15|EvisionUtils              |通用工具类        | ×   |动态链接库|    
+|16|EvisionSandbox            |主程序UI          | √    |可执行程序|
+
+
+#### 5.Deprecated_Version
 1. MFC版本.[演示视频](https://www.bilibili.com/video/av8862669).<br>
    基于[邹宇华老师的StereoVision](https://github.com/yuhuazou/StereoVision)编写.如有需要推荐访问邹宇华老师原版或者在本项目的Release中寻找,由于使用的依赖较为陈旧,强烈不建议继续使用或进行二次开发.<br>
 2. CvLabMain和CvLabSandbox(C#版本)<br>
@@ -122,7 +118,7 @@ Introduction:
        >7.ZedGraph.5.1.5<br> 
 
 
-#### 5.双目设备
+#### 6.双目设备
 1. 需要注意的是,视差效果,点云效果和精度和设备关系非常大,图片的分辨率越高,光照条件越好,畸变越小,一致性越好,最终效果也就越好.此外,两个相机的距离(基线长度)会影响系统的有效范围,一般来讲,基线越长的双目系统越容易获取远处目标的视差,延长基线能够一定程度上(因为有效距离和相机的焦段也有关)将系统的有效范围拉得更远,但同时,基线越长,盲区(距离相机过近的目标不会同时出现在两个视野中)也越大.
 2. 推荐的双目系统:
    1. ZED/RealSense/MYNTEYE小觅相机.这是成熟(昂贵)的商业产品,出厂带有高精度的标定数据和功能强大的SDK,而且还带有IMU,IR主动光学等辅助设备,适合做SLAM,笔者认为购买这类相机是最节约时间成本的方法.<br>
@@ -132,7 +128,7 @@ Introduction:
    ![image](./doc/device.png)<br>
    1. USB相机组装.这是最便宜的方案,只要买两个一样的USB相机,然后想办法把他们固定起来就可以了,但是便宜的USB相机画质比较有限,噪点比较多,而且无法控制两个相机同时拍照,再加上有效距离比较有限,会很大程度上限值效果,此外,由于两个相机固定的不稳定等原因可能出现移动,这会使标定失效,或者由于标定过程中的滑动直接导致标定失败.作者建议,在经济条件允许的情况下,尽量不要采用这种方案<br>
 
-#### 6.参考文献
+#### 7.参考文献
 1. [相机标定+畸变矫正](https://blog.csdn.net/Loser__Wang/article/details/51811347)
 2. [DarkNet](https://github.com/pjreddie/darknet)
 3. [DarkNet_Windows](https://github.com/AlexeyAB/darknet)
@@ -149,5 +145,5 @@ Introduction:
 14. [视差算法](./doc/立体匹配算法.md)
 15. [warpped libelas with opencv and used pangolin as GUI](https://github.com/HeYijia/stereo_elas)
 
-#### 7.未来计划
+#### 8.未来计划
 1. [参考](http://blog.csdn.net/hysteric314/article/details/51357318).<br>
