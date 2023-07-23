@@ -147,3 +147,15 @@ Introduction:
 
 #### 8.未来计划
 1. [参考](http://blog.csdn.net/hysteric314/article/details/51357318).<br>
+
+
+
+
+
+编译opencv
+cmake -DBUILD_opencv_world=TRUE -DBUILD_opencv_dnn=TRUE -DWITH_FFMPEG=TRUE -DWITH_GSTREAMER=FALSE -DCMAKE_INSTALL_PREFIX=<your install path>
+
+devenv .\OpenCV.sln /Build "Debug|x64"  /Project "ALL_BUILD"
+devenv .\OpenCV.sln /Build "Debug|x64"  /Project "INSTALL"
+devenv .\OpenCV.sln /Build "Release|x64"  /Project "ALL_BUILD"
+devenv .\OpenCV.sln /Build "Release|x64"  /Project "INSTALL"

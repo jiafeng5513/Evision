@@ -21,11 +21,11 @@ FILE(GLOB UI_FILES "./*.ui")
 #查找当前文件夹中所有的ui文件
 FILE(GLOB RES_FILES "./*.qrc") 
 #编译ui文件
-qt5_wrap_ui(UIC_FILES ${UI_FILES})
-#moc
-qt5_wrap_cpp(MOC_FILES ${HEAD_FILES} ${INCLUDE_FILES})
+qt6_wrap_ui(UIC_FILES ${UI_FILES})
+#mc
+qt6_wrap_cpp(MOC_FILES ${HEAD_FILES} ${INCLUDE_FILES})
 #编译qrc资源文件
-qt5_add_resources(QRC_FILES ${RES_FILES})
+qt6_add_resources(QRC_FILES ${RES_FILES})
  
 #文件整理
 source_group("include" FILES ${INCLUDE_FILES})
@@ -34,11 +34,11 @@ source_group("Form Files" FILES ${UI_FILES})
 source_group("Resource Files" FILES ${RES_FILES})
 source_group("Source Files" FILES ${SRC_FILES})
 source_group("Header Files" FILES ${HEAD_FILES})
-
+find_package(Qt6 REQUIRED COMPONENTS Core5Compat)
 #创建可执行文件工程
 add_library(EvisionUtils SHARED ${INCLUDE_FILES} ${SRC_FILES} ${HEAD_FILES} ${MOC_FILES} ${RES_FILES} ${UIC_FILES} ${QRC_FILES})
 
 #链接Qt5依赖项
-target_link_libraries(EvisionUtils Qt5::Widgets Qt5::Core Qt5::Gui)
+target_link_libraries(EvisionUtils Qt6::Widgets Qt6::Core Qt6::Gui Qt6::Core5Compat)
 #链接OpenCV
 target_link_libraries(EvisionUtils ${OpenCV_LIBS})

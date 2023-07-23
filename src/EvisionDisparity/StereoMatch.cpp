@@ -149,8 +149,10 @@ void StereoMatch::ADCensusDriver()
 		bool error = false;
 		for (int i = 0; i < (images.size() / 2) && !error; ++i)
 		{
-			QTime time;
-			time.start();//计时开始
+//			QTime time;
+//
+//
+//			time.start();//计时开始
 
 			float percentageOfDeletion = 0.1;
 			std::string blurMethod = "gauss";//"median"
@@ -187,7 +189,7 @@ void StereoMatch::ADCensusDriver()
 			{
 				std::cout << "[ADCensusCV] " << errorMsg << std::endl;
 			}
-			std::cout << "Finished computation after " << time.elapsed() / 1000.0 << "s" << std::endl;
+//			std::cout << "Finished computation after " << time.elapsed() / 1000.0 << "s" << std::endl;
 		}
 	}
 	else

@@ -28,7 +28,7 @@ public:
 	/*
 	 * 路径整理
      */
-	static std::string pathPurify(std::string& src);
+	static std::string pathPurify(std::string src);
 	/*
 	 * 获取数据文件夹
 	 */

@@ -23,11 +23,11 @@ FILE(GLOB UI_FILES "./*.ui")
 FILE(GLOB RES_FILES "./*.qrc")
 
 #编译ui文件
-qt5_wrap_ui(UIC_FILES ${UI_FILES})
+qt6_wrap_ui(UIC_FILES ${UI_FILES})
 #moc
-qt5_wrap_cpp(MOC_FILES ${HEAD_FILES} ${INCLUDE_FILES})
+qt6_wrap_cpp(MOC_FILES ${HEAD_FILES} ${INCLUDE_FILES})
 #编译qrc资源文件
-qt5_add_resources(QRC_FILES ${RES_FILES})
+qt6_add_resources(QRC_FILES ${RES_FILES})
  
 #文件整理
 source_group("include" FILES ${INCLUDE_FILES})
@@ -41,7 +41,7 @@ source_group("Header Files" FILES ${HEAD_FILES})
 add_library(EvisionCalibrate SHARED ${INCLUDE_FILES} ${SRC_FILES} ${HEAD_FILES} ${MOC_FILES} ${RES_FILES} ${UIC_FILES} ${QRC_FILES})
 
 #链接Qt5依赖项
-target_link_libraries(EvisionCalibrate Qt5::Widgets Qt5::Core Qt5::Gui Qt5::Multimedia Qt5::MultimediaWidgets)
+target_link_libraries(EvisionCalibrate Qt6::Widgets Qt6::Core Qt6::Gui Qt6::Multimedia Qt6::MultimediaWidgets)
 #链接OpenCV
 target_link_libraries(EvisionCalibrate ${OpenCV_LIBS})
 #链接通用工具类

@@ -1,11 +1,11 @@
 ﻿#EvisionSandbox:主程序
 
 include_directories(${OpenCV_INCLUDE_DIRS})
-include_directories(${Qt5_INCLUDE_DIR}QtMultimediaWidgets/)
-include_directories(${Qt5_INCLUDE_DIR}QtMultimedia/)
-include_directories(${Qt5_INCLUDE_DIR}QtCore/${Qt5Widgets_VERSION}/QtCore/private/)
-include_directories(${Qt5_INCLUDE_DIR}QtCore/${Qt5Widgets_VERSION}/QtCore/)
-include_directories(${Qt5_INCLUDE_DIR}QtCore/${Qt5Widgets_VERSION}/)
+include_directories(${Qt6_INCLUDE_DIR}QtMultimediaWidgets/)
+include_directories(${Qt6_INCLUDE_DIR}QtMultimedia/)
+include_directories(${Qt6_INCLUDE_DIR}QtCore/${Qt5Widgets_VERSION}/QtCore/private/)
+include_directories(${Qt6_INCLUDE_DIR}QtCore/${Qt5Widgets_VERSION}/QtCore/)
+include_directories(${Qt6_INCLUDE_DIR}QtCore/${Qt5Widgets_VERSION}/)
 include_directories("../EvisionUtils/include/")
 include_directories("../EvisionCalibrate/include/")
 include_directories("../EvisionDisparity/include/")
@@ -62,11 +62,11 @@ FILE(GLOB UI_FILES "./*.ui")
 #查找当前文件夹中所有的ui文件
 FILE(GLOB RES_FILES "./*.qrc") 
 #编译ui文件
-qt5_wrap_ui(UIC_FILES ${UI_FILES})
+qt6_wrap_ui(UIC_FILES ${UI_FILES})
 #moc
-qt5_wrap_cpp(MOC_FILES ${HEAD_FILES})
+qt6_wrap_cpp(MOC_FILES ${HEAD_FILES})
 #编译qrc资源文件
-qt5_add_resources(QRC_FILES ${RES_FILES})
+qt6_add_resources(QRC_FILES ${RES_FILES})
  
 #文件整理
 source_group("Generated Files" FILES ${UIC_FILES} ${MOC_FILES} ${QRC_FILES})
@@ -80,7 +80,7 @@ source_group("Header Files" FILES ${HEAD_FILES})
 add_executable(EvisionSandbox ${SRC_FILES} ${HEAD_FILES} ${MOC_FILES} ${RES_FILES} ${UIC_FILES} ${QRC_FILES})
 
 #链接Qt5依赖项
-target_link_libraries(EvisionSandbox Qt5::Widgets Qt5::Core Qt5::Gui Qt5::Multimedia Qt5::MultimediaWidgets)
+target_link_libraries(EvisionSandbox Qt6::Widgets Qt6::Core Qt6::Gui Qt6::Multimedia Qt6::MultimediaWidgets)
 #链接OpenCV
 target_link_libraries(EvisionSandbox ${OpenCV_LIBS})
 #链接自定义库
@@ -89,7 +89,7 @@ target_link_libraries(EvisionSandbox EvisionCalibrate)
 target_link_libraries(EvisionSandbox EvisionDisparity)
 target_link_libraries(EvisionSandbox EvisionUndistortion)
 target_link_libraries(EvisionSandbox EvisionTrace)
-target_link_libraries(EvisionSandbox EvisionCamera)
+#target_link_libraries(EvisionSandbox EvisionCamera)
 target_link_libraries(EvisionSandbox EvisionParamBridge)
 target_link_libraries(EvisionSandbox EvisionPolyTracker)
 target_link_libraries(EvisionSandbox EvisionMonocularCalib)

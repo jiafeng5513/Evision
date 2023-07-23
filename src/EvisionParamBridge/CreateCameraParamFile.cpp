@@ -39,7 +39,7 @@ void CreateCameraParamFile::onPush_check()
 		QMessageBox::information(this, QStringLiteral("参数不完整"), QStringLiteral("右相机内参有误!"));
 		return;
 	}
-	QList<QString> qlistL = ui.lineEdit_coeffsl->text().split(',', QString::SkipEmptyParts);
+	QList<QString> qlistL = ui.lineEdit_coeffsl->text().split(',', Qt::SkipEmptyParts);
 	
 	for (int i = 0; i < qlistL.size(); ++i)
 	{
@@ -51,7 +51,7 @@ void CreateCameraParamFile::onPush_check()
 		QMessageBox::information(this, QStringLiteral("参数不完整"), QStringLiteral("左相机畸变有误!"));
 		return;
 	}
-	QList<QString> qlistR = ui.lineEdit_coeffsr->text().split(',', QString::SkipEmptyParts);
+	QList<QString> qlistR = ui.lineEdit_coeffsr->text().split(',', Qt::SkipEmptyParts);
 	
 	for (int i = 0; i < qlistR.size(); ++i)
 	{
@@ -63,7 +63,7 @@ void CreateCameraParamFile::onPush_check()
 		QMessageBox::information(this, QStringLiteral("参数不完整"), QStringLiteral("右相机畸变有误!"));
 		return;
 	}
-	QList<QString> qlistRotation=ui.lineEdit_R->text().split(',', QString::SkipEmptyParts);
+	QList<QString> qlistRotation=ui.lineEdit_R->text().split(',', Qt::SkipEmptyParts);
 	
 	for (int i = 0; i < qlistRotation.size(); ++i)
 	{
@@ -75,7 +75,7 @@ void CreateCameraParamFile::onPush_check()
 		QMessageBox::information(this, QStringLiteral("参数不完整"), QStringLiteral("旋转矩阵有误!"));
 		return;
 	}
-	QList<QString> qlistTranslation=ui.lineEdit_t->text().split(',', QString::SkipEmptyParts);
+	QList<QString> qlistTranslation=ui.lineEdit_t->text().split(',', Qt::SkipEmptyParts);
 	
 	for (int i = 0; i < qlistTranslation.size(); ++i)
 	{

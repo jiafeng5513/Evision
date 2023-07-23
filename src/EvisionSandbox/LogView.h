@@ -14,7 +14,7 @@ public:
 	static LogView *getInstance();
 private:
 	Ui::LogView ui;
-	StdoutRedirector *redirector;
+//	StdoutRedirector *redirector;
 public slots:
 	void readData();//接收重定向过来的信息
 	void onChecked_StayOnTop(bool value);//保持在前端

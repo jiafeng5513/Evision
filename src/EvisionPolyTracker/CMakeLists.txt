@@ -25,11 +25,11 @@ FILE(GLOB UI_FILES "./*.ui")
 FILE(GLOB RES_FILES "./*.qrc") 
 
 #编译ui文件
-qt5_wrap_ui(UIC_FILES ${UI_FILES})
+qt6_wrap_ui(UIC_FILES ${UI_FILES})
 #moc
-qt5_wrap_cpp(MOC_FILES ${HEAD_FILES} ${INCLUDE_FILES})
+qt6_wrap_cpp(MOC_FILES ${HEAD_FILES} ${INCLUDE_FILES})
 #编译qrc资源文件
-qt5_add_resources(QRC_FILES ${RES_FILES})
+qt6_add_resources(QRC_FILES ${RES_FILES})
 
 #文件整理
 source_group("Form Files" FILES ${UI_FILES})
@@ -42,7 +42,7 @@ source_group("Generated Files" FILES ${UIC_FILES} ${MOC_FILES} ${QRC_FILES})
 #生成目标文件
 add_library(EvisionPolyTracker SHARED ${SRC_FILES} ${HEAD_FILES} ${MOC_FILES} ${RES_FILES} ${INCLUDE_FILES} ${UIC_FILES} ${QRC_FILES})
 #链接Qt5依赖项
-target_link_libraries(EvisionPolyTracker Qt5::OpenGL Qt5::Widgets Qt5::Core Qt5::Gui)
+target_link_libraries(EvisionPolyTracker Qt6::OpenGL Qt6::Widgets Qt6::Core Qt6::Gui Qt6::OpenGLWidgets)
 #链接OPENGL
 target_link_libraries(EvisionPolyTracker ${OPENGL_gl_LIBRARY} ${Qt5OpenGL_LIBRARIES})
 #链接OpenCV

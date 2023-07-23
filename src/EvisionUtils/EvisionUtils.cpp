@@ -1,6 +1,7 @@
 ﻿#include "EvisionUtils.h"
 #include <sstream>
 #include <QFileInfo>
+#include <QRegExp>
 
 EvisionUtils::EvisionUtils()
 {
@@ -25,10 +26,10 @@ std::string EvisionUtils::getCurrentPath()
 /*
  * 路径整理
  */
-std::string EvisionUtils::pathPurify(std::string& src)
+std::string EvisionUtils::pathPurify(std::string src)
 {
 	QString str1 = QString::fromStdString(src);
-	QString str2 = str1.replace(QRegExp("\\\\"), "/");
+	QString str2 = str1.replace("\\", "/");
 	QFileInfo* fileinfo = new QFileInfo(str2);
 	if (fileinfo->exists())
 	{
@@ -39,7 +40,9 @@ std::string EvisionUtils::pathPurify(std::string& src)
 
 std::string EvisionUtils::getDataPath()
 {
-	return EvisionUtils::pathPurify(EvisionUtils::getCurrentPath() + "\\..\\..\\..\\data");
+    std::stringstream ss;
+    ss << EvisionUtils::getCurrentPath() << "\\..\\..\\..\\data";
+	return EvisionUtils::pathPurify(ss.str());
 }
 
 /*
@@ -201,8 +204,9 @@ QImage EvisionUtils::getDefaultImage()
 
 
 	QFontMetrics fm(font);
-	int charWidth = fm.width(imageText);
-	charWidth = fm.boundingRect(imageText).width();
+
+//	int charWidth = fm.width(imageText);
+	int charWidth = fm.boundingRect(imageText).width();
 	
 	QSize size(charWidth + 8, 15);//指定图片大小为字体的大小
 	//QSize size(1920, 1080);//指定图片大小为字体的大小

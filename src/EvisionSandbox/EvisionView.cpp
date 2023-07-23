@@ -19,7 +19,7 @@
 #include "EvisionCalibrateFactory.h"
 #include "EvisionDisparityFactory.h"
 #include "EvisionTraceFactory.h"
-#include "EvisionCameraFactory.h"
+//#include "EvisionCameraFactory.h"
 #include "EvisionParamBridgeFactory.h"
 #include "EvisionPolyTrackerFactory.h"
 #include "EvisionMonocularCalibFactory.h"
@@ -71,16 +71,16 @@ EvisionView::EvisionView(QWidget* parent)
 //显示单目相机视图
 void EvisionView::onCamera()
 {
-	auto _camera = EvisionCameraFactory::CreateCameraView(this);
-	ui.mdiArea->addSubWindow(_camera);
-	_camera->show();
+//	auto _camera = EvisionCameraFactory::CreateCameraView(this);
+//	ui.mdiArea->addSubWindow(_camera);
+//	_camera->show();
 }
 //显示双目相机视图
 void EvisionView::onStereoCamera()
 {
-	auto _stereoCamera = EvisionCameraFactory::CreateStereoCameraView(this);
-	ui.mdiArea->addSubWindow(_stereoCamera);
-	_stereoCamera->show();
+//	auto _stereoCamera = EvisionCameraFactory::CreateStereoCameraView(this);
+//	ui.mdiArea->addSubWindow(_stereoCamera);
+//	_stereoCamera->show();
 }
 //显示点云
 void EvisionView::onShowPointCloud()

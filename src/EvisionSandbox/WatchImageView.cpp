@@ -3,7 +3,7 @@
 
 void MyGraphicsView::wheelEvent(QWheelEvent * event)
 {
-	emit mouseWheelZoom( event->delta());
+	emit mouseWheelZoom( event->angleDelta().y());
 }
 
 
@@ -40,18 +40,18 @@ void WatchImageView::onMouseWheelZoom(int delta)
 	if (delta > 0 && scaleFactor >= 0)
 	{
 		scaleFactor += 5;
-		QMatrix old_matrix;
-		old_matrix = m_GraphicsView->matrix();
-		m_GraphicsView->resetMatrix();
+        QTransform  old_matrix;
+		old_matrix = m_GraphicsView->transform();
+		m_GraphicsView->resetTransform();
 		m_GraphicsView->translate(old_matrix.dx(), old_matrix.dy());
 		m_GraphicsView->scale(scaleFactor / 100.0, scaleFactor / 100.0);
 	}
 	else if (delta < 0 && scaleFactor >= 0)
 	{
 		scaleFactor -= 5;
-		QMatrix old_matrix;
-		old_matrix = m_GraphicsView->matrix();
-		m_GraphicsView->resetMatrix();
+        QTransform old_matrix;
+		old_matrix = m_GraphicsView->transform();
+		m_GraphicsView->resetTransform();
 		m_GraphicsView->translate(old_matrix.dx(), old_matrix.dy());
 		m_GraphicsView->scale(scaleFactor / 100.0, scaleFactor / 100.0);
 	}

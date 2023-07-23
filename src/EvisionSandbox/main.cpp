@@ -15,9 +15,9 @@ VS输入
 */
 int main(int argc, char* argv[])
 {
-#ifdef WIN32
-	ShowWindow(GetConsoleWindow(), SW_HIDE);
-#endif
+//#ifdef WIN32
+//	ShowWindow(GetConsoleWindow(), SW_HIDE);
+//#endif
 	QApplication a(argc, argv);
 	EvisionView w;
 	w.show();

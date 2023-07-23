@@ -20,16 +20,18 @@ find_package(OpenCV REQUIRED)
 message(STATUS "Found OpenCV: ${OpenCV_VERSION}")
 
 # Qt
-find_package(Qt5 COMPONENTS Widgets REQUIRED)
-find_package(Qt5 COMPONENTS Core REQUIRED)
-find_package(Qt5 COMPONENTS Gui REQUIRED)
-find_package(Qt5 COMPONENTS UiPlugin REQUIRED)
-find_package(Qt5 COMPONENTS Multimedia REQUIRED)
-find_package(Qt5 COMPONENTS MultimediaWidgets REQUIRED)
-find_package(Qt5 COMPONENTS OpenGL REQUIRED)
+find_package(Qt6 COMPONENTS Widgets REQUIRED)
+find_package(Qt6 COMPONENTS Core REQUIRED)
+find_package(Qt6 COMPONENTS Gui REQUIRED)
+find_package(Qt6 COMPONENTS UiPlugin REQUIRED)
+find_package(Qt6 COMPONENTS Multimedia REQUIRED)
+find_package(Qt6 COMPONENTS MultimediaWidgets REQUIRED)
+find_package(Qt6 COMPONENTS OpenGL REQUIRED)
+find_package(Qt6 COMPONENTS OpenGLWidgets REQUIRED)
+find_package(Qt6 REQUIRED COMPONENTS Core5Compat)
 # message(STATUS "Qt5Widgets_INCLUDE_DIRS:${Qt5Widgets_INCLUDE_DIRS}")  # Qt的includes
-list(GET Qt5Widgets_INCLUDE_DIRS 0 Qt5_INCLUDE_DIR)  # 取include的根目录,是列表变量的第一个元素
-message(STATUS "Found Qt: ${Qt5Widgets_VERSION}")
+list(GET Qt6Widgets_INCLUDE_DIRS 0 Qt6_INCLUDE_DIR)  # 取include的根目录,是列表变量的第一个元素
+message(STATUS "Found Qt: ${Qt6Widgets_VERSION}")
 # message(STATUS "Qt5Widgets_INCLUDE_DIR:${Qt5_INCLUDE_DIR}")
 #查找一些特定的Qt目录
 #find_path(QT_INCLUDE_MultimediaWidgets QtMultimediaWidgets_Path)
@@ -97,7 +99,7 @@ add_subdirectory(EvisionUndistortion)
 add_subdirectory(EvisionTrace)
 
 # 相机
-add_subdirectory(EvisionCamera)
+#add_subdirectory(EvisionCamera)
 
 # 手动参数转换
 add_subdirectory(EvisionParamBridge)
@@ -112,7 +114,7 @@ add_subdirectory(EvisionPolyTracker)
 add_subdirectory(EvisionMonocularCalib)
 
 # 配置工程筛选器
-SET_TARGET_PROPERTIES(EvisionUtils EvisionCamera EvisionParamBridge PROPERTIES FOLDER Utils) 
+SET_TARGET_PROPERTIES(EvisionUtils  EvisionParamBridge PROPERTIES FOLDER Utils)  # EvisionCamera
 SET_TARGET_PROPERTIES(EvisionADCensus EvisionElas EvisionPnP PROPERTIES FOLDER Algorithm)
 SET_TARGET_PROPERTIES(EvisionCalibrate EvisionDisparity EvisionTrace EvisionUndistortion PROPERTIES FOLDER Stereo) 
 SET_TARGET_PROPERTIES(EvisionPolyTracker EvisionMonocularCalib PROPERTIES FOLDER Monocular)
