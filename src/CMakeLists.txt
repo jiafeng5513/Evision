@@ -92,8 +92,8 @@ add_subdirectory(EvisionUndistortion)
 # 测量
 add_subdirectory(EvisionTrace)
 
-# 相机 (阶段 2 启用: 待 Qt6 Multimedia API 迁移)
-# add_subdirectory(EvisionCamera)
+# 相机
+add_subdirectory(EvisionCamera)
 
 # 手动参数转换
 add_subdirectory(EvisionParamBridge)

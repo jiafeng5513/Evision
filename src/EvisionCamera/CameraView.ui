@@ -357,19 +357,19 @@
       <property name="bottomMargin">
        <number>0</number>
       </property>
-      <item row="0" column="0">
-       <widget class="QCameraViewfinder" name="viewfinder" native="true">
-        <property name="minimumSize">
-         <size>
-          <width>640</width>
-          <height>480</height>
-         </size>
-        </property>
-        <property name="autoFillBackground">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
+       <item row="0" column="0">
+        <widget class="QVideoWidget" name="viewfinder">
+         <property name="minimumSize">
+          <size>
+           <width>640</width>
+           <height>480</height>
+          </size>
+         </property>
+         <property name="autoFillBackground">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
      </layout>
     </widget>
    </item>
@@ -420,9 +420,9 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>QCameraViewfinder</class>
+   <class>QVideoWidget</class>
    <extends>QWidget</extends>
-   <header>qcameraviewfinder.h</header>
+   <header>qvideowidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

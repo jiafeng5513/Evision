@@ -124,19 +124,19 @@
        <property name="spacing">
         <number>0</number>
        </property>
-       <item row="0" column="0">
-        <widget class="QCameraViewfinder" name="viewfinderL" native="true">
-         <property name="minimumSize">
-          <size>
-           <width>320</width>
-           <height>240</height>
-          </size>
-         </property>
-         <property name="autoFillBackground">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
+        <item row="0" column="0">
+         <widget class="QVideoWidget" name="viewfinderL">
+          <property name="minimumSize">
+           <size>
+            <width>320</width>
+            <height>240</height>
+           </size>
+          </property>
+          <property name="autoFillBackground">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
       </layout>
      </widget>
      <widget class="QFrame" name="frame_2">
@@ -162,19 +162,19 @@
        <property name="spacing">
         <number>0</number>
        </property>
-       <item row="0" column="0">
-        <widget class="QCameraViewfinder" name="viewfinder_R" native="true">
-         <property name="minimumSize">
-          <size>
-           <width>320</width>
-           <height>240</height>
-          </size>
-         </property>
-         <property name="autoFillBackground">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
+        <item row="0" column="0">
+         <widget class="QVideoWidget" name="viewfinder_R">
+          <property name="minimumSize">
+           <size>
+            <width>320</width>
+            <height>240</height>
+           </size>
+          </property>
+          <property name="autoFillBackground">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
       </layout>
      </widget>
     </widget>
@@ -418,9 +418,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>QCameraViewfinder</class>
+   <class>QVideoWidget</class>
    <extends>QWidget</extends>
-   <header>qcameraviewfinder.h</header>
+   <header>qvideowidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
@@ -494,7 +494,7 @@
    <sender>horizontalSlider_LQuality</sender>
    <signal>valueChanged(int)</signal>
    <receiver>StereoCameraView</receiver>
-   <slot>OnChanged_LQuality(int)</slot>
+   <slot>OnValueChanged_LQuality(int)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>148</x>
@@ -510,7 +510,7 @@
    <sender>horizontalSlider_LexposureCompensation</sender>
    <signal>valueChanged(int)</signal>
    <receiver>StereoCameraView</receiver>
-   <slot>OnChanged_LExposureCompensation(int)</slot>
+   <slot>OnValueChanged_LExposureCompensation(int)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>393</x>
@@ -574,7 +574,7 @@
    <sender>horizontalSlider_RQuality</sender>
    <signal>valueChanged(int)</signal>
    <receiver>StereoCameraView</receiver>
-   <slot>OnChanged_RQuality(int)</slot>
+   <slot>OnValueChanged_RQuality(int)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>662</x>
@@ -590,7 +590,7 @@
    <sender>horizontalSlider_RexposureCompensation</sender>
    <signal>valueChanged(int)</signal>
    <receiver>StereoCameraView</receiver>
-   <slot>OnChanged_RExposureCompensation(int)</slot>
+   <slot>OnValueChanged_RExposureCompensation(int)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>910</x>
@@ -654,13 +654,13 @@
  <slots>
   <slot>OnFindSavePath()</slot>
   <slot>OnShot()</slot>
-  <slot>OnChanged_LExposureCompensation(int)</slot>
-  <slot>OnChanged_LQuality(int)</slot>
+  <slot>OnValueChanged_LExposureCompensation(int)</slot>
+  <slot>OnValueChanged_LQuality(int)</slot>
   <slot>OnSelectedChanged_LCameraDevice(QString)</slot>
   <slot>OnSelectedChanged_LResolution(QString)</slot>
   <slot>OnSelectedChanged_LCodec(QString)</slot>
-  <slot>OnChanged_RExposureCompensation(int)</slot>
-  <slot>OnChanged_RQuality(int)</slot>
+  <slot>OnValueChanged_RExposureCompensation(int)</slot>
+  <slot>OnValueChanged_RQuality(int)</slot>
   <slot>OnSelectedChanged_RCameraDevice(QString)</slot>
   <slot>OnSelectedChanged_RResolution(QString)</slot>
   <slot>OnSelectedChanged_RCodec(QString)</slot>

@@ -2,10 +2,10 @@
 
 #include <QWidget>
 #include "ui_CameraView.h"
-#include <QtMultimedia/QCamera>
-#include <QtMultimedia/QCameraImageCapture>
-#include <QtMultimedia/QMediaRecorder>
-#include <QtMultimedia/QCameraInfo>
+#include <QCamera>
+#include <QImageCapture>
+#include <QCameraDevice>
+#include <QMediaCaptureSession>
 #include <QScopedPointer>
 class CameraView : public QWidget
 {
@@ -18,10 +18,11 @@ public:
 private:
 	Ui::CameraView ui;
 	QScopedPointer<QCamera> m_pCamera;
-	QScopedPointer<QCameraImageCapture> m_pImageCapture;
+	QScopedPointer<QImageCapture> m_pImageCapture;
+	QScopedPointer<QMediaCaptureSession> m_pSession;
 	QString saveToHere;
 private:
-	void setCamera(QCameraInfo *cameraInfo);
+	void setCamera(const QCameraDevice &cameraDevice);
 	void refreshResAndCodecList();
 	QVariant boxValue(const QComboBox *box) const;
 	void closeEvent(QCloseEvent * e) override;

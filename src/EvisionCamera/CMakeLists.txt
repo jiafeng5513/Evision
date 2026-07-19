@@ -13,7 +13,7 @@ add_definitions(-D QT_GUI_LIB)
 add_definitions(-D QT_WIDGETS_LIB)
 add_definitions(-D QT_MULTIMEDIA_LIB)
 add_definitions(-D QT_MULTIMEDIAWIDGETS_LIB)
-add_definitions(-D EVISIONCAMERA_LIB)
+add_definitions(-D EVISIONCAMERAFACTORY_LIB)
 
 #收集文件
 FILE(GLOB INCLUDE_FILES "./include/*.h") 

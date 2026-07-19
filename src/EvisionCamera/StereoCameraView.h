@@ -2,10 +2,10 @@
 
 #include <QWidget>
 #include "ui_StereoCameraView.h"
-#include <QtMultimedia/QCamera>
-#include <QtMultimedia/QCameraImageCapture>
-#include <QtMultimedia/QMediaRecorder>
-#include <QtMultimedia/QCameraInfo>
+#include <QCamera>
+#include <QImageCapture>
+#include <QCameraDevice>
+#include <QMediaCaptureSession>
 #include <QScopedPointer>
 
 class StereoCameraView : public QWidget
@@ -20,12 +20,14 @@ private:
 	Ui::StereoCameraView ui;
 	QScopedPointer<QCamera> m_pLCamera;
 	QScopedPointer<QCamera> m_pRCamera;
-	QScopedPointer<QCameraImageCapture> m_pLImageCapture;
-	QScopedPointer<QCameraImageCapture> m_pRImageCapture;
+	QScopedPointer<QImageCapture> m_pLImageCapture;
+	QScopedPointer<QImageCapture> m_pRImageCapture;
+	QScopedPointer<QMediaCaptureSession> m_pLSession;
+	QScopedPointer<QMediaCaptureSession> m_pRSession;
 	QString saveToHere;
 private:
-	void setLCamera(QCameraInfo *cameraInfo);
-	void setRCamera(QCameraInfo *cameraInfo);
+	void setLCamera(const QCameraDevice &cameraDevice);
+	void setRCamera(const QCameraDevice &cameraDevice);
 	void refreshResAndCodecListL();
 	void refreshResAndCodecListR();
 	QVariant boxValue(const QComboBox *box) const;

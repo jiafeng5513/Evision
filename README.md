@@ -87,13 +87,13 @@ Introduction:
 | 9|EvisionDisparity          |视差(立体匹配)    |√   |动态链接库|✅|
 |10|EvisionTrace              |交互式测量        | √   |动态链接库|✅|
 |11|EvisionUndistortion       |畸变校正          | √   |动态链接库|✅|  
-|12|EvisionCamera             |单目和双目相机功能 | √    |动态链接库|🚧 禁用,待 Qt6 Multimedia 迁移|   
+|12|EvisionCamera             |单目和双目相机功能 | √    |动态链接库|✅|   
 |13|EvisionCloudViewer        |三维点云查看      | √    |动态链接库|✅|
 |14|EvisionParamBridge        |外部参数传递      | √   |动态链接库|✅|  
 |15|EvisionUtils              |通用工具类        | ×   |动态链接库|✅|    
 |16|EvisionSandbox            |主程序UI          | √    |可执行程序|✅|
 
-> **EvisionCamera 模块**:当前在 `src/CMakeLists.txt` 中被注释禁用,原因是其使用的 `QCameraInfo`/`QCameraImageCapture`/`QMediaRecorder` 是 Qt5 Multimedia API,在 Qt6 中已重构为 `QCameraDevice`/`QImageCapture`/`QMediaRecorder`(模型变化)。将在路线图阶段 2 完成 Qt6 Multimedia 迁移后重新启用。
+> **EvisionCamera 模块**:已迁移至 Qt6 Multimedia API(`QCameraDevice`/`QImageCapture`/`QMediaCaptureSession`),使用 `QVideoWidget` 替代已移除的 `QCameraViewfinder`。编解码器选择 UI 保留为占位(Qt6 `QImageCapture` 不再暴露编解码器 API)。
 
 #### 5.双目设备
 1. 需要注意的是,视差效果,点云效果和精度和设备关系非常大,图片的分辨率越高,光照条件越好,畸变越小,一致性越好,最终效果也就越好.此外,两个相机的距离(基线长度)会影响系统的有效范围,一般来讲,基线越长的双目系统越容易获取远处目标的视差,延长基线能够一定程度上(因为有效距离和相机的焦段也有关)将系统的有效范围拉得更远,但同时,基线越长,盲区(距离相机过近的目标不会同时出现在两个视野中)也越大.
@@ -138,7 +138,7 @@ YOLOv3 权重亦可从 [pjreddie.com](https://pjreddie.com/media/files/yolov3.we
 
 - ✅ **阶段 0 — 仓库清理**:移除 `legacy/`(C# 旧版本)、`install/`(编译产物)、`src/.vs/`、`sln/`、`src/EvisionSandbox/GeneratedFiles/`、`yolov3.weights`、`Simulations/`、`Tracker/test_reg/` 等大体积/无关文件;working tree 从 ~1.2 GB 降至 ~120 MB。旧内容归档于 `archive/legacy-pre-cleanup` 分支。
 - ✅ **阶段 1 — 让 master 重新可编译**:CMake 现代化(`target_include_directories`/`target_compile_definitions`/显式源文件列表)、修复 Qt5/Qt6 变量混用、修复明显内存泄漏、修正 `catch(...)` 反模式、新增 GitHub Actions CI 骨架。
-- 🚧 **阶段 2 — Qt6 完整迁移**:完成 `EvisionCamera` 的 Qt6 Multimedia API 迁移、移除 `Qt5Compat` 依赖、SIGNAL/SLOT 字符串宏 → PMF/lambda。
+- ✅ **阶段 2 — Qt6 完整迁移**:完成 `EvisionCamera` 的 Qt6 Multimedia API 迁移(`QCameraInfo`→`QCameraDevice`、`QCameraImageCapture`→`QImageCapture`、`QCameraViewfinder`→`QVideoWidget`、新增 `QMediaCaptureSession`)、移除 `Qt5Compat` 依赖、SIGNAL/SLOT 字符串宏 → PMF/lambda(144 处)、修复 `EvisionCameraFactory` 导出宏与 `StereoCameraView.ui` 槽名不匹配的预存 bug。
 - 🔜 **阶段 3 — AI 引擎替换**:删除内嵌 Darknet(~10K LOC CUDA kernel),改用 ONNX Runtime + YOLOv8 ONNX 模型(248MB → ~22MB,跨平台 CPU/GPU/DirectML)。
 - 🔜 **阶段 4 — 深度学习立体匹配**:引入 RAFT-Stereo / IGEV-Stereo 作为可选后端,保留 ADCensus/ELAS 作为基线。
 - 🔜 **阶段 5 — UI 现代化**:延续作者原计划(EvisionLight),探索 Dear ImGui 路线或继续 Qt6 + Docking 框架。

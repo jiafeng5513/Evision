@@ -81,6 +81,7 @@ target_link_libraries(EvisionSandbox PRIVATE
     EvisionDisparity
     EvisionUndistortion
     EvisionTrace
+    EvisionCamera
     EvisionParamBridge
     EvisionPolyTracker
     EvisionMonocularCalib
