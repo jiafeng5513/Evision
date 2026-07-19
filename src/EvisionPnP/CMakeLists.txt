@@ -1,19 +1,21 @@
-# pnp
+# EvisionPnP
 
-set(CMAKE_INCLUDE_CURRENT_DIR ON) 
-include_directories(${OpenCV_INCLUDE_DIRS})
+file(GLOB SRC_FILES  CONFIGURE_DEPENDS "./*.cpp")
+file(GLOB HEAD_FILES CONFIGURE_DEPENDS "./*.h")
 
-#查找当前文件夹中的所有源代码文件
-FILE(GLOB SRC_FILES "./*.cpp") 
-#查找当前文件夹中所有的头文件
-FILE(GLOB HEAD_FILES "./*.h") 
-
-#文件整理
 source_group("Source Files" FILES ${SRC_FILES})
 source_group("Header Files" FILES ${HEAD_FILES})
 
-#创建动态链接库
-ADD_LIBRARY(EvisionPnP SHARED ${HEAD_FILES} ${SRC_FILES} )
+# 生成动态库
+add_library(EvisionPnP SHARED
+    ${HEAD_FILES}
+    ${SRC_FILES}
+)
 
-#链接OpenCV
-target_link_libraries(EvisionPnP ${OpenCV_LIBS})
+# include 目录 (PUBLIC: 下游 EvisionPolyTracker 需要 PnP 头文件)
+target_include_directories(EvisionPnP PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+# 链接 OpenCV
+target_link_libraries(EvisionPnP PUBLIC ${OpenCV_LIBS})

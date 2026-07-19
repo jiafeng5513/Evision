@@ -1,22 +1,27 @@
 # Evision ADCensus
 
-set(CMAKE_INCLUDE_CURRENT_DIR ON) 
-# Add OpenCV headers location to your include paths
-include_directories(${OpenCV_INCLUDE_DIRS})
-include_directories("./include/")
-
-FILE(GLOB INCLUDE_FILES "./include/*.h")
-FILE(GLOB SRC_FILES "./*.cpp") 
-FILE(GLOB HEAD_FILES "./*.h") 
+file(GLOB INCLUDE_FILES CONFIGURE_DEPENDS "./include/*.h")
+file(GLOB SRC_FILES     CONFIGURE_DEPENDS "./*.cpp")
+file(GLOB HEAD_FILES    CONFIGURE_DEPENDS "./*.h")
 
 source_group("Include Files" FILES ${INCLUDE_FILES})
-source_group("Source Files" FILES ${SRC_FILES})
-source_group("Header Files" FILES ${HEAD_FILES})
+source_group("Source Files"  FILES ${SRC_FILES})
+source_group("Header Files"  FILES ${HEAD_FILES})
 
-add_definitions(-D LIB_EXPORTS)
+# 生成动态库
+add_library(EvisionADCensus SHARED
+    ${SRC_FILES}
+    ${HEAD_FILES}
+    ${INCLUDE_FILES}
+)
 
-#生成动态链接库
-ADD_LIBRARY(EvisionADCensus SHARED ${SRC_FILES} ${HEAD_FILES} ${INCLUDE_FILES})
+# 预处理器定义
+target_compile_definitions(EvisionADCensus PRIVATE LIB_EXPORTS)
 
-# Link your application with OpenCV libraries
-target_link_libraries(EvisionADCensus ${OpenCV_LIBS})
+# include 目录 (PUBLIC: 下游 EvisionDisparity 需要 ADCensus 头文件)
+target_include_directories(EvisionADCensus PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+# 链接 OpenCV
+target_link_libraries(EvisionADCensus PUBLIC ${OpenCV_LIBS})
