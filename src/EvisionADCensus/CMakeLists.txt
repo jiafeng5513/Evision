@@ -19,7 +19,10 @@ add_library(EvisionADCensus SHARED
 target_compile_definitions(EvisionADCensus PRIVATE LIB_EXPORTS)
 
 # include 目录 (PUBLIC: 下游 EvisionDisparity 需要 ADCensus 头文件)
+# 注意: ${CMAKE_CURRENT_SOURCE_DIR} 必须保留 — aggregation.h/adcensuscv.h 等
+# 使用 #include <libapi.h> (尖括号=系统包含), 而 libapi.h 位于源码根目录而非 include/
 target_include_directories(EvisionADCensus PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
