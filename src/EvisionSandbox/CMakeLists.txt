@@ -94,3 +94,80 @@ endif()
 if(PointCloudViewer)
     target_link_libraries(EvisionSandbox PRIVATE EvisionCloudViewer)
 endif()
+
+# ---------------------------------------------------------------------------
+# 运行时 DLL 部署 (Windows): 构建成功后自动拷贝第三方 DLL 到 exe 同目录,
+# 使 EvisionSandbox.exe 无需设置 PATH 环境变量即可直接运行.
+# 项目自身模块 DLL 已由 CMAKE_RUNTIME_OUTPUT_DIRECTORY 统一输出到同一目录.
+# 注意: 本文件由根 CMakeLists 最后 add_subdirectory, 确保下列模块目标均已存在.
+# ---------------------------------------------------------------------------
+if(WIN32)
+    # --- Qt6: windeployqt 部署 Qt DLL + 插件(platforms/multimedia 等) + MSVC 运行时 ---
+    # 扫描 exe + 所有已启用模块 DLL:
+    # MSVC 链接器会剔除 exe 中未被直接引用的 Qt DLL 导入(如 Multimedia 的使用在
+    # EvisionCamera.dll 内), 仅扫描 exe 会漏掉模块 DLL 携带的 Qt 依赖.
+    set(_deploy_binaries "$<TARGET_FILE:EvisionSandbox>")
+    foreach(_mod IN ITEMS
+        EvisionADCensus EvisionCalibrate EvisionCamera EvisionDisparity
+        EvisionElas EvisionMonocularCalib EvisionParamBridge EvisionPnP
+        EvisionPolyTracker EvisionTrace EvisionUndistortion EvisionUtils
+        EvisionCloudViewer EvisionObjDetection
+    )
+        if(TARGET ${_mod})
+            list(APPEND _deploy_binaries "$<TARGET_FILE:${_mod}>")
+        endif()
+    endforeach()
+
+    add_custom_command(TARGET EvisionSandbox POST_BUILD
+        COMMAND "$<TARGET_FILE:Qt6::windeployqt>"
+                --no-translations
+                --compiler-runtime
+                ${_deploy_binaries}
+        COMMENT "Deploy Qt runtime (windeployqt)"
+    )
+
+    # --- MSVC CRT (vcruntime140/msvcp140 等): 取自 vcvars 注入的 VCToolsRedistDir ---
+    # (Qt 6.9 的 --compiler-runtime 可能找不到 VS2026 的 redist, 这里显式拷贝)
+    if(DEFINED ENV{VCToolsRedistDir})
+        file(GLOB _vcrt_dlls "$ENV{VCToolsRedistDir}/x64/Microsoft.VC*.CRT/*.dll")
+        if(_vcrt_dlls)
+            add_custom_command(TARGET EvisionSandbox POST_BUILD
+                COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                        ${_vcrt_dlls}
+                        "$<TARGET_FILE_DIR:EvisionSandbox>"
+                COMMENT "Deploy MSVC CRT runtime DLLs"
+            )
+        endif()
+    endif()
+
+    # --- OpenCV: 拷贝 bin 目录下的 DLL (opencv_world*, ffmpeg 等) ---
+    # OpenCV_DIR 可能是 <build>/x64/vcXX/lib (叶子) 或 <build> (根), 两种布局都兼容
+    get_filename_component(_opencv_dir "${OpenCV_DIR}" ABSOLUTE)
+    set(_opencv_bin_candidates
+        "${_opencv_dir}/../bin"                                # OpenCV_DIR=<build>/x64/vcXX/lib
+        "${_opencv_dir}/${OpenCV_ARCH}/${OpenCV_RUNTIME}/bin"  # OpenCV_DIR=<build> (+显式 ARCH/RUNTIME)
+        "${_opencv_dir}/bin"                                   # 其他布局
+    )
+    set(_opencv_bin_dir "")
+    foreach(_cand IN LISTS _opencv_bin_candidates)
+        if(EXISTS "${_cand}")
+            get_filename_component(_opencv_bin_dir "${_cand}" ABSOLUTE)
+            break()
+        endif()
+    endforeach()
+
+    if(_opencv_bin_dir)
+        file(GLOB _opencv_runtime_dlls "${_opencv_bin_dir}/*.dll")
+        if(_opencv_runtime_dlls)
+            add_custom_command(TARGET EvisionSandbox POST_BUILD
+                COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                        ${_opencv_runtime_dlls}
+                        "$<TARGET_FILE_DIR:EvisionSandbox>"
+                COMMENT "Deploy OpenCV runtime DLLs"
+            )
+            message(STATUS "OpenCV runtime DLL deploy: ${_opencv_bin_dir}")
+        endif()
+    else()
+        message(WARNING "OpenCV bin dir not found - skip OpenCV DLL deployment")
+    endif()
+endif()

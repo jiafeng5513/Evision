@@ -74,9 +74,6 @@ add_subdirectory(EvisionADCensus)
 # libelas视差算法,生成动态库,依赖OpenCV
 add_subdirectory(EvisionElas)
 
-# 主程序,生成可执行程序
-add_subdirectory(EvisionSandbox)
-
 # 通用工具类
 add_subdirectory(EvisionUtils)
 
@@ -112,3 +109,8 @@ set_target_properties(EvisionUtils EvisionParamBridge PROPERTIES FOLDER Utils)
 set_target_properties(EvisionADCensus EvisionElas EvisionPnP PROPERTIES FOLDER Algorithm)
 set_target_properties(EvisionCalibrate EvisionDisparity EvisionTrace EvisionUndistortion PROPERTIES FOLDER Stereo)
 set_target_properties(EvisionPolyTracker EvisionMonocularCalib PROPERTIES FOLDER Monocular)
+
+# 主程序,生成可执行程序
+# 注意: 必须在所有模块之后添加 — EvisionSandbox/CMakeLists.txt 末尾的
+# 运行时 DLL 部署块需要所有模块目标已经存在.
+add_subdirectory(EvisionSandbox)
