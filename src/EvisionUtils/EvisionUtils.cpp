@@ -1,7 +1,6 @@
 ﻿#include "EvisionUtils.h"
 #include <sstream>
 #include <QFileInfo>
-#include <QRegExp>
 
 EvisionUtils::EvisionUtils()
 {

@@ -22,8 +22,6 @@ source_group("Resource Files"  FILES ${RES_FILES})
 source_group("Source Files"    FILES ${SRC_FILES})
 source_group("Header Files"    FILES ${HEAD_FILES})
 
-find_package(Qt6 REQUIRED COMPONENTS Core5Compat)
-
 # 生成动态库
 add_library(EvisionUtils SHARED
     ${INCLUDE_FILES}
@@ -51,6 +49,6 @@ target_include_directories(EvisionUtils PUBLIC
 
 # 链接依赖
 target_link_libraries(EvisionUtils PUBLIC
-    Qt6::Widgets Qt6::Core Qt6::Gui Qt6::Core5Compat
+    Qt6::Widgets Qt6::Core Qt6::Gui
     ${OpenCV_LIBS}
 )

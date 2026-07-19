@@ -54,13 +54,12 @@ Introduction:
 5. `vcpkg install boost:x64-windows`<br>
 6. `vcpkg install pcl:x64-windows`<br>
 7. `vcpkg install qt6:x64-windows`<br>
-8. `vcpkg install qt5compat:x64-windows`(过渡期兼容层,后续清理后将移除)<br>
-9. `mkdir sln,cd sln`<br>
-10. `cmake ..\src\ -DCMAKE_TOOLCHAIN_FILE="${vcpkg_root}/scripts/buildsystems/vcpkg.cmake" -G"Visual Studio 16 2019" -A x64 -DPointCloudViewer=ON`<br>
-11. 使用 Visual Studio 打开 `Evision.sln`.<br>
-12. 右键 `_CMakeTargets/ALL_BUILD`,生成.<br>
-13. 右键 `EvisionSandBox`,设为启动项目.<br>
-14. 点击"本地Windows调试器",启动程序.<br>
+8. `mkdir sln,cd sln`<br>
+9. `cmake ..\src\ -DCMAKE_TOOLCHAIN_FILE="${vcpkg_root}/scripts/buildsystems/vcpkg.cmake" -G"Visual Studio 16 2019" -A x64 -DPointCloudViewer=ON`<br>
+10. 使用 Visual Studio 打开 `Evision.sln`.<br>
+11. 右键 `_CMakeTargets/ALL_BUILD`,生成.<br>
+12. 右键 `EvisionSandBox`,设为启动项目.<br>
+13. 点击"本地Windows调试器",启动程序.<br>
 * 如果vcpkg下载包的速度过慢,可以上代理(以PowerShell为例)`$env:HTTP_PROXY="http://127.0.0.1:1080"`
 
 #### 3.编译目标检测和硬件加速模块

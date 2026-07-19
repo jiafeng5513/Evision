@@ -25,7 +25,7 @@ endif()
 find_package(OpenCV REQUIRED)
 message(STATUS "Found OpenCV: ${OpenCV_VERSION}")
 
-# Qt6 (Core5Compat 为过渡期兼容层,阶段 2 移除)
+# Qt6
 find_package(Qt6 REQUIRED COMPONENTS
     Widgets
     Core
@@ -35,7 +35,6 @@ find_package(Qt6 REQUIRED COMPONENTS
     MultimediaWidgets
     OpenGL
     OpenGLWidgets
-    Core5Compat
 )
 message(STATUS "Found Qt: ${Qt6Widgets_VERSION}")
 
