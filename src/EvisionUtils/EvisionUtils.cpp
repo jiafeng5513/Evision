@@ -30,10 +30,10 @@ std::string EvisionUtils::pathPurify(std::string src)
 {
 	QString str1 = QString::fromStdString(src);
 	QString str2 = str1.replace("\\", "/");
-	QFileInfo* fileinfo = new QFileInfo(str2);
-	if (fileinfo->exists())
+	QFileInfo fileinfo(str2);
+	if (fileinfo.exists())
 	{
-		return fileinfo->absoluteFilePath().toStdString();
+		return fileinfo.absoluteFilePath().toStdString();
 	}
 	return str2.toStdString();
 }
