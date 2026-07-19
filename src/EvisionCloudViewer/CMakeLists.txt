@@ -1,47 +1,64 @@
-# EvisionCloudViewer
+# EvisionCloudViewer: 三维点云查看
 
 find_package(VTK)
 if(NOT DEFINED CMAKE_SUPPRESS_DEVELOPER_WARNINGS)
-     set(CMAKE_SUPPRESS_DEVELOPER_WARNINGS 1 CACHE INTERNAL "No dev warnings")
+    set(CMAKE_SUPPRESS_DEVELOPER_WARNINGS 1 CACHE INTERNAL "No dev warnings")
 endif()
 find_package(PCL REQUIRED COMPONENTS io common)
-# find_package(OpenGL)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-include_directories(${PCL_INCLUDE_DIRS})
-include_directories(${OpenCV_INCLUDE_DIRS})
-include_directories("./include/")
 
-add_definitions(-D QT_DLL)
-add_definitions(-D QT_CORE_LIB)
-add_definitions(-D QT_GUI_LIB)
-add_definitions(-D QT_WIDGETS_LIB)
-add_definitions(-D EVISIONCLOUDVIEWER_LIB)
+# 收集源文件
+file(GLOB INCLUDE_FILES CONFIGURE_DEPENDS "./include/*.h")
+file(GLOB HEAD_FILES    CONFIGURE_DEPENDS "./*.h")
+file(GLOB SRC_FILES     CONFIGURE_DEPENDS "./*.cpp")
+file(GLOB UI_FILES      CONFIGURE_DEPENDS "./*.ui")
+file(GLOB RES_FILES     CONFIGURE_DEPENDS "./*.qrc")
 
-FILE(GLOB INCLUDE_FILES "./include/*.h") 
-FILE(GLOB HEAD_FILES "./*.h" "") 
-FILE(GLOB SRC_FILES "./*.cpp")
-
-#查找当前文件夹中所有的ui文件
-FILE(GLOB UI_FILES "./*.ui") 
-#查找当前文件夹中所有的ui文件
-FILE(GLOB RES_FILES "./*.qrc") 
-
-#编译ui文件
+# Qt 处理
 qt6_wrap_ui(UIC_FILES ${UI_FILES})
-#moc
 qt6_wrap_cpp(MOC_FILES ${HEAD_FILES} ${INCLUDE_FILES})
-#编译qrc资源文件
 qt6_add_resources(QRC_FILES ${RES_FILES})
 
-#文件整理
-source_group("Form Files" FILES ${UI_FILES})
-source_group("Resource Files" FILES ${RES_FILES})
-source_group("include" FILES ${INCLUDE_FILES})
-source_group("Source Files" FILES ${SRC_FILES})
-source_group("Header Files" FILES ${HEAD_FILES})
+# 文件整理
+source_group("include"         FILES ${INCLUDE_FILES})
 source_group("Generated Files" FILES ${UIC_FILES} ${MOC_FILES} ${QRC_FILES})
+source_group("Form Files"      FILES ${UI_FILES})
+source_group("Resource Files"  FILES ${RES_FILES})
+source_group("Source Files"    FILES ${SRC_FILES})
+source_group("Header Files"    FILES ${HEAD_FILES})
 
-add_library(EvisionCloudViewer SHARED ${SRC_FILES} ${HEAD_FILES} ${MOC_FILES} ${RES_FILES} ${INCLUDE_FILES} ${UIC_FILES} ${QRC_FILES})
-#链接Qt5依赖项
-target_link_libraries(EvisionCloudViewer ${OpenCV_LIBS} ${PCL_LIBRARIES}  ${OPENGL_gl_LIBRARY} ${Qt5OpenGL_LIBRARIES} Qt6::OpenGL Qt6::Widgets Qt6::Core Qt6::Gui)
+# 生成动态库
+add_library(EvisionCloudViewer SHARED
+    ${SRC_FILES}
+    ${HEAD_FILES}
+    ${INCLUDE_FILES}
+    ${MOC_FILES}
+    ${RES_FILES}
+    ${UIC_FILES}
+    ${QRC_FILES}
+)
+
+# 预处理器定义
+target_compile_definitions(EvisionCloudViewer PRIVATE
+    UNICODE
+    QT_CORE_LIB
+    QT_GUI_LIB
+    QT_WIDGETS_LIB
+    EVISIONCLOUDVIEWER_LIB
+)
+
+# include 目录
+target_include_directories(EvisionCloudViewer
+    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
+    PRIVATE
+        ${PCL_INCLUDE_DIRS}
+        ${OpenCV_INCLUDE_DIRS}
+)
+
+# 链接依赖 (Qt6::OpenGL 自动传递 Qt OpenGL 头文件与库,无需 Qt5OpenGL_LIBRARIES)
+target_link_libraries(EvisionCloudViewer PRIVATE
+    Qt6::OpenGL Qt6::Widgets Qt6::Core Qt6::Gui
+    ${OpenCV_LIBS}
+    ${PCL_LIBRARIES}
+)

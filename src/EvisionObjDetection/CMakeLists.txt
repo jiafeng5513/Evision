@@ -1,48 +1,59 @@
-﻿# Evision Object Detection (View)
-
-add_definitions(-D QT_DLL)
-add_definitions(-D QT_CORE_LIB)
-add_definitions(-D QT_GUI_LIB)
-add_definitions(-D QT_WIDGETS_LIB)
-add_definitions(-D QT_MULTIMEDIA_LIB)
-add_definitions(-D QT_MULTIMEDIAWIDGETS_LIB)
+﻿# EvisionObjDetection: 目标检测UI
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-include_directories("./include/")
-include_directories("../EvisionObjDetectionEngine/include/")
 
-LINK_DIRECTORIES(../install/lib)
+# 收集源文件
+file(GLOB INCLUDE_FILES CONFIGURE_DEPENDS "./include/*.h")
+file(GLOB HEAD_FILES    CONFIGURE_DEPENDS "./*.h")
+file(GLOB SRC_FILES     CONFIGURE_DEPENDS "./*.cpp")
+file(GLOB UI_FILES      CONFIGURE_DEPENDS "./*.ui")
+file(GLOB RES_FILES     CONFIGURE_DEPENDS "./*.qrc")
 
-add_definitions(-D EVISIONOBJDETECTION_LIB)
-add_definitions(-D QT_DLL)
-add_definitions(-D QT_CORE_LIB)
-add_definitions(-D QT_GUI_LIB)
-add_definitions(-D QT_WIDGETS_LIB)
-add_definitions(-D OPENCV)
-# 文件收集
-FILE(GLOB INCLUDE_FILES "./include/*.h") # [include]文件夹中的头文件
-FILE(GLOB HEAD_FILES "./*.h")                    # 其他头文件 
-FILE(GLOB SRC_FILES "./*.cpp")                     # 其他源文件 
-FILE(GLOB UI_FILES "./*.ui") 
-FILE(GLOB RES_FILES "./*.qrc")
-
-#编译ui文件
+# Qt 处理
 qt6_wrap_ui(UIC_FILES ${UI_FILES})
-#moc
 qt6_wrap_cpp(MOC_FILES ${HEAD_FILES} ${INCLUDE_FILES})
-#编译qrc资源文件
 qt6_add_resources(QRC_FILES ${RES_FILES})
 
-#文件整理
-source_group("include" FILES ${INCLUDE_FILES})
-source_group("Form Files" FILES ${UI_FILES})
-source_group("Resource Files" FILES ${RES_FILES})
+# 文件整理
+source_group("include"         FILES ${INCLUDE_FILES})
 source_group("Generated Files" FILES ${UIC_FILES} ${MOC_FILES} ${QRC_FILES})
-source_group("Header Files" FILES ${HEAD_FILES})
-source_group("Source Files" FILES ${SRC_FILES})
+source_group("Form Files"      FILES ${UI_FILES})
+source_group("Resource Files"  FILES ${RES_FILES})
+source_group("Source Files"    FILES ${SRC_FILES})
+source_group("Header Files"    FILES ${HEAD_FILES})
 
-ADD_LIBRARY(EvisionObjDetection SHARED ${MOC_FILES} ${RES_FILES} ${UIC_FILES} ${QRC_FILES} ${INCLUDE_FILES} ${HEAD_FILES} ${SRC_FILES})
+# 生成动态库
+add_library(EvisionObjDetection SHARED
+    ${INCLUDE_FILES}
+    ${HEAD_FILES}
+    ${SRC_FILES}
+    ${MOC_FILES}
+    ${RES_FILES}
+    ${UIC_FILES}
+    ${QRC_FILES}
+)
 
-target_link_libraries(EvisionObjDetection ${OpenCV_LIBS})
-target_link_libraries(EvisionObjDetection Qt6::Widgets Qt6::Core Qt6::Gui Qt6::Multimedia Qt6::MultimediaWidgets)
-target_link_libraries(EvisionObjDetection EvisionObjDetectionEngine)
+# 预处理器定义
+target_compile_definitions(EvisionObjDetection PRIVATE
+    UNICODE
+    QT_CORE_LIB
+    QT_GUI_LIB
+    QT_WIDGETS_LIB
+    QT_MULTIMEDIA_LIB
+    QT_MULTIMEDIAWIDGETS_LIB
+    OPENCV
+    EVISIONOBJDETECTION_LIB
+)
+
+# include 目录
+target_include_directories(EvisionObjDetection
+    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
+    PRIVATE ../EvisionObjDetectionEngine/include
+)
+
+# 链接依赖
+target_link_libraries(EvisionObjDetection PRIVATE
+    Qt6::Widgets Qt6::Core Qt6::Gui Qt6::Multimedia Qt6::MultimediaWidgets
+    ${OpenCV_LIBS}
+    EvisionObjDetectionEngine
+)
