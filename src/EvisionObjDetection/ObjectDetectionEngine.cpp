@@ -80,18 +80,18 @@ void ObjectDetectionEngine::run()
 	while (keepRun)
 	{
 
-		cv::Mat * mat_img = new cv::Mat();
-		cam >> *mat_img;
+		cv::Mat mat_img;
+		cam >> mat_img;
 
 		auto start = std::chrono::steady_clock::now();
-		std::vector<bbox_t> result_vec = detector.detect(*mat_img);
+		std::vector<bbox_t> result_vec = detector.detect(mat_img);
 		auto end = std::chrono::steady_clock::now();
 
 		std::chrono::duration<double> spent = end - start;
 		std::cout << " Time: " << spent.count() << " sec \n";
 
-		draw_boxes(*mat_img, result_vec, obj_names);
-		m_entity->setDetectionPlayer(*mat_img);
+		draw_boxes(mat_img, result_vec, obj_names);
+		m_entity->setDetectionPlayer(mat_img);
 		show_console_result(result_vec, obj_names);
 	}
 }
