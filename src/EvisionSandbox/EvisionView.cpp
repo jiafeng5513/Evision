@@ -89,15 +89,15 @@ void EvisionView::onShowPointCloud()
 	//QWidget  * evision3dViz = Evision3dVizFactory::CreateEvision3dViz();
 	//ui.mdiArea->addSubWindow(evision3dViz);
 	//evision3dViz->show();
-	QFileDialog* fileDialog = new QFileDialog();
-	fileDialog->setDirectory(QString::fromStdString(EvisionUtils::getDataPath()));
-	fileDialog->setWindowTitle(QStringLiteral("请选择点云文件"));
-	fileDialog->setNameFilter(QStringLiteral("pcl点云文件(*.pcd)"));
-	fileDialog->setFileMode(QFileDialog::ExistingFile);
-	if (fileDialog->exec() == QDialog::Accepted)
+	QFileDialog fileDialog;
+	fileDialog.setDirectory(QString::fromStdString(EvisionUtils::getDataPath()));
+	fileDialog.setWindowTitle(QStringLiteral("请选择点云文件"));
+	fileDialog.setNameFilter(QStringLiteral("pcl点云文件(*.pcd)"));
+	fileDialog.setFileMode(QFileDialog::ExistingFile);
+	if (fileDialog.exec() == QDialog::Accepted)
 	{
 		QWidget* evisionCloudViewer =
-			EvisionCloudViewerFactory::CreateEvisionEvisionCloudViewer(fileDialog->selectedFiles().at(0).toStdString(), this);
+			EvisionCloudViewerFactory::CreateEvisionEvisionCloudViewer(fileDialog.selectedFiles().at(0).toStdString(), this);
 		ui.mdiArea->addSubWindow(evisionCloudViewer);
 		evisionCloudViewer->showMaximized();
 		evisionCloudViewer->show();
@@ -163,8 +163,9 @@ void EvisionView::on_action_LogViewSwitch()
 
 	old_pos = this->pos();
 	old_size = this->size();
-	logView->move(*new QPoint(old_pos.x() + 10 + this->frameGeometry().width(), old_pos.y()));
+	logView->move(QPoint(old_pos.x() + 10 + this->frameGeometry().width(), old_pos.y()));
 }
+
 //视差转点云
 void EvisionView::on_action_disp_to_pcd()
 {
@@ -172,23 +173,23 @@ void EvisionView::on_action_disp_to_pcd()
 	//1.选择视差
 	cv::Mat RawDisp, img, Q;
 	bool ok = false;
-	QFileDialog* fileDialog = new QFileDialog();
-	fileDialog->setDirectory(QString::fromStdString(EvisionUtils::getDataPath()));
+	QFileDialog fileDialog;
+	fileDialog.setDirectory(QString::fromStdString(EvisionUtils::getDataPath()));
 	QString dispFilename;
-	fileDialog->setWindowTitle(QStringLiteral("请选择原始视差文件"));
-	fileDialog->setNameFilter(QStringLiteral("序列化(*.xml)"));
-	fileDialog->setFileMode(QFileDialog::ExistingFile);
-	if (fileDialog->exec() == QDialog::Accepted)
+	fileDialog.setWindowTitle(QStringLiteral("请选择原始视差文件"));
+	fileDialog.setNameFilter(QStringLiteral("序列化(*.xml)"));
+	fileDialog.setFileMode(QFileDialog::ExistingFile);
+	if (fileDialog.exec() == QDialog::Accepted)
 	{
 		try
 		{
-			dispFilename = fileDialog->selectedFiles().at(0);
+			dispFilename = fileDialog.selectedFiles().at(0);
 			cv::FileStorage fStorage(dispFilename.toStdString(), cv::FileStorage::READ);
 			fStorage["disp"] >> RawDisp;
 			fStorage.release();
 			ok = true;
 		}
-		catch (cv::Exception e)
+		catch (const cv::Exception& e)
 		{
 			std::cout << "原始视差数据读取失败!" << e.err << std::endl;
 		}
@@ -200,20 +201,20 @@ void EvisionView::on_action_disp_to_pcd()
 	if (ok)
 	{
 		ok = false;
-		fileDialog->setWindowTitle(QStringLiteral("请选择参与生成所选视差图的左视图或右视图"));
-		fileDialog->setNameFilter(QStringLiteral("图片文件(*.jpg *.png *.jpeg *.bmp)"));
-		fileDialog->setFileMode(QFileDialog::ExistingFile);
-		if (fileDialog->exec() == QDialog::Accepted)
+		fileDialog.setWindowTitle(QStringLiteral("请选择参与生成所选视差图的左视图或右视图"));
+		fileDialog.setNameFilter(QStringLiteral("图片文件(*.jpg *.png *.jpeg *.bmp)"));
+		fileDialog.setFileMode(QFileDialog::ExistingFile);
+		if (fileDialog.exec() == QDialog::Accepted)
 		{
 			try
 			{
-				img = cv::imread(fileDialog->selectedFiles().at(0).toStdString());
+				img = cv::imread(fileDialog.selectedFiles().at(0).toStdString());
 				ok = true;
 			}
-			catch (cv::Exception e)
-			{
-				std::cout << "原图读取失败!" << e.err << std::endl;
-			}
+		catch (const cv::Exception& e)
+		{
+			std::cout << "原图读取失败!" << e.err << std::endl;
+		}
 		}
 		else
 		{
@@ -227,22 +228,22 @@ void EvisionView::on_action_disp_to_pcd()
 	if (ok)
 	{
 		ok = false;
-		fileDialog->setWindowTitle(QStringLiteral("请选择相机参数文件"));
-		fileDialog->setNameFilter(QStringLiteral("序列化文件(*.xml *.yml)"));
-		fileDialog->setFileMode(QFileDialog::ExistingFile);
-		if (fileDialog->exec() == QDialog::Accepted)
+		fileDialog.setWindowTitle(QStringLiteral("请选择相机参数文件"));
+		fileDialog.setNameFilter(QStringLiteral("序列化文件(*.xml *.yml)"));
+		fileDialog.setFileMode(QFileDialog::ExistingFile);
+		if (fileDialog.exec() == QDialog::Accepted)
 		{
 			try
 			{
-				cv::FileStorage fStorage(fileDialog->selectedFiles().at(0).toStdString(), cv::FileStorage::READ);
+				cv::FileStorage fStorage(fileDialog.selectedFiles().at(0).toStdString(), cv::FileStorage::READ);
 				fStorage["Q"] >> Q;
 				fStorage.release();
 				ok = true;
 			}
-			catch (cv::Exception e)
-			{
-				std::cout << "相机参数读取失败!" << e.err << std::endl;
-			}
+		catch (const cv::Exception& e)
+		{
+			std::cout << "相机参数读取失败!" << e.err << std::endl;
+		}
 		}
 		else
 		{
@@ -255,10 +256,10 @@ void EvisionView::on_action_disp_to_pcd()
 	}
 	if (ok)
 	{
-		QFileInfo* _fileInfo = new QFileInfo(dispFilename);//path like F:/test/123.xml
-		std::string filename = _fileInfo->absolutePath().toStdString().//F:/test
+		QFileInfo _fileInfo(dispFilename);//path like F:/test/123.xml
+		std::string filename = _fileInfo.absolutePath().toStdString().//F:/test
 			append("/").												   //F:/test/
-			append(_fileInfo->baseName().toStdString()).				   //F:/test/123
+			append(_fileInfo.baseName().toStdString()).				   //F:/test/123
 			append(".pcd");												   //F:/test/123.pcd
 		EvisionCloudViewerFactory::createAndSavePointCloud(RawDisp, img, Q, filename);
 	}
@@ -347,7 +348,7 @@ void EvisionView::moveEvent(QMoveEvent* event)
 	QPoint delta = this->pos() - old_pos;
 	//算出主窗口的移动量
 	//子窗口进行等量移动
-	logView->move(delta + *new QPoint(old_pos.x() + 10 + this->frameGeometry().width(), old_pos.y()));
+	logView->move(delta + QPoint(old_pos.x() + 10 + this->frameGeometry().width(), old_pos.y()));
 	old_pos = this->pos();
 }
 
@@ -355,7 +356,7 @@ void EvisionView::resizeEvent(QResizeEvent* event)
 {
 	if (this->size().width() != old_size.width())
 	{
-		logView->move(*new QPoint(old_pos.x() + 10 + this->frameGeometry().width(), old_pos.y()));
+		logView->move(QPoint(old_pos.x() + 10 + this->frameGeometry().width(), old_pos.y()));
 		old_size = this->size();
 	}
 }
