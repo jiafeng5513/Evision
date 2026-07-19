@@ -72,7 +72,7 @@
 //	pipeReader = new QWindowsPipeReader(this);
 //	pipeReader->setHandle(hRead);
 //	pipeReader->startAsyncRead();
-//	connect(pipeReader, SIGNAL(readyRead()), this, SIGNAL(readyRead()));
+//	connect(pipeReader, &QWindowsPipeReader::readyRead, this, &StdoutRedirector::readyRead);
 //#else
 //	::pipe(pipeEnds);
 //	if (m_channels & StandardOutput)
@@ -83,7 +83,7 @@
 //
 //	buffer = new QRingBuffer();
 //	socketNotifier = new QSocketNotifier(pipeEnds[0], QSocketNotifier::Read, this);
-//	connect(socketNotifier, SIGNAL(activated(int)), this, SLOT(onSocketActivated()));
+//	connect(socketNotifier, &QSocketNotifier::activated, this, &StdoutRedirector::onSocketActivated);
 //#endif
 //}
 //

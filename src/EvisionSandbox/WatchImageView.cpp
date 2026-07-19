@@ -19,7 +19,7 @@ WatchImageView::WatchImageView(QString filename, QWidget* parent)
 	m_GraphicsView = new MyGraphicsView();
 	//.a
 	ui.gridLayout->addWidget(m_GraphicsView);
-	connect(m_GraphicsView, SIGNAL(mouseWheelZoom(int)), this, SLOT(onMouseWheelZoom(int)));
+	connect(m_GraphicsView, &MyGraphicsView::mouseWheelZoom, this, &WatchImageView::onMouseWheelZoom);
 
 	image = new QImage(filename);
 

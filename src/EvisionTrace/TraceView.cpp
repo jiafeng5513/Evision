@@ -12,9 +12,9 @@ TraceView::TraceView(QWidget *parent)
 	trace_graphics_view = new TraceGraphicsView(this);
 	//
 	ui.TraceLayout->addWidget(trace_graphics_view);
-	connect(trace_graphics_view, SIGNAL(mouseMove(int,int)), this, SLOT(onMouseMove(int, int)), Qt::QueuedConnection);
-	connect(trace_graphics_view, SIGNAL(mouseLDown(int, int)), this, SLOT(onMouseLButtonDown(int, int)), Qt::QueuedConnection);
-	connect(trace_graphics_view, SIGNAL(mouseRDown(int, int)), this, SLOT(onMouseRButtonDown(int, int)), Qt::QueuedConnection);
+	connect(trace_graphics_view, &TraceGraphicsView::mouseMove, this, &TraceView::onMouseMove, Qt::QueuedConnection);
+	connect(trace_graphics_view, &TraceGraphicsView::mouseLDown, this, &TraceView::onMouseLButtonDown, Qt::QueuedConnection);
+	connect(trace_graphics_view, &TraceGraphicsView::mouseRDown, this, &TraceView::onMouseRButtonDown, Qt::QueuedConnection);
 	//
 	ui.checkBox_RawDispOK->setEnabled(false);
 	ui.checkBox_OriginOK->setEnabled(false);

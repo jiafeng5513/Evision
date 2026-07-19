@@ -53,7 +53,7 @@ EvisionView::EvisionView(QWidget* parent)
 	//m_controller = new EvisionController();
 
 
-	connect(m_entity, SIGNAL(paramChanged_StatusBar()), this, SLOT(onParamChanged_StatusBarText()), Qt::QueuedConnection);
+	connect(m_entity, &EvisionParamEntity::paramChanged_StatusBar, this, &EvisionView::onParamChanged_StatusBarText, Qt::QueuedConnection);
 
 
 	on_action_LogViewSwitch();//Logview的准备

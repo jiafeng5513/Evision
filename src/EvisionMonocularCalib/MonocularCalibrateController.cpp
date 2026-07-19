@@ -62,7 +62,7 @@ void MonocularCalibrateController::CalibrateCommand()
 			}
 			m_calib_entity->clearItemMap();
 			_stereoCalib = new MonocularCalibrate(imagelistL);
-			connect(_stereoCalib, SIGNAL(openMessageBox(QString, QString)), this, SLOT(onOpenMessageBox(QString, QString)));
+			connect(_stereoCalib, &MonocularCalibrate::openMessageBox, this, &MonocularCalibrateController::onOpenMessageBox);
 			_stereoCalib->start();
 		}
 

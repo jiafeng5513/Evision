@@ -11,13 +11,13 @@ EvisionPolyTracker::EvisionPolyTracker(QWidget *parent)
     //this->trackerGLWidget = new TrackerGLWidget(this);
 
     //connections
-    //connect(ui.xSlider, SIGNAL(valueChanged(int)), ui.openGLWidget, SLOT(setXRotation(int)));
-    //connect(ui.ySlider, SIGNAL(valueChanged(int)), ui.openGLWidget, SLOT(setYRotation(int)));
-    //connect(ui.zSlider, SIGNAL(valueChanged(int)), ui.openGLWidget, SLOT(setZRotation(int)));
+    //connect(ui.xSlider, &QSlider::valueChanged, ui.openGLWidget, &TrackerGLWidget::setXRotation);
+    //connect(ui.ySlider, &QSlider::valueChanged, ui.openGLWidget, &TrackerGLWidget::setYRotation);
+    //connect(ui.zSlider, &QSlider::valueChanged, ui.openGLWidget, &TrackerGLWidget::setZRotation);
 
-    //connect(ui.openGLWidget, SIGNAL(xRotationChanged(int)), ui.xSlider, SLOT(setValue(int)));
-    //connect(ui.openGLWidget, SIGNAL(yRotationChanged(int)), ui.ySlider, SLOT(setValue(int)));
-    //connect(ui.openGLWidget, SIGNAL(zRotationChanged(int)), ui.zSlider, SLOT(setValue(int)));
+    //connect(ui.openGLWidget, &TrackerGLWidget::xRotationChanged, ui.xSlider, &QSlider::setValue);
+    //connect(ui.openGLWidget, &TrackerGLWidget::yRotationChanged, ui.ySlider, &QSlider::setValue);
+    //connect(ui.openGLWidget, &TrackerGLWidget::zRotationChanged, ui.zSlider, &QSlider::setValue);
 
     //ui.xSlider->setValue(15 * 16);
     //ui.ySlider->setValue(345 * 16);

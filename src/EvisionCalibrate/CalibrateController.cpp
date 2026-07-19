@@ -71,7 +71,7 @@ void CalibrateController::CalibrateCommand()
 				}
 				m_calib_entity->clearItemMap();
 				_stereoCalib = new StereoCalibrate(imagelistL, imagelistR);
-				connect(_stereoCalib, SIGNAL(openMessageBox(QString, QString)), this, SLOT(onOpenMessageBox(QString, QString)));
+				connect(_stereoCalib, &StereoCalibrate::openMessageBox, this, &CalibrateController::onOpenMessageBox);
 				_stereoCalib->start();
 			}
 		}

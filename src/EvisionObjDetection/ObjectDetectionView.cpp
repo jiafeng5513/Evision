@@ -10,10 +10,10 @@ ObjectDetectionView::ObjectDetectionView(QWidget *parent)
 	//链接信号槽
 	m_entity = ObjectDetectionEntity::getInstance();
 
-	connect(m_entity, SIGNAL(paramChanged_DetectionPlayer()), this, SLOT(OnParamChanged_DetectionPlayer()));
-	connect(m_entity, SIGNAL(paramChanged_cfgFilename()), this, SLOT(OnParamChanged_cfgFilename()));
-	connect(m_entity, SIGNAL(paramChanged_weightsFilename()), this, SLOT(OnParamChanged_weightsFilename()));
-	connect(m_entity, SIGNAL(paramChanged_namesFilename()), this, SLOT(OnParamChanged_namesFilename()));
+	connect(m_entity, &ObjectDetectionEntity::paramChanged_DetectionPlayer, this, &ObjectDetectionView::OnParamChanged_DetectionPlayer);
+	connect(m_entity, &ObjectDetectionEntity::paramChanged_cfgFilename, this, &ObjectDetectionView::OnParamChanged_cfgFilename);
+	connect(m_entity, &ObjectDetectionEntity::paramChanged_weightsFilename, this, &ObjectDetectionView::OnParamChanged_weightsFilename);
+	connect(m_entity, &ObjectDetectionEntity::paramChanged_namesFilename, this, &ObjectDetectionView::OnParamChanged_namesFilename);
 }
 
 ObjectDetectionView::~ObjectDetectionView()

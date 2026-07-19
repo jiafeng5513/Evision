@@ -142,7 +142,7 @@ void StereoMatchController::MatchCommand()
 		//注意.此时paramsFile.toStdString()可能是空的(当m_entity->getRectifiedInput()==true时)
 		if (_stereoMatch->init())
 		{
-			connect(_stereoMatch, SIGNAL(openMessageBox(QString, QString)), this, SLOT(onOpenMessageBox(QString, QString)));
+			connect(_stereoMatch, &StereoMatch::openMessageBox, this, &StereoMatchController::onOpenMessageBox);
 			_stereoMatch->start();
 		}
 		else
@@ -160,7 +160,7 @@ void StereoMatchController::RefreshStereoMatchCommand()
 		ImageR.toStdString(), paramsFile.toStdString());
 	if (_stereoMatch->init())
 	{
-		connect(_stereoMatch, SIGNAL(openMessageBox(QString, QString)), this, SLOT(onOpenMessageBox(QString, QString)));
+		connect(_stereoMatch, &StereoMatch::openMessageBox, this, &StereoMatchController::onOpenMessageBox);
 		_stereoMatch->start();
 	}
 	else

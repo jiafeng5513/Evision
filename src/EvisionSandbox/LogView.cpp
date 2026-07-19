@@ -15,7 +15,7 @@ LogView::LogView(QWidget *parent)
 	this->setWindowFlags(this->windowFlags() | Qt::WindowStaysOnTopHint);//保持在界面的最前面
 	ui.checkBox_StayOnTop->setChecked(true);
 //	redirector = new StdoutRedirector(this, StdoutRedirector::StandardOutput | StdoutRedirector::StandardError);
-//	connect(redirector, SIGNAL(readyRead()), this, SLOT(readData()));
+//	connect(redirector, &StdoutRedirector::readyRead, this, &LogView::readData);
 
 }
 

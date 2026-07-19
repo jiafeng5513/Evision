@@ -4,7 +4,7 @@
 ObjectDetectionEngine::ObjectDetectionEngine(QObject *parent)
 {
 	m_entity = ObjectDetectionEntity::getInstance();
-	connect(m_entity, SIGNAL(paramChanged_RunningState()), this, SLOT(onChangeRunState()));
+	connect(m_entity, &ObjectDetectionEntity::paramChanged_RunningState, this, &ObjectDetectionEngine::onChangeRunState);
 }
 
 ObjectDetectionEngine::~ObjectDetectionEngine()

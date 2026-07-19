@@ -8,25 +8,25 @@ MonocularCalibraterView::MonocularCalibraterView(QWidget *parent)
 	m_calib_entity = MonocularCalibrateParamEntity::getInstance();
 	m_calib_controller = new MonocularCalibrateController();
 	m_MainScene = new QGraphicsScene();
-	connect(m_calib_entity, SIGNAL(paramChanged_BoardWidth()), this, SLOT(onParamChanged_BoardWidth()));
-	connect(m_calib_entity, SIGNAL(paramChanged_BoardHeight()), this, SLOT(onParamChanged_BoardHeight()));
-	connect(m_calib_entity, SIGNAL(paramChanged_SquareSize()), this, SLOT(onParamChanged_SquareSize()));
-	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_FIX_PRINCIPAL_POINT()), this, SLOT(onParamChanged_FIX_PRINCIPAL_POINT()));
-	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_FIX_ASPECT_RATIO()), this, SLOT(onParamChanged_FIX_ASPECT_RATIO()));
-	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_ZERO_TANGENT_DIST()), this, SLOT(onParamChanged_ZERO_TANGENT_DIST()));
-	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_FIX_K1()), this, SLOT(onParamChanged_FIX_K1()));
-	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_FIX_K2()), this, SLOT(onParamChanged_FIX_K2()));
-	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_FIX_K3()), this, SLOT(onParamChanged_FIX_K3()));
-	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_FIX_K4()), this, SLOT(onParamChanged_FIX_K4()));
-	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_FIX_K5()), this, SLOT(onParamChanged_FIX_K5()));
-	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_FIX_K6()), this, SLOT(onParamChanged_FIX_K6()));
-	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_RATIONAL_MODEL()), this, SLOT(onParamChanged_RATIONAL_MODEL()));
-	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_THIN_PRISM_MODEL()), this, SLOT(onParamChanged_THIN_PRISM_MODEL()));
-	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_FIX_S1_S2_S3_S4()), this, SLOT(onParamChanged_FIX_S1_S2_S3_S4()));
-	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_TILTED_MODEL()), this, SLOT(onParamChanged_TILTED_MODEL()));
-	connect(m_calib_entity, SIGNAL(paramChanged_CALIB_FIX_TAUX_TAUY()), this, SLOT(onParamChanged_FIX_TAUX_TAUY()));
-	connect(m_calib_entity, SIGNAL(paramChanged_InsertToItemMap()), this, SLOT(onParamChanged_NewToItemMap()),Qt::BlockingQueuedConnection);
-	connect(m_calib_entity, SIGNAL(paramChanged_ClearItemMap()), this, SLOT(onParamChanged_ClearItemMap()));
+	connect(m_calib_entity, &MonocularCalibrateParamEntity::paramChanged_BoardWidth, this, &MonocularCalibraterView::onParamChanged_BoardWidth);
+	connect(m_calib_entity, &MonocularCalibrateParamEntity::paramChanged_BoardHeight, this, &MonocularCalibraterView::onParamChanged_BoardHeight);
+	connect(m_calib_entity, &MonocularCalibrateParamEntity::paramChanged_SquareSize, this, &MonocularCalibraterView::onParamChanged_SquareSize);
+	connect(m_calib_entity, &MonocularCalibrateParamEntity::paramChanged_CALIB_FIX_PRINCIPAL_POINT, this, &MonocularCalibraterView::onParamChanged_FIX_PRINCIPAL_POINT);
+	connect(m_calib_entity, &MonocularCalibrateParamEntity::paramChanged_CALIB_FIX_ASPECT_RATIO, this, &MonocularCalibraterView::onParamChanged_FIX_ASPECT_RATIO);
+	connect(m_calib_entity, &MonocularCalibrateParamEntity::paramChanged_CALIB_ZERO_TANGENT_DIST, this, &MonocularCalibraterView::onParamChanged_ZERO_TANGENT_DIST);
+	connect(m_calib_entity, &MonocularCalibrateParamEntity::paramChanged_CALIB_FIX_K1, this, &MonocularCalibraterView::onParamChanged_FIX_K1);
+	connect(m_calib_entity, &MonocularCalibrateParamEntity::paramChanged_CALIB_FIX_K2, this, &MonocularCalibraterView::onParamChanged_FIX_K2);
+	connect(m_calib_entity, &MonocularCalibrateParamEntity::paramChanged_CALIB_FIX_K3, this, &MonocularCalibraterView::onParamChanged_FIX_K3);
+	connect(m_calib_entity, &MonocularCalibrateParamEntity::paramChanged_CALIB_FIX_K4, this, &MonocularCalibraterView::onParamChanged_FIX_K4);
+	connect(m_calib_entity, &MonocularCalibrateParamEntity::paramChanged_CALIB_FIX_K5, this, &MonocularCalibraterView::onParamChanged_FIX_K5);
+	connect(m_calib_entity, &MonocularCalibrateParamEntity::paramChanged_CALIB_FIX_K6, this, &MonocularCalibraterView::onParamChanged_FIX_K6);
+	connect(m_calib_entity, &MonocularCalibrateParamEntity::paramChanged_CALIB_RATIONAL_MODEL, this, &MonocularCalibraterView::onParamChanged_RATIONAL_MODEL);
+	connect(m_calib_entity, &MonocularCalibrateParamEntity::paramChanged_CALIB_THIN_PRISM_MODEL, this, &MonocularCalibraterView::onParamChanged_THIN_PRISM_MODEL);
+	connect(m_calib_entity, &MonocularCalibrateParamEntity::paramChanged_CALIB_FIX_S1_S2_S3_S4, this, &MonocularCalibraterView::onParamChanged_FIX_S1_S2_S3_S4);
+	connect(m_calib_entity, &MonocularCalibrateParamEntity::paramChanged_CALIB_TILTED_MODEL, this, &MonocularCalibraterView::onParamChanged_TILTED_MODEL);
+	connect(m_calib_entity, &MonocularCalibrateParamEntity::paramChanged_CALIB_FIX_TAUX_TAUY, this, &MonocularCalibraterView::onParamChanged_FIX_TAUX_TAUY);
+	connect(m_calib_entity, &MonocularCalibrateParamEntity::paramChanged_InsertToItemMap, this, &MonocularCalibraterView::onParamChanged_NewToItemMap, Qt::BlockingQueuedConnection);
+	connect(m_calib_entity, &MonocularCalibrateParamEntity::paramChanged_ClearItemMap, this, &MonocularCalibraterView::onParamChanged_ClearItemMap);
 }
 
 MonocularCalibraterView::~MonocularCalibraterView()
