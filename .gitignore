@@ -13,10 +13,8 @@
 # build/
 # [Bb]in/
 [Oo]bj/
-.vs/*
-.vs/SkyEyes/v15/
-.vs/SkyEyes/v15/.suo
-.vs/SkyEyes/v15/Browse.VC.db
+# Visual Studio IDE cache (any level)
+**/.vs/
 
 # Enable "build/" folder in the NuGet Packages folder since NuGet packages use it for MSBuild targets
 !packages/*/build/
@@ -185,6 +183,20 @@ QuantEvision/.vs/*
 src/.idea
 src/cmake-build-debug
 src/out
+src/EvisionSandbox/GeneratedFiles/
 /build/
 .idea
 data/Tracker/test_reg
+# Large test data — download from Releases instead of committing
+data/Simulations/
+
+# =========================
+# OpenCode working directory
+# =========================
+.omo/
+
+# =========================
+# CMake build directories
+# =========================
+sln/
+build-out/
