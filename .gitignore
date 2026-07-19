@@ -200,3 +200,4 @@ data/Simulations/
 # =========================
 sln/
 build-out/
+src/cmake-build/
