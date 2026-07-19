@@ -102,7 +102,7 @@ void TraceView::onSelectRawDispFile()
 			fStorage["disp"] >> RawDisp;
 			fStorage.release();
 		}
-		catch (cv::Exception e)
+		catch (const cv::Exception& e)
 		{
 			std::cout << "原始视差数据读取失败!" << e.err << std::endl;
 		}
@@ -126,7 +126,7 @@ void TraceView::onSelectOriginImg()
 		{
 			this->img = cv::imread(fileDialog->selectedFiles().at(0).toStdString());
 		}
-		catch (cv::Exception e)
+		catch (const cv::Exception& e)
 		{
 			std::cout << "原图读取失败!" << e.err << std::endl;
 		}
@@ -154,7 +154,7 @@ void TraceView::onSelectCameraParamFile()
 			ui.checkBox_CameraParamOK->setChecked(true);
 			checkEnable();
 		}
-		catch (cv::Exception e)
+		catch (const cv::Exception& e)
 		{
 			std::cout << "相机参数读取失败!" << e.err << std::endl;
 		}

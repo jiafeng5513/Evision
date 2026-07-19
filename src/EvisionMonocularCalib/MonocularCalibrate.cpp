@@ -44,7 +44,7 @@ void MonocularCalibrate::run()
 
 		ready_to_save = true;
 	}
-	catch (std::exception e)
+	catch (const std::exception& e)
 	{
 		std::cout << "标定出现严重错误!" <<e.what() << std::endl;
 
@@ -273,7 +273,7 @@ void MonocularCalibrate::Calib1D(cv::Size boardSize, float squareSize, std::vect
 			std::cout << "单目相机矫正成功完成" << std::endl;
 		}
 	}
-	catch (std::exception e)
+	catch (const std::exception& e)
 	{
 		std::cout << "Calib1D出现严重错误" << e.what() << std::endl;
 	}

@@ -153,7 +153,7 @@ void CreateCameraParamFile::onPush_save()
 			cameraMatrix_R, distCoeffs_R, R, T, imageSize, R1, P1, R2, P2, Q, validRoi[0], validRoi[1]);
 		std::cout << "参数已经保存到:" << cameraParamsFilename << std::endl;
 	}
-	catch (cv::Exception e)
+	catch (const cv::Exception& e)
 	{
 		std::cout << "错误 " << e.code << e.err << e.msg << e.what() << std::endl;
 	}

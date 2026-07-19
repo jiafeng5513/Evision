@@ -66,7 +66,7 @@ void StereoCalibrate::run()
 			R, T, E, F, R1, P1, R2, P2, Q, roi1, roi2, flags_2D, false, true, showRectified);
 		ready_to_save = true;
 	}
-	catch (std::exception e)
+	catch (const std::exception& e)
 	{
 		std::cout << "标定出现严重错误!" <<e.what() << std::endl;
 
@@ -296,7 +296,7 @@ void StereoCalibrate::Calib1D(cv::Size boardSize, float squareSize, std::vector<
 			std::cout << "第一次矫正成功完成" << std::endl;
 		}
 	}
-	catch (std::exception e)
+	catch (const std::exception& e)
 	{
 		std::cout << "Calib1D出现严重错误" << e.what() << std::endl;
 	}
@@ -595,7 +595,7 @@ void StereoCalibrate::StereoCalib(
 		roi1 = validRoi[0];
 		roi2 = validRoi[1];
 	}
-	catch (std::exception e)
+	catch (const std::exception& e)
 	{
 		std::cout << "StereoCalib出现严重错误" << e.what() << std::endl;
 	}
