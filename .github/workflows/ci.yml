@@ -1,0 +1,96 @@
+name: CI
+
+on:
+  push:
+    branches: [master, code_refine]
+  pull_request:
+    branches: [master]
+
+env:
+  BUILD_TYPE: Release
+
+jobs:
+  build-windows:
+    name: Windows / MSVC / vcpkg
+    runs-on: windows-latest
+
+    env:
+      VCPKG_ROOT: ${{ github.workspace }}\vcpkg
+      VCPKG_DEFAULT_TRIPLET: x64-windows
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Checkout vcpkg
+        uses: actions/checkout@v4
+        with:
+          repository: microsoft/vcpkg
+          path: vcpkg
+          fetch-depth: 1
+
+      - name: Bootstrap vcpkg
+        run: .\vcpkg\bootstrap-vcpkg.bat -disableMetrics
+
+      - name: Install dependencies (vcpkg baseline cache)
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ github.workspace }}\vcpkg\buildtrees
+            ${{ github.workspace }}\vcpkg\installed
+            ${{ github.workspace }}\vcpkg\packages
+          key: vcpkg-${{ runner.os }}-x64-windows-{{ checksum("src/CMakeLists.txt") }}
+          restore-keys: |
+            vcpkg-${{ runner.os }}-x64-windows-
+
+      - name: Install vcpkg packages
+        run: |
+          & $env:VCPKG_ROOT\vcpkg.exe install `
+            opencv:x64-windows `
+            qt6:x64-windows `
+            qt5compat:x64-windows `
+            boost:x64-windows `
+            --recurse
+
+      - name: Configure CMake
+        run: |
+          cmake -S src -B build `
+            -G "Visual Studio 17 2022" -A x64 `
+            -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT\scripts\buildsystems\vcpkg.cmake" `
+            -DCMAKE_BUILD_TYPE=$env:BUILD_TYPE `
+            -DPointCloudViewer=OFF `
+            -DObjectDetection=OFF
+
+      - name: Build
+        run: cmake --build build --config $env:BUILD_TYPE --parallel 2
+
+  build-linux:
+    name: Linux / GCC / Qt6 system packages
+    runs-on: ubuntu-latest
+    # Linux build is informational-only: PCL/CUDA/vcpkg Qt are not trivial here.
+    # We configure to surface CMake-level regressions early.
+    continue-on-error: true
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Qt6 + OpenCV + Boost (apt)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            qt6-base-dev qt6-base-dev-tools qt6-tools-dev qt6-tools-dev-tools \
+            libqt6core5compat6-dev \
+            libopencv-dev libboost-all-dev cmake build-essential
+
+      - name: Configure CMake
+        run: |
+          cmake -S src -B build \
+            -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
+            -DPointCloudViewer=OFF \
+            -DObjectDetection=OFF
+
+      - name: Build
+        run: cmake --build build --config $BUILD_TYPE --parallel 2
