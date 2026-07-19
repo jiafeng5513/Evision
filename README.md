@@ -134,7 +134,7 @@ Introduction:
 YOLOv3 权重亦可从 [pjreddie.com](https://pjreddie.com/media/files/yolov3.weights) 直接下载。配置文件 `yolov3.cfg` 与类别名 `coco.names` 已随仓库提供。
 
 #### 8.路线图
-本项目正借助 AI 工具进行阶段性复活与现代化:
+本项目正借助 AI 工具进行阶段性复活与现代化(完整开发计划见 [doc/开发计划.md](doc/开发计划.md)):
 
 - ✅ **阶段 0 — 仓库清理**:移除 `legacy/`(C# 旧版本)、`install/`(编译产物)、`src/.vs/`、`sln/`、`src/EvisionSandbox/GeneratedFiles/`、`yolov3.weights`、`Simulations/`、`Tracker/test_reg/` 等大体积/无关文件;working tree 从 ~1.2 GB 降至 ~120 MB。旧内容归档于 `archive/legacy-pre-cleanup` 分支。
 - ✅ **阶段 1 — 让 master 重新可编译**:CMake 现代化(`target_include_directories`/`target_compile_definitions`/显式源文件列表)、修复 Qt5/Qt6 变量混用、修复明显内存泄漏、修正 `catch(...)` 反模式、新增 GitHub Actions CI 骨架。
