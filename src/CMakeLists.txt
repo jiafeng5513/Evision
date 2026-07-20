@@ -42,8 +42,12 @@ message(STATUS "Found Qt: ${Qt6Widgets_VERSION}")
 find_package(OpenGL)
 
 # 二进制产物路径
+# 注:Windows 上 DLL 属于 RUNTIME 产物,Linux 上共享库属于 LIBRARY 产物,
+# 因此 LIBRARY_OUTPUT_DIRECTORY 也必须设置,否则 .so 会散落在 build/<模块>/ 下
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/../install/lib/Debug)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/../install/lib/Release)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/../install/lib/Debug)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/../install/lib/Release)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/../install/bin/Debug)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/../install/bin/Release)
 
