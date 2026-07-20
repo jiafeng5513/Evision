@@ -122,8 +122,9 @@ Introduction:
 - ✅ **阶段 1 — 让 master 重新可编译**:CMake 现代化(`target_include_directories`/`target_compile_definitions`/显式源文件列表)、修复 Qt5/Qt6 变量混用、修复明显内存泄漏、修正 `catch(...)` 反模式、新增 GitHub Actions CI 骨架。
 - ✅ **阶段 2 — Qt6 完整迁移**:完成 `EvisionCamera` 的 Qt6 Multimedia API 迁移(`QCameraInfo`→`QCameraDevice`、`QCameraImageCapture`→`QImageCapture`、`QCameraViewfinder`→`QVideoWidget`、新增 `QMediaCaptureSession`)、移除 `Qt5Compat` 依赖、SIGNAL/SLOT 字符串宏 → PMF/lambda(144 处)、修复 `EvisionCameraFactory` 导出宏与 `StereoCameraView.ui` 槽名不匹配的预存 bug。
 - ✅ **阶段 3 — 目标检测模块移除**:内嵌 Darknet/YOLOv3 目标检测(`EvisionObjDetection` + `EvisionObjDetectionEngine`,约 40K LOC、130 个文件、11 个 CUDA kernel)及 `package/pthread` 已整体移除,不做替换——该模块已完全过时(强制 CUDA/仅 Windows/模型陈旧),归档于 `archive/darknet-fork` 分支。未来如需 AI 检测能力,将基于 ONNX Runtime 等现代方案重新设计,不沿用旧代码。
-- 🔜 **阶段 4 — 深度学习立体匹配**:引入 RAFT-Stereo / IGEV-Stereo 作为可选后端,保留 ADCensus/ELAS 作为基线。
-- 🔜 **阶段 5 — UI 现代化**:延续作者原计划(EvisionLight),探索 Dear ImGui 路线或继续 Qt6 + Docking 框架。
+- 🔨 **阶段 4 — 相机标定优化(进行中)**:新增 Qt-free 共享标定核心 `CalibrationCore`(单/双目模块共用,消除约 350 行重复代码);棋盘格检测升级 `findChessboardCornersSB`;新增 ChArUco 标定板支持(OpenCV 4.7+ objdetect 模块,部分可见即可用);逐视图重投影误差质量门控与离群视图剔除;标定结果(RMS/极线误差/逐视图误差)结构化上报 UI;修复空点集崩溃、内存泄漏等预存 bug。
+- 🔜 **阶段 5 — 深度学习立体匹配**:引入 RAFT-Stereo / IGEV-Stereo 作为可选后端,保留 ADCensus/ELAS 作为基线。
+- 🔜 **阶段 6 — UI 现代化**:延续作者原计划(EvisionLight),探索 Dear ImGui 路线或继续 Qt6 + Docking 框架。
 
 > **历史方向**:作者曾在原 README 中提到"未来 Evision 会采用 ImgUI 作为界面,不再基于 Qt,以提供更方便的安装体验,并提高运行效率"(`EvisionLight` 计划)。该方向仍作为长期 roadmap 保留,具体路线待阶段 2 完成后评估。
 
