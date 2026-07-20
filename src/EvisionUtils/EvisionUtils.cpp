@@ -1,6 +1,10 @@
 ﻿#include "EvisionUtils.h"
 #include <sstream>
 #include <QFileInfo>
+#ifndef _WIN32
+#include <unistd.h>
+#include <limits.h>
+#endif
 
 EvisionUtils::EvisionUtils()
 {
@@ -15,10 +19,20 @@ EvisionUtils::~EvisionUtils()
  */
 std::string EvisionUtils::getCurrentPath()
 {
+#ifdef _WIN32
 	std::ostringstream ss;
 	ss << _pgmptr;
 	std::string abspath = ss.str();
 	int last_slash_pos = abspath.rfind("\\");
+#else
+	char buf[PATH_MAX] = {0};
+	std::string abspath;
+	if (readlink("/proc/self/exe", buf, sizeof(buf) - 1) > 0)
+	{
+		abspath = buf;
+	}
+	int last_slash_pos = abspath.rfind("/");
+#endif
 	std::string path = abspath.substr(0, last_slash_pos);
 	return path;
 }
