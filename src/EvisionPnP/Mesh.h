@@ -7,6 +7,7 @@
 
 #ifndef MESH_H_
 #define MESH_H_
+#include "EvisionPnPExport.h"
 
 #include <iostream>
 #include <opencv2/core/core.hpp>
@@ -55,7 +56,7 @@ private:
 //                OBJECT MESH CLASS                    //
 // --------------------------------------------------- //
 
-class _declspec(dllexport) Mesh
+class EVISION_PNP_EXPORT Mesh
 {
 public:
 

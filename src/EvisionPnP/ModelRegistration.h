@@ -7,11 +7,12 @@
 
 #ifndef MODELREGISTRATION_H_
 #define MODELREGISTRATION_H_
+#include "EvisionPnPExport.h"
 
 #include <iostream>
 #include <opencv2/core.hpp>
 
-class _declspec(dllexport) ModelRegistration
+class EVISION_PNP_EXPORT ModelRegistration
 {
 public:
     ModelRegistration();

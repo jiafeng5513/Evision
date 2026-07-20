@@ -7,12 +7,13 @@
 
 #ifndef MODEL_H_
 #define MODEL_H_
+#include "EvisionPnPExport.h"
 
 #include <iostream>
 #include <opencv2/core/core.hpp>
 #include <opencv2/features2d/features2d.hpp>
 
-class _declspec(dllexport) Model
+class EVISION_PNP_EXPORT Model
 {
 public:
     Model();

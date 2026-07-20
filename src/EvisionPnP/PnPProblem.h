@@ -7,6 +7,7 @@
 
 #ifndef PNPPROBLEM_H_
 #define PNPPROBLEM_H_
+#include "EvisionPnPExport.h"
 
 #include <iostream>
 
@@ -16,7 +17,7 @@
 #include "Mesh.h"
 #include "ModelRegistration.h"
 
-class _declspec(dllexport) PnPProblem
+class EVISION_PNP_EXPORT PnPProblem
 {
 public:
     explicit PnPProblem(const double param[]);  // custom constructor
