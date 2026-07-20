@@ -7,10 +7,6 @@
 #include <QFileDialog>
 #include "WatchImageView.h"
 
-#ifdef WITH_CUDA
-#include "EvisionObjDetectionFactory.h"
-#endif
-
 #if (defined WITH_PCL) 
 #include "EvisionCloudViewerFactory.h"
 #endif
@@ -135,18 +131,6 @@ void EvisionView::on_action_Measure_View_triggered()
 	auto _Rfinterface = EvisionTraceFactory::CreateEvisionTraceView(this);
 	ui.mdiArea->addSubWindow(_Rfinterface);
 	_Rfinterface->show();
-}
-//启动目标检测视图
-void EvisionView::on_action_ObjectDetection_triggered()
-{
-#ifdef WITH_CUDA
-	auto _ObjectDetectionView = EvisionObjDetectionFactory::CreateEvisionEvisionCloudViewer(this);
-	ui.mdiArea->addSubWindow(_ObjectDetectionView);
-	_ObjectDetectionView->show();
-#else
-	QMessageBox::information(this, QStringLiteral("该功能未启用!"),
-		QStringLiteral("请在项目属性/C++/预处理器中添加\"WITH_CUDA\"并确保EvisionObjDetection模块正常工作"));
-#endif
 }
 //启动几何体追踪
 void EvisionView::on_action_PolyTracker_triggered()

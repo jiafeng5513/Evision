@@ -62,11 +62,6 @@ if(PointCloudViewer)
     target_compile_definitions(EvisionSandbox PRIVATE WITH_PCL)
 endif()
 
-if(ObjectDetection)
-    target_include_directories(EvisionSandbox PRIVATE "../EvisionObjDetection/include/")
-    target_compile_definitions(EvisionSandbox PRIVATE WITH_CUDA)
-endif()
-
 if(RealSense)
     target_include_directories(EvisionSandbox PRIVATE "../RealSenseCamera/include/")
     target_compile_definitions(EvisionSandbox PRIVATE WITH_REAL_SENSE)
@@ -86,10 +81,6 @@ target_link_libraries(EvisionSandbox PRIVATE
     EvisionPolyTracker
     EvisionMonocularCalib
 )
-
-if(ObjectDetection)
-    target_link_libraries(EvisionSandbox PRIVATE EvisionObjDetection)
-endif()
 
 if(PointCloudViewer)
     target_link_libraries(EvisionSandbox PRIVATE EvisionCloudViewer)
@@ -111,7 +102,7 @@ if(WIN32)
         EvisionADCensus EvisionCalibrate EvisionCamera EvisionDisparity
         EvisionElas EvisionMonocularCalib EvisionParamBridge EvisionPnP
         EvisionPolyTracker EvisionTrace EvisionUndistortion EvisionUtils
-        EvisionCloudViewer EvisionObjDetection
+        EvisionCloudViewer
     )
         if(TARGET ${_mod})
             list(APPEND _deploy_binaries "$<TARGET_FILE:${_mod}>")

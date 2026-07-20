@@ -32,7 +32,6 @@ public slots:
 	void on_action_Rectify_triggered();				//启动校正视图
 	void on_action_StereoMatchView_triggered();		//启动匹配视图
 	void on_action_Measure_View_triggered();			//启动测量界面
-	void on_action_ObjectDetection_triggered();	//启动目标检测视图
 	void on_action_PolyTracker_triggered();		//启动几何体追踪视图
 	void on_action_LogView_triggered();			//LOGVIEW
 	void on_action_dispToPCD_triggered();			//视差转点云

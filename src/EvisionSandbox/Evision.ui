@@ -97,12 +97,6 @@
     <addaction name="action_Measure_View"/>
     <addaction name="action_dispToPCD"/>
    </widget>
-   <widget class="QMenu" name="menuAi">
-    <property name="title">
-     <string>Ai</string>
-    </property>
-    <addaction name="action_ObjectDetection"/>
-   </widget>
    <widget class="QMenu" name="menu_4">
     <property name="title">
      <string>单目视觉</string>
@@ -113,7 +107,6 @@
    <addaction name="menu"/>
    <addaction name="menu_4"/>
    <addaction name="menu_3"/>
-   <addaction name="menuAi"/>
    <addaction name="menu_2"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
@@ -139,8 +132,6 @@
    <addaction name="action_StereoMatchView"/>
    <addaction name="action_Measure_View"/>
    <addaction name="action_dispToPCD"/>
-   <addaction name="separator"/>
-   <addaction name="action_ObjectDetection"/>
    <addaction name="separator"/>
    <addaction name="action_LogView"/>
    <addaction name="separator"/>
@@ -208,15 +199,6 @@
    </property>
    <property name="text">
     <string>双目相机标定</string>
-   </property>
-  </action>
-  <action name="action_ObjectDetection">
-   <property name="icon">
-    <iconset resource="Evision.qrc">
-     <normaloff>:/Evision/resource/face_detection_128px_1218199_easyicon.net.ico</normaloff>:/Evision/resource/face_detection_128px_1218199_easyicon.net.ico</iconset>
-   </property>
-   <property name="text">
-    <string>目标检测</string>
    </property>
   </action>
   <action name="action_LogView">
