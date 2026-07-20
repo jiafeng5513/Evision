@@ -3,7 +3,7 @@
 #include <QtWidgets/QWidget>
 #include <QtWidgets/QDialog>
 #include "ui_TextureTrackingParams.h"
-#include <opencv2\video\tracking.hpp>
+#include <opencv2/video/tracking.hpp>
 
 /*
  * 
