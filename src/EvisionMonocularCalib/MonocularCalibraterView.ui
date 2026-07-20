@@ -116,25 +116,83 @@
            </property>
           </widget>
          </item>
-         <item>
-          <widget class="QLineEdit" name="lineEdit_SquareSize">
-           <property name="minimumSize">
-            <size>
-             <width>50</width>
-             <height>20</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>20</width>
-             <height>16777215</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </item>
+          <item>
+           <widget class="QLineEdit" name="lineEdit_SquareSize">
+            <property name="minimumSize">
+             <size>
+              <width>50</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>20</width>
+              <height>16777215</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_BoardType">
+            <property name="text">
+             <string>Type:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboBox_BoardType">
+            <item>
+             <property name="text">
+              <string>棋盘格</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>圆点阵列</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>非对称圆点阵列</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>ChArUco</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_MarkerSize">
+            <property name="text">
+             <string>Marker:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDoubleSpinBox" name="doubleSpinBox_MarkerSize">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="decimals">
+             <number>2</number>
+            </property>
+            <property name="minimum">
+             <double>0.100000000000000</double>
+            </property>
+            <property name="maximum">
+             <double>1000.000000000000000</double>
+            </property>
+            <property name="suffix">
+             <string> mm</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+
       <item row="1" column="1">
        <widget class="QGroupBox" name="groupBox_4">
         <property name="title">
@@ -363,10 +421,24 @@
       </layout>
      </widget>
     </widget>
-   </item>
-  </layout>
- </widget>
- <layoutdefault spacing="6" margin="11"/>
+    </item>
+    <item row="2" column="1" colspan="2">
+     <widget class="QPlainTextEdit" name="plainTextEdit_CalibReport">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>120</height>
+       </size>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <layoutdefault spacing="6" margin="11"/>
+
  <resources/>
  <connections>
   <connection>

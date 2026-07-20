@@ -1,282 +1,169 @@
 ﻿#include "MonocularCalibrate.h"
-#include <QMessageBox>
-#include "QFileDialog"
+#include <QFileInfo>
 #include <opencv2/opencv.hpp>
 #include <opencv2/calib3d/calib3d.hpp>
 #include <iostream>
 #include "EvisionUtils.h"
-#include <QListWidget>
-#include <QListWidgetItem>
-#include <QPixmap>
 
-
-MonocularCalibrate::MonocularCalibrate(std::vector<std::string>* imagelistL,QObject * parent)
+MonocularCalibrate::MonocularCalibrate(const std::vector<std::string>& imagelistL, QObject* parent)
+	: QThread(parent), imagelistL(imagelistL)
 {
 	m_entity = MonocularCalibrateParamEntity::getInstance();
-	this->imagelistL = imagelistL;
-	QFileInfo *_fileInfo = new QFileInfo(QString::fromStdString(imagelistL->at(0)));
-	this->cameraParamsFilename = _fileInfo->absolutePath().toStdString().append("/MonocularCameraParams.yml");
+	if (!this->imagelistL.empty())
+	{
+		QFileInfo fileInfo(QString::fromStdString(this->imagelistL[0]));
+		this->cameraParamsFilename = fileInfo.absolutePath().toStdString() + "/MonocularCameraParams.yml";
+	}
 }
 
 MonocularCalibrate::~MonocularCalibrate()
 {
-
 }
+
 /*
  * 线程方法
  */
 void MonocularCalibrate::run()
 {
 	ready_to_save = false;
+	m_calibResult = MonoCalibResult();
 	try
 	{
-		cv::Size boardSize(m_entity->getBoardWidth(), m_entity->getBoardHeight());
-		float squareSize = m_entity->getSquareSize();
+		BoardConfig cfg;
+		cfg.type = static_cast<BoardType>(m_entity->getBoardTypeIndex());
+		cfg.boardSize = cv::Size(m_entity->getBoardWidth(), m_entity->getBoardHeight());
+		cfg.squareSize = static_cast<float>(m_entity->getSquareSize());
+		cfg.markerSize = m_entity->getMarkerSize();
+
 		int flags_1D = getCalibrate1D_flags();
 
-		bool showRectified = true;
-		float  aspectRatio = 1;
-		Pattern pattern = CHESSBOARD;
-		bool showUndistorted = true;
-
 		std::cout << "标定单目相机" << std::endl;
-		Calib1D(boardSize, squareSize, *imagelistL, cameraMatrix_L, distCoeffs_L, aspectRatio, pattern, flags_1D, showUndistorted);
 
+		std::vector<std::vector<cv::Point2f>> imagePoints;
+		std::vector<std::vector<cv::Point3f>> objectPoints;
+
+		bool imageSizeInitialized = false;
+		int validViews = 0;
+
+		for (size_t i = 0; i < imagelistL.size(); ++i)
+		{
+			cv::Mat view = cv::imread(imagelistL[i], cv::IMREAD_COLOR);
+			if (view.empty())
+			{
+				std::cout << "无法读取图像: " << imagelistL[i] << std::endl;
+				continue;
+			}
+
+			if (!imageSizeInitialized)
+			{
+				imageSize = view.size();
+				imageSizeInitialized = true;
+			}
+			else if (view.size() != imageSize)
+			{
+				std::cout << "跳过尺寸不匹配的图像: " << imagelistL[i] << std::endl;
+				m_entity->insertItem(view);
+				continue;
+			}
+
+			DetectionResult det = CalibrationCore::detectBoard(view, cfg);
+			cv::Mat display = view.clone();
+
+			if (det.found)
+			{
+				display = CalibrationCore::drawDetection(view, cfg, det);
+				imagePoints.push_back(det.corners);
+				objectPoints.push_back(det.objects);
+				++validViews;
+			}
+
+			std::string msg = cv::format("%d/%d", (int)imagePoints.size(), (int)imagelistL.size());
+			int baseLine = 0;
+			cv::Size textSize = cv::getTextSize(msg, 1, 1, 1, &baseLine);
+			cv::Point textOrigin(display.cols - 2 * textSize.width - 10, display.rows - 2 * baseLine - 10);
+			cv::putText(display, msg, textOrigin, 1, 1, cv::Scalar(0, 0, 255));
+
+			m_entity->insertItem(display);
+		}
+
+		if (validViews < 3)
+		{
+			emit openMessageBox(QStringLiteral("错误"), QStringLiteral("有效视图不足,至少需要3个有效视图."));
+			ready_to_save = false;
+			return;
+		}
+
+		m_calibResult = CalibrationCore::calibrateMonocular(imagePoints, objectPoints, imageSize, flags_1D);
+		if (!m_calibResult.ok)
+		{
+			emit openMessageBox(QStringLiteral("错误"), QStringLiteral("单目标定失败."));
+			ready_to_save = false;
+			return;
+		}
+
+		cameraMatrix_L = m_calibResult.cameraMatrix.clone();
+		distCoeffs_L = m_calibResult.distCoeffs.clone();
+		imageSize = m_calibResult.imageSize;
 		ready_to_save = true;
+
+		// 生成中文标定报告
+		QString report;
+		report.append(QStringLiteral("========== 单目标定报告 ==========\n"));
+		report.append(QStringLiteral("RMS: %1\n").arg(m_calibResult.rms, 0, 'f', 4));
+		report.append(QStringLiteral("平均重投影误差: %1\n").arg(m_calibResult.avgReprojErr, 0, 'f', 4));
+		report.append(QStringLiteral("有效视图数: %1 / %2\n").arg(m_calibResult.usedViews).arg((int)imagelistL.size()));
+		report.append(QStringLiteral("逐视图误差(剔除标注为 -1):\n"));
+		for (size_t i = 0; i < m_calibResult.perViewErrors.size(); ++i)
+		{
+			if (m_calibResult.perViewErrors[i] < 0.0f)
+				report.append(QStringLiteral("视图%1: 已剔除\n").arg((int)i + 1));
+			else
+				report.append(QStringLiteral("视图%1: %2\n").arg((int)i + 1).arg(m_calibResult.perViewErrors[i], 0, 'f', 4));
+		}
+		emit reportReady(report);
+
+		// 畸变校正预览
+		cv::Mat map1, map2;
+		cv::Mat newCameraMatrix = cv::getOptimalNewCameraMatrix(cameraMatrix_L, distCoeffs_L, imageSize, 1, imageSize, 0);
+		cv::initUndistortRectifyMap(cameraMatrix_L, distCoeffs_L, cv::Mat(), newCameraMatrix, imageSize, CV_16SC2, map1, map2);
+		for (size_t i = 0; i < imagelistL.size(); ++i)
+		{
+			cv::Mat view = cv::imread(imagelistL[i], cv::IMREAD_COLOR);
+			if (view.empty())
+				continue;
+			if (view.size() != imageSize)
+				continue;
+			cv::Mat rview;
+			cv::remap(view, rview, map1, map2, cv::INTER_LINEAR);
+			m_entity->insertItem(rview);
+		}
+		std::cout << "单目相机矫正成功完成" << std::endl;
 	}
 	catch (const std::exception& e)
 	{
-		std::cout << "标定出现严重错误!" <<e.what() << std::endl;
-
+		std::cout << "标定出现严重错误!" << e.what() << std::endl;
+		ready_to_save = false;
 	}
 }
+
 /*
  * 把标定产生的参数保存到文件
  */
 bool MonocularCalibrate::SaveCameraParamsToFile()
 {
-	if (ready_to_save==false)
+	if (ready_to_save == false)
 	{
 		std::cout << "没有准备好保存参数!" << std::endl;
 		return false;
 	}
-	else
+	bool flag = EvisionUtils::write_MonocularCameraParams(cameraParamsFilename, cameraMatrix_L, distCoeffs_L, imageSize);
+	std::cout << "参数已经保存到:" << cameraParamsFilename << std::endl;
+	if (!flag)
 	{
-		// 保存参数
-		bool flag = EvisionUtils::write_MonocularCameraParams(cameraParamsFilename, cameraMatrix_L, distCoeffs_L, imageSize);
-		std::cout << "参数已经保存到:" << cameraParamsFilename << std::endl;
-		if (!flag)
-		{
-			emit openMessageBox(QStringLiteral("文件访问错误"), QStringLiteral("无法写入:cameraParams.yml"));
-			return false;
-		}
+		emit openMessageBox(QStringLiteral("文件访问错误"), QStringLiteral("无法写入:cameraParams.yml"));
+		return false;
 	}
 	return true;
-}
-
-/*
- * 计算重投影误差
- */
-double MonocularCalibrate::computeReprojectionErrors(const std::vector<std::vector<cv::Point3f>>& objectPoints,
-	const std::vector<std::vector<cv::Point2f>>& imagePoints, const std::vector<cv::Mat>& rvecs,
-	const std::vector<cv::Mat>& tvecs, const cv::Mat& cameraMatrix, const cv::Mat& distCoeffs,
-	std::vector<float>& perViewErrors)
-{
-	std::vector<cv::Point2f> imagePoints2;
-	int i, totalPoints = 0;
-	double totalErr = 0, err;
-	perViewErrors.resize(objectPoints.size());
-
-	for (i = 0; i < (int)objectPoints.size(); i++)
-	{
-		projectPoints(cv::Mat(objectPoints[i]), rvecs[i], tvecs[i],
-			cameraMatrix, distCoeffs, imagePoints2);
-		err = norm(cv::Mat(imagePoints[i]), cv::Mat(imagePoints2), cv::NORM_L2);
-		int n = (int)objectPoints[i].size();
-		perViewErrors[i] = (float)std::sqrt(err*err / n);
-		totalErr += err * err;
-		totalPoints += n;
-	}
-
-	return std::sqrt(totalErr / totalPoints);
-}
-/*
- * 初始化标定板corners
- */
-void MonocularCalibrate::calcChessboardCorners(cv::Size boardSize, float squareSize, std::vector<cv::Point3f>& corners,
-	Pattern patternType)
-{
-	corners.resize(0);
-
-	switch (patternType)
-	{
-	case CHESSBOARD:
-	case CIRCLES_GRID:
-		for (int i = 0; i < boardSize.height; i++)
-			for (int j = 0; j < boardSize.width; j++)
-				corners.push_back(cv::Point3f(float(j*squareSize),
-					float(i*squareSize), 0));
-		break;
-
-	case ASYMMETRIC_CIRCLES_GRID:
-		for (int i = 0; i < boardSize.height; i++)
-			for (int j = 0; j < boardSize.width; j++)
-				corners.push_back(cv::Point3f(float((2 * j + i % 2)*squareSize),
-					float(i*squareSize), 0));
-		break;
-
-	default:
-		CV_Error(cv::Error::StsBadArg, "Unknown pattern type\n");
-	}
-}
-/*
- * 单目标定的核心代码
- */
-bool MonocularCalibrate::calibrate_1D_core(const std::vector<std::vector<cv::Point2f>>& imagePoints, cv::Size imageSize,
-	cv::Size boardSize, float squareSize, float aspectRatio, int flags, cv::Mat& cameraMatrix, cv::Mat& distCoeffs)
-{
-	std::vector<cv::Mat> rvecs, tvecs;
-	std::vector<float> reprojErrs;
-
-
-	cameraMatrix = cv::Mat::eye(3, 3, CV_64F);
-	if (flags & cv::CALIB_FIX_ASPECT_RATIO)
-		cameraMatrix.at<double>(0, 0) = aspectRatio;
-
-	distCoeffs = cv::Mat::zeros(8, 1, CV_64F);
-
-	std::vector<std::vector<cv::Point3f> > objectPoints(1);
-	calcChessboardCorners(boardSize, squareSize, objectPoints[0]);
-
-	objectPoints.resize(imagePoints.size(), objectPoints[0]);
-
-	double rms = calibrateCamera(objectPoints, imagePoints, imageSize, cameraMatrix,
-		distCoeffs, rvecs, tvecs, flags);// cv::CALIB_FIX_K3 |
-	printf("RMS error reported by calibrateCamera: %g\n", rms);
-
-	bool ok = checkRange(cameraMatrix) && checkRange(distCoeffs);
-
-	double totalAvgErr = computeReprojectionErrors(objectPoints, imagePoints,
-		rvecs, tvecs, cameraMatrix, distCoeffs, reprojErrs);
-
-	printf("%s. avg reprojection error = %.2f\n", ok ? "Calibration succeeded" : "Calibration failed", totalAvgErr);
-
-	return ok;
-}
-/*
- * 单目标定的驱动代码
- *	cv::Size		[in]	boardSize				标定板尺寸
-	float			[in]	squareSize				方格尺寸
-	vector<string>	[in]	imageList				标定图片文件名
-	Mat&			[io]	cameraMatrix			相机矩阵
-	Mat&			[io]	distCoeffs				畸变系数
-	float			[in]	aspectRatio=1			宽高比,只有当flag中指定CALIB_FIX_ASPECT_RATIO时才起作用
-	Pattern			[in]	pattern=CHESSBOARD		标定板模式,可选:
-														CHESSBOARD				象棋盘,
-														CIRCLES_GRID			圆点阵列,
-														ASYMMETRIC_CIRCLES_GRID	非对称圆点阵列
-	int				[in]	flags=0					标定标志位,可选
-														CALIB_FIX_ASPECT_RATIO	固定宽高比
-														CALIB_ZERO_TANGENT_DIST
-														CALIB_FIX_PRINCIPAL_POINT
-	bool			[in]	showUndistorted=true	是否显示矫正之后的情况
- */
-void MonocularCalibrate::Calib1D(cv::Size boardSize, float squareSize, std::vector<std::string> imageList,
-	cv::Mat& cameraMatrix, cv::Mat& distCoeffs, float aspectRatio, Pattern pattern, int flags, bool showUndistorted)
-{
-	try
-	{
-		//cv::Size imageSize;//改成成员变量
-		std::vector<std::vector<cv::Point2f> > imagePoints;
-		int nframes = (int)imageList.size();
-		//cv::namedWindow("Image View", 1);
-
-
-
-		for (int i = 0;; i++)
-		{
-			cv::Mat view, viewGray;
-			if (i < (int)imageList.size())
-				view = cv::imread(imageList[i], 1);
-
-			if (view.empty())//数据读完了,开始标定
-			{
-				if (imagePoints.size() > 0)
-					std::cout << "数据读完了,开始标定" << std::endl;
-					calibrate_1D_core(imagePoints, imageSize, boardSize, squareSize, aspectRatio, flags, cameraMatrix, distCoeffs);
-				break;
-			}
-
-			imageSize = view.size();
-
-			std::vector<cv::Point2f> pointbuf;
-			cvtColor(view, viewGray, cv::COLOR_BGR2GRAY);
-
-			bool found;
-			switch (pattern)
-			{
-			case CHESSBOARD:
-				found = findChessboardCorners(view, boardSize, pointbuf,
-					cv::CALIB_CB_ADAPTIVE_THRESH | cv::CALIB_CB_FAST_CHECK | cv::CALIB_CB_NORMALIZE_IMAGE);
-				break;
-			case CIRCLES_GRID:
-				found = findCirclesGrid(view, boardSize, pointbuf);
-				break;
-			case ASYMMETRIC_CIRCLES_GRID:
-				found = findCirclesGrid(view, boardSize, pointbuf, cv::CALIB_CB_ASYMMETRIC_GRID);
-				break;
-			default:
-				return;
-			}
-
-			// improve the found corners' coordinate accuracy
-			if (pattern == CHESSBOARD && found)
-				cv::cornerSubPix(viewGray, pointbuf, cv::Size(11, 11), cv::Size(-1, -1),
-					cv::TermCriteria(cv::TermCriteria::EPS + cv::TermCriteria::COUNT, 30, 0.1));
-
-			if (found)
-			{
-				imagePoints.push_back(pointbuf);
-			}
-
-			if (found)
-				drawChessboardCorners(view, boardSize, cv::Mat(pointbuf), found);
-
-			std::string msg = "100/100";
-			int baseLine = 0;
-			cv::Size textSize = cv::getTextSize(msg, 1, 1, 1, &baseLine);
-			cv::Point textOrigin(view.cols - 2 * textSize.width - 10, view.rows - 2 * baseLine - 10);
-
-
-			msg = cv::format("%d/%d", (int)imagePoints.size(), nframes);
-
-			putText(view, msg, textOrigin, 1, 1, cv::Scalar(0, 0, 255));
-
-			m_entity->insertItem(view);
-		}
-
-		if (showUndistorted)
-		{
-			cv::Mat view, rview, map1, map2;
-			cv::initUndistortRectifyMap(cameraMatrix, distCoeffs, cv::Mat(),
-				getOptimalNewCameraMatrix(cameraMatrix, distCoeffs, imageSize, 1, imageSize, 0),
-				imageSize, CV_16SC2, map1, map2);
-
-			for (int i = 0; i < (int)imageList.size(); i++)
-			{
-				view = cv::imread(imageList[i], 1);
-				if (view.empty())
-					continue;
-				remap(view, rview, map1, map2, cv::INTER_LINEAR);
-				m_entity->insertItem(rview);
-			}
-			std::cout << "单目相机矫正成功完成" << std::endl;
-		}
-	}
-	catch (const std::exception& e)
-	{
-		std::cout << "Calib1D出现严重错误" << e.what() << std::endl;
-	}
 }
 
 /*
@@ -297,7 +184,6 @@ int MonocularCalibrate::getCalibrate1D_flags()
 	{
 		flag |= cv::CALIB_ZERO_TANGENT_DIST;
 	}
-
 	if (m_entity->getCALIB_FIX_K1())
 	{
 		flag |= cv::CALIB_FIX_K1;
@@ -322,7 +208,7 @@ int MonocularCalibrate::getCalibrate1D_flags()
 	{
 		flag |= cv::CALIB_FIX_K6;
 	}
-	if(m_entity->getCALIB_RATIONAL_MODEL())
+	if (m_entity->getCALIB_RATIONAL_MODEL())
 	{
 		flag |= cv::CALIB_RATIONAL_MODEL;
 	}
@@ -344,4 +230,3 @@ int MonocularCalibrate::getCalibrate1D_flags()
 	}
 	return flag;
 }
-

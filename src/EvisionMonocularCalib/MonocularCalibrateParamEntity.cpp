@@ -51,6 +51,28 @@ void MonocularCalibrateParamEntity::setSquareSize(int value)
 	emit paramChanged_SquareSize();
 }
 
+int MonocularCalibrateParamEntity::getBoardTypeIndex()
+{
+	return BoardTypeIndex;
+}
+
+void MonocularCalibrateParamEntity::setBoardTypeIndex(int value)
+{
+	BoardTypeIndex = value;
+	emit paramChanged_BoardTypeIndex();
+}
+
+float MonocularCalibrateParamEntity::getMarkerSize()
+{
+	return MarkerSize;
+}
+
+void MonocularCalibrateParamEntity::setMarkerSize(float value)
+{
+	MarkerSize = value;
+	emit paramChanged_MarkerSize();
+}
+
 bool MonocularCalibrateParamEntity::getCALIB_FIX_PRINCIPAL_POINT()
 {
 	return CALIB_FIX_PRINCIPAL_POINT;

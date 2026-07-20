@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include <QObject>
+#include <map>
 #include <opencv2/core/mat.hpp>
 
 class MonocularCalibrateParamEntity : public QObject
@@ -19,6 +20,8 @@ private:
 	int BoardWidth = 0;
 	int BoardHeight = 0;
 	int SquareSize = 0;
+	int BoardTypeIndex = 0;
+	float MarkerSize = 18.75f;
 
 	bool CALIB_FIX_PRINCIPAL_POINT = false;	//不优化主点位置
 	bool CALIB_FIX_ASPECT_RATIO = false;	//固定宽高比
@@ -40,10 +43,14 @@ private:
 #pragma endregion 
 
 #pragma region param_Changed_signals
-signals:
+	signals:
 	void paramChanged_BoardWidth();
 	void paramChanged_BoardHeight();
 	void paramChanged_SquareSize();
+	void paramChanged_BoardTypeIndex();
+	void paramChanged_MarkerSize();
+	void calibReportReady(QString);
+
 	void paramChanged_CALIB_FIX_PRINCIPAL_POINT();
 	void paramChanged_CALIB_FIX_ASPECT_RATIO();
 	void paramChanged_CALIB_ZERO_TANGENT_DIST();
@@ -72,6 +79,12 @@ public:
 
 	int getSquareSize();
 	void setSquareSize(int value);
+
+	int getBoardTypeIndex();
+	void setBoardTypeIndex(int value);
+
+	float getMarkerSize();
+	void setMarkerSize(float value);
 
 	bool getCALIB_FIX_PRINCIPAL_POINT();
 	void setCALIB_FIX_PRINCIPAL_POINT(bool value);

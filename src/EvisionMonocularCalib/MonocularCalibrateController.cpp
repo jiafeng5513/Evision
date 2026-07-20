@@ -19,6 +19,8 @@ void MonocularCalibrateController::setDefaultCalibParamCommand()
 	m_calib_entity->setBoardWidth(9);
 	m_calib_entity->setBoardHeight(6);
 	m_calib_entity->setSquareSize(25);
+	m_calib_entity->setBoardTypeIndex(0);
+	m_calib_entity->setMarkerSize(18.75f);
 	m_calib_entity->setCALIB_RATIONAL_MODEL(true);
 	m_calib_entity->setCALIB_FIX_K3(true);
 	m_calib_entity->setCALIB_FIX_K4(true);
@@ -35,14 +37,14 @@ void MonocularCalibrateController::CalibrateCommand()
 		return;
 	}
 	//2.选择文件
-	QFileDialog* fileDialog = new QFileDialog();
-	fileDialog->setWindowTitle(QStringLiteral("请选择单目摄像头拍摄的图片文件序列"));
-	fileDialog->setDirectory(QString::fromStdString(EvisionUtils::getDataPath()));
-	fileDialog->setNameFilter("图片文件(*.jpg *.png *.jpeg *.bmp)");
-	fileDialog->setFileMode(QFileDialog::ExistingFiles);
-	if (fileDialog->exec() == QDialog::Accepted)
+	QFileDialog fileDialog(nullptr);
+	fileDialog.setWindowTitle(QStringLiteral("请选择单目摄像头拍摄的图片文件序列"));
+	fileDialog.setDirectory(QString::fromStdString(EvisionUtils::getDataPath()));
+	fileDialog.setNameFilter("图片文件(*.jpg *.png *.jpeg *.bmp)");
+	fileDialog.setFileMode(QFileDialog::ExistingFiles);
+	if (fileDialog.exec() == QDialog::Accepted)
 	{
-		ImageListL = fileDialog->selectedFiles();
+		ImageListL = fileDialog.selectedFiles();
 		//验证数量
 		if (ImageListL.size() == 0)
 		{
@@ -55,14 +57,23 @@ void MonocularCalibrateController::CalibrateCommand()
 			/*
 			 *3.一切正常,可以进行从图片标定
 			 */
-			std::vector<std::string>* imagelistL = new std::vector<std::string>();
+			std::vector<std::string> imagelistL;
 			for (int i = 0; i < ImageListL.size(); ++i)
 			{
-				imagelistL->push_back(ImageListL.at(i).toStdString());
+				imagelistL.push_back(ImageListL.at(i).toStdString());
 			}
 			m_calib_entity->clearItemMap();
+
+			if (_stereoCalib != nullptr)
+			{
+				disconnect(_stereoCalib, &MonocularCalibrate::openMessageBox, this, &MonocularCalibrateController::onOpenMessageBox);
+				_stereoCalib->wait();
+				_stereoCalib->deleteLater();
+			}
+
 			_stereoCalib = new MonocularCalibrate(imagelistL);
 			connect(_stereoCalib, &MonocularCalibrate::openMessageBox, this, &MonocularCalibrateController::onOpenMessageBox);
+			connect(_stereoCalib, &MonocularCalibrate::reportReady, m_calib_entity, &MonocularCalibrateParamEntity::calibReportReady);
 			_stereoCalib->start();
 		}
 
@@ -76,10 +87,16 @@ void MonocularCalibrateController::CalibrateCommand()
 //命令:把参数保存到文件中
 void MonocularCalibrateController::SaveParamsToFileCommand()
 {
-	if (_stereoCalib != NULL)
+	if (_stereoCalib == nullptr)
 	{
-		_stereoCalib->SaveCameraParamsToFile();
+		return;
 	}
+	if (_stereoCalib->isRunning())
+	{
+		QMessageBox::information(NULL, QStringLiteral("提示"), QStringLiteral("标定正在进行中,请等待完成后再保存."));
+		return;
+	}
+	_stereoCalib->SaveCameraParamsToFile();
 }
 
 //消息响应:弹出对话框

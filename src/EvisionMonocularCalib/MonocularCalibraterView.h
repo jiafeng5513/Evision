@@ -75,6 +75,13 @@ public slots:
 	void onValueChanged_FIX_TAUX_TAUY(bool value);
 	void onParamChanged_FIX_TAUX_TAUY();
 
+	void onValueChanged_BoardTypeIndex(int value);
+	void onParamChanged_BoardTypeIndex();
+
+	void onValueChanged_MarkerSize(double value);
+	void onParamChanged_MarkerSize();
+
+	void onCalibReportReady(QString report);
 
 	void onParamChanged_NewToItemMap();//有人插入了缩略图Map,界面上要响应一下
 	void onParamChanged_ClearItemMap();//有人清空了缩略图的Map,界面上响应一下

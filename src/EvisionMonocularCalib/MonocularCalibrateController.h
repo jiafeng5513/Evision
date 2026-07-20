@@ -11,7 +11,7 @@ private:
 	QStringList ImageListL;//从图片标定时需要的图片
 	MonocularCalibrateParamEntity * m_calib_entity;
 	QString ImageL, insFile, extFile;
-	MonocularCalibrate * _stereoCalib;
+	MonocularCalibrate * _stereoCalib = nullptr;
 public:
 	MonocularCalibrateController(QObject *parent = Q_NULLPTR);
 	~MonocularCalibrateController();

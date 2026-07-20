@@ -25,8 +25,17 @@ MonocularCalibraterView::MonocularCalibraterView(QWidget *parent)
 	connect(m_calib_entity, &MonocularCalibrateParamEntity::paramChanged_CALIB_FIX_S1_S2_S3_S4, this, &MonocularCalibraterView::onParamChanged_FIX_S1_S2_S3_S4);
 	connect(m_calib_entity, &MonocularCalibrateParamEntity::paramChanged_CALIB_TILTED_MODEL, this, &MonocularCalibraterView::onParamChanged_TILTED_MODEL);
 	connect(m_calib_entity, &MonocularCalibrateParamEntity::paramChanged_CALIB_FIX_TAUX_TAUY, this, &MonocularCalibraterView::onParamChanged_FIX_TAUX_TAUY);
+	connect(m_calib_entity, &MonocularCalibrateParamEntity::paramChanged_BoardTypeIndex, this, &MonocularCalibraterView::onParamChanged_BoardTypeIndex);
+	connect(m_calib_entity, &MonocularCalibrateParamEntity::paramChanged_MarkerSize, this, &MonocularCalibraterView::onParamChanged_MarkerSize);
+	connect(m_calib_entity, &MonocularCalibrateParamEntity::calibReportReady, this, &MonocularCalibraterView::onCalibReportReady);
 	connect(m_calib_entity, &MonocularCalibrateParamEntity::paramChanged_InsertToItemMap, this, &MonocularCalibraterView::onParamChanged_NewToItemMap, Qt::BlockingQueuedConnection);
 	connect(m_calib_entity, &MonocularCalibrateParamEntity::paramChanged_ClearItemMap, this, &MonocularCalibraterView::onParamChanged_ClearItemMap);
+
+	connect(ui.comboBox_BoardType, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MonocularCalibraterView::onValueChanged_BoardTypeIndex);
+	connect(ui.doubleSpinBox_MarkerSize, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &MonocularCalibraterView::onValueChanged_MarkerSize);
+
+	onParamChanged_BoardTypeIndex();
+	onParamChanged_MarkerSize();
 }
 
 MonocularCalibraterView::~MonocularCalibraterView()
@@ -263,6 +272,42 @@ void MonocularCalibraterView::onParamChanged_FIX_TAUX_TAUY()
 		ui.checkBox_CALIB_FIX_TAUX_TAUY->setChecked(m_calib_entity->getCALIB_FIX_TAUX_TAUY());
 	}
 }
+
+void MonocularCalibraterView::onValueChanged_BoardTypeIndex(int value)
+{
+	m_calib_entity->setBoardTypeIndex(value);
+}
+
+void MonocularCalibraterView::onParamChanged_BoardTypeIndex()
+{
+	int index = m_calib_entity->getBoardTypeIndex();
+	if (ui.comboBox_BoardType->currentIndex() != index)
+	{
+		ui.comboBox_BoardType->setCurrentIndex(index);
+	}
+	ui.doubleSpinBox_MarkerSize->setEnabled(index == 3);
+}
+
+void MonocularCalibraterView::onValueChanged_MarkerSize(double value)
+{
+	m_calib_entity->setMarkerSize(static_cast<float>(value));
+}
+
+void MonocularCalibraterView::onParamChanged_MarkerSize()
+{
+	float value = m_calib_entity->getMarkerSize();
+	if (!qFuzzyCompare(ui.doubleSpinBox_MarkerSize->value(), static_cast<double>(value)))
+	{
+		ui.doubleSpinBox_MarkerSize->setValue(static_cast<double>(value));
+	}
+}
+
+void MonocularCalibraterView::onCalibReportReady(QString report)
+{
+	ui.plainTextEdit_CalibReport->clear();
+	ui.plainTextEdit_CalibReport->appendPlainText(report);
+}
+
 /*
  * 新图加入ListView
  */
