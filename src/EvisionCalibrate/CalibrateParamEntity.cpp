@@ -51,6 +51,28 @@ void CalibrateParamEntity::setSquareSize(int value)
 	emit paramChanged_SquareSize();
 }
 
+int CalibrateParamEntity::getBoardTypeIndex()
+{
+	return BoardTypeIndex;
+}
+
+void CalibrateParamEntity::setBoardTypeIndex(int value)
+{
+	BoardTypeIndex = value;
+	emit paramChanged_BoardTypeIndex();
+}
+
+float CalibrateParamEntity::getMarkerSize()
+{
+	return MarkerSize;
+}
+
+void CalibrateParamEntity::setMarkerSize(float value)
+{
+	MarkerSize = value;
+	emit paramChanged_MarkerSize();
+}
+
 bool CalibrateParamEntity::getCALIB_FIX_PRINCIPAL_POINT()
 {
 	return CALIB_FIX_PRINCIPAL_POINT;
@@ -239,5 +261,3 @@ int CalibrateParamEntity::getIndex()
 {
 	return index;
 }
-
-

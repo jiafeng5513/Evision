@@ -33,6 +33,12 @@ public slots:
 	void onValueChanged_SquareSize(QString value);
 	void onParamChanged_SquareSize();
 
+	void onValueChanged_BoardTypeIndex(int value);
+	void onParamChanged_BoardTypeIndex();
+
+	void onValueChanged_MarkerSize(double value);
+	void onParamChanged_MarkerSize();
+
 	void onValueChanged_FIX_PRINCIPAL_POINT(bool value);
 	void onParamChanged_FIX_PRINCIPAL_POINT();
 
@@ -82,6 +88,8 @@ public slots:
 	void onParamChanged_NewToItemMap();//有人插入了缩略图Map,界面上要响应一下
 	void onParamChanged_ClearItemMap();//有人清空了缩略图的Map,界面上响应一下
 	void onItemClicked(QListWidgetItem*item);//响应点击缩略图
+
+	void onCalibReportReady(QString report);//标定报告就绪
 
 	void onPush_saveParamsToFile();
 };

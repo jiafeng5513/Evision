@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>CalibraterView</class>
  <widget class="QWidget" name="CalibraterView">
@@ -260,6 +260,63 @@
            </property>
           </widget>
          </item>
+         <item>
+          <widget class="QLabel" name="label_BoardType">
+           <property name="text">
+            <string>标定板:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox_BoardType">
+           <item>
+            <property name="text">
+             <string>棋盘格</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>圆点阵列</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>非对称圆点阵列</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>ChArUco</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_MarkerSize">
+           <property name="text">
+            <string>Marker:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDoubleSpinBox" name="doubleSpinBox_MarkerSize">
+           <property name="minimum">
+            <double>0.100000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>1000.000000000000000</double>
+           </property>
+           <property name="decimals">
+            <number>2</number>
+           </property>
+           <property name="value">
+            <double>18.750000000000000</double>
+           </property>
+           <property name="suffix">
+            <string> mm</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </widget>
       </item>
@@ -311,7 +368,7 @@
      </layout>
     </widget>
    </item>
-   <item row="0" column="0" rowspan="2">
+   <item row="0" column="0" rowspan="3">
     <widget class="QListWidget" name="listWidget">
      <property name="maximumSize">
       <size>
@@ -369,6 +426,22 @@
        </item>
       </layout>
      </widget>
+    </widget>
+   </item>
+   <item row="2" column="1" colspan="2">
+    <widget class="QPlainTextEdit" name="plainTextEdit_CalibReport">
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>120</height>
+      </size>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+     <property name="plainText">
+      <string>等待标定...</string>
+     </property>
     </widget>
    </item>
   </layout>

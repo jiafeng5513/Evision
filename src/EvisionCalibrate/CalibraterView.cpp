@@ -1,5 +1,6 @@
-#include "CalibraterView.h"
+﻿#include "CalibraterView.h"
 #include "EvisionUtils.h"
+#include <cmath>
 
 CalibraterView::CalibraterView(QWidget *parent)
 	: QWidget(parent)
@@ -11,6 +12,8 @@ CalibraterView::CalibraterView(QWidget *parent)
 	connect(m_calib_entity, &CalibrateParamEntity::paramChanged_BoardWidth, this, &CalibraterView::onParamChanged_BoardWidth);
 	connect(m_calib_entity, &CalibrateParamEntity::paramChanged_BoardHeight, this, &CalibraterView::onParamChanged_BoardHeight);
 	connect(m_calib_entity, &CalibrateParamEntity::paramChanged_SquareSize, this, &CalibraterView::onParamChanged_SquareSize);
+	connect(m_calib_entity, &CalibrateParamEntity::paramChanged_BoardTypeIndex, this, &CalibraterView::onParamChanged_BoardTypeIndex);
+	connect(m_calib_entity, &CalibrateParamEntity::paramChanged_MarkerSize, this, &CalibraterView::onParamChanged_MarkerSize);
 	connect(m_calib_entity, &CalibrateParamEntity::paramChanged_CALIB_FIX_PRINCIPAL_POINT, this, &CalibraterView::onParamChanged_FIX_PRINCIPAL_POINT);
 	connect(m_calib_entity, &CalibrateParamEntity::paramChanged_CALIB_FIX_ASPECT_RATIO, this, &CalibraterView::onParamChanged_FIX_ASPECT_RATIO);
 	connect(m_calib_entity, &CalibrateParamEntity::paramChanged_CALIB_ZERO_TANGENT_DIST, this, &CalibraterView::onParamChanged_ZERO_TANGENT_DIST);
@@ -28,16 +31,25 @@ CalibraterView::CalibraterView(QWidget *parent)
 	connect(m_calib_entity, &CalibrateParamEntity::paramChanged_CALIB_FIX_TAUX_TAUY, this, &CalibraterView::onParamChanged_FIX_TAUX_TAUY);
 	connect(m_calib_entity, &CalibrateParamEntity::paramChanged_InsertToItemMap, this, &CalibraterView::onParamChanged_NewToItemMap, Qt::BlockingQueuedConnection);
 	connect(m_calib_entity, &CalibrateParamEntity::paramChanged_ClearItemMap, this, &CalibraterView::onParamChanged_ClearItemMap);
+	connect(m_calib_entity, &CalibrateParamEntity::calibReportReady, this, &CalibraterView::onCalibReportReady);
+
+	connect(ui.comboBox_BoardType, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &CalibraterView::onValueChanged_BoardTypeIndex);
+	connect(ui.doubleSpinBox_MarkerSize, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &CalibraterView::onValueChanged_MarkerSize);
+
+	onParamChanged_BoardTypeIndex();
+	onParamChanged_MarkerSize();
 }
 
 CalibraterView::~CalibraterView()
 {
 }
+
 //默认标定参数
 void CalibraterView::setDefaultCalibParam()
 {
 	m_calib_controller->setDefaultCalibParamCommand();
 }
+
 //标定
 void CalibraterView::doCalib()
 {
@@ -48,6 +60,7 @@ void CalibraterView::onValueChanged_BoardWidth(QString value)
 {
 	m_calib_entity->setBoardWidth(value.toInt());
 }
+
 void CalibraterView::onParamChanged_BoardWidth() const
 {
 	QString tmp = QString::fromStdString(std::to_string(m_calib_entity->getBoardWidth()));
@@ -61,6 +74,7 @@ void CalibraterView::onValueChanged_BoardHeight(QString value)
 {
 	m_calib_entity->setBoardHeight(value.toInt());
 }
+
 void CalibraterView::onParamChanged_BoardHeight()
 {
 	QString tmp = QString::fromStdString(std::to_string(m_calib_entity->getBoardHeight()));
@@ -84,6 +98,35 @@ void CalibraterView::onParamChanged_SquareSize()
 	}
 }
 
+void CalibraterView::onValueChanged_BoardTypeIndex(int value)
+{
+	m_calib_entity->setBoardTypeIndex(value);
+}
+
+void CalibraterView::onParamChanged_BoardTypeIndex()
+{
+	int value = m_calib_entity->getBoardTypeIndex();
+	if (ui.comboBox_BoardType->currentIndex() != value)
+	{
+		ui.comboBox_BoardType->setCurrentIndex(value);
+	}
+	ui.doubleSpinBox_MarkerSize->setEnabled(value == 3);
+}
+
+void CalibraterView::onValueChanged_MarkerSize(double value)
+{
+	m_calib_entity->setMarkerSize(static_cast<float>(value));
+}
+
+void CalibraterView::onParamChanged_MarkerSize()
+{
+	double value = static_cast<double>(m_calib_entity->getMarkerSize());
+	if (std::abs(ui.doubleSpinBox_MarkerSize->value() - value) > 1e-6)
+	{
+		ui.doubleSpinBox_MarkerSize->setValue(value);
+	}
+}
+
 void CalibraterView::onValueChanged_FIX_PRINCIPAL_POINT(bool value)
 {
 	m_calib_entity->setCALIB_FIX_PRINCIPAL_POINT(value);
@@ -91,7 +134,7 @@ void CalibraterView::onValueChanged_FIX_PRINCIPAL_POINT(bool value)
 
 void CalibraterView::onParamChanged_FIX_PRINCIPAL_POINT()
 {
-	if(ui.checkBox_CALIB_FIX_PRINCIPAL_POINT->isChecked()!=m_calib_entity->getCALIB_FIX_PRINCIPAL_POINT())
+	if (ui.checkBox_CALIB_FIX_PRINCIPAL_POINT->isChecked() != m_calib_entity->getCALIB_FIX_PRINCIPAL_POINT())
 	{
 		ui.checkBox_CALIB_FIX_PRINCIPAL_POINT->setChecked(m_calib_entity->getCALIB_FIX_PRINCIPAL_POINT());
 	}
@@ -104,7 +147,7 @@ void CalibraterView::onValueChanged_FIX_ASPECT_RATIO(bool value)
 
 void CalibraterView::onParamChanged_FIX_ASPECT_RATIO()
 {
-	if(ui.checkBox_CALIB_FIX_ASPECT_RATIO->isChecked()!=m_calib_entity->getCALIB_FIX_ASPECT_RATIO())
+	if (ui.checkBox_CALIB_FIX_ASPECT_RATIO->isChecked() != m_calib_entity->getCALIB_FIX_ASPECT_RATIO())
 	{
 		ui.checkBox_CALIB_FIX_ASPECT_RATIO->setChecked(m_calib_entity->getCALIB_FIX_ASPECT_RATIO());
 	}
@@ -117,7 +160,7 @@ void CalibraterView::onValueChanged_ZERO_TANGENT_DIST(bool value)
 
 void CalibraterView::onParamChanged_ZERO_TANGENT_DIST()
 {
-	if(ui.checkBox_CALIB_ZERO_TANGENT_DIST->isChecked()!=m_calib_entity->getCALIB_ZERO_TANGENT_DIST())
+	if (ui.checkBox_CALIB_ZERO_TANGENT_DIST->isChecked() != m_calib_entity->getCALIB_ZERO_TANGENT_DIST())
 	{
 		ui.checkBox_CALIB_ZERO_TANGENT_DIST->setChecked(m_calib_entity->getCALIB_ZERO_TANGENT_DIST());
 	}
@@ -130,7 +173,7 @@ void CalibraterView::onValueChanged_SAME_FOCAL_LENGTH(bool value)
 
 void CalibraterView::onParamChanged_SAME_FOCAL_LENGTH()
 {
-	if(ui.checkBox_CALIB_SAME_FOCAL_LENGTH->isChecked()!=m_calib_entity->getCALIB_SAME_FOCAL_LENGTH())
+	if (ui.checkBox_CALIB_SAME_FOCAL_LENGTH->isChecked() != m_calib_entity->getCALIB_SAME_FOCAL_LENGTH())
 	{
 		ui.checkBox_CALIB_SAME_FOCAL_LENGTH->setChecked(m_calib_entity->getCALIB_SAME_FOCAL_LENGTH());
 	}
@@ -143,7 +186,7 @@ void CalibraterView::onValueChanged_FIX_K1(bool value)
 
 void CalibraterView::onParamChanged_FIX_K1()
 {
-	if(ui.checkBox_CALIB_FIX_K1->isChecked()!=m_calib_entity->getCALIB_FIX_K1())
+	if (ui.checkBox_CALIB_FIX_K1->isChecked() != m_calib_entity->getCALIB_FIX_K1())
 	{
 		ui.checkBox_CALIB_FIX_K1->setChecked(m_calib_entity->getCALIB_FIX_K1());
 	}
@@ -156,7 +199,7 @@ void CalibraterView::onValueChanged_FIX_K2(bool value)
 
 void CalibraterView::onParamChanged_FIX_K2()
 {
-	if(ui.checkBox_CALIB_FIX_K2->isChecked()!=m_calib_entity->getCALIB_FIX_K2())
+	if (ui.checkBox_CALIB_FIX_K2->isChecked() != m_calib_entity->getCALIB_FIX_K2())
 	{
 		ui.checkBox_CALIB_FIX_K2->setChecked(m_calib_entity->getCALIB_FIX_K2());
 	}
@@ -169,7 +212,7 @@ void CalibraterView::onValueChanged_FIX_K3(bool value)
 
 void CalibraterView::onParamChanged_FIX_K3()
 {
-	if(ui.checkBox_CALIB_FIX_K3->isChecked()!=m_calib_entity->getCALIB_FIX_K3())
+	if (ui.checkBox_CALIB_FIX_K3->isChecked() != m_calib_entity->getCALIB_FIX_K3())
 	{
 		ui.checkBox_CALIB_FIX_K3->setChecked(m_calib_entity->getCALIB_FIX_K3());
 	}
@@ -182,7 +225,7 @@ void CalibraterView::onValueChanged_FIX_K4(bool value)
 
 void CalibraterView::onParamChanged_FIX_K4()
 {
-	if(ui.checkBox_CALIB_FIX_K4->isChecked()!=m_calib_entity->getCALIB_FIX_K4())
+	if (ui.checkBox_CALIB_FIX_K4->isChecked() != m_calib_entity->getCALIB_FIX_K4())
 	{
 		ui.checkBox_CALIB_FIX_K4->setChecked(m_calib_entity->getCALIB_FIX_K4());
 	}
@@ -195,11 +238,12 @@ void CalibraterView::onValueChanged_FIX_K5(bool value)
 
 void CalibraterView::onParamChanged_FIX_K5()
 {
-	if(ui.checkBox_CALIB_FIX_K5->isChecked()!=m_calib_entity->getCALIB_FIX_K5())
+	if (ui.checkBox_CALIB_FIX_K5->isChecked() != m_calib_entity->getCALIB_FIX_K5())
 	{
 		ui.checkBox_CALIB_FIX_K5->setChecked(m_calib_entity->getCALIB_FIX_K5());
 	}
 }
+
 void CalibraterView::onValueChanged_FIX_K6(bool value)
 {
 	m_calib_entity->setCALIB_FIX_K6(value);
@@ -207,7 +251,7 @@ void CalibraterView::onValueChanged_FIX_K6(bool value)
 
 void CalibraterView::onParamChanged_FIX_K6()
 {
-	if(ui.checkBox_CALIB_FIX_K6->isChecked()!=m_calib_entity->getCALIB_FIX_K6())
+	if (ui.checkBox_CALIB_FIX_K6->isChecked() != m_calib_entity->getCALIB_FIX_K6())
 	{
 		ui.checkBox_CALIB_FIX_K6->setChecked(m_calib_entity->getCALIB_FIX_K6());
 	}
@@ -220,7 +264,7 @@ void CalibraterView::onValueChanged_RATIONAL_MODEL(bool value)
 
 void CalibraterView::onParamChanged_RATIONAL_MODEL()
 {
-	if(ui.checkBox_CALIB_RATIONAL_MODEL->isChecked()!=m_calib_entity->getCALIB_RATIONAL_MODEL())
+	if (ui.checkBox_CALIB_RATIONAL_MODEL->isChecked() != m_calib_entity->getCALIB_RATIONAL_MODEL())
 	{
 		ui.checkBox_CALIB_RATIONAL_MODEL->setChecked(m_calib_entity->getCALIB_RATIONAL_MODEL());
 	}
@@ -233,7 +277,7 @@ void CalibraterView::onValueChanged_THIN_PRISM_MODEL(bool value)
 
 void CalibraterView::onParamChanged_THIN_PRISM_MODEL()
 {
-	if(ui.checkBox_CALIB_THIN_PRISM_MODEL->isChecked()!=m_calib_entity->getCALIB_THIN_PRISM_MODEL())
+	if (ui.checkBox_CALIB_THIN_PRISM_MODEL->isChecked() != m_calib_entity->getCALIB_THIN_PRISM_MODEL())
 	{
 		ui.checkBox_CALIB_THIN_PRISM_MODEL->setChecked(m_calib_entity->getCALIB_THIN_PRISM_MODEL());
 	}
@@ -246,7 +290,7 @@ void CalibraterView::onValueChanged_FIX_S1_S2_S3_S4(bool value)
 
 void CalibraterView::onParamChanged_FIX_S1_S2_S3_S4()
 {
-	if(ui.checkBox_CALIB_FIX_S1_S2_S3_S4->isChecked()!=m_calib_entity->getCALIB_FIX_S1_S2_S3_S4())
+	if (ui.checkBox_CALIB_FIX_S1_S2_S3_S4->isChecked() != m_calib_entity->getCALIB_FIX_S1_S2_S3_S4())
 	{
 		ui.checkBox_CALIB_FIX_S1_S2_S3_S4->setChecked(m_calib_entity->getCALIB_FIX_S1_S2_S3_S4());
 	}
@@ -259,7 +303,7 @@ void CalibraterView::onValueChanged_TILTED_MODEL(bool value)
 
 void CalibraterView::onParamChanged_TILTED_MODEL()
 {
-	if(ui.checkBox_CALIB_TILTED_MODEL->isChecked()!=m_calib_entity->getCALIB_TILTED_MODEL())
+	if (ui.checkBox_CALIB_TILTED_MODEL->isChecked() != m_calib_entity->getCALIB_TILTED_MODEL())
 	{
 		ui.checkBox_CALIB_TILTED_MODEL->setChecked(m_calib_entity->getCALIB_TILTED_MODEL());
 	}
@@ -272,11 +316,12 @@ void CalibraterView::onValueChanged_FIX_TAUX_TAUY(bool value)
 
 void CalibraterView::onParamChanged_FIX_TAUX_TAUY()
 {
-	if(ui.checkBox_CALIB_FIX_TAUX_TAUY->isChecked()!=m_calib_entity->getCALIB_FIX_TAUX_TAUY())
+	if (ui.checkBox_CALIB_FIX_TAUX_TAUY->isChecked() != m_calib_entity->getCALIB_FIX_TAUX_TAUY())
 	{
 		ui.checkBox_CALIB_FIX_TAUX_TAUY->setChecked(m_calib_entity->getCALIB_FIX_TAUX_TAUY());
 	}
 }
+
 /*
  * 新图加入ListView
  */
@@ -285,7 +330,6 @@ void CalibraterView::onParamChanged_NewToItemMap()
 	QListWidgetItem * item = new QListWidgetItem;
 	cv::Mat img = m_calib_entity->getItemMap().at(QString::fromStdString(std::to_string(m_calib_entity->getIndex())));
 	QPixmap pixmap = QPixmap::fromImage(EvisionUtils::cvMat2QImage(img));
-
 
 	item->setIcon(QIcon(pixmap));
 	item->setText(QString::fromStdString(std::to_string(m_calib_entity->getIndex())));
@@ -318,6 +362,16 @@ void CalibraterView::onItemClicked(QListWidgetItem* item)
 	ui.graphicsView->show();
 	ui.graphicsView->update();
 }
+
+/*
+ * 标定报告就绪
+ */
+void CalibraterView::onCalibReportReady(QString report)
+{
+	ui.plainTextEdit_CalibReport->clear();
+	ui.plainTextEdit_CalibReport->appendPlainText(report);
+}
+
 /*
  * 保存参数文件
  */
@@ -325,4 +379,3 @@ void CalibraterView::onPush_saveParamsToFile()
 {
 	m_calib_controller->SaveParamsToFileCommand();
 }
-
