@@ -56,7 +56,7 @@ EvisionView::EvisionView(QWidget* parent)
 	connect(m_entity, &EvisionParamEntity::paramChanged_StatusBar, this, &EvisionView::onParamChanged_StatusBarText, Qt::QueuedConnection);
 
 
-	on_action_LogViewSwitch();//Logview的准备
+	on_action_LogView_triggered();//Logview的准备
 
 	std::cout << "Qt Detected:" << QT_VERSION_MAJOR << "." << QT_VERSION_MINOR << "." << QT_VERSION_PATCH << std::endl;
 #ifdef _DEBUG
@@ -69,21 +69,21 @@ EvisionView::EvisionView(QWidget* parent)
 #endif
 }
 //显示单目相机视图
-void EvisionView::onCamera()
+void EvisionView::on_action_Camera_triggered()
 {
 	auto _camera = EvisionCameraFactory::CreateCameraView(this);
 	ui.mdiArea->addSubWindow(_camera);
 	_camera->show();
 }
 //显示双目相机视图
-void EvisionView::onStereoCamera()
+void EvisionView::on_action_StereoCamera_triggered()
 {
 	auto _stereoCamera = EvisionCameraFactory::CreateStereoCameraView(this);
 	ui.mdiArea->addSubWindow(_stereoCamera);
 	_stereoCamera->show();
 }
 //显示点云
-void EvisionView::onShowPointCloud()
+void EvisionView::on_action_ShowPointCloud_triggered()
 {
 #if (defined WITH_PCL) 
 	//QWidget  * evision3dViz = Evision3dVizFactory::CreateEvision3dViz();
@@ -109,35 +109,35 @@ void EvisionView::onShowPointCloud()
 #endif
 }
 //显示标定视图
-void EvisionView::on_action_calibrate_view()
+void EvisionView::on_action_CalibrateView_triggered()
 {
 	auto m_calibrate = EvisionCalibrateFactory::CreateEvisionCalibrateViewer(this);
 	ui.mdiArea->addSubWindow(m_calibrate);
 	m_calibrate->show();
 }
 //显示矫正视图
-void EvisionView::on_action_rectify()
+void EvisionView::on_action_Rectify_triggered()
 {
 	auto m_Rectify = EvisionUndistortionFactory::CreateEvisionUndistortionView(this);
 	ui.mdiArea->addSubWindow(m_Rectify);
 	m_Rectify->show();
 }
 //显示立体匹配视图
-void EvisionView::on_action_stereoMatch_view()
+void EvisionView::on_action_StereoMatchView_triggered()
 {
 	auto m_matcher = EvisionDisparityFactory::CreateEvisionDisparity(this);
 	ui.mdiArea->addSubWindow(m_matcher);
 	m_matcher->show();
 }
 //显示交互式测距视图
-void EvisionView::on_action_Measure_view()
+void EvisionView::on_action_Measure_View_triggered()
 {
 	auto _Rfinterface = EvisionTraceFactory::CreateEvisionTraceView(this);
 	ui.mdiArea->addSubWindow(_Rfinterface);
 	_Rfinterface->show();
 }
 //启动目标检测视图
-void EvisionView::on_action_ObjectDetection_view()
+void EvisionView::on_action_ObjectDetection_triggered()
 {
 #ifdef WITH_CUDA
 	auto _ObjectDetectionView = EvisionObjDetectionFactory::CreateEvisionEvisionCloudViewer(this);
@@ -149,14 +149,14 @@ void EvisionView::on_action_ObjectDetection_view()
 #endif
 }
 //启动几何体追踪
-void EvisionView::on_action_PolyTracker_view()
+void EvisionView::on_action_PolyTracker_triggered()
 {
 	auto tracker = EvisionPolyTrackerFactory::CreateEvisionPolyTrackerViewer(this);
 	ui.mdiArea->addSubWindow(tracker);
 	tracker->show();
 }
 //LogView
-void EvisionView::on_action_LogViewSwitch()
+void EvisionView::on_action_LogView_triggered()
 {
 	logView = LogView::getInstance();
 	logView->show();
@@ -167,7 +167,7 @@ void EvisionView::on_action_LogViewSwitch()
 }
 
 //视差转点云
-void EvisionView::on_action_disp_to_pcd()
+void EvisionView::on_action_dispToPCD_triggered()
 {
 #ifdef WITH_PCL
 	//1.选择视差
@@ -268,14 +268,14 @@ void EvisionView::on_action_disp_to_pcd()
 #endif
 }
 //创建相机参数文件
-void EvisionView::on_action_create_param()
+void EvisionView::on_action_CreateParamFile_triggered()
 {
 	auto _createCameraParamFile = EvisionParamBridgeFactory::CreateEvisionParamBridgeView(this);
 	ui.mdiArea->addSubWindow(_createCameraParamFile);
 	_createCameraParamFile->show();
 }
 //打开单目标定视图
-void EvisionView::on_action_MonocularCalib_view()
+void EvisionView::on_action_MonocularCalib_triggered()
 {
 	auto _monocularCalibView = EvisionMonocularCalibFactory::CreateEvisionMonocularCalibViewer(this);
 	ui.mdiArea->addSubWindow(_monocularCalibView);

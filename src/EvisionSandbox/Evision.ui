@@ -92,7 +92,7 @@
      <string>双目视觉</string>
     </property>
     <addaction name="action_CalibrateView"/>
-    <addaction name="actio_Rectify"/>
+    <addaction name="action_Rectify"/>
     <addaction name="action_StereoMatchView"/>
     <addaction name="action_Measure_View"/>
     <addaction name="action_dispToPCD"/>
@@ -135,7 +135,7 @@
    <addaction name="action_PolyTracker"/>
    <addaction name="separator"/>
    <addaction name="action_CalibrateView"/>
-   <addaction name="actio_Rectify"/>
+   <addaction name="action_Rectify"/>
    <addaction name="action_StereoMatchView"/>
    <addaction name="action_Measure_View"/>
    <addaction name="action_dispToPCD"/>
@@ -231,7 +231,7 @@
     <string>切换LogView的显示状态</string>
    </property>
   </action>
-  <action name="actio_Rectify">
+  <action name="action_Rectify">
    <property name="icon">
     <iconset resource="Evision.qrc">
      <normaloff>:/Evision/resource/focusing_128px_1162023_easyicon.net.ico</normaloff>:/Evision/resource/focusing_128px_1162023_easyicon.net.ico</iconset>
@@ -256,11 +256,6 @@
    </property>
    <property name="text">
     <string>构造参数文件</string>
-   </property>
-  </action>
-  <action name="action_RealSenseCamera">
-   <property name="text">
-    <string>RealSenseCamera</string>
    </property>
   </action>
   <action name="action_PolyTracker">
@@ -289,246 +284,4 @@
  <resources>
   <include location="Evision.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>action_ShowPointCloud</sender>
-   <signal>triggered()</signal>
-   <receiver>EvisionClass</receiver>
-   <slot>onShowPointCloud()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>499</x>
-     <y>289</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_StereoCamera</sender>
-   <signal>triggered()</signal>
-   <receiver>EvisionClass</receiver>
-   <slot>onStereoCamera()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>499</x>
-     <y>289</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_Camera</sender>
-   <signal>triggered()</signal>
-   <receiver>EvisionClass</receiver>
-   <slot>onCamera()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>499</x>
-     <y>289</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_CalibrateView</sender>
-   <signal>triggered()</signal>
-   <receiver>EvisionClass</receiver>
-   <slot>on_action_calibrate_view()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>520</x>
-     <y>364</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_StereoMatchView</sender>
-   <signal>triggered()</signal>
-   <receiver>EvisionClass</receiver>
-   <slot>on_action_stereoMatch_view()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>540</x>
-     <y>355</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_Measure_View</sender>
-   <signal>triggered()</signal>
-   <receiver>EvisionClass</receiver>
-   <slot>on_action_Measure_view()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>540</x>
-     <y>355</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_ObjectDetection</sender>
-   <signal>triggered()</signal>
-   <receiver>EvisionClass</receiver>
-   <slot>on_action_ObjectDetection_view()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>490</x>
-     <y>329</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_LogView</sender>
-   <signal>triggered()</signal>
-   <receiver>EvisionClass</receiver>
-   <slot>on_action_LogViewSwitch()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>511</x>
-     <y>354</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>actio_Rectify</sender>
-   <signal>triggered()</signal>
-   <receiver>EvisionClass</receiver>
-   <slot>on_action_rectify()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>511</x>
-     <y>354</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_dispToPCD</sender>
-   <signal>triggered()</signal>
-   <receiver>EvisionClass</receiver>
-   <slot>on_action_disp_to_pcd()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>511</x>
-     <y>354</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_CreateParamFile</sender>
-   <signal>triggered()</signal>
-   <receiver>EvisionClass</receiver>
-   <slot>on_action_create_param()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>511</x>
-     <y>354</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_RealSenseCamera</sender>
-   <signal>triggered()</signal>
-   <receiver>EvisionClass</receiver>
-   <slot>on_action_RealSenseCamera()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>511</x>
-     <y>354</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_PolyTracker</sender>
-   <signal>triggered()</signal>
-   <receiver>EvisionClass</receiver>
-   <slot>on_action_PolyTracker_view()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>511</x>
-     <y>354</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_MonocularCalib</sender>
-   <signal>triggered()</signal>
-   <receiver>EvisionClass</receiver>
-   <slot>on_action_MonocularCalib_view()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>511</x>
-     <y>354</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
- <slots>
-  <slot>onShowPointCloud()</slot>
-  <slot>onCamera()</slot>
-  <slot>onStereoCamera()</slot>
-  <slot>on_action_calibrate_view()</slot>
-  <slot>on_action_stereoMatch_view()</slot>
-  <slot>on_action_Measure_view()</slot>
-  <slot>on_action_ObjectDetection_view()</slot>
-  <slot>on_action_LogViewSwitch()</slot>
-  <slot>on_action_rectify()</slot>
-  <slot>on_action_disp_to_pcd()</slot>
-  <slot>on_action_create_param()</slot>
-  <slot>on_action_RealSenseCamera()</slot>
-  <slot>on_action_PolyTracker_view()</slot>
-  <slot>on_action_MonocularCalib_view()</slot>
- </slots>
 </ui>

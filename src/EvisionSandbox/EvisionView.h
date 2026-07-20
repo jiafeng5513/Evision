@@ -24,20 +24,20 @@ private:
 	LogView * logView;
 public slots:
 	//菜单
-	void onCamera();						//单目相机
-	void onStereoCamera();					//双目相机
-	void onShowPointCloud();				//显示点云
+	void on_action_Camera_triggered();						//单目相机
+	void on_action_StereoCamera_triggered();					//双目相机
+	void on_action_ShowPointCloud_triggered();				//显示点云
 
-	void on_action_calibrate_view();		//启动标定视图
-	void on_action_rectify();				//启动校正视图
-	void on_action_stereoMatch_view();		//启动匹配视图
-	void on_action_Measure_view();			//启动测量界面
-	void on_action_ObjectDetection_view();	//启动目标检测视图
-	void on_action_PolyTracker_view();		//启动几何体追踪视图
-	void on_action_LogViewSwitch();			//LOGVIEW
-	void on_action_disp_to_pcd();			//视差转点云
-	void on_action_create_param();			//创建相机参数文件
-	void on_action_MonocularCalib_view();   //单目标定视图
+	void on_action_CalibrateView_triggered();		//启动标定视图
+	void on_action_Rectify_triggered();				//启动校正视图
+	void on_action_StereoMatchView_triggered();		//启动匹配视图
+	void on_action_Measure_View_triggered();			//启动测量界面
+	void on_action_ObjectDetection_triggered();	//启动目标检测视图
+	void on_action_PolyTracker_triggered();		//启动几何体追踪视图
+	void on_action_LogView_triggered();			//LOGVIEW
+	void on_action_dispToPCD_triggered();			//视差转点云
+	void on_action_CreateParamFile_triggered();			//创建相机参数文件
+	void on_action_MonocularCalib_triggered();   //单目标定视图
 	//状态栏
 	void onParamChanged_StatusBarText();
 private:
