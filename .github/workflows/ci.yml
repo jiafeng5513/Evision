@@ -60,8 +60,7 @@ jobs:
             -G "Visual Studio 17 2022" -A x64 `
             -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT\scripts\buildsystems\vcpkg.cmake" `
             -DCMAKE_BUILD_TYPE=$env:BUILD_TYPE `
-            -DPointCloudViewer=OFF `
-            -DObjectDetection=OFF
+            -DPointCloudViewer=OFF
 
       - name: Build
         run: cmake --build build --config $env:BUILD_TYPE --parallel 2
@@ -89,8 +88,7 @@ jobs:
         run: |
           cmake -S src -B build \
             -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
-            -DPointCloudViewer=OFF \
-            -DObjectDetection=OFF
+            -DPointCloudViewer=OFF
 
       - name: Build
         run: cmake --build build --config $BUILD_TYPE --parallel 2
