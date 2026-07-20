@@ -56,20 +56,11 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set_property(GLOBAL PROPERTY PREDEFINED_TARGETS_FOLDER "_CMakeTargets")
 
 option(PointCloudViewer "Point Cloud Viewer" OFF)
-option(ObjectDetection "Object Detection" OFF)
 
 # 点云浏览器
 if(PointCloudViewer)
     add_subdirectory(EvisionCloudViewer)
     set_target_properties(EvisionCloudViewer PROPERTIES FOLDER Utils)
-endif()
-
-# 目标检测
-if(ObjectDetection)
-    add_subdirectory(EvisionObjDetection)
-    add_subdirectory(EvisionObjDetectionEngine)
-    set_target_properties(EvisionObjDetectionEngine PROPERTIES FOLDER Algorithm)
-    set_target_properties(EvisionObjDetection PROPERTIES FOLDER Ai)
 endif()
 
 # ADCensus视差算法,生成动态库,依赖OpenCV
